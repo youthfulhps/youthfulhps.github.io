@@ -5,10 +5,14 @@ const googleAnalyticsTrackingId = process.env.GOOGLE_ANALYTICS_ID;
 
 module.exports = {
   siteMetadata: {
-    siteTitle: "브랜든의 기술 블로그",
-    siteTitleAlt: `Tech Blog - Brandon`,
+    siteTitle: "브랜든 기술 블로그",
+    siteTitleAlt: `브랜든 기술 블로그`,
+    siteHeadline: "브랜든 기술 블로그",
+    siteUrl: `https://youthfulhps.github.io`,
     author: `유병호`,
-    email: "ybh942002@gmail.com",
+    siteLanguage: "ko",
+    siteImage: "/favicon.png",
+    siteDescription: "프론트엔드 개발자 브랜든 기술 블로그입니다",
   },
   plugins: [
     {
@@ -27,21 +31,6 @@ module.exports = {
         ],
       },
     },
-    {
-      resolve: `gatsby-omni-font-loader`,
-      options: {
-        enableListener: true,
-        preconnect: [`https://fonts.gstatic.com`],
-        interval: 300,
-        timeout: 30000,
-        web: [
-          {
-            name: `IBM Plex Sans`,
-            file: `https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap`,
-          },
-        ],
-      },
-    },
     googleAnalyticsTrackingId && {
       resolve: `gatsby-plugin-google-analytics`,
       options: {
@@ -52,12 +41,12 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `minimal-blog - @lekoarts/gatsby-theme-minimal-blog`,
-        short_name: `minimal-blog`,
-        description: `Typography driven, feature-rich blogging theme with minimal aesthetics. Includes tags/categories support and extensive features for code blocks such as live preview, line numbers, and code highlighting.`,
+        name: `브랜든 기술 블로그 - 가치 있는 기록을 남깁니다.`,
+        short_name: `브랜든 기술 블로그`,
+        description: `브랜든 기술 블로그입니다. 가치있는 기록을 남깁니다.`,
         start_url: `/`,
-        background_color: `#fff`,
-        theme_color: `#6B46C1`,
+        background_color: `#F1F5FF`,
+        theme_color: `#F1F5FF`,
         display: `standalone`,
         icons: [
           {
@@ -120,7 +109,7 @@ module.exports = {
               }
             `,
             output: `rss.xml`,
-            title: `Brandon's Tech Blog - @lekoarts/gatsby-theme-minimal-blog`,
+            title: `브랜든 기술 블로그`,
           },
         ],
       },

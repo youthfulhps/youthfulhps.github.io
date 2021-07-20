@@ -6,10 +6,10 @@ import Title from "./title";
 import Listing from "./listing";
 import List from "./list";
 import useMinimalBlogConfig from "../hooks/use-minimal-blog-config";
-import useSiteMetadata from "../hooks/use-site-metadata";
 import replaceSlashes from "../utils/replaceSlashes";
-import { visuallyHidden } from "../styles/utils";
+import Spacer from "./Common/Spacer";
 import Hero from "../components/Hero";
+import styled from "@emotion/styled";
 // @ts-ignore
 import Bottom from "../texts/bottom";
 
@@ -29,23 +29,32 @@ type PostsProps = {
   [key: string]: any;
 };
 
+const StyledLayout = styled(Layout)`
+  display: grid;
+  border-top: 1px solid black;
+  border-left: 1px solid black;
+
+  & > * {
+    border-bottom: 1px solid black;
+    border-right: 1px solid black;
+  }
+`;
+
 const Homepage = ({ posts }: PostsProps) => {
   const { basePath, blogPath } = useMinimalBlogConfig();
-  const { siteTitle } = useSiteMetadata();
 
   return (
-    <Layout>
-      <h1 sx={visuallyHidden}>{siteTitle}</h1>
+    <StyledLayout>
       <section
         sx={{
-          mb: [3, 4, 5],
-          p: { fontSize: [1, 2, 3], mt: 2 },
+          p: { fontSize: [1, 2, 3] },
           variant: `section_hero`,
         }}
       >
         <Hero />
       </section>
-      <Title text="Latest Posts">
+      <Spacer height={32} />
+      <Title text="BLOGS">
         <Link to={replaceSlashes(`/${basePath}/${blogPath}`)}>
           Read all posts
         </Link>
@@ -54,7 +63,7 @@ const Homepage = ({ posts }: PostsProps) => {
       <List sx={{ variant: `section_bottom` }}>
         <Bottom />
       </List>
-    </Layout>
+    </StyledLayout>
   );
 };
 

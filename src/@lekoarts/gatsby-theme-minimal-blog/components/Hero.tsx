@@ -1,8 +1,9 @@
 import React from "react";
 import styled from "@emotion/styled";
-import Me from "../assets/image/me.png";
+import Me from "../assets/images/me.png";
 import Spacer from "./Common/Spacer";
 import { useColorMode } from "theme-ui";
+import Divider from "./Common/Divider";
 
 type StyledHeroHeaderWrapperProps = {
   isDark: boolean;
@@ -12,11 +13,11 @@ const StyledHeroHeaderWrapper = styled.div<StyledHeroHeaderWrapperProps>`
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  border-radius: 32px;
-  background: ${({ isDark }) => !isDark && `white`};
-  box-shadow: 0px 2px 30px rgba(62, 74, 107, 0.08);
+  /* border-radius: 32px; */
+  background: ${({ isDark }) => !isDark && `#FDFDFD`};
+  /* box-shadow: 0px 2px 30px rgba(62, 74, 107, 0.08); */
   width: 100%;
-  padding: 32px;
+  /* padding: 32px; */
 `;
 
 const StyledHeroHeader = styled.div`
@@ -25,7 +26,7 @@ const StyledHeroHeader = styled.div`
 `;
 
 const StyledProfileImage = styled.img`
-  border-radius: 30px;
+  /* border-radius: 30px; */
 `;
 
 const StyledDescription = styled.div`
@@ -39,6 +40,7 @@ function Hero() {
     <>
       <StyledHeroHeaderWrapper isDark={colorMode === "dark"}>
         <StyledProfileImage src={Me} />
+        <Divider />
         <Spacer width={32} />
         <div>
           <StyledHeroHeader>프론트엔드 개발자 유 병호</StyledHeroHeader>

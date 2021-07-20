@@ -17,11 +17,22 @@ export const GlobalStyles = (theme: Theme) => {
     }
     body {
       font-family: "Spoqa Han Sans", "Nanum Gothic", sans-serif;
+      -webkit-font-smoothing: antialiased !important;
+      text-rendering: optimizeLegibility !important;
     }
     ::selection {
       background-color: ${theme.colors.text};
       color: ${theme.colors.background};
     }
+
+    /* section:not(:first-child) {
+      border-top: 1px solid black;
+      border-bottom: 1px solid black;
+    }
+
+    section:first-child {
+      border-bottom: 1px solid black;
+    } */
 
     img {
       box-shadow: 0px 2px 20px rgba(62, 74, 107, 0.08);
