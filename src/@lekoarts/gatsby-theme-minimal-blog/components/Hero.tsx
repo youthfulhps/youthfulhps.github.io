@@ -13,20 +13,15 @@ const StyledHeroHeaderWrapper = styled.div<StyledHeroHeaderWrapperProps>`
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  /* border-radius: 32px; */
-  background: ${({ isDark }) => !isDark && `#FDFDFD`};
-  /* box-shadow: 0px 2px 30px rgba(62, 74, 107, 0.08); */
+  background: ${({ isDark }) => !isDark && `#ffffff`};
+  box-shadow: 0px 2px 20px rgba(62, 74, 107, 0.08);
+  border-radius: 16px;
   width: 100%;
-  /* padding: 32px; */
 `;
 
 const StyledHeroHeader = styled.div`
   font-size: 24px;
   font-weight: bold;
-`;
-
-const StyledProfileImage = styled.img`
-  /* border-radius: 30px; */
 `;
 
 const StyledDescription = styled.div`
@@ -39,11 +34,11 @@ function Hero() {
   return (
     <>
       <StyledHeroHeaderWrapper isDark={colorMode === "dark"}>
-        <StyledProfileImage src={Me} />
+        <img src={Me} />
         <Divider />
         <Spacer width={32} />
         <div>
-          <StyledHeroHeader>프론트엔드 개발자 유 병호</StyledHeroHeader>
+          {/* <StyledHeroHeader></StyledHeroHeader> */}
           <StyledDescription>
             옛 장인들은 자신의 작품에 서명하는 것을 자랑스러워했습니다.
           </StyledDescription>

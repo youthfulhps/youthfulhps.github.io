@@ -11,7 +11,6 @@ import Spacer from "./Common/Spacer";
 import Hero from "../components/Hero";
 import styled from "@emotion/styled";
 // @ts-ignore
-import Bottom from "../texts/bottom";
 
 type PostsProps = {
   posts: {
@@ -31,13 +30,6 @@ type PostsProps = {
 
 const StyledLayout = styled(Layout)`
   display: grid;
-  border-top: 1px solid black;
-  border-left: 1px solid black;
-
-  & > * {
-    border-bottom: 1px solid black;
-    border-right: 1px solid black;
-  }
 `;
 
 const Homepage = ({ posts }: PostsProps) => {
@@ -55,14 +47,13 @@ const Homepage = ({ posts }: PostsProps) => {
       </section>
       <Spacer height={32} />
       <Title text="BLOGS">
-        <Link to={replaceSlashes(`/${basePath}/${blogPath}`)}>
-          Read all posts
-        </Link>
+        <Link to={replaceSlashes(`/${basePath}/${blogPath}`)} />
       </Title>
+      <Spacer height={32} />
       <Listing posts={posts} showTags={false} />
-      <List sx={{ variant: `section_bottom` }}>
+      {/* <List sx={{ variant: `section_bottom` }}>
         <Bottom />
-      </List>
+      </List> */}
     </StyledLayout>
   );
 };

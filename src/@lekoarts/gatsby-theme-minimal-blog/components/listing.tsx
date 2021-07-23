@@ -25,6 +25,8 @@ type ListingProps = {
 };
 const StyledListing = styled.section<StyledListingProps>`
   background: ${({ isDark }) => !isDark && `#ffffff`};
+  box-shadow: 0px 2px 20px rgba(62, 74, 107, 0.1);
+  border-radius: 16px;
 `;
 
 const Listing = ({ posts, className = ``, showTags = true }: ListingProps) => {

@@ -51,7 +51,7 @@ const Title = ({ text, children, as = `h1`, className = `` }: TitleProps) => (
     <StyledMore
       sx={{
         color: `secondary`,
-        borderLeft: "1px solid black",
+        // borderLeft: "1px solid black",
         a: {
           variant: `links.secondary`,
         },

@@ -1,10 +1,10 @@
 /** @jsx jsx */
-import * as React from "react"
-import { jsx } from "theme-ui"
+import * as React from "react";
+import { jsx } from "theme-ui";
 
 type ListProps = {
-  children: React.ReactNode
-}
+  children: React.ReactNode;
+};
 
 const List = ({ children }: ListProps) => (
   <section
@@ -17,6 +17,6 @@ const List = ({ children }: ListProps) => (
   >
     {children}
   </section>
-)
+);
 
-export default List
+export default List;

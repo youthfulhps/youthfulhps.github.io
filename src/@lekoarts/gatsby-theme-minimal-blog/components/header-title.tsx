@@ -4,7 +4,7 @@ import { jsx } from "theme-ui";
 import replaceSlashes from "../utils/replaceSlashes";
 import useSiteMetadata from "../hooks/use-site-metadata";
 import useMinimalBlogConfig from "../hooks/use-minimal-blog-config";
-import styled from "styled-components";
+import styled from "@emotion/styled";
 
 const StyledHeaderTitle = styled.div`
   font-weight: 400;
