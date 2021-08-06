@@ -1,14 +1,14 @@
-import { tint } from "@theme-ui/color"
+import { tint } from "@theme-ui/color";
 
 const code = {
   "[data-name='live-editor']": {
-    fontSize: 1,
-    "textarea, pre": {
-      padding: (t: any) => `${t.space[3]} !important`,
-    },
+    padding: (t: any) => `${t.space[2]} !important`,
+    fontFamily: `'menlo', 'monaco','monospace'`,
+    fontSize: 0.5,
   },
   "[data-name='live-preview']": {
     padding: (t: any) => `calc(${t.space[2]} + 10px) !important`,
+    fontFamily: `'menlo', 'monaco','monospace'`,
     backgroundColor: tint(`primary`, 0.7),
   },
   ".prism-code": {
@@ -26,11 +26,12 @@ const code = {
       },
     },
   },
-  ".gatsby-highlight[data-language=''], .gatsby-highlight[data-language='noLineNumbers']": {
-    ".prism-code": {
-      pt: `1rem`,
+  ".gatsby-highlight[data-language=''], .gatsby-highlight[data-language='noLineNumbers']":
+    {
+      ".prism-code": {
+        pt: `1rem`,
+      },
     },
-  },
   ".token": {
     display: `inline-block`,
   },
@@ -69,11 +70,12 @@ const code = {
       textTransform: `uppercase`,
       top: 0,
     },
-    'pre[class~="language-javascript"]:before, pre[class~="language-js"]:before': {
-      content: `"js"`,
-      background: `#f7df1e`,
-      color: `black`,
-    },
+    'pre[class~="language-javascript"]:before, pre[class~="language-js"]:before':
+      {
+        content: `"js"`,
+        background: `#f7df1e`,
+        color: `black`,
+      },
     'pre[class~="language-jsx"]:before': {
       content: `"jsx"`,
       background: `#61dafb`,
@@ -160,14 +162,15 @@ const code = {
       background: `#e6ffed`,
     },
   },
-  '.gatsby-highlight > code[class*="language-"], .gatsby-highlight > pre[class=*="language-"]': {
-    wordSpacing: `normal`,
-    wordBreak: `normal`,
-    overflowWrap: `normal`,
-    lineHeight: 1.5,
-    tabSize: 4,
-    hyphens: `none`,
-  },
+  '.gatsby-highlight > code[class*="language-"], .gatsby-highlight > pre[class=*="language-"]':
+    {
+      wordSpacing: `normal`,
+      wordBreak: `normal`,
+      overflowWrap: `normal`,
+      lineHeight: 1.5,
+      tabSize: 4,
+      hyphens: `none`,
+    },
   ".gatsby-highlight pre::-webkit-scrollbar": {
     width: 2,
     height: 2,
@@ -217,6 +220,6 @@ const code = {
   ".react-live-wrapper .code-copy-button": {
     right: [0, 0, 0, -3],
   },
-}
+};
 
-export default code
+export default code;
