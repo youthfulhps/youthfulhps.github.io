@@ -1,8 +1,6 @@
 /** @jsx jsx */
 import * as React from "react";
 import { jsx, Box } from "theme-ui";
-import Plus from "../assets/icons/plus.svg";
-import styled from "@emotion/styled";
 
 type TitleProps = {
   children: React.ReactNode;
@@ -11,54 +9,44 @@ type TitleProps = {
   text: string;
 };
 
-const StyledMore = styled.div`
-  height: 100%;
-  width: 51px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-
-  &:hover {
-    opacity: 0.7;
-  }
-`;
-
-const Title = ({ text, children, as = `h1`, className = `` }: TitleProps) => (
+const Title = ({ text, children, as = `h2`, className = `` }: TitleProps) => (
   <div
     sx={{
       justifyContent: `space-between`,
       alignItems: `center`,
+      borderBottomStyle: `solid`,
+      borderBottomWidth: `1px`,
+      borderBottomColor: `divide`,
+      pb: 3,
+      mb: 4,
       flexFlow: `wrap`,
       boxSizing: `border-box`,
       display: `flex`,
-      height: "51px",
     }}
   >
     <Box
-      as={as as React.ElementType}
+      as={as}
       sx={{
-        fontWeight: 900,
-        fontSize: [5, 6],
+        fontWeight: `medium`,
+        fontSize: [3, 4],
         fontFamily: `heading`,
-        lineHeight: 1,
+        lineHeight: `heading`,
         color: `heading`,
       }}
       className={className}
     >
       {text}
     </Box>
-    <StyledMore
+    <div
       sx={{
         color: `secondary`,
-        // borderLeft: "1px solid black",
         a: {
           variant: `links.secondary`,
         },
       }}
     >
-      <img src={Plus} />
-    </StyledMore>
+      {children}
+    </div>
   </div>
 );
 

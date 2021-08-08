@@ -5,15 +5,12 @@ import Layout from "./layout";
 import Title from "./title";
 import Listing from "./listing";
 import List from "./list";
+import styled from "@emotion/styled";
 import useMinimalBlogConfig from "../hooks/use-minimal-blog-config";
 import useSiteMetadata from "../hooks/use-site-metadata";
 import replaceSlashes from "../utils/replaceSlashes";
 import { visuallyHidden } from "../styles/utils";
-// import Hero from "../components/Hero";
-// @ts-ignore
-import Hero from "../texts/hero";
-// @ts-ignore
-import Bottom from "../texts/bottom";
+import Spacer from "./Common/Spacer";
 
 type PostsProps = {
   posts: {
@@ -38,24 +35,11 @@ const Homepage = ({ posts }: PostsProps) => {
   return (
     <Layout>
       <h1 sx={visuallyHidden}>{siteTitle}</h1>
-      <section
-        sx={{
-          mb: [4, 5, 6],
-          p: { fontSize: [1, 1, 2], mt: 2 },
-          variant: `section_hero`,
-        }}
-      >
-        <Hero />
-      </section>
-      <Title text="Latest Posts">
-        <Link to={replaceSlashes(`/${basePath}/${blogPath}`)}>
-          Read all posts
-        </Link>
+      <Spacer height={24} />
+      <Title text="최신글">
+        <Link to={replaceSlashes(`/${basePath}/${blogPath}`)}>블로그 보기</Link>
       </Title>
       <Listing posts={posts} showTags={false} />
-      {/* <List sx={{ variant: `section_bottom` }}>
-        <Bottom />
-      </List> */}
     </Layout>
   );
 };

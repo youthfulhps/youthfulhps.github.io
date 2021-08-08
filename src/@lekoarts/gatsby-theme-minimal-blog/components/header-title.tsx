@@ -4,11 +4,22 @@ import { jsx } from "theme-ui";
 import replaceSlashes from "../utils/replaceSlashes";
 import useSiteMetadata from "../hooks/use-site-metadata";
 import useMinimalBlogConfig from "../hooks/use-minimal-blog-config";
+import heroImg from "../assets/images/hero.png";
 import styled from "@emotion/styled";
 
+const StyledHeaderLink = styled(Link)`
+  display: flex;
+  text-decoration: none;
+  align-items: center;
+  color: black;
+`;
+
 const StyledHeaderTitle = styled.div`
-  font-weight: 400;
-  font-size: 2rem;
+  font-weight: 700;
+`;
+
+const StyledHeaderImage = styled.img`
+  width: 36px;
 `;
 
 const HeaderTitle = () => {
@@ -16,13 +27,13 @@ const HeaderTitle = () => {
   const { basePath } = useMinimalBlogConfig();
 
   return (
-    <Link
+    <StyledHeaderLink
       to={replaceSlashes(`/${basePath}`)}
       aria-label={`${siteTitle} - Back to home`}
-      sx={{ color: `heading`, textDecoration: `none` }}
     >
+      <StyledHeaderImage src={heroImg} />
       <StyledHeaderTitle>{siteTitle}</StyledHeaderTitle>
-    </Link>
+    </StyledHeaderLink>
   );
 };
 

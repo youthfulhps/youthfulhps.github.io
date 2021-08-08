@@ -5,7 +5,7 @@ const googleAnalyticsTrackingId = process.env.GOOGLE_ANALYTICS_ID;
 
 module.exports = {
   siteMetadata: {
-    siteTitle: "브랜든 기술 블로그",
+    siteTitle: "Brandon.dev",
     siteTitleAlt: `브랜든 기술 블로그`,
     siteHeadline: "브랜든 기술 블로그",
     siteUrl: `https://youthfulhps.github.io`,
