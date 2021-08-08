@@ -45,6 +45,7 @@ const Post = ({ data: { post } }: PostProps) => (
       pathname={post.slug}
       canonicalUrl={post.canonicalUrl}
     />
+    <Spacer height={48} />
     <Heading as="h1" variant="styles.h1" sx={{ margin: "0 auto" }}>
       {post.title}
     </Heading>

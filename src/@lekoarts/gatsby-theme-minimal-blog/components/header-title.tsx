@@ -30,6 +30,7 @@ const HeaderTitle = () => {
     <StyledHeaderLink
       to={replaceSlashes(`/${basePath}`)}
       aria-label={`${siteTitle} - Back to home`}
+      sx={{ color: "heading" }}
     >
       <StyledHeaderImage src={heroImg} />
       <StyledHeaderTitle>{siteTitle}</StyledHeaderTitle>
