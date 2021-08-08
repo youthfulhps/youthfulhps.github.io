@@ -5,6 +5,14 @@ export const GlobalStyles = (theme: Theme) => {
     @import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css);
     @import url(//fonts.googleapis.com/css?family=Monoton|Nanum+Gothic&display=swap);
 
+    @font-face {
+      font-family: "Pretendard-Regular";
+      src: url("https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff")
+        format("woff");
+      font-weight: 400;
+      font-style: normal;
+    }
+
     * {
       box-sizing: border-box;
     }
@@ -16,7 +24,8 @@ export const GlobalStyles = (theme: Theme) => {
       transition: all 0.3s ease-in-out;
     }
     body {
-      font-family: "Spoqa Han Sans", "Nanum Gothic", sans-serif;
+      font-family: "Pretendard-Regular", "Spoqa Han Sans", "Nanum Gothic",
+        sans-serif;
       -webkit-font-smoothing: antialiased !important;
       text-rendering: optimizeLegibility !important;
     }
