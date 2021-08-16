@@ -81,7 +81,7 @@ const Post = ({ data: { post } }: PostProps) => (
         variant: `layout.content`,
         img: {
           display: "block",
-          width: "80%",
+          width: "100%",
           margin: `0 auto`,
         },
       }}
