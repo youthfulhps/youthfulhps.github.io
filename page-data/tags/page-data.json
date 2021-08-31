@@ -1,1 +1,5 @@
-{"componentChunkName":"component---node-modules-lekoarts-gatsby-theme-minimal-blog-core-src-templates-tags-query-tsx","path":"/tags","result":{"data":{"allPost":{"group":[{"fieldValue":"Dark Arts","totalCount":2},{"fieldValue":"Highlight","totalCount":1},{"fieldValue":"Novel","totalCount":2},{"fieldValue":"Tutorial","totalCount":2}]}},"pageContext":{}},"staticQueryHashes":["2744905544","3090400250","318001574"]}
+{
+    "componentChunkName": "component---node-modules-lekoarts-gatsby-theme-minimal-blog-core-src-templates-tags-query-tsx",
+    "path": "/tags",
+    "result": {"data":{"allPost":{"group":[{"fieldValue":"AWS","totalCount":1},{"fieldValue":"CRA","totalCount":1},{"fieldValue":"CloudFront","totalCount":1},{"fieldValue":"Route53","totalCount":1},{"fieldValue":"S3","totalCount":1},{"fieldValue":"core","totalCount":1},{"fieldValue":"openapi-generator","totalCount":1},{"fieldValue":"redux","totalCount":2},{"fieldValue":"redux persist","totalCount":1},{"fieldValue":"redux saga","totalCount":1},{"fieldValue":"redux toolkit","totalCount":1},{"fieldValue":"리덕스","totalCount":1}]}},"pageContext":{}},
+    "staticQueryHashes": ["2744905544","3090400250","318001574"]}

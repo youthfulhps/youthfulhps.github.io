@@ -1,0 +1,5 @@
+{
+    "componentChunkName": "component---node-modules-lekoarts-gatsby-theme-minimal-blog-core-src-templates-tag-query-tsx",
+    "path": "/tags/core",
+    "result": {"data":{"allPost":{"nodes":[{"slug":"/실무에서-배운-리덕스-접근법","title":"실무에서 배운 리덕스 접근법","date":"01.08.2021","excerpt":"…","timeToRead":2,"description":"실무에서 리덕스를 어떻게 접근해야 하는 지 배운 점을 공유합니다.","tags":[{"name":"redux","slug":"redux"},{"name":"redux saga","slug":"redux-saga"},{"name":"redux toolkit","slug":"redux-toolkit"},{"name":"리덕스","slug":"리덕스"},{"name":"core","slug":"core"}]}]}},"pageContext":{"slug":"core","name":"core","formatString":"DD.MM.YYYY"}},
+    "staticQueryHashes": ["2744905544","3090400250","318001574"]}
