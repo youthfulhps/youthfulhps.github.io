@@ -1,0 +1,71 @@
+---
+title: Redux-Persist에서 상태값이 병합되는 과정 톺아보기
+date: 2021-08-28
+description: Redux-persist에서 상태 구조가 변하면 발생하는 상태값 충돌을 대비한 경험을 정리합니다.
+tags:
+  - redux
+  - redux persist
+
+banner: ""
+---
+
+최근, 구매 프로세스의 전반적인 액션과 상태를 관장하고 있는 [Slice](https://redux-toolkit.js.org/api/createslice)가
+직관적이지 못한 레거시 코드들로 인해 발목을 잡히게 되는 상황을 염려해
+새롭게 리팩토링함과 동시에 죽은 코드들을 처내는 작업을 진행하게 되었습니다.
+
+구매 과정에 대한 정보들을 담고 있는 상태값들은 유저가 구매 중간 과정에서 이탈하게 되더라도 다시금 구매를 진행할 때 이전 단계를 반복하는 일이 없도록
+Redux-Persist에서 관리하고 있었습니다.
+
+문제는, 리팩토링 이후 새로운 버전의 슬라이스로 대체되는 과정에서 발생되었는데요. 로컬 스토리지에 저장되어 있는 이전 버전의 상태값 구조가
+새로운 버전의 상태값 구조와 충돌이 일어나는 문제였습니다.
+
+### Redux-Persist의 기본 병합 방식
+
+> 들어가기 앞서, 로컬 혹은 세션 스토리지에 저장되어 있는 상태값 객체를 `incomming state`, 현재 리듀서의 상태값 객체를 `initial state` 라고 부르겠습니다.
+
+incoming State와 intial State의 충돌이라 표현했지만,
+충돌보단 '덮어쓰기' 라는 표현에 가깝습니다.
+
+![redux-persist-intro](./images/redux-persist-intro.png)
+
+페이지가 랜더링되는 직후 Redux-Persist에 의해 `rehydrate` 액션이 발생되면, incoming State를 불러와
+최상위 객체의 키(key)값을 비교해 일치하는 키의 value로 incoming State의 값을 세팅해버립니다.
+
+가령, 필요에 의해 리덕스 상태 객체에 새로운 키값을 추가하였지만, 컴포넌트 랜더링 직후 incoming State로 대체되니 컴포넌트단에서 'email'이라는
+키에 접근했을 때 타입에러가 발생하게 됩니다.
+
+```ts
+// intial  state
+const initialState: UserState = {
+  user: {
+    id: null,
+    name: "",
+    email: "", //newly added key
+  },
+};
+
+// Access redux state value through redux hook in component
+
+// TypeError: Cannot read property 'email' of undefined
+const { email } = useSelector((state: RootState) => state.userReducer.user);
+```
+
+사실, 다음 섹션에서 다루겠지만, `autoMergeLevel1` 라는 설정값이 default로 설정되어 있어
+위와 같은 병합 과정을 거치게 됩니다. (왜 이런 병합 방식이 디폴트인지는 아직 의문입니다..)
+
+### 병합 과정을 톺아보자
+
+Redux-Persist은 `hardSet`, `autoMergeLevel1`, `autoMergeLevel2` 라는 세 가지 병합 방식을 제공합니다.
+각각, incoming 혹은 initial state 중 어떤 값이 최종 세팅되는 상태값 객체의 키를 선점되는 지에 대한 다른 기준을 가지고 있습니다.
+
+![redux-persist-reconciler-overview](./images/redux-persist-reconciler-overview.png)
+
+캐시를 지워야겠구나 라는 개발자 관점의 새로고침은 QA단계에서 피해야 한다.
+
+근데 이전작업에선 어떻게 됐지?
+checkout 페이지에 접근할 때 setSelectedCoupon에 접근하는데 reducer에서는 selectedCoupon값을 null로 초기화한다.
+이때 initialState에 없어도, 타입에 정의되어 있지 않아도 selectedCoupon상태값이 정의되고 그 값에 null이 할당된다.
+
+세션, 로컬 스토리지 둘중 어떤 것을 사용할 지 결정해야 한다.
+
+redux persist versioning?

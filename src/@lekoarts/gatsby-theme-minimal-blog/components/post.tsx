@@ -84,6 +84,10 @@ const Post = ({ data: { post } }: PostProps) => (
           width: "100%",
           margin: `0 auto`,
         },
+        ".gatsby-highlight": {
+          my: [4, 4, 5],
+          boxShadow: shadow.join(`, `),
+        },
       }}
     >
       <MDXRenderer>{post.body}</MDXRenderer>

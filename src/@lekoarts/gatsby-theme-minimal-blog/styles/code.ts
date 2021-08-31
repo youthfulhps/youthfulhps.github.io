@@ -12,7 +12,7 @@ const code = {
     backgroundColor: tint(`primary`, 0.7),
   },
   ".prism-code": {
-    fontSize: "16px",
+    fontSize: "14px",
     padding: `2rem 1rem 1rem 1rem`,
     webkitOverflowScrolling: `touch`,
     backgroundColor: `transparent`,
@@ -198,10 +198,6 @@ const code = {
     fontFamily: `monospace`,
     mx: [0, 0, 0, -3],
   },
-  // "[data-name='live-preview'], [data-name='live-editor']": {
-  //   mx: [0, 0, 0, -3],
-  //   fontSize: [1, 1, 2],
-  // },
   ".token-line": {
     pr: 3,
   },
