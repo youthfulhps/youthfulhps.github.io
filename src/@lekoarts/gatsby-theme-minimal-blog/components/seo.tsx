@@ -61,6 +61,10 @@ const Seo = ({
       <meta name="twitter:image:alt" content={seo.description} />
       <meta name="twitter:creator" content={author} />
       <meta name="gatsby-theme" content="@lekoarts/gatsby-theme-minimal-blog" />
+      <meta
+        name="google-site-verification"
+        content="f4EOADBHWVbkr4BqV6haLgZMxergowHY9ngPC-fMY0M"
+      />
       <link
         rel="icon"
         type="image/png"
