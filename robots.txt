@@ -1,3 +1,4 @@
 User-agent: *
-
-sitemap: https://minimal-blog.lekoarts.de/sitemap.xml
+Allow: /
+Sitemap: https://youthfulhps.github.io/sitemap.xml
+Host: https://youthfulhps.github.io
