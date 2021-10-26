@@ -11,7 +11,7 @@ module.exports = {
     siteUrl: `https://youthfulhps.github.io`,
     author: `유병호`,
     siteLanguage: "ko",
-    siteImage: "/favicon.png",
+    siteImage: "/banner.png",
     siteDescription: "프론트엔드 개발자 브랜든 기술 블로그입니다",
   },
   plugins: [
