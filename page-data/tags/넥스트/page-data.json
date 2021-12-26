@@ -1,0 +1,5 @@
+{
+    "componentChunkName": "component---node-modules-lekoarts-gatsby-theme-minimal-blog-core-src-templates-tag-query-tsx",
+    "path": "/tags/넥스트",
+    "result": {"data":{"allPost":{"nodes":[{"slug":"/cra-프로젝트에서-넥스트로-마이그레이션-여정-《빌드만-되게-해주세요》-편","title":"CRA 프로젝트에서 넥스트로 마이그레이션 여정 《빌드만 되게 해주세요》 편","date":"26.12.2021","excerpt":"웹 개발을 하면서 개인적으로 정량적인 지표를 보는 게 엄청난 동기를 부여합니다.\n최근  lighthouse…","timeToRead":2,"description":null,"tags":[{"name":"넥스트","slug":"넥스트"},{"name":"SSR","slug":"ssr"},{"name":"react","slug":"react"}]}]}},"pageContext":{"slug":"넥스트","name":"넥스트","formatString":"DD.MM.YYYY"}},
+    "staticQueryHashes": ["2744905544","3090400250","318001574"]}
