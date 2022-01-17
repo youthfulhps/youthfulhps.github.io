@@ -51,11 +51,18 @@ const theme = merge(tailwind, {
     },
     ul: {
       li: {
-        fontSize: [1, 1, 2],
-        letterSpacing: `-0.003em`,
+        fontSize: [1, 1, 1],
+        letterSpacing: `0.003em`,
         lineHeight: `body`,
+        fontWeight: "bold",
+        mt: 2,
         "--baseline-multiplier": 0.179,
         "--x-height-multiplier": 0.35,
+      },
+      noDot: {
+        listStyleType: "none",
+        padding: 0,
+        margin: 0,
       },
     },
     ol: {
@@ -80,6 +87,7 @@ const theme = merge(tailwind, {
     h3: {
       variant: `text.heading`,
       fontSize: [3, 4, 4, 5],
+      letterSpacing: `0.002em`,
       mt: 4,
     },
     h4: {
@@ -139,6 +147,12 @@ const theme = merge(tailwind, {
       padding: [3, 4],
       maxWidth: `824px`,
     },
+
+    flex: {
+      display: "flex",
+      justifyContent: "space-between",
+      alignItems: "center",
+    },
   },
   section: {
     maxWidth: `900px`,
@@ -149,6 +163,25 @@ const theme = merge(tailwind, {
       fontWeight: `heading`,
       lineHeight: `heading`,
       color: `heading`,
+    },
+
+    description: {
+      fontSize: ["14px", "14px", "16px"],
+      letterSpacing: `-0.003em`,
+      wordBreak: `break-word`,
+      mt: 1,
+    },
+
+    highlight: {
+      fontSize: ["14px", "14px", "16px"],
+      letterSpacing: `-0.003em`,
+      wordBreak: `break-word`,
+      color: tailwind.colors.green[2],
+    },
+  },
+  image: {
+    profile: {
+      borderRadius: 4,
     },
   },
   copyButton: {
