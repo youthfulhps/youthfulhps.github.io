@@ -1,7 +1,6 @@
 import { merge } from "theme-ui";
 import { transparentize } from "@theme-ui/color";
 import { tailwind } from "@theme-ui/presets";
-
 const theme = merge(tailwind, {
   initialColorModeName: `dark`,
   config: {
@@ -30,7 +29,7 @@ const theme = merge(tailwind, {
     // },
   },
   fonts: {
-    body: `"IBM Plex Sans", -apple-system, BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji"`,
+    body: `"Pretendard", "IBM Plex Sans", -apple-system, BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji"`,
   },
   styles: {
     root: {
