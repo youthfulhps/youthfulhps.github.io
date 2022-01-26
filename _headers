@@ -55,14 +55,14 @@
   Link: </component---node-modules-lekoarts-gatsby-theme-minimal-blog-core-src-templates-tags-query-tsx-4fc700a8dcdc1437bc27.js>; rel=preload; as=script
   Link: </page-data/app-data.json>; rel=preload; as=fetch; crossorigin
   Link: </page-data/tags/page-data.json>; rel=preload; as=fetch; crossorigin
-/aws-lambda-edge에서-최적화된-이미지-전달받기-위한-인프라-구성-작성중
+/aws-lambda-edge에서-최적화된-이미지-전달받기-위한-인프라-구성
   Link: </webpack-runtime-a5473fee5e23fc85944a.js>; rel=preload; as=script
   Link: </framework-f3a47ef4a22d24b14274.js>; rel=preload; as=script
   Link: </app-b505ad433015846ca3af.js>; rel=preload; as=script
   Link: </aed2e917f30c051bccba91aa15989a75fd0bd633-5bd110ed80ddad9ae84d.js>; rel=preload; as=script
   Link: </component---node-modules-lekoarts-gatsby-theme-minimal-blog-core-src-templates-post-query-tsx-f888a4f0c0e5cd281470.js>; rel=preload; as=script
   Link: </page-data/app-data.json>; rel=preload; as=fetch; crossorigin
-  Link: </page-data/aws-lambda-edge에서-최적화된-이미지-전달받기-위한-인프라-구성-작성중/page-data.json>; rel=preload; as=fetch; crossorigin
+  Link: </page-data/aws-lambda-edge에서-최적화된-이미지-전달받기-위한-인프라-구성/page-data.json>; rel=preload; as=fetch; crossorigin
 /incremental-static-regeneration을-적용하기-앞서-타임라인-이해하기
   Link: </webpack-runtime-a5473fee5e23fc85944a.js>; rel=preload; as=script
   Link: </framework-f3a47ef4a22d24b14274.js>; rel=preload; as=script
