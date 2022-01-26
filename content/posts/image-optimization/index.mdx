@@ -1,5 +1,5 @@
 ---
-title: AWS Lambda@Edge에서 최적화된 이미지 전달받기 위한 인프라 구성 (작성중..)
+title: AWS Lambda@Edge에서 최적화된 이미지 전달받기 위한 인프라 구성
 date: 2022-01-21
 description: AWS Lambda@Edge에서 온디멘드 이미지 리사이징과 WebP 형식 변환을 통해 최적화된 이미지를 전달받기 위한 인프라를 구성해보고 기록합니다.
 tags:
@@ -112,3 +112,7 @@ CloudFront 배포를 생성한다. CloudFront에서 쿼리 문자열 파라미�
 S3로 Origin Request가 전달되고, S3에서 응답받은 이미지를 통해 전처리가 필요하기 때문에 Origin response로 설정한다.
 
 ![distribution-lambda](./images/distribution-lambda.png)
+
+### 테스트 클라이언트 구성
+
+[image-ondemand-resizing](https://github.com/youthfulhps/image-ondemand-resizing)
