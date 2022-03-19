@@ -4,6 +4,7 @@ import { jsx, Link as TLink, Box } from "theme-ui";
 import { Link } from "gatsby";
 import ItemTags from "./item-tags";
 import styled from "@emotion/styled";
+import Spacer from "./Common/Spacer";
 
 type BlogListItemProps = {
   post: {
@@ -43,7 +44,7 @@ const StyledDescription = styled.p`
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
   word-wrap: break-word;
   font-size: 14px;
@@ -60,16 +61,24 @@ const BlogListItem = ({ post, showTags = true }: BlogListItemProps) => (
     </StyledTLink>
     <p
       sx={{
-        color: `secondary`,
+        color: `#2d3748`,
         mt: 1,
         a: { color: `secondary` },
-        fontSize: [1, 1, 2],
+        fontSize: [0.5, 0.5, 0.5],
       }}
     >
-      <time>{post.date}</time>
+      <time
+        sx={{
+          backgroundColor: "#feb2b2",
+          padding: "4px",
+          marginRight: "2px",
+          borderRadius: "2px",
+        }}
+      >
+        {post.date}
+      </time>
       {post.tags && showTags && (
         <React.Fragment>
-          {` — `}
           <ItemTags tags={post.tags} />
         </React.Fragment>
       )}
@@ -77,7 +86,7 @@ const BlogListItem = ({ post, showTags = true }: BlogListItemProps) => (
     <StyledDescription
       sx={{
         color: `secondary`,
-        mt: 1,
+        mt: 2,
         a: { color: `secondary` },
       }}
     >

@@ -223,6 +223,22 @@ const theme = merge(tailwind, {
     },
   },
   links: {
+    tag: {
+      cursor: 'pointer',
+      color: `#2d3748 !important`,
+      textDecoration: `none`,
+      fontSize: [0.5, 0.5, 0.5],
+      backgroundColor: "#b2f5ea",
+      padding: "4px",
+      borderRadius: 2,
+      ":hover": {
+        color: `heading`,
+        textDecoration: `underline`,
+      },
+      ":focus": {
+        color: `heading`,
+      },
+    },
     secondary: {
       color: `secondary`,
       textDecoration: `none`,

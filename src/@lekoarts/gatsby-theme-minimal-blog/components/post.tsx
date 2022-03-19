@@ -58,15 +58,24 @@ const Post = ({ data: { post } }: PostProps) => (
         fontSize: [0.5, 0.5, 1],
       }}
     >
-      <time>{post.date}</time>
-      {post.tags && (
-        <React.Fragment>
-          {` — `}
-          <ItemTags tags={post.tags} />
-        </React.Fragment>
+      <time
+        sx={{
+          color: `#2d3748`,
+          fontSize: [0.5, 0.5, 0.5],
+          backgroundColor: "#feb2b2",
+          padding: "4px",
+          marginRight: "2px",
+          borderRadius: "2px",
+        }}
+      >
+        {post.date}
+      </time>
+      {post.tags && <ItemTags tags={post.tags} />}
+      {post.timeToRead && (
+        <span sx={{ fontSize: [0.5, 0.5, 0.5], ml: "4px" }}>
+          - {post.timeToRead} min read
+        </span>
       )}
-      {post.timeToRead && ` — `}
-      {post.timeToRead && <span>{post.timeToRead} min read</span>}
     </p>
     <Spacer height={48} />
     <section

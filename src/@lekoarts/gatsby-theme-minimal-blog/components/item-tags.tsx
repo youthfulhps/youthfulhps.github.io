@@ -18,10 +18,9 @@ const ItemTags = ({ tags }: TagsProps) => {
     <React.Fragment>
       {tags.map((tag, i) => (
         <React.Fragment key={tag.slug}>
-          {!!i && `, `}
+          {!!i && ` `}
           <TLink
-            sx={{ fontSize: [0.5, 0.5, 1] }}
-            as={Link}
+            sx={{ variant: `links.tag` }}
             to={replaceSlashes(`/${basePath}/${tagsPath}/${tag.slug}`)}
           >
             {tag.name}
