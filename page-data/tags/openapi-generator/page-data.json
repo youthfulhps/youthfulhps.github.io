@@ -1,5 +1,5 @@
 {
     "componentChunkName": "component---node-modules-lekoarts-gatsby-theme-minimal-blog-core-src-templates-tag-query-tsx",
     "path": "/tags/openapi-generator",
-    "result": {"data":{"allPost":{"nodes":[{"slug":"/openapi-generator를-통한-타입세이프한-개발-그리고-mock-서버까지","title":"Openapi-generator를 통한 타입세이프한 개발, 그리고 Mock 서버까지","date":"28.07.2021","excerpt":"…","timeToRead":2,"description":"실무에서 Openapi-generator와 Stoplight를 통해 API 스펙을 공유한 경험을 정리합니다.","tags":[{"name":"openapi-generator","slug":"openapi-generator"}]}]}},"pageContext":{"slug":"openapi-generator","name":"openapi-generator","formatString":"DD.MM.YYYY"}},
+    "result": {"data":{"allPost":{"nodes":[{"slug":"/how-to-use-openapi-generator","title":"Openapi-generator를 통한 타입세이프한 개발, 그리고 Mock 서버까지","date":"28.07.2021","excerpt":"…","timeToRead":2,"description":"실무에서 Openapi-generator와 Stoplight를 통해 API 스펙을 공유한 경험을 정리합니다.","tags":[{"name":"openapi-generator","slug":"openapi-generator"}]}]}},"pageContext":{"slug":"openapi-generator","name":"openapi-generator","formatString":"DD.MM.YYYY"}},
     "staticQueryHashes": ["2744905544","3090400250","318001574"]}
