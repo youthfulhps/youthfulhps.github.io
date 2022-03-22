@@ -64,7 +64,7 @@ const BlogListItem = ({ post, showTags = true }: BlogListItemProps) => (
         color: `#2d3748`,
         mt: 1,
         a: { color: `secondary` },
-        fontSize: [0.5, 0.5, 0.5],
+        fontSize: [12, 12, 12],
       }}
     >
       <time

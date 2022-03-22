@@ -61,7 +61,7 @@ const Post = ({ data: { post } }: PostProps) => (
       <time
         sx={{
           color: `#2d3748`,
-          fontSize: [0.5, 0.5, 0.5],
+          fontSize: [12, 12, 12],
           backgroundColor: "#feb2b2",
           padding: "4px",
           marginRight: "2px",
@@ -72,7 +72,7 @@ const Post = ({ data: { post } }: PostProps) => (
       </time>
       {post.tags && <ItemTags tags={post.tags} />}
       {post.timeToRead && (
-        <span sx={{ fontSize: [0.5, 0.5, 0.5], ml: "4px" }}>
+        <span sx={{ fontSize: [12, 12, 12], ml: "4px" }}>
           - {post.timeToRead} min read
         </span>
       )}
