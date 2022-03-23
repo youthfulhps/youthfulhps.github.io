@@ -35,7 +35,7 @@ module.exports = {
       resolve: "gatsby-plugin-robots-txt",
       options: {
         host: "https://youthfulhps.github.io",
-        sitemap: "https://youthfulhps.github.io/sitemap.xml",
+        sitemap: "https://youthfulhps.github.io/sitemap/sitemap-index.xml",
         policy: [{ userAgent: "*", allow: "/" }],
       },
     },
