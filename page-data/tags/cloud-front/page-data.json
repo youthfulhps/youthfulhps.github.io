@@ -1,5 +1,0 @@
-{
-    "componentChunkName": "component---node-modules-lekoarts-gatsby-theme-minimal-blog-core-src-templates-tag-query-tsx",
-    "path": "/tags/cloud-front",
-    "result": {"data":{"allPost":{"nodes":[{"slug":"/hosting-cra-via-aws","title":"AWS를 통해 CRA 클라이언트 호스팅하기","date":"10.08.2021","excerpt":"사내에서 새로운 호스트를 구출할 기회가 생겼습니다. 기존 프러덕션들에 대한 인프라는 이미 구축되어 있는 상태여서 클라이언트를 호스팅해볼 기회가 없었는데\n마침 웹 채팅 기능이 담긴 프러덕션을 호스팅할 기회가 생겨 그 과정을 정리해볼까 합니다. S…","timeToRead":2,"description":"AWS를 통해 CRA 클라이언트를 호스팅한 경험을 정리합니다.","tags":[{"name":"AWS","slug":"aws"},{"name":"CRA","slug":"cra"},{"name":"S3","slug":"s-3"},{"name":"CloudFront","slug":"cloud-front"},{"name":"Route53","slug":"route-53"}]}]}},"pageContext":{"slug":"cloud-front","name":"CloudFront","formatString":"DD.MM.YYYY"}},
-    "staticQueryHashes": ["2744905544","3090400250","318001574"]}

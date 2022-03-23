@@ -1,5 +1,0 @@
-{
-    "componentChunkName": "component---node-modules-lekoarts-gatsby-theme-minimal-blog-core-src-templates-tag-query-tsx",
-    "path": "/tags/web-p",
-    "result": {"data":{"allPost":{"nodes":[{"slug":"/image-optimization-via-lambda-edge","title":"AWS Lambda@Edge에서 최적화된 이미지 전달받기 위한 인프라 구성","date":"21.01.2022","excerpt":"많은 이미지를 다루는 페이지의 경우, 이미지 최적화에 신경쓰지 않으면 사용자 경험 지표에서 많은 감점을 받기 쉽다.\nLightHouse 기준,  적절한 이미지 사이즈 사용과 next-gen…","timeToRead":1,"description":"AWS Lambda@Edge에서 온디멘드 이미지 리사이징과 WebP 형식 변환을 통해 최적화된 이미지를 전달받기 위한 인프라를 구성해보고 기록합니다.","tags":[{"name":"AWS","slug":"aws"},{"name":"Lambda@Edge","slug":"lambda-edge"},{"name":"WebP","slug":"web-p"}]}]}},"pageContext":{"slug":"web-p","name":"WebP","formatString":"DD.MM.YYYY"}},
-    "staticQueryHashes": ["2744905544","3090400250","318001574"]}

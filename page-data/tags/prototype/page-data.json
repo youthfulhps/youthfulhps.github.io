@@ -1,5 +1,5 @@
 {
     "componentChunkName": "component---node-modules-lekoarts-gatsby-theme-minimal-blog-core-src-templates-tag-query-tsx",
     "path": "/tags/prototype",
-    "result": {"data":{"allPost":{"nodes":[{"slug":"/do-I-know-javascript-prototype","title":"자바스크립트 프로토타입이..그러니까 그게 말이야","date":"19.03.2022","excerpt":"…","timeToRead":4,"description":"자바스크립트 프로토타입 공부를 정리합니다.","tags":[{"name":"Javascript","slug":"javascript"},{"name":"Prototype","slug":"prototype"}]}]}},"pageContext":{"slug":"prototype","name":"Prototype","formatString":"DD.MM.YYYY"}},
+    "result": {"data":{"allPost":{"nodes":[{"slug":"/do-I-know-javascript-prototype","title":"자바스크립트 프로토타입이..그러니까 그게 말이야","date":"19.03.2022","excerpt":"…","timeToRead":4,"description":"자바스크립트 프로토타입 공부를 정리합니다.","tags":[{"name":"javascript","slug":"javascript"},{"name":"prototype","slug":"prototype"}]}]}},"pageContext":{"slug":"prototype","name":"prototype","formatString":"DD.MM.YYYY"}},
     "staticQueryHashes": ["2744905544","3090400250","318001574"]}
