@@ -5,4 +5,4 @@ category: 'category1'
 draft: false
 ---
 
-Test1
+페이지 수정 적용 테스트입니다.
