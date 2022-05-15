@@ -1,5 +1,0 @@
-{
-    "componentChunkName": "component---node-modules-lekoarts-gatsby-theme-minimal-blog-core-src-templates-tag-query-tsx",
-    "path": "/tags/isr",
-    "result": {"data":{"allPost":{"nodes":[{"slug":"/understand-isr-timeline","title":"Incremental Static Regeneration을 적용하기 앞서 타임라인 이해하기","date":"08.01.2022","excerpt":"최근 CRA…","timeToRead":3,"description":"넥스트의 ISR 타임라인을 이해하고, 적용하기 앞서 고민해야 할 요소들을 정리합니다.","tags":[{"name":"next","slug":"next"},{"name":"ssg","slug":"ssg"},{"name":"isr","slug":"isr"}]}]}},"pageContext":{"slug":"isr","name":"isr","formatString":"DD.MM.YYYY"}},
-    "staticQueryHashes": ["2744905544","3090400250","318001574"]}

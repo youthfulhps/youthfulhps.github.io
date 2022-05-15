@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-Sitemap: https://youthfulhps.github.io/sitemap.xml
-Host: https://youthfulhps.github.io

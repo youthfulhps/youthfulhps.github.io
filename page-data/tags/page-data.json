@@ -1,5 +1,0 @@
-{
-    "componentChunkName": "component---node-modules-lekoarts-gatsby-theme-minimal-blog-core-src-templates-tags-query-tsx",
-    "path": "/tags",
-    "result": {"data":{"allPost":{"group":[{"fieldValue":"aws","totalCount":2},{"fieldValue":"cloudfront","totalCount":1},{"fieldValue":"cra","totalCount":1},{"fieldValue":"generator","totalCount":1},{"fieldValue":"isr","totalCount":1},{"fieldValue":"javascript","totalCount":2},{"fieldValue":"lambda@edge","totalCount":1},{"fieldValue":"next","totalCount":2},{"fieldValue":"openapi-generator","totalCount":1},{"fieldValue":"prototype","totalCount":1},{"fieldValue":"react","totalCount":2},{"fieldValue":"react-native","totalCount":1},{"fieldValue":"redux","totalCount":2},{"fieldValue":"redux persist","totalCount":1},{"fieldValue":"redux-saga","totalCount":1},{"fieldValue":"redux-toolkit","totalCount":1},{"fieldValue":"route53","totalCount":1},{"fieldValue":"s3","totalCount":1},{"fieldValue":"ssg","totalCount":2},{"fieldValue":"webp","totalCount":1}]}},"pageContext":{}},
-    "staticQueryHashes": ["2744905544","3090400250","318001574"]}

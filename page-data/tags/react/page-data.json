@@ -1,5 +1,0 @@
-{
-    "componentChunkName": "component---node-modules-lekoarts-gatsby-theme-minimal-blog-core-src-templates-tag-query-tsx",
-    "path": "/tags/react",
-    "result": {"data":{"allPost":{"nodes":[{"slug":"/migrating-from-cra-to-next","title":"CRA 프로젝트에서 넥스트로 마이그레이션 여정 《빌드만 되게 해주세요》 편","date":"26.12.2021","excerpt":"웹 개발을 하면서 개인적으로 정량적인 지표를 보는 게 엄청난 동기를 부여합니다.\n최근  lighthouse…","timeToRead":2,"description":"CRA 프로젝트를 넥스트로 마이그레이션한 작업을 정리합니다.","tags":[{"name":"next","slug":"next"},{"name":"ssg","slug":"ssg"},{"name":"react","slug":"react"}]},{"slug":"/junior-react-native-retrospective","title":"주니어의 리액트 네이티브 3개월차 회고","date":"25.10.2021","excerpt":"근무하고 있는 회사에서는, 리액트 네이티브로 iOS, Android…","timeToRead":2,"description":"리액트 네이티브 개발을 담당하게 되며 들었던 생각들을 정리합니다.","tags":[{"name":"react-native","slug":"react-native"},{"name":"react","slug":"react"}]}]}},"pageContext":{"slug":"react","name":"react","formatString":"DD.MM.YYYY"}},
-    "staticQueryHashes": ["2744905544","3090400250","318001574"]}
