@@ -1,28 +1,28 @@
 module.exports = {
-  title: `Bee starter`,
-  description: `Blog posted about ...`,
-  author: `[Your Name]`,
-  introduction: `I explain with words and code. I explain with words and code. I explain with words and code.`,
-  siteUrl: `https://gatsby-starter-bee.netlify.com`, // Your blog site url
+  title: `Youthfulhps.dev`,
+  description: `Blog posted front-end, troubleshooting!`,
+  author: `youthfulhps`,
+  introduction: `프론트엔드 주니어 개발자, 트러블슈팅에 대한 고민의 흔적을 기록으로 남기는 것을 좋아하는 개발자`,
+  siteUrl: `https://youthfulhps.github.io`, 
   social: {
-    twitter: ``, // Your Twitter account
-    github: ``, // Your GitHub account
-    medium: ``, // Your Medium account
-    facebook: ``, // Your Facebook account
-    linkedin: ``, // Your LinkedIn account
-    instagram: ``, // Your Instagram account
+    twitter: ``, 
+    github: `youthfulhps`, 
+    medium: ``, 
+    facebook: ``, 
+    linkedin: ``, 
+    instagram: `youthfulhps`, 
   },
-  icon: `content/assets/felog.png`, // Add your favicon
-  keywords: [`blog`],
+  icon: `static/favicon.png`, 
+  keywords: [`blog`, 'javascript', 'web', 'react', 'frontend', 'development'],
   comment: {
-    disqusShortName: '', // Your disqus-short-name. check disqus.com.
-    utterances: 'JaeYeopHan/gatsby-starter-bee', // Your repository for archive comment
+    disqusShortName: 'youthfulhps', // Your disqus-short-name. check disqus.com.
+    utterances: 'youthfulhps/youthfulhps.github.io', // Your repository for archive comment
   },
   configs: {
     countOfInitialPost: 10, // Config your initial count of post
   },
   sponsor: {
-    buyMeACoffeeId: 'jbee',
+    buyMeACoffeeId: 'youthfulhps',
   },
   share: {
     facebookAppId: '', // Add facebookAppId for using facebook share feature v3.2
