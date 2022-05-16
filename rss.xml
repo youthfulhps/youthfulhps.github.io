@@ -1,4 +1,372 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Youthfulhps.dev]]></title><description><![CDATA[Blog posted front-end, troubleshooting!]]></description><link>https://youthfulhps.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Sun, 15 May 2022 13:59:48 GMT</lastBuildDate><item><title><![CDATA[나는 제네레이터를 알고 사용하는 걸까?]]></title><description><![CDATA[리덕스 사가는 ES6에 새롭게 도입된 제네레이터 (Generator…]]></description><link>https://youthfulhps.github.io/javascript/do-I-know-javascript-generator/</link><guid isPermaLink="false">https://youthfulhps.github.io/javascript/do-I-know-javascript-generator/</guid><pubDate>Sun, 21 Nov 2021 22:05:01 GMT</pubDate><content:encoded>&lt;p&gt;리덕스 사가는 ES6에 새롭게 도입된 제네레이터 (Generator) 문법을 사용하여 유용하게 비동기 처리를 할 수 있게 해줍니다.
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Youthfulhps.dev]]></title><description><![CDATA[Blog posted front-end, troubleshooting!]]></description><link>https://youthfulhps.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Mon, 16 May 2022 15:44:53 GMT</lastBuildDate><item><title><![CDATA[자바스크립트 프로토타입 톺아보기]]></title><description><![CDATA[…]]></description><link>https://youthfulhps.github.io/javascript/javascript-prototype/</link><guid isPermaLink="false">https://youthfulhps.github.io/javascript/javascript-prototype/</guid><pubDate>Sat, 19 Mar 2022 00:05:02 GMT</pubDate><content:encoded>&lt;p&gt;자바스크립트는 프로토타입 기반의 객체 지향 프로그래밍 언어입니다. 개인적으로 프로토타입에 대한 큰 그림을 이해하고 있다고 생각했는데,
+이직을 준비하면서 프로토타입만 마주하면 작아지는 제 모습을 보게 됩니다.&lt;/p&gt;
+&lt;p&gt;자연스레 프로토타입 객체로부터 상속받은 메서드를 사용하면서도, 직접 프로토타입 객체를 다룰 기회는 적었는데요.
+어쩌면 가장 익숙하지만 낯선 프로토타입 기반을 다시금 공부해보려 합니다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 1086px; &quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 49.33333333333333%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAACXBIWXMAABYlAAAWJQFJUiTwAAACr0lEQVQozyWS+09SYRzGzz/VT8bNAwIBBxWOjItBKEgGB09mQiomEHhhlUnDtppZoeu+bivdureyVm1lbS2rtWr1Q1v9CZ9e7Yd3797tu8/zfJ/nlWyyjZbtRgwGE07ZSpu1DavNhSy7cNgV3K52PO6OrTsSCfH7zwf+/tmgJxLAbnPgcbmxyg62bdvO7NwkksFgxmy0kAr5qOkxtIifSJdKl9qF36eieDqxC7DD4RVvP99+vuH7x/voMRXZKGO1WDGbZFpaLLidLqRcspv5kd2cKaYpp6Pke0PM7EuQTkQJh4JEI0HavT7sbQqqqvL91zqf1m8zN5qi0+bE2WoTwFZMxv9Hmh1OcfVojuqeGENijVEBXJzUGc724XQoBANdKO52LK1ufH6Vrz9es/H2Fs1pnbjiRZHttAmXRoNly6k0kYpxYizDWG83iyWNmhbj2FCC2vgAhXGdmbJOeSxNUEQQ8AdYf7/Kq5UGCxMZdnd20GG14xBAk4hty2FBDXD5cI6losZ8vp9CoptSb5CKHufO1Rr3l0tcqg9zeLiXykCSt29Weff0As1DGqM9YXyiEKtZFj2YMQqoNGhTqGpJoSiAQ31M9u+ilAijxYLcPFtm9fQ4Jyf2UOwLUS8OsPbsEl827tIsZ6iKmYTbg01kaBTATZfSkN3L/p4o0yWdpdp+6puFeIWIcLt28wgrpw9y8mA/M9ko1b0JVm7N8+nzPer5NIV4iGYlS8TlwthiwiLA0j7xJbQOP5XiIC+fLbJ89ABTqW4eXDvGkys1rjcO0Mgnmc7s5FA2Tm1E42yjxLn5Mtn+Hi7M5Vio6Dg2MxTFSJnWHRTCYTFQZO3hKR7fmOXuUpXnjxY4XxtkeWqARi7Jkb1xypkYI6kox4X4Yn2cgOKhOZfnxcUpJsX6snD4D/pP0IdSntOOAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;thumbnail&quot;
+        title=&quot;thumbnail&quot;
+        src=&quot;/static/2be1781c7f40f713d1d34bcebb6f9d99/f3a19/thumbnail.png&quot;
+        srcset=&quot;/static/2be1781c7f40f713d1d34bcebb6f9d99/5a46d/thumbnail.png 300w,
+/static/2be1781c7f40f713d1d34bcebb6f9d99/0a47e/thumbnail.png 600w,
+/static/2be1781c7f40f713d1d34bcebb6f9d99/f3a19/thumbnail.png 1086w&quot;
+        sizes=&quot;(max-width: 1086px) 100vw, 1086px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;h2 id=&quot;객체-그리고-프로토타입-객체&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EA%B0%9D%EC%B2%B4-%EA%B7%B8%EB%A6%AC%EA%B3%A0-%ED%94%84%EB%A1%9C%ED%86%A0%ED%83%80%EC%9E%85-%EA%B0%9D%EC%B2%B4&quot; aria-label=&quot;객체 그리고 프로토타입 객체 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;객체, 그리고 프로토타입 객체&lt;/h2&gt;
+&lt;p&gt;자바스크립트의 모든 객체는 자신의 부모격이 되는 객체와 연결되어 있습니다. 그리고, 자식 객체는 부모격이 되는 객체의 프로퍼티와 메서드를
+마치 자신의 프로퍼티와 메서드처럼 사용할 수 있습니다. 객체 지향의 상속과 같은 패턴이죠!
+자식 객체는 hasOwnProperty 메서드가 없음에도 호출할 수 있는 것처럼요. &lt;strong&gt;여기서, 부모격이 되는 객체를 프로토타입 객체라 부릅니다.&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; child &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token literal-property property&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;Brandon&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;token literal-property property&quot;&gt;age&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;29&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+console&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;child&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;hasOwnProperty&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;name&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;// true&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&quot;prototype&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#prototype&quot; aria-label=&quot;prototype permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;[[Prototype]]&lt;/h2&gt;
+&lt;p&gt;자식 객체는 어떻게 부모 객체의 프로퍼티와 메서드에 문제없이 접근하고 상속받을 수 있을까요? 자바스크립트의 모든 객체는 &lt;em&gt;[[Prototype]]&lt;/em&gt; 이라는
+인터널 슬롯을 가지고 있고, 이를 통해 부모 객체를 참조하고 있어서 &lt;em&gt;[[Prototype]]&lt;/em&gt; 객체의 데이터 프로퍼티를 상속받을 수 있게 됩니다.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;[[Prototype]]&lt;/em&gt; 은 &lt;em&gt;\&lt;/em&gt;_proto__ _ 접근자 프로퍼티로 접근할 수 있는데, 이는 Object.getPrototypeOf 가 내부적으로 호출되어
+프로토타입 객체를 반환해준다고 합니다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 1200px; &quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 31.333333333333336%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAGCAYAAADDl76dAAAACXBIWXMAABYlAAAWJQFJUiTwAAAAxklEQVQY05WQuRLCMAxE8yOQw/HtyAkx10BBxf//0SIZhoaGFDujHclPKzcxzSjlAqKMlAjWWFhtoEXWoVcGXT/+rcb6iPvjieVwgxoNdq3CvlNou5GlNsEqcN8OCOsNfr1CLytCJAyD3gz6An2YOF3hkycYG+B8Qj+8mz2Dpd6ihvKK0/mKYyFkipj4L/NSYFyENh6WF3hObdnLQrlAQogfuR9SrnX12qGRgZkBlIlTJq4X1rE+1sbVQZkR/wNkQPwApSf+BWXcrh8HMRihAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;prototype-dir&quot;
+        title=&quot;prototype-dir&quot;
+        src=&quot;/static/3700caa950c0dc54dd84f4274ceb95d6/c1b63/prototype-dir.png&quot;
+        srcset=&quot;/static/3700caa950c0dc54dd84f4274ceb95d6/5a46d/prototype-dir.png 300w,
+/static/3700caa950c0dc54dd84f4274ceb95d6/0a47e/prototype-dir.png 600w,
+/static/3700caa950c0dc54dd84f4274ceb95d6/c1b63/prototype-dir.png 1200w,
+/static/3700caa950c0dc54dd84f4274ceb95d6/bd9eb/prototype-dir.png 1442w&quot;
+        sizes=&quot;(max-width: 1200px) 100vw, 1200px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;h2 id=&quot;prototype-프로퍼티&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#prototype-%ED%94%84%EB%A1%9C%ED%8D%BC%ED%8B%B0&quot; aria-label=&quot;prototype 프로퍼티 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;prototype 프로퍼티&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;함수 객체는 일단 객체와는 달리, &lt;em&gt;prototype&lt;/em&gt; 프로퍼티를 소유하고 있습니다.&lt;/strong&gt; 물론 &lt;em&gt;[[Prototype]]&lt;/em&gt; 도 가지고 있죠.&lt;/p&gt;
+&lt;p&gt;여기서, &lt;strong&gt;&lt;em&gt;prototype&lt;/em&gt; 프로퍼티는 함수가 생성자 함수로서 호출되어 새롭게 객체를 생성할 때 생성된 객체의 프로토타입 객체를 가리키고 있습니다.&lt;/strong&gt;
+쉽게 설명하자면, 새롭게 생성된 객체에게 프로토타입 객체를 참조할 수 있도록 전달해주는 역할을 합니다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 1200px; &quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 32%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAGCAYAAADDl76dAAAACXBIWXMAABYlAAAWJQFJUiTwAAAAk0lEQVQY052QUQ6DIBBEOYmAFhQkAitabNp4/1NNV26gHy+Zj83LzApjPGZfkHNEphV+XtDJHkq/INVwGzGHiJQzizx8SE2kL/pnCGsdyvFD/Z7Y3ycLTZM+RVw1R/pgogptJ0ie20nN9Z/NFqo3cHGDWysCbe2HCx0wY2jyu1KhWZhYROuOwhBn6xMG46D44O7kP9NKquPadyxLAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;function-prototype&quot;
+        title=&quot;function-prototype&quot;
+        src=&quot;/static/aaf45b22c2c7360cd05383919bf65553/c1b63/function-prototype.png&quot;
+        srcset=&quot;/static/aaf45b22c2c7360cd05383919bf65553/5a46d/function-prototype.png 300w,
+/static/aaf45b22c2c7360cd05383919bf65553/0a47e/function-prototype.png 600w,
+/static/aaf45b22c2c7360cd05383919bf65553/c1b63/function-prototype.png 1200w,
+/static/aaf45b22c2c7360cd05383919bf65553/a2792/function-prototype.png 1462w&quot;
+        sizes=&quot;(max-width: 1200px) 100vw, 1200px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;Person&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;name &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; name
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; brandon &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;Person&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;brandon&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+
+console&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;brandon&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;hasOwnProperty&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;prototype&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;// false&lt;/span&gt;
+console&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;Person&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;hasOwnProperty&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;prototype&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;// true&lt;/span&gt;
+
+console&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token class-name&quot;&gt;Person&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;prototype &lt;span class=&quot;token operator&quot;&gt;===&lt;/span&gt; brandon&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;__proto__&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;// true&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&quot;constructor-프로퍼티&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#constructor-%ED%94%84%EB%A1%9C%ED%8D%BC%ED%8B%B0&quot; aria-label=&quot;constructor 프로퍼티 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;constructor 프로퍼티&lt;/h2&gt;
+&lt;p&gt;프로토타입 객체는 &lt;em&gt;constructor&lt;/em&gt; 라는 프로퍼티를 가지고 있습니다. &lt;strong&gt;&lt;em&gt;constructor&lt;/em&gt; 프로퍼티는 객체의 입장에서 자신을 생성한 객체를 가리키게 됩니다.&lt;/strong&gt;
+가령, brandon 객체의 프로토타입 객체의 &lt;em&gt;constructor&lt;/em&gt; 프로퍼티는 Person 생성자 함수를 가리키게 되는데요. 아래와 같은 전개를 통해 참조됩니다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Person 생성자 함수를 통해 brandon객체가 생성된다.&lt;/li&gt;
+&lt;li&gt;brandon 객체의 프로토타입 객체는 Person.prototype이다.&lt;/li&gt;
+&lt;li&gt;brandon 객체의 프로토타입 객체 Person.prototype의 constructor 프로퍼티는 자신을 생성한 객체 즉, Person을 가리킨다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 1200px; &quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 55.99999999999999%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAALCAYAAAB/Ca1DAAAACXBIWXMAABYlAAAWJQFJUiTwAAABZ0lEQVQoz5VSTU/CQBDl//8Azp6NJ6NnQhNj4sEYDaYoLYUWCmXp99Kv7T53t1KgUcFJJpPdnXnz3sz2IIzzGrzuuLhr3rjyS633V3LzxlvQS7wnC7P1G4LJAGSiYWtoCM2hujuAdhr92hwNIFs9obLuQd5v4b7cIBxdI5kOUNeNbFZQVHminBWpgmSMIUkS5HnegimG+4Ms9YMIWV5iufLgLFwQQrCjFJvZK2YjDcuPR9j6A3ZpLIAKeJ6HOI5BRc6+ee8wdI4sy1RSGASIogi+72M8HiuJJRNMv+UVRXEiN01TlGV5kHy8ySgM4TgObNuGZVnK6zxG4M0RbuZIA1c09JVcyU6Cua6rRnDCsAUUzCSgYRiKHdmsQSd3MLU+Pod9kOcr0MjDYuliaprQdR2miO236TKUs6iqSkmQA69rBl5EqChBSbfgeSAKRI5gJPOkfBnbpfy0+nN29tscM/zPJ+6OS8YvIaBWwIeUbg8AAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;person-prototype&quot;
+        title=&quot;person-prototype&quot;
+        src=&quot;/static/c9177aaf0e0ecc64c60021d5d4a1dd9a/c1b63/person-prototype.png&quot;
+        srcset=&quot;/static/c9177aaf0e0ecc64c60021d5d4a1dd9a/5a46d/person-prototype.png 300w,
+/static/c9177aaf0e0ecc64c60021d5d4a1dd9a/0a47e/person-prototype.png 600w,
+/static/c9177aaf0e0ecc64c60021d5d4a1dd9a/c1b63/person-prototype.png 1200w,
+/static/c9177aaf0e0ecc64c60021d5d4a1dd9a/d61c2/person-prototype.png 1800w,
+/static/c9177aaf0e0ecc64c60021d5d4a1dd9a/97a96/person-prototype.png 2400w,
+/static/c9177aaf0e0ecc64c60021d5d4a1dd9a/9ade0/person-prototype.png 3002w&quot;
+        sizes=&quot;(max-width: 1200px) 100vw, 1200px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;Person&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;name &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; name
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;token comment&quot;&gt;//Person 생성자 함수를 통해 brandon객체가 생성된다.&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; brandon &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;Person&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;Brandon&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;token comment&quot;&gt;//brandon 객체의 프로토타입 객체는 Person.prototype이다.&lt;/span&gt;
+console&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;brandon&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;__proto__ &lt;span class=&quot;token operator&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;Person&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;prototype&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;token comment&quot;&gt;//brandon 객체의 프로토타입 객체 Person.prototype의 constructor 프로퍼티는 자신을 생성한 객체&lt;/span&gt;
+&lt;span class=&quot;token comment&quot;&gt;//즉, Person을 가리킨다.&lt;/span&gt;
+console&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token class-name&quot;&gt;Person&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;prototype&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;constructor &lt;span class=&quot;token operator&quot;&gt;===&lt;/span&gt; Person&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;token comment&quot;&gt;// brandon 객체를 생성한 객체는 Person() 생성자 함수이다.&lt;/span&gt;
+console&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;brandon&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;constructor &lt;span class=&quot;token operator&quot;&gt;===&lt;/span&gt; Person&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;token comment&quot;&gt;// Person() 생성자 함수를 생성한 객체는 Function() 생성자 함수이다.&lt;/span&gt;
+console&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token class-name&quot;&gt;Person&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;constructor &lt;span class=&quot;token operator&quot;&gt;===&lt;/span&gt; Function&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&quot;프로토타입-체인&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%ED%94%84%EB%A1%9C%ED%86%A0%ED%83%80%EC%9E%85-%EC%B2%B4%EC%9D%B8&quot; aria-label=&quot;프로토타입 체인 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;프로토타입 체인&lt;/h2&gt;
+&lt;p&gt;자바스크립트는 특정 객체의 프로퍼티나 메서드에 접근하려고 할 떄 해당 객체에 접근하려는 프로퍼티 또는 메서드가 없다면,
+&lt;em&gt;[[Prototype]]&lt;/em&gt; 이 가리키는 링크를 따라 자신의 부모 객체, 즉 프로토타입 객체의 프로퍼티 또는 메서드를 검색하게 됩니다.
+&lt;strong&gt;이러한 상속 개념의 패턴을 구현하기 위한 매커니즘이 프로토타입 체인이라 합니다.&lt;/strong&gt; 변수를 검색하는 메커니즘인
+실행컨텍스트의 스코프체인과 유사한 역할과 동작을 띄고 있네요.&lt;/p&gt;
+&lt;p&gt;상단의 예시에서 child 라는 객체는 hasOwnProperty 메서드를 가지고 있지 않지만, 호출이 가능했던 것은 &lt;em&gt;[[Prototype]]&lt;/em&gt; 이 링크를 따라
+Object.prototype를 참조하여 hasOwnProperty 메서드를 호출한 동작에 대한 근거가 됩니다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; child &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token literal-property property&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;Brandon&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;token literal-property property&quot;&gt;age&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;29&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;token comment&quot;&gt;//child 객체는 hasOwnProperty 메서드를 가지고 있지 않지만, 호출이 가능하다.&lt;/span&gt;
+console&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;child&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;hasOwnProperty&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;name&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;// true&lt;/span&gt;
+
+&lt;span class=&quot;token comment&quot;&gt;//child 객체의 프로토타입 객체는 Object.prototype이다.&lt;/span&gt;
+console&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;child&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;__proto__ &lt;span class=&quot;token operator&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;Object&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;prototype&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;// true&lt;/span&gt;
+
+&lt;span class=&quot;token comment&quot;&gt;//Object.prototype은 hasOwnProperty 메서드를 소유하고 있다.&lt;/span&gt;
+console&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token class-name&quot;&gt;Object&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;prototype&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;hasOwnProperty&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;hasOwnProperty&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;// true&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&quot;프로토타입-체인의-종점&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%ED%94%84%EB%A1%9C%ED%86%A0%ED%83%80%EC%9E%85-%EC%B2%B4%EC%9D%B8%EC%9D%98-%EC%A2%85%EC%A0%90&quot; aria-label=&quot;프로토타입 체인의 종점 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;프로토타입 체인의 종점&lt;/h2&gt;
+&lt;p&gt;그렇다면, &lt;strong&gt;프로토타입 체인의 마지막 링크는 어떤 객체를 가리키고 있을까요?&lt;/strong&gt;
+사실, 이 질문은 프로토타입을 깊게 이해하기 전 면접에서 받았던 질문인데요. 제가 프로토타입을 깊게 공부하도록 만든 질문이기도 합니다.&lt;/p&gt;
+&lt;p&gt;우선, 객체를 어떻게 생성하는 지부터 이야기해볼까요? 쉽게 객체를 정의할 수 있는 객체 리터럴 방식, 생성자 함수 그리고 Object() 생성자 함수로
+객체를 정의합니다. 여기서 &lt;strong&gt;객체 리터럴 방식은 결국 Object() 생성자 함수로 생성하는 것을 단순화한 축약 표현&lt;/strong&gt;이니, 내부적으로는 생성자 함수 그리고 Object() 생성자 함수를
+통해 객체를 정의한다고 볼 수 있겠네요.&lt;/p&gt;
+&lt;p&gt;Object() 생성자 함수도 함수이니, &lt;em&gt;prototype&lt;/em&gt; 프로퍼티를 소유하고 있습니다. 즉, 아래와 같이 참조가 전개됩니다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 1200px; &quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 55.00000000000001%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAALCAYAAAB/Ca1DAAAACXBIWXMAABYlAAAWJQFJUiTwAAABYklEQVQoz5VSTU+DQBDt//8BevZoPOlRT00bTx40aj9iCxGw0ELL14IssPucXVpKjdo6yWMC83gz83Z7oJBSQIqaIPagb1ShrOoSp0bvL7Js1HQ+FT31Iw8mWM/6WM+HGpE5RLF83or+1OiX5mpC9ahXD6jMG6xH13AfrxC/XiI17iDIBl0vc1QFa8CZtkKQLXmeg3PeiukJ2xfCJoyRFyVcbwXbWSAIAmRZhsB+gTUawJncwybkLCahUtfTNNUc1aDxsOMVLwr4/gpRFBIxQRiGmE6nUNSShhXb9YqCH6zLGE1eVfuVd8ariOMYjuPAtm2YpqkhS4bIdzSyyEMUbrRIkiQ6u67bmbBzQjtBy7Iwn80wHo+xXHoo329hDs7w1j9H9HRBoi4+Fh4Mw9AclVsPv5+S6qTGV1CGq4ORPEbJfFRZAPG5IbJAXdctZ7fugWBX9FhIHLk23Q/ynxe5a5fKX72lVxBa0ii8AAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;object-prototype&quot;
+        title=&quot;object-prototype&quot;
+        src=&quot;/static/f3a1d7b41af93bf4e9fac96e4613e42a/c1b63/object-prototype.png&quot;
+        srcset=&quot;/static/f3a1d7b41af93bf4e9fac96e4613e42a/5a46d/object-prototype.png 300w,
+/static/f3a1d7b41af93bf4e9fac96e4613e42a/0a47e/object-prototype.png 600w,
+/static/f3a1d7b41af93bf4e9fac96e4613e42a/c1b63/object-prototype.png 1200w,
+/static/f3a1d7b41af93bf4e9fac96e4613e42a/d61c2/object-prototype.png 1800w,
+/static/f3a1d7b41af93bf4e9fac96e4613e42a/97a96/object-prototype.png 2400w,
+/static/f3a1d7b41af93bf4e9fac96e4613e42a/7f486/object-prototype.png 3010w&quot;
+        sizes=&quot;(max-width: 1200px) 100vw, 1200px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;프로토타입 체인을 따라서 더 올라가볼까요? Object() 생성자 함수 또한 &lt;em&gt;[[Prototype]]&lt;/em&gt;를 가지고 있고 다음과 같이 참조가 전개됩니다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Object 생성자 함수를 통해 child 객체가 생성된다.&lt;/li&gt;
+&lt;li&gt;child 객체의 프로토타입 객체는 Object.prototype이다.&lt;/li&gt;
+&lt;li&gt;child 객체의 프로토타입 객체 Object.prototype의 constructor 프로퍼티는 자신을 생성한 객체 즉, Object 생성자 함수를 가리킨다.&lt;/li&gt;
+&lt;li&gt;Object.__proto__ 는 Function.prototype이다.&lt;/li&gt;
+&lt;li&gt;Function.prototype.__proto__ 는 Object.prototype이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 1200px; &quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 55.99999999999999%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAALCAYAAAB/Ca1DAAAACXBIWXMAABYlAAAWJQFJUiTwAAAB4ElEQVQoz22TSW/bQAyF9f/vPfTSUxqggIFc+g/S9BInjRM38lIvsuJYjixptMvavs6Ma9VpTYDQiOI88vFRRtu2KGv3IYF1i7+UbvURqzvpt7RFgMo45p2ainX3/5yNLpA5lLMril9XvPQvSUY9immPNnk5fG8qqn1OXebymen3ozVN052Nv+iHQJwkiDBGiBDHcfA8jzTLScUW2/zGyrzBfr5mt56gcIQQ7HY70jSlKIpDh6etV1VFGEqw7Zb1eq2BR6MRURTRyJQj8bKs2O/33d2yLHWOwRmr6xpns2FlWRpUAYYiIE1ChL8jEh5FnpEkqe4sz3N839fd6g7LqqaqGwkkXfIoZGUFtFgsMM1nHocmjZjh//jE7Pojr98/kK5u2Gw9rOWSyWTCcDgkCAKMOvMQP7+wvf/Mun/B7uGCZPqVqiw0de1RTBq6ZL5F5Fqk3lJyDuUIWj0iRVfRV+IY1DmEY8L1I749INk8SWXmxHGEbdty4C7Om6Rj3+M+XOIMegRPl7RifFyed+My2v9CsnhNp7Lve4zGU91Z/DogsGVh6446fXu3f90eog/NwdUeaBolGymKmuF8PpeimHLOzdnF/teMcwlKZbVbrutqcSyptiqiizeHwqd/yKn9BhHXSX6+PIjLAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;object-prototype-chain&quot;
+        title=&quot;object-prototype-chain&quot;
+        src=&quot;/static/88932170cb27eea840bf5e2f6a3d29d1/c1b63/object-prototype-chain.png&quot;
+        srcset=&quot;/static/88932170cb27eea840bf5e2f6a3d29d1/5a46d/object-prototype-chain.png 300w,
+/static/88932170cb27eea840bf5e2f6a3d29d1/0a47e/object-prototype-chain.png 600w,
+/static/88932170cb27eea840bf5e2f6a3d29d1/c1b63/object-prototype-chain.png 1200w,
+/static/88932170cb27eea840bf5e2f6a3d29d1/d61c2/object-prototype-chain.png 1800w,
+/static/88932170cb27eea840bf5e2f6a3d29d1/97a96/object-prototype-chain.png 2400w,
+/static/88932170cb27eea840bf5e2f6a3d29d1/1307b/object-prototype-chain.png 3000w&quot;
+        sizes=&quot;(max-width: 1200px) 100vw, 1200px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;// Object 생성자 함수를 통해 child 객체가 생성된다.&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; child &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token literal-property property&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;Brandon&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;token comment&quot;&gt;// child 객체의 프로토타입 객체는 Object.prototype이다.&lt;/span&gt;
+console&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;child&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;__proto__ &lt;span class=&quot;token operator&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;Object&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;prototype&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;token comment&quot;&gt;// child 객체의 프로토타입 객체 Object.prototype의 constructor 프로퍼티는 자신을 생성한 객체&lt;/span&gt;
+&lt;span class=&quot;token comment&quot;&gt;//즉, Object 생성자 함수를 가리킨다.&lt;/span&gt;
+console&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token class-name&quot;&gt;Object&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;prototype&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;constructor &lt;span class=&quot;token operator&quot;&gt;===&lt;/span&gt; Object&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;token comment&quot;&gt;// Object.__proto__ 는 Function.prototype이다.&lt;/span&gt;
+console&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;Object&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;__proto__ &lt;span class=&quot;token operator&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;Function&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;prototype&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;token comment&quot;&gt;// Function.prototype.__proto__ 는 Object.prototype이다.&lt;/span&gt;
+console&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token class-name&quot;&gt;Function&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;prototype&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;__proto__ &lt;span class=&quot;token operator&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;Object&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;prototype&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;이번엔 객체를 생성하는 또 다른 방법으로 &lt;strong&gt;생성자 함수를 통해 생성된 객체의 프로토타입 체인에 대한 전개를 확인해 보겠습니다.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;우선, 생성자 함수를 선언하는 단계부터 간단하게 알아보자면, 함수 선언식, 표현식 그리고 Function() 생성자 함수를 통해 함수를 선언할 수 있습니다.
+함수 표현식은 가시적으로도 함수 리터럴 방식을 사용하고 있습니다. &lt;strong&gt;함수 선언식의 경우 자바스크립트 엔진이 내부적으로 함수 기명 표현식으로 변환되어 사용됩니다.
+즉, 함수 선언식, 표현식 모두 함수 리터럴 방식을 사용하고 있다고 할 수 있습니다.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;여기서 함수 리터럴 방식은 Function() 생성자 함수를 통해 함수를 선언하는 것을 단순화한 표현이니, 결국 함수 선언 방법 세 가지는 모두 Function() 생성자 함수를
+통해 선언되는 것과 같습니다. 그럼, Function() 생성자 함수의 프로토타입 체인이 어떻게 전개되는 지 보겠습니다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Person 생성자 함수를 통해 brandon 객체가 생성된다.&lt;/li&gt;
+&lt;li&gt;brandon 객체의 프로토타입 객체는 Person.prototype이다.&lt;/li&gt;
+&lt;li&gt;Person 생성자 함수의 프로토타입 객체는 Function.prototype이다.&lt;/li&gt;
+&lt;li&gt;Function.prototype의 프로토타입 객체는 Object.prototype이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;Person&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;name &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; name
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;token comment&quot;&gt;// Person 생성자 함수를 통해 brandon 객체가 생성된다.&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; brandon &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;Person&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;Brandon&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;token comment&quot;&gt;// brandon 객체의 프로토타입 객체는 Person.prototype이다.&lt;/span&gt;
+console&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;brandon&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;__proto__ &lt;span class=&quot;token operator&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;Person&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;prototype&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;token comment&quot;&gt;// Person 생성자 함수의 프로토타입 객체는 Function.prototype이다.&lt;/span&gt;
+console&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;Person&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;__proto__ &lt;span class=&quot;token operator&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;Function&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;prototype&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;token comment&quot;&gt;// Function.prototype의 프로토타입 객체는 Object.prototype이다.&lt;/span&gt;
+console&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token class-name&quot;&gt;Function&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;prototype&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;__proto__ &lt;span class=&quot;token operator&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;Object&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;prototype&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;객체 선언 방식에 대한 프로토타입 체인을 거슬러 올라가 봤는데요. 객체 리터럴, 생성자 함수 방식이나 결국은 &lt;strong&gt;모든 객체의 부모 객체인 Object.prototype 객체에서
+프로토타입 체인이 끝나는 것을 확인할 수 있습니다. 그래서, 모든 객체의 프로토타입 체인의 종점은 Object.prototype 객체가 됩니다.&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id=&quot;프로토타입-체인의-동작&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%ED%94%84%EB%A1%9C%ED%86%A0%ED%83%80%EC%9E%85-%EC%B2%B4%EC%9D%B8%EC%9D%98-%EB%8F%99%EC%9E%91&quot; aria-label=&quot;프로토타입 체인의 동작 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;프로토타입 체인의 동작&lt;/h2&gt;
+&lt;p&gt;프로토타입 체인은 객체의 프로퍼티를 참조할 때 해당 객체에 프로퍼티가 없는 경우 프로토타입 체인이 동작합니다.
+만약, 객체의 프로퍼티에 값을 할당하는 경우는 프로퍼티가 있다면 재할당을, 프로퍼티가 없다면 동적으로 할당되어 참조가 가능하기 때문에
+이런 경우에는 프로토타입 체인이 동작하지 않습니다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;Person&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;name &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; name
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;token class-name&quot;&gt;Person&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;prototype&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;job &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;junior developer&apos;&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; brandon &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;Person&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;Brandon&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; max &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;Person&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;Max&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+
+max&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;job &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;senior developer&apos;&lt;/span&gt;
+
+console&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;brandon&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;job&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+console&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;max&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;job&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&quot;프로토타입-객체의-확장&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%ED%94%84%EB%A1%9C%ED%86%A0%ED%83%80%EC%9E%85-%EA%B0%9D%EC%B2%B4%EC%9D%98-%ED%99%95%EC%9E%A5&quot; aria-label=&quot;프로토타입 객체의 확장 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;프로토타입 객체의 확장&lt;/h2&gt;
+&lt;p&gt;위의 예제를 보면, Person.prototype에 ‘job’이라는 새로운 프로퍼티를 추가한 것을 확인할 수 있습니다.
+프로토타입 객체는 객체이기 때문에 프로토타입 체인에 즉시 반영되는 프로퍼티를 추가/삭제할 수 있습니다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;Person&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;name &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; name
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; brandon &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;Person&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;Brandon&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;token class-name&quot;&gt;Person&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;prototype&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function-variable function&quot;&gt;sayName&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  console&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;name&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+brandon&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;sayName&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;추가적으로, 자바스크립트에는 객체 이외에도 기본형 값들에 대한 원시 타입이 존재합니다. 기본형들은 불면이며 메서드를 가지지 않는다는 점에서
+객체와 구분되는데, 기본형인 string의 경우 메서드를 가지고 있는 것처럼 동작합니다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token string&quot;&gt;&apos;primitive&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;charAt&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;// &quot;m&quot;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;charAt은 분명 기본형 string의 메서드가 아니지만, 자바스크립트는 기본형과 객체 타입을 서로 자유롭게 변환합니다.
+만약, 기본형에서 charAt에 접근하게 되면 자바스크립트는 기본형을 String 객체로 래핑하고, 메서드를 호출하고 마지막에 래핑할 때 사용했던 객체를
+버립니다. &lt;strong&gt;즉, 원시 타입으로 프로퍼티나 메서드를 참조하면 관련된 객체를 래핑하여 프로토타입 객체를 공유하게 됩니다.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;결론적으로, 원시 타입을 확장하고자 한다면 객체가 아닌 원시 타입에 프로퍼티나 메서드를 추가할 수는 없지만, 원시 타입과 관련된 객체의 프로토타입에 프로퍼티나
+메서드를 추가하면 원시 타입에서도 공유받아 사용할 수 있게 됩니다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; str &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;string&apos;&lt;/span&gt;
+
+str&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function-variable function&quot;&gt;sayValue&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  console&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;string&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+str&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;sayValue&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;// TypeError: str.sayValue is not a function&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; str &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;string&apos;&lt;/span&gt;
+
+&lt;span class=&quot;token class-name&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;prototype&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function-variable function&quot;&gt;sayValue&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  console&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;string&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+str&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;sayValue&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;// &quot;string&quot;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&quot;프로토타입-객체의-변경&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%ED%94%84%EB%A1%9C%ED%86%A0%ED%83%80%EC%9E%85-%EA%B0%9D%EC%B2%B4%EC%9D%98-%EB%B3%80%EA%B2%BD&quot; aria-label=&quot;프로토타입 객체의 변경 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;프로토타입 객체의 변경&lt;/h2&gt;
+&lt;p&gt;프로토타입 객체는 결정된 프로토타입 객체를 임의로 다른 객체로 변경할 수 있는데요. 프로토타입 객체의 변경 시점을 기준으로
+이전에 생성된 객체는 기존 프로토타입 객체에, 이후에 생성된 객체는 변경된 프로토타입 객체에 바인딩되는 것을 주의해야 합니다.&lt;/p&gt;
+&lt;p&gt;프로토타입 객체가 변경이 되면, Person() 생성자 함수의 프로토타입 객체가 일반 객체로 변경되면서, Person.prototype.constructor가
+제거되고, 프로토타입 체이닝에 의해 Object.prototype.constructor 인 Object() 생성자 함수로 변경이 됩니다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 1200px; &quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 55.99999999999999%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAALCAYAAAB/Ca1DAAAACXBIWXMAABYlAAAWJQFJUiTwAAABxklEQVQoz31TTW/TQBDN//8FcOTCAaoiuKBegKqAIsEhwaFN49hO/L22s/Y2/ow/Xme3MZFQmyeNvF7Nzr5583aCMxiGQYVEURQoy/K432Po/wvak5jgeOilkNjv93AcB1EUIQhCdGcITAacR9u2yLIMjDEkux02Gwt88wtiO0Vi/AS3puDmd1SJ/sRQVu3oUHM4oJXRdWiEUGuJjv4D34dlmjApFtofFOYV+s0nsPl7pLeXaM0P6NjvY8uEWvsIMXtDCW/Brl9BTF+jdr6qhJ70ycReRZRw+AFDP5xpuaxrCFtDeX+D9O4HogXRj/8i82/RNI1MQxqsEVhzxPYCiXtHrA+KeZqmqKpKXTrqPeGkS1rUiDUqslphl1cIGWlle0o33/eQcw87fwXBTPquadqFKsQ5V9MXJJG8QBVsSL/YNBBbBph+D5fWeZ5TsZCK+Vgulyqx7iTXJ9TEfLSJhByaHN4/DVtKqChKKsTjGK7nwTDW0PU1wsBHFc4RLr/A0a6Q6N/AE4YwZLBtG9vtFpZlnVoeFyMKMq9sRbbrui4eRIbGuUY4e4dgdoHK/IymeiALceXL0Z8nHz5j5BdfDk5tPzdhiUf5dEnVbe0+zQAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;prototype-change&quot;
+        title=&quot;prototype-change&quot;
+        src=&quot;/static/708f924117a12ce9baf29cd46b544367/c1b63/prototype-change.png&quot;
+        srcset=&quot;/static/708f924117a12ce9baf29cd46b544367/5a46d/prototype-change.png 300w,
+/static/708f924117a12ce9baf29cd46b544367/0a47e/prototype-change.png 600w,
+/static/708f924117a12ce9baf29cd46b544367/c1b63/prototype-change.png 1200w,
+/static/708f924117a12ce9baf29cd46b544367/d61c2/prototype-change.png 1800w,
+/static/708f924117a12ce9baf29cd46b544367/97a96/prototype-change.png 2400w,
+/static/708f924117a12ce9baf29cd46b544367/0e909/prototype-change.png 3008w&quot;
+        sizes=&quot;(max-width: 1200px) 100vw, 1200px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;프로토타입 객체를 임의로 변경해야 하는 일이 있을 지는 의문이지만, 사이드 이펙트는 없을 지 걱정부터 됩니다.&lt;/p&gt;
+&lt;h2 id=&quot;마치면서&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EB%A7%88%EC%B9%98%EB%A9%B4%EC%84%9C&quot; aria-label=&quot;마치면서 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;마치면서&lt;/h2&gt;
+&lt;p&gt;가장 익숙한 것이 낯설게 느껴지는 프로토타입에 대한 공부가 아니었나 싶습니다. 전개를 쉽게 이해하고자 그림을 그려가면서 표현을 해봤는데요.
+정확하게 표현을 한 것인지 잘못된 부분은 없는 지 다시 한번 확인해보면서 자주 꺼내볼 수 있는 글을 적게되어 매우 뿌듯합니다 :)
+글에서 잘못된 이해로 인해 표현이 적절하지 않은 부분이 있다면 언제든 지적해주시면 감사하겠습니다.&lt;/p&gt;
+&lt;h2 id=&quot;reference&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#reference&quot; aria-label=&quot;reference permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Reference&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://poiemaweb.com/js-prototype&quot;&gt;https://poiemaweb.com/js-prototype&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content:encoded></item><item><title><![CDATA[나는 제네레이터를 알고 사용하는 걸까?]]></title><description><![CDATA[리덕스 사가는 ES6에 새롭게 도입된 제네레이터 (Generator…]]></description><link>https://youthfulhps.github.io/javascript/do-I-know-javascript-generator/</link><guid isPermaLink="false">https://youthfulhps.github.io/javascript/do-I-know-javascript-generator/</guid><pubDate>Sun, 21 Nov 2021 22:05:01 GMT</pubDate><content:encoded>&lt;p&gt;리덕스 사가는 ES6에 새롭게 도입된 제네레이터 (Generator) 문법을 사용하여 유용하게 비동기 처리를 할 수 있게 해줍니다.
 현재 운영 중인 프러덕션 또한, 리덕스에서 사이드 이펙트가 존재할 만한 비동기적인 비지니스 로직을 관리하기 위해 리덕스 사가 미들웨어를 사용하고 있는데요.&lt;/p&gt;
 &lt;p&gt;늘 사용하고 있는 문법이고 동작 또한 해석이 되니 작업에 문제는 없지만, 제네레이터에 대한 이론적인 이해 정도를 스스로 질문했을 때
 한창 공부했을 때의 이론적 대답이 쉽게 나오지 않는 걸 느끼고 다시 한번 정리를 해볼 까 합니다.&lt;/p&gt;
