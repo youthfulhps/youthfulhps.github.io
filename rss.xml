@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Youthfulhps.dev]]></title><description><![CDATA[Blog posted front-end, troubleshooting!]]></description><link>https://youthfulhps.dev</link><generator>GatsbyJS</generator><lastBuildDate>Fri, 20 May 2022 01:06:46 GMT</lastBuildDate><item><title><![CDATA[자바스크립트 프로토타입 톺아보기]]></title><description><![CDATA[…]]></description><link>https://youthfulhps.dev/javascript/javascript-prototype/</link><guid isPermaLink="false">https://youthfulhps.dev/javascript/javascript-prototype/</guid><pubDate>Sat, 19 Mar 2022 00:05:02 GMT</pubDate><content:encoded>&lt;p&gt;자바스크립트는 프로토타입 기반의 객체 지향 프로그래밍 언어입니다. 개인적으로 프로토타입에 대한 큰 그림을 이해하고 있다고 생각했는데,
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Youthfulhps.dev]]></title><description><![CDATA[Blog posted front-end, troubleshooting!]]></description><link>https://youthfulhps.dev</link><generator>GatsbyJS</generator><lastBuildDate>Fri, 20 May 2022 01:51:41 GMT</lastBuildDate><item><title><![CDATA[자바스크립트 프로토타입 톺아보기]]></title><description><![CDATA[…]]></description><link>https://youthfulhps.dev/javascript/javascript-prototype/</link><guid isPermaLink="false">https://youthfulhps.dev/javascript/javascript-prototype/</guid><pubDate>Sat, 19 Mar 2022 00:05:02 GMT</pubDate><content:encoded>&lt;p&gt;자바스크립트는 프로토타입 기반의 객체 지향 프로그래밍 언어입니다. 개인적으로 프로토타입에 대한 큰 그림을 이해하고 있다고 생각했는데,
 이직을 준비하면서 프로토타입만 마주하면 작아지는 제 모습을 보게 됩니다.&lt;/p&gt;
 &lt;p&gt;자연스레 프로토타입 객체로부터 상속받은 메서드를 사용하면서도, 직접 프로토타입 객체를 다룰 기회는 적었는데요.
 어쩌면 가장 익숙하지만 낯선 프로토타입 기반을 다시금 공부해보려 합니다.&lt;/p&gt;
@@ -1040,7 +1040,252 @@ generator&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span 
 &lt;p&gt;Openapi-generator를 통해 API 스펙 기반 개발을 적용해 병렬적인 개발 사이클에서 발생할 수 있는 문제를 어떻게 해결할 수 있는 가에
 대한 이야기를 해보았는데요.&lt;/p&gt;
 &lt;p&gt;이상적인 루틴을 그리는 개발 사이클이 아닌 연쇄적이지만 병렬적으로 진행되어야 하는 현실적인 작업 환경에서
-API 스펙 기반으로 타입 세이프한 개발과 동시에 생산성까지 챙겨보시면 좋을 것 같습니다:)&lt;/p&gt;</content:encoded></item><item><title><![CDATA[about]]></title><description><![CDATA[Your name Thank you for reading my resume. If you want to contact me, Please send me an email.]]></description><link>https://youthfulhps.dev/resume-en/</link><guid isPermaLink="false">https://youthfulhps.dev/resume-en/</guid><pubDate>Sun, 27 Jan 2019 16:21:13 GMT</pubDate><content:encoded>&lt;h1 id=&quot;your-name&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#your-name&quot; aria-label=&quot;your name permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Your name&lt;/h1&gt;
+API 스펙 기반으로 타입 세이프한 개발과 동시에 생산성까지 챙겨보시면 좋을 것 같습니다:)&lt;/p&gt;</content:encoded></item><item><title><![CDATA[AWS를 통해 클라이언트 호스팅하기]]></title><description><![CDATA[사내에서 새로운 호스트를 구출할 기회가 생겼습니다. 기존 프러덕션들에 대한 인프라는 이미 구축되어 있는 상태여서 클라이언트를 호스팅해볼 기회가 없었는데
+마침 웹 채팅 기능이 담긴 프러덕션을 호스팅할 기회가 생겨 그 과정을 정리해볼까 합니다. S…]]></description><link>https://youthfulhps.dev/infra/hosting-cra-on-aws/</link><guid isPermaLink="false">https://youthfulhps.dev/infra/hosting-cra-on-aws/</guid><pubDate>Tue, 10 Aug 2021 10:06:19 GMT</pubDate><content:encoded>&lt;p&gt;사내에서 새로운 호스트를 구출할 기회가 생겼습니다. 기존 프러덕션들에 대한 인프라는 이미 구축되어 있는 상태여서 클라이언트를 호스팅해볼 기회가 없었는데
+마침 웹 채팅 기능이 담긴 프러덕션을 호스팅할 기회가 생겨 그 과정을 정리해볼까 합니다.&lt;/p&gt;
+&lt;h2 id=&quot;s3-빌드된-정적파일-업로드하기&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#s3-%EB%B9%8C%EB%93%9C%EB%90%9C-%EC%A0%95%EC%A0%81%ED%8C%8C%EC%9D%BC-%EC%97%85%EB%A1%9C%EB%93%9C%ED%95%98%EA%B8%B0&quot; aria-label=&quot;s3 빌드된 정적파일 업로드하기 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;S3, 빌드된 정적파일 업로드하기&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;https://docs.aws.amazon.com/ko_kr/AmazonS3/latest/userguide/Welcome.html&quot;&gt;S3&lt;/a&gt;는 인터넷 스토리지 서비스입니다. 우선, S3의 컨테이너인 버킷을 생성합니다. 프로젝트의 빌드된 파일을 업로드 해줄거예요!&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 824px; &quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 60.333333333333336%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAMCAYAAABiDJ37AAAACXBIWXMAAAsTAAALEwEAmpwYAAABdklEQVQoz52SC0/DMAyE+///HEggmAaUrXv23SVNmyZpj0vG0MaQGFj65LpVzxfHUVY12BYNhGyRpimKooCUEkKIC6SQNxEtFkvM5i94fp5hvdkG4bYlFD1H3kgUxzEeHh9xd3ePp9kc8SJBkiRBfLkvsdgVWGUVu4sr1z8RedU8L+hMQuseyrtrFZRSaFX3Rdf9Rh/+ibxqskxwaBpgmjA6dzPWOjj7mVkPw0CHVE3LCorFMI7Q7sjwlR0M3xt3pLcWnbHMjv2nCyy/RTWPtzlIrOsD1rzxU16VNTZ8TmqB11Lg7ZNM9YGy0/BxEvPhXUYdHVZ06Odg2dmxizUGg9YwdK0HA9EbSNJqE8ZyinN3PvzRI0WhNMuQZTlqzjFQNzAUdTyq7zqNR0ZiWevQaLhyGAT7vkdV1djvU+x2+7DcXtwLjRT8zjROITvO89ohZ+iv+p3L/foWI8tz7pIM7v4TYYbK7xl3z++j7+DCOtgg+lc05/4BmXWhFeUgF7MAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;create bucket&quot;
+        title=&quot;create bucket&quot;
+        src=&quot;/static/620b4edcaf86e2ab6372c1f3b61285a5/c1c45/create-bucket.png&quot;
+        srcset=&quot;/static/620b4edcaf86e2ab6372c1f3b61285a5/5a46d/create-bucket.png 300w,
+/static/620b4edcaf86e2ab6372c1f3b61285a5/0a47e/create-bucket.png 600w,
+/static/620b4edcaf86e2ab6372c1f3b61285a5/c1c45/create-bucket.png 824w&quot;
+        sizes=&quot;(max-width: 824px) 100vw, 824px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;하단으로 이동하면, &lt;code class=&quot;language-text&quot;&gt;이 버킷의 퍼블릭 엑세스 차단 설정&lt;/code&gt; 에서 &lt;code class=&quot;language-text&quot;&gt;모든 퍼블릭 엑세스 차단&lt;/code&gt; 을 해제해줍니다. 프로젝트의 빌드된 정적파일이기 때문에 접근을 열어두어야 합니다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 791px; &quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 75.66666666666666%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAPCAYAAADkmO9VAAAACXBIWXMAAAsTAAALEwEAmpwYAAACRUlEQVQ4y41Ti46iQBDk/z9uVwVUEOTlY1EREBQEtK6rMd5mc5csSdNMz0xNdRVjbLc7mKaF6dSUbGPl+bAsG2EUo23vuF6vGnUt+XZ750bixrm6RlWN0TYtDM8P8DmZYTqzYdkLTAhszfExMXU8k0OmMwufUp+Zc/3mweZihQ/LwcR2sFi6cFwPRVHCIDI/iqJAWV6Q5wUul4tEpVGWpc6f81xzKXOsZWWFtKglKjTSSXfv0Pc9DL7CMILvr5EkG23p8XjoZCcxDA88n0/JAwap318b//VwncGFx+MJQRAqYCTaETyOE1DfOElEzwhRHCPZbHA4HAT0Ph7wLUhCAfliCzQhEhACeN4aazkgEObM/jrAmiHfsRyqbUvUakil3zSu6zoYRKZ+PJ2sdru9siTYdrfDfv+lY7JN04My/F/LfBSQLVv2HK67guO4WEqMv5E1jpfi5GIpzH1lmkgXZNT3g2pKZgxiKSBps2VqyKCjWXbG+XxW5wu6KmMenEs3mdTZbiP/HU2sBZwY6jI15MbVylMGkQIn6jxrYSi6iSGUgzWaxzHXke1Xmgq7vxIYT3ndhSX//p9Rf7sht6bB7da86uOYmdG07dtp415JS95SHXQcR1lQs/l88WZIJqy5rvvWmUxZp6HUs5EDFHBoG1TbGK5s5uIgGDfT1VxvRyGS5CoLdeQ4y7Lx1pTjDeM6giog+74+AG+TYpPEr825Xj8uPMlmjk+nTA1h7Xg86uafD9s2+lfvV9GCTvF6/bwFv4n+lf8AA8hr+iNzS1oAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;public access&quot;
+        title=&quot;public access&quot;
+        src=&quot;/static/9995d00893a4bffb95957b68f54202a7/cc8d6/public-access.png&quot;
+        srcset=&quot;/static/9995d00893a4bffb95957b68f54202a7/5a46d/public-access.png 300w,
+/static/9995d00893a4bffb95957b68f54202a7/0a47e/public-access.png 600w,
+/static/9995d00893a4bffb95957b68f54202a7/cc8d6/public-access.png 791w&quot;
+        sizes=&quot;(max-width: 791px) 100vw, 791px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;다른 설정을 변경하지 않고, 이제 버킷 생성을 눌러주면 버킷 생성이 완료되고, 속성을 변경시켜주러 갑니다.
+방금 생성한 버킷을 클릭하고, &lt;code class=&quot;language-text&quot;&gt;속성 탭 / 정적 웹 사이트 호스팅&lt;/code&gt; 을 편집해줍니다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 1200px; &quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 9%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAACCAYAAABYBvyLAAAACXBIWXMAAAsTAAALEwEAmpwYAAAARUlEQVQI153KwQnAMAxD0ey/YzpACr0kOKaWrDSdoPTw+CBUaj3U2ikzUx9DV386XQAUEZ/tv7urmE2R+Q7bDQqkMvOXBWRfnSmU3P/YAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;edit static hosting&quot;
+        title=&quot;edit static hosting&quot;
+        src=&quot;/static/289c96476e4d198474f0cc8564e23f8e/c1b63/edit-static-hosting.png&quot;
+        srcset=&quot;/static/289c96476e4d198474f0cc8564e23f8e/5a46d/edit-static-hosting.png 300w,
+/static/289c96476e4d198474f0cc8564e23f8e/0a47e/edit-static-hosting.png 600w,
+/static/289c96476e4d198474f0cc8564e23f8e/c1b63/edit-static-hosting.png 1200w,
+/static/289c96476e4d198474f0cc8564e23f8e/0f586/edit-static-hosting.png 1498w&quot;
+        sizes=&quot;(max-width: 1200px) 100vw, 1200px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;정적 웹 사이트 호스팅&lt;/code&gt; 을 활성화 시켜주고, 기본 페이지와 에러 발생 시 반환되는 페이지 또한 설정해주어야 합니다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 806px; &quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 103%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAVCAYAAABG1c6oAAAACXBIWXMAAAsTAAALEwEAmpwYAAACaUlEQVQ4y5WU6a6bMBCFef8X65+qarMpOwmXLcGYHcx6OmOIenVFclNLX8AmDMc+M2M4IsZNJiiKAkVZoiTiOMb9HiAIBDzPRxhK5FmGNE2RpdlLjMVqjSWxPxyw3e6w2+1xPB6xWCxhXiwk6RjoXQzP9UiFB9+/aVzXhW07sCwLLs1jCsjqsjcxgiDA+WzCcVxcr6QoSTAMA7quJ1o0TYO6ZmoNz19hhDIiNTYcUspXz7tBRjGECDVhlOASZrBC2lJR0Uc6NG2L9glGRSYkybh/VsCj73utcg5+9gqDHWZTJDnJX5gLoscw8c0wRJJBULBX45naOQzOQ5sMEUIgorPjg2XpTTfRdv8V1Mgqhav1Qbl3wtm8UNp4SLMcQVYiSEvIvHo7mN5yT6khpSQiUkhQlZRlBTYrVw3CQiEuFd4ZWqEsa3hJAT7Le5LDj1K4YQxHRHCJx9wj9Hog9bN7nOLGz+ie13wyN6tqMqVqsfUj/Fhu8XO1w+/tCRvzA4uDidXJonsbf/YmlscLNhdbr/GztSOwdkP8su5YEBuKEVWU2Pzj5jXOlLjXIMItV4gaQNY9QkZ1n+jHdboGNBeK/zNoBK3HquVKkeSyo7uNosTmjpNSTfI59v0jkWcS+pnL/LJFLrMZNaVMVVU6mFJKl9kzWk4ndvYToynkLncYbg7s9mTX+EUuwS881A7fKeRqUaqeusxzZf0E388GjKldOe6ojlsZnyFvXU3tamxdU/ui9aJudX7ydTYgd5o7BeIzZIN4nqQj3IEe81R3bs7VAn6cQ1AljUf3dcvTi7o1vdjqvy23I/18jf8F0+5X+ZxLE7EAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;edit static hosting 2&quot;
+        title=&quot;edit static hosting 2&quot;
+        src=&quot;/static/77e67c3b8aa57255a65adbd49d21bb56/764be/edit-static-hosting-2.png&quot;
+        srcset=&quot;/static/77e67c3b8aa57255a65adbd49d21bb56/5a46d/edit-static-hosting-2.png 300w,
+/static/77e67c3b8aa57255a65adbd49d21bb56/0a47e/edit-static-hosting-2.png 600w,
+/static/77e67c3b8aa57255a65adbd49d21bb56/764be/edit-static-hosting-2.png 806w&quot;
+        sizes=&quot;(max-width: 806px) 100vw, 806px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;변경 사항 저장&lt;/code&gt; 이 완료되었다면, 이제 객체를 업로드만 해주면 됩니다. 프로젝트를 빌드하면 생성되는 모든 파일을
+그대로 드래그 &amp;#x26; 드랍 해줍니다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 904px; &quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 69.33333333333334%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAOCAYAAAAvxDzwAAAACXBIWXMAAAsTAAALEwEAmpwYAAABu0lEQVQ4y51T7Y7TMBD0g99j8Aj8Pt4AJCQe4UAg8VHR5tN27MRxnKTN3s6mEbmqghOVRp54vePZXVcdSkPHypJvW+q6TtAyb1vm/wGFZO+9iDS+Jd24negfvFow+/SBDo9vyX77TGFI5Fg0hLCChfu+Fy4J3b+h7PEX6cN3qsuS6lqT1ivAjTF0OmXC77m+B6V1TY1rxFnD5Tr3EtZyf517lTsRrOqasiynaRwppUSjrKOs4zhRZB7iQJExDCtijDff64p8VVY1/Tz8pqyo6HjMpETgR27oKbP0tWgoN47dcxXOCwy7traRl4EqUBkAUeUbQ6Y8Uec0OT4QeAgYhMMQ+ki9uIk0zbPw1fkovOLeYmBFsfZfBN2Xj6TfPZB7/4YSl7glANPE32nfivQijlKx1/fx2oZIKnT8xpyhzjdyK5wIIMaYN369YGZMV5zPZ4lDFO7QDtXzLb4LPGkvm/iHYFpICKGnoqx4P0niwImIpatrzc8qzwuJ4zwcq/1Nl8tFOLBxOMPNGMI+BkzTLC8BfLksoqFw4N5vWRZZcQgNxwDgbB+7/UFYIWE7dIttX2t+CcZKwt/OIv4MVPM2tko0l0AAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;upload object&quot;
+        title=&quot;upload object&quot;
+        src=&quot;/static/8b261d97370ca079c3657ebd471dda16/d9217/upload-object.png&quot;
+        srcset=&quot;/static/8b261d97370ca079c3657ebd471dda16/5a46d/upload-object.png 300w,
+/static/8b261d97370ca079c3657ebd471dda16/0a47e/upload-object.png 600w,
+/static/8b261d97370ca079c3657ebd471dda16/d9217/upload-object.png 904w&quot;
+        sizes=&quot;(max-width: 904px) 100vw, 904px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;업로드가 모두 완료되었다면, 이전에 편집했던 &lt;code class=&quot;language-text&quot;&gt;속성 탭 / 정적 웹 사이트 호스팅&lt;/code&gt; 에서 버킷이 호스팅된 URL로 접속해보세요.
+index.html 문서의 내용이 랜더링된다면 버킷 생성 과정은 마무리됩니다 :b&lt;/p&gt;
+&lt;h2 id=&quot;cloudfront-전세계에-s3-컨텐츠-제공하기&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#cloudfront-%EC%A0%84%EC%84%B8%EA%B3%84%EC%97%90-s3-%EC%BB%A8%ED%85%90%EC%B8%A0-%EC%A0%9C%EA%B3%B5%ED%95%98%EA%B8%B0&quot; aria-label=&quot;cloudfront 전세계에 s3 컨텐츠 제공하기 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;CloudFront, 전세계에 S3 컨텐츠 제공하기&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;https://aws.amazon.com/ko/cloudfront/?nc=sn&amp;#x26;loc=1&quot;&gt;CloudFront&lt;/a&gt;는 컨텐츠 전송 네트워크의 역할을 합니다. S3에 담겨있는 컨텐츠를 가리키고 어디서나 접속 가능하도록 합니다.
+전세계 &lt;a href=&quot;https://aws.amazon.com/ko/cloudfront/features/?nc=sn&amp;#x26;loc=2&amp;#x26;whats-new-cloudfront.sort-by=item.additionalFields.postDateTime&amp;#x26;whats-new-cloudfront.sort-order=desc&quot;&gt;Edge Location&lt;/a&gt;
+에 컨텐츠를 전파시키고, 어디서나 컨텐츠에 접근하고자 하는 클라이언트에게 빠르게 제공합니다. 또한, 캐싱과 HTTPS 프로토콜을 적용할 수 있습니다.&lt;/p&gt;
+&lt;p&gt;우선, CloudFront에서 새로운 &lt;a href=&quot;https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/GettingStarted.SimpleDistribution.html&quot;&gt;Distributions&lt;/a&gt;을 생성합니다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 794px; &quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 94.33333333333334%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAATCAYAAACQjC21AAAACXBIWXMAAAsTAAALEwEAmpwYAAABzUlEQVQ4y6VUXXObMBDk//+7uGmavPQhjg1EiC8BFkh4c3dIJGVwx2k1s3OIEXt7tyeSV1XjrBsUjcHvvIaqDcqyhNYanTFo2xamNXcjeXr6hcfHnzgcfggeHg54fn5ZiFbCe0GESimod4U0TQmZxDzPl4zm+0i0LpFlGeZ5hvde4JzHOI7fwjRNuFwuSJqG+lcUROIw+5nghTwiJrkHTJzUdYMzlZrl77B2pCxWMg3DAk50vV4xE65/AS8+m/T9gIb61ZoODfWA9+M4BYxwrJg+8DtqdwnrmsbmnKJQBdIsh2476UfsC0dr7afS0IrbCocBZVULdFXBkEJ+11HkkpfnHpaItyp3CY2U2ctmCirkwNfDIX41a6tyJaxYGd0MVmEMl+s+3eUYMO9gl5B71FFZpuvWXvnN6MQEPJ8uxJslV9Q3NiUjQ3jA304ndER+sVZGyIbIh7drl3CgmdNlJWXzx5x5cXeSGLFVdNNlHmL+sygaG1b1L+sPwlxpvB6PyOi2HN/O0M3iehwZxsAIt0fe9cuejWQP4hLCU9GgousXFxsQjREjNrdDjHHx2a1ur4TeTaKIS+fm84H/Kpn7VoWbUpI5PIdbB+9BJPwA05LKxOeSUKsAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;create distributions&quot;
+        title=&quot;create distributions&quot;
+        src=&quot;/static/9b995a10faa6df7cc43a8efeb37b21ca/7de01/create-distribution.png&quot;
+        srcset=&quot;/static/9b995a10faa6df7cc43a8efeb37b21ca/5a46d/create-distribution.png 300w,
+/static/9b995a10faa6df7cc43a8efeb37b21ca/0a47e/create-distribution.png 600w,
+/static/9b995a10faa6df7cc43a8efeb37b21ca/7de01/create-distribution.png 794w&quot;
+        sizes=&quot;(max-width: 794px) 100vw, 794px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;Origin Domain&lt;/code&gt; 은 어떤 S3를 가리키게 할 것인지 선택합니다. 직전에 생성한 S3 버킷 이름 검색 후 선택해주세요.
+버킷을 선택하면 자동으로 버킷 엔드포인트가 Name 에 적용되는데, Region 이 빠져있다면, Region을 추가해주어야 합니다.&lt;/p&gt;
+&lt;p&gt;첫 배포 이후 관련 문제가 발생해서 구글링 해봤을 때 CloudFront를 생성 이후 24시간이내에 사용하려면 Region을 추가해주어야 한다는 답변을 받은 것 같아요. :(&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;txt&quot;&gt;&lt;pre class=&quot;language-txt&quot;&gt;&lt;code class=&quot;language-txt&quot;&gt;example.com.s3.amazonaws.com (x)
+example.com.s3-website.us-east-1.amazonaws.com (O)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;하단으로 내려가면 여러 세팅을 설정할 수 있습니다. 일반적으로 우선 &lt;code class=&quot;language-text&quot;&gt;Viewer Protocol Policy&lt;/code&gt; 설정을 변경합니다.
+컨텐츠를 요청한 클라이언트가 HTTP 접속을 시도한다면 보안상의 이유로 강제로 HTTPS로 리다이렉션될 수 있도록 합니다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 770px; &quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 21.666666666666668%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAECAYAAACOXx+WAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAUklEQVQY06XOwQrAIAwDUP//Iyc4Wle7gcrm0UwEdx/NJTk94mI8QMxY6b1/vfafuJIzeIBEhJTUhE1Qy40Q9gEyVE+01mwPr/pg8x4iMjEr+AIQpTr30xSJYQAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;viewer protocol&quot;
+        title=&quot;viewer protocol&quot;
+        src=&quot;/static/7041c7f5fc3a8008ac925efa363d65d5/f4b77/viewer-protocol.png&quot;
+        srcset=&quot;/static/7041c7f5fc3a8008ac925efa363d65d5/5a46d/viewer-protocol.png 300w,
+/static/7041c7f5fc3a8008ac925efa363d65d5/0a47e/viewer-protocol.png 600w,
+/static/7041c7f5fc3a8008ac925efa363d65d5/f4b77/viewer-protocol.png 770w&quot;
+        sizes=&quot;(max-width: 770px) 100vw, 770px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;다음은 Default root object을 index.html로 설정합니다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 792px; &quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 12.666666666666668%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAADCAYAAACTWi8uAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAa0lEQVQI112O2wrAIAxD/f/vnOCmjqngg7fMdlPEwiFpHtIKrQ2UUjDWdj2RUkKtdVI2OCsFrTXQDB0jDilxac2FVO69Rwih6wd51zPC//njHGKMXLbChdbeIMsf9ZCu54V9n1nO7MeXo/AFyNTqYUOlsjAAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;default root object&quot;
+        title=&quot;default root object&quot;
+        src=&quot;/static/9f774ed9de4ec2aebf21267ee9ba48f4/9a86a/default-root-object.png&quot;
+        srcset=&quot;/static/9f774ed9de4ec2aebf21267ee9ba48f4/5a46d/default-root-object.png 300w,
+/static/9f774ed9de4ec2aebf21267ee9ba48f4/0a47e/default-root-object.png 600w,
+/static/9f774ed9de4ec2aebf21267ee9ba48f4/9a86a/default-root-object.png 792w&quot;
+        sizes=&quot;(max-width: 792px) 100vw, 792px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;여기까지만 진행한다면, CloudFront에서 제공하는 기본 URL을 사용해 배포되게 됩니다. 만약, &lt;code class=&quot;language-text&quot;&gt;Alternative Domain Names (CName)&lt;/code&gt; 을 사용하고자 한다면, &lt;code class=&quot;language-text&quot;&gt;SSL Certicifate / Custom SSL Certicifate&lt;/code&gt; 를 선택해 인증서를 넣어주세요. 미리 생성해둔 인증서가 없다면 새롭게 생성해야 합니다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 784px; &quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 31.666666666666664%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAGCAYAAADDl76dAAAACXBIWXMAAAsTAAALEwEAmpwYAAAA1klEQVQY031Qia6DMAzj/z9zA9qyHkAPxumXdK/VNGmLZJmkJbXdaK3Rth26roOQkrjP3AsBN45Iy4KYEhIhxpj5ui5wFX6vJtCl272FNhbHceA8L8JZwbOCfX+BF32iPNBM8wypFAwtfDw0WLHWhnoDay3BQc0RNq34VWVpw7aUGjAMAwTZlFLl73VdK57M2/bfb3W+0YxxkJOq0PsA6xwMqZmmCT4EeO9rbjk7Zsry1S85S3bGrhz9y3HUhTYsEKOHcDN653FyJnTI/BWkaKclRfG75T9ylNJzfFq41AAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;acm&quot;
+        title=&quot;acm&quot;
+        src=&quot;/static/3df95d492ff958049fe61edc6268a7fb/4971b/acm.png&quot;
+        srcset=&quot;/static/3df95d492ff958049fe61edc6268a7fb/5a46d/acm.png 300w,
+/static/3df95d492ff958049fe61edc6268a7fb/0a47e/acm.png 600w,
+/static/3df95d492ff958049fe61edc6268a7fb/4971b/acm.png 784w&quot;
+        sizes=&quot;(max-width: 784px) 100vw, 784px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;이후, 컨텐츠를 Edge Location으로 전파시키는 데 시간이 소요됩니다. &lt;code class=&quot;language-text&quot;&gt;Enabled&lt;/code&gt; 상태가 되면 CloudFront distributions 생성도 완료가 됩니다 :b&lt;/p&gt;
+&lt;h2 id=&quot;route53-도메인-입히기&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#route53-%EB%8F%84%EB%A9%94%EC%9D%B8-%EC%9E%85%ED%9E%88%EA%B8%B0&quot; aria-label=&quot;route53 도메인 입히기 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Route53, 도메인 입히기&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;https://aws.amazon.com/ko/route53/&quot;&gt;Route53&lt;/a&gt;는 AWS에서 제공하는 &lt;a href=&quot;https://aws.amazon.com/ko/route53/what-is-dns/&quot;&gt;DNS&lt;/a&gt; 서비스 입니다.&lt;/p&gt;
+&lt;p&gt;우선, 레코드를 생성합니다. 레코드 이름은 사용하고 있는 호스팅 영역이 있다면 도메인 앞에 붙을 값만 설정해주면 됩니다.
+레코드 유형은 &lt;code class=&quot;language-text&quot;&gt;A&lt;/code&gt; 로, 트래픽 라우팅 대상은 &lt;code class=&quot;language-text&quot;&gt;별칭 선택 / CloudFront 배포에 대한 별칭&lt;/code&gt; 으로 직전 생성한 CloudFront를 선택합니다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 1074px; &quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 42.33333333333334%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAICAYAAAD5nd/tAAAACXBIWXMAAAsTAAALEwEAmpwYAAABAElEQVQoz5VRi2rDMAz0/3/iRjtGC2ne8fuV5CZ5DaRZNpjgcGTJpztFNE2L2+2Ouu1gQ0ROCekfiDGVN4PxqKWDMMZAaw2OZV2xHnAWZzXrAyapIJRSGCaFmOeXpnme0XYdmmGCsRbWOmga7kOAMRZVVaFqeii6pxEYbUTdjxCaiooUeprAzZmINjuBcktk7MK6b0K+U9rg7XLF+/UDn7SucZLox7Gc4tUK/rS6BQuo6qZYbLseD/ru+gFSaQjvPVlymJ8kG9WyLEVZjPHH3jKth1fCuWPlNIDzlDOElBIP+tPp2cTIVAhExEqOhHv1Z07EvrjscHz4K8Aqfdkfn1+pIXGov9yueQAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;create record&quot;
+        title=&quot;create record&quot;
+        src=&quot;/static/e0ba3ba55cf98c68ea130daa27f8b537/18539/create-record.png&quot;
+        srcset=&quot;/static/e0ba3ba55cf98c68ea130daa27f8b537/5a46d/create-record.png 300w,
+/static/e0ba3ba55cf98c68ea130daa27f8b537/0a47e/create-record.png 600w,
+/static/e0ba3ba55cf98c68ea130daa27f8b537/18539/create-record.png 1074w&quot;
+        sizes=&quot;(max-width: 1074px) 100vw, 1074px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;최종적으로, 레코드 이름으로 설정한 값을 도메인으로 CloudFront와 연결되어 호스팅된 것을 확인할 수 있습니다.&lt;/p&gt;
+&lt;h2 id=&quot;마치면서&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EB%A7%88%EC%B9%98%EB%A9%B4%EC%84%9C&quot; aria-label=&quot;마치면서 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;마치면서&lt;/h2&gt;
+&lt;p&gt;간단하게라도 필수적인 과정을 까먹지 않게 정리해봤습니다. 사실, ‘인프라 공부해야지’, ‘직접 구축해봐야지’ 하면서 막상 손데기 힘든 게 사실인데 클라이언트를 개발에서 그치지 않고 직접 배포해보면 조금 더 시아가 넓어지는 듯한 경험을 해본 작업이었습니다 :)&lt;/p&gt;</content:encoded></item><item><title><![CDATA[about]]></title><description><![CDATA[Your name Thank you for reading my resume. If you want to contact me, Please send me an email.]]></description><link>https://youthfulhps.dev/resume-en/</link><guid isPermaLink="false">https://youthfulhps.dev/resume-en/</guid><pubDate>Sun, 27 Jan 2019 16:21:13 GMT</pubDate><content:encoded>&lt;h1 id=&quot;your-name&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#your-name&quot; aria-label=&quot;your name permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Your name&lt;/h1&gt;
 &lt;div align=&quot;center&quot;&gt;
 &lt;p&gt;&lt;em&gt;Thank you for reading my resume. If you want to contact me, Please send me an email.&lt;/em&gt;&lt;/p&gt;
 &lt;/div&gt;</content:encoded></item></channel></rss>
