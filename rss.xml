@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Youthfulhps.dev]]></title><description><![CDATA[Blog posted front-end, troubleshooting!]]></description><link>https://youthfulhps.dev</link><generator>GatsbyJS</generator><lastBuildDate>Tue, 17 May 2022 14:27:34 GMT</lastBuildDate><item><title><![CDATA[자바스크립트 프로토타입 톺아보기]]></title><description><![CDATA[…]]></description><link>https://youthfulhps.dev/javascript/javascript-prototype/</link><guid isPermaLink="false">https://youthfulhps.dev/javascript/javascript-prototype/</guid><pubDate>Sat, 19 Mar 2022 00:05:02 GMT</pubDate><content:encoded>&lt;p&gt;자바스크립트는 프로토타입 기반의 객체 지향 프로그래밍 언어입니다. 개인적으로 프로토타입에 대한 큰 그림을 이해하고 있다고 생각했는데,
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Youthfulhps.dev]]></title><description><![CDATA[Blog posted front-end, troubleshooting!]]></description><link>https://youthfulhps.dev</link><generator>GatsbyJS</generator><lastBuildDate>Fri, 20 May 2022 01:06:46 GMT</lastBuildDate><item><title><![CDATA[자바스크립트 프로토타입 톺아보기]]></title><description><![CDATA[…]]></description><link>https://youthfulhps.dev/javascript/javascript-prototype/</link><guid isPermaLink="false">https://youthfulhps.dev/javascript/javascript-prototype/</guid><pubDate>Sat, 19 Mar 2022 00:05:02 GMT</pubDate><content:encoded>&lt;p&gt;자바스크립트는 프로토타입 기반의 객체 지향 프로그래밍 언어입니다. 개인적으로 프로토타입에 대한 큰 그림을 이해하고 있다고 생각했는데,
 이직을 준비하면서 프로토타입만 마주하면 작아지는 제 모습을 보게 됩니다.&lt;/p&gt;
 &lt;p&gt;자연스레 프로토타입 객체로부터 상속받은 메서드를 사용하면서도, 직접 프로토타입 객체를 다룰 기회는 적었는데요.
 어쩌면 가장 익숙하지만 낯선 프로토타입 기반을 다시금 공부해보려 합니다.&lt;/p&gt;
@@ -856,7 +856,191 @@ generator&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span 
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&quot;https://poiemaweb.com/es6-iteration-for-of&quot;&gt;https://poiemaweb.com/es6-iteration-for-of&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;https://poiemaweb.com/es6-generator&quot;&gt;https://poiemaweb.com/es6-generator&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content:encoded></item><item><title><![CDATA[about]]></title><description><![CDATA[Your name Thank you for reading my resume. If you want to contact me, Please send me an email.]]></description><link>https://youthfulhps.dev/resume-en/</link><guid isPermaLink="false">https://youthfulhps.dev/resume-en/</guid><pubDate>Sun, 27 Jan 2019 16:21:13 GMT</pubDate><content:encoded>&lt;h1 id=&quot;your-name&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#your-name&quot; aria-label=&quot;your name permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Your name&lt;/h1&gt;
+&lt;/ul&gt;</content:encoded></item><item><title><![CDATA[API 스펙을 통한 타입세이프한 개발, 그리고 Mock Server 까지]]></title><description><![CDATA[…]]></description><link>https://youthfulhps.dev/development/how-to-use-openapi-generator/</link><guid isPermaLink="false">https://youthfulhps.dev/development/how-to-use-openapi-generator/</guid><pubDate>Thu, 28 Oct 2021 09:05:28 GMT</pubDate><content:encoded>&lt;p&gt;실무에서 프론트엔드 개발일을 하다보면, 작업이 팬딩상태가 되버리는 경우를 자주 경험합니다. 기획, 백엔드 개발이 순차적으로 마무리된 후에
+프론트엔드 작업을 진행하는 것이 이상적이지만, 현실적으로 특정 기능 개발에 대한 킥오브와 동시에 작업이 병렬적으로 진행되는 경우가 많기 때문인데요.&lt;/p&gt;
+&lt;p&gt;API 개발이 되지 않아 기다리거나, 마이너한 기획의 변경 사항이 발생하는 경우, 최종 산출물을 다루는 프론트엔드 개발 영역에서의 수정사항은 눈덩이처럼 불어납니다.&lt;/p&gt;
+&lt;p&gt;이러한 작업 단계의 블로커를 최소한으로 하기 위해 스펙 문서 기반의 개발과 Mocking을 적극 활용하고 있습니다.&lt;/p&gt;
+&lt;h3 id=&quot;api-스펙-픽스하기&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#api-%EC%8A%A4%ED%8E%99-%ED%94%BD%EC%8A%A4%ED%95%98%EA%B8%B0&quot; aria-label=&quot;api 스펙 픽스하기 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;API 스펙 픽스하기&lt;/h3&gt;
+&lt;p&gt;요구 사항과 기획이 산출되면, 기능 개발을 들어가기 전에 API 스펙을 픽스하기 위한 단계에 들어갑니다. API 스펙을 픽스하고 공유하는 것은 정말 중요한 단계인데요.&lt;/p&gt;
+&lt;p&gt;일방적으로 API 스펙이 전달되거나, 누락이 되어 버리는 경우 특정 인터페이스에 예상한 프로퍼티가 없다던지, 타입이 일치하지 않은 문제를 야기할 수 있습니다.
+사실, 일방적으로 API 스펙을 전달받았다 하더라도 공유받은 것은 맞으니까요.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 690px; &quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 55.99999999999999%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAALCAYAAAB/Ca1DAAAACXBIWXMAAAsTAAALEwEAmpwYAAAC4UlEQVQozy2S3VMTVxjGc9dxxhmLNoSEfO1uNml2N9mQIAgkoIkQYiCEhAAhCRCSYD6UQYrWqa1UKSNWHfshOFOnV144Mt563T/t18PoxTPve87F73nO+x7LYN8AbqsDl9VGNDTG4q0auXSZufSaUJnp6wWGAjq6x0NQUQnrJtnpIq1aj9Z6l61Km621Ns1aR9TbWFyXBbDfgdvuRHZKSE4f0qCC7PajuiSmjSCRASvSxQsELl/C8Pm5FoszfjUhFGdidJK40MRIQvSJc6AVWcBCXgnF7sIrJIlzQPbjvvId9/M5fi4tsX1jihlVxttvI6SFMbQQhh5C/97ACApphrg3sCg2O6mAymJII+GTUJ1eJIcHxaOgeRUe5Bc47XV5Ud+kl0oyqqqYepiwgGoCFA5FMMNDopqYZhSL4RhkL5PmaHWV2/FxNKebgBRAcfsIKQFebbf4d/8H3nS7HK9VmI5dxS+rRIM6jXyBWCT2BfoVbBkRw/51qcjvlSrtRBxT8hExRtHUmJinQiWZ5K9mk5cCtn0zJcwUismbvPtxn8NeD00kjQrouWJDw1gmgxqHpRKHC3l2JieRrXZsV7yY2qhYlIdhr8zxeo39bIZZsQhVpK/Pz3Pyy3OmxjPouk44HPmS8vzJm9l5HpWW2UmmqAnn6+YQEacd/Typ36CYrvGkUmNTmJnhPD5lCps1woDjBh5vmlupRcq5JVbmCiwLWdrVNt3aNve7D5mfKZBLZsinciJhkkikSGHliOzcvvh7HcZGVhnov0bft1HcriSyLBIG0uxUt9jbaHJvo4Glkq9yp7nLvfZPrK+0eHn8Nydv3nN6esbb0w98OPuPJ88+8cfJZ84+fuaft+9ZKnY4ePya8souF74xKC00eHbwnIMHT7E0VhuiOaJVvUuj0qFe22U23WB2ps5ysUdn7x3ljT951Dpgq/6QbKaB1z3GxFiRgDpD36Vh9OAsvz1+wfHT1/wPMweNVHQlodsAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;thumbnail&quot;
+        title=&quot;thumbnail&quot;
+        src=&quot;/static/b8727cde6de119e0ea1caf4a9627128d/1e043/thumbnail.png&quot;
+        srcset=&quot;/static/b8727cde6de119e0ea1caf4a9627128d/5a46d/thumbnail.png 300w,
+/static/b8727cde6de119e0ea1caf4a9627128d/0a47e/thumbnail.png 600w,
+/static/b8727cde6de119e0ea1caf4a9627128d/1e043/thumbnail.png 690w&quot;
+        sizes=&quot;(max-width: 690px) 100vw, 690px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;이를 방지하기 위해 API 스펙을 픽스하고 공유하는 단계는 기능 개발에 참여하는 모든 개발자가 참여합니다. 최종적으로 합의된 API 스펙은 문서화 단계를 거치는 데
+그 중 &lt;a href=&quot;https://stoplight.io/&quot;&gt;Stoplight&lt;/a&gt;를 사용하고 있습니다.&lt;/p&gt;
+&lt;p&gt;API, 앤드포인트, 모델 설계 등 다양한 기능을 제공하는 에디터입니다. 추가적으로 Github 저장소와 연동하여 스펙을 업데이트할 수 있습니다.
+최종적으로 yaml 파일 형식으로 된 API 스펙 문서를 반환합니다.
+&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 834px; &quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 58.666666666666664%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAMCAYAAABiDJ37AAAACXBIWXMAAAsTAAALEwEAmpwYAAACg0lEQVQoz2WSS0wTURSG2Wt8LBRqoS1th7YznbYznbYzLS22PBoTo5G1JC6MBhcIRMEg0agLjYnBiAYwNa3RuHDhwsSYQEQxEjU+CEFDfK8U368t0N9zL8UWuMk/58xkznfPqyyfz2PxzM7O4v74I4yOPcDI6D2u4WUauTuG28N3MPVymsew+FJGGXu8fvsBD588R+7adYihOBy+MCocEkxO7xJVkMwuP1aV29Da3sUB8/PzK4HdPafg0pIQtAT80RSU2gbUKAasYgBWT0Hk20QFdm8QJsGLjkNHOGBubm4JlAMP9B6Dr7YJnkgSDiVKsBjEoAF3QIczYECgbw6/TlAVdjmEDTY32rt7sfwwKAce7D0BvXE7lLot8FDJ1d4QKQgHBVeTGIR9s0lB7m+0i2jt6MLvP3/xaeYLPs58xo+fv0oyPHwcol4PX6zpfw9ZNhaPwq1VXLAMaKHyZSMFo2kHIg3boCW3Qqa41s6eIrDr6EkqlUBKLey+CJz+SCErrQDSuNh7lTsANZFGmGBiJAU52ogqKYyWvfuLwBfTrzD++CmGslchhRPw6klE081QqQUM6KRLpNBm6muCLtMJUg9/PA2vUU/QJMxulYBtC8DSkb959x4u1eDZieE66meCMlO5BBpOjaLz7F1aHDXBOAQ1xv1NbgUte9qKGbKFZmdicopWphFuLcbXhoFZP5m4Ly8MJkD/sCGyDCVStd/Arn2dRSDbJXaeTUyikm4zCTJNUsL6SgFrzQ6SE+uYKp1YY7LDQv20yhGUC7SbZFebBTTv3F0ELpb99dt3XMxeweClyxjIZMnmVmggk0Pf+UGc6R/A2QtDODeYwem+fty4eYsz/gEWgjpyuekDnQAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;stoplight&quot;
+        title=&quot;stoplight&quot;
+        src=&quot;/static/357741090831dff4b17dce949aa767e6/5d72a/stoplight.png&quot;
+        srcset=&quot;/static/357741090831dff4b17dce949aa767e6/5a46d/stoplight.png 300w,
+/static/357741090831dff4b17dce949aa767e6/0a47e/stoplight.png 600w,
+/static/357741090831dff4b17dce949aa767e6/5d72a/stoplight.png 834w&quot;
+        sizes=&quot;(max-width: 834px) 100vw, 834px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;h3 id=&quot;api-함수를-담고-있는-클래스-인터페이스-자동-생성하기&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#api-%ED%95%A8%EC%88%98%EB%A5%BC-%EB%8B%B4%EA%B3%A0-%EC%9E%88%EB%8A%94-%ED%81%B4%EB%9E%98%EC%8A%A4-%EC%9D%B8%ED%84%B0%ED%8E%98%EC%9D%B4%EC%8A%A4-%EC%9E%90%EB%8F%99-%EC%83%9D%EC%84%B1%ED%95%98%EA%B8%B0&quot; aria-label=&quot;api 함수를 담고 있는 클래스 인터페이스 자동 생성하기 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;API 함수를 담고 있는 클래스, 인터페이스 자동 생성하기&lt;/h3&gt;
+&lt;p&gt;본 섹션에서 진행하는 과정은 &lt;a href=&quot;https://github.com/youthfulhps/react-typescript-openapi-generator&quot;&gt;깃허브 저장소&lt;/a&gt;에서 예시로 확인할 수 있습니다.&lt;/p&gt;
+&lt;p&gt;이제, 픽스된 API 스펙을 통해 개발을 진행할 때가 되었습니다. Stoplight 에디터에서 최종적으로 yaml 파일을 반환해준다 했는데요.
+이 yaml 파일을 &lt;a href=&quot;https://openapi-generator.tech/&quot;&gt;Opanapi-generator&lt;/a&gt;에게 제공하면 API 함수를 담고 있는 클래스와 API 함수 정의에 필요한 다양한 인터페이스를 자동으로 생성해줍니다.&lt;/p&gt;
+&lt;p&gt;패키지 설치와, 프로젝트 환경에 적합한 Generator를 선택하고 스크립트를 돌려 API를 생성합니다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;shell&quot;&gt;&lt;pre class=&quot;language-shell&quot;&gt;&lt;code class=&quot;language-shell&quot;&gt;~$ &lt;span class=&quot;token function&quot;&gt;yarn&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;add&lt;/span&gt; @openapitools/openapi-generator-cli -g
+~$ openapi-generator-cli generate -i &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;yaml or json file&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; -g &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;generator name&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; -o &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;file path to be created&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; --config &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;config file&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 887px; &quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 49.66666666666666%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAACXBIWXMAAAsTAAALEwEAmpwYAAABuUlEQVQoz3WS25KbMBBE+ZDs2izCEhK6ABLibuzdVB6Sp/z/v3QGXL5UKnmYGlQlzkx3K7Ghx/T9EyHOqMNENe69obPvFoiyQcYNmNjK4iQdhA4odISPNZZxRVt/wdkJRRmQvH0IrF8Bdmjxjb4PWYFDXuA9E3hL+X4+Monj1nMJVhgaEgga0caApV9RuytCfYFzM5IDXTalQ9/3kHOPog3IjUMmNEEk0lzttUHTkwJTdt+kMLShHzH2CyrXQpsexoxIjnRZcAtnPOTY7UBWWjDt9n4HbvXBS+Q0XJR+Bzpfo50bdPOCUH3ShgMSXjic6jPU5TeqdgDXHsKSJEdFQ06yfhQnP6Vtb0CSXHlPwIDpvGLwPxD9BUnKBFI9gM0/oaInuRVJK2++safklKmH5DvQhQb9EAgW9/Bq35JkVoArD0vmyjFCdpF+MjdgLh/gp4fuZcMGcQqoYwelO0hStwOZaqDmK8opgjfNM4QX/+7AVw83YJg9hvWKJfxCbK4EpOfArYc+X6BoQ0XBZIX+P1C9hLJJHslD8t7YAY3vN6CErAjYenAy+V+wv5/Nw0PasCPJIdyCkhTiH+u9M0JgMzEkAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;output&quot;
+        title=&quot;output&quot;
+        src=&quot;/static/0653b3c39a0f63be30bd3b287202a6e5/eac55/openapi-output.png&quot;
+        srcset=&quot;/static/0653b3c39a0f63be30bd3b287202a6e5/5a46d/openapi-output.png 300w,
+/static/0653b3c39a0f63be30bd3b287202a6e5/0a47e/openapi-output.png 600w,
+/static/0653b3c39a0f63be30bd3b287202a6e5/eac55/openapi-output.png 887w&quot;
+        sizes=&quot;(max-width: 887px) 100vw, 887px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;인터페이스 함수를 담고 있는 클래스, 관련 객체 인터페이스를 자동으로 생성해준다니, 사실 덤덤하게 말했지만 API, 인터페이스 자동 생성이 주는 장점은 엄청납니다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 690px; &quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 63.66666666666666%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAANCAYAAACpUE5eAAAACXBIWXMAAAsTAAALEwEAmpwYAAADSElEQVQ4yz2Sa28UZRiG90dogsV2W7dLu1DUpfS0293OcQ8zO7uz09KIlbS2BWlNTCpR1GowhmgUI91QJLVC03AwJCJQXbRAtBhEklaN1Q9CDIkfMFqM/oTLZ6ZJP7x5ZzJ5rrmf+75DqpZG11SyGQ0rb1CwTBwrQ8nKUbbzeCUbz5Z3I4WbSWFlejANFU3mNK0bVetCURJEG8PU1D5MSFV75INKLufDsrgCKRctyiWBlW0KAuhPPslQOk72iQgdTXXoSjeGoaOqaQEm6E51EhHgo+FNhDRVkT9q2HlflcAKclxLYAIVoKd0cvHAELcOjXF6r8u4vhOjbTu6mg6EqFqKHqWLxmi9AGsE6KvLmhQDmLWuzs3T69nYtsm4o3Lt1b18NTHAqWGHNz2V9sceoSPeIioNUakItJstTQ3U1gswkzFlVYHZ1rpfrn+sAOgUskzuLnBixOPksw6TrsrLhSSxzQ/RtuNx/FlFLFO1HpqbI+vAXDZDIZ8X76wAFAD9VWXlkjzPvzjC1weHOTGQ45N9HkeeMtC3hlGS7QHQV6hoCs2xKLX+yqZpSLq5DWC5vO6fDy25BSrDHpU+jdHEdg47XUyYOxhoi1HM6Rimv7K6AawLbybkp2WLwqJtBWH0egX6eov0eQ5OyWGspHPQbKfQEmXCaKW/NUpiWxRLbMqY5gYwtjVGOBwmpOt6oLAogXiBbznppCG3rN27i7HBZ5gdcph9OsPzapxifAv9eV+d+KdI5WQ+LYk3tbSKhxE/ZU28EB+lLpYUev/+cSqV41y+VGXl9gpLX17huaLOrp1NlLrivLZvD6+/MMYrL00yODhCKpWmM9lBPOlSF4n5xdaC+LMSzqmP51n761/+W/uHP+/d4+7qr8xPT7HHK9JQW8Nov8v81HvMHT1C9dPPWb79C8ePnUQ38yjuAeobtwlQV0in0xx9f4oH9x/wx527cu6wdv9vfl/9mS9Oz+FI8QfF1wszx7g4N8s3Cwt8e+0mP638xmJ1ibffmcEdnaa2oZlQV6KNocFhfvhumeUbS9xarHKzusD3cq/euM5HH7xLrClC5fBb/Hh9kavnz3Hl3FmufrbAhTPnmal8yBuHptk9cYZNNWH+B7bKFjjSIgb2AAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;openapi&quot;
+        title=&quot;openapi&quot;
+        src=&quot;/static/4db9aa6b134df7c2f8a11f69341f08df/1e043/openapi.png&quot;
+        srcset=&quot;/static/4db9aa6b134df7c2f8a11f69341f08df/5a46d/openapi.png 300w,
+/static/4db9aa6b134df7c2f8a11f69341f08df/0a47e/openapi.png 600w,
+/static/4db9aa6b134df7c2f8a11f69341f08df/1e043/openapi.png 690w&quot;
+        sizes=&quot;(max-width: 690px) 100vw, 690px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;타입스크립트에서 API 함수를 정의할 때 타이핑양이 상당히 많아지고, 응답 객체의 인터페이스 또한 정확하게 정의해주어야 하는데요. 여기에 사용되는 리소스 또한 비지니스 작업에
+집중할 수 있게 도와줍니다.&lt;/p&gt;
+&lt;p&gt;또한, 작업 과정에서 휴면에러가 발생할 여지를 최소화 해주어 API 스펙 기반의 타입세이프한 개발이 가능하도록 도와줍니다.&lt;/p&gt;
+&lt;h3 id=&quot;mocking를-통한-병렬적인-개발-생산성-챙기기&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#mocking%EB%A5%BC-%ED%86%B5%ED%95%9C-%EB%B3%91%EB%A0%AC%EC%A0%81%EC%9D%B8-%EA%B0%9C%EB%B0%9C-%EC%83%9D%EC%82%B0%EC%84%B1-%EC%B1%99%EA%B8%B0%EA%B8%B0&quot; aria-label=&quot;mocking를 통한 병렬적인 개발 생산성 챙기기 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Mocking를 통한 병렬적인 개발 생산성 챙기기&lt;/h3&gt;
+&lt;p&gt;특정 기능 개발을 진행하는 과정에서 현실적으로 병렬적으로 개발이 진행되는 문제를 위에서 언급했었는데요.&lt;/p&gt;
+&lt;p&gt;프론트엔드 개발 단계의 팬딩 상태를 최소화하기 위해 실제 API가 개발되기 전에 Mocking 서버를 동작시켜 Mock 데이터를 전달받아
+실제 데이터가 전달되는 것처럼 랜더링 시켜주는 방식의 개발을 진행합니다.&lt;/p&gt;
+&lt;p&gt;API 스펙을 문서화하는 단계에서 인터페이스를 정의할 때 인터페이스의 예시 데이터를 기입해줄 수 있습니다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 909px; &quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 50.33333333333333%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAACXBIWXMAAAsTAAALEwEAmpwYAAAA6ElEQVQoz52S227EIAxE+f8v7S4JCSEGYi5Tm1VX0fahSUcaJQ/mMLYxFAnOOah672//6Px/1rmOmRFjAiWGqbXiOBilFClovw785c9aU1sDCyxmBomLXJDzcQt8limlYl09JufxmBeQRI8pXU746QFcfABRRBKQplW11q+567eNztSGNeFGWOwkyTKyzDNJy7csZ5x18CHpUtpIN7kFK+0DeNtcENwqm84v4BZ2fFn7L6C+EJLO5ueMpMAiwH0nPJ4W3ntkbVtuvAzk14jc4hHiocCKMICTLGeTxWQpuDNHHrPXV+IF+A0MuxBeF7tG1AAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;scheme&quot;
+        title=&quot;scheme&quot;
+        src=&quot;/static/aed828dc948f0e6714d82d3c20fe8f50/b3ad9/scheme.png&quot;
+        srcset=&quot;/static/aed828dc948f0e6714d82d3c20fe8f50/5a46d/scheme.png 300w,
+/static/aed828dc948f0e6714d82d3c20fe8f50/0a47e/scheme.png 600w,
+/static/aed828dc948f0e6714d82d3c20fe8f50/b3ad9/scheme.png 909w&quot;
+        sizes=&quot;(max-width: 909px) 100vw, 909px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+    &lt;/span&gt;
+&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 899px; &quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 47.333333333333336%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAJCAYAAAAywQxIAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAxUlEQVQoz52S3Q7CIAyFef9n9EITE50aF5RRCivHVp2Z/9Mm54LQfpzT4Nq2hfceVrXWm8bnVzW+Y2Z0MSKmDNeXgpIzSunvhh+h7/TY44gzAjEoMVjBWWUvjqHfatznDOYDXYAKTwojSl+dDZIrzOaizrlPO5oSeegzQ10k3WEv8B3jaK50n6/2+FNkszxbBSzXB+Rmi7zbQ4hQRSY7NN4Q34lUzJuAxSbgsD2C1grkhInmnpxq5B5ZvwwXOUeWa+x/ZA5P24LH7fURJJEAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;example&quot;
+        title=&quot;example&quot;
+        src=&quot;/static/84b427f9e17184978d9562f63e3b89ce/681f1/example.png&quot;
+        srcset=&quot;/static/84b427f9e17184978d9562f63e3b89ce/5a46d/example.png 300w,
+/static/84b427f9e17184978d9562f63e3b89ce/0a47e/example.png 600w,
+/static/84b427f9e17184978d9562f63e3b89ce/681f1/example.png 899w&quot;
+        sizes=&quot;(max-width: 899px) 100vw, 899px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;이후 Mock 서버를 실행시켜 주어야 하는데요. 이때 Stoplight에서 제공하는 &lt;a href=&quot;https://stoplight.io/open-source/prism/&quot;&gt;Prism&lt;/a&gt;를 사용합니다.&lt;/p&gt;
+&lt;p&gt;Prism에 &lt;code class=&quot;language-text&quot;&gt;yaml&lt;/code&gt; 형식의 API 스펙을 제공하면 로컬에서 API 스펙을 기반으로 Mock 서버를 실행시킬 수 있으며, 인터페이스를 정의할 때 기입한 예시 데이터를 응답받을 수 있습니다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;shell&quot;&gt;&lt;pre class=&quot;language-shell&quot;&gt;&lt;code class=&quot;language-shell&quot;&gt;~$ prism mock &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;yaml or json file&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;`&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 915px; &quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 49%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAACXBIWXMAAAsTAAALEwEAmpwYAAABk0lEQVQoz32S207CQBRF+RkotNwslELLTdpCC7QUCq0gxkTjuz75G3IR49duz0wRUMGHk5lkkpW195mEWjPw/PIKaxBBKJmoVA0oaodPvqijKDf4FK7qyOU1CBkFabFyOH9PIi0q+Nh9YhA9QVAdtNoO5HILdj9A1x5j4IZwRzdwBlN0uj7S2SpS6fJFaELKVbFabdGfPSJFhrpuQsrV4PSnHDIazzEObgkaYURn23D5+0VDMatis37nwGTJQJsMi3KT2/WcCTf0yLA/nMGmUTQrtjsDOwDXeyAzbDR71F2d27Hx/DkmwZIDVb0LQaLIQulHl6e2R8OQgGULmmYiS+WzDtmw/lhsFtnq+chIKkR6z1CXZzuMDbccmCTDVsvmhizuN9AfLzD0Qn52qEPNGEEs6AQs/xf5gQxNbijl46UwoOcTcBID2V1hsVnMk03/jbzZxUuRTTSbNv25RrwUe78U6pH1GYT3uPYWSF3Y8PHbvG0wvKMOK9ewLA81smBRh17E+2NLCaZLOG4EWbdpKfJF4Be8KV3V3P/lnwAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;mock&quot;
+        title=&quot;mock&quot;
+        src=&quot;/static/1ebe9205c33274a94f940b4df121e195/4255a/mock-log.png&quot;
+        srcset=&quot;/static/1ebe9205c33274a94f940b4df121e195/5a46d/mock-log.png 300w,
+/static/1ebe9205c33274a94f940b4df121e195/0a47e/mock-log.png 600w,
+/static/1ebe9205c33274a94f940b4df121e195/4255a/mock-log.png 915w&quot;
+        sizes=&quot;(max-width: 915px) 100vw, 915px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Mock 서버를 통해 실제 API 개발이 완료되지 않아도 병렬적으로
+프론트엔드 개발에 집중할 수 있게 되고 팬딩 상태를 최소화하여 생산성을 챙길 수 있는 이점을 제공합니다.&lt;/p&gt;
+&lt;h3 id=&quot;마치면서&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EB%A7%88%EC%B9%98%EB%A9%B4%EC%84%9C&quot; aria-label=&quot;마치면서 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;마치면서&lt;/h3&gt;
+&lt;p&gt;Openapi-generator를 통해 API 스펙 기반 개발을 적용해 병렬적인 개발 사이클에서 발생할 수 있는 문제를 어떻게 해결할 수 있는 가에
+대한 이야기를 해보았는데요.&lt;/p&gt;
+&lt;p&gt;이상적인 루틴을 그리는 개발 사이클이 아닌 연쇄적이지만 병렬적으로 진행되어야 하는 현실적인 작업 환경에서
+API 스펙 기반으로 타입 세이프한 개발과 동시에 생산성까지 챙겨보시면 좋을 것 같습니다:)&lt;/p&gt;</content:encoded></item><item><title><![CDATA[about]]></title><description><![CDATA[Your name Thank you for reading my resume. If you want to contact me, Please send me an email.]]></description><link>https://youthfulhps.dev/resume-en/</link><guid isPermaLink="false">https://youthfulhps.dev/resume-en/</guid><pubDate>Sun, 27 Jan 2019 16:21:13 GMT</pubDate><content:encoded>&lt;h1 id=&quot;your-name&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#your-name&quot; aria-label=&quot;your name permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Your name&lt;/h1&gt;
 &lt;div align=&quot;center&quot;&gt;
 &lt;p&gt;&lt;em&gt;Thank you for reading my resume. If you want to contact me, Please send me an email.&lt;/em&gt;&lt;/p&gt;
 &lt;/div&gt;</content:encoded></item></channel></rss>
