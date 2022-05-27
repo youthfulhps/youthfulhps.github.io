@@ -1,5 +1,5 @@
 ---
-title: Lambda@Edge를 통한 최적화된 이미지 전달받기
+title: 사용자 경험 품질 향상을 위한 이미지 최적화 (feat. Lambda@Edge) 
 date: 2022-01-21 14:05:04
 category: infra
 description: test
@@ -7,16 +7,27 @@ thumbnail: ../../../public/banner.png
 draft: true
 ---
 
-많은 이미지를 다루는 페이지의 경우, 이미지 최적화에 신경쓰지 않으면 사용자 경험 지표에서 많은 감점을 받기 쉽다.
-LightHouse 기준, **적절한 이미지 사이즈 사용과 next-gen 포멧 이미지 사용**에 대한 개선 방향을 제시받게 된다.
+많은 이미지를 다루는 페이지의 경우, 이미지 최적화에 신경쓰지 않으면 사용자 경험 지표에서 많은 감점을 받기 쉽습니다.
+사용자 경험 지표를 측정해보면, 이미지 관련된 감점 요소들이 정말 많은데요.
 
-![opportunity-1](./images/image-optimization-with-cloudfront/intro1.png)
+- **Properly size images**
+- **Serve images in next-gen formats**
+- **Defer offscreen images**
+- **Image elements do not have explicit width and height**
+- ...
 
-![opportunity-2](./images/image-optimization-with-cloudfront/intro2.png)
+어떻게 하면 유저 경험 측면에서 사랑받을 수 있는 이미지를 랜더링할 수 있을 지에 대해 고민하고 작업한 내용들을 기록해볼 까 합니다.
 
-사용자 경험 지표를 위한 플랫폼 친화적인 이미지를 응답받기 위한 인프라 구성을 기록해두려 한다.
+## 이미지 요소의 속성을 이해하자
 
-### TL;DR
+`<img />`는 필수 속성인 `src`를 제외한 많은 속성들이 사용자 경험에 대해 다양한 역할을 담고 있습니다. 
+
+`alt` 속성은 대체 텍스트로서 이슈로 인해 이미지 랜더링이 어려울 때 이미지를 대신하여 대체 텍스트를 랜더링하게 됩니다. 또한 이미지 묘사의 목적으로 사용되는 텍스트의 성질로 스크린 리더에게 전달되어 이미지 대신 낭독되며, SEO 측면에서 이미지 색인화를 도와주는 큰 역할을 담당합니다.
+
+`width, height`는 이미지의 너비와 높이를 담당하는 속성입니다.
+
+
+## TL;DR
 
 1. S3 버킷 생성, 샘플 이미지 업로드
 2. CloudFront로 S3버킷 가리키기
@@ -24,21 +35,21 @@ LightHouse 기준, **적절한 이미지 사이즈 사용과 next-gen 포멧 이
 4. 온디멘드 이미지, WebP 파일 형식 변환을 위한 Lambda 함수 생성 (w/ sharp.js)
 5. Lambda@edge 트리거로 CloudFront Origin response 설정
 
-### S3 버킷 생성, 샘플 이미지 업로드
+## S3 버킷 생성, 샘플 이미지 업로드
 
 버킷 생성 단계는 별 다른 주의사항 없이 **모든 퍼블릭 액세스 차단이 비활성화**된 S3 버킷을 생성하고,
 생성한 버킷에 샘플 이미지를 업로드한다.
 
 ![s3-bucket](./images/image-optimization-with-cloudfront/s3-bucket.png)
 
-### CloudFront로 S3버킷 가리키기
+## CloudFront로 S3버킷 가리키기
 
 CloudFront 배포를 생성한다. CloudFront에서 쿼리 문자열 파라미터 기반의 콘텐츠 캐싱이 가능하도록
 **캐시 키 및 원본 요청**에서 Legacy cache settings 선택, 콘텐츠 캐싱에 사용할 **쿼리 문자열을 설정**한다.
 
 ![cloudFront](./images/image-optimization-with-cloudfront/cloudFront.png)
 
-### 람다 함수에 부여할 IAM 역할 생성
+## 람다 함수에 부여할 IAM 역할 생성
 
 람다 함수에 권한을 부여해야 한다. **IAM 콘솔에서 역할을 생성**한다. AWS 서비스 / Lambda를 선택하고 다음 단계로 넘어간다.
 
@@ -91,7 +102,7 @@ CloudFront 배포를 생성한다. CloudFront에서 쿼리 문자열 파라미�
 }
 ```
 
-### 온디멘드 이미지, WebP 파일 형식 변환을 위한 Lambda 함수 생성 (w/ sharp.js)
+## 온디멘드 이미지, WebP 파일 형식 변환을 위한 Lambda 함수 생성 (w/ sharp.js)
 
 람다 함수를 생성할 때, 람다 트리거를 CloudFront로 설정하기 위해 지역은 **버지니아 북부**로 설정하여 생성한다.
 
@@ -112,7 +123,7 @@ S3로 Origin Request가 전달되고, S3에서 응답받은 이미지를 통해 
 
 ![distribution-lambda](./images/image-optimization-with-cloudfront/distribution-lambda.png)
 
-### 테스트 클라이언트 구성
+## 테스트 클라이언트 구성
 
 [image-ondemand-resizing](https://github.com/youthfulhps/image-ondemand-resizing)
 
