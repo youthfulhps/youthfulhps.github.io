@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Youthfulhps.dev]]></title><description><![CDATA[Blog posted front-end, troubleshooting!]]></description><link>https://youthfulhps.dev</link><generator>GatsbyJS</generator><lastBuildDate>Thu, 26 May 2022 01:25:38 GMT</lastBuildDate><item><title><![CDATA[자바스크립트 프로토타입 톺아보기]]></title><description><![CDATA[…]]></description><link>https://youthfulhps.dev/javascript/javascript-prototype/</link><guid isPermaLink="false">https://youthfulhps.dev/javascript/javascript-prototype/</guid><pubDate>Sat, 19 Mar 2022 00:05:02 GMT</pubDate><content:encoded>&lt;p&gt;자바스크립트는 프로토타입 기반의 객체 지향 프로그래밍 언어입니다. 개인적으로 프로토타입에 대한 큰 그림을 이해하고 있다고 생각했는데,
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Youthfulhps.dev]]></title><description><![CDATA[Blog posted front-end, troubleshooting!]]></description><link>https://youthfulhps.dev</link><generator>GatsbyJS</generator><lastBuildDate>Fri, 27 May 2022 00:36:43 GMT</lastBuildDate><item><title><![CDATA[자바스크립트 프로토타입 톺아보기]]></title><description><![CDATA[…]]></description><link>https://youthfulhps.dev/javascript/javascript-prototype/</link><guid isPermaLink="false">https://youthfulhps.dev/javascript/javascript-prototype/</guid><pubDate>Sat, 19 Mar 2022 00:05:02 GMT</pubDate><content:encoded>&lt;p&gt;자바스크립트는 프로토타입 기반의 객체 지향 프로그래밍 언어입니다. 개인적으로 프로토타입에 대한 큰 그림을 이해하고 있다고 생각했는데,
 이직을 준비하면서 프로토타입만 마주하면 작아지는 제 모습을 보게 됩니다.&lt;/p&gt;
 &lt;p&gt;자연스레 프로토타입 객체로부터 상속받은 메서드를 사용하면서도, 직접 프로토타입 객체를 다룰 기회는 적었는데요.
 어쩌면 가장 익숙하지만 낯선 프로토타입 기반을 다시금 공부해보려 합니다.&lt;/p&gt;
@@ -363,53 +363,22 @@ str&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=
 &lt;h2 id=&quot;reference&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#reference&quot; aria-label=&quot;reference permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Reference&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&quot;https://poiemaweb.com/js-prototype&quot;&gt;https://poiemaweb.com/js-prototype&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content:encoded></item><item><title><![CDATA[Lambda@Edge를 통한 최적화된 이미지 전달받기]]></title><description><![CDATA[많은 이미지를 다루는 페이지의 경우, 이미지 최적화에 신경쓰지 않으면 사용자 경험 지표에서 많은 감점을 받기 쉽다.
-LightHouse 기준, 적절한 이미지 사이즈 사용과 next-gen…]]></description><link>https://youthfulhps.dev/infra/image-optimization-with-cloudfront/</link><guid isPermaLink="false">https://youthfulhps.dev/infra/image-optimization-with-cloudfront/</guid><pubDate>Fri, 21 Jan 2022 14:05:04 GMT</pubDate><content:encoded>&lt;p&gt;많은 이미지를 다루는 페이지의 경우, 이미지 최적화에 신경쓰지 않으면 사용자 경험 지표에서 많은 감점을 받기 쉽다.
-LightHouse 기준, &lt;strong&gt;적절한 이미지 사이즈 사용과 next-gen 포멧 이미지 사용&lt;/strong&gt;에 대한 개선 방향을 제시받게 된다.&lt;/p&gt;
-&lt;p&gt;&lt;span
-      class=&quot;gatsby-resp-image-wrapper&quot;
-      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 707px; &quot;
-    &gt;
-      &lt;span
-    class=&quot;gatsby-resp-image-background-image&quot;
-    style=&quot;padding-bottom: 4%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAABCAYAAADeko4lAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAJUlEQVQI12OwtLT8b2dn919XV/e/goLCfyUlJbKwIhCbqan+BwCGDxyzb4Me+AAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
-  &gt;&lt;/span&gt;
-  &lt;img
-        class=&quot;gatsby-resp-image-image&quot;
-        alt=&quot;opportunity-1&quot;
-        title=&quot;opportunity-1&quot;
-        src=&quot;/static/4c6022390cfe6309692d833e02ed1d65/394f7/intro1.png&quot;
-        srcset=&quot;/static/4c6022390cfe6309692d833e02ed1d65/5a46d/intro1.png 300w,
-/static/4c6022390cfe6309692d833e02ed1d65/0a47e/intro1.png 600w,
-/static/4c6022390cfe6309692d833e02ed1d65/394f7/intro1.png 707w&quot;
-        sizes=&quot;(max-width: 707px) 100vw, 707px&quot;
-        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
-        loading=&quot;lazy&quot;
-      /&gt;
-    &lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span
-      class=&quot;gatsby-resp-image-wrapper&quot;
-      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 708px; &quot;
-    &gt;
-      &lt;span
-    class=&quot;gatsby-resp-image-background-image&quot;
-    style=&quot;padding-bottom: 4%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAABCAYAAADeko4lAAAACXBIWXMAAAsTAAALEwEAmpwYAAAANklEQVQI12Owtrb+b2pq+t/Kyuq/paUlGCsrK/9XUFD4r6ioiBOD5JWAtJO66n9PTXUwdgSyAbF4HdDXb4yHAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
-  &gt;&lt;/span&gt;
-  &lt;img
-        class=&quot;gatsby-resp-image-image&quot;
-        alt=&quot;opportunity-2&quot;
-        title=&quot;opportunity-2&quot;
-        src=&quot;/static/a425f2c6421abccb8c277e83d31990cb/3cb0f/intro2.png&quot;
-        srcset=&quot;/static/a425f2c6421abccb8c277e83d31990cb/5a46d/intro2.png 300w,
-/static/a425f2c6421abccb8c277e83d31990cb/0a47e/intro2.png 600w,
-/static/a425f2c6421abccb8c277e83d31990cb/3cb0f/intro2.png 708w&quot;
-        sizes=&quot;(max-width: 708px) 100vw, 708px&quot;
-        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
-        loading=&quot;lazy&quot;
-      /&gt;
-    &lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;사용자 경험 지표를 위한 플랫폼 친화적인 이미지를 응답받기 위한 인프라 구성을 기록해두려 한다.&lt;/p&gt;
-&lt;h3 id=&quot;tldr&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#tldr&quot; aria-label=&quot;tldr permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;TL;DR&lt;/h3&gt;
+&lt;/ul&gt;</content:encoded></item><item><title><![CDATA[사용자 경험 품질 향상을 위한 이미지 최적화 (feat. Lambda@Edge)]]></title><description><![CDATA[많은 이미지를 다루는 페이지의 경우, 이미지 최적화에 신경쓰지 않으면 사용자 경험 지표에서 많은 감점을 받기 쉽습니다.
+사용자 경험 지표를 측정해보면, 이미지 관련된 감점 요소들이 정말 많은데요. Properly size images Serve…]]></description><link>https://youthfulhps.dev/infra/image-optimization-with-cloudfront/</link><guid isPermaLink="false">https://youthfulhps.dev/infra/image-optimization-with-cloudfront/</guid><pubDate>Fri, 21 Jan 2022 14:05:04 GMT</pubDate><content:encoded>&lt;p&gt;많은 이미지를 다루는 페이지의 경우, 이미지 최적화에 신경쓰지 않으면 사용자 경험 지표에서 많은 감점을 받기 쉽습니다.
+사용자 경험 지표를 측정해보면, 이미지 관련된 감점 요소들이 정말 많은데요.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Properly size images&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Serve images in next-gen formats&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Defer offscreen images&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Image elements do not have explicit width and height&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;…&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;어떻게 하면 유저 경험 측면에서 사랑받을 수 있는 이미지를 랜더링할 수 있을 지에 대해 고민하고 작업한 내용들을 기록해볼 까 합니다.&lt;/p&gt;
+&lt;h2 id=&quot;이미지-요소의-속성을-이해하자&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EC%9D%B4%EB%AF%B8%EC%A7%80-%EC%9A%94%EC%86%8C%EC%9D%98-%EC%86%8D%EC%84%B1%EC%9D%84-%EC%9D%B4%ED%95%B4%ED%95%98%EC%9E%90&quot; aria-label=&quot;이미지 요소의 속성을 이해하자 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;이미지 요소의 속성을 이해하자&lt;/h2&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;&amp;lt;img /&gt;&lt;/code&gt;는 필수 속성인 &lt;code class=&quot;language-text&quot;&gt;src&lt;/code&gt;를 제외한 많은 속성들이 사용자 경험에 대해 다양한 역할을 담고 있습니다. &lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;alt&lt;/code&gt; 속성은 대체 텍스트로서 이슈로 인해 이미지 랜더링이 어려울 때 이미지를 대신하여 대체 텍스트를 랜더링하게 됩니다. 또한 이미지 묘사의 목적으로 사용되는 텍스트의 성질로 스크린 리더에게 전달되어 이미지 대신 낭독되며, SEO 측면에서 이미지 색인화를 도와주는 큰 역할을 담당합니다.&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;width, height&lt;/code&gt;는 이미지의 너비와 높이를 담당하는 속성입니다.&lt;/p&gt;
+&lt;h2 id=&quot;tldr&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#tldr&quot; aria-label=&quot;tldr permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;TL;DR&lt;/h2&gt;
 &lt;ol&gt;
 &lt;li&gt;S3 버킷 생성, 샘플 이미지 업로드&lt;/li&gt;
 &lt;li&gt;CloudFront로 S3버킷 가리키기&lt;/li&gt;
@@ -417,7 +386,7 @@ LightHouse 기준, &lt;strong&gt;적절한 이미지 사이즈 사용과 next-ge
 &lt;li&gt;온디멘드 이미지, WebP 파일 형식 변환을 위한 Lambda 함수 생성 (w/ sharp.js)&lt;/li&gt;
 &lt;li&gt;Lambda@edge 트리거로 CloudFront Origin response 설정&lt;/li&gt;
 &lt;/ol&gt;
-&lt;h3 id=&quot;s3-버킷-생성-샘플-이미지-업로드&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#s3-%EB%B2%84%ED%82%B7-%EC%83%9D%EC%84%B1-%EC%83%98%ED%94%8C-%EC%9D%B4%EB%AF%B8%EC%A7%80-%EC%97%85%EB%A1%9C%EB%93%9C&quot; aria-label=&quot;s3 버킷 생성 샘플 이미지 업로드 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;S3 버킷 생성, 샘플 이미지 업로드&lt;/h3&gt;
+&lt;h2 id=&quot;s3-버킷-생성-샘플-이미지-업로드&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#s3-%EB%B2%84%ED%82%B7-%EC%83%9D%EC%84%B1-%EC%83%98%ED%94%8C-%EC%9D%B4%EB%AF%B8%EC%A7%80-%EC%97%85%EB%A1%9C%EB%93%9C&quot; aria-label=&quot;s3 버킷 생성 샘플 이미지 업로드 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;S3 버킷 생성, 샘플 이미지 업로드&lt;/h2&gt;
 &lt;p&gt;버킷 생성 단계는 별 다른 주의사항 없이 &lt;strong&gt;모든 퍼블릭 액세스 차단이 비활성화&lt;/strong&gt;된 S3 버킷을 생성하고,
 생성한 버킷에 샘플 이미지를 업로드한다.&lt;/p&gt;
 &lt;p&gt;&lt;span
@@ -442,7 +411,7 @@ LightHouse 기준, &lt;strong&gt;적절한 이미지 사이즈 사용과 next-ge
         loading=&quot;lazy&quot;
       /&gt;
     &lt;/span&gt;&lt;/p&gt;
-&lt;h3 id=&quot;cloudfront로-s3버킷-가리키기&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#cloudfront%EB%A1%9C-s3%EB%B2%84%ED%82%B7-%EA%B0%80%EB%A6%AC%ED%82%A4%EA%B8%B0&quot; aria-label=&quot;cloudfront로 s3버킷 가리키기 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;CloudFront로 S3버킷 가리키기&lt;/h3&gt;
+&lt;h2 id=&quot;cloudfront로-s3버킷-가리키기&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#cloudfront%EB%A1%9C-s3%EB%B2%84%ED%82%B7-%EA%B0%80%EB%A6%AC%ED%82%A4%EA%B8%B0&quot; aria-label=&quot;cloudfront로 s3버킷 가리키기 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;CloudFront로 S3버킷 가리키기&lt;/h2&gt;
 &lt;p&gt;CloudFront 배포를 생성한다. CloudFront에서 쿼리 문자열 파라미터 기반의 콘텐츠 캐싱이 가능하도록
 &lt;strong&gt;캐시 키 및 원본 요청&lt;/strong&gt;에서 Legacy cache settings 선택, 콘텐츠 캐싱에 사용할 &lt;strong&gt;쿼리 문자열을 설정&lt;/strong&gt;한다.&lt;/p&gt;
 &lt;p&gt;&lt;span
@@ -466,7 +435,7 @@ LightHouse 기준, &lt;strong&gt;적절한 이미지 사이즈 사용과 next-ge
         loading=&quot;lazy&quot;
       /&gt;
     &lt;/span&gt;&lt;/p&gt;
-&lt;h3 id=&quot;람다-함수에-부여할-iam-역할-생성&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EB%9E%8C%EB%8B%A4-%ED%95%A8%EC%88%98%EC%97%90-%EB%B6%80%EC%97%AC%ED%95%A0-iam-%EC%97%AD%ED%95%A0-%EC%83%9D%EC%84%B1&quot; aria-label=&quot;람다 함수에 부여할 iam 역할 생성 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;람다 함수에 부여할 IAM 역할 생성&lt;/h3&gt;
+&lt;h2 id=&quot;람다-함수에-부여할-iam-역할-생성&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EB%9E%8C%EB%8B%A4-%ED%95%A8%EC%88%98%EC%97%90-%EB%B6%80%EC%97%AC%ED%95%A0-iam-%EC%97%AD%ED%95%A0-%EC%83%9D%EC%84%B1&quot; aria-label=&quot;람다 함수에 부여할 iam 역할 생성 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;람다 함수에 부여할 IAM 역할 생성&lt;/h2&gt;
 &lt;p&gt;람다 함수에 권한을 부여해야 한다. &lt;strong&gt;IAM 콘솔에서 역할을 생성&lt;/strong&gt;한다. AWS 서비스 / Lambda를 선택하고 다음 단계로 넘어간다.&lt;/p&gt;
 &lt;p&gt;&lt;span
       class=&quot;gatsby-resp-image-wrapper&quot;
@@ -546,7 +515,7 @@ LightHouse 기준, &lt;strong&gt;적절한 이미지 사이즈 사용과 next-ge
     &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
   &lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;
 &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h3 id=&quot;온디멘드-이미지-webp-파일-형식-변환을-위한-lambda-함수-생성-w-sharpjs&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EC%98%A8%EB%94%94%EB%A9%98%EB%93%9C-%EC%9D%B4%EB%AF%B8%EC%A7%80-webp-%ED%8C%8C%EC%9D%BC-%ED%98%95%EC%8B%9D-%EB%B3%80%ED%99%98%EC%9D%84-%EC%9C%84%ED%95%9C-lambda-%ED%95%A8%EC%88%98-%EC%83%9D%EC%84%B1-w-sharpjs&quot; aria-label=&quot;온디멘드 이미지 webp 파일 형식 변환을 위한 lambda 함수 생성 w sharpjs permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;온디멘드 이미지, WebP 파일 형식 변환을 위한 Lambda 함수 생성 (w/ sharp.js)&lt;/h3&gt;
+&lt;h2 id=&quot;온디멘드-이미지-webp-파일-형식-변환을-위한-lambda-함수-생성-w-sharpjs&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EC%98%A8%EB%94%94%EB%A9%98%EB%93%9C-%EC%9D%B4%EB%AF%B8%EC%A7%80-webp-%ED%8C%8C%EC%9D%BC-%ED%98%95%EC%8B%9D-%EB%B3%80%ED%99%98%EC%9D%84-%EC%9C%84%ED%95%9C-lambda-%ED%95%A8%EC%88%98-%EC%83%9D%EC%84%B1-w-sharpjs&quot; aria-label=&quot;온디멘드 이미지 webp 파일 형식 변환을 위한 lambda 함수 생성 w sharpjs permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;온디멘드 이미지, WebP 파일 형식 변환을 위한 Lambda 함수 생성 (w/ sharp.js)&lt;/h2&gt;
 &lt;p&gt;람다 함수를 생성할 때, 람다 트리거를 CloudFront로 설정하기 위해 지역은 &lt;strong&gt;버지니아 북부&lt;/strong&gt;로 설정하여 생성한다.&lt;/p&gt;
 &lt;p&gt;&lt;span
       class=&quot;gatsby-resp-image-wrapper&quot;
@@ -638,7 +607,7 @@ S3로 Origin Request가 전달되고, S3에서 응답받은 이미지를 통해 
         loading=&quot;lazy&quot;
       /&gt;
     &lt;/span&gt;&lt;/p&gt;
-&lt;h3 id=&quot;테스트-클라이언트-구성&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%ED%85%8C%EC%8A%A4%ED%8A%B8-%ED%81%B4%EB%9D%BC%EC%9D%B4%EC%96%B8%ED%8A%B8-%EA%B5%AC%EC%84%B1&quot; aria-label=&quot;테스트 클라이언트 구성 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;테스트 클라이언트 구성&lt;/h3&gt;
+&lt;h2 id=&quot;테스트-클라이언트-구성&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%ED%85%8C%EC%8A%A4%ED%8A%B8-%ED%81%B4%EB%9D%BC%EC%9D%B4%EC%96%B8%ED%8A%B8-%EA%B5%AC%EC%84%B1&quot; aria-label=&quot;테스트 클라이언트 구성 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;테스트 클라이언트 구성&lt;/h2&gt;
 &lt;p&gt;&lt;a href=&quot;https://github.com/youthfulhps/image-ondemand-resizing&quot;&gt;image-ondemand-resizing&lt;/a&gt;&lt;/p&gt;</content:encoded></item><item><title><![CDATA[Incremental Static Regeneration 타임라인 이해하기]]></title><description><![CDATA[최근 CRA…]]></description><link>https://youthfulhps.dev/nextjs/next-isr/</link><guid isPermaLink="false">https://youthfulhps.dev/nextjs/next-isr/</guid><pubDate>Sat, 08 Jan 2022 21:06:16 GMT</pubDate><content:encoded>&lt;p&gt;최근 CRA 프로젝트를 넥스트로 이관하는 작업이 한창입니다. 넥스트는 서버 사이드 랜더링과 동시에 클라이언트 사이드 랜더링을
 동시에 지원하기 때문에 점진적 이관이 가능했죠. 단순히 빌드가 실패되는 문제들을 제외하면요.&lt;/p&gt;
 &lt;p&gt;이후 적절한 &lt;code class=&quot;language-text&quot;&gt;getStaticProps&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;getStaticPaths&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;getServerSideProps&lt;/code&gt; 를 통해 서버 사이드에서 데이터 패칭이
