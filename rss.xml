@@ -1,4 +1,252 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Youthfulhps.dev]]></title><description><![CDATA[Blog posted front-end, troubleshooting!]]></description><link>https://youthfulhps.dev</link><generator>GatsbyJS</generator><lastBuildDate>Sun, 29 May 2022 08:05:05 GMT</lastBuildDate><item><title><![CDATA[사용자 경험 품질 향상을 위한 이미지 최적화]]></title><description><![CDATA[많은 이미지를 다루는 페이지의 경우, 이미지 최적화에 신경쓰지 않으면 사용자 경험 지표에서 많은 감점을 받기 쉽습니다.
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Youthfulhps.dev]]></title><description><![CDATA[Blog posted front-end, troubleshooting!]]></description><link>https://youthfulhps.dev</link><generator>GatsbyJS</generator><lastBuildDate>Tue, 31 May 2022 09:53:27 GMT</lastBuildDate><item><title><![CDATA[온디멘드 이미지 리사이징을 위한 인프라 구성]]></title><description><![CDATA[사용자 경험 품질 향상을 위한 이미지 최적화에서 온디멘드 이미지 리사이징 
+에 대한 이야기를 공유해드렸습니다. 이번 글에서는 CloudFront에서  를 통해 직접 구현해본 과정을 정리해보려 합니다. TL;DR S…]]></description><link>https://youthfulhps.dev/infra/image-optimization-with-cloudfront/</link><guid isPermaLink="false">https://youthfulhps.dev/infra/image-optimization-with-cloudfront/</guid><pubDate>Tue, 31 May 2022 14:05:04 GMT</pubDate><content:encoded>&lt;p&gt;&lt;a href=&quot;https://youthfulhps.dev/web/image-optimization/&quot;&gt;사용자 경험 품질 향상을 위한 이미지 최적화&lt;/a&gt;에서 온디멘드 이미지 리사이징
+에 대한 이야기를 공유해드렸습니다. 이번 글에서는 CloudFront에서 &lt;code class=&quot;language-text&quot;&gt;lambda@edge&lt;/code&gt; 를 통해 직접 구현해본 과정을 정리해보려 합니다.&lt;/p&gt;
+&lt;h2 id=&quot;tldr&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#tldr&quot; aria-label=&quot;tldr permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;TL;DR&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;S3 버킷을 생성하고 이미지를 업로드합니다.&lt;/li&gt;
+&lt;li&gt;CloudFront를 통해 S3 컨텐츠를 배포합니다.&lt;/li&gt;
+&lt;li&gt;라시아징, webp 파일 형식 변환을 위한 노드 환경 람다 함수를 구현합니다.&lt;/li&gt;
+&lt;li&gt;버킷 접근 권한 및 역할을 담은 IAM을 정의하고 람다 함수에 부여합니다.&lt;/li&gt;
+&lt;li&gt;CloudFront의 오리진 응답 엣지에 람다 함수를 연동합니다.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&quot;s3-샘플-이미지-업로드&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#s3-%EC%83%98%ED%94%8C-%EC%9D%B4%EB%AF%B8%EC%A7%80-%EC%97%85%EB%A1%9C%EB%93%9C&quot; aria-label=&quot;s3 샘플 이미지 업로드 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;S3, 샘플 이미지 업로드&lt;/h2&gt;
+&lt;p&gt;일반적으로 사용되는 S3 버킷을 생성하는 과정과 동일합니다. &lt;code class=&quot;language-text&quot;&gt;모든 퍼블릭 엑세스 차단이 비활성화&lt;/code&gt; 가 선택된
+버킷을 생성하고 샘플 이미지 객체를 업로드해주세요.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 1200px; &quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 38.33333333333333%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAICAYAAAD5nd/tAAAACXBIWXMAAAsTAAALEwEAmpwYAAABO0lEQVQoz5VRSXbDIBTz/e/Qy/QO7aJDbCdpGtsJmNEG7KqCDO910UUWeh/ERxKfqtkfsN3tULctscVu/4XhLKCNgdK61EdQ1fUGddNiU9fYNA3ePz7R0kQqxQZdRB9BJUfJhbkT2UUIgcxra/9Jwj59Mbxx5mpedX0P6xwJkhRQ1kPaCcrYO6fZaFmtdWVvnIeZU6n5TJM/aw/rJ1RCSozq4qSIkYIn7SDI3U146cS55uSH/gzRvGB8foLevsJOoQQSDGGnGZXhxk8eKUWESISAGEOpN0Ty83U9zQGzkZi/3xBYY1oQyS+8nzUqISSG0WL0oQimlApu6dZ15TxH9P1w4Yi0rFgApPWniExMNtMoj4WfotAMCnvp4HiQRWNMcEyex5DF85PzrI/HDseu42X2hfnPC5z3yOF+AbnoZN7grE7QAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;create s3 bucket&quot;
+        title=&quot;create s3 bucket&quot;
+        src=&quot;/static/886281b9a152864e2531ecdde013164a/c1b63/s3-bucket.png&quot;
+        srcset=&quot;/static/886281b9a152864e2531ecdde013164a/5a46d/s3-bucket.png 300w,
+/static/886281b9a152864e2531ecdde013164a/0a47e/s3-bucket.png 600w,
+/static/886281b9a152864e2531ecdde013164a/c1b63/s3-bucket.png 1200w,
+/static/886281b9a152864e2531ecdde013164a/9239a/s3-bucket.png 1246w&quot;
+        sizes=&quot;(max-width: 1200px) 100vw, 1200px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;h2 id=&quot;cloudfront-s3-컨텐츠-배포&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#cloudfront-s3-%EC%BB%A8%ED%85%90%EC%B8%A0-%EB%B0%B0%ED%8F%AC&quot; aria-label=&quot;cloudfront s3 컨텐츠 배포 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;CloudFront, S3 컨텐츠 배포&lt;/h2&gt;
+&lt;p&gt;CloudFront 배포를 생성합니다. 기본적으로 CloudFront는 쿼리 문자열을 무시하게 되는데,
+쿼리 문자열 파라미터 기반의 컨텐츠 캐싱이 가능하도록 &lt;code class=&quot;language-text&quot;&gt;캐시 키 및 원본 요청&lt;/code&gt;
+에서 &lt;code class=&quot;language-text&quot;&gt;Lagacy cache settings&lt;/code&gt; 를 선택하여 컨텐츠 캐싱에 사용할 &lt;code class=&quot;language-text&quot;&gt;쿼리 문자열을 설정&lt;/code&gt; 해줍니다.&lt;/p&gt;
+&lt;p&gt;쿼리 문자열은 이미지 변환에 대한 설정을 전달하기 위한 역할로서
+&lt;code class=&quot;language-text&quot;&gt;너비, 높이, 이미지 핏, webp 변환&lt;/code&gt; 에 대한 설정값을 담을 수 있습니다.&lt;/p&gt;
+&lt;p&gt;또한, &lt;code class=&quot;language-text&quot;&gt;쿼리 문자열 파라미터 기반의 컨텐츠 캐싱&lt;/code&gt; 이라는 특징에 따라, 동일한 쿼리 조합의 요청에 대한
+리사이징된 컨텐츠가 CloudFront에 캐싱되어 있다면, S3까지 오리진 요청이 전달되지 않고,
+CloudFront에서 뷰어 응답으로 빠르게 컨텐츠를 전달합니다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;https://...cloudfront/sample-image.jpg?w=500&amp;amp;h=300&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 646px; &quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 82.66666666666667%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAARCAYAAADdRIy+AAAACXBIWXMAAAsTAAALEwEAmpwYAAABrElEQVQ4y5VUaXeCMBDk//82X1/bD7ZVoJcWLwhHuNHtzkJ4YMVqfGMgWYaZ3Q3WfP5Cr28Lms0e6PHpmTxvQ8fjkaqqYtSCsmyvS15rmoYwTqeT4HxYB98nP1C02+1pf2ivtU4py3JKEk1RFFMYRpTw2sEPeNbXCfM8pziO+eGEibQ8rMKQ55CUUv19EASUZllPNjWsxZdHjm3T0nZosbQFAatUqiUNo0juQYiXD9WdQwiTNOMclVdtDMel/RFh+3ZFUZwI4gTQkyqmlBliC5a8zZbz0xYBydesuq5rqrmi/4LjEI/OEIUZisKqTDv0b+MfgpobgHbqLfvcCrbjkvvxyUkvxLbfpQCEd1tOWe73asVYk+O+C3SaUlGUt9nmGKSptwy5IG1PBoMDzEDQFIaWQdpbxiZOCVThiCGnOCUgv3eIZfyhKKg28qZCzLGcClHCtkbo1vKikOaHCKOuJyx4E4pGlvgh2J8C0rTZ7qSQw+YWQmwiwbiWQhhMFKKS3kvpx9sK4R+FaOjV2pOvjbEgSjFfQueg7lIwIkQADj0+TfhU1YMq31MMQ/oL16kym/3742QAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;cloudFront&quot;
+        title=&quot;cloudFront&quot;
+        src=&quot;/static/bb8a52f68069f6b1bb7de64e65c6a92a/27524/cloudFront.png&quot;
+        srcset=&quot;/static/bb8a52f68069f6b1bb7de64e65c6a92a/5a46d/cloudFront.png 300w,
+/static/bb8a52f68069f6b1bb7de64e65c6a92a/0a47e/cloudFront.png 600w,
+/static/bb8a52f68069f6b1bb7de64e65c6a92a/27524/cloudFront.png 646w&quot;
+        sizes=&quot;(max-width: 646px) 100vw, 646px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;h2 id=&quot;람다-함수에-부여할-iam-역할-생성&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EB%9E%8C%EB%8B%A4-%ED%95%A8%EC%88%98%EC%97%90-%EB%B6%80%EC%97%AC%ED%95%A0-iam-%EC%97%AD%ED%95%A0-%EC%83%9D%EC%84%B1&quot; aria-label=&quot;람다 함수에 부여할 iam 역할 생성 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;람다 함수에 부여할 IAM 역할 생성&lt;/h2&gt;
+&lt;p&gt;람다 함수에 권한을 부여해야 합니다. &lt;/p&gt;
+&lt;p&gt;람다 함수에 권한을 부여해야 한다. &lt;strong&gt;IAM 콘솔에서 역할을 생성&lt;/strong&gt;한다. AWS 서비스 / Lambda를 선택하고 다음 단계로 넘어간다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 981px; &quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 42.33333333333334%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAICAYAAAD5nd/tAAAACXBIWXMAAAsTAAALEwEAmpwYAAABIElEQVQoz41S7W6EIBD0/R+qfYm296+5qoUCiiLKh1/ThTsvl0vTdpMJiM7s7EgxDAM4Y+g6De8dYgjwzmHbNtzXvu8Zxz5V2Tg8vTa02xDnGcuyoDAkKGQDpXtwoTKaps0vE3El4XVdb4Kp0XY9u7a6PScULyzg+aTxdpY46wWfFlCdhZQCjJw7N2Ua5xxlWSLQBDHG3LCua1RVBSFEPsuCH2rEqTYoRY933qFUFoxcto2CGSz6kSKIC6ZpykjEJJoErbXU0GGmcQ+XxWgNWiXJAcM0jpTfhZg+dD5gDCvCvOKxjhzv803IGUqlEKjzz7Vfcroj/YaCqR6t7miUkEfx3uf1yOrRwZ+CX5oykx3sYJDcpmtkjMlrwvE3/yv4DVBfbnoVbMAfAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;create-iam&quot;
+        title=&quot;create-iam&quot;
+        src=&quot;/static/a30b87eaf5e4a000e4fe0cb332379170/1c3a5/create-iam.png&quot;
+        srcset=&quot;/static/a30b87eaf5e4a000e4fe0cb332379170/5a46d/create-iam.png 300w,
+/static/a30b87eaf5e4a000e4fe0cb332379170/0a47e/create-iam.png 600w,
+/static/a30b87eaf5e4a000e4fe0cb332379170/1c3a5/create-iam.png 981w&quot;
+        sizes=&quot;(max-width: 981px) 100vw, 981px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;다음 단계에서, &lt;strong&gt;정책 생성&lt;/strong&gt;을 클릭하고, JSON 편집을 통해 아래와 같은 정책을 부여한다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;json&quot;&gt;&lt;pre class=&quot;language-json&quot;&gt;&lt;code class=&quot;language-json&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token property&quot;&gt;&quot;Version&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;2012-10-17&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;token property&quot;&gt;&quot;Statement&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;token property&quot;&gt;&quot;Sid&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;VisualEditor0&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;token property&quot;&gt;&quot;Effect&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;Allow&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;token property&quot;&gt;&quot;Action&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;
+        &lt;span class=&quot;token string&quot;&gt;&quot;iam:CreateServiceLinkedRole&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;token string&quot;&gt;&quot;lambda:GetFunction&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;token string&quot;&gt;&quot;lambda:EnableReplication&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;token string&quot;&gt;&quot;cloudfront:UpdateDistribution&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;token string&quot;&gt;&quot;s3:GetObject&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;token string&quot;&gt;&quot;logs:CreateLogGroup&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;token string&quot;&gt;&quot;logs:CreateLogStream&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;token string&quot;&gt;&quot;logs:PutLogEvents&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;token string&quot;&gt;&quot;logs:DescribeLogStreams&quot;&lt;/span&gt;
+      &lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;token property&quot;&gt;&quot;Resource&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;*&quot;&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;정책 이름을 설정하고, 정책 생성을 완료한다. 완료 후 다시 IAM 역할 생성으로로 돌아가, &lt;strong&gt;생성한 정책을 연결&lt;/strong&gt;한다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 985px; &quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 24%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAFCAYAAABFA8wzAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAjElEQVQY052OWw6CMBQFu3cX5Fr8M8FHgoW0hZZWgsW+jnJlAWCTyeT+TA8bbQ+lOjjniLZtMQwDpJR0L6+UshnGRYcHbyCEoMgS5JxTNISAnDNSSuQtsMPxglP9/O7IeK+BGCP9tncdLTxXd1TXG7TW0MaQzWrd6593wPxrQqMsamnhxgnz7OH9/3wAx1KCC2XdC/gAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;connect-policy&quot;
+        title=&quot;connect-policy&quot;
+        src=&quot;/static/f6d8a8940e62c5211434002e7fe55792/58bb7/connect-policy.png&quot;
+        srcset=&quot;/static/f6d8a8940e62c5211434002e7fe55792/5a46d/connect-policy.png 300w,
+/static/f6d8a8940e62c5211434002e7fe55792/0a47e/connect-policy.png 600w,
+/static/f6d8a8940e62c5211434002e7fe55792/58bb7/connect-policy.png 985w&quot;
+        sizes=&quot;(max-width: 985px) 100vw, 985px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;역할에 신뢰관계를 추가한다. &lt;strong&gt;역할 / 신뢰 관계/ 신뢰 관계 편집&lt;/strong&gt;을 선택하고, JSON을 편집한다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;json&quot;&gt;&lt;pre class=&quot;language-json&quot;&gt;&lt;code class=&quot;language-json&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token property&quot;&gt;&quot;Version&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;2012-10-17&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;token property&quot;&gt;&quot;Statement&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;token property&quot;&gt;&quot;Effect&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;Allow&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;token property&quot;&gt;&quot;Principal&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;token property&quot;&gt;&quot;Service&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;edgelambda.amazonaws.com&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;lambda.amazonaws.com&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;
+      &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;token property&quot;&gt;&quot;Action&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;sts:AssumeRole&quot;&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&quot;온디멘드-이미지-webp-파일-형식-변환을-위한-lambda-함수-생성-w-sharpjs&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EC%98%A8%EB%94%94%EB%A9%98%EB%93%9C-%EC%9D%B4%EB%AF%B8%EC%A7%80-webp-%ED%8C%8C%EC%9D%BC-%ED%98%95%EC%8B%9D-%EB%B3%80%ED%99%98%EC%9D%84-%EC%9C%84%ED%95%9C-lambda-%ED%95%A8%EC%88%98-%EC%83%9D%EC%84%B1-w-sharpjs&quot; aria-label=&quot;온디멘드 이미지 webp 파일 형식 변환을 위한 lambda 함수 생성 w sharpjs permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;온디멘드 이미지, WebP 파일 형식 변환을 위한 Lambda 함수 생성 (w/ sharp.js)&lt;/h2&gt;
+&lt;p&gt;람다 함수를 생성합니다. 이때, 람다 트리거를 CloudFront로 설정할 수 있는 지역은
+&lt;code class=&quot;language-text&quot;&gt;버지니아 북부&lt;/code&gt; 만 가능하기 때문에 지역을 변경하고 람다 함수를 생성해주세요.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 978px; &quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 51%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAACXBIWXMAAAsTAAALEwEAmpwYAAAA40lEQVQoz6VS2Y6DMAzM///klq2qSrAkQE4SYNY20FZ9KW0tjZxL4/HEqmka1HWNaSoopSDn/BWUMR1M19GmIMZExBOWZcE8zx9BtVrj51Sh+j0LBmtRiJQvpw23NZ2/gur7Abq38CHAOQ9rHcZxlPb3R6ye85EghQbXukGIUZCIjLPzQYrshfjsiErykAn/ENMoymJKlLP4uINDfD0AdW07VOcLKctCmDZCbETvhuJP4Pae41HhEdwIeWTM4FYPQ7z75r0U4mydk8xjxX6ud3dwVzux4mFsWw1Nn8Pj8a6yZ/wDNRURG9YxeiMAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;create-lambda&quot;
+        title=&quot;create-lambda&quot;
+        src=&quot;/static/57e65d67c8b4ae261a794e50e8bb41a8/914c7/create-lambda.png&quot;
+        srcset=&quot;/static/57e65d67c8b4ae261a794e50e8bb41a8/5a46d/create-lambda.png 300w,
+/static/57e65d67c8b4ae261a794e50e8bb41a8/0a47e/create-lambda.png 600w,
+/static/57e65d67c8b4ae261a794e50e8bb41a8/914c7/create-lambda.png 978w&quot;
+        sizes=&quot;(max-width: 978px) 100vw, 978px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;권한 설정에서 기존에 생성한 역할을 설정한다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 837px; &quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 26.666666666666668%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAFCAYAAABFA8wzAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAqElEQVQY042OyQrDMAxE/f/fmEJr6maxnX3xPpVd6KWQ9PBAMNLTMKU1VN9D1DWk0uBPgabroGqOpm1olqjbFv0wYJpnjNN0CtMky8vLun7Jh52U9ED9ZFeQcCxm5xystQVjDPbjQFXdwB8cIQR4yt0fMNUIHMbSkYfzHp7I0m3fqenyyWKC8QExJaQLmBJ32LwcQ2kSYizSLBTDime/4TXmeS8PS9sT3gNQgjcfQD13AAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;set-policy&quot;
+        title=&quot;set-policy&quot;
+        src=&quot;/static/8eb26ebf210f9e4a278ce9a432ce7bc9/ddc81/set-policy.png&quot;
+        srcset=&quot;/static/8eb26ebf210f9e4a278ce9a432ce7bc9/5a46d/set-policy.png 300w,
+/static/8eb26ebf210f9e4a278ce9a432ce7bc9/0a47e/set-policy.png 600w,
+/static/8eb26ebf210f9e4a278ce9a432ce7bc9/ddc81/set-policy.png 837w&quot;
+        sizes=&quot;(max-width: 837px) 100vw, 837px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;이후 생성된 람다에 코드 업로드한다. 코드는 &lt;a href=&quot;https://medium.com/daangn/lambda-edge%EB%A1%9C-%EA%B5%AC%ED%98%84%ED%95%98%EB%8A%94-on-the-fly-%EC%9D%B4%EB%AF%B8%EC%A7%80-%EB%A6%AC%EC%82%AC%EC%9D%B4%EC%A7%95-f4e5052d49f3&quot;&gt;AWS Lambda@Edge에서 실시간 이미지 리사이즈 &amp;#x26; WebP 형식으로 변환&lt;/a&gt;
+를 참고하여 구현하고 zip파일로 압축 후 업로드한다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 812px; &quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 36.333333333333336%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAHCAYAAAAIy204AAAACXBIWXMAAAsTAAALEwEAmpwYAAAA2UlEQVQoz5XRTW7CMBAFYJ+6t+qCm3RBq5RsGkQaxyEoJXEy47/HYIVFpSKopc9vNmNbY9U0DYriE2VZYppGBO/hHMP/4h5yzLDWQpELWFbk4yqs4tOu/Sw9qh4DPvSIXX3Etmrxvm9R1D12zQnbL50dfhjtnKBtEPFP31PAcZYDLTmczhaT5Lhwdp4pp4sACwrpMXmlk1TDMKCq9uj7HsYYmNZAa42u68BEeTb/WcrJJ7AMlaTxmreaiLEslOuU0l3xVscoGaGeufXeYbLBkgd1FabXF9DbBhcz6CBzqjHQjAAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;upload-code&quot;
+        title=&quot;upload-code&quot;
+        src=&quot;/static/4156216eefefc2712ad4f0d24616971f/63ec5/upload-code.png&quot;
+        srcset=&quot;/static/4156216eefefc2712ad4f0d24616971f/5a46d/upload-code.png 300w,
+/static/4156216eefefc2712ad4f0d24616971f/0a47e/upload-code.png 600w,
+/static/4156216eefefc2712ad4f0d24616971f/63ec5/upload-code.png 812w&quot;
+        sizes=&quot;(max-width: 812px) 100vw, 812px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;람다 함수 상단 메뉴 작업 / Lambda@edge 배포를 선택한다. 오리진 응답으로 설정하는 이유는
+클라이언트에서 들어온 요청이 CloudFront로 전달되고, 이 때 요청된 쿼리에 대한 콘텐츠가 캐싱되어 있지 않으면,
+S3로 Origin Request가 전달되고, S3에서 응답받은 이미지를 통해 전처리가 필요하기 때문에 Origin response로 설정한다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 810px; &quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 71.66666666666667%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAOCAYAAAAvxDzwAAAACXBIWXMAAAsTAAALEwEAmpwYAAABeklEQVQ4y6VTi06DQBDkt/0r458YbavWUqutRV53vK9AGXcOMK2hiY9LJsDd7ezO7uDsdu+YzRe4u59hvniAUgpN0+BwOPwcdW2feV7A0TpBEIRI0xSnq+s6HI/HX8PZ+ArL5xVWrovtdgdWrLVG27b4y3J8qc5111ivX+yTZHmeW9ljpZcWz77D2e89UHYmJIQZelILrOyJoHFvKqEThBF0kqIyBlVlUFYVirK0xK30hNJ79O/sE5Px/iRhLFONoliqK5Bm2RcomcHtBfBskpDBlKyUtqMnETFWM0VU01ZS5SThhx9g8/qGIBTr2D4WSMRClvRM8gDZG5NODUamHODxaYm954EDimPVB0mwBYPH94HUGvmkwjPCUgaQJIm1C/8Sfv9nOalIjHWKvChRFL1cLQn45zAJk/WDi+w+FRBKzrKT/ofiFk7f8XUO14sRCSkJaWpawlgbVXaPVRP8LgeM5/Y+7WZqaZVIxj+XaTo08Rbl9RXM7Q0+AZ02RHec2QQWAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;distribution-lambda&quot;
+        title=&quot;distribution-lambda&quot;
+        src=&quot;/static/fb945c5c14381aae0d1b9ff3f6836096/d7542/distribution-lambda.png&quot;
+        srcset=&quot;/static/fb945c5c14381aae0d1b9ff3f6836096/5a46d/distribution-lambda.png 300w,
+/static/fb945c5c14381aae0d1b9ff3f6836096/0a47e/distribution-lambda.png 600w,
+/static/fb945c5c14381aae0d1b9ff3f6836096/d7542/distribution-lambda.png 810w&quot;
+        sizes=&quot;(max-width: 810px) 100vw, 810px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;h2 id=&quot;테스트-클라이언트-구성&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%ED%85%8C%EC%8A%A4%ED%8A%B8-%ED%81%B4%EB%9D%BC%EC%9D%B4%EC%96%B8%ED%8A%B8-%EA%B5%AC%EC%84%B1&quot; aria-label=&quot;테스트 클라이언트 구성 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;테스트 클라이언트 구성&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/youthfulhps/image-ondemand-resizing&quot;&gt;image-ondemand-resizing&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&quot;reference&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#reference&quot; aria-label=&quot;reference permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Reference&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;https://velog.io/@hustle-dev/%EC%9B%B9-%EC%84%B1%EB%8A%A5%EC%9D%84-%EC%9C%84%ED%95%9C-%EC%9D%B4%EB%AF%B8%EC%A7%80-%EC%B5%9C%EC%A0%81%ED%99%94&quot;&gt;https://velog.io/@hustle-dev/웹-성능을-위한-이미지-최적화&lt;/a&gt;
+&lt;a href=&quot;https://heropy.blog/2019/06/16/html-img-srcset-and-sizes/&quot;&gt;https://heropy.blog/2019/06/16/html-img-srcset-and-sizes/&lt;/a&gt;
+&lt;a href=&quot;https://ko.wikipedia.org/wiki/WebP&quot;&gt;https://ko.wikipedia.org/wiki/WebP&lt;/a&gt;
+&lt;a href=&quot;https://web.dev/uses-responsive-images/&quot;&gt;https://web.dev/uses-responsive-images/&lt;/a&gt;
+&lt;a href=&quot;https://web.dev/serve-responsive-images/&quot;&gt;https://web.dev/serve-responsive-images/&lt;/a&gt;&lt;/p&gt;</content:encoded></item><item><title><![CDATA[사용자 경험 품질 향상을 위한 이미지 최적화]]></title><description><![CDATA[많은 이미지를 다루는 페이지의 경우, 이미지 최적화에 신경쓰지 않으면 사용자 경험 지표에서 많은 감점을 받기 쉽습니다.
 사용자 경험 지표를 측정해보면, 이미지 관련된 감점 요소들이 정말 많은데요. Properly size images Serve…]]></description><link>https://youthfulhps.dev/web/image-optimization/</link><guid isPermaLink="false">https://youthfulhps.dev/web/image-optimization/</guid><pubDate>Sun, 29 May 2022 16:05:05 GMT</pubDate><content:encoded>&lt;p&gt;많은 이미지를 다루는 페이지의 경우, 이미지 최적화에 신경쓰지 않으면 사용자 경험 지표에서 많은 감점을 받기 쉽습니다.
 사용자 경험 지표를 측정해보면, 이미지 관련된 감점 요소들이 정말 많은데요.&lt;/p&gt;
 &lt;ul&gt;
@@ -499,285 +747,7 @@ str&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=
 &lt;h2 id=&quot;reference&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#reference&quot; aria-label=&quot;reference permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Reference&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&quot;https://poiemaweb.com/js-prototype&quot;&gt;https://poiemaweb.com/js-prototype&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content:encoded></item><item><title><![CDATA[온디멘드 이미지 리사이징을 위한 인프라 구성]]></title><description><![CDATA[이러한 문제를 당근마켓에서는 AWS Lambda@Edge에서 실시간 이미지 리사이즈 & WebP 형식으로 변환 하는 방안을 착안하였고
-개선점에 대해서 공유해주셨는데요. 개선 방안에 대한 큰 그림을 이해해봅시다. Lambda@edge…]]></description><link>https://youthfulhps.dev/infra/image-optimization-with-cloudfront/</link><guid isPermaLink="false">https://youthfulhps.dev/infra/image-optimization-with-cloudfront/</guid><pubDate>Fri, 21 Jan 2022 14:05:04 GMT</pubDate><content:encoded>&lt;p&gt;이러한 문제를 당근마켓에서는 &lt;a href=&quot;https://medium.com/daangn/lambda-edge%EB%A1%9C-%EA%B5%AC%ED%98%84%ED%95%98%EB%8A%94-on-the-fly-%EC%9D%B4%EB%AF%B8%EC%A7%80-%EB%A6%AC%EC%82%AC%EC%9D%B4%EC%A7%95-f4e5052d49f3&quot;&gt;AWS Lambda@Edge에서 실시간 이미지 리사이즈 &amp;#x26; WebP 형식으로 변환&lt;/a&gt; 하는 방안을 착안하였고
-개선점에 대해서 공유해주셨는데요. 개선 방안에 대한 큰 그림을 이해해봅시다.&lt;/p&gt;
-&lt;h2 id=&quot;lambdaedge&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#lambdaedge&quot; aria-label=&quot;lambdaedge permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Lambda@edge&lt;/h2&gt;
-&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;Lambda@edge&lt;/code&gt;는 CloudFront에 전달된 이벤트를 트리거 삼아 람다 함수를 실행할 수 있는 기능입니다.
-그 이벤트로는 크게 네 가지가 존재합니다.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;./images/image-optimization-with-cloudfront/lambda.png&quot; alt=&quot;implement lambda edge&quot;&gt;&lt;/p&gt;
-&lt;p&gt;우선 유저로부터 전달된 요청이 어떻게 처리되는 지 흐름을 파악해봅시다.
-&lt;code class=&quot;language-text&quot;&gt;유저로부터 CloudFront로 요청 (뷰어 요청)&lt;/code&gt;이 전달됩니다. 이 때
-CloudFront에서는 요청에 대한 응답이 캐싱되어 있다면 캐싱된 컨텐츠를 반환하고,
-없다면 &lt;code class=&quot;language-text&quot;&gt;S3로 컨텐츠에 대한 요청 (오리진 요청)&lt;/code&gt;을 전달합니다.
-&lt;code class=&quot;language-text&quot;&gt;S3는 CloudFront로부터 전달받은 요청에 대해 응답 (오리진 응답)&lt;/code&gt;합니다.
-CloudFront는 S3로 부터 전달받은 컨텐츠를 캐싱하고, &lt;code class=&quot;language-text&quot;&gt;유저에게 컨텐츠를 응답 (뷰어 응답)&lt;/code&gt;합니다.&lt;/p&gt;
-&lt;p&gt;여기서, &lt;code class=&quot;language-text&quot;&gt;lambda@edge&lt;/code&gt;는 뷰어 요청과 응답, 오리진 요청과 응답의 미들웨어와 같은 기능을 하며
-응답과 요청을 가공할 수 있습니다.&lt;/p&gt;
-&lt;h2 id=&quot;온디멘드-이미지-리사이징&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EC%98%A8%EB%94%94%EB%A9%98%EB%93%9C-%EC%9D%B4%EB%AF%B8%EC%A7%80-%EB%A6%AC%EC%82%AC%EC%9D%B4%EC%A7%95&quot; aria-label=&quot;온디멘드 이미지 리사이징 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;온디멘드 이미지 리사이징&lt;/h2&gt;
-&lt;p&gt;이제 어떻게 실시간 이미지 요청에 대한 리사이징을 구현할 수 있을까요?
-결론부터 말씀드리면, 오리진 응답으로 전달받은 컨텐츠에 대해 &lt;code class=&quot;language-text&quot;&gt;lambda@edge&lt;/code&gt;를 통해
-리사이징, webp 포맷이 적용된 이미지를 CloudFront로 전달합니다.&lt;/p&gt;
-&lt;p&gt;유저로부터 이미지 컨텐츠에 대한 뷰어 요청이 CloudFront에 전달되었다고 생각해봅시다.
-CloudFront는 요청에 대한 캐싱되어 있는 컨텐츠 여부를 파악합니다. 만약, 캐싱되어 있다면
-빠르게 뷰어 응답으로 이미지 컨텐츠를 반환합니다. 반대로 캐싱되어 있는 컨텐츠가 없다면, S3로 오리진 요청을 보내
-이미지 컨텐츠를 오리진 응답으로 반환받습니다.&lt;/p&gt;
-&lt;p&gt;이 때 &lt;code class=&quot;language-text&quot;&gt;오리진 응답&lt;/code&gt;을 트리거로 하는 &lt;code class=&quot;language-text&quot;&gt;lambda@edge&lt;/code&gt; 를 통해 S3로 부터 전달받은 이미지를 리사이징하고,
-webp 이미지 포맷으로 변경하여 CloudFront에게 반환합니다. CloudFront는 이를 캐싱한 후에
-뷰어 응답으로 유저에게 이미지 컨텐츠를 반환합니다.&lt;/p&gt;
-&lt;p&gt;결과적으로, &lt;strong&gt;S3에 존재하는 이미지의 사이즈가 크고 webp 포맷이 아닐지라도, 유저는 리사이징된 webp 파일 확장자의
-이미지 컨텐츠를 반환받게 됩니다.&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;처음 뷰어 요청으로 지목된 이미지의 경우 이미지 리사이징 과정에서 약간의 시간이 소요되지만,
-이후 CloudFront에서 캐싱되어 빠르게 최적화된 이미지를 반환받을 수 있습니다.&lt;/p&gt;
-&lt;h2 id=&quot;마치면서&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EB%A7%88%EC%B9%98%EB%A9%B4%EC%84%9C&quot; aria-label=&quot;마치면서 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;마치면서&lt;/h2&gt;
-&lt;p&gt;통계적으로, 이미지는 웹 페이지에서 평균 68% 정도의 용량을 차지하는 컨텐츠입니다. 그 만큼
-웹 최적화와 사용자 경험 지표에 대해 많은 영향을 끼치는 부분인데요. 이미지 최적화는 다른 최적화 작업에 비해
-그 결과가 가시적이고 직관적이기 때문에 최적화 작업을 통해 감점 요소를 제거하는 경험을 해보시길 바랍니다.&lt;/p&gt;
-&lt;p&gt;온디멘드 이미지 리사이징에 대한 인프라 작업은 따로 포스팅할 예정입니다! 긴 글 읽어주셔서 감사합니다.&lt;/p&gt;
-&lt;h3 id=&quot;tldr&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#tldr&quot; aria-label=&quot;tldr permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;TL;DR&lt;/h3&gt;
-&lt;ol&gt;
-&lt;li&gt;S3 버킷을 생성하고 이미지를 업로드합니다.&lt;/li&gt;
-&lt;li&gt;CloudFront를 통해 S3 컨텐츠를 분배 배포합니다.&lt;/li&gt;
-&lt;li&gt;라시아징, webp 파일 형식 변환을 위한 노드 환경 람다 함수를 구현합니다.&lt;/li&gt;
-&lt;li&gt;버킷 접근 권한 및 역할을 담은 IAM을 정의하고 람다 함수에 부여합니다.&lt;/li&gt;
-&lt;li&gt;CloudFront의 오리진 응답 엣지에 람다 함수를 연동합니다.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h3 id=&quot;s3-샘플-이미지-업로드&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#s3-%EC%83%98%ED%94%8C-%EC%9D%B4%EB%AF%B8%EC%A7%80-%EC%97%85%EB%A1%9C%EB%93%9C&quot; aria-label=&quot;s3 샘플 이미지 업로드 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;S3, 샘플 이미지 업로드&lt;/h3&gt;
-&lt;p&gt;일반적으로 사용되는 S3 버킷을 생성하는 과정과 동일합니다. &lt;code class=&quot;language-text&quot;&gt;모든 퍼블릭 엑세스 차단이 비활성화&lt;/code&gt; 가 선택된
-버킷을 생성하고 샘플 이미지 객체를 업로드해주세요.&lt;/p&gt;
-&lt;p&gt;&lt;span
-      class=&quot;gatsby-resp-image-wrapper&quot;
-      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 1200px; &quot;
-    &gt;
-      &lt;span
-    class=&quot;gatsby-resp-image-background-image&quot;
-    style=&quot;padding-bottom: 38.33333333333333%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAICAYAAAD5nd/tAAAACXBIWXMAAAsTAAALEwEAmpwYAAABO0lEQVQoz5VRSXbDIBTz/e/Qy/QO7aJDbCdpGtsJmNEG7KqCDO910UUWeh/ERxKfqtkfsN3tULctscVu/4XhLKCNgdK61EdQ1fUGddNiU9fYNA3ePz7R0kQqxQZdRB9BJUfJhbkT2UUIgcxra/9Jwj59Mbxx5mpedX0P6xwJkhRQ1kPaCcrYO6fZaFmtdWVvnIeZU6n5TJM/aw/rJ1RCSozq4qSIkYIn7SDI3U146cS55uSH/gzRvGB8foLevsJOoQQSDGGnGZXhxk8eKUWESISAGEOpN0Ty83U9zQGzkZi/3xBYY1oQyS+8nzUqISSG0WL0oQimlApu6dZ15TxH9P1w4Yi0rFgApPWniExMNtMoj4WfotAMCnvp4HiQRWNMcEyex5DF85PzrI/HDseu42X2hfnPC5z3yOF+AbnoZN7grE7QAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
-  &gt;&lt;/span&gt;
-  &lt;img
-        class=&quot;gatsby-resp-image-image&quot;
-        alt=&quot;create s3 bucket&quot;
-        title=&quot;create s3 bucket&quot;
-        src=&quot;/static/886281b9a152864e2531ecdde013164a/c1b63/s3-bucket.png&quot;
-        srcset=&quot;/static/886281b9a152864e2531ecdde013164a/5a46d/s3-bucket.png 300w,
-/static/886281b9a152864e2531ecdde013164a/0a47e/s3-bucket.png 600w,
-/static/886281b9a152864e2531ecdde013164a/c1b63/s3-bucket.png 1200w,
-/static/886281b9a152864e2531ecdde013164a/9239a/s3-bucket.png 1246w&quot;
-        sizes=&quot;(max-width: 1200px) 100vw, 1200px&quot;
-        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
-        loading=&quot;lazy&quot;
-      /&gt;
-    &lt;/span&gt;&lt;/p&gt;
-&lt;h2 id=&quot;cloudfront-s3-컨텐츠-배포&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#cloudfront-s3-%EC%BB%A8%ED%85%90%EC%B8%A0-%EB%B0%B0%ED%8F%AC&quot; aria-label=&quot;cloudfront s3 컨텐츠 배포 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;CloudFront, S3 컨텐츠 배포&lt;/h2&gt;
-&lt;p&gt;CloudFront 배포를 생성합니다. 기본적으로 CloudFront는 쿼리 문자열을 무시하게 되는데,
-쿼리 문자열 파라미터 기반의 컨텐츠 캐싱이 가능하도록 &lt;code class=&quot;language-text&quot;&gt;캐시 키 및 원본 요청&lt;/code&gt;
-에서 &lt;code class=&quot;language-text&quot;&gt;Lagacy cache settings&lt;/code&gt; 를 선택하여 컨텐츠 캐싱에 사용할 &lt;code class=&quot;language-text&quot;&gt;쿼리 문자열을 설정&lt;/code&gt; 해줍니다.&lt;/p&gt;
-&lt;p&gt;쿼리 문자열은 이미지 변환에 대한 설정을 전달하기 위한 역할로서
-&lt;code class=&quot;language-text&quot;&gt;너비, 높이, 이미지 핏, webp 변환&lt;/code&gt; 에 대한 설정값을 담을 수 있습니다.&lt;/p&gt;
-&lt;p&gt;또한, &lt;code class=&quot;language-text&quot;&gt;쿼리 문자열 파라미터 기반의 컨텐츠 캐싱&lt;/code&gt; 이라는 특징에 따라, 동일한 쿼리 조합의 요청에 대한
-리사이징된 컨텐츠가 CloudFront에 캐싱되어 있다면, S3까지 오리진 요청이 전달되지 않고,
-CloudFront에서 뷰어 응답으로 빠르게 컨텐츠를 전달합니다.&lt;/p&gt;
-&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;https://...cloudfront/sample-image.jpg?w=500&amp;amp;h=300&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;span
-      class=&quot;gatsby-resp-image-wrapper&quot;
-      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 646px; &quot;
-    &gt;
-      &lt;span
-    class=&quot;gatsby-resp-image-background-image&quot;
-    style=&quot;padding-bottom: 82.66666666666667%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAARCAYAAADdRIy+AAAACXBIWXMAAAsTAAALEwEAmpwYAAABrElEQVQ4y5VUaXeCMBDk//82X1/bD7ZVoJcWLwhHuNHtzkJ4YMVqfGMgWYaZ3Q3WfP5Cr28Lms0e6PHpmTxvQ8fjkaqqYtSCsmyvS15rmoYwTqeT4HxYB98nP1C02+1pf2ivtU4py3JKEk1RFFMYRpTw2sEPeNbXCfM8pziO+eGEibQ8rMKQ55CUUv19EASUZllPNjWsxZdHjm3T0nZosbQFAatUqiUNo0juQYiXD9WdQwiTNOMclVdtDMel/RFh+3ZFUZwI4gTQkyqmlBliC5a8zZbz0xYBydesuq5rqrmi/4LjEI/OEIUZisKqTDv0b+MfgpobgHbqLfvcCrbjkvvxyUkvxLbfpQCEd1tOWe73asVYk+O+C3SaUlGUt9nmGKSptwy5IG1PBoMDzEDQFIaWQdpbxiZOCVThiCGnOCUgv3eIZfyhKKg28qZCzLGcClHCtkbo1vKikOaHCKOuJyx4E4pGlvgh2J8C0rTZ7qSQw+YWQmwiwbiWQhhMFKKS3kvpx9sK4R+FaOjV2pOvjbEgSjFfQueg7lIwIkQADj0+TfhU1YMq31MMQ/oL16kym/3742QAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
-  &gt;&lt;/span&gt;
-  &lt;img
-        class=&quot;gatsby-resp-image-image&quot;
-        alt=&quot;cloudFront&quot;
-        title=&quot;cloudFront&quot;
-        src=&quot;/static/bb8a52f68069f6b1bb7de64e65c6a92a/27524/cloudFront.png&quot;
-        srcset=&quot;/static/bb8a52f68069f6b1bb7de64e65c6a92a/5a46d/cloudFront.png 300w,
-/static/bb8a52f68069f6b1bb7de64e65c6a92a/0a47e/cloudFront.png 600w,
-/static/bb8a52f68069f6b1bb7de64e65c6a92a/27524/cloudFront.png 646w&quot;
-        sizes=&quot;(max-width: 646px) 100vw, 646px&quot;
-        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
-        loading=&quot;lazy&quot;
-      /&gt;
-    &lt;/span&gt;&lt;/p&gt;
-&lt;h2 id=&quot;람다-함수에-부여할-iam-역할-생성&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EB%9E%8C%EB%8B%A4-%ED%95%A8%EC%88%98%EC%97%90-%EB%B6%80%EC%97%AC%ED%95%A0-iam-%EC%97%AD%ED%95%A0-%EC%83%9D%EC%84%B1&quot; aria-label=&quot;람다 함수에 부여할 iam 역할 생성 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;람다 함수에 부여할 IAM 역할 생성&lt;/h2&gt;
-&lt;p&gt;람다 함수에 권한을 부여해야 한다. &lt;strong&gt;IAM 콘솔에서 역할을 생성&lt;/strong&gt;한다. AWS 서비스 / Lambda를 선택하고 다음 단계로 넘어간다.&lt;/p&gt;
-&lt;p&gt;&lt;span
-      class=&quot;gatsby-resp-image-wrapper&quot;
-      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 981px; &quot;
-    &gt;
-      &lt;span
-    class=&quot;gatsby-resp-image-background-image&quot;
-    style=&quot;padding-bottom: 42.33333333333334%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAICAYAAAD5nd/tAAAACXBIWXMAAAsTAAALEwEAmpwYAAABIElEQVQoz41S7W6EIBD0/R+qfYm296+5qoUCiiLKh1/ThTsvl0vTdpMJiM7s7EgxDAM4Y+g6De8dYgjwzmHbNtzXvu8Zxz5V2Tg8vTa02xDnGcuyoDAkKGQDpXtwoTKaps0vE3El4XVdb4Kp0XY9u7a6PScULyzg+aTxdpY46wWfFlCdhZQCjJw7N2Ua5xxlWSLQBDHG3LCua1RVBSFEPsuCH2rEqTYoRY933qFUFoxcto2CGSz6kSKIC6ZpykjEJJoErbXU0GGmcQ+XxWgNWiXJAcM0jpTfhZg+dD5gDCvCvOKxjhzv803IGUqlEKjzz7Vfcroj/YaCqR6t7miUkEfx3uf1yOrRwZ+CX5oykx3sYJDcpmtkjMlrwvE3/yv4DVBfbnoVbMAfAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
-  &gt;&lt;/span&gt;
-  &lt;img
-        class=&quot;gatsby-resp-image-image&quot;
-        alt=&quot;create-iam&quot;
-        title=&quot;create-iam&quot;
-        src=&quot;/static/a30b87eaf5e4a000e4fe0cb332379170/1c3a5/create-iam.png&quot;
-        srcset=&quot;/static/a30b87eaf5e4a000e4fe0cb332379170/5a46d/create-iam.png 300w,
-/static/a30b87eaf5e4a000e4fe0cb332379170/0a47e/create-iam.png 600w,
-/static/a30b87eaf5e4a000e4fe0cb332379170/1c3a5/create-iam.png 981w&quot;
-        sizes=&quot;(max-width: 981px) 100vw, 981px&quot;
-        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
-        loading=&quot;lazy&quot;
-      /&gt;
-    &lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;다음 단계에서, &lt;strong&gt;정책 생성&lt;/strong&gt;을 클릭하고, JSON 편집을 통해 아래와 같은 정책을 부여한다.&lt;/p&gt;
-&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;json&quot;&gt;&lt;pre class=&quot;language-json&quot;&gt;&lt;code class=&quot;language-json&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;token property&quot;&gt;&quot;Version&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;2012-10-17&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
-  &lt;span class=&quot;token property&quot;&gt;&quot;Statement&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;
-    &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
-      &lt;span class=&quot;token property&quot;&gt;&quot;Sid&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;VisualEditor0&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
-      &lt;span class=&quot;token property&quot;&gt;&quot;Effect&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;Allow&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
-      &lt;span class=&quot;token property&quot;&gt;&quot;Action&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;
-        &lt;span class=&quot;token string&quot;&gt;&quot;iam:CreateServiceLinkedRole&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
-        &lt;span class=&quot;token string&quot;&gt;&quot;lambda:GetFunction&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
-        &lt;span class=&quot;token string&quot;&gt;&quot;lambda:EnableReplication&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
-        &lt;span class=&quot;token string&quot;&gt;&quot;cloudfront:UpdateDistribution&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
-        &lt;span class=&quot;token string&quot;&gt;&quot;s3:GetObject&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
-        &lt;span class=&quot;token string&quot;&gt;&quot;logs:CreateLogGroup&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
-        &lt;span class=&quot;token string&quot;&gt;&quot;logs:CreateLogStream&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
-        &lt;span class=&quot;token string&quot;&gt;&quot;logs:PutLogEvents&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
-        &lt;span class=&quot;token string&quot;&gt;&quot;logs:DescribeLogStreams&quot;&lt;/span&gt;
-      &lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
-      &lt;span class=&quot;token property&quot;&gt;&quot;Resource&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;*&quot;&lt;/span&gt;
-    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
-  &lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;
-&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;정책 이름을 설정하고, 정책 생성을 완료한다. 완료 후 다시 IAM 역할 생성으로로 돌아가, &lt;strong&gt;생성한 정책을 연결&lt;/strong&gt;한다.&lt;/p&gt;
-&lt;p&gt;&lt;span
-      class=&quot;gatsby-resp-image-wrapper&quot;
-      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 985px; &quot;
-    &gt;
-      &lt;span
-    class=&quot;gatsby-resp-image-background-image&quot;
-    style=&quot;padding-bottom: 24%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAFCAYAAABFA8wzAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAjElEQVQY052OWw6CMBQFu3cX5Fr8M8FHgoW0hZZWgsW+jnJlAWCTyeT+TA8bbQ+lOjjniLZtMQwDpJR0L6+UshnGRYcHbyCEoMgS5JxTNISAnDNSSuQtsMPxglP9/O7IeK+BGCP9tncdLTxXd1TXG7TW0MaQzWrd6593wPxrQqMsamnhxgnz7OH9/3wAx1KCC2XdC/gAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
-  &gt;&lt;/span&gt;
-  &lt;img
-        class=&quot;gatsby-resp-image-image&quot;
-        alt=&quot;connect-policy&quot;
-        title=&quot;connect-policy&quot;
-        src=&quot;/static/f6d8a8940e62c5211434002e7fe55792/58bb7/connect-policy.png&quot;
-        srcset=&quot;/static/f6d8a8940e62c5211434002e7fe55792/5a46d/connect-policy.png 300w,
-/static/f6d8a8940e62c5211434002e7fe55792/0a47e/connect-policy.png 600w,
-/static/f6d8a8940e62c5211434002e7fe55792/58bb7/connect-policy.png 985w&quot;
-        sizes=&quot;(max-width: 985px) 100vw, 985px&quot;
-        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
-        loading=&quot;lazy&quot;
-      /&gt;
-    &lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;역할에 신뢰관계를 추가한다. &lt;strong&gt;역할 / 신뢰 관계/ 신뢰 관계 편집&lt;/strong&gt;을 선택하고, JSON을 편집한다.&lt;/p&gt;
-&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;json&quot;&gt;&lt;pre class=&quot;language-json&quot;&gt;&lt;code class=&quot;language-json&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;token property&quot;&gt;&quot;Version&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;2012-10-17&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
-  &lt;span class=&quot;token property&quot;&gt;&quot;Statement&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;
-    &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
-      &lt;span class=&quot;token property&quot;&gt;&quot;Effect&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;Allow&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
-      &lt;span class=&quot;token property&quot;&gt;&quot;Principal&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;token property&quot;&gt;&quot;Service&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;edgelambda.amazonaws.com&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;lambda.amazonaws.com&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;
-      &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
-      &lt;span class=&quot;token property&quot;&gt;&quot;Action&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;sts:AssumeRole&quot;&lt;/span&gt;
-    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
-  &lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;
-&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h2 id=&quot;온디멘드-이미지-webp-파일-형식-변환을-위한-lambda-함수-생성-w-sharpjs&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EC%98%A8%EB%94%94%EB%A9%98%EB%93%9C-%EC%9D%B4%EB%AF%B8%EC%A7%80-webp-%ED%8C%8C%EC%9D%BC-%ED%98%95%EC%8B%9D-%EB%B3%80%ED%99%98%EC%9D%84-%EC%9C%84%ED%95%9C-lambda-%ED%95%A8%EC%88%98-%EC%83%9D%EC%84%B1-w-sharpjs&quot; aria-label=&quot;온디멘드 이미지 webp 파일 형식 변환을 위한 lambda 함수 생성 w sharpjs permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;온디멘드 이미지, WebP 파일 형식 변환을 위한 Lambda 함수 생성 (w/ sharp.js)&lt;/h2&gt;
-&lt;p&gt;람다 함수를 생성할 때, 람다 트리거를 CloudFront로 설정하기 위해 지역은 &lt;strong&gt;버지니아 북부&lt;/strong&gt;로 설정하여 생성한다.&lt;/p&gt;
-&lt;p&gt;&lt;span
-      class=&quot;gatsby-resp-image-wrapper&quot;
-      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 978px; &quot;
-    &gt;
-      &lt;span
-    class=&quot;gatsby-resp-image-background-image&quot;
-    style=&quot;padding-bottom: 51%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAACXBIWXMAAAsTAAALEwEAmpwYAAAA40lEQVQoz6VS2Y6DMAzM///klq2qSrAkQE4SYNY20FZ9KW0tjZxL4/HEqmka1HWNaSoopSDn/BWUMR1M19GmIMZExBOWZcE8zx9BtVrj51Sh+j0LBmtRiJQvpw23NZ2/gur7Abq38CHAOQ9rHcZxlPb3R6ye85EghQbXukGIUZCIjLPzQYrshfjsiErykAn/ENMoymJKlLP4uINDfD0AdW07VOcLKctCmDZCbETvhuJP4Pae41HhEdwIeWTM4FYPQ7z75r0U4mydk8xjxX6ud3dwVzux4mFsWw1Nn8Pj8a6yZ/wDNRURG9YxeiMAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
-  &gt;&lt;/span&gt;
-  &lt;img
-        class=&quot;gatsby-resp-image-image&quot;
-        alt=&quot;create-lambda&quot;
-        title=&quot;create-lambda&quot;
-        src=&quot;/static/57e65d67c8b4ae261a794e50e8bb41a8/914c7/create-lambda.png&quot;
-        srcset=&quot;/static/57e65d67c8b4ae261a794e50e8bb41a8/5a46d/create-lambda.png 300w,
-/static/57e65d67c8b4ae261a794e50e8bb41a8/0a47e/create-lambda.png 600w,
-/static/57e65d67c8b4ae261a794e50e8bb41a8/914c7/create-lambda.png 978w&quot;
-        sizes=&quot;(max-width: 978px) 100vw, 978px&quot;
-        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
-        loading=&quot;lazy&quot;
-      /&gt;
-    &lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;권한 설정에서 기존에 생성한 역할을 설정한다.&lt;/p&gt;
-&lt;p&gt;&lt;span
-      class=&quot;gatsby-resp-image-wrapper&quot;
-      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 837px; &quot;
-    &gt;
-      &lt;span
-    class=&quot;gatsby-resp-image-background-image&quot;
-    style=&quot;padding-bottom: 26.666666666666668%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAFCAYAAABFA8wzAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAqElEQVQY042OyQrDMAxE/f/fmEJr6maxnX3xPpVd6KWQ9PBAMNLTMKU1VN9D1DWk0uBPgabroGqOpm1olqjbFv0wYJpnjNN0CtMky8vLun7Jh52U9ED9ZFeQcCxm5xystQVjDPbjQFXdwB8cIQR4yt0fMNUIHMbSkYfzHp7I0m3fqenyyWKC8QExJaQLmBJ32LwcQ2kSYizSLBTDime/4TXmeS8PS9sT3gNQgjcfQD13AAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
-  &gt;&lt;/span&gt;
-  &lt;img
-        class=&quot;gatsby-resp-image-image&quot;
-        alt=&quot;set-policy&quot;
-        title=&quot;set-policy&quot;
-        src=&quot;/static/8eb26ebf210f9e4a278ce9a432ce7bc9/ddc81/set-policy.png&quot;
-        srcset=&quot;/static/8eb26ebf210f9e4a278ce9a432ce7bc9/5a46d/set-policy.png 300w,
-/static/8eb26ebf210f9e4a278ce9a432ce7bc9/0a47e/set-policy.png 600w,
-/static/8eb26ebf210f9e4a278ce9a432ce7bc9/ddc81/set-policy.png 837w&quot;
-        sizes=&quot;(max-width: 837px) 100vw, 837px&quot;
-        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
-        loading=&quot;lazy&quot;
-      /&gt;
-    &lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;이후 생성된 람다에 코드 업로드한다. 코드는 &lt;a href=&quot;https://medium.com/daangn/lambda-edge%EB%A1%9C-%EA%B5%AC%ED%98%84%ED%95%98%EB%8A%94-on-the-fly-%EC%9D%B4%EB%AF%B8%EC%A7%80-%EB%A6%AC%EC%82%AC%EC%9D%B4%EC%A7%95-f4e5052d49f3&quot;&gt;AWS Lambda@Edge에서 실시간 이미지 리사이즈 &amp;#x26; WebP 형식으로 변환&lt;/a&gt;
-를 참고하여 구현하고 zip파일로 압축 후 업로드한다.&lt;/p&gt;
-&lt;p&gt;&lt;span
-      class=&quot;gatsby-resp-image-wrapper&quot;
-      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 812px; &quot;
-    &gt;
-      &lt;span
-    class=&quot;gatsby-resp-image-background-image&quot;
-    style=&quot;padding-bottom: 36.333333333333336%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAHCAYAAAAIy204AAAACXBIWXMAAAsTAAALEwEAmpwYAAAA2UlEQVQoz5XRTW7CMBAFYJ+6t+qCm3RBq5RsGkQaxyEoJXEy47/HYIVFpSKopc9vNmNbY9U0DYriE2VZYppGBO/hHMP/4h5yzLDWQpELWFbk4yqs4tOu/Sw9qh4DPvSIXX3Etmrxvm9R1D12zQnbL50dfhjtnKBtEPFP31PAcZYDLTmczhaT5Lhwdp4pp4sACwrpMXmlk1TDMKCq9uj7HsYYmNZAa42u68BEeTb/WcrJJ7AMlaTxmreaiLEslOuU0l3xVscoGaGeufXeYbLBkgd1FabXF9DbBhcz6CBzqjHQjAAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
-  &gt;&lt;/span&gt;
-  &lt;img
-        class=&quot;gatsby-resp-image-image&quot;
-        alt=&quot;upload-code&quot;
-        title=&quot;upload-code&quot;
-        src=&quot;/static/4156216eefefc2712ad4f0d24616971f/63ec5/upload-code.png&quot;
-        srcset=&quot;/static/4156216eefefc2712ad4f0d24616971f/5a46d/upload-code.png 300w,
-/static/4156216eefefc2712ad4f0d24616971f/0a47e/upload-code.png 600w,
-/static/4156216eefefc2712ad4f0d24616971f/63ec5/upload-code.png 812w&quot;
-        sizes=&quot;(max-width: 812px) 100vw, 812px&quot;
-        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
-        loading=&quot;lazy&quot;
-      /&gt;
-    &lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;람다 함수 상단 메뉴 작업 / Lambda@edge 배포를 선택한다. 오리진 응답으로 설정하는 이유는
-클라이언트에서 들어온 요청이 CloudFront로 전달되고, 이 때 요청된 쿼리에 대한 콘텐츠가 캐싱되어 있지 않으면,
-S3로 Origin Request가 전달되고, S3에서 응답받은 이미지를 통해 전처리가 필요하기 때문에 Origin response로 설정한다.&lt;/p&gt;
-&lt;p&gt;&lt;span
-      class=&quot;gatsby-resp-image-wrapper&quot;
-      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 810px; &quot;
-    &gt;
-      &lt;span
-    class=&quot;gatsby-resp-image-background-image&quot;
-    style=&quot;padding-bottom: 71.66666666666667%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAOCAYAAAAvxDzwAAAACXBIWXMAAAsTAAALEwEAmpwYAAABeklEQVQ4y6VTi06DQBDkt/0r458YbavWUqutRV53vK9AGXcOMK2hiY9LJsDd7ezO7uDsdu+YzRe4u59hvniAUgpN0+BwOPwcdW2feV7A0TpBEIRI0xSnq+s6HI/HX8PZ+ArL5xVWrovtdgdWrLVG27b4y3J8qc5111ivX+yTZHmeW9ljpZcWz77D2e89UHYmJIQZelILrOyJoHFvKqEThBF0kqIyBlVlUFYVirK0xK30hNJ79O/sE5Px/iRhLFONoliqK5Bm2RcomcHtBfBskpDBlKyUtqMnETFWM0VU01ZS5SThhx9g8/qGIBTr2D4WSMRClvRM8gDZG5NODUamHODxaYm954EDimPVB0mwBYPH94HUGvmkwjPCUgaQJIm1C/8Sfv9nOalIjHWKvChRFL1cLQn45zAJk/WDi+w+FRBKzrKT/ofiFk7f8XUO14sRCSkJaWpawlgbVXaPVRP8LgeM5/Y+7WZqaZVIxj+XaTo08Rbl9RXM7Q0+AZ02RHec2QQWAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
-  &gt;&lt;/span&gt;
-  &lt;img
-        class=&quot;gatsby-resp-image-image&quot;
-        alt=&quot;distribution-lambda&quot;
-        title=&quot;distribution-lambda&quot;
-        src=&quot;/static/fb945c5c14381aae0d1b9ff3f6836096/d7542/distribution-lambda.png&quot;
-        srcset=&quot;/static/fb945c5c14381aae0d1b9ff3f6836096/5a46d/distribution-lambda.png 300w,
-/static/fb945c5c14381aae0d1b9ff3f6836096/0a47e/distribution-lambda.png 600w,
-/static/fb945c5c14381aae0d1b9ff3f6836096/d7542/distribution-lambda.png 810w&quot;
-        sizes=&quot;(max-width: 810px) 100vw, 810px&quot;
-        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
-        loading=&quot;lazy&quot;
-      /&gt;
-    &lt;/span&gt;&lt;/p&gt;
-&lt;h2 id=&quot;테스트-클라이언트-구성&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%ED%85%8C%EC%8A%A4%ED%8A%B8-%ED%81%B4%EB%9D%BC%EC%9D%B4%EC%96%B8%ED%8A%B8-%EA%B5%AC%EC%84%B1&quot; aria-label=&quot;테스트 클라이언트 구성 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;테스트 클라이언트 구성&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&quot;https://github.com/youthfulhps/image-ondemand-resizing&quot;&gt;image-ondemand-resizing&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id=&quot;reference&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#reference&quot; aria-label=&quot;reference permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Reference&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&quot;https://velog.io/@hustle-dev/%EC%9B%B9-%EC%84%B1%EB%8A%A5%EC%9D%84-%EC%9C%84%ED%95%9C-%EC%9D%B4%EB%AF%B8%EC%A7%80-%EC%B5%9C%EC%A0%81%ED%99%94&quot;&gt;https://velog.io/@hustle-dev/웹-성능을-위한-이미지-최적화&lt;/a&gt;
-&lt;a href=&quot;https://heropy.blog/2019/06/16/html-img-srcset-and-sizes/&quot;&gt;https://heropy.blog/2019/06/16/html-img-srcset-and-sizes/&lt;/a&gt;
-&lt;a href=&quot;https://ko.wikipedia.org/wiki/WebP&quot;&gt;https://ko.wikipedia.org/wiki/WebP&lt;/a&gt;
-&lt;a href=&quot;https://web.dev/uses-responsive-images/&quot;&gt;https://web.dev/uses-responsive-images/&lt;/a&gt;
-&lt;a href=&quot;https://web.dev/serve-responsive-images/&quot;&gt;https://web.dev/serve-responsive-images/&lt;/a&gt;&lt;/p&gt;</content:encoded></item><item><title><![CDATA[Incremental Static Regeneration 타임라인 이해하기]]></title><description><![CDATA[최근 CRA…]]></description><link>https://youthfulhps.dev/nextjs/next-isr/</link><guid isPermaLink="false">https://youthfulhps.dev/nextjs/next-isr/</guid><pubDate>Sat, 08 Jan 2022 21:06:16 GMT</pubDate><content:encoded>&lt;p&gt;최근 CRA 프로젝트를 넥스트로 이관하는 작업이 한창입니다. 넥스트는 서버 사이드 랜더링과 동시에 클라이언트 사이드 랜더링을
+&lt;/ul&gt;</content:encoded></item><item><title><![CDATA[Incremental Static Regeneration 타임라인 이해하기]]></title><description><![CDATA[최근 CRA…]]></description><link>https://youthfulhps.dev/nextjs/next-isr/</link><guid isPermaLink="false">https://youthfulhps.dev/nextjs/next-isr/</guid><pubDate>Sat, 08 Jan 2022 21:06:16 GMT</pubDate><content:encoded>&lt;p&gt;최근 CRA 프로젝트를 넥스트로 이관하는 작업이 한창입니다. 넥스트는 서버 사이드 랜더링과 동시에 클라이언트 사이드 랜더링을
 동시에 지원하기 때문에 점진적 이관이 가능했죠. 단순히 빌드가 실패되는 문제들을 제외하면요.&lt;/p&gt;
 &lt;p&gt;이후 적절한 &lt;code class=&quot;language-text&quot;&gt;getStaticProps&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;getStaticPaths&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;getServerSideProps&lt;/code&gt; 를 통해 서버 사이드에서 데이터 패칭이
 이루어질 수 있도록 작업했습니다.&lt;/p&gt;
