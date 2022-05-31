@@ -3,11 +3,12 @@ title: 온디멘드 이미지 리사이징을 위한 인프라 구성
 date: 2022-05-31 14:05:04
 category: infra
 thumbnail: ../../../public/banner.png
-draft: true
+draft: false
 ---
 
-[사용자 경험 품질 향상을 위한 이미지 최적화](https://youthfulhps.dev/web/image-optimization/)에서 온디멘드 이미지 리사이징 
+[사용자 경험 품질 향상을 위한 이미지 최적화](https://youthfulhps.dev/web/image-optimization/)에서 온디멘드 이미지 리사이징
 에 대한 이야기를 공유해드렸습니다. 이번 글에서는 CloudFront에서 `lambda@edge` 를 통해 직접 구현해본 과정을 정리해보려 합니다.
+
 ## TL;DR
 
 1. S3 버킷을 생성하고 이미지를 업로드합니다.
@@ -44,13 +45,13 @@ https://...cloudfront/sample-image.jpg?w=500&h=300
 
 ## 람다 함수에 부여할 IAM 역할 생성
 
-람다 함수에 권한을 부여해야 합니다. 
-
-람다 함수에 권한을 부여해야 한다. **IAM 콘솔에서 역할을 생성**한다. AWS 서비스 / Lambda를 선택하고 다음 단계로 넘어간다.
+람다 함수에서 우리를 대신해 S3 객체에 접근할 수 있도록 `s3:GetObject` 와 같은 권한을 부여해주어야 합니다.
+`IAM 콘솔` 로 접근하여 역할을 생성, `AWS 서비스 / Lambda` 를 선택하고 단계를 넘어갑니다.
 
 ![create-iam](./images/image-optimization-with-cloudfront/create-iam.png)
 
-다음 단계에서, **정책 생성**을 클릭하고, JSON 편집을 통해 아래와 같은 정책을 부여한다.
+다음 단계에서는 `정책 생성` 을 통해 JSON 편집을 통해 권한을 편집합니다.
+아래와 동일하게 작성하셔도 무방합니다.
 
 ```json
 {
@@ -76,11 +77,12 @@ https://...cloudfront/sample-image.jpg?w=500&h=300
 }
 ```
 
-정책 이름을 설정하고, 정책 생성을 완료한다. 완료 후 다시 IAM 역할 생성으로로 돌아가, **생성한 정책을 연결**한다.
+`정책 이름` 을 설정하고, `정책 생성` 을 완료했다면, `IAM` 탭으로 돌아가
+람다 함수에게 실행 역할 즉, AWS 서비스 및 리소스에 접근할 수 있는 엑세스 권한을 `정책 연결`을 통해 제공합니다.
 
 ![connect-policy](./images/image-optimization-with-cloudfront/connect-policy.png)
 
-역할에 신뢰관계를 추가한다. **역할 / 신뢰 관계/ 신뢰 관계 편집**을 선택하고, JSON을 편집한다.
+`역할 / 신뢰 관계 / 신례 관계 편집` 을 선택하여 마찬가지로 JSON 편집을 통해 역할에 신뢰 관계를 추가합니다.
 
 ```json
 {
@@ -96,35 +98,59 @@ https://...cloudfront/sample-image.jpg?w=500&h=300
   ]
 }
 ```
+
 ## 온디멘드 이미지, WebP 파일 형식 변환을 위한 Lambda 함수 생성 (w/ sharp.js)
 
-람다 함수를 생성합니다. 이때, 람다 트리거를 CloudFront로 설정할 수 있는 지역은 
+람다 함수를 생성합니다. 이때, 람다 트리거를 CloudFront로 설정할 수 있는 지역은
 `버지니아 북부` 만 가능하기 때문에 지역을 변경하고 람다 함수를 생성해주세요.
 
 ![create-lambda](./images/image-optimization-with-cloudfront/create-lambda.png)
 
-권한 설정에서 기존에 생성한 역할을 설정한다.
+`권한 / 구성` 탭에서 생성한 IAM 역할을 설정합니다.
 
 ![set-policy](./images/image-optimization-with-cloudfront/set-policy.png)
 
-이후 생성된 람다에 코드 업로드한다. 코드는 [AWS Lambda@Edge에서 실시간 이미지 리사이즈 & WebP 형식으로 변환](https://medium.com/daangn/lambda-edge%EB%A1%9C-%EA%B5%AC%ED%98%84%ED%95%98%EB%8A%94-on-the-fly-%EC%9D%B4%EB%AF%B8%EC%A7%80-%EB%A6%AC%EC%82%AC%EC%9D%B4%EC%A7%95-f4e5052d49f3)
-를 참고하여 구현하고 zip파일로 압축 후 업로드한다.
+이제, 람다 함수 대시보드로 이동하여 이미지 리사이징, webp 포맷팅 적용을 위한 코드를 업로드합니다.
+코드는 [AWS Lambda@Edge에서 실시간 이미지 리사이즈 & WebP 형식으로 변환](https://medium.com/daangn/lambda-edge%EB%A1%9C-%EA%B5%AC%ED%98%84%ED%95%98%EB%8A%94-on-the-fly-%EC%9D%B4%EB%AF%B8%EC%A7%80-%EB%A6%AC%EC%82%AC%EC%9D%B4%EC%A7%95-f4e5052d49f3)를 참고하고 약간의 수정을 더하여 작성하였는데, 위 글에서도 잘 정리되어 있지만, 구현하면서 짚고 넘어가야 될 부분들이 몇 가지 있었는데요.
+
+**노드 환경에서 동작하는 람다 머신이 별도로 가지고 있지 않은 모듈은 직접 `node_modules` 폴더를 함께 압축하여 제공해주어야 했습니다.** 의존성 해결을 위한 별도의 설치 과정이 포함되어 있지 않습니다.
+`querystring`, `aws-sdk` 를 포함한 몇 가지 모듈들은 이미 의존성이 해결되어 있습니다.
+
+```js
+// Dependencies resolved
+
+const querystring = require('querystring')
+const AWS = require('aws-sdk')
+```
+
+**람다 함수에서 바디를 조작했다면, 그 결과가 1MB 이하여야 했습니다.** 만약 1MB 보다 크다면, 이미지의 퀄리티를 단계적으로 낮추는 방법으로 접근했습니다.
+
+```js
+const MEGABYTE = 1046528
+const byteLength = Buffer.byteLength(resizedImage, 'base64')
+
+if (byteLength > MEGABYTE) {
+  resizedImage.toFormat(requiredFormat, { quality: 90 })
+}
+```
+
+**퀄리티 저하의 한계점을 넘어가거나, 타임 아웃이 되면 원본을 반환했습니다.**
+1MB 제약을 지키기 위해서 변환 과정이 너무 오래 걸리거나, 이미지 퀄리티가
+너무 저하되는 경우 원본을 반환하도록 했습니다.
+
+이제 비즈니스에 맞게 코드를 수정하고, `node_modules` 와 함께 압축된 코드 업로드를 마치셨다면,
+람다 함수 상단 메뉴 `작업 / Lambda@edge 배포` 를 선택합니다.
 
 ![upload-code](./images/image-optimization-with-cloudfront/upload-code.png)
 
-람다 함수 상단 메뉴 작업 / Lambda@edge 배포를 선택한다. 오리진 응답으로 설정하는 이유는
-클라이언트에서 들어온 요청이 CloudFront로 전달되고, 이 때 요청된 쿼리에 대한 콘텐츠가 캐싱되어 있지 않으면,
-S3로 Origin Request가 전달되고, S3에서 응답받은 이미지를 통해 전처리가 필요하기 때문에 Origin response로 설정한다.
+CloudFront 이벤트는 [사용자 경험 품질 향상을 위한 이미지 최적화](https://youthfulhps.dev/web/image-optimization/#lambdaedge)에 기반하여 `오리진 응답` 을 설정합니다. 이제, 람다 함수를 `배포` 합니다.
 
 ![distribution-lambda](./images/image-optimization-with-cloudfront/distribution-lambda.png)
-## 테스트 클라이언트 구성
 
-[image-ondemand-resizing](https://github.com/youthfulhps/image-ondemand-resizing)
+## 마치면서
+
+단순히 코드 레벨과 물리적인 대응 방안을 고민하는 단계에서 더 넓은 접근 방식을 배울 수 있었던 좋은 경험이었습니다. 이미지 리사이징, webp 포맷팅이 잘 적용되는 지 확인해보실 수 있는 간단한 [프로젝트](https://github.com/youthfulhps/image-ondemand-resizing)를 구성해두었으니 경험해보실 수 있습니다.
 
 ## Reference
 
-https://velog.io/@hustle-dev/웹-성능을-위한-이미지-최적화
-https://heropy.blog/2019/06/16/html-img-srcset-and-sizes/
-https://ko.wikipedia.org/wiki/WebP
-https://web.dev/uses-responsive-images/
-https://web.dev/serve-responsive-images/
+https://medium.com/daangn/lambda-edge로-구현하는-on-the-fly-이미지-리사이징-f4e5052d49f3
