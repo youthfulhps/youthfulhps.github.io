@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Youthfulhps.dev]]></title><description><![CDATA[Blog posted front-end, troubleshooting!]]></description><link>https://youthfulhps.dev</link><generator>GatsbyJS</generator><lastBuildDate>Tue, 31 May 2022 09:53:27 GMT</lastBuildDate><item><title><![CDATA[온디멘드 이미지 리사이징을 위한 인프라 구성]]></title><description><![CDATA[사용자 경험 품질 향상을 위한 이미지 최적화에서 온디멘드 이미지 리사이징 
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Youthfulhps.dev]]></title><description><![CDATA[Blog posted front-end, troubleshooting!]]></description><link>https://youthfulhps.dev</link><generator>GatsbyJS</generator><lastBuildDate>Tue, 31 May 2022 16:25:00 GMT</lastBuildDate><item><title><![CDATA[온디멘드 이미지 리사이징을 위한 인프라 구성]]></title><description><![CDATA[사용자 경험 품질 향상을 위한 이미지 최적화에서 온디멘드 이미지 리사이징
 에 대한 이야기를 공유해드렸습니다. 이번 글에서는 CloudFront에서  를 통해 직접 구현해본 과정을 정리해보려 합니다. TL;DR S…]]></description><link>https://youthfulhps.dev/infra/image-optimization-with-cloudfront/</link><guid isPermaLink="false">https://youthfulhps.dev/infra/image-optimization-with-cloudfront/</guid><pubDate>Tue, 31 May 2022 14:05:04 GMT</pubDate><content:encoded>&lt;p&gt;&lt;a href=&quot;https://youthfulhps.dev/web/image-optimization/&quot;&gt;사용자 경험 품질 향상을 위한 이미지 최적화&lt;/a&gt;에서 온디멘드 이미지 리사이징
 에 대한 이야기를 공유해드렸습니다. 이번 글에서는 CloudFront에서 &lt;code class=&quot;language-text&quot;&gt;lambda@edge&lt;/code&gt; 를 통해 직접 구현해본 과정을 정리해보려 합니다.&lt;/p&gt;
 &lt;h2 id=&quot;tldr&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#tldr&quot; aria-label=&quot;tldr permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;TL;DR&lt;/h2&gt;
@@ -66,8 +66,8 @@ CloudFront에서 뷰어 응답으로 빠르게 컨텐츠를 전달합니다.&lt;
       /&gt;
     &lt;/span&gt;&lt;/p&gt;
 &lt;h2 id=&quot;람다-함수에-부여할-iam-역할-생성&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EB%9E%8C%EB%8B%A4-%ED%95%A8%EC%88%98%EC%97%90-%EB%B6%80%EC%97%AC%ED%95%A0-iam-%EC%97%AD%ED%95%A0-%EC%83%9D%EC%84%B1&quot; aria-label=&quot;람다 함수에 부여할 iam 역할 생성 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;람다 함수에 부여할 IAM 역할 생성&lt;/h2&gt;
-&lt;p&gt;람다 함수에 권한을 부여해야 합니다. &lt;/p&gt;
-&lt;p&gt;람다 함수에 권한을 부여해야 한다. &lt;strong&gt;IAM 콘솔에서 역할을 생성&lt;/strong&gt;한다. AWS 서비스 / Lambda를 선택하고 다음 단계로 넘어간다.&lt;/p&gt;
+&lt;p&gt;람다 함수에서 우리를 대신해 S3 객체에 접근할 수 있도록 &lt;code class=&quot;language-text&quot;&gt;s3:GetObject&lt;/code&gt; 와 같은 권한을 부여해주어야 합니다.
+&lt;code class=&quot;language-text&quot;&gt;IAM 콘솔&lt;/code&gt; 로 접근하여 역할을 생성, &lt;code class=&quot;language-text&quot;&gt;AWS 서비스 / Lambda&lt;/code&gt; 를 선택하고 단계를 넘어갑니다.&lt;/p&gt;
 &lt;p&gt;&lt;span
       class=&quot;gatsby-resp-image-wrapper&quot;
       style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 981px; &quot;
@@ -89,7 +89,8 @@ CloudFront에서 뷰어 응답으로 빠르게 컨텐츠를 전달합니다.&lt;
         loading=&quot;lazy&quot;
       /&gt;
     &lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;다음 단계에서, &lt;strong&gt;정책 생성&lt;/strong&gt;을 클릭하고, JSON 편집을 통해 아래와 같은 정책을 부여한다.&lt;/p&gt;
+&lt;p&gt;다음 단계에서는 &lt;code class=&quot;language-text&quot;&gt;정책 생성&lt;/code&gt; 을 통해 JSON 편집을 통해 권한을 편집합니다.
+아래와 동일하게 작성하셔도 무방합니다.&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;json&quot;&gt;&lt;pre class=&quot;language-json&quot;&gt;&lt;code class=&quot;language-json&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
   &lt;span class=&quot;token property&quot;&gt;&quot;Version&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;2012-10-17&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
   &lt;span class=&quot;token property&quot;&gt;&quot;Statement&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;
@@ -111,7 +112,8 @@ CloudFront에서 뷰어 응답으로 빠르게 컨텐츠를 전달합니다.&lt;
     &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
   &lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;
 &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;정책 이름을 설정하고, 정책 생성을 완료한다. 완료 후 다시 IAM 역할 생성으로로 돌아가, &lt;strong&gt;생성한 정책을 연결&lt;/strong&gt;한다.&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;정책 이름&lt;/code&gt; 을 설정하고, &lt;code class=&quot;language-text&quot;&gt;정책 생성&lt;/code&gt; 을 완료했다면, &lt;code class=&quot;language-text&quot;&gt;IAM&lt;/code&gt; 탭으로 돌아가
+람다 함수에게 실행 역할 즉, AWS 서비스 및 리소스에 접근할 수 있는 엑세스 권한을 &lt;code class=&quot;language-text&quot;&gt;정책 연결&lt;/code&gt;을 통해 제공합니다.&lt;/p&gt;
 &lt;p&gt;&lt;span
       class=&quot;gatsby-resp-image-wrapper&quot;
       style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 985px; &quot;
@@ -133,7 +135,7 @@ CloudFront에서 뷰어 응답으로 빠르게 컨텐츠를 전달합니다.&lt;
         loading=&quot;lazy&quot;
       /&gt;
     &lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;역할에 신뢰관계를 추가한다. &lt;strong&gt;역할 / 신뢰 관계/ 신뢰 관계 편집&lt;/strong&gt;을 선택하고, JSON을 편집한다.&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;역할 / 신뢰 관계 / 신례 관계 편집&lt;/code&gt; 을 선택하여 마찬가지로 JSON 편집을 통해 역할에 신뢰 관계를 추가합니다.&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;json&quot;&gt;&lt;pre class=&quot;language-json&quot;&gt;&lt;code class=&quot;language-json&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
   &lt;span class=&quot;token property&quot;&gt;&quot;Version&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;2012-10-17&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
   &lt;span class=&quot;token property&quot;&gt;&quot;Statement&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;
@@ -170,7 +172,7 @@ CloudFront에서 뷰어 응답으로 빠르게 컨텐츠를 전달합니다.&lt;
         loading=&quot;lazy&quot;
       /&gt;
     &lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;권한 설정에서 기존에 생성한 역할을 설정한다.&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;권한 / 구성&lt;/code&gt; 탭에서 생성한 IAM 역할을 설정합니다.&lt;/p&gt;
 &lt;p&gt;&lt;span
       class=&quot;gatsby-resp-image-wrapper&quot;
       style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 837px; &quot;
@@ -192,8 +194,26 @@ CloudFront에서 뷰어 응답으로 빠르게 컨텐츠를 전달합니다.&lt;
         loading=&quot;lazy&quot;
       /&gt;
     &lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;이후 생성된 람다에 코드 업로드한다. 코드는 &lt;a href=&quot;https://medium.com/daangn/lambda-edge%EB%A1%9C-%EA%B5%AC%ED%98%84%ED%95%98%EB%8A%94-on-the-fly-%EC%9D%B4%EB%AF%B8%EC%A7%80-%EB%A6%AC%EC%82%AC%EC%9D%B4%EC%A7%95-f4e5052d49f3&quot;&gt;AWS Lambda@Edge에서 실시간 이미지 리사이즈 &amp;#x26; WebP 형식으로 변환&lt;/a&gt;
-를 참고하여 구현하고 zip파일로 압축 후 업로드한다.&lt;/p&gt;
+&lt;p&gt;이제, 람다 함수 대시보드로 이동하여 이미지 리사이징, webp 포맷팅 적용을 위한 코드를 업로드합니다.
+코드는 &lt;a href=&quot;https://medium.com/daangn/lambda-edge%EB%A1%9C-%EA%B5%AC%ED%98%84%ED%95%98%EB%8A%94-on-the-fly-%EC%9D%B4%EB%AF%B8%EC%A7%80-%EB%A6%AC%EC%82%AC%EC%9D%B4%EC%A7%95-f4e5052d49f3&quot;&gt;AWS Lambda@Edge에서 실시간 이미지 리사이즈 &amp;#x26; WebP 형식으로 변환&lt;/a&gt;를 참고하고 약간의 수정을 더하여 작성하였는데, 위 글에서도 잘 정리되어 있지만, 구현하면서 짚고 넘어가야 될 부분들이 몇 가지 있었는데요.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;노드 환경에서 동작하는 람다 머신이 별도로 가지고 있지 않은 모듈은 직접 &lt;code class=&quot;language-text&quot;&gt;node_modules&lt;/code&gt; 폴더를 함께 압축하여 제공해주어야 했습니다.&lt;/strong&gt; 의존성 해결을 위한 별도의 설치 과정이 포함되어 있지 않습니다.
+&lt;code class=&quot;language-text&quot;&gt;querystring&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;aws-sdk&lt;/code&gt; 를 포함한 몇 가지 모듈들은 이미 의존성이 해결되어 있습니다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;// Dependencies resolved&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; querystring &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;querystring&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;token constant&quot;&gt;AWS&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;aws-sdk&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;람다 함수에서 바디를 조작했다면, 그 결과가 1MB 이하여야 했습니다.&lt;/strong&gt; 만약 1MB 보다 크다면, 이미지의 퀄리티를 단계적으로 낮추는 방법으로 접근했습니다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;token constant&quot;&gt;MEGABYTE&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;1046528&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; byteLength &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; Buffer&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;byteLength&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;resizedImage&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;base64&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;byteLength &lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt; &lt;span class=&quot;token constant&quot;&gt;MEGABYTE&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  resizedImage&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;toFormat&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;requiredFormat&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;token literal-property property&quot;&gt;quality&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;90&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;퀄리티 저하의 한계점을 넘어가거나, 타임 아웃이 되면 원본을 반환했습니다.&lt;/strong&gt;
+1MB 제약을 지키기 위해서 변환 과정이 너무 오래 걸리거나, 이미지 퀄리티가
+너무 저하되는 경우 원본을 반환하도록 했습니다.&lt;/p&gt;
+&lt;p&gt;이제 비즈니스에 맞게 코드를 수정하고, &lt;code class=&quot;language-text&quot;&gt;node_modules&lt;/code&gt; 와 함께 압축된 코드 업로드를 마치셨다면,
+람다 함수 상단 메뉴 &lt;code class=&quot;language-text&quot;&gt;작업 / Lambda@edge 배포&lt;/code&gt; 를 선택합니다.&lt;/p&gt;
 &lt;p&gt;&lt;span
       class=&quot;gatsby-resp-image-wrapper&quot;
       style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 812px; &quot;
@@ -215,9 +235,7 @@ CloudFront에서 뷰어 응답으로 빠르게 컨텐츠를 전달합니다.&lt;
         loading=&quot;lazy&quot;
       /&gt;
     &lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;람다 함수 상단 메뉴 작업 / Lambda@edge 배포를 선택한다. 오리진 응답으로 설정하는 이유는
-클라이언트에서 들어온 요청이 CloudFront로 전달되고, 이 때 요청된 쿼리에 대한 콘텐츠가 캐싱되어 있지 않으면,
-S3로 Origin Request가 전달되고, S3에서 응답받은 이미지를 통해 전처리가 필요하기 때문에 Origin response로 설정한다.&lt;/p&gt;
+&lt;p&gt;CloudFront 이벤트는 &lt;a href=&quot;https://youthfulhps.dev/web/image-optimization/#lambdaedge&quot;&gt;사용자 경험 품질 향상을 위한 이미지 최적화&lt;/a&gt;에 기반하여 &lt;code class=&quot;language-text&quot;&gt;오리진 응답&lt;/code&gt; 을 설정합니다. 이제, 람다 함수를 &lt;code class=&quot;language-text&quot;&gt;배포&lt;/code&gt; 합니다.&lt;/p&gt;
 &lt;p&gt;&lt;span
       class=&quot;gatsby-resp-image-wrapper&quot;
       style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 810px; &quot;
@@ -239,14 +257,10 @@ S3로 Origin Request가 전달되고, S3에서 응답받은 이미지를 통해 
         loading=&quot;lazy&quot;
       /&gt;
     &lt;/span&gt;&lt;/p&gt;
-&lt;h2 id=&quot;테스트-클라이언트-구성&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%ED%85%8C%EC%8A%A4%ED%8A%B8-%ED%81%B4%EB%9D%BC%EC%9D%B4%EC%96%B8%ED%8A%B8-%EA%B5%AC%EC%84%B1&quot; aria-label=&quot;테스트 클라이언트 구성 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;테스트 클라이언트 구성&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&quot;https://github.com/youthfulhps/image-ondemand-resizing&quot;&gt;image-ondemand-resizing&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&quot;마치면서&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EB%A7%88%EC%B9%98%EB%A9%B4%EC%84%9C&quot; aria-label=&quot;마치면서 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;마치면서&lt;/h2&gt;
+&lt;p&gt;단순히 코드 레벨과 물리적인 대응 방안을 고민하는 단계에서 더 넓은 접근 방식을 배울 수 있었던 좋은 경험이었습니다. 이미지 리사이징, webp 포맷팅이 잘 적용되는 지 확인해보실 수 있는 간단한 &lt;a href=&quot;https://github.com/youthfulhps/image-ondemand-resizing&quot;&gt;프로젝트&lt;/a&gt;를 구성해두었으니 경험해보실 수 있습니다.&lt;/p&gt;
 &lt;h2 id=&quot;reference&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#reference&quot; aria-label=&quot;reference permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Reference&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&quot;https://velog.io/@hustle-dev/%EC%9B%B9-%EC%84%B1%EB%8A%A5%EC%9D%84-%EC%9C%84%ED%95%9C-%EC%9D%B4%EB%AF%B8%EC%A7%80-%EC%B5%9C%EC%A0%81%ED%99%94&quot;&gt;https://velog.io/@hustle-dev/웹-성능을-위한-이미지-최적화&lt;/a&gt;
-&lt;a href=&quot;https://heropy.blog/2019/06/16/html-img-srcset-and-sizes/&quot;&gt;https://heropy.blog/2019/06/16/html-img-srcset-and-sizes/&lt;/a&gt;
-&lt;a href=&quot;https://ko.wikipedia.org/wiki/WebP&quot;&gt;https://ko.wikipedia.org/wiki/WebP&lt;/a&gt;
-&lt;a href=&quot;https://web.dev/uses-responsive-images/&quot;&gt;https://web.dev/uses-responsive-images/&lt;/a&gt;
-&lt;a href=&quot;https://web.dev/serve-responsive-images/&quot;&gt;https://web.dev/serve-responsive-images/&lt;/a&gt;&lt;/p&gt;</content:encoded></item><item><title><![CDATA[사용자 경험 품질 향상을 위한 이미지 최적화]]></title><description><![CDATA[많은 이미지를 다루는 페이지의 경우, 이미지 최적화에 신경쓰지 않으면 사용자 경험 지표에서 많은 감점을 받기 쉽습니다.
+&lt;p&gt;&lt;a href=&quot;https://medium.com/daangn/lambda-edge%EB%A1%9C-%EA%B5%AC%ED%98%84%ED%95%98%EB%8A%94-on-the-fly-%EC%9D%B4%EB%AF%B8%EC%A7%80-%EB%A6%AC%EC%82%AC%EC%9D%B4%EC%A7%95-f4e5052d49f3&quot;&gt;https://medium.com/daangn/lambda-edge로-구현하는-on-the-fly-이미지-리사이징-f4e5052d49f3&lt;/a&gt;&lt;/p&gt;</content:encoded></item><item><title><![CDATA[사용자 경험 품질 향상을 위한 이미지 최적화]]></title><description><![CDATA[많은 이미지를 다루는 페이지의 경우, 이미지 최적화에 신경쓰지 않으면 사용자 경험 지표에서 많은 감점을 받기 쉽습니다.
 사용자 경험 지표를 측정해보면, 이미지 관련된 감점 요소들이 정말 많은데요. Properly size images Serve…]]></description><link>https://youthfulhps.dev/web/image-optimization/</link><guid isPermaLink="false">https://youthfulhps.dev/web/image-optimization/</guid><pubDate>Sun, 29 May 2022 16:05:05 GMT</pubDate><content:encoded>&lt;p&gt;많은 이미지를 다루는 페이지의 경우, 이미지 최적화에 신경쓰지 않으면 사용자 경험 지표에서 많은 감점을 받기 쉽습니다.
 사용자 경험 지표를 측정해보면, 이미지 관련된 감점 요소들이 정말 많은데요.&lt;/p&gt;
 &lt;ul&gt;
