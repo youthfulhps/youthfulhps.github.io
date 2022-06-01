@@ -31,13 +31,22 @@ GitHubTheme.overrideThemeStyles = () => {
       fontFamily: 'Catamaran',
     },
 
+    h3: {
+      fontFamily: 'Catamaran',
+    },
+
     ul: {
       marginBottom: '6px',
     },
 
     li: {
       marginBottom: '2px',
+      fontFamily: 'Pretendard',
     },
+
+    p: {
+      fontFamily: 'Pretendard',
+    }
   }
 }
 
