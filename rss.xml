@@ -1,4 +1,89 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Youthfulhps.dev]]></title><description><![CDATA[Blog posted front-end, troubleshooting!]]></description><link>https://youthfulhps.dev</link><generator>GatsbyJS</generator><lastBuildDate>Thu, 02 Jun 2022 15:17:00 GMT</lastBuildDate><item><title><![CDATA[stale-while-revalidate는 어떻게 활용되고 있을까]]></title><link>https://youthfulhps.dev/web/stale-while-ravalidate/</link><guid isPermaLink="false">https://youthfulhps.dev/web/stale-while-ravalidate/</guid><pubDate>Wed, 01 Jun 2022 16:07:27 GMT</pubDate><content:encoded></content:encoded></item><item><title><![CDATA[온디멘드 이미지 리사이징을 위한 인프라 구성]]></title><description><![CDATA[사용자 경험 품질 향상을 위한 이미지 최적화에서 온디멘드 이미지 리사이징
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Youthfulhps.dev]]></title><description><![CDATA[Blog posted front-end, troubleshooting!]]></description><link>https://youthfulhps.dev</link><generator>GatsbyJS</generator><lastBuildDate>Sat, 04 Jun 2022 12:02:21 GMT</lastBuildDate><item><title><![CDATA[stale-while-revalidate는 어떻게 활용되고 있을까]]></title><description><![CDATA[클라이언트를 개발하면서 HTTP Cache-Control Extensions for Stale Content의
+ 확장을 기반으로한 구현체들을 많이 접하게 됩니다. swr…]]></description><link>https://youthfulhps.dev/web/stale-while-ravalidate/</link><guid isPermaLink="false">https://youthfulhps.dev/web/stale-while-ravalidate/</guid><pubDate>Wed, 01 Jun 2022 16:07:27 GMT</pubDate><content:encoded>&lt;p&gt;클라이언트를 개발하면서 &lt;a href=&quot;https://datatracker.ietf.org/doc/html/rfc5861&quot;&gt;HTTP Cache-Control Extensions for Stale Content&lt;/a&gt;의
+&lt;code class=&quot;language-text&quot;&gt;stale-while-revalidate (swr)&lt;/code&gt; 확장을 기반으로한 구현체들을 많이 접하게 됩니다.&lt;/p&gt;
+&lt;p&gt;swr 전략에 대해 알아보고, 구현체들에서 어떻게 활용되고 있는 지 알아봅시다.&lt;/p&gt;
+&lt;h2 id=&quot;stale-while-revalidate&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#stale-while-revalidate&quot; aria-label=&quot;stale while revalidate permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;stale-while-revalidate&lt;/h2&gt;
+&lt;p&gt;swr 전략은 캐싱된 컨텐츠를 즉시 로드하는 즉시성과 캐싱된 컨텐츠에 대한 업데이트가
+미래에 사용되도록 보장하는 균형을 유지하는 데 사용되는 디렉티브입니다.&lt;/p&gt;
+&lt;p&gt;브라우저는 기본적으로 Cache-Control의 max-age를 기준으로 캐싱된 컨텐츠의 최신 상태 여부를 판단하게 되는데,
+swr은 낡은 캐싱 컨텐츠에 대한 확장된 지시를 표현합니다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;yaml&quot;&gt;&lt;pre class=&quot;language-yaml&quot;&gt;&lt;code class=&quot;language-yaml&quot;&gt;&lt;span class=&quot;token key atrule&quot;&gt;Cache-Control&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; max&lt;span class=&quot;token punctuation&quot;&gt;-&lt;/span&gt;age=1&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; stale&lt;span class=&quot;token punctuation&quot;&gt;-&lt;/span&gt;while&lt;span class=&quot;token punctuation&quot;&gt;-&lt;/span&gt;revalidate=59&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;위와 같은 HTTP 해더는 캐싱된 컨텐츠에 대해 아래와 같이 지시를 따르게 됩니다.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;HTTP 요청이 1초(max-age) 이내에 반복적으로 발생한다면, 유효성 검증 없이 캐싱된 컨텐츠를 반환합니다.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 864px; &quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 55.99999999999999%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAALCAYAAAB/Ca1DAAAACXBIWXMAABYlAAAWJQFJUiTwAAAA80lEQVQoz62TPYsCMRCG/be29w9OsD2wshMLO7HT6rhGWLBRERV1beS4O+62uizqJpnsx2sS3eBHpWvgycwUeUgmSSnLMpyP6/reUcolSZI4WRGpFaZpCsaYlebCR7DCPJFSFj6uWe+EYRhCCAGlFBSpY8yhI/Gpjh2xw+3QTIk+8uJ7jenfCqPfGQY/I/S/Bnj/7KO3+UDb76K17KDpt1FftPA2b6AyreNlUkN5WMXruAaK6fJSTA8jHkGQBJfiBNe1ANuGGgZOHHux10TY6bi17Gx+00P2z57TQ5MQETzPA+e8+C2byYiCILgRPvQOn/1TDi/IWkorpouYAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;Requests within max-age return caching data&quot;
+        title=&quot;Requests within max-age return caching data&quot;
+        src=&quot;/static/f9e7bb4b3dee1eadcc36789a1ce9936b/9cab2/swr-flow-1.png&quot;
+        srcset=&quot;/static/f9e7bb4b3dee1eadcc36789a1ce9936b/5a46d/swr-flow-1.png 300w,
+/static/f9e7bb4b3dee1eadcc36789a1ce9936b/0a47e/swr-flow-1.png 600w,
+/static/f9e7bb4b3dee1eadcc36789a1ce9936b/9cab2/swr-flow-1.png 864w&quot;
+        sizes=&quot;(max-width: 864px) 100vw, 864px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;ol start=&quot;2&quot;&gt;
+&lt;li&gt;HTTP 요청이 1 ~ 60초(max-age ~ swr) 사이에 반복적으로 발생할 경우,
+우선 낡은 캐싱된 컨텐츠를 반환하고, 이와 동시에 캐싱된 데이터를 새로운 값으로 채우도록 재검증 요청이 발생합니다.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 864px; &quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 56.333333333333336%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAALCAYAAAB/Ca1DAAAACXBIWXMAABYlAAAWJQFJUiTwAAABMElEQVQoz51SPU/DMBTMv2XlDzAgVhBTJ8QAE4gJJpi6hKUVqkBtYUCIVOoQKYmdOrHzYfuIHbkNH4JQKyffs/LuvXe2p7WGW13+U9xneS7RJTvejbcSrOva7kopEEJs/LXAX7CCjiit1lU451uNa3LWgqYjWUt7yFas5aqp3HSspII2sHELfIJRM59uRzZjzhYvmCynGC8f4S9GGL7f4/ZtiJvXO1zOr3E+u8Lp8wUG0zMcPp1gfzLA7sMxdkYH2BsfoazLjYfWN0rA8gy8EM3OkIkcecEhqgJJmiCiMZjIkPIVaAPCUyQGOQVp8N1DtfEwiePWy5yDEvo/Dx1hjFnRqqrg+z6EEIiiCEEQQEpp/el1y667siztoREKw9DetIEpZAT7vknvt5+6NvR9Rh9JCVjenLr8FQAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;Return stale caching content for requests within swr, request re-validation&quot;
+        title=&quot;Return stale caching content for requests within swr, request re-validation&quot;
+        src=&quot;/static/4cfd14b60aa1d85a5dc28e2a9770979f/9cab2/swr-flow-2.png&quot;
+        srcset=&quot;/static/4cfd14b60aa1d85a5dc28e2a9770979f/5a46d/swr-flow-2.png 300w,
+/static/4cfd14b60aa1d85a5dc28e2a9770979f/0a47e/swr-flow-2.png 600w,
+/static/4cfd14b60aa1d85a5dc28e2a9770979f/9cab2/swr-flow-2.png 864w&quot;
+        sizes=&quot;(max-width: 864px) 100vw, 864px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;ol start=&quot;3&quot;&gt;
+&lt;li&gt;HTTP 요청이 60초(swr ~) 이후 시점에 발생한다면, 요청이 서버로 전달되어 컨텐츠를 반환받습니다.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&quot;react-query-swr&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#react-query-swr&quot; aria-label=&quot;react query swr permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;react-query, swr&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;https://react-query.tanstack.com/&quot;&gt;react-query&lt;/a&gt;와 &lt;a href=&quot;https://swr.vercel.app/ko&quot;&gt;swr&lt;/a&gt;는 swr 전략을 취한 대표적인 데이터 패칭 도구입니다.&lt;/p&gt;
+&lt;p&gt;클라이언트에서 리덕스를 사용한다면 서버로부터 전달받은 값을 리덕스에 저장하고
+최신화된 데이터로서 사용됩니다. 하지만 특정 시점의 서버 데이터를 캡쳐한 것이고,
+이 데이터가 실제 최신화된 데이터라는 보장하기가 어렵습니다.&lt;/p&gt;
+&lt;p&gt;그렇다보니 페이지 전환, 유저의 인터렉션이 새롭게 발생되면 새로운 요청을 통해
+리덕스 스토어의 값을 업데이트해주어야 하는 최신화에 대한 의무와 시점에 대한 고민,
+그리고 중복된 디스패치에 대한 제거는 오로지 클라이언트 개발자의 몫이었습니다.&lt;/p&gt;
+&lt;p&gt;반면 react-query, swr은 주기적으로 서버의 값을 가져와 최신화된 데이터를
+메모리에 캐싱하는 전략을 통해 캐싱, 업데이트 및 동기화, 에러 핸들링 등 복잡한
+비동기 과정을 앱에게 책임지게 할 수 있도록 도와줍니다.&lt;/p&gt;
+&lt;p&gt;react-query의 경우, 비동기 데이터 소스에 대해 쿼리라는 고유키를 통해 관리하며
+데이터 상태를 &lt;code class=&quot;language-text&quot;&gt;fresh&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;fetching&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;stale&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;inactive&lt;/code&gt; 로 표현합니다.&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;staleTime&lt;/code&gt; 을 통해 fresh한 데이터의 stale 전환 시간을 설정하고,
+&lt;code class=&quot;language-text&quot;&gt;cacheTime&lt;/code&gt;을 통해 inactive한 데이터를 캐싱된 데이터로서 유지하는 시간을 설정할 수 있고,
+부가적인 옵션을 설정하여 메모리에 캐싱된 데이터를 우아하게 관리합니다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; data &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;useQuery&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;users&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; getUsers&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token literal-property property&quot;&gt;staleTime&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;5000&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;token literal-property property&quot;&gt;cacheTime&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;1000&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;60&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&quot;reference&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#reference&quot; aria-label=&quot;reference permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Reference&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;https://jbee.io/react/thinking-about-global-state/&quot;&gt;전역 상태 관리에 대한 단상 (stale-while-revalidate)&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://web.dev/i18n/ko/stale-while-revalidate/&quot;&gt;stale-while-revalidate로 최신 상태 유지&lt;/a&gt;&lt;/p&gt;</content:encoded></item><item><title><![CDATA[온디멘드 이미지 리사이징을 위한 인프라 구성]]></title><description><![CDATA[사용자 경험 품질 향상을 위한 이미지 최적화에서 온디멘드 이미지 리사이징
 에 대한 이야기를 공유해드렸습니다. 이번 글에서는 CloudFront에서  를 통해 직접 구현해본 과정을 정리해보려 합니다. TL;DR S…]]></description><link>https://youthfulhps.dev/infra/image-optimization-with-cloudfront/</link><guid isPermaLink="false">https://youthfulhps.dev/infra/image-optimization-with-cloudfront/</guid><pubDate>Tue, 31 May 2022 14:05:04 GMT</pubDate><content:encoded>&lt;p&gt;&lt;a href=&quot;https://youthfulhps.dev/web/image-optimization/&quot;&gt;사용자 경험 품질 향상을 위한 이미지 최적화&lt;/a&gt;에서 온디멘드 이미지 리사이징
 에 대한 이야기를 공유해드렸습니다. 이번 글에서는 CloudFront에서 &lt;code class=&quot;language-text&quot;&gt;lambda@edge&lt;/code&gt; 를 통해 직접 구현해본 과정을 정리해보려 합니다.&lt;/p&gt;
 &lt;h2 id=&quot;tldr&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#tldr&quot; aria-label=&quot;tldr permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;TL;DR&lt;/h2&gt;
