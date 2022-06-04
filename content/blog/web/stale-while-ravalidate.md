@@ -1,5 +1,5 @@
 ---
-title: stale-while-revalidate는 어떻게 활용되고 있을까
+title: stale-while-revalidate 전략은 어떻게 활용되고 있을까
 date: 2022-06-01 16:06:87
 category: web
 thumbnail: { thumbnailSrc }
@@ -7,16 +7,16 @@ draft: true
 ---
 
 클라이언트를 개발하면서 [HTTP Cache-Control Extensions for Stale Content](https://datatracker.ietf.org/doc/html/rfc5861)의
-`stale-while-revalidate (swr)` 확장을 기반으로한 구현체들을 많이 접하게 됩니다.
-
-swr 전략에 대해 알아보고, 구현체들에서 어떻게 활용되고 있는 지 알아봅시다.
+`stale-while-revalidate (swr)` 확장 디렉티브 전략을 기반으로한
+구현체들을 많이 접하게 되는데요. swr 전략은 무엇인지, 어떻게 활용되고 있는 지
+알아보려 합니다.
 
 ## stale-while-revalidate
 
-swr 전략은 캐싱된 컨텐츠를 즉시 로드하는 즉시성과 캐싱된 컨텐츠에 대한 업데이트가
-미래에 사용되도록 보장하는 균형을 유지하는 데 사용되는 디렉티브입니다.
+swr 전략은 캐싱된 컨텐츠를 즉시 로드하는 즉시성과 업데이트된 캐싱 컨텐츠가
+미래에 사용되도록 보장하기 위한 디렉티브입니다.
 
-브라우저는 기본적으로 Cache-Control의 max-age를 기준으로 캐싱된 컨텐츠의 최신 상태 여부를 판단하게 되는데,
+브라우저는 Cache-Control의 max-age를 기준으로 캐싱된 컨텐츠의 최신 상태 여부를 판단하게 되는데,
 swr은 낡은 캐싱 컨텐츠에 대한 확장된 지시를 표현합니다.
 
 ```yaml
@@ -48,16 +48,12 @@ Cache-Control: max-age=1, stale-while-revalidate=59
 리덕스 스토어의 값을 업데이트해주어야 하는 최신화에 대한 의무와 시점에 대한 고민,
 그리고 중복된 디스패치에 대한 제거는 오로지 클라이언트 개발자의 몫이었습니다.
 
-반면 react-query, swr은 주기적으로 서버의 값을 가져와 최신화된 데이터를
-메모리에 캐싱하는 전략을 통해 캐싱, 업데이트 및 동기화, 에러 핸들링 등 복잡한
-비동기 과정을 앱에게 책임지게 할 수 있도록 도와줍니다.
+반면 react-query, swr은 낡은 캐시로부터 빠르게 컨텐츠를 반환하고, 백그라운드에서 요청을 통해 캐싱된 컨텐츠의 재검증을 진행하여 캐싱 레이어에서 최신화된 데이터를 보장할 수 있도록 swr 캐싱 전략을 취하고 있습니다.
 
 react-query의 경우, 비동기 데이터 소스에 대해 쿼리라는 고유키를 통해 관리하며
-데이터 상태를 `fresh`, `fetching`, `stale`, `inactive` 로 표현합니다.
-
-`staleTime` 을 통해 fresh한 데이터의 stale 전환 시간을 설정하고,
-`cacheTime`을 통해 inactive한 데이터를 캐싱된 데이터로서 유지하는 시간을 설정할 수 있고,
-부가적인 옵션을 설정하여 메모리에 캐싱된 데이터를 우아하게 관리합니다.
+데이터 상태를 `fresh`, `fetching`, `stale`, `inactive` 로 표현하며,
+`staleTime` 을 통해 프레시한 컨텐츠가 낡은 컨텐츠로 전환되는 시간을 설정하여
+캐싱된 컨텐츠 특성에 따라 유효 시간을 개별 설정해줄 수 있습니다.
 
 ```js
 const { data } = useQuery('users', getUsers, {
@@ -65,6 +61,11 @@ const { data } = useQuery('users', getUsers, {
   cacheTime: 1000 * 60 * 5,
 })
 ```
+
+이러한 데이터 패칭 도구들은 클라이언트 개발에서 주기적 혹은 특정 트리거에 의해
+서버의 값을 가져와 최신화된 데이터를 가져오려는 노력과 캐싱, 업데이트 및 동기화, 에러 핸들링 등 복잡한 비동기 과정을 앱에게 책임지게 할 수 있도록 도와줍니다.
+
+## incremental static regeneration
 
 ## Reference
 
