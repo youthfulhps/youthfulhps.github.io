@@ -75,6 +75,14 @@ pre[class*='language-'] {
   color: $inline-text-color;
 }
 
+.dark :not(pre) > code[class*='language-'] {
+  padding: 0.1em 0.6em;
+  border-radius: 0.2em;
+  white-space: normal;
+  background: $inline-dimmed-color;
+  color: $dark-inline-text-color;
+}
+
 .token.comment,
 .token.block-comment,
 .token.prolog,
