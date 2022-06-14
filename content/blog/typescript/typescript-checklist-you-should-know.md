@@ -24,8 +24,8 @@ draft: true
 
 ```ts
 // main.ts
-let greetings = 'hello';
-greetings = 1234;
+let greetings = 'hello'
+greetings = 1234
 ```
 
 ```shell
@@ -50,20 +50,20 @@ main.ts:2:1 -error ... '1234' 형식은 'string' 형식에 할당할 수 없습�
 
 ```ts
 interface Square {
-  width: number;
+  width: number
 }
 
 interface Rectangle extends Square {
-  height: number;
+  height: number
 }
 
-type Shape = Square | Rectangle;
+type Shape = Square | Rectangle
 
 function calculateArea(shape: Shape) {
   if (shape instanceof Rectangle) {
-    return shape.width * shape * height;
+    return shape.width * shape * height
   } else {
-    return shape.width * shape.width;
+    return shape.width * shape.width
   }
 }
 ```
@@ -106,17 +106,17 @@ class Square {
 
 class Rectangle extends Square {
   constructor(public width: number, public height: number) {
-    super(width);
+    super(width)
   }
 }
 
-type Shape = Square | Rectangle;
+type Shape = Square | Rectangle
 
 function calculateArea(shape: Shape) {
   if (shape instanceof Rectangle) {
-    return shape.width * shape * height;
+    return shape.width * shape * height
   } else {
-    return shape.width * shape.width;
+    return shape.width * shape.width
   }
 }
 ```
@@ -136,30 +136,30 @@ function calculateArea(shape: Shape) {
 
 ```ts
 interface Square {
-  width: number;
+  width: number
 }
 
 interface Rectangle extends Square {
-  height: number;
+  height: number
 }
 
 interface NamedRectangle {
-  name: string;
-  width: number;
-  height: number;
+  name: string
+  width: number
+  height: number
 }
 
 function calculateArea(rectangle: Rectangle) {
-  return rectangle.width * rectangle.height;
+  return rectangle.width * rectangle.height
 }
 
 const rectangle: NamedRectangle = {
   name: 'namedRectangle',
   width: 3,
   height: 4,
-};
+}
 
-calculateArea(rectangle);
+calculateArea(rectangle)
 ```
 
 즉 같은 메서드와 맴버변수를 포함하고 있는 동일한 구조의 두 타입은
@@ -169,7 +169,132 @@ calculateArea(rectangle);
 선언된 타입에 국한되어 있지 않고 '열려 (open)' 있음을 인지해야
 합니다.
 
-## 4. any 타입은 타입 시스템을 무력화 시킨다
+## 4. type, interface의 차이를 이해하고 일관성을 유지해야 한다
+
+type, interface를 통해 명명된 타입을 정의할 수 있으며,
+일반적으로 두 방법 모두 사용가능합니다. 하지만, 그 차이점을
+이해하고 일관성을 유지하도록 노력해야 합니다.
+
+```ts
+type TState = {
+  name: string
+  age: number
+}
+
+type IState = {
+  name: string
+  age: number
+}
+```
+
+type과 interface 모두 추가적인 속성을 할당하면 동일한
+오류가 발생합니다.
+
+```ts
+const foo: TState = {
+  name: 'foo',
+  age: 29,
+  organization: 'fastfive',
+  // ~~~~~~~~~~~~~~~~~~ Type ... is not assignable to type 'TState'
+  //                    Object literal may only specify known properties, and
+  //                    'organization' does not exist in type 'TState'
+}
+
+type TDict = { [key: string]: string }
+interface IDict {
+  [key: string]: string
+}
+```
+
+두 방법 모두 인덱스 시그니처, 함수 타입, 제너릭이 가능합니다.
+
+```ts
+//index signature
+type TDict = { [key: string]: string }
+interface IDict {
+  [key: string]: string
+}
+
+//function type
+type TFn = (x: number) => string
+interface IFn {
+  (x: number): string
+}
+
+//generic
+type TPair<T> = {
+  first: T
+  second: T
+}
+interface IPair<T> {
+  first: T
+  second: T
+}
+```
+
+반면에 type과 interface는 서로 확장 가능하나,
+인터페이스는 복잡한 타입(유니온 타입, 원시값, 템플릿 리터럴,
+튜플 등)은 확장하지 못합니다.
+복잡한 타입을 확장하고 싶다면 타입과 &(intersection)을 사용해야 합니다.
+
+```ts
+type AorB = 'A' | 'B'
+
+type Input = {
+  /* ... */
+}
+type Output = {
+  /* ... */
+}
+interface VariableMap {
+  [name: string]: Input | Output
+}
+
+type NamedVariable = (Input | Output) & { name: string }
+```
+
+type은 튜플과 배열 타입도 간결하게 표현할 수 있습니다.
+물론 interface로도 구현이 가능하지만, 튜플에서
+사용할 수 있는 concat과 같은 메서드를 사용할 수 없게 됩니다.
+즉, 튜플은 type을 통해 구현하는 것이 낫습니다.
+
+```ts
+type Pair = [number, number]
+type StringList = string[]
+type NamedNums = [string, ...number[]]
+```
+
+반면 인터페이스는 속성을 확장하는 '선언 병합'
+을 통해 보강이 가능합니다.
+
+```ts
+interface IState {
+  name: string
+  age: number
+}
+interface IState {
+  organization: string
+}
+const foo: IState = {
+  name: 'foo',
+  age: 29,
+  organization: 'fastfive',
+} // OK
+```
+
+선언 병합은 주로 타입 선언 파일에서 사용됩니다.
+예를 들어, _lib.es5.d.ts_ 에 선언되어 있는 Array 인터페이스가
+_lib.es2015.d.ts_ 에 선언된 인터페이스를 병합하여
+보강될 수 있도록 하기 위함입니다. 결과적으로
+각 선언이 병합되어 전체 메서드를 가지는 하나의
+Array 타입을 얻게 됩니다.
+
+결론적으로, 복잡한 타입이라면 타입 별칭을 사용합니다. 그러나
+두 가지 방법으로 모두 표현할 수 있다면 일관성과 보강의 관점에서
+고려해봐야 합니다. 또한 합류하게 된 프로젝트의 코드 베이스의
+일관성을 지키기 위해 선택되어도 좋습니다.
+
+## 5. any 타입은 타입 시스템을 무력화 시킨다
 
 any 타입은 점진적이며 선택적인 타입스크립트의 특성을 위한
 핵심 타입이지만, 타입 안정성이 없으며 설계를 감추고
@@ -195,12 +320,12 @@ any -> any[];
 
 ```ts
 interface Foo {
-  foo: string;
+  foo: string
 }
 interface Bar {
-  bar: string;
+  bar: string
 }
-declare function expressionReturningFoo(): Foo;
+declare function expressionReturningFoo(): Foo
 
 function processBar(b: Bar) {
   /* ... */
@@ -208,14 +333,14 @@ function processBar(b: Bar) {
 
 //// Don't do this
 function f1() {
-  const x: any = expressionReturningFoo();
-  processBar(x);
+  const x: any = expressionReturningFoo()
+  processBar(x)
 }
 
 // Prefer this
 function f2() {
-  const x = expressionReturningFoo();
-  processBar(x as any);
+  const x = expressionReturningFoo()
+  processBar(x as any)
 }
 ```
 
@@ -227,7 +352,7 @@ x 타입은 `Foo` 가 됩니다.
 함수 내부 뿐만 아니라 외부까지 퍼져나가게 되기 때문에
 any 타입의 적용 범위를 좁게 제한해야 합니다.
 
-## 타입스크립트 기본형 타입과 객체 래퍼 타입은 다르다
+## 6. 타입스크립트 기본형 타입과 객체 래퍼 타입은 다르다
 
 자바스크립트는 일곱 가지 기본 타입(number, boolean, null,
 undefined, symbol, bigint)이 있습니다. 기본형들은
@@ -237,7 +362,7 @@ undefined, symbol, bigint)이 있습니다. 기본형들은
 가지고 있는 것 처럼 보이지만, string의 메서드가 아닙니다.
 
 ```js
-'string'.charAt(3); //"i"
+'string'.charAt(3) //"i"
 ```
 
 자바스크립트는 기본형과 객체 타입을 서로 자유롭게 변환하여
@@ -246,9 +371,9 @@ String 객체로 래핑하고 메서드를 호출하고 래핑한 객체를
 버립니다.** 이러한 동작으로 아래의 코드처럼 혼란을 가져오기도 합니다.
 
 ```js
-const foo = 'foo';
-foo.bar = 'hi';
-console.log(foo.bar); //undefined
+const foo = 'foo'
+foo.bar = 'hi'
+console.log(foo.bar) //undefined
 ```
 
 타입스크립트는 이러한 자바스크립트 동작을 위해
@@ -260,11 +385,11 @@ console.log(foo.bar); //undefined
 
 ```ts
 function getStringLength(foo: String) {
-  return foo.length;
+  return foo.length
 }
 
-getStringLen('hello'); // OK
-getStringLen(new String('hello')); // OK
+getStringLen('hello') // OK
+getStringLen(new String('hello')) // OK
 ```
 
 그러나, string은 String에 할당할 수 있지만, String은
@@ -272,11 +397,11 @@ string에 할당할 수 없습니다.
 
 ```ts
 function isSubString(subString: String) {
-  return 'hello'.includes(subString);
+  return 'hello'.includes(subString)
   //Argument of type 'String' is not assignable to parameter of type 'string'.
 }
 ```
 
 타입스크립트가 제공하는 타입 선언은 전부 기본형 타입으로
-되어 있기 때문에 객체 래퍼 타입은 지양하고 기본형 타입을
-사용해야 합니다.
+되어 있기 때문에 기본형 타입과 객체 래퍼 타입을
+혼동해서는 안되며, 기본형 타입을 사용해야 합니다.
