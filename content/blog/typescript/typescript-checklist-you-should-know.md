@@ -24,8 +24,8 @@ draft: true
 
 ```ts
 // main.ts
-let greetings = 'hello'
-greetings = 1234
+let greetings = 'hello';
+greetings = 1234;
 ```
 
 ```shell
@@ -50,20 +50,20 @@ main.ts:2:1 -error ... '1234' 형식은 'string' 형식에 할당할 수 없습�
 
 ```ts
 interface Square {
-  width: number
+  width: number;
 }
 
 interface Rectangle extends Square {
-  height: number
+  height: number;
 }
 
-type Shape = Square | Rectangle
+type Shape = Square | Rectangle;
 
 function calculateArea(shape: Shape) {
   if (shape instanceof Rectangle) {
-    return shape.width * shape * height
+    return shape.width * shape * height;
   } else {
-    return shape.width * shape.width
+    return shape.width * shape.width;
   }
 }
 ```
@@ -106,17 +106,17 @@ class Square {
 
 class Rectangle extends Square {
   constructor(public width: number, public height: number) {
-    super(width)
+    super(width);
   }
 }
 
-type Shape = Square | Rectangle
+type Shape = Square | Rectangle;
 
 function calculateArea(shape: Shape) {
   if (shape instanceof Rectangle) {
-    return shape.width * shape * height
+    return shape.width * shape * height;
   } else {
-    return shape.width * shape.width
+    return shape.width * shape.width;
   }
 }
 ```
@@ -136,30 +136,30 @@ function calculateArea(shape: Shape) {
 
 ```ts
 interface Square {
-  width: number
+  width: number;
 }
 
 interface Rectangle extends Square {
-  height: number
+  height: number;
 }
 
 interface NamedRectangle {
-  name: string
-  width: number
-  height: number
+  name: string;
+  width: number;
+  height: number;
 }
 
 function calculateArea(rectangle: Rectangle) {
-  return rectangle.width * rectangle.height
+  return rectangle.width * rectangle.height;
 }
 
 const rectangle: NamedRectangle = {
   name: 'namedRectangle',
   width: 3,
   height: 4,
-}
+};
 
-calculateArea(rectangle)
+calculateArea(rectangle);
 ```
 
 즉 같은 메서드와 맴버변수를 포함하고 있는 동일한 구조의 두 타입은
@@ -177,14 +177,14 @@ type, interface를 통해 명명된 타입을 정의할 수 있으며,
 
 ```ts
 type TState = {
-  name: string
-  age: number
-}
+  name: string;
+  age: number;
+};
 
 type IState = {
-  name: string
-  age: number
-}
+  name: string;
+  age: number;
+};
 ```
 
 type과 interface 모두 추가적인 속성을 할당하면 동일한
@@ -198,11 +198,11 @@ const foo: TState = {
   // ~~~~~~~~~~~~~~~~~~ Type ... is not assignable to type 'TState'
   //                    Object literal may only specify known properties, and
   //                    'organization' does not exist in type 'TState'
-}
+};
 
-type TDict = { [key: string]: string }
+type TDict = { [key: string]: string };
 interface IDict {
-  [key: string]: string
+  [key: string]: string;
 }
 ```
 
@@ -210,25 +210,25 @@ interface IDict {
 
 ```ts
 //index signature
-type TDict = { [key: string]: string }
+type TDict = { [key: string]: string };
 interface IDict {
-  [key: string]: string
+  [key: string]: string;
 }
 
 //function type
-type TFn = (x: number) => string
+type TFn = (x: number) => string;
 interface IFn {
-  (x: number): string
+  (x: number): string;
 }
 
 //generic
 type TPair<T> = {
-  first: T
-  second: T
-}
+  first: T;
+  second: T;
+};
 interface IPair<T> {
-  first: T
-  second: T
+  first: T;
+  second: T;
 }
 ```
 
@@ -238,19 +238,19 @@ interface IPair<T> {
 복잡한 타입을 확장하고 싶다면 타입과 &(intersection)을 사용해야 합니다.
 
 ```ts
-type AorB = 'A' | 'B'
+type AorB = 'A' | 'B';
 
 type Input = {
   /* ... */
-}
+};
 type Output = {
   /* ... */
-}
+};
 interface VariableMap {
-  [name: string]: Input | Output
+  [name: string]: Input | Output;
 }
 
-type NamedVariable = (Input | Output) & { name: string }
+type NamedVariable = (Input | Output) & { name: string };
 ```
 
 type은 튜플과 배열 타입도 간결하게 표현할 수 있습니다.
@@ -259,9 +259,9 @@ type은 튜플과 배열 타입도 간결하게 표현할 수 있습니다.
 즉, 튜플은 type을 통해 구현하는 것이 낫습니다.
 
 ```ts
-type Pair = [number, number]
-type StringList = string[]
-type NamedNums = [string, ...number[]]
+type Pair = [number, number];
+type StringList = string[];
+type NamedNums = [string, ...number[]];
 ```
 
 반면 인터페이스는 속성을 확장하는 '선언 병합'
@@ -269,17 +269,17 @@ type NamedNums = [string, ...number[]]
 
 ```ts
 interface IState {
-  name: string
-  age: number
+  name: string;
+  age: number;
 }
 interface IState {
-  organization: string
+  organization: string;
 }
 const foo: IState = {
   name: 'foo',
   age: 29,
   organization: 'fastfive',
-} // OK
+}; // OK
 ```
 
 선언 병합은 주로 타입 선언 파일에서 사용됩니다.
@@ -320,12 +320,12 @@ any -> any[];
 
 ```ts
 interface Foo {
-  foo: string
+  foo: string;
 }
 interface Bar {
-  bar: string
+  bar: string;
 }
-declare function expressionReturningFoo(): Foo
+declare function expressionReturningFoo(): Foo;
 
 function processBar(b: Bar) {
   /* ... */
@@ -333,14 +333,14 @@ function processBar(b: Bar) {
 
 //// Don't do this
 function f1() {
-  const x: any = expressionReturningFoo()
-  processBar(x)
+  const x: any = expressionReturningFoo();
+  processBar(x);
 }
 
 // Prefer this
 function f2() {
-  const x = expressionReturningFoo()
-  processBar(x as any)
+  const x = expressionReturningFoo();
+  processBar(x as any);
 }
 ```
 
@@ -362,7 +362,7 @@ undefined, symbol, bigint)이 있습니다. 기본형들은
 가지고 있는 것 처럼 보이지만, string의 메서드가 아닙니다.
 
 ```js
-'string'.charAt(3) //"i"
+'string'.charAt(3); //"i"
 ```
 
 자바스크립트는 기본형과 객체 타입을 서로 자유롭게 변환하여
@@ -371,9 +371,9 @@ String 객체로 래핑하고 메서드를 호출하고 래핑한 객체를
 버립니다.** 이러한 동작으로 아래의 코드처럼 혼란을 가져오기도 합니다.
 
 ```js
-const foo = 'foo'
-foo.bar = 'hi'
-console.log(foo.bar) //undefined
+const foo = 'foo';
+foo.bar = 'hi';
+console.log(foo.bar); //undefined
 ```
 
 타입스크립트는 이러한 자바스크립트 동작을 위해
@@ -385,11 +385,11 @@ console.log(foo.bar) //undefined
 
 ```ts
 function getStringLength(foo: String) {
-  return foo.length
+  return foo.length;
 }
 
-getStringLen('hello') // OK
-getStringLen(new String('hello')) // OK
+getStringLen('hello'); // OK
+getStringLen(new String('hello')); // OK
 ```
 
 그러나, string은 String에 할당할 수 있지만, String은
@@ -397,7 +397,7 @@ string에 할당할 수 없습니다.
 
 ```ts
 function isSubString(subString: String) {
-  return 'hello'.includes(subString)
+  return 'hello'.includes(subString);
   //Argument of type 'String' is not assignable to parameter of type 'string'.
 }
 ```
@@ -405,3 +405,121 @@ function isSubString(subString: String) {
 타입스크립트가 제공하는 타입 선언은 전부 기본형 타입으로
 되어 있기 때문에 기본형 타입과 객체 래퍼 타입을
 혼동해서는 안되며, 기본형 타입을 사용해야 합니다.
+
+## 7. '잉여 속성 체크'와 '할당 가능 검사'는 별도 과정이다
+
+타입이 명시되어 있는 변수에 객체 리터럴을 할당한다면
+타입스크립트는 해당 타입의 속성이 있는 지, 그리고
+'그 외의 속성은 없는지' 확인합니다.
+
+타입이 명시되어 있는 변수에 명명된 속성의 매개변수 외의
+속성을 할당하려 한다면 오류가 발생합니다.
+
+```ts
+interface Room {
+  numDoors: number;
+  ceilingHeightFt: number;
+}
+const r: Room = {
+  numDoors: 1,
+  ceilingHeightFt: 10,
+  elephant: 'present',
+  // ~~~~ Object literal may only specify known properties,
+  //      and 'elephant' does not exist in type 'Room'
+};
+```
+
+하지만, 구조적 타이핑 관점으로 생각해보면
+r은 구조적으로 Room 타입에 해당하는 속성을 모두
+가지고 있기 때문에 오류가 발생하지 않아야 합니다.
+
+다른 예시로, 임시 변수를 도입하여 Room 타입에 할당한다면
+오류가 발생하지 않습니다.
+
+```ts
+interface Room {
+  numDoors: number;
+  ceilingHeightFt: number;
+}
+const obj = {
+  numDoors: 1,
+  ceilingHeightFt: 10,
+  elephant: 'present',
+};
+const r: Room = obj; // OK
+```
+
+타입스크립트는 타입 시스템의 구조적 본질을 해치지 않으면서,
+알 수 없는 객체 리터럴의 속성을 허용하지 않도록 하여
+구조적 타입 시스템에서 발생할 수 있는 중요한 오류를 잡을 수
+있도록 조건적으로 '잉여 속성 체크'를 진행합니다.
+
+두 예제에 대입하여 생각해보면, 첫번 째 명명된 타입에 객체의 속성을 할당하는 경우
+구조적 시스템 관점에서 오류를 잡기 위해 '잉여 속성 체크' 가 수행되었지만,
+두 번째 예시의 경우 조건에 따라 '잉여 속성 체크'가 수행되지 않았습니다.
+
+'잉여 속성 체크'는 구조적 타이핑 시스템에서 허용되는
+속성 이름의 오타 같은 실수를 잡아내고, 선택적 필드를
+포함하는 타입에 특히 유용하지만, 적용 범위도 매우 제한적이고
+오직 객체 리터럴에서만 수행합니다.
+
+즉, '할당 가능 검사'와 조건적으로 동작하는 '잉여 속성 체크'는
+별도의 과정이라는 것을 인지하고 있어야 합니다.
+
+## 8. 타입 단언보다는 타입 선언을 하는 것이 낫다
+
+변수가 값을 할당하고 타입을 부여하려면 변수에 타입을 선언하여
+그 값이 선언된 타입임을 명시하거나,
+타입을 단언하여 타입스크립트가 추론한 타입이 있더라도
+단언한 타입으로 간주하는 두 방법을 사용합니다.
+
+```ts
+interface Person {
+  name: string;
+}
+
+const alice: Person = { name: 'Alice' };
+const bob = { name: 'Bob' } as Person;
+```
+
+타입 선언은 할당되는 값이 해당 타입을 만족하는 지
+검사하지만, 타입 단언은 타입을 강제로 단언하여
+타입 체커에게 타입 오류가 있지만, 강제하여 무시하도록 합니다.
+
+```ts
+const alice: Person = {
+  name: 'Alice',
+  occupation: 'Typescript developer',
+  // ~~~~~ Object literal may only specify known properties
+  //       and 'occupation' does not exist in type 'Person'
+};
+
+const bob = {
+  name: 'Bob',
+  occupation: 'Javascript developer',
+} as Person; //No error
+```
+
+타입 단언을 사용하면 문제가 해결되는 것처럼 보이지만
+런타임에 문제가 발생할 수 있습니다.
+
+```ts
+interface Person {
+  name: string;
+}
+
+const people = ['alice', 'bob', 'jan'].map((name) => ({} as Person));
+//No error
+```
+
+일반적으로 단언문을 사용하지 않는 것이 변수를 선언하는 것이
+가장 직관적이며 타입 단언은 타입 체커가 추론한 타입보다
+개발자가 판단하는 타입이 더 정확할 때 유효합니다.
+
+```ts
+document.querySelector('#myButton').addEventListener('click', (e) => {
+  e.currentTarget; //타입은 EventTarget;
+  const button = e.currentTarget as HTMLButtonElement;
+  button; //타입은 HTMLButtonElement;
+});
+```
