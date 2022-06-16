@@ -24,8 +24,8 @@ draft: true
 
 ```ts
 // main.ts
-let greetings = 'hello';
-greetings = 1234;
+let greetings = 'hello'
+greetings = 1234
 ```
 
 ```shell
@@ -50,20 +50,20 @@ main.ts:2:1 -error ... '1234' 형식은 'string' 형식에 할당할 수 없습�
 
 ```ts
 interface Square {
-  width: number;
+  width: number
 }
 
 interface Rectangle extends Square {
-  height: number;
+  height: number
 }
 
-type Shape = Square | Rectangle;
+type Shape = Square | Rectangle
 
 function calculateArea(shape: Shape) {
   if (shape instanceof Rectangle) {
-    return shape.width * shape * height;
+    return shape.width * shape * height
   } else {
-    return shape.width * shape.width;
+    return shape.width * shape.width
   }
 }
 ```
@@ -106,17 +106,17 @@ class Square {
 
 class Rectangle extends Square {
   constructor(public width: number, public height: number) {
-    super(width);
+    super(width)
   }
 }
 
-type Shape = Square | Rectangle;
+type Shape = Square | Rectangle
 
 function calculateArea(shape: Shape) {
   if (shape instanceof Rectangle) {
-    return shape.width * shape * height;
+    return shape.width * shape * height
   } else {
-    return shape.width * shape.width;
+    return shape.width * shape.width
   }
 }
 ```
@@ -136,30 +136,30 @@ function calculateArea(shape: Shape) {
 
 ```ts
 interface Square {
-  width: number;
+  width: number
 }
 
 interface Rectangle extends Square {
-  height: number;
+  height: number
 }
 
 interface NamedRectangle {
-  name: string;
-  width: number;
-  height: number;
+  name: string
+  width: number
+  height: number
 }
 
 function calculateArea(rectangle: Rectangle) {
-  return rectangle.width * rectangle.height;
+  return rectangle.width * rectangle.height
 }
 
 const rectangle: NamedRectangle = {
   name: 'namedRectangle',
   width: 3,
   height: 4,
-};
+}
 
-calculateArea(rectangle);
+calculateArea(rectangle)
 ```
 
 즉 같은 메서드와 맴버변수를 포함하고 있는 동일한 구조의 두 타입은
@@ -177,14 +177,14 @@ type, interface를 통해 명명된 타입을 정의할 수 있으며,
 
 ```ts
 type TState = {
-  name: string;
-  age: number;
-};
+  name: string
+  age: number
+}
 
 type IState = {
-  name: string;
-  age: number;
-};
+  name: string
+  age: number
+}
 ```
 
 type과 interface 모두 추가적인 속성을 할당하면 동일한
@@ -195,14 +195,14 @@ const foo: TState = {
   name: 'foo',
   age: 29,
   organization: 'fastfive',
-  // ~~~~~~~~~~~~~~~~~~ Type ... is not assignable to type 'TState'
-  //                    Object literal may only specify known properties, and
-  //                    'organization' does not exist in type 'TState'
-};
+  // ~~~~ Type ... is not assignable to type 'TState'
+  //      Object literal may only specify known properties, and
+  //     'organization' does not exist in type 'TState'
+}
 
-type TDict = { [key: string]: string };
+type TDict = { [key: string]: string }
 interface IDict {
-  [key: string]: string;
+  [key: string]: string
 }
 ```
 
@@ -210,25 +210,25 @@ interface IDict {
 
 ```ts
 //index signature
-type TDict = { [key: string]: string };
+type TDict = { [key: string]: string }
 interface IDict {
-  [key: string]: string;
+  [key: string]: string
 }
 
 //function type
-type TFn = (x: number) => string;
+type TFn = (x: number) => string
 interface IFn {
-  (x: number): string;
+  (x: number): string
 }
 
 //generic
 type TPair<T> = {
-  first: T;
-  second: T;
-};
+  first: T
+  second: T
+}
 interface IPair<T> {
-  first: T;
-  second: T;
+  first: T
+  second: T
 }
 ```
 
@@ -238,19 +238,19 @@ interface IPair<T> {
 복잡한 타입을 확장하고 싶다면 타입과 &(intersection)을 사용해야 합니다.
 
 ```ts
-type AorB = 'A' | 'B';
+type AorB = 'A' | 'B'
 
 type Input = {
   /* ... */
-};
+}
 type Output = {
   /* ... */
-};
+}
 interface VariableMap {
-  [name: string]: Input | Output;
+  [name: string]: Input | Output
 }
 
-type NamedVariable = (Input | Output) & { name: string };
+type NamedVariable = (Input | Output) & { name: string }
 ```
 
 type은 튜플과 배열 타입도 간결하게 표현할 수 있습니다.
@@ -259,9 +259,9 @@ type은 튜플과 배열 타입도 간결하게 표현할 수 있습니다.
 즉, 튜플은 type을 통해 구현하는 것이 낫습니다.
 
 ```ts
-type Pair = [number, number];
-type StringList = string[];
-type NamedNums = [string, ...number[]];
+type Pair = [number, number]
+type StringList = string[]
+type NamedNums = [string, ...number[]]
 ```
 
 반면 인터페이스는 속성을 확장하는 '선언 병합'
@@ -269,17 +269,17 @@ type NamedNums = [string, ...number[]];
 
 ```ts
 interface IState {
-  name: string;
-  age: number;
+  name: string
+  age: number
 }
 interface IState {
-  organization: string;
+  organization: string
 }
 const foo: IState = {
   name: 'foo',
   age: 29,
   organization: 'fastfive',
-}; // OK
+} // OK
 ```
 
 선언 병합은 주로 타입 선언 파일에서 사용됩니다.
@@ -320,12 +320,12 @@ any -> any[];
 
 ```ts
 interface Foo {
-  foo: string;
+  foo: string
 }
 interface Bar {
-  bar: string;
+  bar: string
 }
-declare function expressionReturningFoo(): Foo;
+declare function expressionReturningFoo(): Foo
 
 function processBar(b: Bar) {
   /* ... */
@@ -333,14 +333,14 @@ function processBar(b: Bar) {
 
 //// Don't do this
 function f1() {
-  const x: any = expressionReturningFoo();
-  processBar(x);
+  const x: any = expressionReturningFoo()
+  processBar(x)
 }
 
 // Prefer this
 function f2() {
-  const x = expressionReturningFoo();
-  processBar(x as any);
+  const x = expressionReturningFoo()
+  processBar(x as any)
 }
 ```
 
@@ -362,7 +362,7 @@ undefined, symbol, bigint)이 있습니다. 기본형들은
 가지고 있는 것 처럼 보이지만, string의 메서드가 아닙니다.
 
 ```js
-'string'.charAt(3); //"i"
+'string'.charAt(3) //"i"
 ```
 
 자바스크립트는 기본형과 객체 타입을 서로 자유롭게 변환하여
@@ -371,9 +371,9 @@ String 객체로 래핑하고 메서드를 호출하고 래핑한 객체를
 버립니다.** 이러한 동작으로 아래의 코드처럼 혼란을 가져오기도 합니다.
 
 ```js
-const foo = 'foo';
-foo.bar = 'hi';
-console.log(foo.bar); //undefined
+const foo = 'foo'
+foo.bar = 'hi'
+console.log(foo.bar) //undefined
 ```
 
 타입스크립트는 이러한 자바스크립트 동작을 위해
@@ -385,11 +385,11 @@ console.log(foo.bar); //undefined
 
 ```ts
 function getStringLength(foo: String) {
-  return foo.length;
+  return foo.length
 }
 
-getStringLen('hello'); // OK
-getStringLen(new String('hello')); // OK
+getStringLen('hello') // OK
+getStringLen(new String('hello')) // OK
 ```
 
 그러나, string은 String에 할당할 수 있지만, String은
@@ -397,7 +397,7 @@ string에 할당할 수 없습니다.
 
 ```ts
 function isSubString(subString: String) {
-  return 'hello'.includes(subString);
+  return 'hello'.includes(subString)
   //Argument of type 'String' is not assignable to parameter of type 'string'.
 }
 ```
@@ -417,8 +417,8 @@ function isSubString(subString: String) {
 
 ```ts
 interface Room {
-  numDoors: number;
-  ceilingHeightFt: number;
+  numDoors: number
+  ceilingHeightFt: number
 }
 const r: Room = {
   numDoors: 1,
@@ -426,7 +426,7 @@ const r: Room = {
   elephant: 'present',
   // ~~~~ Object literal may only specify known properties,
   //      and 'elephant' does not exist in type 'Room'
-};
+}
 ```
 
 하지만, 구조적 타이핑 관점으로 생각해보면
@@ -438,15 +438,15 @@ r은 구조적으로 Room 타입에 해당하는 속성을 모두
 
 ```ts
 interface Room {
-  numDoors: number;
-  ceilingHeightFt: number;
+  numDoors: number
+  ceilingHeightFt: number
 }
 const obj = {
   numDoors: 1,
   ceilingHeightFt: 10,
   elephant: 'present',
-};
-const r: Room = obj; // OK
+}
+const r: Room = obj // OK
 ```
 
 타입스크립트는 **타입 시스템의 구조적 본질을 해치지 않으면서,
@@ -504,7 +504,74 @@ const get: HTTPFunction = (url, options) => { ... }
 const post: HTTPFunction = (url, options) => { ... }
 ```
 
-이미 존재하는
+이미 존재하는 인터페이스를 확장해서 반복을 제거할 수 있습니다.
+
+```ts
+interface Person {
+  firstName: string
+  lastName: string
+}
+
+interface PersonWithBirthDate extends Person {
+  birth?: Date
+}
+
+type PersonWithBirthDate = Person & { birth?: Date }
+```
+
+제너릭 타입을 사용하여 중복을 제거할 수 있습니다.
+타입스크립트는 자주 사용되는 타입 변환을 모델링하여
+[유틸리티 타입](https://www.typescriptlang.org/ko/docs/handbook/utility-types.html)
+을 제공합니다.
+
+가령 다수의 중복된 속성을 가진 두 타입이 있다면,
+State의 속성을 인덱싱하여 topNavState를 정의할 수 있습니다.
+
+```ts
+interface State {
+  userId: string
+  pageTitle: string
+  recentFiles: string[]
+  pageContents: string
+}
+interface TopNavState {
+  userId: string
+  pageTitle: string
+  recentFiles: string[]
+}
+```
+
+```ts
+type TopNavState = {
+  userId: State['userId']
+  pageTitle: State['pageTitle']
+  recentFiles: State['recentFiles']
+}
+```
+
+하거나, 여전히 남아있는 중복은 매핑된 타입으로
+중복을 제거할 수 있습니다. 이러한 패턴은 중복 제거에
+자주 등장하는 패턴이며 이를 모델링하여 타입스크립트는
+유틸리티 제너릭 타입 [Pick](https://www.typescriptlang.org/ko/docs/handbook/utility-types.html#picktype-keys)
+을 제공합니다.
+
+```ts
+type TopNavState = {
+  [k in 'userId' | 'pageTitle' | 'recentFiles']: State[k]
+}
+
+type TopNavState = Pick<State, 'userId' | 'pageTitle' | 'recentFiles'>
+```
+
+반복적인 작업을 줄이기 위해 노력하는 만큼, 타입의 공간에서
+또한 반복을 주의해야 합니다.
+
+## 9. 객체의 숫자 키를 허용하고 문자열 키와 다르게 인식한다
+
+동적인 데이터에 대해서 인덱스 시그니처를 사용합니다. 인덱스 시그니처는 키, 값의
+타입의 조합입니다. 키의 왜 타입이 필요할까
+
+(아이템 16, 인덱스 시그니처)
 
 ## 9. 타입 단언보다는 타입 선언을 하는 것이 낫다 (후보)
 
@@ -515,11 +582,11 @@ const post: HTTPFunction = (url, options) => { ... }
 
 ```ts
 interface Person {
-  name: string;
+  name: string
 }
 
-const alice: Person = { name: 'Alice' };
-const bob = { name: 'Bob' } as Person;
+const alice: Person = { name: 'Alice' }
+const bob = { name: 'Bob' } as Person
 ```
 
 타입 선언은 할당되는 값이 해당 타입을 만족하는 지
@@ -532,12 +599,12 @@ const alice: Person = {
   occupation: 'Typescript developer',
   // ~~~~~ Object literal may only specify known properties
   //       and 'occupation' does not exist in type 'Person'
-};
+}
 
 const bob = {
   name: 'Bob',
   occupation: 'Javascript developer',
-} as Person; //No error
+} as Person //No error
 ```
 
 타입 단언을 사용하면 문제가 해결되는 것처럼 보이지만
@@ -545,10 +612,10 @@ const bob = {
 
 ```ts
 interface Person {
-  name: string;
+  name: string
 }
 
-const people = ['alice', 'bob', 'jan'].map((name) => ({} as Person));
+const people = ['alice', 'bob', 'jan'].map(name => ({} as Person))
 //No error
 ```
 
@@ -557,9 +624,9 @@ const people = ['alice', 'bob', 'jan'].map((name) => ({} as Person));
 개발자가 판단하는 타입이 더 정확할 때 유효합니다.
 
 ```ts
-document.querySelector('#myButton').addEventListener('click', (e) => {
-  e.currentTarget; //타입은 EventTarget;
-  const button = e.currentTarget as HTMLButtonElement;
-  button; //타입은 HTMLButtonElement;
-});
+document.querySelector('#myButton').addEventListener('click', e => {
+  e.currentTarget //타입은 EventTarget;
+  const button = e.currentTarget as HTMLButtonElement
+  button //타입은 HTMLButtonElement;
+})
 ```
