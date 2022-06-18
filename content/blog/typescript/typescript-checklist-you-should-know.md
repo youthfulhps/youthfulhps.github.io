@@ -625,7 +625,71 @@ const x1 = xs['1']
 그럼에도 타입 체크 단계에서 혼란스러운 자바스크립트의 동작을 오류로
 잡을 수 있어 충분히 유용합니다.
 
-## 10. 타입 단언보다는 타입 선언을 하는 것이 낫다
+## 10. 인덱스 시그니처는 동적 데이터에만 사용되어야 한다
+
+CSV 파일을 파싱하여 행과 열을 값으로 매칭하는 객체로
+나타내고 싶은 경우, 객체의 프로퍼티 스펙을 명확히
+알 수 없는 경우에 대해 미리 동적 데이터에 대한 타입을
+지정해야 한다면, 키와 값 쌍의 타입 시그니처인
+인덱스 시그니처를 사용할 수 있습니다.
+
+```ts
+type TestScore = { [property: string]: number }
+const testScore: TestScore = {
+  math: 90,
+  english: 85,
+}
+```
+
+하지만, **인덱스 시그니처는 동적 데이터에 대한 타입을 지정할 때만
+사용되어야 하며 객체의 가능한 필드가 제한되어 있는 경우라면 인덱스
+시그니처로 모델링하지 말아야 합니다.**
+객체 키의 string 타입은 매우 넓은 값을 포함하는 타입이기 때문에
+잘못된 키를 포함한 모든 문자열 키를 허용하는 위험이 있으며, 객체의
+키값에 대한 자동완성 기능을 제공받지 못하게 됩니다.
+
+만약 데이터의 키가 한정적이지만 존재 여부를 몰라 인덱스 시그니처를
+사용했다면, 선택적 필드를 사용하거나 유니온 타입으로 모델링할 수 있습니다.
+
+```ts
+interface Row1 {
+  a: number
+  b?: number
+  c?: number
+  d?: number
+}
+
+type Row2 =
+  | { a: number }
+  | { a: number; b: number }
+  | { a: number; b: number; c: number }
+  | { a: number; b: number; c: number; d: number }
+```
+
+이러한 방법이 번거롭다면, 키 타입에 유연성을 부여하는 [Record](https://www.typescriptlang.org/ko/docs/handbook/utility-types.html#recordkeystype)
+제너릭 타입을 사용할 수도 있습니다.
+
+```ts
+type Vec3D = Record<'x' | 'y' | 'z', number>
+// Type Vec3D = {
+//   x: number;
+//   y: number;
+//   z: number;
+// }
+```
+
+키마다 별도의 타입을 사용해야 한다면, 매핑된 타입을 사용할 수 있습니다.
+
+```ts
+type ABC = { [k in 'x' | 'y' | 'z']: k extends 'y' ? string : number }
+// Type ABC = {
+//   a: number;
+//   y: string;
+//   c: number;
+// }
+```
+
+## 11. 타입 단언보다는 타입 선언을 하는 것이 낫다
 
 변수가 값을 할당하고 타입을 부여하려면 변수에 타입을 선언하여
 그 값이 선언된 타입임을 명시하거나,
