@@ -500,7 +500,6 @@ function getDistance(a: Point2D, b: Point2D) {
 type HTTPFunction = (url: string, opts: Options) => Promise<Response>;
 
 const get: HTTPFunction = (url, options) => { ... }
-
 const post: HTTPFunction = (url, options) => { ... }
 ```
 
@@ -568,12 +567,65 @@ type TopNavState = Pick<State, 'userId' | 'pageTitle' | 'recentFiles'>
 
 ## 9. 객체의 숫자 키를 허용하고 문자열 키와 다르게 인식한다
 
-동적인 데이터에 대해서 인덱스 시그니처를 사용합니다. 인덱스 시그니처는 키, 값의
-타입의 조합입니다. 키의 왜 타입이 필요할까
+자바스크립트의 객체는 키와 값의 모음입니다. 키는 일반적으로 문자열이고
+값은 어떤 것이든 될 수 있습니다. 여기서, 일반적으로 문자열이라는
+것은 더 복잡한 객체를 키로 사용해도 문제가 되지 않음을 이야기합니다.
 
-(아이템 16, 인덱스 시그니처)
+```js
+const x = {}
+x[[1, 2, 3]] = 2
+console.log(x) // {'1,2,3': 2};
+```
 
-## 9. 타입 단언보다는 타입 선언을 하는 것이 낫다 (후보)
+자바스크립트는 '해시 기능' 객체라는 표현이 없기 때문에 만약, **문자열이
+아닌 더 복잡한 객체를 키로 사용하려 한다면, 내부적으로 toString 메서드가
+호출되어 객체를 문자열로 반환하여 키로 사용합니다.**
+
+물론 객체의 키를 숫자로 사용한다면, 문자열로 변환되며
+숫자로 인덱싱하는 배열 또한 객체로서 배열의 모든 숫자 인덱스들은
+문자열로 변환되어 사용됩니다.
+
+```js
+const x = {
+  1: 2,
+  3: 4,
+}
+console.log(x) // {'1': 2, '3': 4};
+
+console.log(typeof []) // 'object'
+const x = [1, 2, 3]
+console.log(x[0]) // 1
+console.log(x['1']) // 2
+console.log(Object.keys(x)) // ['0', '1', '2']
+console.log(typeof Object.keys(x)[0]) // 'string'
+```
+
+타입스크립트는 **혼란스러운 자바스크립트의 동작을 그대로 모델링하지 않고,
+숫자 키를 허용하며 문자열 키와는 다른 것으로 인식합니다.**
+
+```ts
+// lib.es5.d.ts
+
+interface Array<T> {
+  ...
+  [n: number]: T;
+}
+```
+
+```ts
+const xs = [1, 2, 3]
+const x0 = xs[0] // OK
+const x1 = xs['1']
+// ~~~~ Element implicitly has an 'any' type
+//      because index expression is not of type 'number'
+```
+
+숫자 키와 문자열 키를 다른 것으로 보는 타입스크립트의 동작은
+타입 체크 단계에서만 유효한 런타임에는 모두 제거되는 가상의 동작입니다.
+그럼에도 타입 체크 단계에서 혼란스러운 자바스크립트의 동작을 오류로
+잡을 수 있어 충분히 유용합니다.
+
+## 10. 타입 단언보다는 타입 선언을 하는 것이 낫다
 
 변수가 값을 할당하고 타입을 부여하려면 변수에 타입을 선언하여
 그 값이 선언된 타입임을 명시하거나,
