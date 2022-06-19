@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Youthfulhps.dev]]></title><description><![CDATA[Blog posted front-end, troubleshooting!]]></description><link>https://youthfulhps.dev</link><generator>GatsbyJS</generator><lastBuildDate>Sat, 18 Jun 2022 09:45:04 GMT</lastBuildDate><item><title><![CDATA[typescript-checklist-you-should-know]]></title><description><![CDATA[단순히 자바스크립트에 타입을 명시한다고 해서 타입스크립트 개발자라고
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Youthfulhps.dev]]></title><description><![CDATA[Blog posted front-end, troubleshooting!]]></description><link>https://youthfulhps.dev</link><generator>GatsbyJS</generator><lastBuildDate>Sun, 19 Jun 2022 09:26:52 GMT</lastBuildDate><item><title><![CDATA[typescript-checklist-you-should-know]]></title><description><![CDATA[단순히 자바스크립트에 타입을 명시한다고 해서 타입스크립트 개발자라고
 치환되면 안된다 라고 생각합니다.…]]></description><link>https://youthfulhps.dev/typescript/typescript-checklist-you-should-know/</link><guid isPermaLink="false">https://youthfulhps.dev/typescript/typescript-checklist-you-should-know/</guid><pubDate>Tue, 14 Jun 2022 10:06:39 GMT</pubDate><content:encoded>&lt;p&gt;단순히 자바스크립트에 타입을 명시한다고 해서 타입스크립트 개발자라고
 치환되면 안된다 라고 생각합니다.&lt;/p&gt;
 &lt;h2 id=&quot;1-코드-생성과-타입-체크는-독립적이다&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#1-%EC%BD%94%EB%93%9C-%EC%83%9D%EC%84%B1%EA%B3%BC-%ED%83%80%EC%9E%85-%EC%B2%B4%ED%81%AC%EB%8A%94-%EB%8F%85%EB%A6%BD%EC%A0%81%EC%9D%B4%EB%8B%A4&quot; aria-label=&quot;1 코드 생성과 타입 체크는 독립적이다 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;1. 코드 생성과 타입 체크는 독립적이다&lt;/h2&gt;
@@ -548,7 +548,92 @@ console&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span cl
   e&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;currentTarget &lt;span class=&quot;token comment&quot;&gt;//타입은 EventTarget;&lt;/span&gt;
   &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; button &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; e&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;currentTarget &lt;span class=&quot;token keyword&quot;&gt;as&lt;/span&gt; HTMLButtonElement
   button &lt;span class=&quot;token comment&quot;&gt;//타입은 HTMLButtonElement;&lt;/span&gt;
-&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content:encoded></item><item><title><![CDATA[stale-while-revalidate 전략은 어떻게 활용되고 있을까]]></title><description><![CDATA[클라이언트를 개발하면서 HTTP Cache-Control Extensions for Stale Content의
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&quot;12-타입-추론은-잘못된-추론을-할-만큼-구체적으로-수행되지-않는다&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#12-%ED%83%80%EC%9E%85-%EC%B6%94%EB%A1%A0%EC%9D%80-%EC%9E%98%EB%AA%BB%EB%90%9C-%EC%B6%94%EB%A1%A0%EC%9D%84-%ED%95%A0-%EB%A7%8C%ED%81%BC-%EA%B5%AC%EC%B2%B4%EC%A0%81%EC%9C%BC%EB%A1%9C-%EC%88%98%ED%96%89%EB%90%98%EC%A7%80-%EC%95%8A%EB%8A%94%EB%8B%A4&quot; aria-label=&quot;12 타입 추론은 잘못된 추론을 할 만큼 구체적으로 수행되지 않는다 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;12. 타입 추론은 잘못된 추론을 할 만큼 구체적으로 수행되지 않는다&lt;/h2&gt;
+&lt;p&gt;타입 체커는 타입이 명시되어 있지 않은 코드에 대해
+할당된 값과 문맥을 통해 가능한 값들의 집합을 유추하여
+타입을 추론하는 기능을 제공하기 때문에 장황하게 타입 구문
+을 넣을 필요가 없습니다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;ts&quot;&gt;&lt;pre class=&quot;language-ts&quot;&gt;&lt;code class=&quot;language-ts&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;let&lt;/span&gt; x&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token builtin&quot;&gt;number&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;12&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;let&lt;/span&gt; x &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;12&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;하지만, 타입 추론은 넓은 타입 추론으로 인해 발생할 수 있는
+오류를 잡고자 노력하지만, &lt;strong&gt;명확성과 유연성을 유지하기 위해
+잘못된 추론을 할 만큼 구체적으로 수행하지는 않습니다.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;타입 추론 과정에서 가능한 값들을 포함하는 집합을 찾기 위한
+타입스크립트의 동작을 ‘타입 넓히기’라고 하며, 작성자의 의도가
+명확하지 않은 코드에 대해 명확성과 유연성을 유지하기 위해
+많은 타입의 후보군을 추론하게 됩니다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;ts&quot;&gt;&lt;pre class=&quot;language-ts&quot;&gt;&lt;code class=&quot;language-ts&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; mixed &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;x&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;yaml&quot;&gt;&lt;pre class=&quot;language-yaml&quot;&gt;&lt;code class=&quot;language-yaml&quot;&gt;(&apos;x&apos;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; 1)&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;x&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;string&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; number&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;
+readonly &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;string&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; number&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;
+(string&lt;span class=&quot;token punctuation&quot;&gt;|&lt;/span&gt;number)&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;
+readonly (string&lt;span class=&quot;token punctuation&quot;&gt;|&lt;/span&gt;number)&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;any&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; any&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;
+any&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;타입 넓히기 과정을 제어하고 더 좁은 타입으로
+추론할 수 있도록 작성자의 의도를 전달해야 합니다.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;함수의 파라미터에 할당하고자 하는 값을 변수로 분리해내면
+타입스크립트는 할당 시점에 타입을 추론하기 때문에 변수
+language는 string으로 추론되어 아래와 같은 에러가 발생합니다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;ts&quot;&gt;&lt;pre class=&quot;language-ts&quot;&gt;&lt;code class=&quot;language-ts&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;type&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;Language&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;JavaScript&apos;&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;TypeScript&apos;&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;Python&apos;&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;setLanguage&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;language&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; Language&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token comment&quot;&gt;/* ... */&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;let&lt;/span&gt; language &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;Javascript&apos;&lt;/span&gt;
+&lt;span class=&quot;token function&quot;&gt;setLanguage&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;language&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;token comment&quot;&gt;// ~~~~ Argument of type &apos;string&apos; is not assignable&lt;/span&gt;
+&lt;span class=&quot;token comment&quot;&gt;//      to parameter of type &apos;Language&apos;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;명시된 타입 구문을 적절히 제공하여 타입 추론의 강도를 제어할
+수 있습니다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;ts&quot;&gt;&lt;pre class=&quot;language-ts&quot;&gt;&lt;code class=&quot;language-ts&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;let&lt;/span&gt; language&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; Language &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;Javascript&apos;&lt;/span&gt;
+&lt;span class=&quot;token function&quot;&gt;setLanguage&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;language&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;//OK&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;넓혀진 타입을 제한하기 위해 함수 파라미터에 문자열 리터럴
+값을 직접 제공하여 문자열 리터럴 타입으로 추론되도록 유도할 수 있습니다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;ts&quot;&gt;&lt;pre class=&quot;language-ts&quot;&gt;&lt;code class=&quot;language-ts&quot;&gt;&lt;span class=&quot;token function&quot;&gt;setLanguage&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;Javascript&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;//OK&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;let을 const로 사용하여 선언하면, 재할당이 없을 것이라는
+의도를 전달하여 더 좁은 타입으로 추론될 수 있도록
+유도할 수 있습니다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;ts&quot;&gt;&lt;pre class=&quot;language-ts&quot;&gt;&lt;code class=&quot;language-ts&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;let&lt;/span&gt; x &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;x&apos;&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;// type is string&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; y &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;y&apos;&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;// type is &apos;y&apos;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;ts&quot;&gt;&lt;pre class=&quot;language-ts&quot;&gt;&lt;code class=&quot;language-ts&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; language &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;Javascript&apos;&lt;/span&gt;
+&lt;span class=&quot;token function&quot;&gt;setLanguage&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;language&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;//OK&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;추가적인 예시로, 객체의 경우 타입스크립트의 넓히기 알고리즘에 의해
+각 요소가 let으로 할당된 것처럼 다루기 때문에 여전히
+구체적으로 타입을 추론할 수 없는 문제가 존재합니다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;ts&quot;&gt;&lt;pre class=&quot;language-ts&quot;&gt;&lt;code class=&quot;language-ts&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;type&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;Language&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;JavaScript&apos;&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;TypeScript&apos;&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;Python&apos;&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;GovernedLanguage&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  language&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; Language
+  organization&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token builtin&quot;&gt;string&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;complain&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;language&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; GovernedLanguage&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token comment&quot;&gt;/* ... */&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;token function&quot;&gt;complain&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; language&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;TypeScript&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; organization&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;Microsoft&apos;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;// OK&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; ts &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  language&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;TypeScript&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+  organization&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;Microsoft&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token function&quot;&gt;complain&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;ts&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;token comment&quot;&gt;//       ~~ Argument of type &apos;{ language: string; organization: string; }&apos;&lt;/span&gt;
+&lt;span class=&quot;token comment&quot;&gt;//            is not assignable to parameter of type &apos;GovernedLanguage&apos;&lt;/span&gt;
+&lt;span class=&quot;token comment&quot;&gt;//          Types of property &apos;language&apos; are incompatible&lt;/span&gt;
+&lt;span class=&quot;token comment&quot;&gt;//            Type &apos;string&apos; is not assignable to type &apos;Language&apos;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;이럴 때는 ‘상수 문맥(as const)‘을 제공할 수 있습니다. &lt;strong&gt;const는
+단지 값이 가리키는 참조가 변하지 않는 얕은 상수인 반면,
+as const는 그 값이 내부까지 상수라는 사실을 타입스크립트에게
+알려주는 타입 공간의 기법입니다.&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;ts&quot;&gt;&lt;pre class=&quot;language-ts&quot;&gt;&lt;code class=&quot;language-ts&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; ts &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  language&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;TypeScript&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+  organization&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;Microsoft&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt;
+
+&lt;span class=&quot;token function&quot;&gt;complain&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;ts&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;// OK&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content:encoded></item><item><title><![CDATA[stale-while-revalidate 전략은 어떻게 활용되고 있을까]]></title><description><![CDATA[클라이언트를 개발하면서 HTTP Cache-Control Extensions for Stale Content의
  확장 디렉티브 전략을 기반으로한
 구현체들을 많이 접하게 되는데요. swr…]]></description><link>https://youthfulhps.dev/web/stale-while-ravalidate/</link><guid isPermaLink="false">https://youthfulhps.dev/web/stale-while-ravalidate/</guid><pubDate>Wed, 01 Jun 2022 16:07:27 GMT</pubDate><content:encoded>&lt;p&gt;클라이언트를 개발하면서 &lt;a href=&quot;https://datatracker.ietf.org/doc/html/rfc5861&quot;&gt;HTTP Cache-Control Extensions for Stale Content&lt;/a&gt;의
 &lt;code class=&quot;language-text&quot;&gt;stale-while-revalidate (swr)&lt;/code&gt; 확장 디렉티브 전략을 기반으로한
