@@ -746,3 +746,129 @@ document.querySelector('#myButton').addEventListener('click', e => {
   button //타입은 HTMLButtonElement;
 })
 ```
+
+## 12. 타입 추론은 잘못된 추론을 할 만큼 구체적으로 수행되지 않는다
+
+타입 체커는 타입이 명시되어 있지 않은 코드에 대해
+할당된 값과 문맥을 통해 가능한 값들의 집합을 유추하여
+타입을 추론하는 기능을 제공하기 때문에 장황하게 타입 구문
+을 넣을 필요가 없습니다.
+
+```ts
+let x: number = 12
+let x = 12
+```
+
+하지만, 타입 추론은 넓은 타입 추론으로 인해 발생할 수 있는
+오류를 잡고자 노력하지만, **명확성과 유연성을 유지하기 위해
+잘못된 추론을 할 만큼 구체적으로 수행하지는 않습니다.**
+
+타입 추론 과정에서 가능한 값들을 포함하는 집합을 찾기 위한
+타입스크립트의 동작을 '타입 넓히기'라고 하며, 작성자의 의도가
+명확하지 않은 코드에 대해 명확성과 유연성을 유지하기 위해
+많은 타입의 후보군을 추론하게 됩니다.
+
+```ts
+const mixed = ['x', 1]
+```
+
+```yaml
+('x', 1)[]
+['x', 1]
+[string, number]
+readonly [string, number]
+(string|number)[]
+readonly (string|number)[]
+[any, any]
+any[]
+```
+
+**타입 넓히기 과정을 제어하고 더 좁은 타입으로
+추론할 수 있도록 작성자의 의도를 전달해야 합니다.**
+
+함수의 파라미터에 할당하고자 하는 값을 변수로 분리해내면
+타입스크립트는 할당 시점에 타입을 추론하기 때문에 변수
+language는 string으로 추론되어 아래와 같은 에러가 발생합니다.
+
+```ts
+type Language = 'JavaScript' | 'TypeScript' | 'Python'
+function setLanguage(language: Language) {
+  /* ... */
+}
+
+let language = 'Javascript'
+setLanguage(language)
+// ~~~~ Argument of type 'string' is not assignable
+//      to parameter of type 'Language'
+```
+
+명시된 타입 구문을 적절히 제공하여 타입 추론의 강도를 제어할
+수 있습니다.
+
+```ts
+let language: Language = 'Javascript'
+setLanguage(language) //OK
+```
+
+넓혀진 타입을 제한하기 위해 함수 파라미터에 문자열 리터럴
+값을 직접 제공하여 문자열 리터럴 타입으로 추론되도록 유도할 수 있습니다.
+
+```ts
+setLanguage('Javascript') //OK
+```
+
+let을 const로 사용하여 선언하면, 재할당이 없을 것이라는
+의도를 전달하여 더 좁은 타입으로 추론될 수 있도록
+유도할 수 있습니다.
+
+```ts
+let x = 'x' // type is string
+const y = 'y' // type is 'y'
+```
+
+```ts
+const language = 'Javascript'
+setLanguage(language) //OK
+```
+
+추가적인 예시로, 객체의 경우 타입스크립트의 넓히기 알고리즘에 의해
+각 요소가 let으로 할당된 것처럼 다루기 때문에 여전히
+구체적으로 타입을 추론할 수 없는 문제가 존재합니다.
+
+```ts
+type Language = 'JavaScript' | 'TypeScript' | 'Python'
+interface GovernedLanguage {
+  language: Language
+  organization: string
+}
+
+function complain(language: GovernedLanguage) {
+  /* ... */
+}
+
+complain({ language: 'TypeScript', organization: 'Microsoft' }) // OK
+
+const ts = {
+  language: 'TypeScript',
+  organization: 'Microsoft',
+}
+complain(ts)
+//       ~~ Argument of type '{ language: string; organization: string; }'
+//            is not assignable to parameter of type 'GovernedLanguage'
+//          Types of property 'language' are incompatible
+//            Type 'string' is not assignable to type 'Language'
+```
+
+이럴 때는 '상수 문맥(as const)'을 제공할 수 있습니다. **const는
+단지 값이 가리키는 참조가 변하지 않는 얕은 상수인 반면,
+as const는 그 값이 내부까지 상수라는 사실을 타입스크립트에게
+알려주는 타입 공간의 기법입니다.**
+
+```ts
+const ts = {
+  language: 'TypeScript',
+  organization: 'Microsoft',
+} as const
+
+complain(ts) // OK
+```
