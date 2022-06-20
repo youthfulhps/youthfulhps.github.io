@@ -872,3 +872,84 @@ const ts = {
 
 complain(ts) // OK
 ```
+
+## 13. string 타입보다는 더 구체적인 타입 사용을 고민해야 한다
+
+string은 매우 넓은 범위의 타입입니다. string은 any와
+마찬가지로 더 좁은 타입으로 대체할 수 있을 가능성이 높습니다.
+
+Album 인터페이스를 정의할 때, string을 남발한 덕분에
+주석에 타입 정보를 적어두었습니다.
+타입으로 가능한 값을 좁히지 못하여 주석을 사용했다면,
+인터페이스에 문제가 있다는 것을 증명합니다.
+
+```ts
+interface Album {
+  artist: string
+  title: string
+  releaseDate: string // YYYY-MM-DD
+  recordingType: string // E.g., "live" or "studio"
+}
+```
+
+또한 주석에 명시되어 있는 규칙을 따르지 않아도 타입은
+문제없이 타입 체크를 통과합니다.
+
+```ts
+const kindOfBlue: Album = {
+  artist: 'Miles Davis',
+  title: 'Kind of Blue',
+  releaseDate: 'August 17th, 1959', // Oops!
+  recordingType: 'Studio', // Oops!
+} // OK
+```
+
+releaseDate는 Date 객체를 사용하여 날짜 형식으로만
+제한하고, recordingType은 'live' | 'studio'
+두 가지 값으로 제한된 유니온 타입으로 정의하여 사용하는
+것이 좋습니다.
+
+```ts
+type RecordingType = 'studio' | 'live'
+
+interface Album {
+  artist: string
+  title: string
+  releaseDate: Date
+  recordingType: RecordingType
+}
+```
+
+타입을 좁혀두면, 타입스크립트가 오류를 더 세밀하게
+체크할 수 있고, 타입을 명시적으로 정의하여 다른 곳으로
+값이 전달되어도 타입 정보를 유지시킬 수 있으며
+keyof 연산자로 더욱 세밀하게 객체의 속성 체크가
+가능해집니다.
+
+다른 예시로 객체 배열에서 한 필드의 값만 추출하는 함수를 작성할 때,
+키 값으로 전달할 매개 변수의 타입이 string이기 때문에
+타입 체크에 문제는 없지만, 반환값에 any가 사용되어
+any의 영향력이 퍼져나가게 됩니다.
+
+```ts
+function pluck<T>(record: T[], key: string): any[] {
+  return record.map(r => r[key])
+  // ~~~~~~ Element implicitly has an 'any' type
+  //        because type '{}' has no index signature
+}
+```
+
+타입 시그니처와 가능한 키 값을 keyof를 통해 제한하여
+사용하거나, 더 좁히기 위해 `keyof T`의 부분 집합으로
+두 번째 제너릭 매개변수로 전달하여 완벽하게 좁혀진 타입으로
+string을 대체할 수 있습니다.
+
+```ts
+function pluck<T>(record: T[], key: keyof T) {
+  return record.map(r => r[key])
+}
+
+function pluck<T, K extends keyof T>(record: T[], key: K): T[K][] {
+  return record.map(r => r[key])
+}
+```
