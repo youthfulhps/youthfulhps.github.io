@@ -2,7 +2,7 @@
 title: 타입스크립트, 글로 배웠습니다만
 date: 2022-06-14 10:06:39
 category: typescript
-thumbnail: 
+thumbnail:
 draft: false
 ---
 
@@ -11,14 +11,14 @@ draft: false
 타입스크립트로 시작한 프로젝트도 있었던 반면, 자바스크립트에서
 타입스크립트로 마이그레이션해야 하는 프로젝트들도 있었는데요.
 
-타입스크립트는 '자바스크립트에 타입을 부여한 언어' 라고 생각할 수 있지만,
+타입스크립트는 단순히 '자바스크립트에 타입을 부여한 언어' 라고 생각할 수 있지만,
 최근 몇 개월동안 어설프게 시작한 타입스크립트를 다시 공부하면서
-'단순히 자바스크립트에 타입을 명시한다고 해서 타입스크립트를
+'자바스크립트에 타입을 명시한다고 해서 타입스크립트를
 사용할 줄 안다' 라고 치환될 수 없음을 느꼈고,
 주로 [이펙티브 타입스크립트](https://effectivetypescript.com/)
 를 [TIL/typescript](https://github.com/youthfulhps/TIL/tree/main/typescript)
 에 정리하고, [타입 챌린지](https://github.com/youthfulhps/type-challenges)
-도 도전해보며 타입스크립트에 대한 이해와 자바스크립트와의 관계를
+도 도전해보며 타입스크립트, 그리고 자바스크립트와의 관계를
 깊게 이해하기 위해 노력하고 있습니다.
 
 이 글의 목적은 이펙티브 타입스크립트와 그 외 타입스크립트에
@@ -38,7 +38,7 @@ js 파일을 ts 파일로 변경해도 문제가 없습니다.
 
 ```js
 function sayHello(who: string) {
-  console.log("Hello", who);
+  console.log('Hello', who)
 }
 
 //SyntaxError: Unexpected token : ,in node
@@ -271,12 +271,12 @@ interface IPair<T> {
 
 ```ts
 class StateT implements TState {
-  name: string = "";
-  capital: string = "";
+  name: string = ''
+  capital: string = ''
 }
 class StateI implements IState {
-  name: string = "";
-  capital: string = "";
+  name: string = ''
+  capital: string = ''
 }
 ```
 
@@ -284,16 +284,16 @@ class StateI implements IState {
 
 ```ts
 interface IStateWithPop extends TState {
-  population: number;
+  population: number
 }
-type TStateWithPop = IState & { population: number };
+type TStateWithPop = IState & { population: number }
 ```
 
 대표적인 공통점이 있는 반면 차이점도 존재하는데,
 유니온 타입은 있지만 유니온 인터페이스라는 개념은 없습니다.
 
 ```ts
-type AorB = "a" | "b";
+type AorB = 'a' | 'b'
 ```
 
 '일반적으로' 타입과 인터페이스는 서로 확장 가능하다는 것은
@@ -304,8 +304,12 @@ type AorB = "a" | "b";
 
 ```ts
 type AorB = 'A' | 'B'
-type Input = { /* ... */ }
-type Output = { /* ... */ }
+type Input = {
+  /* ... */
+}
+type Output = {
+  /* ... */
+}
 
 interface VariableMap {
   [name: string]: Input | Output
@@ -1030,16 +1034,16 @@ function parseYAML(yaml: string): any {
 }
 
 interface Book {
-  name: string;
-  author: string;
+  name: string
+  author: string
 }
 const book: Book = parseYAML(`
   name: Wuthering Heights
   author: Emily Brontë
-`);
+`)
 
-alert(book.title); // No error, alerts "undefined" at runtime
-book("read"); // No error, throws "TypeError: book is not a
+alert(book.title) // No error, alerts "undefined" at runtime
+book('read') // No error, throws "TypeError: book is not a
 // function" at runtime
 ```
 
@@ -1049,16 +1053,16 @@ book("read"); // No error, throws "TypeError: book is not a
 
 ```ts
 function safeParseYAML(yaml: string): unknown {
-  return parseYAML(yaml);
+  return parseYAML(yaml)
 }
 
 const book = safeParseYAML(`
   name: Villette
   author: Charlotte Brontë
-`) as Book;
-alert(book.title);
+`) as Book
+alert(book.title)
 // ~~~~~ Property 'title' does not exist on type 'Book'
-book("read");
+book('read')
 // ~~~~~~~~~ this expression is not callable
 ```
 
@@ -1069,7 +1073,7 @@ book("read");
 ```ts
 function processValue(val: unknown) {
   if (val instanceof Date) {
-    val; // Type is Date
+    val // Type is Date
   }
 }
 ```
@@ -1079,12 +1083,12 @@ function processValue(val: unknown) {
 ```ts
 function isBook(val: unknown): val is Book {
   return (
-    typeof val === "object" && val !== null && "name" in val && "author" in val
-  );
+    typeof val === 'object' && val !== null && 'name' in val && 'author' in val
+  )
 }
 function processValue(val: unknown) {
   if (isBook(val)) {
-    val; // Type is Book
+    val // Type is Book
   }
 }
 ```
