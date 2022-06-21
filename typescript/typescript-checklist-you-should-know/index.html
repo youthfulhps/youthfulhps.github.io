@@ -92,7 +92,7 @@
 자바스크립트 런타임에서는 오류로 출력하지만, 반대로
 js 파일을 ts 파일로 변경해도 문제가 없습니다.</p>
 <div class="gatsby-highlight" data-language="js"><pre class="language-js"><code class="language-js"><span class="token keyword">function</span> <span class="token function">sayHello</span><span class="token punctuation">(</span><span class="token parameter"><span class="token literal-property property">who</span><span class="token operator">:</span> string</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'Hello'</span><span class="token punctuation">,</span> who<span class="token punctuation">)</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'Hello'</span><span class="token punctuation">,</span> who<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 
 <span class="token comment">//SyntaxError: Unexpected token : ,in node</span></code></pre></div>
@@ -109,8 +109,8 @@ js 파일을 ts 파일로 변경해도 문제가 없습니다.</p>
 <p>아래의 코드는 타입 체커에게 다음과 같은 지적을 받지만,
 자바스크립트 코드로서 문법적 오류가 없다면, 문제없이 컴파일됩니다.</p>
 <div class="gatsby-highlight" data-language="ts"><pre class="language-ts"><code class="language-ts"><span class="token comment">// main.ts</span>
-<span class="token keyword">let</span> greetings <span class="token operator">=</span> <span class="token string">'hello'</span>
-greetings <span class="token operator">=</span> <span class="token number">1234</span></code></pre></div>
+<span class="token keyword">let</span> greetings <span class="token operator">=</span> <span class="token string">'hello'</span><span class="token punctuation">;</span>
+greetings <span class="token operator">=</span> <span class="token number">1234</span><span class="token punctuation">;</span></code></pre></div>
 <div class="gatsby-highlight" data-language="shell"><pre class="language-shell"><code class="language-shell">~$ tsc main.ts
 main.ts:2:1 -error <span class="token punctuation">..</span>. <span class="token string">'1234'</span> 형식은 <span class="token string">'string'</span> 형식에 할당할 수 없습니다.</code></pre></div>
 <p>타입 체크에는 문제가 있지만, 컴파일이 수행되는 타입스크립트의
@@ -125,20 +125,20 @@ main.ts:2:1 -error <span class="token punctuation">..</span>. <span class="token
 <code class="language-text">Rectangle</code>은 타입이기 때문에 런타임 시점에 아무런 역할을
 할 수 없습니다.</p>
 <div class="gatsby-highlight" data-language="ts"><pre class="language-ts"><code class="language-ts"><span class="token keyword">interface</span> <span class="token class-name">Square</span> <span class="token punctuation">{</span>
-  width<span class="token operator">:</span> <span class="token builtin">number</span>
+  width<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 
 <span class="token keyword">interface</span> <span class="token class-name">Rectangle</span> <span class="token keyword">extends</span> <span class="token class-name">Square</span> <span class="token punctuation">{</span>
-  height<span class="token operator">:</span> <span class="token builtin">number</span>
+  height<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 
-<span class="token keyword">type</span> <span class="token class-name">Shape</span> <span class="token operator">=</span> Square <span class="token operator">|</span> Rectangle
+<span class="token keyword">type</span> <span class="token class-name">Shape</span> <span class="token operator">=</span> Square <span class="token operator">|</span> Rectangle<span class="token punctuation">;</span>
 
 <span class="token keyword">function</span> <span class="token function">calculateArea</span><span class="token punctuation">(</span>shape<span class="token operator">:</span> Shape<span class="token punctuation">)</span> <span class="token punctuation">{</span>
   <span class="token keyword">if</span> <span class="token punctuation">(</span>shape <span class="token keyword">instanceof</span> <span class="token class-name">Rectangle</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">return</span> shape<span class="token punctuation">.</span>width <span class="token operator">*</span> shape <span class="token operator">*</span> height
+    <span class="token keyword">return</span> shape<span class="token punctuation">.</span>width <span class="token operator">*</span> shape <span class="token operator">*</span> height<span class="token punctuation">;</span>
   <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
-    <span class="token keyword">return</span> shape<span class="token punctuation">.</span>width <span class="token operator">*</span> shape<span class="token punctuation">.</span>width
+    <span class="token keyword">return</span> shape<span class="token punctuation">.</span>width <span class="token operator">*</span> shape<span class="token punctuation">.</span>width<span class="token punctuation">;</span>
   <span class="token punctuation">}</span>
 <span class="token punctuation">}</span></code></pre></div>
 <p>런타임에 타입 정보를 유지하고자 한다면 속성의 존재 여부를
@@ -170,17 +170,17 @@ main.ts:2:1 -error <span class="token punctuation">..</span>. <span class="token
 
 <span class="token keyword">class</span> <span class="token class-name">Rectangle</span> <span class="token keyword">extends</span> <span class="token class-name">Square</span> <span class="token punctuation">{</span>
   <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token keyword">public</span> width<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">,</span> <span class="token keyword">public</span> height<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">super</span><span class="token punctuation">(</span>width<span class="token punctuation">)</span>
+    <span class="token keyword">super</span><span class="token punctuation">(</span>width<span class="token punctuation">)</span><span class="token punctuation">;</span>
   <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 
-<span class="token keyword">type</span> <span class="token class-name">Shape</span> <span class="token operator">=</span> Square <span class="token operator">|</span> Rectangle
+<span class="token keyword">type</span> <span class="token class-name">Shape</span> <span class="token operator">=</span> Square <span class="token operator">|</span> Rectangle<span class="token punctuation">;</span>
 
 <span class="token keyword">function</span> <span class="token function">calculateArea</span><span class="token punctuation">(</span>shape<span class="token operator">:</span> Shape<span class="token punctuation">)</span> <span class="token punctuation">{</span>
   <span class="token keyword">if</span> <span class="token punctuation">(</span>shape <span class="token keyword">instanceof</span> <span class="token class-name">Rectangle</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">return</span> shape<span class="token punctuation">.</span>width <span class="token operator">*</span> shape <span class="token operator">*</span> height
+    <span class="token keyword">return</span> shape<span class="token punctuation">.</span>width <span class="token operator">*</span> shape <span class="token operator">*</span> height<span class="token punctuation">;</span>
   <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
-    <span class="token keyword">return</span> shape<span class="token punctuation">.</span>width <span class="token operator">*</span> shape<span class="token punctuation">.</span>width
+    <span class="token keyword">return</span> shape<span class="token punctuation">.</span>width <span class="token operator">*</span> shape<span class="token punctuation">.</span>width<span class="token punctuation">;</span>
   <span class="token punctuation">}</span>
 <span class="token punctuation">}</span></code></pre></div>
 <h2 id="4-덕-타이핑-기반-자바스크립트를-모델링한다" style="position:relative;"><a href="#4-%EB%8D%95-%ED%83%80%EC%9D%B4%ED%95%91-%EA%B8%B0%EB%B0%98-%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%EB%A5%BC-%EB%AA%A8%EB%8D%B8%EB%A7%81%ED%95%9C%EB%8B%A4" aria-label="4 덕 타이핑 기반 자바스크립트를 모델링한다 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>4. 덕 타이핑 기반 자바스크립트를 모델링한다</h2>
@@ -193,30 +193,30 @@ calculateArea의 매개변수로 NamedRectangle 타입의 객체를
 사용해도 정상적으로 동작하는 것이 타입스크립트가 구조적 타이핑을
 모델링하고 있음을 보여줍니다.</p>
 <div class="gatsby-highlight" data-language="ts"><pre class="language-ts"><code class="language-ts"><span class="token keyword">interface</span> <span class="token class-name">Square</span> <span class="token punctuation">{</span>
-  width<span class="token operator">:</span> <span class="token builtin">number</span>
+  width<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 
 <span class="token keyword">interface</span> <span class="token class-name">Rectangle</span> <span class="token keyword">extends</span> <span class="token class-name">Square</span> <span class="token punctuation">{</span>
-  height<span class="token operator">:</span> <span class="token builtin">number</span>
+  height<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 
 <span class="token keyword">interface</span> <span class="token class-name">NamedRectangle</span> <span class="token punctuation">{</span>
-  name<span class="token operator">:</span> <span class="token builtin">string</span>
-  width<span class="token operator">:</span> <span class="token builtin">number</span>
-  height<span class="token operator">:</span> <span class="token builtin">number</span>
+  name<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
+  width<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">;</span>
+  height<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 
 <span class="token keyword">function</span> <span class="token function">calculateArea</span><span class="token punctuation">(</span>rectangle<span class="token operator">:</span> Rectangle<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-  <span class="token keyword">return</span> rectangle<span class="token punctuation">.</span>width <span class="token operator">*</span> rectangle<span class="token punctuation">.</span>height
+  <span class="token keyword">return</span> rectangle<span class="token punctuation">.</span>width <span class="token operator">*</span> rectangle<span class="token punctuation">.</span>height<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 
 <span class="token keyword">const</span> rectangle<span class="token operator">:</span> NamedRectangle <span class="token operator">=</span> <span class="token punctuation">{</span>
   name<span class="token operator">:</span> <span class="token string">'namedRectangle'</span><span class="token punctuation">,</span>
   width<span class="token operator">:</span> <span class="token number">3</span><span class="token punctuation">,</span>
   height<span class="token operator">:</span> <span class="token number">4</span><span class="token punctuation">,</span>
-<span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
 
-<span class="token function">calculateArea</span><span class="token punctuation">(</span>rectangle<span class="token punctuation">)</span> <span class="token comment">//OK</span></code></pre></div>
+<span class="token function">calculateArea</span><span class="token punctuation">(</span>rectangle<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//OK</span></code></pre></div>
 <p>이러한 관점에서 함수를 작성할 때 호출에 사용되는 매개변수의 속성들이
 선언된 타입에 국한되어 있지 않고 ‘열려 (open)’ 있음을 인지해야
 합니다.</p>
@@ -225,14 +225,14 @@ calculateArea의 매개변수로 NamedRectangle 타입의 객체를
 정의할 수 있습니다. 일반적으로 두 방법 모두 사용가능하지만,
 그 차이점을 이해하고 사용의 일관성을 유지하도록 노력해야 합니다.</p>
 <div class="gatsby-highlight" data-language="ts"><pre class="language-ts"><code class="language-ts"><span class="token keyword">type</span> <span class="token class-name">TState</span> <span class="token operator">=</span> <span class="token punctuation">{</span>
-  name<span class="token operator">:</span> <span class="token builtin">string</span>
-  age<span class="token operator">:</span> <span class="token builtin">number</span>
-<span class="token punctuation">}</span>
+  name<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
+  age<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
 
 <span class="token keyword">type</span> <span class="token class-name">IState</span> <span class="token operator">=</span> <span class="token punctuation">{</span>
-  name<span class="token operator">:</span> <span class="token builtin">string</span>
-  age<span class="token operator">:</span> <span class="token builtin">number</span>
-<span class="token punctuation">}</span></code></pre></div>
+  name<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
+  age<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>type과 interface 모두 추가적인 속성을 할당하면 동일한
 오류가 발생합니다.</p>
 <div class="gatsby-highlight" data-language="ts"><pre class="language-ts"><code class="language-ts"><span class="token keyword">const</span> foo<span class="token operator">:</span> TState <span class="token operator">=</span> <span class="token punctuation">{</span>
@@ -242,90 +242,90 @@ calculateArea의 매개변수로 NamedRectangle 타입의 객체를
   <span class="token comment">// ~~~~ Type ... is not assignable to type 'TState'</span>
   <span class="token comment">//      Object literal may only specify known properties, and</span>
   <span class="token comment">//     'organization' does not exist in type 'TState'</span>
-<span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
 
-<span class="token keyword">type</span> <span class="token class-name">TDict</span> <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token punctuation">[</span>key<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">]</span><span class="token operator">:</span> <span class="token builtin">string</span> <span class="token punctuation">}</span>
+<span class="token keyword">type</span> <span class="token class-name">TDict</span> <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token punctuation">[</span>key<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">]</span><span class="token operator">:</span> <span class="token builtin">string</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
 <span class="token keyword">interface</span> <span class="token class-name">IDict</span> <span class="token punctuation">{</span>
-  <span class="token punctuation">[</span>key<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">]</span><span class="token operator">:</span> <span class="token builtin">string</span>
+  <span class="token punctuation">[</span>key<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">]</span><span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span></code></pre></div>
 <p>두 방법 모두 인덱스 시그니처, 함수 타입, 제너릭이 가능합니다.</p>
 <div class="gatsby-highlight" data-language="ts"><pre class="language-ts"><code class="language-ts"><span class="token comment">//index signature</span>
-<span class="token keyword">type</span> <span class="token class-name">TDict</span> <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token punctuation">[</span>key<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">]</span><span class="token operator">:</span> <span class="token builtin">string</span> <span class="token punctuation">}</span>
+<span class="token keyword">type</span> <span class="token class-name">TDict</span> <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token punctuation">[</span>key<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">]</span><span class="token operator">:</span> <span class="token builtin">string</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
 <span class="token keyword">interface</span> <span class="token class-name">IDict</span> <span class="token punctuation">{</span>
-  <span class="token punctuation">[</span>key<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">]</span><span class="token operator">:</span> <span class="token builtin">string</span>
+  <span class="token punctuation">[</span>key<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">]</span><span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 
 <span class="token comment">//function type</span>
-<span class="token class-name"><span class="token keyword">type</span></span> <span class="token function-variable function">TFn</span> <span class="token operator">=</span> <span class="token punctuation">(</span>x<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token builtin">string</span>
+<span class="token class-name"><span class="token keyword">type</span></span> <span class="token function-variable function">TFn</span> <span class="token operator">=</span> <span class="token punctuation">(</span>x<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token builtin">string</span><span class="token punctuation">;</span>
 <span class="token keyword">interface</span> <span class="token class-name">IFn</span> <span class="token punctuation">{</span>
-  <span class="token punctuation">(</span>x<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">string</span>
+  <span class="token punctuation">(</span>x<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 
 <span class="token comment">//generic</span>
 <span class="token keyword">type</span> <span class="token class-name">TPair<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">></span></span> <span class="token operator">=</span> <span class="token punctuation">{</span>
-  first<span class="token operator">:</span> <span class="token constant">T</span>
-  second<span class="token operator">:</span> <span class="token constant">T</span>
-<span class="token punctuation">}</span>
+  first<span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">;</span>
+  second<span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
 <span class="token keyword">interface</span> <span class="token class-name">IPair<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">></span></span> <span class="token punctuation">{</span>
-  first<span class="token operator">:</span> <span class="token constant">T</span>
-  second<span class="token operator">:</span> <span class="token constant">T</span>
+  first<span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">;</span>
+  second<span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span></code></pre></div>
 <p>두 방법 모두 클래스를 구현할 때 사용할 수 있습니다.</p>
 <div class="gatsby-highlight" data-language="ts"><pre class="language-ts"><code class="language-ts"><span class="token keyword">class</span> <span class="token class-name">StateT</span> <span class="token keyword">implements</span> <span class="token class-name">TState</span> <span class="token punctuation">{</span>
-  name<span class="token operator">:</span> <span class="token builtin">string</span> <span class="token operator">=</span> <span class="token string">''</span>
-  capital<span class="token operator">:</span> <span class="token builtin">string</span> <span class="token operator">=</span> <span class="token string">''</span>
+  name<span class="token operator">:</span> <span class="token builtin">string</span> <span class="token operator">=</span> <span class="token string">''</span><span class="token punctuation">;</span>
+  capital<span class="token operator">:</span> <span class="token builtin">string</span> <span class="token operator">=</span> <span class="token string">''</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 <span class="token keyword">class</span> <span class="token class-name">StateI</span> <span class="token keyword">implements</span> <span class="token class-name">IState</span> <span class="token punctuation">{</span>
-  name<span class="token operator">:</span> <span class="token builtin">string</span> <span class="token operator">=</span> <span class="token string">''</span>
-  capital<span class="token operator">:</span> <span class="token builtin">string</span> <span class="token operator">=</span> <span class="token string">''</span>
+  name<span class="token operator">:</span> <span class="token builtin">string</span> <span class="token operator">=</span> <span class="token string">''</span><span class="token punctuation">;</span>
+  capital<span class="token operator">:</span> <span class="token builtin">string</span> <span class="token operator">=</span> <span class="token string">''</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span></code></pre></div>
 <p>일반적으로 타입과 인터페이스는 서로 확장할 수 있습니다.</p>
 <div class="gatsby-highlight" data-language="ts"><pre class="language-ts"><code class="language-ts"><span class="token keyword">interface</span> <span class="token class-name">IStateWithPop</span> <span class="token keyword">extends</span> <span class="token class-name">TState</span> <span class="token punctuation">{</span>
-  population<span class="token operator">:</span> <span class="token builtin">number</span>
+  population<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-<span class="token keyword">type</span> <span class="token class-name">TStateWithPop</span> <span class="token operator">=</span> IState <span class="token operator">&amp;</span> <span class="token punctuation">{</span> population<span class="token operator">:</span> <span class="token builtin">number</span> <span class="token punctuation">}</span></code></pre></div>
+<span class="token keyword">type</span> <span class="token class-name">TStateWithPop</span> <span class="token operator">=</span> IState <span class="token operator">&amp;</span> <span class="token punctuation">{</span> population<span class="token operator">:</span> <span class="token builtin">number</span> <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>대표적인 공통점이 있는 반면 차이점도 존재하는데,
 유니온 타입은 있지만 유니온 인터페이스라는 개념은 없습니다.</p>
-<div class="gatsby-highlight" data-language="ts"><pre class="language-ts"><code class="language-ts"><span class="token keyword">type</span> <span class="token class-name">AorB</span> <span class="token operator">=</span> <span class="token string">'a'</span> <span class="token operator">|</span> <span class="token string">'b'</span></code></pre></div>
+<div class="gatsby-highlight" data-language="ts"><pre class="language-ts"><code class="language-ts"><span class="token keyword">type</span> <span class="token class-name">AorB</span> <span class="token operator">=</span> <span class="token string">'a'</span> <span class="token operator">|</span> <span class="token string">'b'</span><span class="token punctuation">;</span></code></pre></div>
 <p>‘일반적으로’ 타입과 인터페이스는 서로 확장 가능하다는 것은
 인터페이스가 유니온 타입을 확장할 수 없음을 담고 있습니다.
 또한, 인터페이스는 복잡한 타입 (유니온 타입, 원시값,
 템플릿 리터럴, 튜플 등) 을 확장하지 못해
 흔히 type은 interface 보다 쓰임새가 많습니다.</p>
-<div class="gatsby-highlight" data-language="ts"><pre class="language-ts"><code class="language-ts"><span class="token keyword">type</span> <span class="token class-name">AorB</span> <span class="token operator">=</span> <span class="token string">'A'</span> <span class="token operator">|</span> <span class="token string">'B'</span>
+<div class="gatsby-highlight" data-language="ts"><pre class="language-ts"><code class="language-ts"><span class="token keyword">type</span> <span class="token class-name">AorB</span> <span class="token operator">=</span> <span class="token string">'A'</span> <span class="token operator">|</span> <span class="token string">'B'</span><span class="token punctuation">;</span>
 <span class="token keyword">type</span> <span class="token class-name">Input</span> <span class="token operator">=</span> <span class="token punctuation">{</span>
   <span class="token comment">/* ... */</span>
-<span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
 <span class="token keyword">type</span> <span class="token class-name">Output</span> <span class="token operator">=</span> <span class="token punctuation">{</span>
   <span class="token comment">/* ... */</span>
-<span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
 
 <span class="token keyword">interface</span> <span class="token class-name">VariableMap</span> <span class="token punctuation">{</span>
-  <span class="token punctuation">[</span>name<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">]</span><span class="token operator">:</span> Input <span class="token operator">|</span> Output
+  <span class="token punctuation">[</span>name<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">]</span><span class="token operator">:</span> Input <span class="token operator">|</span> Output<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 
-<span class="token keyword">type</span> <span class="token class-name">NamedVariable</span> <span class="token operator">=</span> <span class="token punctuation">(</span>Input <span class="token operator">|</span> Output<span class="token punctuation">)</span> <span class="token operator">&amp;</span> <span class="token punctuation">{</span> name<span class="token operator">:</span> <span class="token builtin">string</span> <span class="token punctuation">}</span></code></pre></div>
+<span class="token keyword">type</span> <span class="token class-name">NamedVariable</span> <span class="token operator">=</span> <span class="token punctuation">(</span>Input <span class="token operator">|</span> Output<span class="token punctuation">)</span> <span class="token operator">&amp;</span> <span class="token punctuation">{</span> name<span class="token operator">:</span> <span class="token builtin">string</span> <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>type은 튜플과 배열 타입도 간결하게 표현할 수 있습니다.
 물론 interface로도 구현이 가능하지만, 튜플에서
 사용할 수 있는 concat과 같은 메서드를 사용할 수 없기 때문에
 튜플은 type을 통해 구현하는 것이 낫습니다.</p>
-<div class="gatsby-highlight" data-language="ts"><pre class="language-ts"><code class="language-ts"><span class="token keyword">type</span> <span class="token class-name">Pair</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token builtin">number</span><span class="token punctuation">,</span> <span class="token builtin">number</span><span class="token punctuation">]</span>
-<span class="token keyword">type</span> <span class="token class-name">StringList</span> <span class="token operator">=</span> <span class="token builtin">string</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
-<span class="token keyword">type</span> <span class="token class-name">NamedNums</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token builtin">string</span><span class="token punctuation">,</span> <span class="token operator">...</span><span class="token builtin">number</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">]</span></code></pre></div>
+<div class="gatsby-highlight" data-language="ts"><pre class="language-ts"><code class="language-ts"><span class="token keyword">type</span> <span class="token class-name">Pair</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token builtin">number</span><span class="token punctuation">,</span> <span class="token builtin">number</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token keyword">type</span> <span class="token class-name">StringList</span> <span class="token operator">=</span> <span class="token builtin">string</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token keyword">type</span> <span class="token class-name">NamedNums</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token builtin">string</span><span class="token punctuation">,</span> <span class="token operator">...</span><span class="token builtin">number</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">;</span></code></pre></div>
 <p>반면 인터페이스는 속성을 확장하는 ‘선언 병합’
 을 통해 보강이 가능합니다.</p>
 <div class="gatsby-highlight" data-language="ts"><pre class="language-ts"><code class="language-ts"><span class="token keyword">interface</span> <span class="token class-name">IState</span> <span class="token punctuation">{</span>
-  name<span class="token operator">:</span> <span class="token builtin">string</span>
-  age<span class="token operator">:</span> <span class="token builtin">number</span>
+  name<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
+  age<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 <span class="token keyword">interface</span> <span class="token class-name">IState</span> <span class="token punctuation">{</span>
-  organization<span class="token operator">:</span> <span class="token builtin">string</span>
+  organization<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 <span class="token keyword">const</span> foo<span class="token operator">:</span> IState <span class="token operator">=</span> <span class="token punctuation">{</span>
   name<span class="token operator">:</span> <span class="token string">'foo'</span><span class="token punctuation">,</span>
   age<span class="token operator">:</span> <span class="token number">29</span><span class="token punctuation">,</span>
   organization<span class="token operator">:</span> <span class="token string">'fastfive'</span><span class="token punctuation">,</span>
-<span class="token punctuation">}</span> <span class="token comment">// OK</span></code></pre></div>
+<span class="token punctuation">}</span><span class="token punctuation">;</span> <span class="token comment">// OK</span></code></pre></div>
 <p>선언 병합은 주로 타입 선언 파일에서 사용됩니다.
 예를 들어, <em>lib.es5.d.ts</em> 에 선언되어 있는 Array 인터페이스가
 <em>lib.es2015.d.ts</em> 에 선언된 인터페이스를 병합하여
@@ -354,12 +354,12 @@ any <span class="token punctuation">-</span><span class="token punctuation">></s
 전달하기 위해 any를 사용한다면, any로 명시하는 것 보다는
 차라리 f2 처럼 사용처에서 단언하여 사용하는 것이 낫습니다.</p>
 <div class="gatsby-highlight" data-language="ts"><pre class="language-ts"><code class="language-ts"><span class="token keyword">interface</span> <span class="token class-name">Foo</span> <span class="token punctuation">{</span>
-  foo<span class="token operator">:</span> <span class="token builtin">string</span>
+  foo<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 <span class="token keyword">interface</span> <span class="token class-name">Bar</span> <span class="token punctuation">{</span>
-  bar<span class="token operator">:</span> <span class="token builtin">string</span>
+  bar<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-<span class="token keyword">declare</span> <span class="token keyword">function</span> <span class="token function">expressionReturningFoo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> Foo
+<span class="token keyword">declare</span> <span class="token keyword">function</span> <span class="token function">expressionReturningFoo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> Foo<span class="token punctuation">;</span>
 
 <span class="token keyword">function</span> <span class="token function">processBar</span><span class="token punctuation">(</span>b<span class="token operator">:</span> Bar<span class="token punctuation">)</span> <span class="token punctuation">{</span>
   <span class="token comment">/* ... */</span>
@@ -367,14 +367,14 @@ any <span class="token punctuation">-</span><span class="token punctuation">></s
 
 <span class="token comment">//// Don't do this</span>
 <span class="token keyword">function</span> <span class="token function">f1</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-  <span class="token keyword">const</span> x<span class="token operator">:</span> <span class="token builtin">any</span> <span class="token operator">=</span> <span class="token function">expressionReturningFoo</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-  <span class="token function">processBar</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span>
+  <span class="token keyword">const</span> x<span class="token operator">:</span> <span class="token builtin">any</span> <span class="token operator">=</span> <span class="token function">expressionReturningFoo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">processBar</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 
 <span class="token comment">// Prefer this</span>
 <span class="token keyword">function</span> <span class="token function">f2</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-  <span class="token keyword">const</span> x <span class="token operator">=</span> <span class="token function">expressionReturningFoo</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-  <span class="token function">processBar</span><span class="token punctuation">(</span>x <span class="token keyword">as</span> <span class="token builtin">any</span><span class="token punctuation">)</span>
+  <span class="token keyword">const</span> x <span class="token operator">=</span> <span class="token function">expressionReturningFoo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">processBar</span><span class="token punctuation">(</span>x <span class="token keyword">as</span> <span class="token builtin">any</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span></code></pre></div>
 <p>f1에서 x 타입은 <code class="language-text">processBar</code> 호출 이후에도 여전히 any 타입인
 반면, f2는 사용처 영역에서만 any 타입으로 단언되어 호출 이후
@@ -388,29 +388,29 @@ undefined, symbol, bigint)이 있습니다. 기본형들은
 불변이고 메서드를 가지고 있지 않다는 점에서 객체와 구분됩니다.</p>
 <p>하지만 기본형인 string은 메서드가 호출이 되어 마치 메서드를
 가지고 있는 것 처럼 보이지만, string의 메서드가 아닙니다.</p>
-<div class="gatsby-highlight" data-language="js"><pre class="language-js"><code class="language-js"><span class="token string">'string'</span><span class="token punctuation">.</span><span class="token function">charAt</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span> <span class="token comment">//"i"</span></code></pre></div>
+<div class="gatsby-highlight" data-language="js"><pre class="language-js"><code class="language-js"><span class="token string">'string'</span><span class="token punctuation">.</span><span class="token function">charAt</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//"i"</span></code></pre></div>
 <p>자바스크립트는 기본형과 객체 타입을 서로 자유롭게 변환하여
 기본형에서 charAt에 접근할 때, 자바스크립트는 <strong>기본형을
 String 객체로 래핑하고 메서드를 호출하고 래핑한 객체를
 버립니다.</strong> 이러한 동작으로 아래의 코드처럼 혼란을 가져오기도 합니다.</p>
-<div class="gatsby-highlight" data-language="js"><pre class="language-js"><code class="language-js"><span class="token keyword">const</span> foo <span class="token operator">=</span> <span class="token string">'foo'</span>
-foo<span class="token punctuation">.</span>bar <span class="token operator">=</span> <span class="token string">'hi'</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>foo<span class="token punctuation">.</span>bar<span class="token punctuation">)</span> <span class="token comment">//undefined</span></code></pre></div>
+<div class="gatsby-highlight" data-language="js"><pre class="language-js"><code class="language-js"><span class="token keyword">const</span> foo <span class="token operator">=</span> <span class="token string">'foo'</span><span class="token punctuation">;</span>
+foo<span class="token punctuation">.</span>bar <span class="token operator">=</span> <span class="token string">'hi'</span><span class="token punctuation">;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>foo<span class="token punctuation">.</span>bar<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//undefined</span></code></pre></div>
 <p>타입스크립트는 이러한 자바스크립트 동작을 위해
 기본형 타입과 객체 래퍼 타입을 구분지어 모델링합니다.
 즉, 기본형 타입과 객체 래퍼 타입은 다릅니다.</p>
 <p>하지만 string을 String으로 잘못 타이핑하기 쉽고, 실수를
 하더라도 아래의 코드처럼 잘 동작하는 것처럼 보일 수 있습니다.</p>
 <div class="gatsby-highlight" data-language="ts"><pre class="language-ts"><code class="language-ts"><span class="token keyword">function</span> <span class="token function">getStringLength</span><span class="token punctuation">(</span>foo<span class="token operator">:</span> String<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-  <span class="token keyword">return</span> foo<span class="token punctuation">.</span>length
+  <span class="token keyword">return</span> foo<span class="token punctuation">.</span>length<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 
-<span class="token function">getStringLen</span><span class="token punctuation">(</span><span class="token string">'hello'</span><span class="token punctuation">)</span> <span class="token comment">// OK</span>
-<span class="token function">getStringLen</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">String</span><span class="token punctuation">(</span><span class="token string">'hello'</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">// OK</span></code></pre></div>
+<span class="token function">getStringLen</span><span class="token punctuation">(</span><span class="token string">'hello'</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// OK</span>
+<span class="token function">getStringLen</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">String</span><span class="token punctuation">(</span><span class="token string">'hello'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// OK</span></code></pre></div>
 <p>그러나, string은 String에 할당할 수 있지만, String은
 string에 할당할 수 없습니다.</p>
 <div class="gatsby-highlight" data-language="ts"><pre class="language-ts"><code class="language-ts"><span class="token keyword">function</span> <span class="token function">isSubString</span><span class="token punctuation">(</span>subString<span class="token operator">:</span> String<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-  <span class="token keyword">return</span> <span class="token string">'hello'</span><span class="token punctuation">.</span><span class="token function">includes</span><span class="token punctuation">(</span>subString<span class="token punctuation">)</span>
+  <span class="token keyword">return</span> <span class="token string">'hello'</span><span class="token punctuation">.</span><span class="token function">includes</span><span class="token punctuation">(</span>subString<span class="token punctuation">)</span><span class="token punctuation">;</span>
   <span class="token comment">//Argument of type 'String' is not assignable to parameter of type 'string'.</span>
 <span class="token punctuation">}</span></code></pre></div>
 <p>타입스크립트가 제공하는 타입 선언은 전부 기본형 타입으로
@@ -423,8 +423,8 @@ string에 할당할 수 없습니다.</p>
 타입이 명시되어 있는 변수에 명명된 속성의 매개변수 외의
 속성을 할당하려 한다면 오류가 발생합니다.</p>
 <div class="gatsby-highlight" data-language="ts"><pre class="language-ts"><code class="language-ts"><span class="token keyword">interface</span> <span class="token class-name">Room</span> <span class="token punctuation">{</span>
-  numDoors<span class="token operator">:</span> <span class="token builtin">number</span>
-  ceilingHeightFt<span class="token operator">:</span> <span class="token builtin">number</span>
+  numDoors<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">;</span>
+  ceilingHeightFt<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 <span class="token keyword">const</span> r<span class="token operator">:</span> Room <span class="token operator">=</span> <span class="token punctuation">{</span>
   numDoors<span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
@@ -432,22 +432,22 @@ string에 할당할 수 없습니다.</p>
   elephant<span class="token operator">:</span> <span class="token string">'present'</span><span class="token punctuation">,</span>
   <span class="token comment">// ~~~~ Object literal may only specify known properties,</span>
   <span class="token comment">//      and 'elephant' does not exist in type 'Room'</span>
-<span class="token punctuation">}</span></code></pre></div>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>하지만, 구조적 타이핑 관점으로 생각해보면
 r은 구조적으로 Room 타입에 해당하는 속성을 모두
 가지고 있기 때문에 오류가 발생하지 않아야 합니다.</p>
 <p>다른 예시로, 임시 변수를 도입하여 Room 타입에 할당한다면
 오류가 발생하지 않습니다.</p>
 <div class="gatsby-highlight" data-language="ts"><pre class="language-ts"><code class="language-ts"><span class="token keyword">interface</span> <span class="token class-name">Room</span> <span class="token punctuation">{</span>
-  numDoors<span class="token operator">:</span> <span class="token builtin">number</span>
-  ceilingHeightFt<span class="token operator">:</span> <span class="token builtin">number</span>
+  numDoors<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">;</span>
+  ceilingHeightFt<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 <span class="token keyword">const</span> obj <span class="token operator">=</span> <span class="token punctuation">{</span>
   numDoors<span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
   ceilingHeightFt<span class="token operator">:</span> <span class="token number">10</span><span class="token punctuation">,</span>
   elephant<span class="token operator">:</span> <span class="token string">'present'</span><span class="token punctuation">,</span>
-<span class="token punctuation">}</span>
-<span class="token keyword">const</span> r<span class="token operator">:</span> Room <span class="token operator">=</span> obj <span class="token comment">// OK</span></code></pre></div>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> r<span class="token operator">:</span> Room <span class="token operator">=</span> obj<span class="token punctuation">;</span> <span class="token comment">// OK</span></code></pre></div>
 <p>타입스크립트는 <strong>타입 시스템의 구조적 본질을 해치지 않으면서,
 알 수 없는 객체 리터럴의 속성을 허용하지 않도록 하여
 구조적 타입 시스템에서 발생할 수 있는 중요한 오류를 잡을 수
@@ -490,15 +490,15 @@ r은 구조적으로 Room 타입에 해당하는 속성을 모두
 <span class="token keyword">const</span> post<span class="token operator">:</span> <span class="token function-variable function">HTTPFunction</span> <span class="token operator">=</span> <span class="token punctuation">(</span>url<span class="token punctuation">,</span> options<span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span> <span class="token operator">...</span> <span class="token punctuation">}</span></code></pre></div>
 <p>이미 존재하는 인터페이스를 확장해서 반복을 제거할 수 있습니다.</p>
 <div class="gatsby-highlight" data-language="ts"><pre class="language-ts"><code class="language-ts"><span class="token keyword">interface</span> <span class="token class-name">Person</span> <span class="token punctuation">{</span>
-  firstName<span class="token operator">:</span> <span class="token builtin">string</span>
-  lastName<span class="token operator">:</span> <span class="token builtin">string</span>
+  firstName<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
+  lastName<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 
 <span class="token keyword">interface</span> <span class="token class-name">PersonWithBirthDate</span> <span class="token keyword">extends</span> <span class="token class-name">Person</span> <span class="token punctuation">{</span>
-  birth<span class="token operator">?</span><span class="token operator">:</span> Date
+  birth<span class="token operator">?</span><span class="token operator">:</span> Date<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 
-<span class="token keyword">type</span> <span class="token class-name">PersonWithBirthDate</span> <span class="token operator">=</span> Person <span class="token operator">&amp;</span> <span class="token punctuation">{</span> birth<span class="token operator">?</span><span class="token operator">:</span> Date <span class="token punctuation">}</span></code></pre></div>
+<span class="token keyword">type</span> <span class="token class-name">PersonWithBirthDate</span> <span class="token operator">=</span> Person <span class="token operator">&amp;</span> <span class="token punctuation">{</span> birth<span class="token operator">?</span><span class="token operator">:</span> Date <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>제너릭 타입을 사용하여 중복을 제거할 수 있습니다.
 타입스크립트는 자주 사용되는 타입 변환을 모델링하여
 <a href="https://www.typescriptlang.org/ko/docs/handbook/utility-types.html">유틸리티 타입</a>
@@ -506,40 +506,40 @@ r은 구조적으로 Room 타입에 해당하는 속성을 모두
 <p>가령 다수의 중복된 속성을 가진 두 타입이 있다면,
 State의 속성을 인덱싱하여 topNavState를 정의할 수 있습니다.</p>
 <div class="gatsby-highlight" data-language="ts"><pre class="language-ts"><code class="language-ts"><span class="token keyword">interface</span> <span class="token class-name">State</span> <span class="token punctuation">{</span>
-  userId<span class="token operator">:</span> <span class="token builtin">string</span>
-  pageTitle<span class="token operator">:</span> <span class="token builtin">string</span>
-  recentFiles<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
-  pageContents<span class="token operator">:</span> <span class="token builtin">string</span>
+  userId<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
+  pageTitle<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
+  recentFiles<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+  pageContents<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 <span class="token keyword">interface</span> <span class="token class-name">TopNavState</span> <span class="token punctuation">{</span>
-  userId<span class="token operator">:</span> <span class="token builtin">string</span>
-  pageTitle<span class="token operator">:</span> <span class="token builtin">string</span>
-  recentFiles<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
+  userId<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
+  pageTitle<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
+  recentFiles<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span></code></pre></div>
 <div class="gatsby-highlight" data-language="ts"><pre class="language-ts"><code class="language-ts"><span class="token keyword">type</span> <span class="token class-name">TopNavState</span> <span class="token operator">=</span> <span class="token punctuation">{</span>
-  userId<span class="token operator">:</span> State<span class="token punctuation">[</span><span class="token string">'userId'</span><span class="token punctuation">]</span>
-  pageTitle<span class="token operator">:</span> State<span class="token punctuation">[</span><span class="token string">'pageTitle'</span><span class="token punctuation">]</span>
-  recentFiles<span class="token operator">:</span> State<span class="token punctuation">[</span><span class="token string">'recentFiles'</span><span class="token punctuation">]</span>
-<span class="token punctuation">}</span></code></pre></div>
+  userId<span class="token operator">:</span> State<span class="token punctuation">[</span><span class="token string">'userId'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+  pageTitle<span class="token operator">:</span> State<span class="token punctuation">[</span><span class="token string">'pageTitle'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+  recentFiles<span class="token operator">:</span> State<span class="token punctuation">[</span><span class="token string">'recentFiles'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>하거나, 여전히 남아있는 중복은 매핑된 타입으로
 중복을 제거할 수 있습니다. 이러한 패턴은 중복 제거에
 자주 등장하는 패턴이며 이를 모델링하여 타입스크립트는
 유틸리티 제너릭 타입 <a href="https://www.typescriptlang.org/ko/docs/handbook/utility-types.html#picktype-keys">Pick</a>
 을 제공합니다.</p>
 <div class="gatsby-highlight" data-language="ts"><pre class="language-ts"><code class="language-ts"><span class="token keyword">type</span> <span class="token class-name">TopNavState</span> <span class="token operator">=</span> <span class="token punctuation">{</span>
-  <span class="token punctuation">[</span>k <span class="token keyword">in</span> <span class="token string">'userId'</span> <span class="token operator">|</span> <span class="token string">'pageTitle'</span> <span class="token operator">|</span> <span class="token string">'recentFiles'</span><span class="token punctuation">]</span><span class="token operator">:</span> State<span class="token punctuation">[</span>k<span class="token punctuation">]</span>
-<span class="token punctuation">}</span>
+  <span class="token punctuation">[</span>k <span class="token keyword">in</span> <span class="token string">'userId'</span> <span class="token operator">|</span> <span class="token string">'pageTitle'</span> <span class="token operator">|</span> <span class="token string">'recentFiles'</span><span class="token punctuation">]</span><span class="token operator">:</span> State<span class="token punctuation">[</span>k<span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
 
-<span class="token keyword">type</span> <span class="token class-name">TopNavState</span> <span class="token operator">=</span> Pick<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> <span class="token string">'userId'</span> <span class="token operator">|</span> <span class="token string">'pageTitle'</span> <span class="token operator">|</span> <span class="token string">'recentFiles'</span><span class="token operator">></span></code></pre></div>
+<span class="token keyword">type</span> <span class="token class-name">TopNavState</span> <span class="token operator">=</span> Pick<span class="token operator">&lt;</span>State<span class="token punctuation">,</span> <span class="token string">'userId'</span> <span class="token operator">|</span> <span class="token string">'pageTitle'</span> <span class="token operator">|</span> <span class="token string">'recentFiles'</span><span class="token operator">></span><span class="token punctuation">;</span></code></pre></div>
 <p>반복적인 작업을 줄이기 위해 노력하는 만큼, 타입의 공간에서
 또한 반복을 주의해야 합니다.</p>
 <h2 id="10-객체의-숫자-키를-허용하고-문자열-키와-다르게-인식한다" style="position:relative;"><a href="#10-%EA%B0%9D%EC%B2%B4%EC%9D%98-%EC%88%AB%EC%9E%90-%ED%82%A4%EB%A5%BC-%ED%97%88%EC%9A%A9%ED%95%98%EA%B3%A0-%EB%AC%B8%EC%9E%90%EC%97%B4-%ED%82%A4%EC%99%80-%EB%8B%A4%EB%A5%B4%EA%B2%8C-%EC%9D%B8%EC%8B%9D%ED%95%9C%EB%8B%A4" aria-label="10 객체의 숫자 키를 허용하고 문자열 키와 다르게 인식한다 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>10. 객체의 숫자 키를 허용하고 문자열 키와 다르게 인식한다</h2>
 <p>자바스크립트의 객체는 키와 값의 모음입니다. 키는 일반적으로 문자열이고
 값은 어떤 것이든 될 수 있습니다. 여기서, 일반적으로 문자열이라는
 것은 더 복잡한 객체를 키로 사용해도 문제가 되지 않음을 이야기합니다.</p>
-<div class="gatsby-highlight" data-language="js"><pre class="language-js"><code class="language-js"><span class="token keyword">const</span> x <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
-x<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">2</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span> <span class="token comment">// {'1,2,3': 2};</span></code></pre></div>
+<div class="gatsby-highlight" data-language="js"><pre class="language-js"><code class="language-js"><span class="token keyword">const</span> x <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+x<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// {'1,2,3': 2};</span></code></pre></div>
 <p>자바스크립트는 ‘해시 기능’ 객체라는 표현이 없기 때문에 만약, <strong>문자열이
 아닌 더 복잡한 객체를 키로 사용하려 한다면, 내부적으로 toString 메서드가
 호출되어 객체를 문자열로 반환하여 키로 사용합니다.</strong></p>
@@ -549,15 +549,15 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <div class="gatsby-highlight" data-language="js"><pre class="language-js"><code class="language-js"><span class="token keyword">const</span> x <span class="token operator">=</span> <span class="token punctuation">{</span>
   <span class="token number">1</span><span class="token operator">:</span> <span class="token number">2</span><span class="token punctuation">,</span>
   <span class="token number">3</span><span class="token operator">:</span> <span class="token number">4</span><span class="token punctuation">,</span>
-<span class="token punctuation">}</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span> <span class="token comment">// {'1': 2, '3': 4};</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// {'1': 2, '3': 4};</span>
 
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">typeof</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token comment">// 'object'</span>
-<span class="token keyword">const</span> x <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>x<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token comment">// 1</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>x<span class="token punctuation">[</span><span class="token string">'1'</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token comment">// 2</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>Object<span class="token punctuation">.</span><span class="token function">keys</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">// ['0', '1', '2']</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">typeof</span> Object<span class="token punctuation">.</span><span class="token function">keys</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token comment">// 'string'</span></code></pre></div>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">typeof</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 'object'</span>
+<span class="token keyword">const</span> x <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>x<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 1</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>x<span class="token punctuation">[</span><span class="token string">'1'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 2</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>Object<span class="token punctuation">.</span><span class="token function">keys</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// ['0', '1', '2']</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">typeof</span> Object<span class="token punctuation">.</span><span class="token function">keys</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 'string'</span></code></pre></div>
 <p>타입스크립트는 <strong>혼란스러운 자바스크립트의 동작을 그대로 모델링하지 않고,
 숫자 키를 허용하며 문자열 키와는 다른 것으로 인식합니다.</strong></p>
 <div class="gatsby-highlight" data-language="ts"><pre class="language-ts"><code class="language-ts"><span class="token comment">// lib.es5.d.ts</span>
@@ -566,9 +566,9 @@ console<span class="token punctuation">.</span><span class="token function">log<
   <span class="token operator">...</span>
   <span class="token punctuation">[</span>n<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">]</span><span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span></code></pre></div>
-<div class="gatsby-highlight" data-language="ts"><pre class="language-ts"><code class="language-ts"><span class="token keyword">const</span> xs <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span>
-<span class="token keyword">const</span> x0 <span class="token operator">=</span> xs<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token comment">// OK</span>
-<span class="token keyword">const</span> x1 <span class="token operator">=</span> xs<span class="token punctuation">[</span><span class="token string">'1'</span><span class="token punctuation">]</span>
+<div class="gatsby-highlight" data-language="ts"><pre class="language-ts"><code class="language-ts"><span class="token keyword">const</span> xs <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> x0 <span class="token operator">=</span> xs<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token comment">// OK</span>
+<span class="token keyword">const</span> x1 <span class="token operator">=</span> xs<span class="token punctuation">[</span><span class="token string">'1'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
 <span class="token comment">// ~~~~ Element implicitly has an 'any' type</span>
 <span class="token comment">//      because index expression is not of type 'number'</span></code></pre></div>
 <p>숫자 키와 문자열 키를 다른 것으로 보는 타입스크립트의 동작은
@@ -581,11 +581,11 @@ console<span class="token punctuation">.</span><span class="token function">log<
 알 수 없는 경우에 대해 미리 동적 데이터에 대한 타입을
 지정해야 한다면, 키와 값 쌍의 타입 시그니처인
 인덱스 시그니처를 사용할 수 있습니다.</p>
-<div class="gatsby-highlight" data-language="ts"><pre class="language-ts"><code class="language-ts"><span class="token keyword">type</span> <span class="token class-name">TestScore</span> <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token punctuation">[</span>property<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">]</span><span class="token operator">:</span> <span class="token builtin">number</span> <span class="token punctuation">}</span>
+<div class="gatsby-highlight" data-language="ts"><pre class="language-ts"><code class="language-ts"><span class="token keyword">type</span> <span class="token class-name">TestScore</span> <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token punctuation">[</span>property<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">]</span><span class="token operator">:</span> <span class="token builtin">number</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
 <span class="token keyword">const</span> testScore<span class="token operator">:</span> TestScore <span class="token operator">=</span> <span class="token punctuation">{</span>
   math<span class="token operator">:</span> <span class="token number">90</span><span class="token punctuation">,</span>
   english<span class="token operator">:</span> <span class="token number">85</span><span class="token punctuation">,</span>
-<span class="token punctuation">}</span></code></pre></div>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>하지만, <strong>인덱스 시그니처는 동적 데이터에 대한 타입을 지정할 때만
 사용되어야 하며 객체의 가능한 필드가 제한되어 있는 경우라면 인덱스
 시그니처로 모델링하지 말아야 합니다.</strong>
@@ -595,27 +595,27 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <p>만약 데이터의 키가 한정적이지만 존재 여부를 몰라 인덱스 시그니처를
 사용했다면, 선택적 필드를 사용하거나 유니온 타입으로 모델링할 수 있습니다.</p>
 <div class="gatsby-highlight" data-language="ts"><pre class="language-ts"><code class="language-ts"><span class="token keyword">interface</span> <span class="token class-name">Row1</span> <span class="token punctuation">{</span>
-  a<span class="token operator">:</span> <span class="token builtin">number</span>
-  b<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">number</span>
-  c<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">number</span>
-  d<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">number</span>
+  a<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">;</span>
+  b<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">;</span>
+  c<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">;</span>
+  d<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 
 <span class="token keyword">type</span> <span class="token class-name">Row2</span> <span class="token operator">=</span>
   <span class="token operator">|</span> <span class="token punctuation">{</span> a<span class="token operator">:</span> <span class="token builtin">number</span> <span class="token punctuation">}</span>
   <span class="token operator">|</span> <span class="token punctuation">{</span> a<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">;</span> b<span class="token operator">:</span> <span class="token builtin">number</span> <span class="token punctuation">}</span>
   <span class="token operator">|</span> <span class="token punctuation">{</span> a<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">;</span> b<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">;</span> c<span class="token operator">:</span> <span class="token builtin">number</span> <span class="token punctuation">}</span>
-  <span class="token operator">|</span> <span class="token punctuation">{</span> a<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">;</span> b<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">;</span> c<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">;</span> d<span class="token operator">:</span> <span class="token builtin">number</span> <span class="token punctuation">}</span></code></pre></div>
+  <span class="token operator">|</span> <span class="token punctuation">{</span> a<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">;</span> b<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">;</span> c<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">;</span> d<span class="token operator">:</span> <span class="token builtin">number</span> <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>이러한 방법이 번거롭다면, 키 타입에 유연성을 부여하는 <a href="https://www.typescriptlang.org/ko/docs/handbook/utility-types.html#recordkeystype">Record</a>
 제너릭 타입을 사용할 수도 있습니다.</p>
-<div class="gatsby-highlight" data-language="ts"><pre class="language-ts"><code class="language-ts"><span class="token keyword">type</span> <span class="token class-name">Vec3D</span> <span class="token operator">=</span> Record<span class="token operator">&lt;</span><span class="token string">'x'</span> <span class="token operator">|</span> <span class="token string">'y'</span> <span class="token operator">|</span> <span class="token string">'z'</span><span class="token punctuation">,</span> <span class="token builtin">number</span><span class="token operator">></span>
+<div class="gatsby-highlight" data-language="ts"><pre class="language-ts"><code class="language-ts"><span class="token keyword">type</span> <span class="token class-name">Vec3D</span> <span class="token operator">=</span> Record<span class="token operator">&lt;</span><span class="token string">'x'</span> <span class="token operator">|</span> <span class="token string">'y'</span> <span class="token operator">|</span> <span class="token string">'z'</span><span class="token punctuation">,</span> <span class="token builtin">number</span><span class="token operator">></span><span class="token punctuation">;</span>
 <span class="token comment">// Type Vec3D = {</span>
 <span class="token comment">//   x: number;</span>
 <span class="token comment">//   y: number;</span>
 <span class="token comment">//   z: number;</span>
 <span class="token comment">// }</span></code></pre></div>
 <p>키마다 별도의 타입을 사용해야 한다면, 매핑된 타입을 사용할 수 있습니다.</p>
-<div class="gatsby-highlight" data-language="ts"><pre class="language-ts"><code class="language-ts"><span class="token keyword">type</span> <span class="token class-name"><span class="token constant">ABC</span></span> <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token punctuation">[</span>k <span class="token keyword">in</span> <span class="token string">'x'</span> <span class="token operator">|</span> <span class="token string">'y'</span> <span class="token operator">|</span> <span class="token string">'z'</span><span class="token punctuation">]</span><span class="token operator">:</span> k <span class="token keyword">extends</span> <span class="token string">'y'</span> <span class="token operator">?</span> <span class="token builtin">string</span> <span class="token operator">:</span> <span class="token builtin">number</span> <span class="token punctuation">}</span>
+<div class="gatsby-highlight" data-language="ts"><pre class="language-ts"><code class="language-ts"><span class="token keyword">type</span> <span class="token class-name"><span class="token constant">ABC</span></span> <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token punctuation">[</span>k <span class="token keyword">in</span> <span class="token string">'x'</span> <span class="token operator">|</span> <span class="token string">'y'</span> <span class="token operator">|</span> <span class="token string">'z'</span><span class="token punctuation">]</span><span class="token operator">:</span> k <span class="token keyword">extends</span> <span class="token string">'y'</span> <span class="token operator">?</span> <span class="token builtin">string</span> <span class="token operator">:</span> <span class="token builtin">number</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
 <span class="token comment">// Type ABC = {</span>
 <span class="token comment">//   a: number;</span>
 <span class="token comment">//   y: string;</span>
@@ -627,11 +627,11 @@ console<span class="token punctuation">.</span><span class="token function">log<
 타입을 단언하여 타입스크립트가 추론한 타입이 있더라도
 단언한 타입으로 간주하는 두 방법을 사용합니다.</p>
 <div class="gatsby-highlight" data-language="ts"><pre class="language-ts"><code class="language-ts"><span class="token keyword">interface</span> <span class="token class-name">Person</span> <span class="token punctuation">{</span>
-  name<span class="token operator">:</span> <span class="token builtin">string</span>
+  name<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 
-<span class="token keyword">const</span> alice<span class="token operator">:</span> Person <span class="token operator">=</span> <span class="token punctuation">{</span> name<span class="token operator">:</span> <span class="token string">'Alice'</span> <span class="token punctuation">}</span>
-<span class="token keyword">const</span> bob <span class="token operator">=</span> <span class="token punctuation">{</span> name<span class="token operator">:</span> <span class="token string">'Bob'</span> <span class="token punctuation">}</span> <span class="token keyword">as</span> Person</code></pre></div>
+<span class="token keyword">const</span> alice<span class="token operator">:</span> Person <span class="token operator">=</span> <span class="token punctuation">{</span> name<span class="token operator">:</span> <span class="token string">'Alice'</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> bob <span class="token operator">=</span> <span class="token punctuation">{</span> name<span class="token operator">:</span> <span class="token string">'Bob'</span> <span class="token punctuation">}</span> <span class="token keyword">as</span> Person<span class="token punctuation">;</span></code></pre></div>
 <p>타입 선언은 할당되는 값이 해당 타입을 만족하는 지
 검사하지만, 타입 단언은 타입을 강제로 단언하여
 타입 체커에게 타입 오류가 있지만, 강제하여 무시하도록 합니다.</p>
@@ -640,35 +640,35 @@ console<span class="token punctuation">.</span><span class="token function">log<
   occupation<span class="token operator">:</span> <span class="token string">'Typescript developer'</span><span class="token punctuation">,</span>
   <span class="token comment">// ~~~~~ Object literal may only specify known properties</span>
   <span class="token comment">//       and 'occupation' does not exist in type 'Person'</span>
-<span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
 
 <span class="token keyword">const</span> bob <span class="token operator">=</span> <span class="token punctuation">{</span>
   name<span class="token operator">:</span> <span class="token string">'Bob'</span><span class="token punctuation">,</span>
   occupation<span class="token operator">:</span> <span class="token string">'Javascript developer'</span><span class="token punctuation">,</span>
-<span class="token punctuation">}</span> <span class="token keyword">as</span> Person <span class="token comment">//No error</span></code></pre></div>
+<span class="token punctuation">}</span> <span class="token keyword">as</span> Person<span class="token punctuation">;</span> <span class="token comment">//No error</span></code></pre></div>
 <p>타입 단언을 사용하면 문제가 해결되는 것처럼 보이지만
 런타임에 문제가 발생할 수 있습니다.</p>
 <div class="gatsby-highlight" data-language="ts"><pre class="language-ts"><code class="language-ts"><span class="token keyword">interface</span> <span class="token class-name">Person</span> <span class="token punctuation">{</span>
-  name<span class="token operator">:</span> <span class="token builtin">string</span>
+  name<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 
-<span class="token keyword">const</span> people <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'alice'</span><span class="token punctuation">,</span> <span class="token string">'bob'</span><span class="token punctuation">,</span> <span class="token string">'jan'</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span>name <span class="token operator">=></span> <span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token punctuation">}</span> <span class="token keyword">as</span> Person<span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token keyword">const</span> people <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'alice'</span><span class="token punctuation">,</span> <span class="token string">'bob'</span><span class="token punctuation">,</span> <span class="token string">'jan'</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span>name <span class="token operator">=></span> <span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token punctuation">}</span> <span class="token keyword">as</span> Person<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token comment">//No error</span></code></pre></div>
 <p>일반적으로 단언문을 사용하지 않는 것이 변수를 선언하는 것이
 가장 직관적이며 타입 단언은 타입 체커가 추론한 타입보다
 개발자가 판단하는 타입이 더 정확할 때 유효합니다.</p>
 <div class="gatsby-highlight" data-language="ts"><pre class="language-ts"><code class="language-ts">document<span class="token punctuation">.</span><span class="token function">querySelector</span><span class="token punctuation">(</span><span class="token string">'#myButton'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">'click'</span><span class="token punctuation">,</span> e <span class="token operator">=></span> <span class="token punctuation">{</span>
-  e<span class="token punctuation">.</span>currentTarget <span class="token comment">//타입은 EventTarget;</span>
-  <span class="token keyword">const</span> button <span class="token operator">=</span> e<span class="token punctuation">.</span>currentTarget <span class="token keyword">as</span> HTMLButtonElement
-  button <span class="token comment">//타입은 HTMLButtonElement;</span>
-<span class="token punctuation">}</span><span class="token punctuation">)</span></code></pre></div>
+  e<span class="token punctuation">.</span>currentTarget<span class="token punctuation">;</span> <span class="token comment">//타입은 EventTarget;</span>
+  <span class="token keyword">const</span> button <span class="token operator">=</span> e<span class="token punctuation">.</span>currentTarget <span class="token keyword">as</span> HTMLButtonElement<span class="token punctuation">;</span>
+  button<span class="token punctuation">;</span> <span class="token comment">//타입은 HTMLButtonElement;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
 <h2 id="13-타입-추론은-잘못된-추론을-할-만큼-구체적으로-수행되지-않는다" style="position:relative;"><a href="#13-%ED%83%80%EC%9E%85-%EC%B6%94%EB%A1%A0%EC%9D%80-%EC%9E%98%EB%AA%BB%EB%90%9C-%EC%B6%94%EB%A1%A0%EC%9D%84-%ED%95%A0-%EB%A7%8C%ED%81%BC-%EA%B5%AC%EC%B2%B4%EC%A0%81%EC%9C%BC%EB%A1%9C-%EC%88%98%ED%96%89%EB%90%98%EC%A7%80-%EC%95%8A%EB%8A%94%EB%8B%A4" aria-label="13 타입 추론은 잘못된 추론을 할 만큼 구체적으로 수행되지 않는다 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>13. 타입 추론은 잘못된 추론을 할 만큼 구체적으로 수행되지 않는다</h2>
 <p>타입 체커는 타입이 명시되어 있지 않은 코드에 대해
 할당된 값과 문맥을 통해 가능한 값들의 집합을 유추하여
 타입을 추론하는 기능을 제공하기 때문에 장황하게 타입 구문
 을 넣을 필요가 없습니다.</p>
-<div class="gatsby-highlight" data-language="ts"><pre class="language-ts"><code class="language-ts"><span class="token keyword">let</span> x<span class="token operator">:</span> <span class="token builtin">number</span> <span class="token operator">=</span> <span class="token number">12</span>
-<span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token number">12</span></code></pre></div>
+<div class="gatsby-highlight" data-language="ts"><pre class="language-ts"><code class="language-ts"><span class="token keyword">let</span> x<span class="token operator">:</span> <span class="token builtin">number</span> <span class="token operator">=</span> <span class="token number">12</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token number">12</span><span class="token punctuation">;</span></code></pre></div>
 <p>하지만, 타입 추론은 넓은 타입 추론으로 인해 발생할 수 있는
 오류를 잡고자 노력하지만, <strong>명확성과 유연성을 유지하기 위해
 잘못된 추론을 할 만큼 구체적으로 수행하지는 않습니다.</strong></p>
@@ -676,7 +676,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
 타입스크립트의 동작을 ‘타입 넓히기’라고 하며, 작성자의 의도가
 명확하지 않은 코드에 대해 명확성과 유연성을 유지하기 위해
 많은 타입의 후보군을 추론하게 됩니다.</p>
-<div class="gatsby-highlight" data-language="ts"><pre class="language-ts"><code class="language-ts"><span class="token keyword">const</span> mixed <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'x'</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">]</span></code></pre></div>
+<div class="gatsby-highlight" data-language="ts"><pre class="language-ts"><code class="language-ts"><span class="token keyword">const</span> mixed <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'x'</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span></code></pre></div>
 <div class="gatsby-highlight" data-language="yaml"><pre class="language-yaml"><code class="language-yaml">('x'<span class="token punctuation">,</span> 1)<span class="token punctuation">[</span><span class="token punctuation">]</span>
 <span class="token punctuation">[</span><span class="token string">'x'</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">]</span>
 <span class="token punctuation">[</span>string<span class="token punctuation">,</span> number<span class="token punctuation">]</span>
@@ -690,49 +690,49 @@ any<span class="token punctuation">[</span><span class="token punctuation">]</sp
 <p>함수의 파라미터에 할당하고자 하는 값을 변수로 분리해내면
 타입스크립트는 할당 시점에 타입을 추론하기 때문에 변수
 language는 string으로 추론되어 아래와 같은 에러가 발생합니다.</p>
-<div class="gatsby-highlight" data-language="ts"><pre class="language-ts"><code class="language-ts"><span class="token keyword">type</span> <span class="token class-name">Language</span> <span class="token operator">=</span> <span class="token string">'JavaScript'</span> <span class="token operator">|</span> <span class="token string">'TypeScript'</span> <span class="token operator">|</span> <span class="token string">'Python'</span>
+<div class="gatsby-highlight" data-language="ts"><pre class="language-ts"><code class="language-ts"><span class="token keyword">type</span> <span class="token class-name">Language</span> <span class="token operator">=</span> <span class="token string">'JavaScript'</span> <span class="token operator">|</span> <span class="token string">'TypeScript'</span> <span class="token operator">|</span> <span class="token string">'Python'</span><span class="token punctuation">;</span>
 <span class="token keyword">function</span> <span class="token function">setLanguage</span><span class="token punctuation">(</span>language<span class="token operator">:</span> Language<span class="token punctuation">)</span> <span class="token punctuation">{</span>
   <span class="token comment">/* ... */</span>
 <span class="token punctuation">}</span>
 
-<span class="token keyword">let</span> language <span class="token operator">=</span> <span class="token string">'Javascript'</span>
-<span class="token function">setLanguage</span><span class="token punctuation">(</span>language<span class="token punctuation">)</span>
+<span class="token keyword">let</span> language <span class="token operator">=</span> <span class="token string">'Javascript'</span><span class="token punctuation">;</span>
+<span class="token function">setLanguage</span><span class="token punctuation">(</span>language<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token comment">// ~~~~ Argument of type 'string' is not assignable</span>
 <span class="token comment">//      to parameter of type 'Language'</span></code></pre></div>
 <p>명시된 타입 구문을 적절히 제공하여 타입 추론의 강도를 제어할
 수 있습니다.</p>
-<div class="gatsby-highlight" data-language="ts"><pre class="language-ts"><code class="language-ts"><span class="token keyword">let</span> language<span class="token operator">:</span> Language <span class="token operator">=</span> <span class="token string">'Javascript'</span>
-<span class="token function">setLanguage</span><span class="token punctuation">(</span>language<span class="token punctuation">)</span> <span class="token comment">//OK</span></code></pre></div>
+<div class="gatsby-highlight" data-language="ts"><pre class="language-ts"><code class="language-ts"><span class="token keyword">let</span> language<span class="token operator">:</span> Language <span class="token operator">=</span> <span class="token string">'Javascript'</span><span class="token punctuation">;</span>
+<span class="token function">setLanguage</span><span class="token punctuation">(</span>language<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//OK</span></code></pre></div>
 <p>넓혀진 타입을 제한하기 위해 함수 파라미터에 문자열 리터럴
 값을 직접 제공하여 문자열 리터럴 타입으로 추론되도록 유도할 수 있습니다.</p>
-<div class="gatsby-highlight" data-language="ts"><pre class="language-ts"><code class="language-ts"><span class="token function">setLanguage</span><span class="token punctuation">(</span><span class="token string">'Javascript'</span><span class="token punctuation">)</span> <span class="token comment">//OK</span></code></pre></div>
+<div class="gatsby-highlight" data-language="ts"><pre class="language-ts"><code class="language-ts"><span class="token function">setLanguage</span><span class="token punctuation">(</span><span class="token string">'Javascript'</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//OK</span></code></pre></div>
 <p>let을 const로 사용하여 선언하면, 재할당이 없을 것이라는
 의도를 전달하여 더 좁은 타입으로 추론될 수 있도록
 유도할 수 있습니다.</p>
-<div class="gatsby-highlight" data-language="ts"><pre class="language-ts"><code class="language-ts"><span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token string">'x'</span> <span class="token comment">// type is string</span>
-<span class="token keyword">const</span> y <span class="token operator">=</span> <span class="token string">'y'</span> <span class="token comment">// type is 'y'</span></code></pre></div>
-<div class="gatsby-highlight" data-language="ts"><pre class="language-ts"><code class="language-ts"><span class="token keyword">const</span> language <span class="token operator">=</span> <span class="token string">'Javascript'</span>
-<span class="token function">setLanguage</span><span class="token punctuation">(</span>language<span class="token punctuation">)</span> <span class="token comment">//OK</span></code></pre></div>
+<div class="gatsby-highlight" data-language="ts"><pre class="language-ts"><code class="language-ts"><span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token string">'x'</span><span class="token punctuation">;</span> <span class="token comment">// type is string</span>
+<span class="token keyword">const</span> y <span class="token operator">=</span> <span class="token string">'y'</span><span class="token punctuation">;</span> <span class="token comment">// type is 'y'</span></code></pre></div>
+<div class="gatsby-highlight" data-language="ts"><pre class="language-ts"><code class="language-ts"><span class="token keyword">const</span> language <span class="token operator">=</span> <span class="token string">'Javascript'</span><span class="token punctuation">;</span>
+<span class="token function">setLanguage</span><span class="token punctuation">(</span>language<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//OK</span></code></pre></div>
 <p>추가적인 예시로, 객체의 경우 타입스크립트의 넓히기 알고리즘에 의해
 각 요소가 let으로 할당된 것처럼 다루기 때문에 여전히
 구체적으로 타입을 추론할 수 없는 문제가 존재합니다.</p>
-<div class="gatsby-highlight" data-language="ts"><pre class="language-ts"><code class="language-ts"><span class="token keyword">type</span> <span class="token class-name">Language</span> <span class="token operator">=</span> <span class="token string">'JavaScript'</span> <span class="token operator">|</span> <span class="token string">'TypeScript'</span> <span class="token operator">|</span> <span class="token string">'Python'</span>
+<div class="gatsby-highlight" data-language="ts"><pre class="language-ts"><code class="language-ts"><span class="token keyword">type</span> <span class="token class-name">Language</span> <span class="token operator">=</span> <span class="token string">'JavaScript'</span> <span class="token operator">|</span> <span class="token string">'TypeScript'</span> <span class="token operator">|</span> <span class="token string">'Python'</span><span class="token punctuation">;</span>
 <span class="token keyword">interface</span> <span class="token class-name">GovernedLanguage</span> <span class="token punctuation">{</span>
-  language<span class="token operator">:</span> Language
-  organization<span class="token operator">:</span> <span class="token builtin">string</span>
+  language<span class="token operator">:</span> Language<span class="token punctuation">;</span>
+  organization<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 
 <span class="token keyword">function</span> <span class="token function">complain</span><span class="token punctuation">(</span>language<span class="token operator">:</span> GovernedLanguage<span class="token punctuation">)</span> <span class="token punctuation">{</span>
   <span class="token comment">/* ... */</span>
 <span class="token punctuation">}</span>
 
-<span class="token function">complain</span><span class="token punctuation">(</span><span class="token punctuation">{</span> language<span class="token operator">:</span> <span class="token string">'TypeScript'</span><span class="token punctuation">,</span> organization<span class="token operator">:</span> <span class="token string">'Microsoft'</span> <span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token comment">// OK</span>
+<span class="token function">complain</span><span class="token punctuation">(</span><span class="token punctuation">{</span> language<span class="token operator">:</span> <span class="token string">'TypeScript'</span><span class="token punctuation">,</span> organization<span class="token operator">:</span> <span class="token string">'Microsoft'</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// OK</span>
 
 <span class="token keyword">const</span> ts <span class="token operator">=</span> <span class="token punctuation">{</span>
   language<span class="token operator">:</span> <span class="token string">'TypeScript'</span><span class="token punctuation">,</span>
   organization<span class="token operator">:</span> <span class="token string">'Microsoft'</span><span class="token punctuation">,</span>
-<span class="token punctuation">}</span>
-<span class="token function">complain</span><span class="token punctuation">(</span>ts<span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token function">complain</span><span class="token punctuation">(</span>ts<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token comment">//       ~~ Argument of type '{ language: string; organization: string; }'</span>
 <span class="token comment">//            is not assignable to parameter of type 'GovernedLanguage'</span>
 <span class="token comment">//          Types of property 'language' are incompatible</span>
@@ -744,9 +744,9 @@ as const는 그 값이 내부까지 상수라는 사실을 타입스크립트에
 <div class="gatsby-highlight" data-language="ts"><pre class="language-ts"><code class="language-ts"><span class="token keyword">const</span> ts <span class="token operator">=</span> <span class="token punctuation">{</span>
   language<span class="token operator">:</span> <span class="token string">'TypeScript'</span><span class="token punctuation">,</span>
   organization<span class="token operator">:</span> <span class="token string">'Microsoft'</span><span class="token punctuation">,</span>
-<span class="token punctuation">}</span> <span class="token keyword">as</span> <span class="token keyword">const</span>
+<span class="token punctuation">}</span> <span class="token keyword">as</span> <span class="token keyword">const</span><span class="token punctuation">;</span>
 
-<span class="token function">complain</span><span class="token punctuation">(</span>ts<span class="token punctuation">)</span> <span class="token comment">// OK</span></code></pre></div>
+<span class="token function">complain</span><span class="token punctuation">(</span>ts<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// OK</span></code></pre></div>
 <h2 id="14-string-타입보다는-더-구체적인-타입-사용을-고민해야-한다" style="position:relative;"><a href="#14-string-%ED%83%80%EC%9E%85%EB%B3%B4%EB%8B%A4%EB%8A%94-%EB%8D%94-%EA%B5%AC%EC%B2%B4%EC%A0%81%EC%9D%B8-%ED%83%80%EC%9E%85-%EC%82%AC%EC%9A%A9%EC%9D%84-%EA%B3%A0%EB%AF%BC%ED%95%B4%EC%95%BC-%ED%95%9C%EB%8B%A4" aria-label="14 string 타입보다는 더 구체적인 타입 사용을 고민해야 한다 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>14. string 타입보다는 더 구체적인 타입 사용을 고민해야 한다</h2>
 <p>string은 매우 넓은 범위의 타입입니다. string은 any와
 마찬가지로 더 좁은 타입으로 대체할 수 있을 가능성이 높습니다.</p>
@@ -755,10 +755,10 @@ as const는 그 값이 내부까지 상수라는 사실을 타입스크립트에
 타입으로 가능한 값을 좁히지 못하여 주석을 사용했다면,
 인터페이스에 문제가 있다는 것을 증명합니다.</p>
 <div class="gatsby-highlight" data-language="ts"><pre class="language-ts"><code class="language-ts"><span class="token keyword">interface</span> <span class="token class-name">Album</span> <span class="token punctuation">{</span>
-  artist<span class="token operator">:</span> <span class="token builtin">string</span>
-  title<span class="token operator">:</span> <span class="token builtin">string</span>
-  releaseDate<span class="token operator">:</span> <span class="token builtin">string</span> <span class="token comment">// YYYY-MM-DD</span>
-  recordingType<span class="token operator">:</span> <span class="token builtin">string</span> <span class="token comment">// E.g., "live" or "studio"</span>
+  artist<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
+  title<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
+  releaseDate<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span> <span class="token comment">// YYYY-MM-DD</span>
+  recordingType<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span> <span class="token comment">// E.g., "live" or "studio"</span>
 <span class="token punctuation">}</span></code></pre></div>
 <p>또한 주석에 명시되어 있는 규칙을 따르지 않아도 타입은
 문제없이 타입 체크를 통과합니다.</p>
@@ -767,18 +767,18 @@ as const는 그 값이 내부까지 상수라는 사실을 타입스크립트에
   title<span class="token operator">:</span> <span class="token string">'Kind of Blue'</span><span class="token punctuation">,</span>
   releaseDate<span class="token operator">:</span> <span class="token string">'August 17th, 1959'</span><span class="token punctuation">,</span> <span class="token comment">// Oops!</span>
   recordingType<span class="token operator">:</span> <span class="token string">'Studio'</span><span class="token punctuation">,</span> <span class="token comment">// Oops!</span>
-<span class="token punctuation">}</span> <span class="token comment">// OK</span></code></pre></div>
+<span class="token punctuation">}</span><span class="token punctuation">;</span> <span class="token comment">// OK</span></code></pre></div>
 <p>releaseDate는 Date 객체를 사용하여 날짜 형식으로만
 제한하고, recordingType은 ‘live’ | ‘studio’
 두 가지 값으로 제한된 유니온 타입으로 정의하여 사용하는
 것이 좋습니다.</p>
-<div class="gatsby-highlight" data-language="ts"><pre class="language-ts"><code class="language-ts"><span class="token keyword">type</span> <span class="token class-name">RecordingType</span> <span class="token operator">=</span> <span class="token string">'studio'</span> <span class="token operator">|</span> <span class="token string">'live'</span>
+<div class="gatsby-highlight" data-language="ts"><pre class="language-ts"><code class="language-ts"><span class="token keyword">type</span> <span class="token class-name">RecordingType</span> <span class="token operator">=</span> <span class="token string">'studio'</span> <span class="token operator">|</span> <span class="token string">'live'</span><span class="token punctuation">;</span>
 
 <span class="token keyword">interface</span> <span class="token class-name">Album</span> <span class="token punctuation">{</span>
-  artist<span class="token operator">:</span> <span class="token builtin">string</span>
-  title<span class="token operator">:</span> <span class="token builtin">string</span>
-  releaseDate<span class="token operator">:</span> Date
-  recordingType<span class="token operator">:</span> RecordingType
+  artist<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
+  title<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
+  releaseDate<span class="token operator">:</span> Date<span class="token punctuation">;</span>
+  recordingType<span class="token operator">:</span> RecordingType<span class="token punctuation">;</span>
 <span class="token punctuation">}</span></code></pre></div>
 <p>타입을 좁혀두면, 타입스크립트가 오류를 더 세밀하게
 체크할 수 있고, 타입을 명시적으로 정의하여 다른 곳으로
@@ -790,7 +790,7 @@ keyof 연산자로 더욱 세밀하게 객체의 속성 체크가
 타입 체크에 문제는 없지만, 반환값에 any가 사용되어
 any의 영향력이 퍼져나가게 됩니다.</p>
 <div class="gatsby-highlight" data-language="ts"><pre class="language-ts"><code class="language-ts"><span class="token keyword">function</span> <span class="token generic-function"><span class="token function">pluck</span><span class="token generic class-name"><span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">></span></span></span><span class="token punctuation">(</span>record<span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> key<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">any</span><span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token punctuation">{</span>
-  <span class="token keyword">return</span> record<span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span>r <span class="token operator">=></span> r<span class="token punctuation">[</span>key<span class="token punctuation">]</span><span class="token punctuation">)</span>
+  <span class="token keyword">return</span> record<span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span>r <span class="token operator">=></span> r<span class="token punctuation">[</span>key<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
   <span class="token comment">// ~~~~~~ Element implicitly has an 'any' type</span>
   <span class="token comment">//        because type '{}' has no index signature</span>
 <span class="token punctuation">}</span></code></pre></div>
@@ -799,11 +799,11 @@ any의 영향력이 퍼져나가게 됩니다.</p>
 두 번째 제너릭 매개변수로 전달하여 완벽하게 좁혀진 타입으로
 string을 대체할 수 있습니다.</p>
 <div class="gatsby-highlight" data-language="ts"><pre class="language-ts"><code class="language-ts"><span class="token keyword">function</span> <span class="token generic-function"><span class="token function">pluck</span><span class="token generic class-name"><span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">></span></span></span><span class="token punctuation">(</span>record<span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> key<span class="token operator">:</span> <span class="token keyword">keyof</span> <span class="token constant">T</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-  <span class="token keyword">return</span> record<span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span>r <span class="token operator">=></span> r<span class="token punctuation">[</span>key<span class="token punctuation">]</span><span class="token punctuation">)</span>
+  <span class="token keyword">return</span> record<span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span>r <span class="token operator">=></span> r<span class="token punctuation">[</span>key<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 
 <span class="token keyword">function</span> <span class="token generic-function"><span class="token function">pluck</span><span class="token generic class-name"><span class="token operator">&lt;</span><span class="token constant">T</span><span class="token punctuation">,</span> <span class="token constant">K</span> <span class="token keyword">extends</span> <span class="token keyword">keyof</span> <span class="token constant">T</span><span class="token operator">></span></span></span><span class="token punctuation">(</span>record<span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> key<span class="token operator">:</span> <span class="token constant">K</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">[</span><span class="token constant">K</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token punctuation">{</span>
-  <span class="token keyword">return</span> record<span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span>r <span class="token operator">=></span> r<span class="token punctuation">[</span>key<span class="token punctuation">]</span><span class="token punctuation">)</span>
+  <span class="token keyword">return</span> record<span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span>r <span class="token operator">=></span> r<span class="token punctuation">[</span>key<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span></code></pre></div>
 <h2 id="15-unknown은-타입시스템에-부합하는-타입이다" style="position:relative;"><a href="#15-unknown%EC%9D%80-%ED%83%80%EC%9E%85%EC%8B%9C%EC%8A%A4%ED%85%9C%EC%97%90-%EB%B6%80%ED%95%A9%ED%95%98%EB%8A%94-%ED%83%80%EC%9E%85%EC%9D%B4%EB%8B%A4" aria-label="15 unknown은 타입시스템에 부합하는 타입이다 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>15. unknown은 타입시스템에 부합하는 타입이다</h2>
 <p>unknown은 할당 가능성 관점에서 any와 비교할 수 있습니다.
@@ -817,49 +817,49 @@ any는 어떠한 타입으로도 할당 가능한 것에서 비롯됩니다.</p>
 <span class="token punctuation">}</span>
 
 <span class="token keyword">interface</span> <span class="token class-name">Book</span> <span class="token punctuation">{</span>
-  name<span class="token operator">:</span> <span class="token builtin">string</span>
-  author<span class="token operator">:</span> <span class="token builtin">string</span>
+  name<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
+  author<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 <span class="token keyword">const</span> book<span class="token operator">:</span> Book <span class="token operator">=</span> <span class="token function">parseYAML</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">
   name: Wuthering Heights
   author: Emily Brontë
-</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span>
+</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-<span class="token function">alert</span><span class="token punctuation">(</span>book<span class="token punctuation">.</span>title<span class="token punctuation">)</span> <span class="token comment">// No error, alerts "undefined" at runtime</span>
-<span class="token function">book</span><span class="token punctuation">(</span><span class="token string">'read'</span><span class="token punctuation">)</span> <span class="token comment">// No error, throws "TypeError: book is not a</span>
+<span class="token function">alert</span><span class="token punctuation">(</span>book<span class="token punctuation">.</span>title<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// No error, alerts "undefined" at runtime</span>
+<span class="token function">book</span><span class="token punctuation">(</span><span class="token string">'read'</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// No error, throws "TypeError: book is not a</span>
 <span class="token comment">// function" at runtime</span></code></pre></div>
 <p>대신, unknown 타입을 반환하게 만들면 타입 체크 단계에서
 오류를 발생시키며 적절한 타입으로 반환을 강제하여 사용할 수
 있습니다.</p>
 <div class="gatsby-highlight" data-language="ts"><pre class="language-ts"><code class="language-ts"><span class="token keyword">function</span> <span class="token function">safeParseYAML</span><span class="token punctuation">(</span>yaml<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">unknown</span> <span class="token punctuation">{</span>
-  <span class="token keyword">return</span> <span class="token function">parseYAML</span><span class="token punctuation">(</span>yaml<span class="token punctuation">)</span>
+  <span class="token keyword">return</span> <span class="token function">parseYAML</span><span class="token punctuation">(</span>yaml<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 
 <span class="token keyword">const</span> book <span class="token operator">=</span> <span class="token function">safeParseYAML</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">
   name: Villette
   author: Charlotte Brontë
-</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span> <span class="token keyword">as</span> Book
-<span class="token function">alert</span><span class="token punctuation">(</span>book<span class="token punctuation">.</span>title<span class="token punctuation">)</span>
+</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span> <span class="token keyword">as</span> Book<span class="token punctuation">;</span>
+<span class="token function">alert</span><span class="token punctuation">(</span>book<span class="token punctuation">.</span>title<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token comment">// ~~~~~ Property 'title' does not exist on type 'Book'</span>
-<span class="token function">book</span><span class="token punctuation">(</span><span class="token string">'read'</span><span class="token punctuation">)</span>
+<span class="token function">book</span><span class="token punctuation">(</span><span class="token string">'read'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token comment">// ~~~~~~~~~ this expression is not callable</span></code></pre></div>
 <p>또한, any를 대신하여 모르는 값이 할당된 변수의 타입을 unknown으로
 명시하였다면 instanceof를 체크하여 unknown에서 원하는 타입으로
 변환할 수 있습니다.</p>
 <div class="gatsby-highlight" data-language="ts"><pre class="language-ts"><code class="language-ts"><span class="token keyword">function</span> <span class="token function">processValue</span><span class="token punctuation">(</span>val<span class="token operator">:</span> <span class="token builtin">unknown</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
   <span class="token keyword">if</span> <span class="token punctuation">(</span>val <span class="token keyword">instanceof</span> <span class="token class-name">Date</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    val <span class="token comment">// Type is Date</span>
+    val<span class="token punctuation">;</span> <span class="token comment">// Type is Date</span>
   <span class="token punctuation">}</span>
 <span class="token punctuation">}</span></code></pre></div>
 <p>정의된 타입 가드를 사용하여 unknown에서 원하는 타입으로 변환할 수 있습니다.</p>
 <div class="gatsby-highlight" data-language="ts"><pre class="language-ts"><code class="language-ts"><span class="token keyword">function</span> <span class="token function">isBook</span><span class="token punctuation">(</span>val<span class="token operator">:</span> <span class="token builtin">unknown</span><span class="token punctuation">)</span><span class="token operator">:</span> val <span class="token keyword">is</span> Book <span class="token punctuation">{</span>
   <span class="token keyword">return</span> <span class="token punctuation">(</span>
     <span class="token keyword">typeof</span> val <span class="token operator">===</span> <span class="token string">'object'</span> <span class="token operator">&amp;&amp;</span> val <span class="token operator">!==</span> <span class="token keyword">null</span> <span class="token operator">&amp;&amp;</span> <span class="token string">'name'</span> <span class="token keyword">in</span> val <span class="token operator">&amp;&amp;</span> <span class="token string">'author'</span> <span class="token keyword">in</span> val
-  <span class="token punctuation">)</span>
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 <span class="token keyword">function</span> <span class="token function">processValue</span><span class="token punctuation">(</span>val<span class="token operator">:</span> <span class="token builtin">unknown</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
   <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">isBook</span><span class="token punctuation">(</span>val<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    val <span class="token comment">// Type is Book</span>
+    val<span class="token punctuation">;</span> <span class="token comment">// Type is Book</span>
   <span class="token punctuation">}</span>
 <span class="token punctuation">}</span></code></pre></div>
 <p>타입을 집합의 관점에서 생각해본다면, any는 모든 집합의
