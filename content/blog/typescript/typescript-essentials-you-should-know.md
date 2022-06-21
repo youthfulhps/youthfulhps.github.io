@@ -2,11 +2,11 @@
 title: 타입스크립트, 글로 배웠습니다만
 date: 2022-06-14 10:06:39
 category: typescript
-thumbnail: ./images/typescript-checklist-you-should-know/thumbnail.png
+thumbnail: ./images/typescript-essentials-you-should-know/thumbnail.png
 draft: false
 ---
 
-![A man who thinks about whether to use any type](./images/typescript-checklist-you-should-know/thumbnail.png)
+![A man who thinks about whether to use any type](./images/typescript-essentials-you-should-know/thumbnail.png)
 
 개인적으로 타입스크립트는 실무에서 사용하면서 익히기 시작해서
 약 2년 가까이 매일 사용하는 언어가 되었습니다.
