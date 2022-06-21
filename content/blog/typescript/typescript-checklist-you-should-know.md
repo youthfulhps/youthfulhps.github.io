@@ -6,8 +6,8 @@ thumbnail: { thumbnailSrc }
 draft: true
 ---
 
-단순히 자바스크립트에 타입을 명시한다고 해서 타입스크립트 개발자라고
-치환되면 안된다 라고 생각합니다.
+단순히 자바스크립트에 타입을 명시한다고 해서 타입스크립트
+개발자라고 치환되면 안된다 라고 생각합니다.
 
 ## 1. 코드 생성과 타입 체크는 독립적이다
 
@@ -953,3 +953,90 @@ function pluck<T, K extends keyof T>(record: T[], key: K): T[K][] {
   return record.map(r => r[key])
 }
 ```
+
+## 14. unknown은 타입시스템에 부합하는 타입이다
+
+unknown은 할당 가능성 관점에서 any와 비교할 수 있습니다.
+any의 강력함은 어떠한 타입이든 any에 할당 가능하며,
+any는 어떠한 타입으로도 할당 가능한 것에서 비롯됩니다.
+
+함수 반환값 타입을 any로 사용한다면, 함수를 호출한 곳에서
+반환값은 암시적 any 타입이 되어 사용되는 곳마다 문제를
+발생시킵니다.
+
+```ts
+function parseYAML(yaml: string): any {
+  // ...
+}
+
+interface Book {
+  name: string;
+  author: string;
+}
+const book: Book = parseYAML(`
+  name: Wuthering Heights
+  author: Emily Brontë
+`);
+
+alert(book.title); // No error, alerts "undefined" at runtime
+book("read"); // No error, throws "TypeError: book is not a
+// function" at runtime
+```
+
+대신, unknown 타입을 반환하게 만들면 타입 체크 단계에서
+오류를 발생시키며 적절한 타입으로 반환을 강제하여 사용할 수
+있습니다.
+
+```ts
+function safeParseYAML(yaml: string): unknown {
+  return parseYAML(yaml);
+}
+
+const book = safeParseYAML(`
+  name: Villette
+  author: Charlotte Brontë
+`) as Book;
+alert(book.title);
+// ~~~~~ Property 'title' does not exist on type 'Book'
+book("read");
+// ~~~~~~~~~ this expression is not callable
+```
+
+또한, any를 대신하여 모르는 값이 할당된 변수의 타입을 unknown으로
+명시하였다면 instanceof를 체크하여 unknown에서 원하는 타입으로
+변환할 수 있습니다.
+
+```ts
+function processValue(val: unknown) {
+  if (val instanceof Date) {
+    val; // Type is Date
+  }
+}
+```
+
+정의된 타입 가드를 사용하여 unknown에서 원하는 타입으로 변환할 수 있습니다.
+
+```ts
+function isBook(val: unknown): val is Book {
+  return (
+    typeof val === "object" && val !== null && "name" in val && "author" in val
+  );
+}
+function processValue(val: unknown) {
+  if (isBook(val)) {
+    val; // Type is Book
+  }
+}
+```
+
+타입을 집합의 관점에서 생각해본다면, any는 모든 집합의
+부분 집합이면서, 동시에 상위 집합인 것이고, 이는
+타입시스템과 상충되는 측면을 가지고 있습니다.
+타입체커는 집합 기반으로 할당 가능성을 판단하기 때문에
+any를 사용하면 타입 체커가 무력화됩니다.
+
+대신, unknown타입은 any를 대신하여 사용할 수 있는
+타입 시스템에 부합하는 타입입니다. **어떤 타입이든 unknown에
+할당 가능하지만, unknown은 오직 unknown과 any에만
+할당 가능**하기 때문에 타입 시스템의 기능을 제공받으며
+모르는 값에 대해 안전하게 타입 처리를 해줄 수 있습니다.
