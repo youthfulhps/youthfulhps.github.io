@@ -2,7 +2,7 @@
 title: 타입스크립트, 글로 배웠습니다만
 date: 2022-06-14 10:06:39
 category: typescript
-thumbnail:
+thumbnail: ./images/typescript-checklist-you-should-know/thumbnail.png
 draft: false
 ---
 
@@ -38,7 +38,7 @@ js 파일을 ts 파일로 변경해도 문제가 없습니다.
 
 ```js
 function sayHello(who: string) {
-  console.log('Hello', who)
+  console.log('Hello', who);
 }
 
 //SyntaxError: Unexpected token : ,in node
@@ -63,8 +63,8 @@ function sayHello(who: string) {
 
 ```ts
 // main.ts
-let greetings = 'hello'
-greetings = 1234
+let greetings = 'hello';
+greetings = 1234;
 ```
 
 ```shell
@@ -89,20 +89,20 @@ main.ts:2:1 -error ... '1234' 형식은 'string' 형식에 할당할 수 없습�
 
 ```ts
 interface Square {
-  width: number
+  width: number;
 }
 
 interface Rectangle extends Square {
-  height: number
+  height: number;
 }
 
-type Shape = Square | Rectangle
+type Shape = Square | Rectangle;
 
 function calculateArea(shape: Shape) {
   if (shape instanceof Rectangle) {
-    return shape.width * shape * height
+    return shape.width * shape * height;
   } else {
-    return shape.width * shape.width
+    return shape.width * shape.width;
   }
 }
 ```
@@ -145,17 +145,17 @@ class Square {
 
 class Rectangle extends Square {
   constructor(public width: number, public height: number) {
-    super(width)
+    super(width);
   }
 }
 
-type Shape = Square | Rectangle
+type Shape = Square | Rectangle;
 
 function calculateArea(shape: Shape) {
   if (shape instanceof Rectangle) {
-    return shape.width * shape * height
+    return shape.width * shape * height;
   } else {
-    return shape.width * shape.width
+    return shape.width * shape.width;
   }
 }
 ```
@@ -174,30 +174,30 @@ calculateArea의 매개변수로 NamedRectangle 타입의 객체를
 
 ```ts
 interface Square {
-  width: number
+  width: number;
 }
 
 interface Rectangle extends Square {
-  height: number
+  height: number;
 }
 
 interface NamedRectangle {
-  name: string
-  width: number
-  height: number
+  name: string;
+  width: number;
+  height: number;
 }
 
 function calculateArea(rectangle: Rectangle) {
-  return rectangle.width * rectangle.height
+  return rectangle.width * rectangle.height;
 }
 
 const rectangle: NamedRectangle = {
   name: 'namedRectangle',
   width: 3,
   height: 4,
-}
+};
 
-calculateArea(rectangle) //OK
+calculateArea(rectangle); //OK
 ```
 
 이러한 관점에서 함수를 작성할 때 호출에 사용되는 매개변수의 속성들이
@@ -212,14 +212,14 @@ calculateArea(rectangle) //OK
 
 ```ts
 type TState = {
-  name: string
-  age: number
-}
+  name: string;
+  age: number;
+};
 
 type IState = {
-  name: string
-  age: number
-}
+  name: string;
+  age: number;
+};
 ```
 
 type과 interface 모두 추가적인 속성을 할당하면 동일한
@@ -233,11 +233,11 @@ const foo: TState = {
   // ~~~~ Type ... is not assignable to type 'TState'
   //      Object literal may only specify known properties, and
   //     'organization' does not exist in type 'TState'
-}
+};
 
-type TDict = { [key: string]: string }
+type TDict = { [key: string]: string };
 interface IDict {
-  [key: string]: string
+  [key: string]: string;
 }
 ```
 
@@ -245,25 +245,25 @@ interface IDict {
 
 ```ts
 //index signature
-type TDict = { [key: string]: string }
+type TDict = { [key: string]: string };
 interface IDict {
-  [key: string]: string
+  [key: string]: string;
 }
 
 //function type
-type TFn = (x: number) => string
+type TFn = (x: number) => string;
 interface IFn {
-  (x: number): string
+  (x: number): string;
 }
 
 //generic
 type TPair<T> = {
-  first: T
-  second: T
-}
+  first: T;
+  second: T;
+};
 interface IPair<T> {
-  first: T
-  second: T
+  first: T;
+  second: T;
 }
 ```
 
@@ -271,12 +271,12 @@ interface IPair<T> {
 
 ```ts
 class StateT implements TState {
-  name: string = ''
-  capital: string = ''
+  name: string = '';
+  capital: string = '';
 }
 class StateI implements IState {
-  name: string = ''
-  capital: string = ''
+  name: string = '';
+  capital: string = '';
 }
 ```
 
@@ -284,16 +284,16 @@ class StateI implements IState {
 
 ```ts
 interface IStateWithPop extends TState {
-  population: number
+  population: number;
 }
-type TStateWithPop = IState & { population: number }
+type TStateWithPop = IState & { population: number };
 ```
 
 대표적인 공통점이 있는 반면 차이점도 존재하는데,
 유니온 타입은 있지만 유니온 인터페이스라는 개념은 없습니다.
 
 ```ts
-type AorB = 'a' | 'b'
+type AorB = 'a' | 'b';
 ```
 
 '일반적으로' 타입과 인터페이스는 서로 확장 가능하다는 것은
@@ -303,19 +303,19 @@ type AorB = 'a' | 'b'
 흔히 type은 interface 보다 쓰임새가 많습니다.
 
 ```ts
-type AorB = 'A' | 'B'
+type AorB = 'A' | 'B';
 type Input = {
   /* ... */
-}
+};
 type Output = {
   /* ... */
-}
+};
 
 interface VariableMap {
-  [name: string]: Input | Output
+  [name: string]: Input | Output;
 }
 
-type NamedVariable = (Input | Output) & { name: string }
+type NamedVariable = (Input | Output) & { name: string };
 ```
 
 type은 튜플과 배열 타입도 간결하게 표현할 수 있습니다.
@@ -324,9 +324,9 @@ type은 튜플과 배열 타입도 간결하게 표현할 수 있습니다.
 튜플은 type을 통해 구현하는 것이 낫습니다.
 
 ```ts
-type Pair = [number, number]
-type StringList = string[]
-type NamedNums = [string, ...number[]]
+type Pair = [number, number];
+type StringList = string[];
+type NamedNums = [string, ...number[]];
 ```
 
 반면 인터페이스는 속성을 확장하는 '선언 병합'
@@ -334,17 +334,17 @@ type NamedNums = [string, ...number[]]
 
 ```ts
 interface IState {
-  name: string
-  age: number
+  name: string;
+  age: number;
 }
 interface IState {
-  organization: string
+  organization: string;
 }
 const foo: IState = {
   name: 'foo',
   age: 29,
   organization: 'fastfive',
-} // OK
+}; // OK
 ```
 
 선언 병합은 주로 타입 선언 파일에서 사용됩니다.
@@ -385,12 +385,12 @@ any -> any[];
 
 ```ts
 interface Foo {
-  foo: string
+  foo: string;
 }
 interface Bar {
-  bar: string
+  bar: string;
 }
-declare function expressionReturningFoo(): Foo
+declare function expressionReturningFoo(): Foo;
 
 function processBar(b: Bar) {
   /* ... */
@@ -398,14 +398,14 @@ function processBar(b: Bar) {
 
 //// Don't do this
 function f1() {
-  const x: any = expressionReturningFoo()
-  processBar(x)
+  const x: any = expressionReturningFoo();
+  processBar(x);
 }
 
 // Prefer this
 function f2() {
-  const x = expressionReturningFoo()
-  processBar(x as any)
+  const x = expressionReturningFoo();
+  processBar(x as any);
 }
 ```
 
@@ -427,7 +427,7 @@ undefined, symbol, bigint)이 있습니다. 기본형들은
 가지고 있는 것 처럼 보이지만, string의 메서드가 아닙니다.
 
 ```js
-'string'.charAt(3) //"i"
+'string'.charAt(3); //"i"
 ```
 
 자바스크립트는 기본형과 객체 타입을 서로 자유롭게 변환하여
@@ -436,9 +436,9 @@ String 객체로 래핑하고 메서드를 호출하고 래핑한 객체를
 버립니다.** 이러한 동작으로 아래의 코드처럼 혼란을 가져오기도 합니다.
 
 ```js
-const foo = 'foo'
-foo.bar = 'hi'
-console.log(foo.bar) //undefined
+const foo = 'foo';
+foo.bar = 'hi';
+console.log(foo.bar); //undefined
 ```
 
 타입스크립트는 이러한 자바스크립트 동작을 위해
@@ -450,11 +450,11 @@ console.log(foo.bar) //undefined
 
 ```ts
 function getStringLength(foo: String) {
-  return foo.length
+  return foo.length;
 }
 
-getStringLen('hello') // OK
-getStringLen(new String('hello')) // OK
+getStringLen('hello'); // OK
+getStringLen(new String('hello')); // OK
 ```
 
 그러나, string은 String에 할당할 수 있지만, String은
@@ -462,7 +462,7 @@ string에 할당할 수 없습니다.
 
 ```ts
 function isSubString(subString: String) {
-  return 'hello'.includes(subString)
+  return 'hello'.includes(subString);
   //Argument of type 'String' is not assignable to parameter of type 'string'.
 }
 ```
@@ -481,8 +481,8 @@ function isSubString(subString: String) {
 
 ```ts
 interface Room {
-  numDoors: number
-  ceilingHeightFt: number
+  numDoors: number;
+  ceilingHeightFt: number;
 }
 const r: Room = {
   numDoors: 1,
@@ -490,7 +490,7 @@ const r: Room = {
   elephant: 'present',
   // ~~~~ Object literal may only specify known properties,
   //      and 'elephant' does not exist in type 'Room'
-}
+};
 ```
 
 하지만, 구조적 타이핑 관점으로 생각해보면
@@ -502,15 +502,15 @@ r은 구조적으로 Room 타입에 해당하는 속성을 모두
 
 ```ts
 interface Room {
-  numDoors: number
-  ceilingHeightFt: number
+  numDoors: number;
+  ceilingHeightFt: number;
 }
 const obj = {
   numDoors: 1,
   ceilingHeightFt: 10,
   elephant: 'present',
-}
-const r: Room = obj // OK
+};
+const r: Room = obj; // OK
 ```
 
 타입스크립트는 **타입 시스템의 구조적 본질을 해치지 않으면서,
@@ -571,15 +571,15 @@ const post: HTTPFunction = (url, options) => { ... }
 
 ```ts
 interface Person {
-  firstName: string
-  lastName: string
+  firstName: string;
+  lastName: string;
 }
 
 interface PersonWithBirthDate extends Person {
-  birth?: Date
+  birth?: Date;
 }
 
-type PersonWithBirthDate = Person & { birth?: Date }
+type PersonWithBirthDate = Person & { birth?: Date };
 ```
 
 제너릭 타입을 사용하여 중복을 제거할 수 있습니다.
@@ -592,24 +592,24 @@ State의 속성을 인덱싱하여 topNavState를 정의할 수 있습니다.
 
 ```ts
 interface State {
-  userId: string
-  pageTitle: string
-  recentFiles: string[]
-  pageContents: string
+  userId: string;
+  pageTitle: string;
+  recentFiles: string[];
+  pageContents: string;
 }
 interface TopNavState {
-  userId: string
-  pageTitle: string
-  recentFiles: string[]
+  userId: string;
+  pageTitle: string;
+  recentFiles: string[];
 }
 ```
 
 ```ts
 type TopNavState = {
-  userId: State['userId']
-  pageTitle: State['pageTitle']
-  recentFiles: State['recentFiles']
-}
+  userId: State['userId'];
+  pageTitle: State['pageTitle'];
+  recentFiles: State['recentFiles'];
+};
 ```
 
 하거나, 여전히 남아있는 중복은 매핑된 타입으로
@@ -620,10 +620,10 @@ type TopNavState = {
 
 ```ts
 type TopNavState = {
-  [k in 'userId' | 'pageTitle' | 'recentFiles']: State[k]
-}
+  [k in 'userId' | 'pageTitle' | 'recentFiles']: State[k];
+};
 
-type TopNavState = Pick<State, 'userId' | 'pageTitle' | 'recentFiles'>
+type TopNavState = Pick<State, 'userId' | 'pageTitle' | 'recentFiles'>;
 ```
 
 반복적인 작업을 줄이기 위해 노력하는 만큼, 타입의 공간에서
@@ -636,9 +636,9 @@ type TopNavState = Pick<State, 'userId' | 'pageTitle' | 'recentFiles'>
 것은 더 복잡한 객체를 키로 사용해도 문제가 되지 않음을 이야기합니다.
 
 ```js
-const x = {}
-x[[1, 2, 3]] = 2
-console.log(x) // {'1,2,3': 2};
+const x = {};
+x[[1, 2, 3]] = 2;
+console.log(x); // {'1,2,3': 2};
 ```
 
 자바스크립트는 '해시 기능' 객체라는 표현이 없기 때문에 만약, **문자열이
@@ -653,15 +653,15 @@ console.log(x) // {'1,2,3': 2};
 const x = {
   1: 2,
   3: 4,
-}
-console.log(x) // {'1': 2, '3': 4};
+};
+console.log(x); // {'1': 2, '3': 4};
 
-console.log(typeof []) // 'object'
-const x = [1, 2, 3]
-console.log(x[0]) // 1
-console.log(x['1']) // 2
-console.log(Object.keys(x)) // ['0', '1', '2']
-console.log(typeof Object.keys(x)[0]) // 'string'
+console.log(typeof []); // 'object'
+const x = [1, 2, 3];
+console.log(x[0]); // 1
+console.log(x['1']); // 2
+console.log(Object.keys(x)); // ['0', '1', '2']
+console.log(typeof Object.keys(x)[0]); // 'string'
 ```
 
 타입스크립트는 **혼란스러운 자바스크립트의 동작을 그대로 모델링하지 않고,
@@ -677,9 +677,9 @@ interface Array<T> {
 ```
 
 ```ts
-const xs = [1, 2, 3]
-const x0 = xs[0] // OK
-const x1 = xs['1']
+const xs = [1, 2, 3];
+const x0 = xs[0]; // OK
+const x1 = xs['1'];
 // ~~~~ Element implicitly has an 'any' type
 //      because index expression is not of type 'number'
 ```
@@ -698,11 +698,11 @@ CSV 파일을 파싱하여 행과 열을 값으로 매칭하는 객체로
 인덱스 시그니처를 사용할 수 있습니다.
 
 ```ts
-type TestScore = { [property: string]: number }
+type TestScore = { [property: string]: number };
 const testScore: TestScore = {
   math: 90,
   english: 85,
-}
+};
 ```
 
 하지만, **인덱스 시그니처는 동적 데이터에 대한 타입을 지정할 때만
@@ -717,24 +717,24 @@ const testScore: TestScore = {
 
 ```ts
 interface Row1 {
-  a: number
-  b?: number
-  c?: number
-  d?: number
+  a: number;
+  b?: number;
+  c?: number;
+  d?: number;
 }
 
 type Row2 =
   | { a: number }
   | { a: number; b: number }
   | { a: number; b: number; c: number }
-  | { a: number; b: number; c: number; d: number }
+  | { a: number; b: number; c: number; d: number };
 ```
 
 이러한 방법이 번거롭다면, 키 타입에 유연성을 부여하는 [Record](https://www.typescriptlang.org/ko/docs/handbook/utility-types.html#recordkeystype)
 제너릭 타입을 사용할 수도 있습니다.
 
 ```ts
-type Vec3D = Record<'x' | 'y' | 'z', number>
+type Vec3D = Record<'x' | 'y' | 'z', number>;
 // Type Vec3D = {
 //   x: number;
 //   y: number;
@@ -745,7 +745,7 @@ type Vec3D = Record<'x' | 'y' | 'z', number>
 키마다 별도의 타입을 사용해야 한다면, 매핑된 타입을 사용할 수 있습니다.
 
 ```ts
-type ABC = { [k in 'x' | 'y' | 'z']: k extends 'y' ? string : number }
+type ABC = { [k in 'x' | 'y' | 'z']: k extends 'y' ? string : number };
 // Type ABC = {
 //   a: number;
 //   y: string;
@@ -762,11 +762,11 @@ type ABC = { [k in 'x' | 'y' | 'z']: k extends 'y' ? string : number }
 
 ```ts
 interface Person {
-  name: string
+  name: string;
 }
 
-const alice: Person = { name: 'Alice' }
-const bob = { name: 'Bob' } as Person
+const alice: Person = { name: 'Alice' };
+const bob = { name: 'Bob' } as Person;
 ```
 
 타입 선언은 할당되는 값이 해당 타입을 만족하는 지
@@ -779,12 +779,12 @@ const alice: Person = {
   occupation: 'Typescript developer',
   // ~~~~~ Object literal may only specify known properties
   //       and 'occupation' does not exist in type 'Person'
-}
+};
 
 const bob = {
   name: 'Bob',
   occupation: 'Javascript developer',
-} as Person //No error
+} as Person; //No error
 ```
 
 타입 단언을 사용하면 문제가 해결되는 것처럼 보이지만
@@ -792,10 +792,10 @@ const bob = {
 
 ```ts
 interface Person {
-  name: string
+  name: string;
 }
 
-const people = ['alice', 'bob', 'jan'].map(name => ({} as Person))
+const people = ['alice', 'bob', 'jan'].map(name => ({} as Person));
 //No error
 ```
 
@@ -805,10 +805,10 @@ const people = ['alice', 'bob', 'jan'].map(name => ({} as Person))
 
 ```ts
 document.querySelector('#myButton').addEventListener('click', e => {
-  e.currentTarget //타입은 EventTarget;
-  const button = e.currentTarget as HTMLButtonElement
-  button //타입은 HTMLButtonElement;
-})
+  e.currentTarget; //타입은 EventTarget;
+  const button = e.currentTarget as HTMLButtonElement;
+  button; //타입은 HTMLButtonElement;
+});
 ```
 
 ## 13. 타입 추론은 잘못된 추론을 할 만큼 구체적으로 수행되지 않는다
@@ -819,8 +819,8 @@ document.querySelector('#myButton').addEventListener('click', e => {
 을 넣을 필요가 없습니다.
 
 ```ts
-let x: number = 12
-let x = 12
+let x: number = 12;
+let x = 12;
 ```
 
 하지만, 타입 추론은 넓은 타입 추론으로 인해 발생할 수 있는
@@ -833,7 +833,7 @@ let x = 12
 많은 타입의 후보군을 추론하게 됩니다.
 
 ```ts
-const mixed = ['x', 1]
+const mixed = ['x', 1];
 ```
 
 ```yaml
@@ -855,13 +855,13 @@ any[]
 language는 string으로 추론되어 아래와 같은 에러가 발생합니다.
 
 ```ts
-type Language = 'JavaScript' | 'TypeScript' | 'Python'
+type Language = 'JavaScript' | 'TypeScript' | 'Python';
 function setLanguage(language: Language) {
   /* ... */
 }
 
-let language = 'Javascript'
-setLanguage(language)
+let language = 'Javascript';
+setLanguage(language);
 // ~~~~ Argument of type 'string' is not assignable
 //      to parameter of type 'Language'
 ```
@@ -870,15 +870,15 @@ setLanguage(language)
 수 있습니다.
 
 ```ts
-let language: Language = 'Javascript'
-setLanguage(language) //OK
+let language: Language = 'Javascript';
+setLanguage(language); //OK
 ```
 
 넓혀진 타입을 제한하기 위해 함수 파라미터에 문자열 리터럴
 값을 직접 제공하여 문자열 리터럴 타입으로 추론되도록 유도할 수 있습니다.
 
 ```ts
-setLanguage('Javascript') //OK
+setLanguage('Javascript'); //OK
 ```
 
 let을 const로 사용하여 선언하면, 재할당이 없을 것이라는
@@ -886,13 +886,13 @@ let을 const로 사용하여 선언하면, 재할당이 없을 것이라는
 유도할 수 있습니다.
 
 ```ts
-let x = 'x' // type is string
-const y = 'y' // type is 'y'
+let x = 'x'; // type is string
+const y = 'y'; // type is 'y'
 ```
 
 ```ts
-const language = 'Javascript'
-setLanguage(language) //OK
+const language = 'Javascript';
+setLanguage(language); //OK
 ```
 
 추가적인 예시로, 객체의 경우 타입스크립트의 넓히기 알고리즘에 의해
@@ -900,23 +900,23 @@ setLanguage(language) //OK
 구체적으로 타입을 추론할 수 없는 문제가 존재합니다.
 
 ```ts
-type Language = 'JavaScript' | 'TypeScript' | 'Python'
+type Language = 'JavaScript' | 'TypeScript' | 'Python';
 interface GovernedLanguage {
-  language: Language
-  organization: string
+  language: Language;
+  organization: string;
 }
 
 function complain(language: GovernedLanguage) {
   /* ... */
 }
 
-complain({ language: 'TypeScript', organization: 'Microsoft' }) // OK
+complain({ language: 'TypeScript', organization: 'Microsoft' }); // OK
 
 const ts = {
   language: 'TypeScript',
   organization: 'Microsoft',
-}
-complain(ts)
+};
+complain(ts);
 //       ~~ Argument of type '{ language: string; organization: string; }'
 //            is not assignable to parameter of type 'GovernedLanguage'
 //          Types of property 'language' are incompatible
@@ -932,9 +932,9 @@ as const는 그 값이 내부까지 상수라는 사실을 타입스크립트에
 const ts = {
   language: 'TypeScript',
   organization: 'Microsoft',
-} as const
+} as const;
 
-complain(ts) // OK
+complain(ts); // OK
 ```
 
 ## 14. string 타입보다는 더 구체적인 타입 사용을 고민해야 한다
@@ -949,10 +949,10 @@ Album 인터페이스를 정의할 때, string을 남발한 덕분에
 
 ```ts
 interface Album {
-  artist: string
-  title: string
-  releaseDate: string // YYYY-MM-DD
-  recordingType: string // E.g., "live" or "studio"
+  artist: string;
+  title: string;
+  releaseDate: string; // YYYY-MM-DD
+  recordingType: string; // E.g., "live" or "studio"
 }
 ```
 
@@ -965,7 +965,7 @@ const kindOfBlue: Album = {
   title: 'Kind of Blue',
   releaseDate: 'August 17th, 1959', // Oops!
   recordingType: 'Studio', // Oops!
-} // OK
+}; // OK
 ```
 
 releaseDate는 Date 객체를 사용하여 날짜 형식으로만
@@ -974,13 +974,13 @@ releaseDate는 Date 객체를 사용하여 날짜 형식으로만
 것이 좋습니다.
 
 ```ts
-type RecordingType = 'studio' | 'live'
+type RecordingType = 'studio' | 'live';
 
 interface Album {
-  artist: string
-  title: string
-  releaseDate: Date
-  recordingType: RecordingType
+  artist: string;
+  title: string;
+  releaseDate: Date;
+  recordingType: RecordingType;
 }
 ```
 
@@ -997,7 +997,7 @@ any의 영향력이 퍼져나가게 됩니다.
 
 ```ts
 function pluck<T>(record: T[], key: string): any[] {
-  return record.map(r => r[key])
+  return record.map(r => r[key]);
   // ~~~~~~ Element implicitly has an 'any' type
   //        because type '{}' has no index signature
 }
@@ -1010,11 +1010,11 @@ string을 대체할 수 있습니다.
 
 ```ts
 function pluck<T>(record: T[], key: keyof T) {
-  return record.map(r => r[key])
+  return record.map(r => r[key]);
 }
 
 function pluck<T, K extends keyof T>(record: T[], key: K): T[K][] {
-  return record.map(r => r[key])
+  return record.map(r => r[key]);
 }
 ```
 
@@ -1034,16 +1034,16 @@ function parseYAML(yaml: string): any {
 }
 
 interface Book {
-  name: string
-  author: string
+  name: string;
+  author: string;
 }
 const book: Book = parseYAML(`
   name: Wuthering Heights
   author: Emily Brontë
-`)
+`);
 
-alert(book.title) // No error, alerts "undefined" at runtime
-book('read') // No error, throws "TypeError: book is not a
+alert(book.title); // No error, alerts "undefined" at runtime
+book('read'); // No error, throws "TypeError: book is not a
 // function" at runtime
 ```
 
@@ -1053,16 +1053,16 @@ book('read') // No error, throws "TypeError: book is not a
 
 ```ts
 function safeParseYAML(yaml: string): unknown {
-  return parseYAML(yaml)
+  return parseYAML(yaml);
 }
 
 const book = safeParseYAML(`
   name: Villette
   author: Charlotte Brontë
-`) as Book
-alert(book.title)
+`) as Book;
+alert(book.title);
 // ~~~~~ Property 'title' does not exist on type 'Book'
-book('read')
+book('read');
 // ~~~~~~~~~ this expression is not callable
 ```
 
@@ -1073,7 +1073,7 @@ book('read')
 ```ts
 function processValue(val: unknown) {
   if (val instanceof Date) {
-    val // Type is Date
+    val; // Type is Date
   }
 }
 ```
@@ -1084,11 +1084,11 @@ function processValue(val: unknown) {
 function isBook(val: unknown): val is Book {
   return (
     typeof val === 'object' && val !== null && 'name' in val && 'author' in val
-  )
+  );
 }
 function processValue(val: unknown) {
   if (isBook(val)) {
-    val // Type is Book
+    val; // Type is Book
   }
 }
 ```
