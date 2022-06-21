@@ -6,6 +6,8 @@ thumbnail: ./images/typescript-checklist-you-should-know/thumbnail.png
 draft: false
 ---
 
+![A man who thinks about whether to use any type](./images/typescript-checklist-you-should-know/thumbnail.png)
+
 개인적으로 타입스크립트는 실무에서 사용하면서 익히기 시작해서
 약 2년 가까이 매일 사용하는 언어가 되었습니다.
 타입스크립트로 시작한 프로젝트도 있었던 반면, 자바스크립트에서
