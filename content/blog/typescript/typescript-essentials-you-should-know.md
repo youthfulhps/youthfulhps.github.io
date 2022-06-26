@@ -1107,10 +1107,6 @@ any를 사용하면 타입 체커가 무력화됩니다.
 할당 가능**하기 때문에 타입 시스템의 기능을 제공받으며
 모르는 값에 대해 안전하게 타입 처리를 해줄 수 있습니다.
 
-## 16. 템플릿 리터럴 타입을 사용하여 반복 정의를 제거할 수 있다
-
-[Template Literal Types로 타입 안전하게 코딩하기](https://toss.tech/article/template-literal-types)
-
 ## 17. enum은 트리쉐이킹되지 않는다
 
 [TypeScript enum을 사용하지 않는 게 좋은 이유를 Tree-shaking 관점에서 소개합니다.](https://engineering.linecorp.com/ko/blog/typescript-enum-tree-shaking/)
