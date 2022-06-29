@@ -628,6 +628,25 @@ type TopNavState = {
 type TopNavState = Pick<State, 'userId' | 'pageTitle' | 'recentFiles'>;
 ```
 
+추가적으로 문자열 리터럴 타입을 기반으로 하는 템플릿 리터럴 타입은
+문자열 리터럴을 통해 새로운 타입을 확장할 수 있는 도구입니다.
+
+```ts
+type Ade = 'ade';
+type LemonAde = `lemon${Ade}`;
+```
+
+더 복잡하게는 여러 개의 유니온 타입을 확장하여 새로운
+문자열 리터럴 타입을 정의할 수 있습니다.
+
+```ts
+type DrinkType = 'ade' | 'juice';
+type Flavor = 'lemon' | 'graphfruit' | 'Strawberry'
+
+type DrinkMenu = `${Flavor}${DrinkType}`;
+//type DrinkMenu = "lemonade" | "lemonjuice" | "graphfruitade" | "graphfruitjuice" | "Strawberryade" | "Strawberryjuice"
+```
+
 반복적인 작업을 줄이기 위해 노력하는 만큼, 타입의 공간에서
 또한 반복을 주의해야 합니다.
 
