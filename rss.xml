@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Youthfulhps.dev]]></title><description><![CDATA[Blog posted front-end, troubleshooting!]]></description><link>https://youthfulhps.dev</link><generator>GatsbyJS</generator><lastBuildDate>Wed, 29 Jun 2022 00:50:52 GMT</lastBuildDate><item><title><![CDATA[타입스크립트, 글로 배웠습니다만]]></title><description><![CDATA[개인적으로 타입스크립트는 실무에서 사용하면서 익히기 시작해서
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Youthfulhps.dev]]></title><description><![CDATA[Blog posted front-end, troubleshooting!]]></description><link>https://youthfulhps.dev</link><generator>GatsbyJS</generator><lastBuildDate>Wed, 29 Jun 2022 16:43:37 GMT</lastBuildDate><item><title><![CDATA[타입스크립트, 글로 배웠습니다만]]></title><description><![CDATA[개인적으로 타입스크립트는 실무에서 사용하면서 익히기 시작해서
 약…]]></description><link>https://youthfulhps.dev/typescript/typescript-essentials-you-should-know/</link><guid isPermaLink="false">https://youthfulhps.dev/typescript/typescript-essentials-you-should-know/</guid><pubDate>Tue, 14 Jun 2022 10:06:39 GMT</pubDate><content:encoded>&lt;p&gt;&lt;span
       class=&quot;gatsby-resp-image-wrapper&quot;
       style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 864px; &quot;
@@ -842,7 +842,109 @@ any를 사용하면 타입 체커가 무력화됩니다.&lt;/p&gt;
 &lt;p&gt;Dan VanderKam. 『&lt;a href=&quot;https://effectivetypescript.com/&quot;&gt;effective typescript&lt;/a&gt;』&lt;/p&gt;
 &lt;p&gt;&lt;a href=&quot;https://github.com/danvk/effective-typescript&quot;&gt;danvk/effective-typescript&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href=&quot;https://toss.tech/article/template-literal-types&quot;&gt;Template Literal Types로 타입 안전하게 코딩하기&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;https://engineering.linecorp.com/ko/blog/typescript-enum-tree-shaking/&quot;&gt;TypeScript enum을 사용하지 않는 게 좋은 이유를 Tree-shaking 관점에서 소개합니다.&lt;/a&gt;&lt;/p&gt;</content:encoded></item><item><title><![CDATA[stale-while-revalidate 전략은 어떻게 활용되고 있을까]]></title><description><![CDATA[클라이언트를 개발하면서 HTTP Cache-Control Extensions for Stale Content의
+&lt;p&gt;&lt;a href=&quot;https://engineering.linecorp.com/ko/blog/typescript-enum-tree-shaking/&quot;&gt;TypeScript enum을 사용하지 않는 게 좋은 이유를 Tree-shaking 관점에서 소개합니다.&lt;/a&gt;&lt;/p&gt;</content:encoded></item><item><title><![CDATA[react-concurrent-mode]]></title><description><![CDATA[리엑트팀에서 Async Rendering
+을 시작으로 5년이 지나 드디어 react18에서 동시성 기능이 정식으로 출시되었습니다. 기능적으로 많은 성능 향상을 이루었는데, ‘Automatic batching for fewer renders’,
+‘SSR…]]></description><link>https://youthfulhps.dev/react/react-concurrent-mode/</link><guid isPermaLink="false">https://youthfulhps.dev/react/react-concurrent-mode/</guid><pubDate>Sat, 11 Jun 2022 16:07:02 GMT</pubDate><content:encoded>&lt;p&gt;리엑트팀에서 &lt;a href=&quot;https://ko.reactjs.org/blog/2018/03/27/update-on-async-rendering.html&quot;&gt;Async Rendering&lt;/a&gt;
+을 시작으로 5년이 지나 드디어 react18에서 동시성 기능이 정식으로 출시되었습니다.&lt;/p&gt;
+&lt;p&gt;기능적으로 많은 성능 향상을 이루었는데, ‘Automatic batching for fewer renders’,
+‘SSR support for Suspense’, ‘Fixes for Suspense behavior quirks’와 같이
+코드 수정없이 내부적으로 성능 향상을 이루었고, 동시성을 제공하는 startTransition,
+useDeferredValue, &lt;SuspenseList&gt;, ‘Streaming SSR with selective hydration’과
+같은 기능들이 추가되었습니다.&lt;/p&gt;
+&lt;p&gt;리엑트는 동시성 랜더링 메커니즘을 담아내기 위해 협력적 멀티태스킹, 우선순위 기반 랜더링, 스케쥴링, 중단 등과 같은
+기능을 구현하였는데요. 저는 동시성이라는 키워드가 궁금했습니다.&lt;/p&gt;
+&lt;p&gt;무엇이길래 리엑트팀이 5년동안 붙잡았을까 라는?&lt;/p&gt;
+&lt;h2 id=&quot;concurrent-vs-parallelism&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#concurrent-vs-parallelism&quot; aria-label=&quot;concurrent vs parallelism permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Concurrent vs Parallelism&lt;/h2&gt;
+&lt;p&gt;동시성을 설명할 때, 서로 관련있는 병렬성과 비교하여 이해하곤 합니다.
+하지만, 이 둘은 뚜렷한 차이를 가지고 있다고 이야기하며
+Go 언어의 창시자의 &lt;a href=&quot;https://go.dev/blog/waza-talk&quot;&gt;Concurrency is not parallelism&lt;/a&gt;
+발표 서문에는 다음과 같이 동시성과 병렬성을 비교합니다.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;‘동시성은 &lt;strong&gt;독립적으로 실행되는 프로세스들의 조합이다.&lt;/strong&gt;’
+‘병렬성은 연관된 복수의 연산들을 동시에 실행하는 것이다.’
+‘동시성은 &lt;strong&gt;여러 일을 한꺼번에 다루는 문제에 관한 것이다.&lt;/strong&gt;’
+‘병렬성은 여러 일을 한꺼번에 실행하는 방법에 관한 것이다.’&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;아주 멜랑꼴리한데 발표에서 언급한 문구를 빌려 정리하자면,
+&lt;strong&gt;동시성은 프로세서가 하나만 있는 경우, 병렬 처리를 가능케 하지만 병렬처리는 아닙니다.&lt;/strong&gt;
+즉, 하나의 스레드로 작업을 순차적으로 처리하지만,
+마치 여러 개의 스레드가 사용되고 있는 것처럼 보이게 하는 것이고,
+동시성은 싱글 코어에서도 동작하지만, 병렬성은 두 개 이상의 코어가 필요합니다.&lt;/p&gt;
+&lt;p&gt;예를 들어 병렬성은 GPU를 통해 이미지를 랜더링할 때 R, G, B를 연산하는
+텍스크를 각각의 코어가 작업하는 것과 같이 최소 한 가지 논리적 통제를
+멀티 코어에서 병렬적으로 진행합니다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 1200px; &quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 56.333333333333336%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAALCAYAAAB/Ca1DAAAACXBIWXMAAAsTAAALEwEAmpwYAAABIklEQVQoz4WTi4qEMAxF/f8vlFkYmEVnncVHW/uyPu4kZR1UqnshGNr0cBNihj8ty4Kj+GyNq5qtsu2DaZ7x/Xjgfr+jrutP0TAMMVh936MoihicH6HZejBPE1qClGWJ29cNT/pqY6G1QQgBzrn4wHsfa/I8Pweys8FauKaBCx42GFhjILRDT8CRgAxizVTLGsfxkyeBnoCDlFC6hzISWiko62Gcjw5X4ESdcM6OOT8Hkn3z8yRXEr/yha7rUAkD2eudQ4bwPLXW0WUSOFKREQL6VaHuWjSqRlVVBKa2pdoBGWKpG0UdsPMkkGchqN2WoIJCComG5ikIzrMMYdzNkN3zfbLl/R7t92292q7Wv3t4XOBUpBb9bOEzXGj74Opv2eoNkIdfx9CH+BoAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;Parallel task processing&quot;
+        title=&quot;Parallel task processing&quot;
+        src=&quot;/static/f82a0e50ef2fa8e1033cc9877480a5d4/c1b63/parallelism-image-rendering.png&quot;
+        srcset=&quot;/static/f82a0e50ef2fa8e1033cc9877480a5d4/5a46d/parallelism-image-rendering.png 300w,
+/static/f82a0e50ef2fa8e1033cc9877480a5d4/0a47e/parallelism-image-rendering.png 600w,
+/static/f82a0e50ef2fa8e1033cc9877480a5d4/c1b63/parallelism-image-rendering.png 1200w,
+/static/f82a0e50ef2fa8e1033cc9877480a5d4/d61c2/parallelism-image-rendering.png 1800w,
+/static/f82a0e50ef2fa8e1033cc9877480a5d4/29114/parallelism-image-rendering.png 1920w&quot;
+        sizes=&quot;(max-width: 1200px) 100vw, 1200px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;동시성은 두 개 이상의 작업을 잘개 쪼개서 컨텍스트를 스위칭하며 작업들이 동시에 이루어지는 것처럼 보이도록 한다.
+최소 두개의 논리적 통제 흐름이 필요로 한다. (동영상을 재생하면서 메모장 쓰기)&lt;/p&gt;
+&lt;p&gt;ReactDOM.createRoot 로 실행 시 내부적으로 ‘concurrent mode’ 활성화
+그러나 ‘concurrent features’를 사용할 때만 ‘concurrent rendering’ 수행&lt;/p&gt;
+&lt;h2 id=&quot;리엑트에서-동시성으로-해결하려는-문제&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EB%A6%AC%EC%97%91%ED%8A%B8%EC%97%90%EC%84%9C-%EB%8F%99%EC%8B%9C%EC%84%B1%EC%9C%BC%EB%A1%9C-%ED%95%B4%EA%B2%B0%ED%95%98%EB%A0%A4%EB%8A%94-%EB%AC%B8%EC%A0%9C&quot; aria-label=&quot;리엑트에서 동시성으로 해결하려는 문제 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;리엑트에서 동시성으로 해결하려는 문제&lt;/h2&gt;
+&lt;p&gt;브라우저의 메인 쓰레드는 싱글 쓰레드로서 한번에 하나의 작업만 수행할 수 있다.
+HTML 파싱 -&gt; 자바스크립트 실행 -&gt; 랜더트리 구축 -&gt; 페인트&lt;/p&gt;
+&lt;p&gt;만약, 메인 쓰레드가 하나의 작업을 시작하면 그 작업을 멈출 수 없다.
+마찬가지로 리엑트 랜더링 연산에 돌입하면 멈출 수 없다.&lt;/p&gt;
+&lt;p&gt;즉, 이러한 동작을 블로킹 랜더링 (blocking rendering)이라고 한다.
+리엑트의 랜더링을 위한 변경 알고리즘이 매우 빠르기 때문에 큰 문제가 되지 않는다.
+하지만, 랜더링이 매우 해비한 작업이라면 어떻게 될까&lt;/p&gt;
+&lt;p&gt;리엑트의 빠른 랜더링 덕분에 그 문제가 잘 이해되지 않는다면, 아래 데모를 실행해보자.
+&lt;a href=&quot;https://ajaxlab.github.io/deview2021/blocking&quot;&gt;deview2021/blocking&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;블로킹은 사용자 경험의 악화이다.&lt;/p&gt;
+&lt;p&gt;리엑트팀은 동시성 랜더링으로 블로킹 랜더링을 해결하고자 했다.&lt;/p&gt;
+&lt;h2 id=&quot;동시성-랜더링&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EB%8F%99%EC%8B%9C%EC%84%B1-%EB%9E%9C%EB%8D%94%EB%A7%81&quot; aria-label=&quot;동시성 랜더링 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;동시성 랜더링&lt;/h2&gt;
+&lt;p&gt;react 공식문서 데모에서는 input 컴포넌트의 변화 랜더링, 목록 컴포넌트 랜더링
+이 두가지 작업의 우선 순위를 구분지었다.&lt;/p&gt;
+&lt;p&gt;input 컴포넌트의 변화 랜더링은 즉각적으로 적용되어야 하는 랜더링이며,
+목록 컴포넌트 랜더링은 상대적으로 급하지 않은 랜더링이다.&lt;/p&gt;
+&lt;p&gt;블로킹 랜더링은 1차선 도로이다. 컴포넌트 갱신이 많아지면 CPU의 점유율이 높아지면서
+D, E의 랜더링을 해결할 수 없다.&lt;/p&gt;
+&lt;p&gt;동시성 랜더링은 2차선 도로라고 생각해보자.&lt;/p&gt;
+&lt;p&gt;동시성 랜더링에서도 마찬가지로 A, B라는 작업을 진행한다고 생각해보자.&lt;/p&gt;
+&lt;p&gt;A에 대한 작업을 진행하다가 메인 쓰레드에게 일정시간 양보한다. (yield)&lt;/p&gt;
+&lt;p&gt;동시성 랜더링은 이전에 언급한 것처럼 하나의 컴포넌트의 랜더링을 잘개 쪼개어 작업한다.
+C의 작업이 마무리되기 전에 D에 대한 입력이 들어오면 C의 작업보다 우선순위가 높은 ‘D에 대한 입력’을 먼저 처리하게 된다.
+즉, 리스트 랜더링보다는 우선순위가 높은 ‘D에 대한 입력 처리’를 먼저 진행하게 된다.&lt;/p&gt;
+&lt;p&gt;그리고, pending 상태에 있었던 낮은 순위 랜더링을 리베이스(git branch의 베이스 지점을 끌어올리는 듯한 동작)을 수행한다.&lt;/p&gt;
+&lt;p&gt;두 개의 차선에서 하나는 고속 하나는 저속으로 보고 리엑트에서는 이를 lane 이라고 말한다.&lt;/p&gt;
+&lt;h2 id=&quot;동시성-랜더링을-위한-api&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EB%8F%99%EC%8B%9C%EC%84%B1-%EB%9E%9C%EB%8D%94%EB%A7%81%EC%9D%84-%EC%9C%84%ED%95%9C-api&quot; aria-label=&quot;동시성 랜더링을 위한 api permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;동시성 랜더링을 위한 API&lt;/h2&gt;
+&lt;p&gt;startTransition은 느린 차선의 lane을 만들어 주는 API 이다.&lt;/p&gt;
+&lt;p&gt;startTransition의 콜백 함수를 전달하면 수도 코드에서 확인할 수 있듯이
+낮은 우선순위를 갖게 된다.&lt;/p&gt;
+&lt;p&gt;startTransition은 바로 실행된다????&lt;/p&gt;
+&lt;p&gt;이렇게 낮은 우선순위를 부여받으면 보다 중요한 CPU 사용처에 양보를 할 수 있다.&lt;/p&gt;
+&lt;p&gt;대규모 화면 업데이트 중 응답성을 유지할 수 있고, 상태 전환 중에 시각적 피드백을 제공할 수 있다.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://ajaxlab.github.io/deview2021/concurrent&quot;&gt;deview2021/concurrent&lt;/a&gt;
+를 통해 블로킹 랜더링과 비교해보자.&lt;/p&gt;
+&lt;p&gt;concurrent에서는 짧은 여러개의 스택이 반복적으로 수행되고 있는 것을 확인할 수 있다.&lt;/p&gt;
+&lt;h2 id=&quot;urgent-update-vs-transition-update&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#urgent-update-vs-transition-update&quot; aria-label=&quot;urgent update vs transition update permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;urgent update vs transition update&lt;/h2&gt;
+&lt;p&gt;그 구분은 어떻게 지어야 할까, 사용자가 오래걸릴 것이라고 예상되는 것들
+하나의 view에서 다른 view로 전환되거나, 전환되는 중간과정이 스킵되어도 문제가 없는 것 (load, refresh)&lt;/p&gt;
+&lt;h2 id=&quot;hci-연구-결과가-실제-ui에-통합되도록-돕는-것&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#hci-%EC%97%B0%EA%B5%AC-%EA%B2%B0%EA%B3%BC%EA%B0%80-%EC%8B%A4%EC%A0%9C-ui%EC%97%90-%ED%86%B5%ED%95%A9%EB%90%98%EB%8F%84%EB%A1%9D-%EB%8F%95%EB%8A%94-%EA%B2%83&quot; aria-label=&quot;hci 연구 결과가 실제 ui에 통합되도록 돕는 것 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;HCI 연구 결과가 실제 Ui에 통합되도록 돕는 것&lt;/h2&gt;
+&lt;p&gt;화면 간 전환에서 로딩 중 상태를 너무 많이 표시하면 UX 품질이 낮아짐
+빠르게 처리되기 기대하는 상호작용과 느려도 문제없는 상호작용
+동시성 모드의 목적은 HCI 연구 결과를 추상화하고 구현할 수 있는 방법을 제공하는 것이다.&lt;/p&gt;
+&lt;p&gt;HCI 연구 결과 확인해보기&lt;/p&gt;
+&lt;h2 id=&quot;reference&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#reference&quot; aria-label=&quot;reference permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Reference&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;https://tv.naver.com/v/23652451&quot;&gt;Inside React(동시성을 구현하는 기술)&lt;/a&gt; 리뷰&lt;/p&gt;</content:encoded></item><item><title><![CDATA[stale-while-revalidate 전략은 어떻게 활용되고 있을까]]></title><description><![CDATA[클라이언트를 개발하면서 HTTP Cache-Control Extensions for Stale Content의
  확장 디렉티브 전략을 기반으로한
 구현체들을 많이 접하게 되는데요. swr…]]></description><link>https://youthfulhps.dev/web/stale-while-ravalidate/</link><guid isPermaLink="false">https://youthfulhps.dev/web/stale-while-ravalidate/</guid><pubDate>Wed, 01 Jun 2022 16:07:27 GMT</pubDate><content:encoded>&lt;p&gt;클라이언트를 개발하면서 &lt;a href=&quot;https://datatracker.ietf.org/doc/html/rfc5861&quot;&gt;HTTP Cache-Control Extensions for Stale Content&lt;/a&gt;의
 &lt;code class=&quot;language-text&quot;&gt;stale-while-revalidate (swr)&lt;/code&gt; 확장 디렉티브 전략을 기반으로한
