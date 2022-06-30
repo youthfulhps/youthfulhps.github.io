@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Youthfulhps.dev]]></title><description><![CDATA[Blog posted front-end, troubleshooting!]]></description><link>https://youthfulhps.dev</link><generator>GatsbyJS</generator><lastBuildDate>Wed, 29 Jun 2022 16:43:37 GMT</lastBuildDate><item><title><![CDATA[타입스크립트, 글로 배웠습니다만]]></title><description><![CDATA[개인적으로 타입스크립트는 실무에서 사용하면서 익히기 시작해서
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Youthfulhps.dev]]></title><description><![CDATA[Blog posted front-end, troubleshooting!]]></description><link>https://youthfulhps.dev</link><generator>GatsbyJS</generator><lastBuildDate>Thu, 30 Jun 2022 15:09:21 GMT</lastBuildDate><item><title><![CDATA[타입스크립트, 글로 배웠습니다만]]></title><description><![CDATA[개인적으로 타입스크립트는 실무에서 사용하면서 익히기 시작해서
 약…]]></description><link>https://youthfulhps.dev/typescript/typescript-essentials-you-should-know/</link><guid isPermaLink="false">https://youthfulhps.dev/typescript/typescript-essentials-you-should-know/</guid><pubDate>Tue, 14 Jun 2022 10:06:39 GMT</pubDate><content:encoded>&lt;p&gt;&lt;span
       class=&quot;gatsby-resp-image-wrapper&quot;
       style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 864px; &quot;
@@ -855,62 +855,137 @@ useDeferredValue, &lt;SuspenseList&gt;, ‘Streaming SSR with selective hydratio
 기능을 구현하였는데요. 저는 동시성이라는 키워드가 궁금했습니다.&lt;/p&gt;
 &lt;p&gt;무엇이길래 리엑트팀이 5년동안 붙잡았을까 라는?&lt;/p&gt;
 &lt;h2 id=&quot;concurrent-vs-parallelism&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#concurrent-vs-parallelism&quot; aria-label=&quot;concurrent vs parallelism permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Concurrent vs Parallelism&lt;/h2&gt;
-&lt;p&gt;동시성을 설명할 때, 서로 관련있는 병렬성과 비교하여 이해하곤 합니다.
-하지만, 이 둘은 뚜렷한 차이를 가지고 있다고 이야기하며
+&lt;p&gt;동시성을 설명할 때, 서로 관련있는 병렬성과 함께 설명하곤 합니다.
+하지만, 이 둘은 뚜렷한 차이를 가지고 있으며
 Go 언어의 창시자의 &lt;a href=&quot;https://go.dev/blog/waza-talk&quot;&gt;Concurrency is not parallelism&lt;/a&gt;
 발표 서문에는 다음과 같이 동시성과 병렬성을 비교합니다.&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;‘동시성은 &lt;strong&gt;독립적으로 실행되는 프로세스들의 조합이다.&lt;/strong&gt;’
+&lt;p&gt;&lt;em&gt;’&lt;strong&gt;동시성은 독립적으로 실행되는 프로세스들의 조합이다.&lt;/strong&gt;’
 ‘병렬성은 연관된 복수의 연산들을 동시에 실행하는 것이다.’
-‘동시성은 &lt;strong&gt;여러 일을 한꺼번에 다루는 문제에 관한 것이다.&lt;/strong&gt;’
+’&lt;strong&gt;동시성은 여러 일을 한꺼번에 다루는 문제에 관한 것이다.&lt;/strong&gt;’
 ‘병렬성은 여러 일을 한꺼번에 실행하는 방법에 관한 것이다.’&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;아주 멜랑꼴리한데 발표에서 언급한 문구를 빌려 정리하자면,
 &lt;strong&gt;동시성은 프로세서가 하나만 있는 경우, 병렬 처리를 가능케 하지만 병렬처리는 아닙니다.&lt;/strong&gt;
 즉, 하나의 스레드로 작업을 순차적으로 처리하지만,
 마치 여러 개의 스레드가 사용되고 있는 것처럼 보이게 하는 것이고,
 동시성은 싱글 코어에서도 동작하지만, 병렬성은 두 개 이상의 코어가 필요합니다.&lt;/p&gt;
-&lt;p&gt;예를 들어 병렬성은 GPU를 통해 이미지를 랜더링할 때 R, G, B를 연산하는
+&lt;p&gt;병렬성은 예를 들어 GPU를 통해 이미지를 랜더링할 때 R, G, B를 연산하는
 텍스크를 각각의 코어가 작업하는 것과 같이 최소 한 가지 논리적 통제를
 멀티 코어에서 병렬적으로 진행합니다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 864px; &quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 56.333333333333336%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAALCAYAAAB/Ca1DAAAACXBIWXMAAAsTAAALEwEAmpwYAAABDklEQVQoz4WT246EIAyGff+n27kxJl55tc66oiConPynJetmouI0aYDSfm1TKLZtAwuvOd0ld/fuUxwNVxJjzPoc7UUy/BmXZUFd13h8PdA0DUIICeacg7U2+WitUVUVyrJE3/f5Cj0FGSmhpgliFJC0N4vFRGcGsu7VruuKYRj+k5yAgZ0ocyRloDQyAbWNmKlqDnwH7mfv/Q1wnhGMISBBjSLgiNkRkOxHIFfIeg+kinzXoRM9WvENIQR+tcMoFcHOQEPJsy1zJq0UPLXXti20mfB8/sD6SJWqFLgHM5AHw5oF8pR1aneC0bQSnCvglYN42nt7LDwovmP4CfjpDd69uct3+OmXXP2Ku5/yAo1jYOU3Q/GkAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;Parallel task processing&quot;
+        title=&quot;Parallel task processing&quot;
+        src=&quot;/static/e2d146e61c5b9a19bb4476de300b308a/9cab2/parallelism-process.png&quot;
+        srcset=&quot;/static/e2d146e61c5b9a19bb4476de300b308a/5a46d/parallelism-process.png 300w,
+/static/e2d146e61c5b9a19bb4476de300b308a/0a47e/parallelism-process.png 600w,
+/static/e2d146e61c5b9a19bb4476de300b308a/9cab2/parallelism-process.png 864w&quot;
+        sizes=&quot;(max-width: 864px) 100vw, 864px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;반면 동시성은 최소 두 개의 논리적 통제 흐름을 가지고 있으며,
+잘개 쪼개진 두 개 이상의 작업을 지속적으로 컨텍스트 스위칭하여
+마치 동시에 이루어지는 것처럼 보이도록 합니다.
+강의를 듣다가 내용 정리를 위해 일시정지하고 메모하는 것과 같은 작업 처리 방식입니다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 864px; &quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 55.99999999999999%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAALCAYAAAB/Ca1DAAAACXBIWXMAABYlAAAWJQFJUiTwAAABPklEQVQoz4WT226DMAyGef/n603RuotWEy3jsJxIQgj/bG8w2rHVkhUl2J9/O6SY5xlsvP7li+3Fbs/ZiseDPcs5i+/FPsKL7cb7gNPphMPhgMvlgmmaBDSOI2KMEmOtRVmWOB5LdF33C74qnCjJKQVDCf1HD60VhhBlvwVyaU9x71WFwXv5FkKQ4mvLE6mIziFTMgOUUwTUsDGTai8wTlzMtg3O5xcoimnbFk3TCHQFcluREieCGkvuNAUr+DGLii2QpxOcpYI9qcrSHeevM/xSOCNQtUSVm77DrbvKfFo7ioo7IPmgepzfXuks7c8wpQRnDBLJvtU3WFJQ1zXGlEmJEeAyQ75rc62gqXhM6e6m11tmc9SuJqispGoYBmgaPoN44Cn9qDHfsXu/UvHsH3xs6dlZ8eyV7L2K/17KJ+0UX3E77Ee7AAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;Concurrent task processing&quot;
+        title=&quot;Concurrent task processing&quot;
+        src=&quot;/static/1c01ef1b6acac66076081b5b3e947f91/9cab2/concurrent-process.png&quot;
+        srcset=&quot;/static/1c01ef1b6acac66076081b5b3e947f91/5a46d/concurrent-process.png 300w,
+/static/1c01ef1b6acac66076081b5b3e947f91/0a47e/concurrent-process.png 600w,
+/static/1c01ef1b6acac66076081b5b3e947f91/9cab2/concurrent-process.png 864w&quot;
+        sizes=&quot;(max-width: 864px) 100vw, 864px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;h2 id=&quot;동시성을-통해-해결하려는-문제&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EB%8F%99%EC%8B%9C%EC%84%B1%EC%9D%84-%ED%86%B5%ED%95%B4-%ED%95%B4%EA%B2%B0%ED%95%98%EB%A0%A4%EB%8A%94-%EB%AC%B8%EC%A0%9C&quot; aria-label=&quot;동시성을 통해 해결하려는 문제 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;동시성을 통해 해결하려는 문제&lt;/h2&gt;
+&lt;p&gt;브라우저는 HTML을 파싱하고, 자바스크립트를 실행하며 랜더트리를 구축하고
+그려내는 작업까지 진행하는 데 단일 스레드로서 한번에 하나의 작업만을
+수행합니다.&lt;/p&gt;
+&lt;p&gt;때문에 만약 메인 스레드가 자바스크립트 엔진에게 실행권을 위임하여
+자바스크립트 파싱을 시작했다면 그 작업을 멈출 수 없으며,
+작업이 완료될 때까지 이후의 작업을 전개할 수 없습니다.
+리엑트 랜더링 연산 과정도 마찬가지로 작업이 전개되며,
+이러한 동작을 블로킹 랜더링이라 하며 리엑트팀은 블로킹 랜더링 문제를
+동시성을 통해 해결하고자 했습니다.&lt;/p&gt;
+&lt;p&gt;재조정을 위한 리엑트의 비교 알고리즘은 매우 최적화되어 있어
+블로킹이 발생하는 문제가 자주 발생하지 않아 공감하기 어려울 수 있지만,
+&lt;a href=&quot;https://ajaxlab.github.io/deview2021/blocking&quot;&gt;deview2021/blocking&lt;/a&gt;
+데모처럼 입력값에 대한 픽셀 박스를 랜더링하는 연산이 무거워짐에 따라
+keypress 이벤트에 대한 처리가 지연되고 있음을 경고 플래그로서 확인할 수 있습니다.&lt;/p&gt;
 &lt;p&gt;&lt;span
       class=&quot;gatsby-resp-image-wrapper&quot;
       style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 1200px; &quot;
     &gt;
       &lt;span
     class=&quot;gatsby-resp-image-background-image&quot;
-    style=&quot;padding-bottom: 56.333333333333336%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAALCAYAAAB/Ca1DAAAACXBIWXMAAAsTAAALEwEAmpwYAAABIklEQVQoz4WTi4qEMAxF/f8vlFkYmEVnncVHW/uyPu4kZR1UqnshGNr0cBNihj8ty4Kj+GyNq5qtsu2DaZ7x/Xjgfr+jrutP0TAMMVh936MoihicH6HZejBPE1qClGWJ29cNT/pqY6G1QQgBzrn4wHsfa/I8Pweys8FauKaBCx42GFhjILRDT8CRgAxizVTLGsfxkyeBnoCDlFC6hzISWiko62Gcjw5X4ESdcM6OOT8Hkn3z8yRXEr/yha7rUAkD2eudQ4bwPLXW0WUSOFKREQL6VaHuWjSqRlVVBKa2pdoBGWKpG0UdsPMkkGchqN2WoIJCComG5ikIzrMMYdzNkN3zfbLl/R7t92292q7Wv3t4XOBUpBb9bOEzXGj74Opv2eoNkIdfx9CH+BoAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+    style=&quot;padding-bottom: 56.333333333333336%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAALCAYAAAB/Ca1DAAAACXBIWXMAABYlAAAWJQFJUiTwAAACTElEQVQoz1WS23KbSBRF+f9fmoepzFQsc2ua5tJgkGSQZMeWsaILICTFKyeZB0+6atepPnVYvXvTDr/Xx6c+Pv7r9APD3y7nKOfsGSZTMsUF4xcPrlc+v/tzOT8EcP3Bn5K5y3RjXD4xti+MqxeG+Ya+/capXnM+X5lkaJLh/+sXy3k/XdHlmrho0PaRuGyJpKp8iapXRL9UrchXW7oJtmd4PV55PXxqK4zN7kInfWecPng/9Lztj2x3Pbv9QCe1k97++8j7buRtd6L7LvvxQj9cOA03TqeJYTxzPN0YDrIfrgyXG875fKTe5CxEZZMxLxZslnPaxSPZfIG1lqJJabOM2l+wrmMaW5DZmqrOycuKuqgwjym95O507wd0HFBmCfe5S5TG5KnBVQWRiglmLjry8TOfJA7JIoU/M6TGJzIeQRBjZE7fx/T7HuftuCe3OUWuSNMU1yTUekaqE4zVqDBk7ibYoJCc70n9hCBKSJTBxgIzmlhgkefRTyNOf3zDpBqbKAqps9yQFx5rk2MzceBrSqXJvsYkdyEq0b8PKHVJVoX49h6jNbrwOQ57nN1hhxLQv6VHbP+RTDwygSV+SWUzwmSGTnzcICDNxZmdiduEWJXYIsIkC9RDLJF5TIejPJv9HiUAJZYDHRD5dyJNII6zuzsBu3wJ/8I3LkqFeDNFEn0ltZHkJ449ObDyJaJQXsBBrnw6UMsffWoanpcp63VD0T5hmw2r+ZJNW1K/VMwXDzRVzUPxjVW7Zfv8KnVFu1ny3HV0r2tu1ws/Add8Hro2DvjMAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
   &gt;&lt;/span&gt;
   &lt;img
         class=&quot;gatsby-resp-image-image&quot;
-        alt=&quot;Parallel task processing&quot;
-        title=&quot;Parallel task processing&quot;
-        src=&quot;/static/f82a0e50ef2fa8e1033cc9877480a5d4/c1b63/parallelism-image-rendering.png&quot;
-        srcset=&quot;/static/f82a0e50ef2fa8e1033cc9877480a5d4/5a46d/parallelism-image-rendering.png 300w,
-/static/f82a0e50ef2fa8e1033cc9877480a5d4/0a47e/parallelism-image-rendering.png 600w,
-/static/f82a0e50ef2fa8e1033cc9877480a5d4/c1b63/parallelism-image-rendering.png 1200w,
-/static/f82a0e50ef2fa8e1033cc9877480a5d4/d61c2/parallelism-image-rendering.png 1800w,
-/static/f82a0e50ef2fa8e1033cc9877480a5d4/29114/parallelism-image-rendering.png 1920w&quot;
+        alt=&quot;Example of blocking rendering&quot;
+        title=&quot;Example of blocking rendering&quot;
+        src=&quot;/static/219e96397b3d85a667ab72d28b32c3da/c1b63/blocking-rendering-example.png&quot;
+        srcset=&quot;/static/219e96397b3d85a667ab72d28b32c3da/5a46d/blocking-rendering-example.png 300w,
+/static/219e96397b3d85a667ab72d28b32c3da/0a47e/blocking-rendering-example.png 600w,
+/static/219e96397b3d85a667ab72d28b32c3da/c1b63/blocking-rendering-example.png 1200w,
+/static/219e96397b3d85a667ab72d28b32c3da/d8817/blocking-rendering-example.png 1238w&quot;
         sizes=&quot;(max-width: 1200px) 100vw, 1200px&quot;
         style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
         loading=&quot;lazy&quot;
       /&gt;
     &lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;동시성은 두 개 이상의 작업을 잘개 쪼개서 컨텍스트를 스위칭하며 작업들이 동시에 이루어지는 것처럼 보이도록 한다.
-최소 두개의 논리적 통제 흐름이 필요로 한다. (동영상을 재생하면서 메모장 쓰기)&lt;/p&gt;
-&lt;p&gt;ReactDOM.createRoot 로 실행 시 내부적으로 ‘concurrent mode’ 활성화
-그러나 ‘concurrent features’를 사용할 때만 ‘concurrent rendering’ 수행&lt;/p&gt;
-&lt;h2 id=&quot;리엑트에서-동시성으로-해결하려는-문제&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EB%A6%AC%EC%97%91%ED%8A%B8%EC%97%90%EC%84%9C-%EB%8F%99%EC%8B%9C%EC%84%B1%EC%9C%BC%EB%A1%9C-%ED%95%B4%EA%B2%B0%ED%95%98%EB%A0%A4%EB%8A%94-%EB%AC%B8%EC%A0%9C&quot; aria-label=&quot;리엑트에서 동시성으로 해결하려는 문제 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;리엑트에서 동시성으로 해결하려는 문제&lt;/h2&gt;
-&lt;p&gt;브라우저의 메인 쓰레드는 싱글 쓰레드로서 한번에 하나의 작업만 수행할 수 있다.
-HTML 파싱 -&gt; 자바스크립트 실행 -&gt; 랜더트리 구축 -&gt; 페인트&lt;/p&gt;
-&lt;p&gt;만약, 메인 쓰레드가 하나의 작업을 시작하면 그 작업을 멈출 수 없다.
-마찬가지로 리엑트 랜더링 연산에 돌입하면 멈출 수 없다.&lt;/p&gt;
-&lt;p&gt;즉, 이러한 동작을 블로킹 랜더링 (blocking rendering)이라고 한다.
-리엑트의 랜더링을 위한 변경 알고리즘이 매우 빠르기 때문에 큰 문제가 되지 않는다.
-하지만, 랜더링이 매우 해비한 작업이라면 어떻게 될까&lt;/p&gt;
-&lt;p&gt;리엑트의 빠른 랜더링 덕분에 그 문제가 잘 이해되지 않는다면, 아래 데모를 실행해보자.
-&lt;a href=&quot;https://ajaxlab.github.io/deview2021/blocking&quot;&gt;deview2021/blocking&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;블로킹은 사용자 경험의 악화이다.&lt;/p&gt;
-&lt;p&gt;리엑트팀은 동시성 랜더링으로 블로킹 랜더링을 해결하고자 했다.&lt;/p&gt;
-&lt;h2 id=&quot;동시성-랜더링&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EB%8F%99%EC%8B%9C%EC%84%B1-%EB%9E%9C%EB%8D%94%EB%A7%81&quot; aria-label=&quot;동시성 랜더링 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;동시성 랜더링&lt;/h2&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 1200px; &quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 43.99999999999999%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAJCAYAAAAywQxIAAAACXBIWXMAABYlAAAWJQFJUiTwAAABzUlEQVQoz23QS4sTQRiF4fxOF4JLde9/EAZxp6ILN64CLkRBRAQhDmOc3Bwm104l6e50Ll3VnaruzJhbv1YnIyPRxUdxPoqHU1Xw/IDJdI7r+ojBCCGG9hziemN6jthP3+60SdFSkZiEdOiSCIGx+4XTR41cIsdB9vsUlosAIwU68khjHx32iIMGy3SB8r7ZS+9YTKqocZnp2UvC3idk8YRp8Snh60fMn9xh9uwewYv7jF89oJDEEhPNSOJ85ui5TxS4LBOD9k6JB18w00vMpEHcKWL8EovmG8aNz4SV56j3D9Fv7xJ8eMzk44kF7VMSbZ+hNWmSEkuNmmmurjcoC0t/xEJGxHNFIGwOxkxFl2FzhN9uMqifIqpfcc4rOJW6BdMMk2TkZ7rcEUUZSu5YXmfMpjtmE5tVhgwzRuKQXZHRa25x2nBxDrUytEou7dLoACY5uLTg1Y44sqg6gPPZdj+R3Sm5xRus99kfbui3Vwy6a5q1X1z82NCphnRr4VHDG1CpPw1zcLcHpW3tDTb77A1tu9baghsuq2t+llcWXtOqr/8PRseg+hfst4/B1QE0JkNri5ocvWkob8H8H/cNw539u1tQdP4Cvx/AvOVv0WaXBF6Q6ToAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;Delay in processing tasks for keypress&quot;
+        title=&quot;Delay in processing tasks for keypress&quot;
+        src=&quot;/static/815e3dae1953dd73e6539b5104895244/c1b63/blocking-rendering-performance.png&quot;
+        srcset=&quot;/static/815e3dae1953dd73e6539b5104895244/5a46d/blocking-rendering-performance.png 300w,
+/static/815e3dae1953dd73e6539b5104895244/0a47e/blocking-rendering-performance.png 600w,
+/static/815e3dae1953dd73e6539b5104895244/c1b63/blocking-rendering-performance.png 1200w,
+/static/815e3dae1953dd73e6539b5104895244/2eb79/blocking-rendering-performance.png 1256w&quot;
+        sizes=&quot;(max-width: 1200px) 100vw, 1200px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;경고 플래그 중 하나의 예시로 keypress 이벤트를 처리하는 데 143.41ms이 소요 되었는데
+&lt;a href=&quot;https://web.dev/rail/?utm_source=devtools#goals-and-guidelines&quot;&gt;RAIL&lt;/a&gt;
+모델을 기반으로 생각한다면, 입력 이벤트에 대해 100ms 이상 소요가 되는 것을
+동작과 응답 사이의 연결이 끊어진 것으로 성능 지연 인식이 시작되는 지연에 속합니다.&lt;/p&gt;
+&lt;h2 id=&quot;문제에-대한-접근&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EB%AC%B8%EC%A0%9C%EC%97%90-%EB%8C%80%ED%95%9C-%EC%A0%91%EA%B7%BC&quot; aria-label=&quot;문제에 대한 접근 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;문제에 대한 접근&lt;/h2&gt;
+&lt;p&gt;리엑트는 모든 랜더링 과정을 인터럽트 가능하도록&lt;/p&gt;
+&lt;p&gt;리엑트는 상호작용에 있어 사용자 경험에 영향을 주는 우선 순위를 언급합니다.
+입력과 호버와 같은 상호작용은 빠르게 반응하길 원하지만, 반면 클릭이나
+페이지 전환, 상호작용에 대한 부수적인 변화에는&lt;/p&gt;
+&lt;p&gt;동시성 랜더링은&lt;/p&gt;
 &lt;p&gt;react 공식문서 데모에서는 input 컴포넌트의 변화 랜더링, 목록 컴포넌트 랜더링
 이 두가지 작업의 우선 순위를 구분지었다.&lt;/p&gt;
 &lt;p&gt;input 컴포넌트의 변화 랜더링은 즉각적으로 적용되어야 하는 랜더링이며,
@@ -926,6 +1001,10 @@ C의 작업이 마무리되기 전에 D에 대한 입력이 들어오면 C의 �
 &lt;p&gt;그리고, pending 상태에 있었던 낮은 순위 랜더링을 리베이스(git branch의 베이스 지점을 끌어올리는 듯한 동작)을 수행한다.&lt;/p&gt;
 &lt;p&gt;두 개의 차선에서 하나는 고속 하나는 저속으로 보고 리엑트에서는 이를 lane 이라고 말한다.&lt;/p&gt;
 &lt;h2 id=&quot;동시성-랜더링을-위한-api&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EB%8F%99%EC%8B%9C%EC%84%B1-%EB%9E%9C%EB%8D%94%EB%A7%81%EC%9D%84-%EC%9C%84%ED%95%9C-api&quot; aria-label=&quot;동시성 랜더링을 위한 api permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;동시성 랜더링을 위한 API&lt;/h2&gt;
+&lt;p&gt;동시성 모드는 기능 단위로 점진적으로 채택될 수 있도록 리엑트는
+동시성 기능을 추가하였습니다. 단순히 createRoot를 사용한다고 해서
+동시성 모드가 켜지는 것이 아닌, 동시성 기능을 사용했을 때
+동시성 모드가 유효해집니다.&lt;/p&gt;
 &lt;p&gt;startTransition은 느린 차선의 lane을 만들어 주는 API 이다.&lt;/p&gt;
 &lt;p&gt;startTransition의 콜백 함수를 전달하면 수도 코드에서 확인할 수 있듯이
 낮은 우선순위를 갖게 된다.&lt;/p&gt;
@@ -944,7 +1023,7 @@ C의 작업이 마무리되기 전에 D에 대한 입력이 들어오면 C의 �
 동시성 모드의 목적은 HCI 연구 결과를 추상화하고 구현할 수 있는 방법을 제공하는 것이다.&lt;/p&gt;
 &lt;p&gt;HCI 연구 결과 확인해보기&lt;/p&gt;
 &lt;h2 id=&quot;reference&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#reference&quot; aria-label=&quot;reference permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Reference&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&quot;https://tv.naver.com/v/23652451&quot;&gt;Inside React(동시성을 구현하는 기술)&lt;/a&gt; 리뷰&lt;/p&gt;</content:encoded></item><item><title><![CDATA[stale-while-revalidate 전략은 어떻게 활용되고 있을까]]></title><description><![CDATA[클라이언트를 개발하면서 HTTP Cache-Control Extensions for Stale Content의
+&lt;p&gt;&lt;a href=&quot;https://tv.naver.com/v/23652451&quot;&gt;Inside React(동시성을 구현하는 기술)&lt;/a&gt;&lt;/p&gt;</content:encoded></item><item><title><![CDATA[stale-while-revalidate 전략은 어떻게 활용되고 있을까]]></title><description><![CDATA[클라이언트를 개발하면서 HTTP Cache-Control Extensions for Stale Content의
  확장 디렉티브 전략을 기반으로한
 구현체들을 많이 접하게 되는데요. swr…]]></description><link>https://youthfulhps.dev/web/stale-while-ravalidate/</link><guid isPermaLink="false">https://youthfulhps.dev/web/stale-while-ravalidate/</guid><pubDate>Wed, 01 Jun 2022 16:07:27 GMT</pubDate><content:encoded>&lt;p&gt;클라이언트를 개발하면서 &lt;a href=&quot;https://datatracker.ietf.org/doc/html/rfc5861&quot;&gt;HTTP Cache-Control Extensions for Stale Content&lt;/a&gt;의
 &lt;code class=&quot;language-text&quot;&gt;stale-while-revalidate (swr)&lt;/code&gt; 확장 디렉티브 전략을 기반으로한
