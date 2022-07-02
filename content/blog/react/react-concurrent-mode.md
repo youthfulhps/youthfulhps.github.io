@@ -15,9 +15,8 @@ draft: true
 useDeferredValue, <SuspenseList>, 'Streaming SSR with selective hydration'과
 같은 기능들이 추가되었습니다.
 
-리엑트는 동시성 랜더링 메커니즘을 담아내기 위해 협력적 멀티태스킹, 우선순위 기반 랜더링, 스케쥴링, 중단 등과 같은
-기능을 구현하였는데요. 저는 동시성이라는 키워드가 궁금했습니다.
-
+리엑트는 동시성 랜더링 메커니즘을 담아내기 위해 협력적 멀티태스킹,
+우선순위 기반 랜더링, 스케쥴링, 중단 등과 같은 기능을 담아냈습니다.
 무엇이길래 리엑트팀이 5년동안 붙잡았을까 라는?
 
 ## Concurrent vs Parallelism
@@ -54,21 +53,21 @@ _'**동시성은 독립적으로 실행되는 프로세스들의 조합이다.**
 ## 동시성을 통해 해결하려는 문제
 
 브라우저는 HTML을 파싱하고, 자바스크립트를 실행하며 랜더트리를 구축하고
-그려내는 작업까지 진행하는 데 단일 스레드로서 한번에 하나의 작업만을
+그려내는 작업까지 단일 스레드로서 한번에 하나의 작업만을
 수행합니다.
 
-때문에 만약 메인 스레드가 자바스크립트 엔진에게 실행권을 위임하여
+때문에 가령 메인 스레드가 자바스크립트 엔진에게 실행권을 위임하여
 자바스크립트 파싱을 시작했다면 그 작업을 멈출 수 없으며,
 작업이 완료될 때까지 이후의 작업을 전개할 수 없습니다.
-리엑트 랜더링 연산 과정도 마찬가지로 작업이 전개되며,
-이러한 동작을 블로킹 랜더링이라 하며 리엑트팀은 블로킹 랜더링 문제를
-동시성을 통해 해결하고자 했습니다.
+리엑트 랜더링 연산 과정도 동일한 절차를 거치게 되며,
+이 때 매우 무거운 랜더링 연산 과정이 시작되면 이후의 작업들이 다소
+긴 시간 동안 대기 상태가 되는 블로킹 랜더링이 발생합니다.
 
-재조정을 위한 리엑트의 비교 알고리즘은 매우 최적화되어 있어
-블로킹이 발생하는 문제가 자주 발생하지 않아 공감하기 어려울 수 있지만,
+재조정(reconciliation)을 위한 리엑트의 비교 알고리즘은 매우 최적화되어 있어
+블로킹되는 이슈가 자주 발생하지 않아 공감하기 어려울 수 있지만,
 [deview2021/blocking](https://ajaxlab.github.io/deview2021/blocking)
 데모처럼 입력값에 대한 픽셀 박스를 랜더링하는 연산이 무거워짐에 따라
-keypress 이벤트에 대한 처리가 지연되고 있음을 경고 플래그로서 확인할 수 있습니다.
+keypress 이벤트에 대한 처리가 지연되고 있음을 경고 플래그를 통해 확인할 수 있습니다.
 
 ![Example of blocking rendering](./images/react-concurrent-mode/blocking-rendering-example.png)
 
@@ -76,18 +75,105 @@ keypress 이벤트에 대한 처리가 지연되고 있음을 경고 플래그�
 
 경고 플래그 중 하나의 예시로 keypress 이벤트를 처리하는 데 143.41ms이 소요 되었는데
 [RAIL](https://web.dev/rail/?utm_source=devtools#goals-and-guidelines)
-모델을 기반으로 생각한다면, 입력 이벤트에 대해 100ms 이상 소요가 되는 것을
-동작과 응답 사이의 연결이 끊어진 것으로 성능 지연 인식이 시작되는 지연에 속합니다.
+모델을 기반으로 생각한다면, 사용자는 입력 이벤트에 대해 100ms 이상 소요되는 것을
+동작과 응답 사이의 연결이 지연되고 있음을 인식하게 되며, 이는 사용자 경험의 감점으로
+이어질 수 있습니다.
 
-## 문제에 대한 접근
+## 동시성 구현을 위한 메커니즘
 
-리엑트는 모든 랜더링 과정을 인터럽트 가능하도록
+브라우저는 랜더링 엔진에게 메인 스레드 점유를 위임하게 되면,
+랜더링 과정 중 발생한 사용자 입력에 대해 즉시 처리할 수 없게 됩니다.
+리엑트는 이러한 근본적인 원인을 해결하고자 **모든 랜더링을 인터럽트 가능하도록 하여
+우선순위가 높은 작업이 텍스크 스택에 들어오면 진행중이던 작업을 중단하고 메인 스레드에게
+점유를 양보(yield)할 수 있는 메커니즘을 구현하게 됩니다.**
 
-리엑트는 상호작용에 있어 사용자 경험에 영향을 주는 우선 순위를 언급합니다.
+(텍스크를 잘개 쪼개는 것에 대한 구현체는 어디있을까?)
+
+![When the user's input comes in, rendering is interrupted](./images/react-concurrent-mode/interruption-and-yield.png)
+
+페이스북팀은 **메인 스레드를 점유하여 랜더링 연산을 전개하고 있는 과정에서
+사용자의 입력에 대한 처리가 대기 중임을 확인하고 메인 스레드 점유를
+양보해야 하는 지에 대해 판단을 할 수 있어야 했고, 이에 대한 메커니즘을
+담은 구현체인 [isInputPending](https://wicg.github.io/is-input-pending/)
+브라우저 API를 기여하게 됩니다.**
+
+실제로 리엑트의 스케쥴러 패키지 코드에는
+호스트 환경에 의존적인 API를 사용하기 위해 host config가 존재하고,
+isInputPending API를 사용할 수 있는 지에 대한 검증과,
+어떠한 기준으로 메인 스레드에게 점유를 양보할 것인지에 대한 기준을 담고 있습니다.
+
+```js
+// packages/scheduler/src/forks/Scheduler.js
+const frameYieldMs = 5;
+let frameInterval = frameYieldMs;
+
+const isInputPending =
+  typeof navigator !== 'undefined' &&
+  navigator.scheduling !== undefined &&
+  navigator.scheduling.isInputPending !== undefined
+    ? navigator.scheduling.isInputPending.bind(navigator.scheduling)
+    : null;
+
+...
+
+function shouldYieldToHost() {
+  const timeElapsed = getCurrentTime() - startTime;
+  // 1)
+  if (timeElapsed < frameInterval) {
+    return false;
+  }
+
+  // 2)
+  if (enableIsInputPending) {
+    if (needsPaint) {
+      // 3)
+      return true;
+    }
+    if (timeElapsed < continuousInputInterval) {
+      // 4)
+      if (isInputPending !== null) {
+        return isInputPending();
+      }
+    } else if (timeElapsed < maxInterval) {
+      // 5)
+      if (isInputPending !== null) {
+        return isInputPending(continuousOptions);
+      }
+    } else {
+      // 6)
+      return true;
+    }
+  }
+
+  // 7)
+  return true;
+
+}
+
+
+
+```
+
+리엑트는 동시성 랜더링 메커니즘을 담아내기 위해 협력적 멀티태스킹, 우선순위 기반 랜더링, 스케쥴링, 중단 등과 같은
+기능을 구현하였는데요. 저는 동시성이라는 키워드가 궁금했습니다.
+
+동시성 랜더링은 블로킹 랜더링을 해결하고자 합니다.
+블로킹 랜더링은 입력값에 대한 픽셀 박스를 랜더링하는 연산을
+시작하게 되면 중간에 중단할 수 없기 때문에, 연산을 점유당하고 있는
+브라우저는 추가적인 값 입력에 대해 즉시 업데이트할 수 없게 됩니다.
+
+리엑트는 동시성 모드에서의 모든 랜더링 과정은 인터럽트가 가능하도록
+만들어 근본적으로 중단(interrupting) 가능하도록 합니다.
+
+리엑트는 동시성 기능을 통해 블로킹 랜더링을 해결하고자
+모든 랜더링 과정을 인터럽트 가능하도록 하였습니다.
+그리고, 상호 작용에 있어 사용자 경험에 영향을 주는 우선 순위를 언급하고,
 입력과 호버와 같은 상호작용은 빠르게 반응하길 원하지만, 반면 클릭이나
-페이지 전환, 상호작용에 대한 부수적인 변화에는
+페이지 전환, 상호작용에 대한 부수적인 변화에는 약간의 기다림이 익숙한 것을
+통해 작업의 우선 순위를 산정합니다.
 
-동시성 랜더링은
+우선 순위는 react18에서 새롭게 정의된 useTransition을 통해
+정의할 수 있습니다.
 
 react 공식문서 데모에서는 input 컴포넌트의 변화 랜더링, 목록 컴포넌트 랜더링
 이 두가지 작업의 우선 순위를 구분지었다.
