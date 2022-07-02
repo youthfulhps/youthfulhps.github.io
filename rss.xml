@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Youthfulhps.dev]]></title><description><![CDATA[Blog posted front-end, troubleshooting!]]></description><link>https://youthfulhps.dev</link><generator>GatsbyJS</generator><lastBuildDate>Thu, 30 Jun 2022 15:09:21 GMT</lastBuildDate><item><title><![CDATA[타입스크립트, 글로 배웠습니다만]]></title><description><![CDATA[개인적으로 타입스크립트는 실무에서 사용하면서 익히기 시작해서
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Youthfulhps.dev]]></title><description><![CDATA[Blog posted front-end, troubleshooting!]]></description><link>https://youthfulhps.dev</link><generator>GatsbyJS</generator><lastBuildDate>Sat, 02 Jul 2022 09:25:19 GMT</lastBuildDate><item><title><![CDATA[타입스크립트, 글로 배웠습니다만]]></title><description><![CDATA[개인적으로 타입스크립트는 실무에서 사용하면서 익히기 시작해서
 약…]]></description><link>https://youthfulhps.dev/typescript/typescript-essentials-you-should-know/</link><guid isPermaLink="false">https://youthfulhps.dev/typescript/typescript-essentials-you-should-know/</guid><pubDate>Tue, 14 Jun 2022 10:06:39 GMT</pubDate><content:encoded>&lt;p&gt;&lt;span
       class=&quot;gatsby-resp-image-wrapper&quot;
       style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 864px; &quot;
@@ -851,9 +851,9 @@ any를 사용하면 타입 체커가 무력화됩니다.&lt;/p&gt;
 코드 수정없이 내부적으로 성능 향상을 이루었고, 동시성을 제공하는 startTransition,
 useDeferredValue, &lt;SuspenseList&gt;, ‘Streaming SSR with selective hydration’과
 같은 기능들이 추가되었습니다.&lt;/p&gt;
-&lt;p&gt;리엑트는 동시성 랜더링 메커니즘을 담아내기 위해 협력적 멀티태스킹, 우선순위 기반 랜더링, 스케쥴링, 중단 등과 같은
-기능을 구현하였는데요. 저는 동시성이라는 키워드가 궁금했습니다.&lt;/p&gt;
-&lt;p&gt;무엇이길래 리엑트팀이 5년동안 붙잡았을까 라는?&lt;/p&gt;
+&lt;p&gt;리엑트는 동시성 랜더링 메커니즘을 담아내기 위해 협력적 멀티태스킹,
+우선순위 기반 랜더링, 스케쥴링, 중단 등과 같은 기능을 담아냈습니다.
+무엇이길래 리엑트팀이 5년동안 붙잡았을까 라는?&lt;/p&gt;
 &lt;h2 id=&quot;concurrent-vs-parallelism&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#concurrent-vs-parallelism&quot; aria-label=&quot;concurrent vs parallelism permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Concurrent vs Parallelism&lt;/h2&gt;
 &lt;p&gt;동시성을 설명할 때, 서로 관련있는 병렬성과 함께 설명하곤 합니다.
 하지만, 이 둘은 뚜렷한 차이를 가지고 있으며
@@ -919,19 +919,19 @@ Go 언어의 창시자의 &lt;a href=&quot;https://go.dev/blog/waza-talk&quot;&g
     &lt;/span&gt;&lt;/p&gt;
 &lt;h2 id=&quot;동시성을-통해-해결하려는-문제&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EB%8F%99%EC%8B%9C%EC%84%B1%EC%9D%84-%ED%86%B5%ED%95%B4-%ED%95%B4%EA%B2%B0%ED%95%98%EB%A0%A4%EB%8A%94-%EB%AC%B8%EC%A0%9C&quot; aria-label=&quot;동시성을 통해 해결하려는 문제 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;동시성을 통해 해결하려는 문제&lt;/h2&gt;
 &lt;p&gt;브라우저는 HTML을 파싱하고, 자바스크립트를 실행하며 랜더트리를 구축하고
-그려내는 작업까지 진행하는 데 단일 스레드로서 한번에 하나의 작업만을
+그려내는 작업까지 단일 스레드로서 한번에 하나의 작업만을
 수행합니다.&lt;/p&gt;
-&lt;p&gt;때문에 만약 메인 스레드가 자바스크립트 엔진에게 실행권을 위임하여
+&lt;p&gt;때문에 가령 메인 스레드가 자바스크립트 엔진에게 실행권을 위임하여
 자바스크립트 파싱을 시작했다면 그 작업을 멈출 수 없으며,
 작업이 완료될 때까지 이후의 작업을 전개할 수 없습니다.
-리엑트 랜더링 연산 과정도 마찬가지로 작업이 전개되며,
-이러한 동작을 블로킹 랜더링이라 하며 리엑트팀은 블로킹 랜더링 문제를
-동시성을 통해 해결하고자 했습니다.&lt;/p&gt;
-&lt;p&gt;재조정을 위한 리엑트의 비교 알고리즘은 매우 최적화되어 있어
-블로킹이 발생하는 문제가 자주 발생하지 않아 공감하기 어려울 수 있지만,
+리엑트 랜더링 연산 과정도 동일한 절차를 거치게 되며,
+이 때 매우 무거운 랜더링 연산 과정이 시작되면 이후의 작업들이 다소
+긴 시간 동안 대기 상태가 되는 블로킹 랜더링이 발생합니다.&lt;/p&gt;
+&lt;p&gt;재조정(reconciliation)을 위한 리엑트의 비교 알고리즘은 매우 최적화되어 있어
+블로킹되는 이슈가 자주 발생하지 않아 공감하기 어려울 수 있지만,
 &lt;a href=&quot;https://ajaxlab.github.io/deview2021/blocking&quot;&gt;deview2021/blocking&lt;/a&gt;
 데모처럼 입력값에 대한 픽셀 박스를 랜더링하는 연산이 무거워짐에 따라
-keypress 이벤트에 대한 처리가 지연되고 있음을 경고 플래그로서 확인할 수 있습니다.&lt;/p&gt;
+keypress 이벤트에 대한 처리가 지연되고 있음을 경고 플래그를 통해 확인할 수 있습니다.&lt;/p&gt;
 &lt;p&gt;&lt;span
       class=&quot;gatsby-resp-image-wrapper&quot;
       style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 1200px; &quot;
@@ -978,14 +978,111 @@ keypress 이벤트에 대한 처리가 지연되고 있음을 경고 플래그�
     &lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;경고 플래그 중 하나의 예시로 keypress 이벤트를 처리하는 데 143.41ms이 소요 되었는데
 &lt;a href=&quot;https://web.dev/rail/?utm_source=devtools#goals-and-guidelines&quot;&gt;RAIL&lt;/a&gt;
-모델을 기반으로 생각한다면, 입력 이벤트에 대해 100ms 이상 소요가 되는 것을
-동작과 응답 사이의 연결이 끊어진 것으로 성능 지연 인식이 시작되는 지연에 속합니다.&lt;/p&gt;
-&lt;h2 id=&quot;문제에-대한-접근&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EB%AC%B8%EC%A0%9C%EC%97%90-%EB%8C%80%ED%95%9C-%EC%A0%91%EA%B7%BC&quot; aria-label=&quot;문제에 대한 접근 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;문제에 대한 접근&lt;/h2&gt;
-&lt;p&gt;리엑트는 모든 랜더링 과정을 인터럽트 가능하도록&lt;/p&gt;
-&lt;p&gt;리엑트는 상호작용에 있어 사용자 경험에 영향을 주는 우선 순위를 언급합니다.
+모델을 기반으로 생각한다면, 사용자는 입력 이벤트에 대해 100ms 이상 소요되는 것을
+동작과 응답 사이의 연결이 지연되고 있음을 인식하게 되며, 이는 사용자 경험의 감점으로
+이어질 수 있습니다.&lt;/p&gt;
+&lt;h2 id=&quot;동시성-구현을-위한-메커니즘&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EB%8F%99%EC%8B%9C%EC%84%B1-%EA%B5%AC%ED%98%84%EC%9D%84-%EC%9C%84%ED%95%9C-%EB%A9%94%EC%BB%A4%EB%8B%88%EC%A6%98&quot; aria-label=&quot;동시성 구현을 위한 메커니즘 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;동시성 구현을 위한 메커니즘&lt;/h2&gt;
+&lt;p&gt;브라우저는 랜더링 엔진에게 메인 스레드 점유를 위임하게 되면,
+랜더링 과정 중 발생한 사용자 입력에 대해 즉시 처리할 수 없게 됩니다.
+리엑트는 이러한 근본적인 원인을 해결하고자 &lt;strong&gt;모든 랜더링을 인터럽트 가능하도록 하여
+우선순위가 높은 작업이 텍스크 스택에 들어오면 진행중이던 작업을 중단하고 메인 스레드에게
+점유를 양보(yield)할 수 있는 메커니즘을 구현하게 됩니다.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;(텍스크를 잘개 쪼개는 것에 대한 구현체는 어디있을까?)&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 1200px; &quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 56.333333333333336%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAALCAYAAAB/Ca1DAAAACXBIWXMAABYlAAAWJQFJUiTwAAAA1UlEQVQoz42S6wqDMAyF+/5PuMl+uckG1mpbe/F6ZgtK0VY9UAJJ+DhJSrDTPM9bDF9Yj9XWSO5AwlpMYZ7Ekk7TNCHLMjyeT+R5vvUMDUNb/lDVNRhjGMfx3GHXdej7Hv0wwLQtaPFBxWqfm5a6tALSSAghoJQ6uCd7d67JWuuBWkiU3xyMNzDaeNexcQ8jhw6llNBawy5OVcNRvF+gbszF7QqMHeTyKE5ufK44uOA46wt1CnSurLF+X/u+lMjZThyQUgpjzSUoCUx9ozuwJDC1gjvQP0YgZVDyZo+xAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;When the user&amp;#39;s input comes in, rendering is interrupted&quot;
+        title=&quot;When the user&amp;#39;s input comes in, rendering is interrupted&quot;
+        src=&quot;/static/e2ceddd26691f38b0dec421c08a40c58/c1b63/interruption-and-yield.png&quot;
+        srcset=&quot;/static/e2ceddd26691f38b0dec421c08a40c58/5a46d/interruption-and-yield.png 300w,
+/static/e2ceddd26691f38b0dec421c08a40c58/0a47e/interruption-and-yield.png 600w,
+/static/e2ceddd26691f38b0dec421c08a40c58/c1b63/interruption-and-yield.png 1200w,
+/static/e2ceddd26691f38b0dec421c08a40c58/d61c2/interruption-and-yield.png 1800w,
+/static/e2ceddd26691f38b0dec421c08a40c58/97a96/interruption-and-yield.png 2400w,
+/static/e2ceddd26691f38b0dec421c08a40c58/5fe07/interruption-and-yield.png 3422w&quot;
+        sizes=&quot;(max-width: 1200px) 100vw, 1200px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;페이스북팀은 &lt;strong&gt;메인 스레드를 점유하여 랜더링 연산을 전개하고 있는 과정에서
+사용자의 입력에 대한 처리가 대기 중임을 확인하고 메인 스레드 점유를
+양보해야 하는 지에 대해 판단을 할 수 있어야 했고, 이에 대한 메커니즘을
+담은 구현체인 &lt;a href=&quot;https://wicg.github.io/is-input-pending/&quot;&gt;isInputPending&lt;/a&gt;
+브라우저 API를 기여하게 됩니다.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;실제로 리엑트의 스케쥴러 패키지 코드에는
+호스트 환경에 의존적인 API를 사용하기 위해 host config가 존재하고,
+isInputPending API를 사용할 수 있는 지에 대한 검증과,
+어떠한 기준으로 메인 스레드에게 점유를 양보할 것인지에 대한 기준을 담고 있습니다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;// packages/scheduler/src/forks/Scheduler.js&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; frameYieldMs &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;let&lt;/span&gt; frameInterval &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; frameYieldMs&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; isInputPending &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;typeof&lt;/span&gt; navigator &lt;span class=&quot;token operator&quot;&gt;!==&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;undefined&apos;&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt;
+  navigator&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;scheduling &lt;span class=&quot;token operator&quot;&gt;!==&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;undefined&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt;
+  navigator&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;scheduling&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;isInputPending &lt;span class=&quot;token operator&quot;&gt;!==&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;undefined&lt;/span&gt;
+    &lt;span class=&quot;token operator&quot;&gt;?&lt;/span&gt; navigator&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;scheduling&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;isInputPending&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;bind&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;navigator&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;scheduling&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;token operator&quot;&gt;...&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;shouldYieldToHost&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; timeElapsed &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;getCurrentTime&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt; startTime&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;token comment&quot;&gt;// 1)&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;timeElapsed &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt; frameInterval&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+  &lt;span class=&quot;token comment&quot;&gt;// 2)&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;enableIsInputPending&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;needsPaint&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;token comment&quot;&gt;// 3)&lt;/span&gt;
+      &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;timeElapsed &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt; continuousInputInterval&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;token comment&quot;&gt;// 4)&lt;/span&gt;
+      &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;isInputPending &lt;span class=&quot;token operator&quot;&gt;!==&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;isInputPending&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+      &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;timeElapsed &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt; maxInterval&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;token comment&quot;&gt;// 5)&lt;/span&gt;
+      &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;isInputPending &lt;span class=&quot;token operator&quot;&gt;!==&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;isInputPending&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;continuousOptions&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+      &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;token comment&quot;&gt;// 6)&lt;/span&gt;
+      &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+  &lt;span class=&quot;token comment&quot;&gt;// 7)&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;리엑트는 동시성 랜더링 메커니즘을 담아내기 위해 협력적 멀티태스킹, 우선순위 기반 랜더링, 스케쥴링, 중단 등과 같은
+기능을 구현하였는데요. 저는 동시성이라는 키워드가 궁금했습니다.&lt;/p&gt;
+&lt;p&gt;동시성 랜더링은 블로킹 랜더링을 해결하고자 합니다.
+블로킹 랜더링은 입력값에 대한 픽셀 박스를 랜더링하는 연산을
+시작하게 되면 중간에 중단할 수 없기 때문에, 연산을 점유당하고 있는
+브라우저는 추가적인 값 입력에 대해 즉시 업데이트할 수 없게 됩니다.&lt;/p&gt;
+&lt;p&gt;리엑트는 동시성 모드에서의 모든 랜더링 과정은 인터럽트가 가능하도록
+만들어 근본적으로 중단(interrupting) 가능하도록 합니다.&lt;/p&gt;
+&lt;p&gt;리엑트는 동시성 기능을 통해 블로킹 랜더링을 해결하고자
+모든 랜더링 과정을 인터럽트 가능하도록 하였습니다.
+그리고, 상호 작용에 있어 사용자 경험에 영향을 주는 우선 순위를 언급하고,
 입력과 호버와 같은 상호작용은 빠르게 반응하길 원하지만, 반면 클릭이나
-페이지 전환, 상호작용에 대한 부수적인 변화에는&lt;/p&gt;
-&lt;p&gt;동시성 랜더링은&lt;/p&gt;
+페이지 전환, 상호작용에 대한 부수적인 변화에는 약간의 기다림이 익숙한 것을
+통해 작업의 우선 순위를 산정합니다.&lt;/p&gt;
+&lt;p&gt;우선 순위는 react18에서 새롭게 정의된 useTransition을 통해
+정의할 수 있습니다.&lt;/p&gt;
 &lt;p&gt;react 공식문서 데모에서는 input 컴포넌트의 변화 랜더링, 목록 컴포넌트 랜더링
 이 두가지 작업의 우선 순위를 구분지었다.&lt;/p&gt;
 &lt;p&gt;input 컴포넌트의 변화 랜더링은 즉각적으로 적용되어야 하는 랜더링이며,
