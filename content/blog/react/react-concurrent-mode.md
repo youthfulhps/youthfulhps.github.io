@@ -3,7 +3,7 @@ title: react-concurrent-mode
 date: 2022-06-11 16:06:62
 category: react
 thumbnail: { thumbnailSrc }
-draft: true
+draft: false
 ---
 
 리엑트팀에서 [Async Rendering](https://ko.reactjs.org/blog/2018/03/27/update-on-async-rendering.html)
@@ -79,7 +79,7 @@ keypress 이벤트에 대한 처리가 지연되고 있음을 경고 플래그�
 동작과 응답 사이의 연결이 지연되고 있음을 인식하게 되며, 이는 사용자 경험의 감점으로
 이어질 수 있습니다.
 
-## 동시성 구현을 위한 메커니즘
+## 동시성 구현을 위한 메커니즘; 양보
 
 브라우저는 랜더링 엔진에게 메인 스레드 점유를 위임하게 되면,
 랜더링 과정 중 발생한 사용자 입력에 대해 즉시 처리할 수 없게 됩니다.
@@ -108,6 +108,15 @@ keypress 이벤트에 대한 처리가 지연되고 있음을 경고 플래그�
 양보하지 않습니다.
 
 ```js
+//SchedulerFeatureFlags.js
+export const frameYieldMs = 5;
+```
+
+```js
+import { frameYieldMs } from '../SchedulerFeatureFlags';
+
+let frameInterval = frameYieldMs;
+
 function shouldYieldToHost() {
   const timeElapsed = getCurrentTime() - startTime;
   
@@ -118,17 +127,10 @@ function shouldYieldToHost() {
 }
 ```
 
-이후의 스코프는 메인 스레드가 무시할 수 없는 시간 동안 차단되었을 때
+이후의 스코프에서는 메인 스레드가 무시할 수 없는 시간 동안 차단되었을 때
 보류 중인 페인트 혹은 사용자 입력 작업이 존재한다면,
 브라우저가 높은 우선 순위 작업을 수행할 수 있도록 메인 스레드에
 대한 제안 권한을 양보합니다.
-
-enableIsInputPending은 호스트 환경에 의존적인 스케쥴러 기능의 플래그 중 하나이며,
-needsPaint 플래그를 통해 보류 중인 페인트 작업의 존재 여부를 검증하여
-양보합니다. 이 때, requestPaint는 reconciler(리콘실러)에서 VDOM을 루트 DOM에
-적용하는 [commitRoot](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberWorkLoop.new.js#L1997) 단계에서 호출되어
-VDOM에서 루트 DOM으로 커밋된 변경 사항들이 있으니, 페인트 작업이 필요하다는 것을
-스케쥴러에게 전달합니다.
 
 ```js
 //Scheduler.js
@@ -149,13 +151,18 @@ function shouldYieldToHost() {
   ...
   if (enableIsInputPending) {
     if (needsPaint) {
-      // 3)
       return true;
     }
   }
   ...
 }
 ```
+
+한편 reconciler(리콘실러)의
+[commitRootImpl](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberWorkLoop.new.js#L1997) 는 VDOM의 변경사항을
+루트 DOM에 적용하는 역할을 하는데, 여기서 requestPaint가 사용됩니다.
+즉 **VDOM에서 루트 DOM으로 변경 사항이 커밋되었으니 페인트 작업이 필요하다는 것을
+스케쥴러에게 전달합니다.**
 
 ```js
 //ReactFiberWorkLoop.new.js
@@ -167,10 +174,24 @@ function commitRootImpl(...) {
 }
 ```
 
+다음으로는 경과된 시간이 연속적인 입력 간격보다 짧은 지 검증합니다.
+isInputPending은 단순히 모든 사용자 이벤트를 동일하게 처리하지 않고,
+[연속적인(continuous) 이벤트]([연속적인 이벤트(Continuous events)](https://wicg.github.io/is-input-pending/#continuous-events))(e.g. click)와 분리된(discrete) 이벤트(e.g. mouseover)를 구분지어 **연속적인 이벤트에 대해 너무 자주 양보하게 되는 것을 막습니다.**
+
+가령 문서를 읽을 때, 시선의 흐름을 마우스 포인터의 이동으로 따라가는 것이
+일반적으로 사용자에게 성능에 대한 영향을 주지 않을 것으로 예상하기 때문에
+기본적으로 이러한 이벤트들은 isInputPending의 검증 대상에서 제외됩니다.
+
+즉 이 검증 단계에서는, 연속적인 이벤트에 대한 처리 작업을 즉시 시작하지 않을 간격을 두고,
+그 시간 동안에는 판단을 온전히 브라우저에게 맡깁니다.
+
 ```js
-// packages/scheduler/src/forks/Scheduler.js
-const frameYieldMs = 5;
-let frameInterval = frameYieldMs;
+//SchedulerFeatureFlags.js
+export const continuousYieldMs = 50;
+```
+
+```js
+import { continuousYieldMs } from '../SchedulerFeatureFlags'
 
 const isInputPending =
   typeof navigator !== 'undefined' &&
@@ -179,41 +200,21 @@ const isInputPending =
     ? navigator.scheduling.isInputPending.bind(navigator.scheduling)
     : null;
 
-...
-
 function shouldYieldToHost() {
-  const timeElapsed = getCurrentTime() - startTime;
-  // 1)
-  if (timeElapsed < frameInterval) {
-    return false;
-  }
-
-  // 2)
-  if (enableIsInputPending) {
-    if (needsPaint) {
-      // 3)
-      return true;
-    }
-    if (timeElapsed < continuousInputInterval) {
-      // 4)
-      if (isInputPending !== null) {
-        return isInputPending();
-      }
-    } else if (timeElapsed < maxInterval) {
-      // 5)
-      if (isInputPending !== null) {
-        return isInputPending(continuousOptions);
-      }
-    } else {
-      // 6)
-      return true;
+  ...
+  if (timeElapsed < continuousInputInterval) {
+    if (isInputPending !== null) {
+      return isInputPending();
     }
   }
-
-  // 7)
-  return true;
+  ...
 }
 ```
+
+<!-- TODO: timeElapsed < maxInterval 에 대한 검증 단계 -->
+<!-- TODO: !enableIsInputPending일 때는 어떻게 처리되는 지 -->
+
+ <!-- ============== Lagacy ============== -->
 
 양보가 필요한 상황인지를 판단하기 위한 첫 검증은 1)현재 작업을
 처리하기 위해 얼마만큼의 시간을 소요했는 지를 확인합니다.
