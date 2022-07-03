@@ -97,10 +97,75 @@ keypress 이벤트에 대한 처리가 지연되고 있음을 경고 플래그�
 담은 구현체인 [isInputPending](https://wicg.github.io/is-input-pending/)
 브라우저 API를 기여하게 됩니다.**
 
-실제로 리엑트의 스케쥴러 패키지 코드에는
-호스트 환경에 의존적인 API를 사용하기 위해 host config가 존재하고,
-isInputPending API를 사용할 수 있는 지에 대한 검증과,
-어떠한 기준으로 메인 스레드에게 점유를 양보할 것인지에 대한 기준을 담고 있습니다.
+실제로 리엑트의 [Scheduler](https://github.com/facebook/react/blob/main/packages/scheduler/src/forks/Scheduler.js)(스케쥴러) 패키지 코드에는
+호스트 환경에 의존적인 API를 사용 가능한지에 대한 플래그들이 존재하고,
+어떠한 기준으로 메인 스레드에게 점유를 양보할 것인지에 대한 전개가 담겨있습니다.
+
+양보가 필요한 상황인지를 판단하기 위한 첫 검증은 1)현재 작업을
+처리하기 위해 얼마만큼의 시간을 소요했는 지를 확인합니다.
+경과된 시간이 frameInterval 값보다 작다면,
+메인 스레드는 단일 프레임만큼 아주 짧은 시간동안만 차단되어 있었기 때문에
+양보하지 않습니다.
+
+```js
+function shouldYieldToHost() {
+  const timeElapsed = getCurrentTime() - startTime;
+  
+  if (timeElapsed < frameInterval) {
+    return false;
+  }
+  ...
+}
+```
+
+이후의 스코프는 메인 스레드가 무시할 수 없는 시간 동안 차단되었을 때
+보류 중인 페인트 혹은 사용자 입력 작업이 존재한다면,
+브라우저가 높은 우선 순위 작업을 수행할 수 있도록 메인 스레드에
+대한 제안 권한을 양보합니다.
+
+enableIsInputPending은 호스트 환경에 의존적인 스케쥴러 기능의 플래그 중 하나이며,
+needsPaint 플래그를 통해 보류 중인 페인트 작업의 존재 여부를 검증하여
+양보합니다. 이 때, requestPaint는 reconciler(리콘실러)에서 VDOM을 루트 DOM에
+적용하는 [commitRoot](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberWorkLoop.new.js#L1997) 단계에서 호출되어
+VDOM에서 루트 DOM으로 커밋된 변경 사항들이 있으니, 페인트 작업이 필요하다는 것을
+스케쥴러에게 전달합니다.
+
+```js
+//Scheduler.js
+let needsPaint = false;
+
+function requestPaint() {
+  if (
+    enableIsInputPending &&
+    navigator !== undefined &&
+    navigator.scheduling !== undefined &&
+    navigator.scheduling.isInputPending !== undefined
+  ) {
+    needsPaint = true;
+  }
+}
+
+function shouldYieldToHost() {
+  ...
+  if (enableIsInputPending) {
+    if (needsPaint) {
+      // 3)
+      return true;
+    }
+  }
+  ...
+}
+```
+
+```js
+//ReactFiberWorkLoop.new.js
+import { requestPaint } from './Scheduler';
+
+function commitRootImpl(...) {
+  ...
+  requestPaint();
+}
+```
 
 ```js
 // packages/scheduler/src/forks/Scheduler.js
@@ -147,12 +212,18 @@ function shouldYieldToHost() {
 
   // 7)
   return true;
-
 }
-
-
-
 ```
+
+양보가 필요한 상황인지를 판단하기 위한 첫 검증은 1)현재 작업을
+처리하기 위해 얼마만큼의 시간을 소요했는 지를 확인합니다.
+만약, 경과된 시간이 frameInterval 값보다 작다면,
+메인 스레드는 단일 프레임만큼 아주 짧은 시간동안만 차단되어 있었기 때문에
+양보하지 않습니다.
+
+하지만, 메인 스레드가 무시할 수 없는 시간 동안 차단되었다면,
+브라우저가 높은 우선 순위 작업을 수행할 수 있도록 메인 스레드에
+대한 제어 권한을 양보합니다.
 
 리엑트는 동시성 랜더링 메커니즘을 담아내기 위해 협력적 멀티태스킹, 우선순위 기반 랜더링, 스케쥴링, 중단 등과 같은
 기능을 구현하였는데요. 저는 동시성이라는 키워드가 궁금했습니다.
