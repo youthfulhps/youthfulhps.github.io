@@ -3,7 +3,7 @@ title: react-concurrent-mode
 date: 2022-06-11 16:06:62
 category: react
 thumbnail: { thumbnailSrc }
-draft: false
+draft: true
 ---
 
 리엑트팀에서 [Async Rendering](https://ko.reactjs.org/blog/2018/03/27/update-on-async-rendering.html)
