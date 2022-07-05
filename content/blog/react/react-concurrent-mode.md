@@ -101,14 +101,16 @@ keypress 이벤트에 대한 처리가 지연되고 있음을 경고 플래그�
 호스트 환경에 의존적인 API를 사용 가능한지에 대한 플래그들이 존재하고,
 어떠한 기준으로 메인 스레드에게 점유를 양보할 것인지에 대한 전개가 담겨있습니다.
 
-양보가 필요한 상황인지를 판단하기 위한 첫 검증은 1)현재 작업을
+### shouldYieldToHost
+
+양보가 필요한 상황인지를 판단하기 위한 첫 검증은 현재 작업을
 처리하기 위해 얼마만큼의 시간을 소요했는 지를 확인합니다.
 경과된 시간이 frameInterval 값보다 작다면,
 메인 스레드는 단일 프레임만큼 아주 짧은 시간동안만 차단되어 있었기 때문에
 양보하지 않습니다.
 
 ```js
-//SchedulerFeatureFlags.js
+// SchedulerFeatureFlags.js
 export const frameYieldMs = 5;
 ```
 
@@ -133,7 +135,7 @@ function shouldYieldToHost() {
 대한 제안 권한을 양보합니다.
 
 ```js
-//Scheduler.js
+// Scheduler.js
 let needsPaint = false;
 
 function requestPaint() {
@@ -165,7 +167,7 @@ function shouldYieldToHost() {
 스케쥴러에게 전달합니다.**
 
 ```js
-//ReactFiberWorkLoop.new.js
+// ReactFiberWorkLoop.new.js
 import { requestPaint } from './Scheduler';
 
 function commitRootImpl(...) {
@@ -186,12 +188,14 @@ isInputPending은 단순히 모든 사용자 이벤트를 동일하게 처리하
 그 시간 동안에는 판단을 온전히 브라우저에게 맡깁니다.
 
 ```js
-//SchedulerFeatureFlags.js
+// SchedulerFeatureFlags.js
 export const continuousYieldMs = 50;
 ```
 
 ```js
 import { continuousYieldMs } from '../SchedulerFeatureFlags'
+
+const continuousInputInterval = continuousYieldMs;
 
 const isInputPending =
   typeof navigator !== 'undefined' &&
@@ -211,12 +215,123 @@ function shouldYieldToHost() {
 }
 ```
 
-<!-- TODO: timeElapsed < maxInterval 에 대한 검증 단계 -->
-<!-- TODO: !enableIsInputPending일 때는 어떻게 처리되는 지 -->
+마지막으로 최대 간격 이내에 보류 중인 연속적이거나, 분리된 모든 이벤트에 대해
+양보합니다. 이후 모든 분기 처리가 담지 못한 케이스에 대해서는,
+보류 중인 입력이 없더라도 네트워크 이벤트와 같은 알지 못하는 다른 작업들이
+대기 중일 수 있다는 가정하에 무조건적으로 양보합니다.
+
+```js
+// SchedulerFeatureFlags.js
+export const maxYieldMs = 300;
+```
+
+```js
+import { maxYieldMs } from '../SchedulerFeatureFlags'
+
+function shouldYieldToHost() {
+    ...
+    else if (timeElapsed < maxInterval) {
+      // Yield if there's either a pending discrete or continuous input.
+      if (isInputPending !== null) {
+        return isInputPending(continuousOptions);
+      }
+    } else {
+      return true;
+    }
+  }
+
+  return true;
+}
+```
+
+초기에 분기처리 되었던 호스트 환경에 의존적인 isInputPending API를
+사용할 수 없는 경우 또한 무조건적으로 양보합니다.
+
+```js
+function shouldYieldToHost() {
+  ...
+  if (enableIsInputPending) {
+    ...
+  }
+
+  return true;
+}
+```
+
+지금까지 알아본 shouldYieldToHost는 스케쥴러의 [workLoop](https://github.com/facebook/react/blob/main/packages/scheduler/src/forks/Scheduler.js#L189)에서 사용됩니다. 현재 진행 중인 작업의 만료시간이 현재 시간에 비해 여유가 있는 시점에서
+우선 순위가 더 높은 작업이 보류되고 있다면, 메인 스레드에게 제어권을 양보하고, 만료 시간이
+지난 작업에 대해서는 양보하지 않고 동기적으로 바쁘게 작업을 이어나갑니다.
+
+```js
+// Scheduler.js
+function workLoop(hasTimeRemaining, initialTime) {
+  ...
+  while (
+    currentTask !== null &&
+    !(enableSchedulerDebugging && isSchedulerPaused)
+  ) {
+    if (
+      currentTask.expirationTime > currentTime &&
+      (!hasTimeRemaining || shouldYieldToHost())
+    ) {
+      break;
+    }
+  ...
+  }
+}
+```
+
+추가적으로 스케쥴러가 아닌, 동시성 모드에서 컴포넌트를 재조정하는 작업이 담긴
+[workLoopConcurrent](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberWorkLoop.new.js#L1836)
+에서도 사용되는데요. shouldYield를 통해 진행되던 재조정 작업이
+중지될 수 있음이 조건에 담겨있습니다.
+
+```js
+// ReactFiberWorkLoop.new.js
+import { shouldYield } from './Scheduler';
+function workLoopConcurrent() {
+  while (workInProgress !== null && !shouldYield()) {
+    performUnitOfWork(workInProgress);
+  }
+}
+```
+
+이를 통해 리콘실러는 workLoopConcurrnet를 통해 현재 작업중이던 루트 혹은 레일(lane)이
+변경되면, 루트에 대기중인 작업들을 모두 제거하여 변경된 레인의 작업이 진행될 수 있도록 합니다.
+(여기서, 레인은 두 가지 이상의 논리적 통제를 다루는 컨텍스트를 의미하는 것 같습니다.
+마치 고속도로의 차선 처럼요.)
+
+```js
+function renderRootConcurrent(root: FiberRoot, lanes: Lanes) {
+  const prevExecutionContext = executionContext;
+  executionContext |= RenderContext;
+  const prevDispatcher = pushDispatcher();
+
+  if (workInProgressRoot !== root || workInProgressRootRenderLanes !== lanes) {
+    ...
+        const memoizedUpdaters = root.memoizedUpdaters;
+        if (memoizedUpdaters.size > 0) {
+          restorePendingUpdaters(root, workInProgressRootRenderLanes);
+          memoizedUpdaters.clear();
+        }
+
+        movePendingFibersToMemoized(root, lanes);
+      }
+    } 
+  }
+  ...
+
+  do {
+    try {
+      workLoopConcurrent();
+      ...
+    }
+  }
+```
 
  <!-- ============== Lagacy ============== -->
 
-양보가 필요한 상황인지를 판단하기 위한 첫 검증은 1)현재 작업을
+<!-- 양보가 필요한 상황인지를 판단하기 위한 첫 검증은 1)현재 작업을
 처리하기 위해 얼마만큼의 시간을 소요했는 지를 확인합니다.
 만약, 경과된 시간이 frameInterval 값보다 작다면,
 메인 스레드는 단일 프레임만큼 아주 짧은 시간동안만 차단되어 있었기 때문에
@@ -308,4 +423,4 @@ HCI 연구 결과 확인해보기
 
 ## Reference
 
-[Inside React(동시성을 구현하는 기술)](https://tv.naver.com/v/23652451)
+[Inside React(동시성을 구현하는 기술)](https://tv.naver.com/v/23652451) -->
