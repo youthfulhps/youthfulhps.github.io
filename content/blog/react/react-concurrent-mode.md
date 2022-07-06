@@ -3,7 +3,7 @@ title: react-concurrent-mode
 date: 2022-06-11 16:06:62
 category: react
 thumbnail: { thumbnailSrc }
-draft: true
+draft: false
 ---
 
 리엑트팀에서 [Async Rendering](https://ko.reactjs.org/blog/2018/03/27/update-on-async-rendering.html)
@@ -79,7 +79,7 @@ keypress 이벤트에 대한 처리가 지연되고 있음을 경고 플래그�
 동작과 응답 사이의 연결이 지연되고 있음을 인식하게 되며, 이는 사용자 경험의 감점으로
 이어질 수 있습니다.
 
-## 동시성 구현을 위한 메커니즘; 양보
+## 동시성 구현을 위한 메커니즘; 중단과 양보
 
 브라우저는 랜더링 엔진에게 메인 스레드 점유를 위임하게 되면,
 랜더링 과정 중 발생한 사용자 입력에 대해 즉시 처리할 수 없게 됩니다.
@@ -160,11 +160,9 @@ function shouldYieldToHost() {
 }
 ```
 
-한편 reconciler(리콘실러)의
-[commitRootImpl](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberWorkLoop.new.js#L1997) 는 VDOM의 변경사항을
-루트 DOM에 적용하는 역할을 하는데, 여기서 requestPaint가 사용됩니다.
-즉 **VDOM에서 루트 DOM으로 변경 사항이 커밋되었으니 페인트 작업이 필요하다는 것을
-스케쥴러에게 전달합니다.**
+여기서, requestPaints 를 호출하는 곳 중 하나는 reconciler(리콘실러)입니다.
+**VDOM의 변경사항을 DOM에 모두 커밋하고 나서 requestPaints() 를 통해
+페인트 작업이 필요하다는 것을 스케쥴러에게 전달하게 됩니다.**
 
 ```js
 // ReactFiberWorkLoop.new.js
@@ -329,13 +327,53 @@ function renderRootConcurrent(root: FiberRoot, lanes: Lanes) {
   }
 ```
 
+동시성 모델과 이벤트 루프에 대한 설명
+
+reactDOMRoot.render를 호출하게 되면, 작업을 예약합니다.
+작업이 예약되게 되면, 예약된 작업에 끝에서 이벤트 루프를 호출합니다.
+
+이벤트 루프가 시작될 때, schedulePerformWorkUntilDeadline 이라는 함수가
+호출됩니다. 이 메서드를 잠시 기억하자.
+
+여기서 메세지 채널을 통해 performWorkUntilDeadline과 통신하게 됩니다.
+performWorkUntilDeadline은 메세지 체널의 콜백함수로서 호출된다.
+
+그리고, performWorkUntilDeadline에서 필요한 일을 flushWork 한다.
+그러면 flush된 flushwork안쪽에서는 루프가 돌게 된다.
+
+에를 들어 cpu가 10ms을 작업의 할당한다면 10ms이 지나면 탈출,
+그리고 flushWork에서 남은 작업이 있는 지 확인
+만약, 남은 작업이 있다면 다시 schedulePerformWorkUntilDeadline를 호출한다.
+
+workLoopConcurrent는 주어진 시간만큼 작업을 처리하는 것이다.
+
+이렇게 해서 스레드를 블로킹하지 않는 루프를 구현
+메인 스레드에게 양보하기 위한 방법
+
+컴포넌트를 순회하면서 메인스레드를 블로킹하지 않는 방법은
+Fiber 아키텍처가 가지고 있다.
+
+Fiber는 랜더링 작업을 미세하게 분할한다.
+자바스크립트 스택을 사용하지 않고 작업을 힙 객체에 펼친다.
+훅의 대수효과를 지원하기 위한 기반이 된다.
+
+파이버 아키텍처를 적용한 리엑트의 랜더링과정은
+더블 버퍼 모델과 유사하다. 프론트 버퍼가 화면을 출력하는 동안,
+백 버퍼가 다음에 그려질 내용을 그려내면서 두 버퍼가 스위칭되며
+랜더링한다.
+
+createRoot를 호출하면 FiberRootNode를 형성한다.
+이건 모든 노드의 루트 노드가 된다.
+
+FiberRootNode의 current를 번갈아가며 변경하면서
+순회 작업을 진행한다. 순회 작업이 마무리되면 current를
+완료된 버퍼를 가르켜 스왑한다.
+
 ## 동시성 구현을 위한 메커니즘; 중단
 
-리엑트 패키지에 동시성 메커니즘이 적용되기 전에는 재귀적인 appendChild
-호출을 통해 레이아웃 작업을 진행되었습니다. 때문에 renderer가 랜더링 작업을
-시작하면 중단할 수 없게 되는데요. 리엑트팀은 중단 메커니즘을 구현하기 위해
-중단할 수 없는 랜더링 이전 단계인 재조정 단계에서 작업을 중단할 수 있도록
-구현했어야 했습니다.
+랜더러(renderer) 레이어에서 랜더링 작업이 시작되면 재귀적인 작업으로 중단이 불가능합니다.
+리엑트팀은 중단 메커니즘을 구현하기 위해 랜더러가 작업을 시작하기 전 단계인
+리콘실러 작업 단계에서 중단할 수 있도록 구현해야 했습니다.
 
 결국, 중단 메커니즘은 리콘실러에 많은 로직이 담겨있습니다.
 
