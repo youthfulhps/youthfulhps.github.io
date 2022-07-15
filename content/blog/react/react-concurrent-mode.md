@@ -330,8 +330,13 @@ function renderRootConcurrent(root: FiberRoot, lanes: Lanes) {
 ## 동시성 구현을 위한 메커니즘; 우선 순위
 
 중단과 양보의 메커니즘에서 우선 순위라는 키워드가 자주 등장합니다.
+리엑트18 이전에서는 작업의 만료 시간을 기준으로 메커니즘이 구현되어 있었고,
+[ReactFiberExpirationTime](https://github.com/facebook/react/blob/v16.12.0/packages/react-reconciler/src/ReactFiberExpirationTime.js#L131)
+에 담겨 있습니다.
 
-동시성 모델과 이벤트 루프에 대한 설명
+반면, 리엑트18 버전에서는 [ReactFiberLane](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberLane.new.js)
+에서 확인할 수 있듯, 많은 비트 연산을 기반으로 우선 순위를
+부여하는 방식으로 메커니즘이 구현하는 것으로 변경되었습니다.
 
 ## 동시성 구현을 위한 메커니즘; 이벤트 루프 중단
 
