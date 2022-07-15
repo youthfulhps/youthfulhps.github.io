@@ -3,7 +3,7 @@ title: react-concurrent-mode
 date: 2022-06-11 16:06:62
 category: react
 thumbnail: { thumbnailSrc }
-draft: false
+draft: true
 ---
 
 리엑트팀에서 [Async Rendering](https://ko.reactjs.org/blog/2018/03/27/update-on-async-rendering.html)
@@ -121,7 +121,7 @@ let frameInterval = frameYieldMs;
 
 function shouldYieldToHost() {
   const timeElapsed = getCurrentTime() - startTime;
-  
+
   if (timeElapsed < frameInterval) {
     return false;
   }
@@ -160,7 +160,7 @@ function shouldYieldToHost() {
 }
 ```
 
-여기서, requestPaints 를 호출하는 곳 중 하나는 reconciler(리콘실러)입니다.
+여기서, requestPaints()를 호출하는 곳 중 하나인 reconciler(리콘실러)는
 **VDOM의 변경사항을 DOM에 모두 커밋하고 나서 requestPaints() 를 통해
 페인트 작업이 필요하다는 것을 스케쥴러에게 전달하게 됩니다.**
 
@@ -295,7 +295,7 @@ function workLoopConcurrent() {
 ```
 
 이를 통해 리콘실러는 workLoopConcurrnet를 통해 현재 작업중이던 루트 혹은 레일(lane)이
-변경되면, 루트에 대기중인 작업들을 모두 제거하여 변경된 레인의 작업이 진행될 수 있도록 합니다.
+변경되면, 루트에 대기중인 작업들을 모두 비우고, 변경된 레인의 작업이 진행될 수 있도록 합니다.
 (여기서, 레인은 두 가지 이상의 논리적 통제를 다루는 컨텍스트를 의미하는 것 같습니다.
 마치 고속도로의 차선 처럼요.)
 
@@ -315,7 +315,7 @@ function renderRootConcurrent(root: FiberRoot, lanes: Lanes) {
 
         movePendingFibersToMemoized(root, lanes);
       }
-    } 
+    }
   }
   ...
 
@@ -327,9 +327,58 @@ function renderRootConcurrent(root: FiberRoot, lanes: Lanes) {
   }
 ```
 
+## 동시성 구현을 위한 메커니즘; 우선 순위
+
+중단과 양보의 메커니즘에서 우선 순위라는 키워드가 자주 등장합니다.
+
 동시성 모델과 이벤트 루프에 대한 설명
 
+## 동시성 구현을 위한 메커니즘; 이벤트 루프 중단
+
+### render
+
+### schedulePerformWorkUntilDeadline
+
+### messageChannel을 통한 performWorkUntilDeadline 콜백 함수 호출
+
+### flushWork
+
+### flushWork 루프가 돔
+
+### 이후 작업에 대해 cpu가 10ms을 할당해 주었다면, 10ms이 지나면 탈출
+
+### 다시 fluskWork에서 남은 작업이 있는 지 확인
+
+### 남은 작업이 있으면 schedulePerformWorkUntilDeadline 호출
+
+### workLoopConcurrent는 주어진 시간만큼 작업 처리
+
+<!-- 지금까지 알아본 양보를 구현하기 위한 메커니즘은 중단을 발생시키기 위한
+플래그로서 사용됩니다. 양보가 필요한지에 대한 판단을 통해 어떻게
+메인 스레드를 블로킹하지 않는 WorkLoop를 구현했는 지 살펴봅시다.
+
 reactDOMRoot.render를 호출하게 되면, 작업을 예약합니다.
+작업이 예약되게 되면, 예약된 작업에 끝에서 이벤트 루프를 호출합니다.
+
+이벤트 루프가 시작될 때, schedulePerformWorkUntilDeadline 이라는 함수가
+호출됩니다. 이 메서드를 잠시 기억하자.
+
+여기서 메세지 채널을 통해 performWorkUntilDeadline과 통신하게 됩니다.
+performWorkUntilDeadline은 메세지 체널의 콜백함수로서 호출된다.
+
+그리고, performWorkUntilDeadline에서 필요한 일을 flushWork 한다.
+그러면 flush된 flushwork안쪽에서는 루프가 돌게 된다.
+
+에를 들어 cpu가 10ms을 작업의 할당한다면 10ms이 지나면 탈출,
+그리고 flushWork에서 남은 작업이 있는 지 확인
+만약, 남은 작업이 있다면 다시 schedulePerformWorkUntilDeadline를 호출한다.
+
+workLoopConcurrent는 주어진 시간만큼 작업을 처리하는 것이다.
+
+이렇게 해서 스레드를 블로킹하지 않는 루프를 구현
+메인 스레드에게 양보하기 위한 방법 -->
+
+<!-- reactDOMRoot.render를 호출하게 되면, 작업을 예약합니다.
 작업이 예약되게 되면, 예약된 작업에 끝에서 이벤트 루프를 호출합니다.
 
 이벤트 루프가 시작될 때, schedulePerformWorkUntilDeadline 이라는 함수가
@@ -375,40 +424,12 @@ FiberRootNode의 current를 번갈아가며 변경하면서
 리엑트팀은 중단 메커니즘을 구현하기 위해 랜더러가 작업을 시작하기 전 단계인
 리콘실러 작업 단계에서 중단할 수 있도록 구현해야 했습니다.
 
-결국, 중단 메커니즘은 리콘실러에 많은 로직이 담겨있습니다.
+결국, 중단 메커니즘은 리콘실러에 많은 로직이 담겨있습니다. -->
 
 <!-- 직접 스케쥴러를 만듦 -->
 <!-- performUntilWork() -->
 
- <!-- ============== Lagacy ============== -->
-
-<!-- 양보가 필요한 상황인지를 판단하기 위한 첫 검증은 1)현재 작업을
-처리하기 위해 얼마만큼의 시간을 소요했는 지를 확인합니다.
-만약, 경과된 시간이 frameInterval 값보다 작다면,
-메인 스레드는 단일 프레임만큼 아주 짧은 시간동안만 차단되어 있었기 때문에
-양보하지 않습니다.
-
-하지만, 메인 스레드가 무시할 수 없는 시간 동안 차단되었다면,
-브라우저가 높은 우선 순위 작업을 수행할 수 있도록 메인 스레드에
-대한 제어 권한을 양보합니다.
-
-리엑트는 동시성 랜더링 메커니즘을 담아내기 위해 협력적 멀티태스킹, 우선순위 기반 랜더링, 스케쥴링, 중단 등과 같은
-기능을 구현하였는데요. 저는 동시성이라는 키워드가 궁금했습니다.
-
-동시성 랜더링은 블로킹 랜더링을 해결하고자 합니다.
-블로킹 랜더링은 입력값에 대한 픽셀 박스를 랜더링하는 연산을
-시작하게 되면 중간에 중단할 수 없기 때문에, 연산을 점유당하고 있는
-브라우저는 추가적인 값 입력에 대해 즉시 업데이트할 수 없게 됩니다.
-
-리엑트는 동시성 모드에서의 모든 랜더링 과정은 인터럽트가 가능하도록
-만들어 근본적으로 중단(interrupting) 가능하도록 합니다.
-
-리엑트는 동시성 기능을 통해 블로킹 랜더링을 해결하고자
-모든 랜더링 과정을 인터럽트 가능하도록 하였습니다.
-그리고, 상호 작용에 있어 사용자 경험에 영향을 주는 우선 순위를 언급하고,
-입력과 호버와 같은 상호작용은 빠르게 반응하길 원하지만, 반면 클릭이나
-페이지 전환, 상호작용에 대한 부수적인 변화에는 약간의 기다림이 익숙한 것을
-통해 작업의 우선 순위를 산정합니다.
+ <!-- ============== Lagacy ===========
 
 우선 순위는 react18에서 새롭게 정의된 useTransition을 통해
 정의할 수 있습니다.
