@@ -337,13 +337,122 @@ function renderRootConcurrent(root: FiberRoot, lanes: Lanes) {
 
 리엑트에서는 사용자 중심의 성능 모델 측면에서 이벤트에 대한 우선순위를
 인위적으로 구분짓고, 작업 별 우선 순위를 부여하고 스케쥴링까지 진행되는
-일련의 메커니즘이 구현되어 있는데요. 먼저, 리엑트에서 이벤트에 대한 우선순위
-를 어떻게 구분짓는 지 확인해봅시다.
+일련의 메커니즘이 구현되어 있는데요. 먼저, 리엑트에서 이벤트에 대한 우선순위를
+어떻게 구분짓는 지 확인해봅시다.
 
 ### 이벤트 우선순위
 
 리엑트는 사용자 인터렉션에 의해 발생된 이벤트의 긴급 정도를
-기준으로 우선순위를 결정합니다.
+기준으로 우선순위를 결정짓는데, 크게 두 종류로 이벤트가 구분되고
+루트로 이벤트를 등록할 때 어느 범주에 속한 이벤트인지에 따라
+우선 순위가 부여됩니다.
+
+- 이산적인(discrete) 이벤트 (e.g. click, keydown, focusin, ..)
+- 연속적인(continuous) 이벤트 (e.g. drag, pointermove, scroll, ..)
+
+<pre>
+<a href="https://github.com/facebook/react/blob/main/packages/react-dom/src/events/ReactDOMEventListener.js#L410">react-dom/src/events/ReactDOMEventListener.js</a>
+</pre>
+
+```js
+export function getEventPriority(domEventName: DOMEventName): * {
+  switch (domEventName) {
+    case 'cancel':
+    case 'click':
+    case 'close':
+    case 'contextmenu':
+    ...
+      return DiscreteEventPriority;
+    case 'drag':
+    case 'dragenter':
+    case 'dragexit':
+    case 'dragleave':
+      return ContinuousEventPriority;
+    case 'message': {
+      const schedulerPriority = getCurrentSchedulerPriorityLevel();
+      switch (schedulerPriority) {
+        case ImmediateSchedulerPriority:
+          return DiscreteEventPriority;
+        case UserBlockingSchedulerPriority:
+          return ContinuousEventPriority;
+        ...
+      }
+    }
+    default:
+      return DefaultEventPriority;
+  }
+}
+```
+
+_여기서 'message' 이벤트는 따로 처리해주는 것을 확인할 수 있는데, 협력적 스케쥴링 모델을
+사용하고, 정확한 스케쥴링 타임을 위해 리엑트 스케쥴러에서는 MessageChannel API를 기반으로
+구현되어 있습니다. 따라서 'message' 이벤트가 스케쥴러 콜백일 수 있기 때문에
+'message' 이벤트에 대해서는 네이티브 스케쥴러에 대한 현재 우선 순위를 확인하여 반환합니다._
+
+getEventPriority() 를 통해 얻어진 이벤트 우선 순위에 따른 각각의 이벤트 리스너를 반환하는
+createEventListenerWrapperWithPriority()에서 사용됩니다.
+
+<pre>
+<a href="https://github.com/facebook/react/blob/main/packages/react-dom/src/events/ReactDOMEventListener.js#L86">react-dom/src/events/ReactDOMEventListener.js</a>
+</pre>
+
+```js
+export function createEventListenerWrapperWithPriority(
+  targetContainer: EventTarget,
+  domEventName: DOMEventName,
+  eventSystemFlags: EventSystemFlags,
+): Function {
+  const eventPriority = getEventPriority(domEventName);
+  let listenerWrapper;
+  switch (eventPriority) {
+    case DiscreteEventPriority:
+      listenerWrapper = dispatchDiscreteEvent;
+      break;
+    case ContinuousEventPriority:
+      listenerWrapper = dispatchContinuousEvent;
+      break;
+    case DefaultEventPriority:
+    default:
+      listenerWrapper = dispatchEvent;
+      break;
+  }
+  return listenerWrapper.bind(
+    null,
+    domEventName,
+    eventSystemFlags,
+    targetContainer,
+  );
+}
+```
+
+함수가 호출되는 곳을 따라 올라가다보면, 결국 createRoot() 에서
+리엑트17 이후 버전의 [이벤트 위임 메커니즘](https://ko.reactjs.org/blog/2020/08/10/react-v17-rc.html#changes-to-event-delegation)에 입각하여, 우선 순위가 부여된
+이벤트 처리를 위한 이벤트 리스너들이 모두 루트에 바인딩되게 됩니다.
+
+<pre>
+<a href="https://github.com/facebook/react/blob/main/packages/react-dom/src/client/ReactDOMRoot.js#L166">react-dom/src/client/ReactDOMRoot.js</a>
+</pre>
+
+```js
+export function createRoot(
+  container: Element | Document | DocumentFragment,
+  options?: CreateRootOptions,
+): RootType {
+  ...
+  const root = createContainer(
+    ...
+  );
+  markContainerAsRoot(root.current, container);
+
+  const rootContainerElement: Document | Element | DocumentFragment =
+    container.nodeType === COMMENT_NODE
+      ? (container.parentNode: any)
+      : container;
+  listenToAllSupportedEvents(rootContainerElement);
+
+  return new ReactDOMRoot(root);
+}
+```
 
 리엑트18 이전에서는 작업의 [만료 시간을 기준으로 우선순위를 부여](https://github.com/facebook/react/blob/v16.12.0/packages/react-reconciler/src/ReactFiberExpirationTime.js)하는 메커니즘으로 구현되어 있었습니다. 반면, 리엑트18 버전에서는 만료 시간에서 Lane 모델을 착안하여
 [비트 연산을 기반으로 우선 순위를 부여](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberLane.new.js)하는 방식으로 구현되었습니다.
