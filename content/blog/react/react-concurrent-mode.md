@@ -52,6 +52,11 @@ _'**동시성은 독립적으로 실행되는 프로세스들의 조합이다.**
 
 ## 동시성을 통해 해결하려는 문제
 
+HCI에 대한 연구 결과가 실제 UI와 통합되도록 돕는 것
+화면 간 전환에서 로딩 중 상태를 너무 많이 표시하면 UX 품질이 낮아짐
+빠르게 처리되기 기대하는 상호작용과 느려도 문제없는 상호작용
+동시성 모드의 목적은 HCI 연구 결과를 추상화하고 구현할 수 있는 방법을 제공하는 것이다.
+
 브라우저는 HTML을 파싱하고, 자바스크립트를 실행하며 랜더트리를 구축하고
 그려내는 작업까지 단일 스레드로서 한번에 하나의 작업만을
 수행합니다.
@@ -79,6 +84,248 @@ keypress 이벤트에 대한 처리가 지연되고 있음을 경고 플래그�
 동작과 응답 사이의 연결이 지연되고 있음을 인식하게 되며, 이는 사용자 경험의 감점으로
 이어질 수 있습니다.
 
+## 동시성 구현을 위한 메커니즘; 우선 순위
+
+리엑트는 사용자 인터페이스를 구축하는 라이브러리로서
+핵심 역할인 인터렉션에 대한 업데이트 과정과 사용자 경험에 대한 연구 결과를
+반영하고 궁극적으로 기술적으로 결합하는 목표를 가지고 있습니다.
+그 기반이 되는 메커니즘 중 하나는 우선순위입니다.
+
+우선순위 메커니즘은 업데이트 전반에 걸쳐 적용되어 있습니다.
+사용자 인터렉션이 이벤트를 통해 전달되면 이에 대한 업데이트가
+필요한데, 리엑트는 사용자 중심의 성능 모델 측면에서 이벤트에 대한
+우선순위를 인위적으로 구분짓고, 작업별 우선순위를 부여합니다.
+
+즉, 업데이트를 진행하기 위한 각각의 작업의 우선순위를
+부여하여 이를 기준으로 스케쥴러에 의해 작업의 교통 정리가 이루어지기
+위한 일련의 메커니즘과 진행 중인 작업이 우선 순위가 높은 대기 상태의
+작업에 의해 중단될 수 있음을 담고 있습니다.
+
+한편, 리엑트v17.0 이전에서는 작업의 [만료 시간을 기준으로 우선순위를 부여](https://github.com/facebook/react/blob/v16.12.0/packages/react-reconciler/src/ReactFiberExpirationTime.js)하는 메커니즘으로 구현되어 있었습니다.
+반면, 리엑트v17.0 이후에서는 Lane 모델을 착안하여 비트 연산을
+기반으로 우선 순위를 부여하는 방식으로 변경되는데요.
+전반적인 우선순위 메커니즘을 담고 있는 모델이기 때문에 우선순위 메커니즘에 대해
+이야기하기 전에 Lane 모델에 대해서 살펴봅시다.
+
+_만료 시간을 사용하지 않고, Lane 모델을 사용하게 된 이유에 대해서는
+[react/pull/18796](https://github.com/facebook/react/pull/18796)에 설명되어 있습니다._
+
+### Lane 모델
+
+Lane 모델은 도로의 차선을 모티브로 하여 리엑트에서 작업의 우선순위를
+표현하기 위해 사용됩니다. 스케쥴링 및 조정 작업 과정에서 매우 중요하게
+사용되는 개념입니다. 작업을 나타내는 32비트 데이터로 표현된
+비트 마스크를 레인(lane)이라 하고, 고유의 작업 스레드를 표현하고 있습니다.
+
+```js
+// react-reconciler/src/ReactFiberLane.new.js
+
+export type Lanes = number;
+export type Lane = number;
+export type LaneMap<T> = Array<T>;
+
+export const TotalLanes = 31;
+
+export const NoLanes: Lanes = /*                        */ 0b0000000000000000000000000000000;
+export const NoLane: Lane = /*                          */ 0b0000000000000000000000000000000;
+export const SyncLane: Lane = /*                        */ 0b0000000000000000000000000000001;
+export const InputContinuousHydrationLane: Lane = /*    */ 0b0000000000000000000000000000010;
+export const InputContinuousLane: Lane = /*             */ 0b0000000000000000000000000000100;
+export const DefaultHydrationLane: Lane = /*            */ 0b0000000000000000000000000001000;
+export const DefaultLane: Lane = /*                     */ 0b0000000000000000000000000010000;
+const TransitionHydrationLane: Lane = /*                */ 0b0000000000000000000000000100000;
+const TransitionLanes: Lanes = /*                       */ 0b0000000001111111111111111000000;
+const TransitionLane1: Lane = /*                        */ 0b0000000000000000000000001000000;
+...
+const RetryLanes: Lanes = /*                            */ 0b0000111110000000000000000000000;
+const RetryLane1: Lane = /*                             */ 0b0000000010000000000000000000000;
+...
+
+export const SomeRetryLane: Lane = RetryLane1;
+export const SelectiveHydrationLane: Lane = /*          */ 0b0001000000000000000000000000000;
+const NonIdleLanes: Lanes = /*                          */ 0b0001111111111111111111111111111;
+export const IdleHydrationLane: Lane = /*               */ 0b0010000000000000000000000000000;
+export const IdleLane: Lane = /*                        */ 0b0100000000000000000000000000000;
+export const OffscreenLane: Lane = /*                   */ 0b1000000000000000000000000000000;
+```
+
+Lane 모델은 우선순위에 따른 교통 정리를 위해 'A 작업이 B 작업보다 급한가?' 에 대한
+Task Prioritization, 'A 작업이 이 그룹 텍스크에 속하는가?'에 대한 Task
+Batching 이라는 두 개념을 착안하여 가령 CPU > I/O > CPU 순의 작업 예약이 있다면,
+I/O 작업을 다른 그룹으로 분리하여 CPU 작업의 병목을 방지하도록 합니다.
+
+_CPU 작업이 I/O 작업보다 우선순위가 낮아 지속적인 양보가 발생하게 되면 CPU 작업처리에
+진전이 없을 여지를 방지하기 위해 I/O 작업들을 묶어 진행할 수 있도록 하는 것은
+리엑트v18에서 제공하는 [Automatic Batching](https://github.com/reactwg/react-18/discussions/21)
+의 기저에 있는 동작 방식이라 생각합니다._
+
+Task Prioritization이 표현되는 각각의 레인이 가지고 있는
+비트 값이 우선순위를 나타내고 있으며, 레인의 이름을 통해
+어떠한 업데이트가 소유할 수 있는 레인인지 파악할 수 있습니다.
+레인 정의 사이에 Task Betching에 사용되는 레인들도 보이네요.
+
+- _**SyncLane**, 이산적인(discrete) 사용자 상호 작용에 대한 업데이트_
+- _**InputContinuousLane**, 연속적인(continuous) 사용자 상호 작용에 대한 업데이트_
+- _**DefaultLane**, setTimeout, 네트워크 요청 등에 의해 생성된 업데이트_
+- _**TransitionLane**, Suspense, useTransition, useDefferredValue에 의해 생성된 업데이트_
+
+레인 모델이 어떻게 구현되어 있는 지 간단하게 살펴보았다면,
+어떻게 적용되어 사용되는 지 확인해볼 차례입니다.
+리엑트의 레인의 우선 순위 개념은 크게 이벤트, 스케쥴러, 레인 우선순위에
+걸쳐 적용되어 있습니다. 먼저 이벤트 우선순위를 살펴봅시다.
+
+_Lane 모델에 대한 설명은 [deview2021/Inside React (동시성을 구현하는 기술)](https://tv.naver.com/v/23652451)
+과 초기 레인 모델을 구현한 [react/pull/18796](https://github.com/facebook/react/pull/18796)
+PR을 기반으로 작성하였습니다. 추가적인 내용은 레퍼런스를 참고하시면 좋습니다._
+
+### 이벤트 우선순위
+
+리엑트는 사용자 인터렉션에 의해 발생된 이벤트를 인위적으로 구분지은
+기준으로 우선순위를 결정짓는데, 크게 두 종류로 이벤트가 구분지어 루트에
+바인딩될 때 어느 범주에 속한 이벤트인지에 따라 우선 순위가 부여됩니다.
+
+- _이산적인 이벤트 (e.g. click, keydown, focusin, ..)_
+- _연속적인 이벤트 (e.g. drag, pointermove, scroll, ..)_
+
+```js
+// react-reconciler/src/ReactEventPriority.new.js
+
+export const DiscreteEventPriority: EventPriority = SyncLane;
+export const ContinuousEventPriority: EventPriority = InputContinuousLane;
+export const DefaultEventPriority: EventPriority = DefaultLane;
+export const IdleEventPriority: EventPriority = IdleLane;
+```
+
+```js
+// react-dom/src/events/ReactDOMEventListener.js 
+
+export function getEventPriority(domEventName: DOMEventName): * {
+  switch (domEventName) {
+    case 'cancel':
+    case 'click':
+    case 'close':
+    case 'contextmenu':
+    ...
+      return DiscreteEventPriority;
+    case 'drag':
+    case 'dragenter':
+    case 'dragexit':
+    case 'dragleave':
+    ...
+      return ContinuousEventPriority;
+    case 'message': {
+      const schedulerPriority = getCurrentSchedulerPriorityLevel();
+      switch (schedulerPriority) {
+        case ImmediateSchedulerPriority:
+          return DiscreteEventPriority;
+        case UserBlockingSchedulerPriority:
+          return ContinuousEventPriority;
+        ...
+      }
+    }
+    default:
+      return DefaultEventPriority;
+  }
+}
+```
+
+_여기서 'message' 이벤트는 따로 처리해주는 것을 확인할 수 있는데, 협력적 스케쥴링 모델을
+사용하고, 정확한 스케쥴링 타임을 위해 리엑트 스케쥴러에서는 MessageChannel API를 기반으로
+구현되어 있습니다. 따라서 'message' 이벤트가 스케쥴러 콜백일 수 있기 때문에
+'message' 이벤트에 대해서는 네이티브 스케쥴러에 대한 현재 우선 순위를 확인하여 반환합니다._
+
+이벤트의 우선순위를 통해 우선순위가 래핑되어 있는 각각의 이벤트에 대한 이벤트 리스너를 구합니다.
+
+```js
+// react-dom/src/events/ReactDOMEventListener.js
+
+export function createEventListenerWrapperWithPriority(
+  targetContainer: EventTarget,
+  domEventName: DOMEventName,
+  eventSystemFlags: EventSystemFlags,
+): Function {
+  const eventPriority = getEventPriority(domEventName);
+  let listenerWrapper;
+  switch (eventPriority) {
+    case DiscreteEventPriority:
+      listenerWrapper = dispatchDiscreteEvent;
+      break;
+    case ContinuousEventPriority:
+      listenerWrapper = dispatchContinuousEvent;
+      break;
+    case DefaultEventPriority:
+    default:
+      listenerWrapper = dispatchEvent;
+      break;
+  }
+  return listenerWrapper.bind(
+    null,
+    domEventName,
+    eventSystemFlags,
+    targetContainer,
+  );
+}
+```
+
+이후 함수가 호출되는 곳을 따라 올라가보면, 결국 createRoot() 에서
+리엑트17 이후 버전의 [이벤트 위임 메커니즘](https://ko.reactjs.org/blog/2020/08/10/react-v17-rc.html#changes-to-event-delegation)
+에 입각하여, 우선 순위가 래핑된 이벤트 리스너들이 모두 루트에 바인딩되게 됩니다.
+
+```js
+// react-dom/src/client/ReactDOMRoot.js
+
+export function createRoot(
+  container: Element | Document | DocumentFragment,
+  options?: CreateRootOptions,
+): RootType {
+  ...
+  const root = createContainer(
+    ...
+  );
+  markContainerAsRoot(root.current, container);
+
+  const rootContainerElement: Document | Element | DocumentFragment =
+    container.nodeType === COMMENT_NODE
+      ? (container.parentNode: any)
+      : container;
+  listenToAllSupportedEvents(rootContainerElement);
+
+  return new ReactDOMRoot(root);
+}
+```
+
+### 스케쥴러 우선순위
+
+스케쥴러 우선순위는 이벤트에 대한 업데이트 작업의 우선순위로
+이해할 수 있습니다. 결국, 이벤트 우선순위를 기반으로 합니다.
+가령 이벤트를 통해 setState를 통해 부가적인 상태 업데이트가
+디스패치되면, 업데이트를 위한 객체를 생성하기 이전 requestUpdateLane()
+이 호출됩니다.
+
+```js
+// react-reconciler/src/ReactFiberHooks.new.js
+
+function dispatchSetState<S, A>(
+  fiber: Fiber,
+  queue: UpdateQueue<S, A>,
+  action: A,
+) {
+  ...
+
+  const lane = requestUpdateLane(fiber);
+
+  const update: Update<S, A> = {
+    lane,
+    action,
+    hasEagerState: false,
+    eagerState: null,
+    next: (null: any),
+  };
+
+  ...
+}
+```
+
 ## 동시성 구현을 위한 메커니즘; 양보
 
 브라우저는 랜더링 엔진에게 메인 스레드 점유를 위임하게 되면,
@@ -86,8 +333,6 @@ keypress 이벤트에 대한 처리가 지연되고 있음을 경고 플래그�
 리엑트는 이러한 근본적인 원인을 해결하고자 **모든 랜더링을 인터럽트 가능하도록 하여
 우선순위가 높은 작업이 텍스크 스택에 들어오면 진행중이던 작업을 중단하고 메인 스레드에게
 점유를 양보(yield)할 수 있는 메커니즘을 구현하게 됩니다.**
-
-(텍스크를 잘개 쪼개는 것에 대한 구현체는 어디있을까?)
 
 ![When the user's input comes in, rendering is interrupted](./images/react-concurrent-mode/interruption-and-yield.png)
 
@@ -327,139 +572,7 @@ function renderRootConcurrent(root: FiberRoot, lanes: Lanes) {
   }
 ```
 
-## 동시성 구현을 위한 메커니즘; 우선 순위
-
-중단과 양보의 메커니즘에서 우선 순위라는 키워드가 자주 등장합니다.
-사용자 인터렉션이 이벤트를 통해 전달되고, 이에 대한 업데이트가
-필요한데, 각각의 이벤트에 따른 업데이트를 위한 작업은 서로 다른 우선 순위를 가지고 있습니다.
-즉, 업데이트를 진행하기 위한 작업을 생성하고 각각의 작업의 우선순위를
-부여하여 우선순위를 기준으로 스케쥴러에 의해 작업의 교통 정리가 이루어 집니다.
-
-리엑트에서는 사용자 중심의 성능 모델 측면에서 이벤트에 대한 우선순위를
-인위적으로 구분짓고, 작업 별 우선 순위를 부여하고 스케쥴링까지 진행되는
-일련의 메커니즘이 구현되어 있는데요. 먼저, 리엑트에서 이벤트에 대한 우선순위를
-어떻게 구분짓는 지 확인해봅시다.
-
-### 이벤트 우선순위
-
-리엑트는 사용자 인터렉션에 의해 발생된 이벤트의 긴급 정도를
-기준으로 우선순위를 결정짓는데, 크게 두 종류로 이벤트가 구분되고
-루트로 이벤트를 등록할 때 어느 범주에 속한 이벤트인지에 따라
-우선 순위가 부여됩니다.
-
-- 이산적인(discrete) 이벤트 (e.g. click, keydown, focusin, ..)
-- 연속적인(continuous) 이벤트 (e.g. drag, pointermove, scroll, ..)
-
-<pre>
-<a href="https://github.com/facebook/react/blob/main/packages/react-dom/src/events/ReactDOMEventListener.js#L410">react-dom/src/events/ReactDOMEventListener.js</a>
-</pre>
-
-```js
-export function getEventPriority(domEventName: DOMEventName): * {
-  switch (domEventName) {
-    case 'cancel':
-    case 'click':
-    case 'close':
-    case 'contextmenu':
-    ...
-      return DiscreteEventPriority;
-    case 'drag':
-    case 'dragenter':
-    case 'dragexit':
-    case 'dragleave':
-      return ContinuousEventPriority;
-    case 'message': {
-      const schedulerPriority = getCurrentSchedulerPriorityLevel();
-      switch (schedulerPriority) {
-        case ImmediateSchedulerPriority:
-          return DiscreteEventPriority;
-        case UserBlockingSchedulerPriority:
-          return ContinuousEventPriority;
-        ...
-      }
-    }
-    default:
-      return DefaultEventPriority;
-  }
-}
-```
-
-_여기서 'message' 이벤트는 따로 처리해주는 것을 확인할 수 있는데, 협력적 스케쥴링 모델을
-사용하고, 정확한 스케쥴링 타임을 위해 리엑트 스케쥴러에서는 MessageChannel API를 기반으로
-구현되어 있습니다. 따라서 'message' 이벤트가 스케쥴러 콜백일 수 있기 때문에
-'message' 이벤트에 대해서는 네이티브 스케쥴러에 대한 현재 우선 순위를 확인하여 반환합니다._
-
-getEventPriority() 를 통해 얻어진 이벤트 우선 순위에 따른 각각의 이벤트 리스너를 반환하는
-createEventListenerWrapperWithPriority()에서 사용됩니다.
-
-<pre>
-<a href="https://github.com/facebook/react/blob/main/packages/react-dom/src/events/ReactDOMEventListener.js#L86">react-dom/src/events/ReactDOMEventListener.js</a>
-</pre>
-
-```js
-export function createEventListenerWrapperWithPriority(
-  targetContainer: EventTarget,
-  domEventName: DOMEventName,
-  eventSystemFlags: EventSystemFlags,
-): Function {
-  const eventPriority = getEventPriority(domEventName);
-  let listenerWrapper;
-  switch (eventPriority) {
-    case DiscreteEventPriority:
-      listenerWrapper = dispatchDiscreteEvent;
-      break;
-    case ContinuousEventPriority:
-      listenerWrapper = dispatchContinuousEvent;
-      break;
-    case DefaultEventPriority:
-    default:
-      listenerWrapper = dispatchEvent;
-      break;
-  }
-  return listenerWrapper.bind(
-    null,
-    domEventName,
-    eventSystemFlags,
-    targetContainer,
-  );
-}
-```
-
-함수가 호출되는 곳을 따라 올라가다보면, 결국 createRoot() 에서
-리엑트17 이후 버전의 [이벤트 위임 메커니즘](https://ko.reactjs.org/blog/2020/08/10/react-v17-rc.html#changes-to-event-delegation)에 입각하여, 우선 순위가 부여된
-이벤트 처리를 위한 이벤트 리스너들이 모두 루트에 바인딩되게 됩니다.
-
-<pre>
-<a href="https://github.com/facebook/react/blob/main/packages/react-dom/src/client/ReactDOMRoot.js#L166">react-dom/src/client/ReactDOMRoot.js</a>
-</pre>
-
-```js
-export function createRoot(
-  container: Element | Document | DocumentFragment,
-  options?: CreateRootOptions,
-): RootType {
-  ...
-  const root = createContainer(
-    ...
-  );
-  markContainerAsRoot(root.current, container);
-
-  const rootContainerElement: Document | Element | DocumentFragment =
-    container.nodeType === COMMENT_NODE
-      ? (container.parentNode: any)
-      : container;
-  listenToAllSupportedEvents(rootContainerElement);
-
-  return new ReactDOMRoot(root);
-}
-```
-
-리엑트18 이전에서는 작업의 [만료 시간을 기준으로 우선순위를 부여](https://github.com/facebook/react/blob/v16.12.0/packages/react-reconciler/src/ReactFiberExpirationTime.js)하는 메커니즘으로 구현되어 있었습니다. 반면, 리엑트18 버전에서는 만료 시간에서 Lane 모델을 착안하여
-[비트 연산을 기반으로 우선 순위를 부여](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberLane.new.js)하는 방식으로 구현되었습니다.
-리엑트의 초기 Lane 모델을 구현한 [PR](https://github.com/facebook/react/pull/18796)
-에서 이를 확인할 수 있습니다.
-
-### Lane
+<!-- ### Lane
 
 ## 동시성 구현을 위한 메커니즘; 이벤트 루프 중단
 
@@ -479,7 +592,7 @@ export function createRoot(
 
 ### 남은 작업이 있으면 schedulePerformWorkUntilDeadline 호출
 
-### workLoopConcurrent는 주어진 시간만큼 작업 처리
+### workLoopConcurrent는 주어진 시간만큼 작업 처리 -->
 
 <!-- 지금까지 알아본 양보를 구현하기 위한 메커니즘은 중단을 발생시키기 위한
 플래그로서 사용됩니다. 양보가 필요한지에 대한 판단을 통해 어떻게
