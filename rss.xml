@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Youthfulhps.dev]]></title><description><![CDATA[Blog posted front-end, troubleshooting!]]></description><link>https://youthfulhps.dev</link><generator>GatsbyJS</generator><lastBuildDate>Tue, 19 Jul 2022 09:40:29 GMT</lastBuildDate><item><title><![CDATA[타입스크립트, 글로 배웠습니다만]]></title><description><![CDATA[개인적으로 타입스크립트는 실무에서 사용하면서 익히기 시작해서
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Youthfulhps.dev]]></title><description><![CDATA[Blog posted front-end, troubleshooting!]]></description><link>https://youthfulhps.dev</link><generator>GatsbyJS</generator><lastBuildDate>Wed, 20 Jul 2022 09:27:46 GMT</lastBuildDate><item><title><![CDATA[타입스크립트, 글로 배웠습니다만]]></title><description><![CDATA[개인적으로 타입스크립트는 실무에서 사용하면서 익히기 시작해서
 약…]]></description><link>https://youthfulhps.dev/typescript/typescript-essentials-you-should-know/</link><guid isPermaLink="false">https://youthfulhps.dev/typescript/typescript-essentials-you-should-know/</guid><pubDate>Tue, 14 Jun 2022 10:06:39 GMT</pubDate><content:encoded>&lt;p&gt;&lt;span
       class=&quot;gatsby-resp-image-wrapper&quot;
       style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 864px; &quot;
@@ -842,18 +842,21 @@ any를 사용하면 타입 체커가 무력화됩니다.&lt;/p&gt;
 &lt;p&gt;Dan VanderKam. 『&lt;a href=&quot;https://effectivetypescript.com/&quot;&gt;effective typescript&lt;/a&gt;』&lt;/p&gt;
 &lt;p&gt;&lt;a href=&quot;https://github.com/danvk/effective-typescript&quot;&gt;danvk/effective-typescript&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href=&quot;https://toss.tech/article/template-literal-types&quot;&gt;Template Literal Types로 타입 안전하게 코딩하기&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;https://engineering.linecorp.com/ko/blog/typescript-enum-tree-shaking/&quot;&gt;TypeScript enum을 사용하지 않는 게 좋은 이유를 Tree-shaking 관점에서 소개합니다.&lt;/a&gt;&lt;/p&gt;</content:encoded></item><item><title><![CDATA[react-concurrent-mode]]></title><description><![CDATA[리엑트팀에서 Async Rendering
-을 시작으로 5년이 지나 드디어 react18에서 동시성 기능이 정식으로 출시되었습니다. 기능적으로 많은 성능 향상을 이루었는데, ‘Automatic batching for fewer renders’,
-‘SSR…]]></description><link>https://youthfulhps.dev/react/react-concurrent-mode/</link><guid isPermaLink="false">https://youthfulhps.dev/react/react-concurrent-mode/</guid><pubDate>Sat, 11 Jun 2022 16:07:02 GMT</pubDate><content:encoded>&lt;p&gt;리엑트팀에서 &lt;a href=&quot;https://ko.reactjs.org/blog/2018/03/27/update-on-async-rendering.html&quot;&gt;Async Rendering&lt;/a&gt;
-을 시작으로 5년이 지나 드디어 react18에서 동시성 기능이 정식으로 출시되었습니다.&lt;/p&gt;
-&lt;p&gt;기능적으로 많은 성능 향상을 이루었는데, ‘Automatic batching for fewer renders’,
-‘SSR support for Suspense’, ‘Fixes for Suspense behavior quirks’와 같이
-코드 수정없이 내부적으로 성능 향상을 이루었고, 동시성을 제공하는 startTransition,
-useDeferredValue, &lt;SuspenseList&gt;, ‘Streaming SSR with selective hydration’과
-같은 기능들이 추가되었습니다.&lt;/p&gt;
-&lt;p&gt;리엑트는 동시성 랜더링 메커니즘을 담아내기 위해 협력적 멀티태스킹,
-우선순위 기반 랜더링, 스케쥴링, 중단 등과 같은 기능을 담아냈습니다.
-무엇이길래 리엑트팀이 5년동안 붙잡았을까 라는?&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://engineering.linecorp.com/ko/blog/typescript-enum-tree-shaking/&quot;&gt;TypeScript enum을 사용하지 않는 게 좋은 이유를 Tree-shaking 관점에서 소개합니다.&lt;/a&gt;&lt;/p&gt;</content:encoded></item><item><title><![CDATA[react-concurrent-mode]]></title><description><![CDATA[리엑트v18에서 동시성 기능을 정식으로 출시하였습니다.
+대표적으로, Automatic batching for fewer renders,
+SSR support for Suspense, Fixes for Suspense behavior quirks…]]></description><link>https://youthfulhps.dev/react/react-concurrent-mode/</link><guid isPermaLink="false">https://youthfulhps.dev/react/react-concurrent-mode/</guid><pubDate>Sat, 11 Jun 2022 16:07:02 GMT</pubDate><content:encoded>&lt;p&gt;리엑트v18에서 동시성 기능을 정식으로 출시하였습니다.
+대표적으로, &lt;em&gt;Automatic batching for fewer renders&lt;/em&gt;,
+&lt;em&gt;SSR support for Suspense&lt;/em&gt;, &lt;em&gt;Fixes for Suspense behavior quirks&lt;/em&gt;
+와 같은 내부적인 성능 향상을 이루었고, &lt;em&gt;startTransition&lt;/em&gt;,
+&lt;em&gt;useDeferredValue&lt;/em&gt;, &lt;em&gt;SuspenseList&lt;/em&gt;, &lt;em&gt;Streaming SSR with selective hydration&lt;/em&gt;
+과 같은 기능들이 추가되었습니다.&lt;/p&gt;
+&lt;p&gt;리엑트v18에는 동시성 랜더링 기능을 담아내기 위해
+협력적 멀티테스킹, 우선순위 기반 랜더링, 스케쥴링, 중단과 같은
+메커니즘을 구현하였습니다. 기저에 있는 아키텍처를 수정해야 했던 만큼
+5년이라는 시간동안 많은 시행착오를 겪었을 텐데요.&lt;/p&gt;
+&lt;p&gt;이 글을 적게 된 계기는 &lt;em&gt;‘도대체, 동시성이 무엇이길래 리엑트팀에서 5년이라는
+시간을 쏟았으며, 동시성을 위한 메커니즘들의 구현체들이 어떻게 구현되어 있을 까?
+’&lt;/em&gt; 라는 단순 호기심이었습니다.&lt;/p&gt;
 &lt;h2 id=&quot;concurrent-vs-parallelism&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#concurrent-vs-parallelism&quot; aria-label=&quot;concurrent vs parallelism permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Concurrent vs Parallelism&lt;/h2&gt;
 &lt;p&gt;동시성을 설명할 때, 서로 관련있는 병렬성과 함께 설명하곤 합니다.
 하지만, 이 둘은 뚜렷한 차이를 가지고 있으며
@@ -917,14 +920,13 @@ Go 언어의 창시자의 &lt;a href=&quot;https://go.dev/blog/waza-talk&quot;&g
         loading=&quot;lazy&quot;
       /&gt;
     &lt;/span&gt;&lt;/p&gt;
-&lt;h2 id=&quot;동시성을-통해-해결하려는-문제&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EB%8F%99%EC%8B%9C%EC%84%B1%EC%9D%84-%ED%86%B5%ED%95%B4-%ED%95%B4%EA%B2%B0%ED%95%98%EB%A0%A4%EB%8A%94-%EB%AC%B8%EC%A0%9C&quot; aria-label=&quot;동시성을 통해 해결하려는 문제 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;동시성을 통해 해결하려는 문제&lt;/h2&gt;
+&lt;h2 id=&quot;동시성을-통해-해결하고자-하는-문제&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EB%8F%99%EC%8B%9C%EC%84%B1%EC%9D%84-%ED%86%B5%ED%95%B4-%ED%95%B4%EA%B2%B0%ED%95%98%EA%B3%A0%EC%9E%90-%ED%95%98%EB%8A%94-%EB%AC%B8%EC%A0%9C&quot; aria-label=&quot;동시성을 통해 해결하고자 하는 문제 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;동시성을 통해 해결하고자 하는 문제&lt;/h2&gt;
 &lt;p&gt;HCI에 대한 연구 결과가 실제 UI와 통합되도록 돕는 것
 화면 간 전환에서 로딩 중 상태를 너무 많이 표시하면 UX 품질이 낮아짐
 빠르게 처리되기 기대하는 상호작용과 느려도 문제없는 상호작용
 동시성 모드의 목적은 HCI 연구 결과를 추상화하고 구현할 수 있는 방법을 제공하는 것이다.&lt;/p&gt;
 &lt;p&gt;브라우저는 HTML을 파싱하고, 자바스크립트를 실행하며 랜더트리를 구축하고
-그려내는 작업까지 단일 스레드로서 한번에 하나의 작업만을
-수행합니다.&lt;/p&gt;
+그려내는 작업까지 단일 스레드로서 한번에 하나의 작업만을 수행합니다.&lt;/p&gt;
 &lt;p&gt;때문에 가령 메인 스레드가 자바스크립트 엔진에게 실행권을 위임하여
 자바스크립트 파싱을 시작했다면 그 작업을 멈출 수 없으며,
 작업이 완료될 때까지 이후의 작업을 전개할 수 없습니다.
