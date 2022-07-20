@@ -3,21 +3,24 @@ title: react-concurrent-mode
 date: 2022-06-11 16:06:62
 category: react
 thumbnail: { thumbnailSrc }
-draft: true
+draft: false
 ---
 
-리엑트팀에서 [Async Rendering](https://ko.reactjs.org/blog/2018/03/27/update-on-async-rendering.html)
-을 시작으로 5년이 지나 드디어 react18에서 동시성 기능이 정식으로 출시되었습니다.
+리엑트v18에서 동시성 기능을 정식으로 출시하였습니다.
+대표적으로, _Automatic batching for fewer renders_,
+_SSR support for Suspense_, _Fixes for Suspense behavior quirks_
+와 같은 내부적인 성능 향상을 이루었고, _startTransition_,
+_useDeferredValue_, _SuspenseList_, _Streaming SSR with selective hydration_
+과 같은 기능들이 추가되었습니다.
 
-기능적으로 많은 성능 향상을 이루었는데, 'Automatic batching for fewer renders',
-'SSR support for Suspense', 'Fixes for Suspense behavior quirks'와 같이
-코드 수정없이 내부적으로 성능 향상을 이루었고, 동시성을 제공하는 startTransition,
-useDeferredValue, <SuspenseList>, 'Streaming SSR with selective hydration'과
-같은 기능들이 추가되었습니다.
+리엑트v18에는 동시성 랜더링 기능을 담아내기 위해
+협력적 멀티테스킹, 우선순위 기반 랜더링, 스케쥴링, 중단과 같은
+메커니즘을 구현하였습니다. 기저에 있는 아키텍처를 수정해야 했던 만큼
+5년이라는 시간동안 많은 시행착오를 겪었을 텐데요.
 
-리엑트는 동시성 랜더링 메커니즘을 담아내기 위해 협력적 멀티태스킹,
-우선순위 기반 랜더링, 스케쥴링, 중단 등과 같은 기능을 담아냈습니다.
-무엇이길래 리엑트팀이 5년동안 붙잡았을까 라는?
+이 글을 적게 된 계기는 _'도대체, 동시성이 무엇이길래 리엑트팀에서 5년이라는
+시간을 쏟았으며, 동시성을 위한 메커니즘들의 구현체들이 어떻게 구현되어 있을 까?
+'_ 라는 단순 호기심이었습니다.
 
 ## Concurrent vs Parallelism
 
@@ -50,7 +53,7 @@ _'**동시성은 독립적으로 실행되는 프로세스들의 조합이다.**
 
 ![Concurrent task processing](./images/react-concurrent-mode/concurrent-process.png)
 
-## 동시성을 통해 해결하려는 문제
+## 동시성을 통해 해결하고자 하는 문제
 
 HCI에 대한 연구 결과가 실제 UI와 통합되도록 돕는 것
 화면 간 전환에서 로딩 중 상태를 너무 많이 표시하면 UX 품질이 낮아짐
@@ -58,8 +61,7 @@ HCI에 대한 연구 결과가 실제 UI와 통합되도록 돕는 것
 동시성 모드의 목적은 HCI 연구 결과를 추상화하고 구현할 수 있는 방법을 제공하는 것이다.
 
 브라우저는 HTML을 파싱하고, 자바스크립트를 실행하며 랜더트리를 구축하고
-그려내는 작업까지 단일 스레드로서 한번에 하나의 작업만을
-수행합니다.
+그려내는 작업까지 단일 스레드로서 한번에 하나의 작업만을 수행합니다.
 
 때문에 가령 메인 스레드가 자바스크립트 엔진에게 실행권을 위임하여
 자바스크립트 파싱을 시작했다면 그 작업을 멈출 수 없으며,
