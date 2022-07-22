@@ -13,7 +13,7 @@ draft: true
 이러한 작업 단계의 블로커를 최소한으로 하고, 클라이언트도 API 개발과 함께 병렬적으로
 진행될 수 있도록 스펙 기반 개발을 적극적으로 도입해서 개발 환경 개선을 위해 노력하고 있습니다.
 
-![thumbnail](./images/benefits-specification-driven-development/thumbnail.png)
+![A man with an awkwardly raised hand](./images/benefits-specification-driven-development/thumbnail.png)
 
 ## 스펙 설계 참여하기
 
@@ -36,9 +36,7 @@ draft: true
 
 누락되거나 변경될 여지가 있는 필드가 있는 지 충분히 이야기 나누어야 했습니다.
 
-## API 함수와 인터페이스 자동 생성 (w/ openapi-generator)
-
-_본 섹션에서 진행하는 과정은 [데모](https://github.com/youthfulhps/react-typescript-openapi-generator)에서 확인할 수 있습니다._
+## API 함수와 인터페이스 자동 생성
 
 실무에서 V2 API가 등장하게 되었습니다. 새로운 API 함수와 관련 인터페이스들을
 다수 새롭게 정의했어야 했는데, 번거롭고 휴먼에러가 발생할 여지가 많은 작업인 만큼
@@ -47,36 +45,46 @@ _본 섹션에서 진행하는 과정은 [데모](https://github.com/youthfulhps
 작업이기도 했는데요.
 
 세션에서 소개하는 [openapi-generator](https://github.com/OpenAPITools/openapi-generator)
-는 API 명세서를 기준으로 API 함수와 인터페이스들을 자동으로 작성해주는 생성기들을 제공합니다.
+는 API 명세서를 기준으로 API 함수와 인터페이스들을 자동으로 정의해주는 생성기들을 제공합니다.
+간단하게 설치를 진행하고 설정 파일을 추가해서 데모를 진행해봅시다.
 
-설치와 사용 방법 또한 간단합니다. 패키지를 설치하고 프로젝트 환경에 적합한 생성기를
-선택해서 API 명세서를 입력으로 건네주면 됩니다.
+_openapi-generator는 jvm 환경에서 동작하기 때문에,
+로컬에 java sdk가 설치되어 있어야 커멘드 가능합니다._
 
 ```shell
 ~$ yarn add @openapitools/openapi-generator-cli -g
-~$ openapi-generator-cli generate -i {yaml or json file} -g {generator name} -o {file path to be created} --config {config file}
 ```
 
-서빙되어 있는 API 명세서의 경로를 입력으로 고정해두면 API가 개발되는 동시에
-업데이트된 API 명세서를 통해 업데이트된 API 함수들과 인터페이스들을 취할 수 있습니다.
+```json
+// openapi.json
+
+{
+  "modelPackage": "src/model",
+  "apiPackage": "src/api",
+  "withSeparateModelsAndApi": true,
+}
+```
+
+이후 서빙되어 있는 API 명세서의 주소를 입력으로 고정해두면 API가 업데이트됨에
+따라 스크립트를 통해 업데이트된 API와 인터페이스들을 취할 수 있게 됩니다.
 
 ```json
 // package.json
+
 "script": {
   "generate-interface": "openapi-generator-cli generate -i https://.../openapi.json
 }
 ```
 
-![output](./images/benefits-specification-driven-development/openapi-output.png)
+```shell
+~$ yarn generate-interface
+```
 
-API 함수들과 인터페이스들이 자동으로 생성된 산출물입니다.
+API 함수와 인터페이스 정의 자동화를 통해 휴먼에러를 최소화하고 비즈니스 로직에
+집중할 수 있게 해주고 또한, 스펙을 기준으로 백엔드단과 소통할 수 있는 환경을
+이끌 수 있습니다.
 
-타입스크립트에서 API 함수를 정의할 때 타이핑양이 상당히 많아지고, 응답 객체의 인
-터페이스 또한 정확하게 정의해주어야 하는데요. 여기에 사용되는 리소스 또한 비지니
-스 작업에집중할 수 있게 도와줍니다.
-
-또한, 작업 과정에서 휴면에러가 발생할 여지를 최소화 해주어 API 스펙 기반의 타입
-세이프한 개발이 가능하도록 도와줍니다.
+_생성된 결과물은 [데모](https://github.com/youthfulhps-tutorial/react-typescript-openapi-generator)에서 확인하실 수 있습니다._
 
 ## Mocking를 통한 병렬적인 개발 생산성 챙기기
 
