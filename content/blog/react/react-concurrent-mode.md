@@ -3,7 +3,7 @@ title: react-concurrent-mode
 date: 2022-06-11 16:06:62
 category: react
 thumbnail: { thumbnailSrc }
-draft: false
+draft: true
 ---
 
 리엑트v18에서 동시성 기능을 정식으로 출시하였습니다.
