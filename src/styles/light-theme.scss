@@ -43,6 +43,18 @@ body.light {
     }
   }
 
+  .post-container {
+    a {
+      color: hsla(0, 0%, 0%, 0.8);
+      text-decoration: underline;
+      text-decoration-color: $text-decoration-color;
+
+      &:hover {
+        text-decoration: none;
+      }
+    }
+  }
+
   .thumbnail {
     h3 {
       color: $dark-gray;

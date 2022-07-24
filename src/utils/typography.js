@@ -1,13 +1,12 @@
-import Typography from 'typography'
-import GitHubTheme from 'typography-theme-github'
+import Typography from 'typography';
+import GitHubTheme from 'typography-theme-github';
 
 GitHubTheme.overrideThemeStyles = () => {
   return {
     a: {
       boxShadow: `none`,
-      textDecoration: `none`,
-      color: `#0687f0`,
     },
+
     'a.gatsby-resp-image-link': {
       boxShadow: `none`,
       textDecoration: `none`,
@@ -46,17 +45,17 @@ GitHubTheme.overrideThemeStyles = () => {
 
     p: {
       fontFamily: 'Pretendard',
-    }
-  }
-}
+    },
+  };
+};
 
-const typography = new Typography(GitHubTheme)
+const typography = new Typography(GitHubTheme);
 
 // Hot reload typography in development.
 if (process.env.NODE_ENV !== `production`) {
-  typography.injectStyles()
+  typography.injectStyles();
 }
 
-export default typography
-export const rhythm = typography.rhythm
-export const scale = typography.scale
+export default typography;
+export const rhythm = typography.rhythm;
+export const scale = typography.scale;
