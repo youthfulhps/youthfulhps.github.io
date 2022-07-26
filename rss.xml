@@ -1,4 +1,92 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Youthfulhps.dev]]></title><description><![CDATA[Blog posted front-end, troubleshooting!]]></description><link>https://youthfulhps.dev</link><generator>GatsbyJS</generator><lastBuildDate>Sun, 24 Jul 2022 12:56:53 GMT</lastBuildDate><item><title><![CDATA[타입스크립트, 글로 배웠습니다만]]></title><description><![CDATA[개인적으로 타입스크립트는 실무에서 사용하면서 익히기 시작해서
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Youthfulhps.dev]]></title><description><![CDATA[Blog posted front-end, troubleshooting!]]></description><link>https://youthfulhps.dev</link><generator>GatsbyJS</generator><lastBuildDate>Tue, 26 Jul 2022 23:47:01 GMT</lastBuildDate><item><title><![CDATA[react-testing]]></title><description><![CDATA[현재 파이브스팟 모바일 웹을 가꾸어 나가고 있습니다. 빠르게 출시하기 위해
+동작하는 프러덕션을 배포하고, 피드백을 취합해서 다음 페이스를 위한 기능적인 살과
+뼈대를 붙여나가고 있는 작업이 한창입니다. Deliver usable products to…]]></description><link>https://youthfulhps.dev/react/react-testing/</link><guid isPermaLink="false">https://youthfulhps.dev/react/react-testing/</guid><pubDate>Mon, 25 Jul 2022 11:07:43 GMT</pubDate><content:encoded>&lt;p&gt;현재 파이브스팟 모바일 웹을 가꾸어 나가고 있습니다. 빠르게 출시하기 위해
+동작하는 프러덕션을 배포하고, 피드백을 취합해서 다음 페이스를 위한 기능적인 살과
+뼈대를 붙여나가고 있는 작업이 한창입니다.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://deming.org/wp-content/uploads/2020/06/minimal-viable-product-henrik-kniberg.png&quot; alt=&quot;Deliver usable products to allow learning to take place&quot;&gt;
+&lt;em&gt;&lt;a href=&quot;https://deming.org/minimal-viable-product&quot;&gt;이미지 출처&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;프러덕션을 가꾸어 나가면서 문뜩 테스트 코드의 필요성을 느끼기 시작했는데요.
+단순히 ‘테스트 코드에 대한 경험이 부족해서..좀 짜봐야 하지 않을 까?’ 라는 동기로
+구색 갖추기에 급급한 기준 없는 테스트를 하고자 했다면, 오히려 테스트
+코드 작성이 작업 진행에 방해가 될 거라는 건 당연했습니다.&lt;/p&gt;
+&lt;p&gt;그렇기 때문에, 스스로 납득할 수 있고 팀원분들의 공감을 얻을 수 있는 적합한 이유가
+등장할 때까지 고민하고 기다렸었는데요. 최근 테스트 코드에 대한 갈증을 느끼면서
+그 이유가 허접하지 않기를 바라며 적합한 이유인지 직시하고자 정리해두려 합니다.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;테스트 코드는 필요하다라는 것을 입증하는 좋은 레퍼런스들은 정말 많습니다.
+다만, 저가 처해있는 환경에서 테스트 코드는 왜 필요하고, 어떤 역할을 할 수
+있을 지에 대한 고민을 담았습니다.&lt;/em&gt;&lt;/p&gt;
+&lt;h2 id=&quot;왜-테스트-코드가-필요하다고-느꼈을-까&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EC%99%9C-%ED%85%8C%EC%8A%A4%ED%8A%B8-%EC%BD%94%EB%93%9C%EA%B0%80-%ED%95%84%EC%9A%94%ED%95%98%EB%8B%A4%EA%B3%A0-%EB%8A%90%EA%BC%88%EC%9D%84-%EA%B9%8C&quot; aria-label=&quot;왜 테스트 코드가 필요하다고 느꼈을 까 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;왜 테스트 코드가 필요하다고 느꼈을 까&lt;/h2&gt;
+&lt;p&gt;최근 리팩토링, 그리고 V2 API로 마이그레이션하면서 동시에,
+새로운 기능을 개발하는 상당히 빠른 변화를 만들어나가고 있습니다.
+그 과정에서 가장 큰 걱정거리는 레거시 기능의 히스토리를 찾고, 기능을 유지한채로
+내부 코드 품질을 높이는 데 집중해야 한다는 점이었습니다.&lt;/p&gt;
+&lt;p&gt;사실, 몇몇 히스토리가 분산되어 있어 구두로 공유되거나 코드와 주석을 찾아봐야
+알 수 있는 히스토리도 분명 있었기 때문에, 다음 페이스를 위해서라도 기획 관련
+히스토리가 그럴싸한 명목하에 작성이 강요되는 구실이 필요했습니다.
+그렇지 않으면, 작성과 동시에 레거시가 되는 새로 작성된 코드도 분명
+히스토리가 남지 않아 동일한 이슈로 골치 아플겁니다.&lt;/p&gt;
+&lt;h3 id=&quot;테스트-코드에-기획-히스토리를-남기자&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%ED%85%8C%EC%8A%A4%ED%8A%B8-%EC%BD%94%EB%93%9C%EC%97%90-%EA%B8%B0%ED%9A%8D-%ED%9E%88%EC%8A%A4%ED%86%A0%EB%A6%AC%EB%A5%BC-%EB%82%A8%EA%B8%B0%EC%9E%90&quot; aria-label=&quot;테스트 코드에 기획 히스토리를 남기자 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;테스트 코드에 기획 히스토리를 남기자&lt;/h3&gt;
+&lt;p&gt;사실 피그마와 같은 기획 도구들에 얼마든지 쌓아나가면 됩니다. 다만
+병렬적으로 코드 레벨에서도 기획 히스토리를 테스트 코드를 통해
+기록을 남겨 부수효과를 얻을 수 있겠다 싶었습니다.&lt;/p&gt;
+&lt;p&gt;가령 깃헙 프로필 UI 기획 명세서가 다음과 같이 작성되어 있다면,
+주요 기획내용을 그대로 테스트 describe에 담아낼 수 있습니다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;프로필 섹션은 유저 정보를 확인할 수 있다.
+1. 유저의 이름과 아이디를 확인할 수 있다.
+2. 유저의 팔로워와 팔로잉 수를 확인할 수 있다.
+3. 유저의 소속 회사, 지역, 이메일, 대표 링크를 확인할 수 있다.
+...&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token function&quot;&gt;describe&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;프로필 섹션에서 유저 정보를 확인할 수 있다.&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token function&quot;&gt;it&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;유저의 이름과 아이디를 확인할 수 있다.&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;...&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+  &lt;span class=&quot;token function&quot;&gt;it&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;유저의 팔로워와 팔로잉 수를 확인할 수 있다.&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;...&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+  &lt;span class=&quot;token function&quot;&gt;it&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;유저의 소속 회사, 지역, 이메일, 대표 링크를 확인할 수 있다.&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;...&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;만약, 기획이 변경된다면 테스트 코드의 설명 또한 변경이 되겠고,
+결국 기획 히스토리 또한 수정 사항에 남게 됩니다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token function&quot;&gt;describe&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;프로필 섹션에서 유저 정보를 확인할 수 있다.&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token function&quot;&gt;it&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;유저의 이름과 아이디를 확인할 수 있다.&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;...&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+  &lt;span class=&quot;token comment&quot;&gt;//it(&quot;유저의 팔로워와 팔로잉 수를 확인할 수 있다.&quot;, () =&gt; { ... });&lt;/span&gt;
+  &lt;span class=&quot;token function&quot;&gt;it&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;유저의 팔로워와 팔로잉 수는 일정 수가 넘으면 &apos;여러 명&apos;으로 표기된다.&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;...&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+
+  &lt;span class=&quot;token function&quot;&gt;it&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;유저의 소속 회사, 지역, 이메일, 대표 링크를 확인할 수 있다.&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;...&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;물론, 관점에 따라 test 보다는 spec에 가까운 테스트 코드이지만,
+어떤 테스트를 해야할 지 감을 못잡겠다면, 명확한 기획 목적을 테스트 주제로
+삼는 것도 좋은 방법입니다.&lt;/p&gt;
+&lt;h3 id=&quot;작업자에게-책임을-부여하고-리뷰어의-짐을-덜자&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EC%9E%91%EC%97%85%EC%9E%90%EC%97%90%EA%B2%8C-%EC%B1%85%EC%9E%84%EC%9D%84-%EB%B6%80%EC%97%AC%ED%95%98%EA%B3%A0-%EB%A6%AC%EB%B7%B0%EC%96%B4%EC%9D%98-%EC%A7%90%EC%9D%84-%EB%8D%9C%EC%9E%90&quot; aria-label=&quot;작업자에게 책임을 부여하고 리뷰어의 짐을 덜자 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;작업자에게 책임을 부여하고 리뷰어의 짐을 덜자&lt;/h3&gt;
+&lt;p&gt;코드 리뷰는 특정 기능 개발을 하는 데 있어 코드 품질을 관리하고,
+작업자가 생각하지 못한 설계의 개선점을 언급해주는 용도로서 사용되어야
+한다고 생각하는데, 코드 리뷰의 역할이 그 이상 넘어가게 되면 슬슬
+리뷰어에게 부담으로 다가오게 됩니다.&lt;/p&gt;
+&lt;p&gt;가령 특정 기능이 동작하는 지에 대한 QA와 예외적인 상황에 대해 고민하는
+시간이 늘어나게 되면 코드 리뷰의 병목을 야기하게 되는데,
+이러한 책임을 리뷰어가 담당하게 되면, 리뷰를 받는 작업자는 어쩌면
+이후 발생할 수 있는 이슈에 대해 책임을 분할했다는 괘씸한 생각을 할 수도
+있습니다.&lt;/p&gt;
+&lt;p&gt;작업자는 작업에 대한 책임을 온전히 짊어져야 하고, 테스트 코드로서
+얼마만큼의 책임을 지고 있는 지에 대해 표현해야 합니다.
+여기서 부족한 테스트 케이스에 대해 짚어주는 것 정도가 리뷰어의 역할입니다.&lt;/p&gt;
+&lt;h3 id=&quot;안정적인-리팩토링의-잣대&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EC%95%88%EC%A0%95%EC%A0%81%EC%9D%B8-%EB%A6%AC%ED%8C%A9%ED%86%A0%EB%A7%81%EC%9D%98-%EC%9E%A3%EB%8C%80&quot; aria-label=&quot;안정적인 리팩토링의 잣대 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;안정적인 리팩토링의 잣대&lt;/h3&gt;
+&lt;p&gt;리팩토링하거나, API를 갈아 끼워야 할 때 레거시와 동일한 기능을 유지하기 위해
+심혈을 기울입니다. 레거시와 같은 화면을 보여주는 지, 값의 전처리는
+잘 이루어지는 지 등에 대한 QA에 많은 시간을 보내곤 하는데요.
+그러다보면 레거시가 미워질 때 있고, 히스토리가 명확하지 않아 얄궂게 느껴지기도 합니다.&lt;/p&gt;
+&lt;p&gt;테스트 코드는 이러한 상황에서 빛을 바랍니다. 여기서 리팩토링을 통해 코드의 퀄리티가
+개선되었다는 관점과는 별개로, 테스트 코드는 테스트 타겟의 반환값이 명시한 값과
+일치하는 지만을 판단합니다. 때문에 테스트에 성공한다면 타겟 영역의 동작들은
+레거시와 동일하다고 판단할 수 있는 지표가 되어 줍니다.&lt;/p&gt;
+&lt;h3 id=&quot;코드-분리의-잣대&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EC%BD%94%EB%93%9C-%EB%B6%84%EB%A6%AC%EC%9D%98-%EC%9E%A3%EB%8C%80&quot; aria-label=&quot;코드 분리의 잣대 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;코드 분리의 잣대&lt;/h3&gt;
+&lt;p&gt;&lt;em&gt;테스트 함수마다 한 개념만 테스트하라&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;함수는 하나의 일만 담당하고 그 일을 잘하도록 구현해야 한다는 클린 코드의 규칙은
+익히 들어왔습니다. 하지만 실상 함수를 작성하다보면, 하나의 일만 담으려 하지만
+사이드 이펙트를 온전하게 제거하기란 쉽지 않은데요.&lt;/p&gt;
+&lt;p&gt;이럴 때 테스트 코드의 describe로 함수의 역할을 구분짓고 함수를 구현하는
+TDD 방식으로 작성하면 기준을 명확히 세우는 데 큰 도움이 됩니다.
+반대로 함수를 작성하고 테스트 코드를 작성하면 어떻게 테스트해야 할 지 막막해집니다.&lt;/p&gt;
+&lt;h2 id=&quot;무슨-테스트를-해야-할-까&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EB%AC%B4%EC%8A%A8-%ED%85%8C%EC%8A%A4%ED%8A%B8%EB%A5%BC-%ED%95%B4%EC%95%BC-%ED%95%A0-%EA%B9%8C&quot; aria-label=&quot;무슨 테스트를 해야 할 까 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;무슨 테스트를 해야 할 까?&lt;/h2&gt;</content:encoded></item><item><title><![CDATA[타입스크립트, 글로 배웠습니다만]]></title><description><![CDATA[개인적으로 타입스크립트는 실무에서 사용하면서 익히기 시작해서
 약…]]></description><link>https://youthfulhps.dev/typescript/typescript-essentials-you-should-know/</link><guid isPermaLink="false">https://youthfulhps.dev/typescript/typescript-essentials-you-should-know/</guid><pubDate>Tue, 14 Jun 2022 10:06:39 GMT</pubDate><content:encoded>&lt;p&gt;&lt;span
       class=&quot;gatsby-resp-image-wrapper&quot;
       style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 864px; &quot;
@@ -920,20 +1008,27 @@ Go 언어의 창시자의 &lt;a href=&quot;https://go.dev/blog/waza-talk&quot;&g
         loading=&quot;lazy&quot;
       /&gt;
     &lt;/span&gt;&lt;/p&gt;
-&lt;h2 id=&quot;동시성을-통해-해결하고자-하는-문제&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EB%8F%99%EC%8B%9C%EC%84%B1%EC%9D%84-%ED%86%B5%ED%95%B4-%ED%95%B4%EA%B2%B0%ED%95%98%EA%B3%A0%EC%9E%90-%ED%95%98%EB%8A%94-%EB%AC%B8%EC%A0%9C&quot; aria-label=&quot;동시성을 통해 해결하고자 하는 문제 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;동시성을 통해 해결하고자 하는 문제&lt;/h2&gt;
-&lt;p&gt;HCI에 대한 연구 결과가 실제 UI와 통합되도록 돕는 것
-화면 간 전환에서 로딩 중 상태를 너무 많이 표시하면 UX 품질이 낮아짐
-빠르게 처리되기 기대하는 상호작용과 느려도 문제없는 상호작용
-동시성 모드의 목적은 HCI 연구 결과를 추상화하고 구현할 수 있는 방법을 제공하는 것이다.&lt;/p&gt;
-&lt;p&gt;브라우저는 HTML을 파싱하고, 자바스크립트를 실행하며 랜더트리를 구축하고
-그려내는 작업까지 단일 스레드로서 한번에 하나의 작업만을 수행합니다.&lt;/p&gt;
+&lt;h2 id=&quot;리엑트팀은-왜-동시성을-구현하고자-했을-까&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EB%A6%AC%EC%97%91%ED%8A%B8%ED%8C%80%EC%9D%80-%EC%99%9C-%EB%8F%99%EC%8B%9C%EC%84%B1%EC%9D%84-%EA%B5%AC%ED%98%84%ED%95%98%EA%B3%A0%EC%9E%90-%ED%96%88%EC%9D%84-%EA%B9%8C&quot; aria-label=&quot;리엑트팀은 왜 동시성을 구현하고자 했을 까 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;리엑트팀은 왜 동시성을 구현하고자 했을 까?&lt;/h2&gt;
+&lt;p&gt;리엑트는 사용자 인터페이스를 구축하는 라이브러리로서 핵심 역할인 인터렉션에
+대한 업데이트 과정과 사용자 경험에 대한 HCI 연구 결과를 반영하고 궁극적으로
+기술적으로 결합하는 목표를 가지고 있습니다. 사람과 컴퓨터간의 인터렉션에
+대한 연구 결과들을 추상화해서 리엑트 코어의 개선 목표로 삼고 이를
+구현합니다.&lt;/p&gt;
+&lt;p&gt;가령, 화면 간 전환에서 로딩 중 상태를 너무 많이 표시하면 UX 품질이
+낮아지는 문제라던지, 빠르게 처리되기를 기대하는 상호작용들과 느려도 문제없는
+상호작용을 구분짓고 이를 적용해서 효과적으로 사용자 인터페이스에 구현할 수 있는
+방법들을 제공하기 위함입니다.&lt;/p&gt;
+&lt;p&gt;조금 더 와닿을 수 있게 우리의 구현체들이 동작하는 브라우저 환경에서
+생각해봅시다. 브라우저는 HTML을 파싱하고, 자바스크립트를 실행하며
+랜더트리를 구축하고 그려내는 작업까지 단일 스레드로서 한번에 하나의
+작업만을 수행합니다.&lt;/p&gt;
 &lt;p&gt;때문에 가령 메인 스레드가 자바스크립트 엔진에게 실행권을 위임하여
 자바스크립트 파싱을 시작했다면 그 작업을 멈출 수 없으며,
 작업이 완료될 때까지 이후의 작업을 전개할 수 없습니다.
 리엑트 랜더링 연산 과정도 동일한 절차를 거치게 되며,
 이 때 매우 무거운 랜더링 연산 과정이 시작되면 이후의 작업들이 다소
 긴 시간 동안 대기 상태가 되는 블로킹 랜더링이 발생합니다.&lt;/p&gt;
-&lt;p&gt;재조정(reconciliation)을 위한 리엑트의 비교 알고리즘은 매우 최적화되어 있어
+&lt;p&gt;재조정을 위한 리엑트의 비교 알고리즘은 매우 최적화되어 있어
 블로킹되는 이슈가 자주 발생하지 않아 공감하기 어려울 수 있지만,
 &lt;a href=&quot;https://ajaxlab.github.io/deview2021/blocking&quot;&gt;deview2021/blocking&lt;/a&gt;
 데모처럼 입력값에 대한 픽셀 박스를 랜더링하는 연산이 무거워짐에 따라
@@ -988,10 +1083,7 @@ keypress 이벤트에 대한 처리가 지연되고 있음을 경고 플래그�
 동작과 응답 사이의 연결이 지연되고 있음을 인식하게 되며, 이는 사용자 경험의 감점으로
 이어질 수 있습니다.&lt;/p&gt;
 &lt;h2 id=&quot;동시성-구현을-위한-메커니즘-우선-순위&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EB%8F%99%EC%8B%9C%EC%84%B1-%EA%B5%AC%ED%98%84%EC%9D%84-%EC%9C%84%ED%95%9C-%EB%A9%94%EC%BB%A4%EB%8B%88%EC%A6%98-%EC%9A%B0%EC%84%A0-%EC%88%9C%EC%9C%84&quot; aria-label=&quot;동시성 구현을 위한 메커니즘 우선 순위 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;동시성 구현을 위한 메커니즘; 우선 순위&lt;/h2&gt;
-&lt;p&gt;리엑트는 사용자 인터페이스를 구축하는 라이브러리로서
-핵심 역할인 인터렉션에 대한 업데이트 과정과 사용자 경험에 대한 연구 결과를
-반영하고 궁극적으로 기술적으로 결합하는 목표를 가지고 있습니다.
-그 기반이 되는 메커니즘 중 하나는 우선순위입니다.&lt;/p&gt;
+&lt;p&gt;리엑트에서 동시성을 구현하는 첫번 째 메커니즘은 바로 우선순위입니다.&lt;/p&gt;
 &lt;p&gt;우선순위 메커니즘은 업데이트 전반에 걸쳐 적용되어 있습니다.
 사용자 인터렉션이 이벤트를 통해 전달되면 이에 대한 업데이트가
 필요한데, 리엑트는 사용자 중심의 성능 모델 측면에서 이벤트에 대한
@@ -1007,7 +1099,7 @@ keypress 이벤트에 대한 처리가 지연되고 있음을 경고 플래그�
 이야기하기 전에 Lane 모델에 대해서 살펴봅시다.&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;만료 시간을 사용하지 않고, Lane 모델을 사용하게 된 이유에 대해서는
 &lt;a href=&quot;https://github.com/facebook/react/pull/18796&quot;&gt;react/pull/18796&lt;/a&gt;에 설명되어 있습니다.&lt;/em&gt;&lt;/p&gt;
-&lt;h3 id=&quot;lane-모델&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#lane-%EB%AA%A8%EB%8D%B8&quot; aria-label=&quot;lane 모델 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Lane 모델&lt;/h3&gt;
+&lt;h3 id=&quot;lane-모델-그리고-lane-우선순위&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#lane-%EB%AA%A8%EB%8D%B8-%EA%B7%B8%EB%A6%AC%EA%B3%A0-lane-%EC%9A%B0%EC%84%A0%EC%88%9C%EC%9C%84&quot; aria-label=&quot;lane 모델 그리고 lane 우선순위 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Lane 모델, 그리고 Lane 우선순위&lt;/h3&gt;
 &lt;p&gt;Lane 모델은 도로의 차선을 모티브로 하여 리엑트에서 작업의 우선순위를
 표현하기 위해 사용됩니다. 스케쥴링 및 조정 작업 과정에서 매우 중요하게
 사용되는 개념입니다. 작업을 나타내는 32비트 데이터로 표현된
@@ -1048,11 +1140,11 @@ I/O 작업을 다른 그룹으로 분리하여 CPU 작업의 병목을 방지하
 &lt;p&gt;&lt;em&gt;CPU 작업이 I/O 작업보다 우선순위가 낮아 지속적인 양보가 발생하게 되면 CPU 작업처리에
 진전이 없을 여지를 방지하기 위해 I/O 작업들을 묶어 진행할 수 있도록 하는 것은
 리엑트v18에서 제공하는 &lt;a href=&quot;https://github.com/reactwg/react-18/discussions/21&quot;&gt;Automatic Batching&lt;/a&gt;
-의 기저에 있는 동작 방식이라 생각합니다.&lt;/em&gt;&lt;/p&gt;
+의 기저에 있는 동작 방식인듯 합니다. 깊이 있게 살펴볼 부분들이 차고 넘치네요.&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;Task Prioritization이 표현되는 각각의 레인이 가지고 있는
 비트 값이 우선순위를 나타내고 있으며, 레인의 이름을 통해
 어떠한 업데이트가 소유할 수 있는 레인인지 파악할 수 있습니다.
-레인 정의 사이에 Task Betching에 사용되는 레인들도 보이네요.&lt;/p&gt;
+레인 정의 사이에 Task Batching에 사용되는 레인들도 보입니다.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;em&gt;&lt;strong&gt;SyncLane&lt;/strong&gt;, 이산적인(discrete) 사용자 상호 작용에 대한 업데이트&lt;/em&gt;&lt;/li&gt;
 &lt;li&gt;&lt;em&gt;&lt;strong&gt;InputContinuousLane&lt;/strong&gt;, 연속적인(continuous) 사용자 상호 작용에 대한 업데이트&lt;/em&gt;&lt;/li&gt;
@@ -1080,7 +1172,7 @@ PR을 기반으로 작성하였습니다. 추가적인 내용은 레퍼런스를
 &lt;span class=&quot;token keyword&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;token literal-property property&quot;&gt;ContinuousEventPriority&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; EventPriority &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; InputContinuousLane&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
 &lt;span class=&quot;token keyword&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;token literal-property property&quot;&gt;DefaultEventPriority&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; EventPriority &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; DefaultLane&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
 &lt;span class=&quot;token keyword&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;token literal-property property&quot;&gt;IdleEventPriority&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; EventPriority &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; IdleLane&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;// react-dom/src/events/ReactDOMEventListener.js &lt;/span&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;// react-dom/src/events/ReactDOMEventListener.js&lt;/span&gt;
 
 &lt;span class=&quot;token keyword&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;getEventPriority&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;&lt;span class=&quot;token literal-property property&quot;&gt;domEventName&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; DOMEventName&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
   &lt;span class=&quot;token keyword&quot;&gt;switch&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;domEventName&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
@@ -1120,7 +1212,7 @@ PR을 기반으로 작성하였습니다. 추가적인 내용은 레퍼런스를
 &lt;span class=&quot;token keyword&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;createEventListenerWrapperWithPriority&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;
   &lt;span class=&quot;token parameter&quot;&gt;&lt;span class=&quot;token literal-property property&quot;&gt;targetContainer&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; EventTarget&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
   &lt;span class=&quot;token literal-property property&quot;&gt;domEventName&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; DOMEventName&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
-  &lt;span class=&quot;token literal-property property&quot;&gt;eventSystemFlags&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; EventSystemFlags&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;&lt;/span&gt;
+  &lt;span class=&quot;token literal-property property&quot;&gt;eventSystemFlags&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; EventSystemFlags&lt;/span&gt;
 &lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; Function &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
   &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; eventPriority &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;getEventPriority&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;domEventName&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
   &lt;span class=&quot;token keyword&quot;&gt;let&lt;/span&gt; listenerWrapper&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
@@ -1140,7 +1232,7 @@ PR을 기반으로 작성하였습니다. 추가적인 내용은 레퍼런스를
     &lt;span class=&quot;token keyword&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
     domEventName&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
     eventSystemFlags&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
-    targetContainer&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    targetContainer
   &lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
 &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;이후 함수가 호출되는 곳을 따라 올라가보면, 결국 createRoot() 에서
