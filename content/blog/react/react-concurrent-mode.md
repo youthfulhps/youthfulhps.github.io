@@ -53,15 +53,23 @@ _'**동시성은 독립적으로 실행되는 프로세스들의 조합이다.**
 
 ![Concurrent task processing](./images/react-concurrent-mode/concurrent-process.png)
 
-## 동시성을 통해 해결하고자 하는 문제
+## 리엑트팀은 왜 동시성을 구현하고자 했을 까?
 
-HCI에 대한 연구 결과가 실제 UI와 통합되도록 돕는 것
-화면 간 전환에서 로딩 중 상태를 너무 많이 표시하면 UX 품질이 낮아짐
-빠르게 처리되기 기대하는 상호작용과 느려도 문제없는 상호작용
-동시성 모드의 목적은 HCI 연구 결과를 추상화하고 구현할 수 있는 방법을 제공하는 것이다.
+리엑트는 사용자 인터페이스를 구축하는 라이브러리로서 핵심 역할인 인터렉션에
+대한 업데이트 과정과 사용자 경험에 대한 HCI 연구 결과를 반영하고 궁극적으로
+기술적으로 결합하는 목표를 가지고 있습니다. 사람과 컴퓨터간의 인터렉션에
+대한 연구 결과들을 추상화해서 리엑트 코어의 개선 목표로 삼고 이를
+구현합니다.
 
-브라우저는 HTML을 파싱하고, 자바스크립트를 실행하며 랜더트리를 구축하고
-그려내는 작업까지 단일 스레드로서 한번에 하나의 작업만을 수행합니다.
+가령, 화면 간 전환에서 로딩 중 상태를 너무 많이 표시하면 UX 품질이
+낮아지는 문제라던지, 빠르게 처리되기를 기대하는 상호작용들과 느려도 문제없는
+상호작용을 구분짓고 이를 적용해서 효과적으로 사용자 인터페이스에 구현할 수 있는
+방법들을 제공하기 위함입니다.
+
+조금 더 와닿을 수 있게 우리의 구현체들이 동작하는 브라우저 환경에서
+생각해봅시다. 브라우저는 HTML을 파싱하고, 자바스크립트를 실행하며
+랜더트리를 구축하고 그려내는 작업까지 단일 스레드로서 한번에 하나의
+작업만을 수행합니다.
 
 때문에 가령 메인 스레드가 자바스크립트 엔진에게 실행권을 위임하여
 자바스크립트 파싱을 시작했다면 그 작업을 멈출 수 없으며,
@@ -70,7 +78,7 @@ HCI에 대한 연구 결과가 실제 UI와 통합되도록 돕는 것
 이 때 매우 무거운 랜더링 연산 과정이 시작되면 이후의 작업들이 다소
 긴 시간 동안 대기 상태가 되는 블로킹 랜더링이 발생합니다.
 
-재조정(reconciliation)을 위한 리엑트의 비교 알고리즘은 매우 최적화되어 있어
+재조정을 위한 리엑트의 비교 알고리즘은 매우 최적화되어 있어
 블로킹되는 이슈가 자주 발생하지 않아 공감하기 어려울 수 있지만,
 [deview2021/blocking](https://ajaxlab.github.io/deview2021/blocking)
 데모처럼 입력값에 대한 픽셀 박스를 랜더링하는 연산이 무거워짐에 따라
@@ -88,10 +96,7 @@ keypress 이벤트에 대한 처리가 지연되고 있음을 경고 플래그�
 
 ## 동시성 구현을 위한 메커니즘; 우선 순위
 
-리엑트는 사용자 인터페이스를 구축하는 라이브러리로서
-핵심 역할인 인터렉션에 대한 업데이트 과정과 사용자 경험에 대한 연구 결과를
-반영하고 궁극적으로 기술적으로 결합하는 목표를 가지고 있습니다.
-그 기반이 되는 메커니즘 중 하나는 우선순위입니다.
+리엑트에서 동시성을 구현하는 첫번 째 메커니즘은 바로 우선순위입니다.
 
 우선순위 메커니즘은 업데이트 전반에 걸쳐 적용되어 있습니다.
 사용자 인터렉션이 이벤트를 통해 전달되면 이에 대한 업데이트가
@@ -112,7 +117,7 @@ keypress 이벤트에 대한 처리가 지연되고 있음을 경고 플래그�
 _만료 시간을 사용하지 않고, Lane 모델을 사용하게 된 이유에 대해서는
 [react/pull/18796](https://github.com/facebook/react/pull/18796)에 설명되어 있습니다._
 
-### Lane 모델
+### Lane 모델, 그리고 Lane 우선순위
 
 Lane 모델은 도로의 차선을 모티브로 하여 리엑트에서 작업의 우선순위를
 표현하기 위해 사용됩니다. 스케쥴링 및 조정 작업 과정에서 매우 중요하게
@@ -159,12 +164,12 @@ I/O 작업을 다른 그룹으로 분리하여 CPU 작업의 병목을 방지하
 _CPU 작업이 I/O 작업보다 우선순위가 낮아 지속적인 양보가 발생하게 되면 CPU 작업처리에
 진전이 없을 여지를 방지하기 위해 I/O 작업들을 묶어 진행할 수 있도록 하는 것은
 리엑트v18에서 제공하는 [Automatic Batching](https://github.com/reactwg/react-18/discussions/21)
-의 기저에 있는 동작 방식이라 생각합니다._
+의 기저에 있는 동작 방식인듯 합니다. 깊이 있게 살펴볼 부분들이 차고 넘치네요._
 
 Task Prioritization이 표현되는 각각의 레인이 가지고 있는
 비트 값이 우선순위를 나타내고 있으며, 레인의 이름을 통해
 어떠한 업데이트가 소유할 수 있는 레인인지 파악할 수 있습니다.
-레인 정의 사이에 Task Betching에 사용되는 레인들도 보이네요.
+레인 정의 사이에 Task Batching에 사용되는 레인들도 보입니다.
 
 - _**SyncLane**, 이산적인(discrete) 사용자 상호 작용에 대한 업데이트_
 - _**InputContinuousLane**, 연속적인(continuous) 사용자 상호 작용에 대한 업데이트_
@@ -199,7 +204,7 @@ export const IdleEventPriority: EventPriority = IdleLane;
 ```
 
 ```js
-// react-dom/src/events/ReactDOMEventListener.js 
+// react-dom/src/events/ReactDOMEventListener.js
 
 export function getEventPriority(domEventName: DOMEventName): * {
   switch (domEventName) {
@@ -244,7 +249,7 @@ _여기서 'message' 이벤트는 따로 처리해주는 것을 확인할 수 �
 export function createEventListenerWrapperWithPriority(
   targetContainer: EventTarget,
   domEventName: DOMEventName,
-  eventSystemFlags: EventSystemFlags,
+  eventSystemFlags: EventSystemFlags
 ): Function {
   const eventPriority = getEventPriority(domEventName);
   let listenerWrapper;
@@ -264,7 +269,7 @@ export function createEventListenerWrapperWithPriority(
     null,
     domEventName,
     eventSystemFlags,
-    targetContainer,
+    targetContainer
   );
 }
 ```
