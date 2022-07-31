@@ -156,8 +156,14 @@ export const IdleLane: Lane = /*                        */ 0b0100000000000000000
 export const OffscreenLane: Lane = /*                   */ 0b1000000000000000000000000000000;
 ```
 
+Lane 모델은 우선순위를 두 가지 중요한 컨셉으로 분리합니다.
+
+- _Task Prioritization, A 작업이 B 작업보다 급한가?_
+- _Task Batching, A 작업이 이 그룹 텍스크에 속하는 가?_
+
 Lane 모델은 우선순위에 따른 교통 정리를 위해 'A 작업이 B 작업보다 급한가?' 에 대한
 Task Prioritization, 'A 작업이 이 그룹 텍스크에 속하는가?'에 대한 Task
+<!-- TODO: Lane 모델 설명이 조금 부족함.. -->
 Batching 이라는 두 개념을 착안하여 가령 CPU > I/O > CPU 순의 작업 예약이 있다면,
 I/O 작업을 다른 그룹으로 분리하여 CPU 작업의 병목을 방지하도록 합니다.
 
@@ -202,6 +208,8 @@ export const ContinuousEventPriority: EventPriority = InputContinuousLane;
 export const DefaultEventPriority: EventPriority = DefaultLane;
 export const IdleEventPriority: EventPriority = IdleLane;
 ```
+
+여기서, 이벤트 우선순위의 정량적인 값은 Lane와 매핑되어 있는 것을 확인할 수 있습니다.
 
 ```js
 // react-dom/src/events/ReactDOMEventListener.js
@@ -301,6 +309,9 @@ export function createRoot(
 }
 ```
 
+<!-- TODO: Lanes, Event, Scheduler 우선순위는 모두 
+기저에 Lanes 모델이 있다는 정도로만 설명하면 될 것 같다. -->
+
 ### 스케쥴러 우선순위
 
 스케쥴러 우선순위는 이벤트에 대한 업데이트 작업의 우선순위로
@@ -331,6 +342,325 @@ function dispatchSetState<S, A>(
 
   ...
 }
+```
+
+<!-- TODO: Lane 모델의 적용단계의 함수 플로우를 정리헤야 함-->
+<!-- TODO: ensureRootIsScheduled 함수에 대한 정리가 필요함-->
+### Lane 모델의 적용
+
+클릭 이벤트를 트리거하고, setState를 호출하여 업데이트에
+대한 작업을 생성할 때,
+
+```js
+Component.prototype.setState = function(partialState, callback) {
+  this.updater.enqueueSetState(this, partialState, callback, 'setState');
+};
+```
+
+setState 함수를 호출하여 업데이트를 시작하고 setState는
+내부적으로 enqueueSetState 함수를 호출한다.
+
+```js
+enqueueSetState(inst, payload, callback) {
+    const fiber = getInstance(inst); //현재 컴포넌트에 해당하는 Fiber Node 가져오기
+    const eventTime = requestEventTime(); // 이벤트가 트리거된 시간 가져오기
+    const lane = requestUpdateLane(fiber); // 현재 이벤트에 해당하는 Lane 우선순위 가져오기
+
+    // 업데이트 개체를 만들고, 업데이트해야 하는 컨텐츠를 페이로드에 탑재한다.
+    const update = createUpdate(eventTime, lane); 
+    update.payload = payload;
+    if (callback !== undefined && callback !== null) {
+      update.callback = callback;
+    }
+
+    // 업데이트 대기열에 업데이트 개체 추가
+    enqueueUpdate(fiber, update, lane);
+    const root = scheduleUpdateOnFiber(fiber, lane, eventTime);
+    ...
+}
+```
+
+이후 생성된 업데이트 개체의 이벤트 우선순위를 할당받습니다.
+먼저, 업데이트가 필요한 컴포넌트의 Fiber 객체를 얻고, requestUpdateLane
+함수를 호출하여 현재 이벤트의 우선순위를 가져옵니다. requestUpdateLane
+함수가 어떻게 이벤트 우선 순위를 얻는지 살펴봅시다.
+
+```js
+export function requestUpdateLane(fiber: Fiber): Lane {
+  // 현재 랜더링 모드를 가져옵니다. 동기화 or 동시성 모드
+  const mode = fiber.mode;
+  if ((mode & ConcurrentMode) === NoMode) {
+    // 현재 랜더링 모드가 동시성 모드인지 확인하고, NoMode와
+    // 같다면, 동기 모드로 랜더링합니다.
+    return (SyncLane: Lane);
+  } else if (
+    !deferRenderPhaseUpdateToNextBatch &&
+    (executionContext & RenderContext) !== NoContext &&
+    workInProgressRootRenderLanes !== NoLanes
+  ) {
+    // workInProgressRootRenderLanes는 작업 실행 단계에서 업데이트해야 하는 FiberNode 
+    // 새 업데이트가 작성되었을 때 workInProgressRootRenderLanes가 비어있지 않음은 실행
+    // 중인 작업이 있음을 의미합니다.
+    // 실행 중인 레인이 직접 반환되고, 현재 새 작업이 기존 작업과 일관적으로 업데이트됩니다.
+    return pickArbitraryLane(workInProgressRootRenderLanes);
+  }
+
+  // 현재 이벤트가 Transition 우선 순위라면 전환 우선 순위를 반환
+  // Transition 우선순위의 할당 규칙은
+  // 생성된 작업 A는 Transition의 첫 번째 비트를 할당한다.
+  // TransitionLane1 = 0b0000000000000000000000001000000
+  // 작업 B가 다시 생성되었으므로, A 위치에서 왼쪽으로 한 비트 이동한다.
+  //： TransitionLane2 = 0b0000000000000000000000010000000
+  // 후속 작업은 마지막 숫자에 도달할 때까지 한 번에 하나씩 뒤로 이동한다.
+  // 16비트의 Transition 우선순위가 있다.:                         
+  // TransitionLanes = 0b0000000001111111111111111000000
+  // 모든 비트가 사용되면 첫 번째 비트부터 이벤트 전환 우선 순위가 부여된다.
+  const isTransition = requestCurrentTransition() !== NoTransition;
+  if (isTransition) {
+    if (currentEventTransitionLane === NoLane) {
+      currentEventTransitionLane = claimNextTransitionLane();
+    }
+    return currentEventTransitionLane;
+  }
+
+  // onClick등과 같은 반응의 내부 이벤트에서 트리거된 업데이트 이벤트는 이벤트가
+  // 트리거될 때 현재 이벤트에 대한 우선순위를 설정한다. 이 이벤트는 직접 사용할 수 있다.
+  const updateLane: Lane = (getCurrentUpdatePriority(): any);
+  if (updateLane !== NoLane) {
+    return updateLane;
+  }
+  
+  // 리엑트 외부의 반응 이벤트에 대해서 (e.g. setTimeout) 
+  // 현재 이벤트에 대한 우선순위를 설정한다. 이는 직접 사용할 수 있다.
+  const eventLane: Lane = (getCurrentEventPriority(): any);
+  return eventLane;
+}
+```
+
+동시성 모드가 아닐 때, 먼저 현재 랜더링 모드가 동시 모드인지 확인하고,
+동시 모드가 아닌 경우 동기화 우선 순위가 랜더링에 사용된다.
+
+```js
+if ((mode & ConcurrentMode) === NoMode) {
+    return (SyncLane: Lane);
+} 
+```
+
+동시성 모드일 때는 먼저 현재 실행 중인 작업이 있는 지 확인한다.
+workInProgressRootRenderLanes는 현재 실행 중인 작업의 Lane우선 순위가 담긴다.
+workInProgressRootRenderLanes가 비어 있지 않다면 실행 중인 작업의
+레인이 직접 반환되고 현재 새 작업이 기존 작업과 함께 일괄적으로 업데이트된다.
+
+```js
+if (
+    !deferRenderPhaseUpdateToNextBatch &&
+    (executionContext & RenderContext) !== NoContext &&
+    workInProgressRootRenderLanes !== NoLanes
+  ) {
+    return pickArbitraryLane(workInProgressRootRenderLanes);
+  }
+```
+
+위의 항목이 없으면, 현재 이벤트가 Transition 우선 순위인지 여부를 결정하고,
+맞다면, 전환 우선 순위에서 위치를 할당한다.
+
+전환 우선 순위 할당 규칙은 다음과 같다. 우선 순위를 할당할 때
+전환 우선순위의 맨 오른쪽부터 시작하여 후속 작업이 차례로 왼쪽으로 한 자리
+이동합니다. 마지막 위치가 할당될 때까지 후속 작업은 다음부터 시작된다.
+가장 오른쪽 첫 번째 위치에서 할당을 시작한다.
+
+```js
+TransitionLane1 = 0b0000000000000000000000001000000
+TransitionLane2 = 0b0000000000000000000000010000000
+```
+
+후속 작업은 총 16의 Transition 우선순위와 함께 하나씩 왼쪽으로 이동한다.
+
+```js
+TransitionLanes = 0b0000000001111111111111111000000
+```
+
+전환 우선순위 작업이 아닌 경우 아래를 보면 다음으로 getCurrentUpdatePriority 함수가 호출되는 것을 볼 수 있습니다. 처음에 프로젝트가 처음 렌더링될 때 이벤트가 위임될 것이라고 언급한 것을 기억하십시오. 루트 컨테이너 및 모든 지원되는 이벤트는 우선 순위에 따라 분류되며 이벤트가 발생하면 setCurrentUpdatePriority 함수가 호출되어 현재 이벤트의 우선 순위를 설정합니다. getCurrentUpdatePriority 함수를 호출하면 이벤트가 트리거될 때 설정된 이벤트 우선 순위도 가져옵니다. 획득한 이벤트 우선 순위가 비어 있지 않으면 이벤트의 우선 순위를 직접 반환합니다.
+
+```js
+const updateLane: Lane = (getCurrentUpdatePriority(): any);
+  if (updateLane !== NoLane) {
+    return updateLane;
+  }
+```
+
+이벤트 우선순위가 위에서 발견되지 않으면 getCurrentEventPriority가 호출되어 React의 외부 이벤트의 우선순위를 가져옵니다.예를 들어 setState 메소드는 setTimeout에서 호출됩니다.
+
+마지막으로 찾은 이벤트의 우선 순위를 반환한다.
+
+```js
+const eventLane: Lane = (getCurrentEventPriority(): any);
+return eventLane;
+```
+
+이벤트의 우선순위를 얻은 다음, Lane을 사용하면 어떻게 되는 지 알아봅시다.
+업데이트 객체가 생성되고, 이벤트의 레인이 업데이트 객체에 추가됩니다.
+
+```js
+export function createUpdate(eventTime: number, lane: Lane): Update<*> {
+  const update: Update<*> = {
+    eventTime,
+    lane,
+
+    tag: UpdateState,
+    payload: null,
+    callback: null, // 콜백 setState의 두 번째 매개변수 업데이트
+
+    next: null,
+  };
+  return update;
+}
+```
+
+다음으로 업데이트해야 하는 컨텐츠를 페이로드에 담고,
+업데이트 콜백 함수를 업데이트 개체의 콜백 속성에 담습니다.
+
+```js
+update.payload = payload;
+if (callback !== undefined && callback !== null) {
+  update.callback = callback;
+}
+```
+
+그 다음 현재 컴포넌트에 해당하는 FiberNode의 업데이트 대기열에
+업데이트 개체를 추가한다.
+
+```js
+enqueueUpdate(fiber, update, lane);
+```
+
+그 다음 스케쥴러 작업을 위해 scheduleUpdateOnFiber가 호출된다.
+scheduleUpdateOnFiber가 주로 사용되는 중요한 위치를 살펴보자.
+
+```js
+export function scheduleUpdateOnFiber(
+  fiber: Fiber,
+  lane: Lane,
+  eventTime: number,
+): FiberRoot | null {
+  checkForNestedUpdates();
+  ...
+
+  // 업데이트해야 하는 자식 노드의 레인을 수집하고 부모 Fiber의 자식 Lane을 저장한다.
+  // 현재 FiberNode의 레인을 업데이트하여 현재 노드를 업데이트해야 함을 나타낸다.
+  // 현재 업데이트해야 하는 파이버 노드에서 위로 트래버스하여 루트 노드로 
+  // 트래버스하고 각 파이버 노드에서 childLanes 속성을 업데이트한다.
+  // childLanes 값은 현재 노드 아래 업데이트해야 하는 자식 노드가 있음을 나타낸다.
+  const root = markUpdateLaneFromFiberToRoot(fiber, lane);
+  if (root === null) {
+    return null;
+  }
+
+  // 현재 업데이트해야 하는 레인을 Fiber Root의 pendingLanes 속성에
+  // 추가하여 실행해야 하는 새 업데이트 작업이 있음을 나타낸다.
+  // 현재 레인의 위치를 계산하고 eventTimes에 이벤트 트리거 시간을 추가한다.
+  markRootUpdated(root, lane, eventTime);
+  ...
+
+  ensureRootIsScheduled(root, eventTime);
+  ...
+  return root;
+}
+```
+
+markUpdateLaneFromFiberToRoot가 함수 내에서 호출되는 것을 볼 수 있습니다.이 함수의 주요 기능은 현재 광섬유 노드의 레인을 업데이트하여 현재 노드를 업데이트해야 함을 표시하고 업데이트해야 하는 자식 노드의 레인을 수집하는 것입니다. 업데이트하고 상위 파이버의 childLanes 속성에 저장합니다. 나중에 업데이트할 때 현재 광섬유 노드가 광섬유 노드의 lannes*에 따라 업데이트되어야 하는지 여부와 현재 광섬유의 자식 노드가 childLanes에 따라 업데이트되어야 하는지 여부를 판단합니다. markUpdateLaneFromFiberToRoot가 내부적으로 구현되는 방식을 살펴보겠습니다.
+
+```js
+function markUpdateLaneFromFiberToRoot(
+  sourceFiber: Fiber,
+  lane: Lane,
+): FiberRoot | null {
+  // 현재 노드를 업데이트해야 함을 나타내는 현재 노드의 레인 업데이트
+  // 새로운 텍스크의 레인의 현재 FiberNode에 대한 레인 속성은 현재
+  // FiberNode에 해당하는 대체 노드가 비어 있지 않으면
+  // 업데이트 중임을 의미하고, 레인은 대체에서 동기적으로 업데이트된다.
+  sourceFiber.lanes = mergeLanes(sourceFiber.lanes, lane);
+  let alternate = sourceFiber.alternate;
+  if (alternate !== null) {
+    alternate.lanes = mergeLanes(alternate.lanes, lane);
+  }
+ ...
+
+  // 현재 업데이트가 필요한 FiberNode에서 루트 광섬유 노드까지 순회하고
+  // 각 광섬유 노드의 childLanes를 업데이트한다.
+  // 미래에 childLanes는 현재 FiberNode 아래에 업데이트해야 하는
+  // 자식 노드가 있는지 확인하는 데 사용된다.
+
+  // 현재 업데이트된 노드에서 Fiber Root Node로 이동하고 각 FiberNode에서
+  // childLanes 속성을 업데이트하여 현재 Fiber 아래 자식노드를 업데이트해야 함을
+  // 나타낸다.
+  let node = sourceFiber;
+  let parent = sourceFiber.return;
+  while (parent !== null) {
+    parent.childLanes = mergeLanes(parent.childLanes, lane);
+    alternate = parent.alternate;
+    if (alternate !== null) {
+      alternate.childLanes = mergeLanes(alternate.childLanes, lane);
+    } else {
+      if (__DEV__) {
+        if ((parent.flags & (Placement | Hydrating)) !== NoFlags) {
+          warnAboutUpdateOnNotYetMountedFiberInDEV(sourceFiber);
+        }
+      }
+    }
+    node = parent;
+    parent = parent.return;
+  }
+
+  // 순회 업데이트가 완료되면 Fiber Root Node가 반환된다.
+  if (node.tag === HostRoot) {
+    const root: FiberRoot = node.stateNode;
+    return root;
+  } else {
+    return null;
+  }
+}
+```
+
+markUpdateLaneFromFiberToRoot가 실행된 후 markRootUpdated 함수가 호출됩니다. 이 함수의 기능은 현재 업데이트된 레인을 Fiber 루트의 pendingLanes 속성에 추가하여 실행할 새 업데이트 작업이 있음을 표시한 다음 기록하는 것입니다. eventTimes 속성의 이벤트 트리거 시간입니다.
+
+updateLane이 0b000100이라고 가정하면, eventTimes에서 다음과 같은 형식이다.
+
+```text
+[-1, -1, 44573.3452, -1， -1...]
+```
+
+```js
+export function markRootUpdated(
+  root: FiberRoot,
+  updateLane: Lane,
+  eventTime: number,
+) {
+  // 将当前需要更新的lane添加到fiber root的pendingLanes属性上
+  root.pendingLanes |= updateLane;
+
+  if (updateLane !== IdleLane) {
+    root.suspendedLanes = NoLanes;
+    root.pingedLanes = NoLanes;
+  }
+
+  // eventTimes는 31비트 바이너리를 사용하는 Lane에
+  // 해당하는 31비트 길이의 배열이다.
+  const eventTimes = root.eventTimes;
+  const index = laneToIndex(updateLane);
+  eventTimes[index] = eventTime;
+}
+```
+
+### ensureRootIsScheduled
+
+markRootUpdated 호출이 완료되면 즉시 ensureRootIsScheduled 함수가 호출되어 작업 예약을 시작할 준비가 됩니다.
+ensureRootIsScheduled는 상대적으로 중요한 기능으로, 우선순위가
+높은 텍스크 큐 삽입 및 택스크 기아 문제, 일괄 업데이트를 처리합니다.
+이 함수가 이러한 문제를 어떻게 처리하는 지 살펴보자.
+
+```js
+
 ```
 
 ## 동시성 구현을 위한 메커니즘; 양보
