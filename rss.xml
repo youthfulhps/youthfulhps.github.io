@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Youthfulhps.dev]]></title><description><![CDATA[Blog posted front-end, troubleshooting!]]></description><link>https://youthfulhps.dev</link><generator>GatsbyJS</generator><lastBuildDate>Mon, 01 Aug 2022 00:49:34 GMT</lastBuildDate><item><title><![CDATA[react-testing]]></title><description><![CDATA[현재 파이브스팟 모바일 웹을 가꾸어 나가고 있습니다. 빠르게 출시하기 위해
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Youthfulhps.dev]]></title><description><![CDATA[Blog posted front-end, troubleshooting!]]></description><link>https://youthfulhps.dev</link><generator>GatsbyJS</generator><lastBuildDate>Mon, 01 Aug 2022 14:19:01 GMT</lastBuildDate><item><title><![CDATA[react-testing]]></title><description><![CDATA[현재 파이브스팟 모바일 웹을 가꾸어 나가고 있습니다. 빠르게 출시하기 위해
 동작하는 프러덕션을 배포하고, 피드백을 취합해서 다음 페이스를 위한 기능적인 살과
 뼈대를 붙여나가고 있는 작업이 한창입니다. Deliver usable products to…]]></description><link>https://youthfulhps.dev/react/react-testing/</link><guid isPermaLink="false">https://youthfulhps.dev/react/react-testing/</guid><pubDate>Mon, 25 Jul 2022 11:07:43 GMT</pubDate><content:encoded>&lt;p&gt;현재 파이브스팟 모바일 웹을 가꾸어 나가고 있습니다. 빠르게 출시하기 위해
 동작하는 프러덕션을 배포하고, 피드백을 취합해서 다음 페이스를 위한 기능적인 살과
@@ -944,7 +944,8 @@ SSR support for Suspense, Fixes for Suspense behavior quirks…]]></description>
 5년이라는 시간동안 많은 시행착오를 겪었을 텐데요.&lt;/p&gt;
 &lt;p&gt;이 글을 적게 된 계기는 &lt;em&gt;‘도대체, 동시성이 무엇이길래 리엑트팀에서 5년이라는
 시간을 쏟았으며, 동시성을 위한 메커니즘들의 구현체들이 어떻게 구현되어 있을 까?
-’&lt;/em&gt; 라는 단순 호기심이었습니다.&lt;/p&gt;
+’&lt;/em&gt; 라는 호기심과 함께, &lt;em&gt;‘리엑트를 사랑하는 개발자로서 최소한의 예의를 보여야 겠다’&lt;/em&gt;
+라는 생각이 들어서 입니다.&lt;/p&gt;
 &lt;h2 id=&quot;concurrent-vs-parallelism&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#concurrent-vs-parallelism&quot; aria-label=&quot;concurrent vs parallelism permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Concurrent vs Parallelism&lt;/h2&gt;
 &lt;p&gt;동시성을 설명할 때, 서로 관련있는 병렬성과 함께 설명하곤 합니다.
 하지만, 이 둘은 뚜렷한 차이를 가지고 있으며
@@ -1008,7 +1009,7 @@ Go 언어의 창시자의 &lt;a href=&quot;https://go.dev/blog/waza-talk&quot;&g
         loading=&quot;lazy&quot;
       /&gt;
     &lt;/span&gt;&lt;/p&gt;
-&lt;h2 id=&quot;리엑트팀은-왜-동시성을-구현하고자-했을-까&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EB%A6%AC%EC%97%91%ED%8A%B8%ED%8C%80%EC%9D%80-%EC%99%9C-%EB%8F%99%EC%8B%9C%EC%84%B1%EC%9D%84-%EA%B5%AC%ED%98%84%ED%95%98%EA%B3%A0%EC%9E%90-%ED%96%88%EC%9D%84-%EA%B9%8C&quot; aria-label=&quot;리엑트팀은 왜 동시성을 구현하고자 했을 까 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;리엑트팀은 왜 동시성을 구현하고자 했을 까?&lt;/h2&gt;
+&lt;h2 id=&quot;리엑트팀은-왜-동시성을-구현하고자-했을-까&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EB%A6%AC%EC%97%91%ED%8A%B8%ED%8C%80%EC%9D%80-%EC%99%9C-%EB%8F%99%EC%8B%9C%EC%84%B1%EC%9D%84-%EA%B5%AC%ED%98%84%ED%95%98%EA%B3%A0%EC%9E%90-%ED%96%88%EC%9D%84-%EA%B9%8C&quot; aria-label=&quot;리엑트팀은 왜 동시성을 구현하고자 했을 까 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;리엑트팀은 왜 동시성을 구현하고자 했을 까&lt;/h2&gt;
 &lt;p&gt;리엑트는 사용자 인터페이스를 구축하는 라이브러리로서 핵심 역할인 인터렉션에
 대한 업데이트 과정과 사용자 경험에 대한 HCI 연구 결과를 반영하고 궁극적으로
 기술적으로 결합하는 목표를 가지고 있습니다. 사람과 컴퓨터간의 인터렉션에
@@ -1091,7 +1092,7 @@ keypress 이벤트에 대한 처리가 지연되고 있음을 경고 플래그�
 &lt;p&gt;즉, 업데이트를 진행하기 위한 각각의 작업의 우선순위를
 부여하여 이를 기준으로 스케쥴러에 의해 작업의 교통 정리가 이루어지기
 위한 일련의 메커니즘과 진행 중인 작업이 우선 순위가 높은 대기 상태의
-작업에 의해 중단될 수 있음을 담고 있습니다.&lt;/p&gt;
+작업에 의해 중단될 수 있음을 담아내고 있습니다.&lt;/p&gt;
 &lt;p&gt;한편, 리엑트v17.0 이전에서는 작업의 &lt;a href=&quot;https://github.com/facebook/react/blob/v16.12.0/packages/react-reconciler/src/ReactFiberExpirationTime.js&quot;&gt;만료 시간을 기준으로 우선순위를 부여&lt;/a&gt;하는 메커니즘으로 구현되어 있었습니다.
 반면, 리엑트v17.0 이후에서는 Lane 모델을 착안하여 비트 연산을
 기반으로 우선 순위를 부여하는 방식으로 변경되는데요.
@@ -1138,10 +1139,9 @@ keypress 이벤트에 대한 처리가 지연되고 있음을 경고 플래그�
 &lt;li&gt;&lt;em&gt;Task Prioritization, A 작업이 B 작업보다 급한가?&lt;/em&gt;&lt;/li&gt;
 &lt;li&gt;&lt;em&gt;Task Batching, A 작업이 이 그룹 텍스크에 속하는 가?&lt;/em&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;Lane 모델은 우선순위에 따른 교통 정리를 위해 ‘A 작업이 B 작업보다 급한가?’ 에 대한
-Task Prioritization, ‘A 작업이 이 그룹 텍스크에 속하는가?‘에 대한 Task&lt;/p&gt;
-&lt;!-- TODO: Lane 모델 설명이 조금 부족함.. --&gt;
-&lt;p&gt;Batching 이라는 두 개념을 착안하여 가령 CPU &gt; I/O &gt; CPU 순의 작업 예약이 있다면,
+&lt;p&gt;Task Prioritization 개념을 통해 작업의 우선순위를 기준으로 작업의
+우선 실행권을 부여하고, Task Batching 이라는 두 개념을 착안하여
+가령 CPU &gt; I/O &gt; CPU 순의 작업 예약이 있다면,
 I/O 작업을 다른 그룹으로 분리하여 CPU 작업의 병목을 방지하도록 합니다.&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;CPU 작업이 I/O 작업보다 우선순위가 낮아 지속적인 양보가 발생하게 되면 CPU 작업처리에
 진전이 없을 여지를 방지하기 위해 I/O 작업들을 묶어 진행할 수 있도록 하는 것은
@@ -1159,8 +1159,8 @@ I/O 작업을 다른 그룹으로 분리하여 CPU 작업의 병목을 방지하
 &lt;/ul&gt;
 &lt;p&gt;레인 모델이 어떻게 구현되어 있는 지 간단하게 살펴보았다면,
 어떻게 적용되어 사용되는 지 확인해볼 차례입니다.
-리엑트의 레인의 우선 순위 개념은 크게 이벤트, 스케쥴러, 레인 우선순위에
-걸쳐 적용되어 있습니다. 먼저 이벤트 우선순위를 살펴봅시다.&lt;/p&gt;
+리엑트에서 Lane 우선 순위 개념은 크게 이벤트, 스케쥴러, 레인 우선순위에
+걸쳐 적용되어 있는데요. 각각 어떻게 스며들어 있는 지 살펴봅시다.&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;Lane 모델에 대한 설명은 &lt;a href=&quot;https://tv.naver.com/v/23652451&quot;&gt;deview2021/Inside React (동시성을 구현하는 기술)&lt;/a&gt;
 과 초기 레인 모델을 구현한 &lt;a href=&quot;https://github.com/facebook/react/pull/18796&quot;&gt;react/pull/18796&lt;/a&gt;
 PR을 기반으로 작성하였습니다. 추가적인 내용은 레퍼런스를 참고하시면 좋습니다.&lt;/em&gt;&lt;/p&gt;
@@ -1178,7 +1178,13 @@ PR을 기반으로 작성하였습니다. 추가적인 내용은 레퍼런스를
 &lt;span class=&quot;token keyword&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;token literal-property property&quot;&gt;ContinuousEventPriority&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; EventPriority &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; InputContinuousLane&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
 &lt;span class=&quot;token keyword&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;token literal-property property&quot;&gt;DefaultEventPriority&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; EventPriority &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; DefaultLane&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
 &lt;span class=&quot;token keyword&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;token literal-property property&quot;&gt;IdleEventPriority&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; EventPriority &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; IdleLane&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;여기서, 이벤트 우선순위의 정량적인 값은 Lane와 매핑되어 있는 것을 확인할 수 있습니다.&lt;/p&gt;
+&lt;p&gt;여기서, 이벤트 우선순위의 정량적인 값들은 31비트로 구성되어 있는 Lane들과 매핑되어
+있는 것을 확인할 수 있습니다.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;그렇다면 이벤트 영역에서 Lane들을 그대로 사용하면 될 것인데, 이벤트 우선순위라는
+변수에 재할당하는 것은 Lane 영역과 이벤트 영역의 의도적인 분리?, 그리고 이벤트들의
+범주가 변해도(가령, click 이벤트가 연속적인 이벤트 범주로 포함된다던지)
+Lane는 변함없이 사용할 수 있도록 하기 위함이 아닌가 감히 추측합니다.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;그리고 각각의 이벤트에 대해 우선순위를 반환하는 함수가 작성되어 있습니다.&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;// react-dom/src/events/ReactDOMEventListener.js&lt;/span&gt;
 
 &lt;span class=&quot;token keyword&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;getEventPriority&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;&lt;span class=&quot;token literal-property property&quot;&gt;domEventName&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; DOMEventName&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
@@ -1213,7 +1219,9 @@ PR을 기반으로 작성하였습니다. 추가적인 내용은 레퍼런스를
 사용하고, 정확한 스케쥴링 타임을 위해 리엑트 스케쥴러에서는 MessageChannel API를 기반으로
 구현되어 있습니다. 따라서 ‘message’ 이벤트가 스케쥴러 콜백일 수 있기 때문에
 ‘message’ 이벤트에 대해서는 네이티브 스케쥴러에 대한 현재 우선 순위를 확인하여 반환합니다.&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;이벤트의 우선순위를 통해 우선순위가 래핑되어 있는 각각의 이벤트에 대한 이벤트 리스너를 구합니다.&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;getEventPriority()&lt;/code&gt; 를 따라 올라가다 보면, 이벤트 우선순위를 구하고
+각각의 이벤트 리스너에 대응되는 이벤트 우선순위를 매핑하여 이를 반환하는 곳에서
+사용됩니다.&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;// react-dom/src/events/ReactDOMEventListener.js&lt;/span&gt;
 
 &lt;span class=&quot;token keyword&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;createEventListenerWrapperWithPriority&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;
@@ -1242,9 +1250,11 @@ PR을 기반으로 작성하였습니다. 추가적인 내용은 레퍼런스를
     targetContainer
   &lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
 &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;이후 함수가 호출되는 곳을 따라 올라가보면, 결국 createRoot() 에서
+&lt;p&gt;이 함수가 호출되는 곳을 따라 올라가보면, 결국 &lt;code class=&quot;language-text&quot;&gt;createRoot()&lt;/code&gt; 에서
 리엑트17 이후 버전의 &lt;a href=&quot;https://ko.reactjs.org/blog/2020/08/10/react-v17-rc.html#changes-to-event-delegation&quot;&gt;이벤트 위임 메커니즘&lt;/a&gt;
 에 입각하여, 우선 순위가 래핑된 이벤트 리스너들이 모두 루트에 바인딩되게 됩니다.&lt;/p&gt;
+&lt;p&gt;이를 통해 사용자 상호 인터렉션에 따라 발생한 이벤트 우선순위는,
+바인딩된 이벤트 리스너를 통해 주입받을 수 있게 됩니다.&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;// react-dom/src/client/ReactDOMRoot.js&lt;/span&gt;
 
 &lt;span class=&quot;token keyword&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;createRoot&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;
@@ -1261,42 +1271,44 @@ PR을 기반으로 작성하였습니다. 추가적인 내용은 레퍼런스를
     container&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;nodeType &lt;span class=&quot;token operator&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;token constant&quot;&gt;COMMENT_NODE&lt;/span&gt;
       &lt;span class=&quot;token operator&quot;&gt;?&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;container&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;parentNode&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; any&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
       &lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; container&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;token function&quot;&gt;listenToAllSupportedEvents&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;rootContainerElement&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;token function&quot;&gt;listenToAllSupportedEvents&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;rootContainerElement&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;//**&lt;/span&gt;
 
   &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;ReactDOMRoot&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;root&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
 &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;!-- TODO: Lanes, Event, Scheduler 우선순위는 모두 
+&lt;!-- TODO: Lanes, Event, Scheduler 우선순위는 모두
 기저에 Lanes 모델이 있다는 정도로만 설명하면 될 것 같다. --&gt;
 &lt;h3 id=&quot;스케쥴러-우선순위&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EC%8A%A4%EC%BC%80%EC%A5%B4%EB%9F%AC-%EC%9A%B0%EC%84%A0%EC%88%9C%EC%9C%84&quot; aria-label=&quot;스케쥴러 우선순위 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;스케쥴러 우선순위&lt;/h3&gt;
-&lt;p&gt;스케쥴러 우선순위는 이벤트에 대한 업데이트 작업의 우선순위로
-이해할 수 있습니다. 결국, 이벤트 우선순위를 기반으로 합니다.
-가령 이벤트를 통해 setState를 통해 부가적인 상태 업데이트가
+&lt;p&gt;위에서 이벤트 우선순위가 Lane 우선순위를 참조하여 정의되고 있음을
+확인했습니다. 마찬가지로 스케쥴러 우선순위는 이벤트 우선순위를
+기반으로 우선순위를 할당합니다.&lt;/p&gt;
+&lt;p&gt;가령 이벤트를 통해 setState를 통해 부가적인 상태 업데이트가
 디스패치되면, 업데이트를 위한 객체를 생성하기 이전 requestUpdateLane()
 이 호출됩니다.&lt;/p&gt;
-&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;// react-reconciler/src/ReactFiberHooks.new.js&lt;/span&gt;
+&lt;!-- ```js
+// react-reconciler/src/ReactFiberHooks.new.js
 
-&lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; dispatchSetState&lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;token constant&quot;&gt;S&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token constant&quot;&gt;A&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;
-  &lt;span class=&quot;token literal-property property&quot;&gt;fiber&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; Fiber&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
-  &lt;span class=&quot;token literal-property property&quot;&gt;queue&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; UpdateQueue&lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;token constant&quot;&gt;S&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token constant&quot;&gt;A&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
-  &lt;span class=&quot;token literal-property property&quot;&gt;action&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token constant&quot;&gt;A&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
-&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;token operator&quot;&gt;...&lt;/span&gt;
+function dispatchSetState&lt;S, A&gt;(
+  fiber: Fiber,
+  queue: UpdateQueue&lt;S, A&gt;,
+  action: A,
+) {
+  ...
 
-  &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; lane &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;requestUpdateLane&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;fiber&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  const lane = requestUpdateLane(fiber);
 
-  &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;token literal-property property&quot;&gt;update&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; Update&lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;token constant&quot;&gt;S&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token constant&quot;&gt;A&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
-    lane&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
-    action&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;token literal-property property&quot;&gt;hasEagerState&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;token literal-property property&quot;&gt;eagerState&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;token literal-property property&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; any&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
-  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  const update: Update&lt;S, A&gt; = {
+    lane,
+    action,
+    hasEagerState: false,
+    eagerState: null,
+    next: (null: any),
+  };
 
-  &lt;span class=&quot;token operator&quot;&gt;...&lt;/span&gt;
-&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+  ...
+}
+``` --&gt;
 &lt;!-- TODO: Lane 모델의 적용단계의 함수 플로우를 정리헤야 함--&gt;
 &lt;!-- TODO: ensureRootIsScheduled 함수에 대한 정리가 필요함--&gt;
-&lt;h3 id=&quot;lane-모델의-적용&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#lane-%EB%AA%A8%EB%8D%B8%EC%9D%98-%EC%A0%81%EC%9A%A9&quot; aria-label=&quot;lane 모델의 적용 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Lane 모델의 적용&lt;/h3&gt;
 &lt;p&gt;클릭 이벤트를 트리거하고, setState를 호출하여 업데이트에
 대한 작업을 생성할 때,&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token class-name&quot;&gt;Component&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;prototype&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function-variable function&quot;&gt;setState&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;partialState&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; callback&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
@@ -1310,7 +1322,7 @@ PR을 기반으로 작성하였습니다. 추가적인 내용은 레퍼런스를
     &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; lane &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;requestUpdateLane&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;fiber&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;// 현재 이벤트에 해당하는 Lane 우선순위 가져오기&lt;/span&gt;
 
     &lt;span class=&quot;token comment&quot;&gt;// 업데이트 개체를 만들고, 업데이트해야 하는 컨텐츠를 페이로드에 탑재한다.&lt;/span&gt;
-    &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; update &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;createUpdate&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;eventTime&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; lane&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt; 
+    &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; update &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;createUpdate&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;eventTime&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; lane&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
     update&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;payload &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; payload&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
     &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;callback &lt;span class=&quot;token operator&quot;&gt;!==&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;undefined&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; callback &lt;span class=&quot;token operator&quot;&gt;!==&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
       update&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;callback &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; callback&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
@@ -1337,7 +1349,7 @@ PR을 기반으로 작성하였습니다. 추가적인 내용은 레퍼런스를
     &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;executionContext &lt;span class=&quot;token operator&quot;&gt;&amp;amp;&lt;/span&gt; RenderContext&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;!==&lt;/span&gt; NoContext &lt;span class=&quot;token operator&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt;
     workInProgressRootRenderLanes &lt;span class=&quot;token operator&quot;&gt;!==&lt;/span&gt; NoLanes
   &lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;token comment&quot;&gt;// workInProgressRootRenderLanes는 작업 실행 단계에서 업데이트해야 하는 FiberNode &lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;// workInProgressRootRenderLanes는 작업 실행 단계에서 업데이트해야 하는 FiberNode&lt;/span&gt;
     &lt;span class=&quot;token comment&quot;&gt;// 새 업데이트가 작성되었을 때 workInProgressRootRenderLanes가 비어있지 않음은 실행&lt;/span&gt;
     &lt;span class=&quot;token comment&quot;&gt;// 중인 작업이 있음을 의미합니다.&lt;/span&gt;
     &lt;span class=&quot;token comment&quot;&gt;// 실행 중인 레인이 직접 반환되고, 현재 새 작업이 기존 작업과 일관적으로 업데이트됩니다.&lt;/span&gt;
@@ -1351,7 +1363,7 @@ PR을 기반으로 작성하였습니다. 추가적인 내용은 레퍼런스를
   &lt;span class=&quot;token comment&quot;&gt;// 작업 B가 다시 생성되었으므로, A 위치에서 왼쪽으로 한 비트 이동한다.&lt;/span&gt;
   &lt;span class=&quot;token comment&quot;&gt;//： TransitionLane2 = 0b0000000000000000000000010000000&lt;/span&gt;
   &lt;span class=&quot;token comment&quot;&gt;// 후속 작업은 마지막 숫자에 도달할 때까지 한 번에 하나씩 뒤로 이동한다.&lt;/span&gt;
-  &lt;span class=&quot;token comment&quot;&gt;// 16비트의 Transition 우선순위가 있다.:                         &lt;/span&gt;
+  &lt;span class=&quot;token comment&quot;&gt;// 16비트의 Transition 우선순위가 있다.:&lt;/span&gt;
   &lt;span class=&quot;token comment&quot;&gt;// TransitionLanes = 0b0000000001111111111111111000000&lt;/span&gt;
   &lt;span class=&quot;token comment&quot;&gt;// 모든 비트가 사용되면 첫 번째 비트부터 이벤트 전환 우선 순위가 부여된다.&lt;/span&gt;
   &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; isTransition &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;requestCurrentTransition&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;!==&lt;/span&gt; NoTransition&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
@@ -1368,8 +1380,8 @@ PR을 기반으로 작성하였습니다. 추가적인 내용은 레퍼런스를
   &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;updateLane &lt;span class=&quot;token operator&quot;&gt;!==&lt;/span&gt; NoLane&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
     &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; updateLane&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
   &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
-  
-  &lt;span class=&quot;token comment&quot;&gt;// 리엑트 외부의 반응 이벤트에 대해서 (e.g. setTimeout) &lt;/span&gt;
+
+  &lt;span class=&quot;token comment&quot;&gt;// 리엑트 외부의 반응 이벤트에 대해서 (e.g. setTimeout)&lt;/span&gt;
   &lt;span class=&quot;token comment&quot;&gt;// 현재 이벤트에 대한 우선순위를 설정한다. 이는 직접 사용할 수 있다.&lt;/span&gt;
   &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;token literal-property property&quot;&gt;eventLane&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; Lane &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;getCurrentEventPriority&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; any&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
   &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; eventLane&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
@@ -1377,34 +1389,34 @@ PR을 기반으로 작성하였습니다. 추가적인 내용은 레퍼런스를
 &lt;p&gt;동시성 모드가 아닐 때, 먼저 현재 랜더링 모드가 동시 모드인지 확인하고,
 동시 모드가 아닌 경우 동기화 우선 순위가 랜더링에 사용된다.&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;mode &lt;span class=&quot;token operator&quot;&gt;&amp;amp;&lt;/span&gt; ConcurrentMode&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;===&lt;/span&gt; NoMode&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;SyncLane&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; Lane&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;SyncLane&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; Lane&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;동시성 모드일 때는 먼저 현재 실행 중인 작업이 있는 지 확인한다.
 workInProgressRootRenderLanes는 현재 실행 중인 작업의 Lane우선 순위가 담긴다.
 workInProgressRootRenderLanes가 비어 있지 않다면 실행 중인 작업의
 레인이 직접 반환되고 현재 새 작업이 기존 작업과 함께 일괄적으로 업데이트된다.&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;
-    &lt;span class=&quot;token operator&quot;&gt;!&lt;/span&gt;deferRenderPhaseUpdateToNextBatch &lt;span class=&quot;token operator&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt;
-    &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;executionContext &lt;span class=&quot;token operator&quot;&gt;&amp;amp;&lt;/span&gt; RenderContext&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;!==&lt;/span&gt; NoContext &lt;span class=&quot;token operator&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt;
-    workInProgressRootRenderLanes &lt;span class=&quot;token operator&quot;&gt;!==&lt;/span&gt; NoLanes
-  &lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;pickArbitraryLane&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;workInProgressRootRenderLanes&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+  &lt;span class=&quot;token operator&quot;&gt;!&lt;/span&gt;deferRenderPhaseUpdateToNextBatch &lt;span class=&quot;token operator&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;executionContext &lt;span class=&quot;token operator&quot;&gt;&amp;amp;&lt;/span&gt; RenderContext&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;!==&lt;/span&gt; NoContext &lt;span class=&quot;token operator&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt;
+  workInProgressRootRenderLanes &lt;span class=&quot;token operator&quot;&gt;!==&lt;/span&gt; NoLanes
+&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;pickArbitraryLane&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;workInProgressRootRenderLanes&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;위의 항목이 없으면, 현재 이벤트가 Transition 우선 순위인지 여부를 결정하고,
 맞다면, 전환 우선 순위에서 위치를 할당한다.&lt;/p&gt;
 &lt;p&gt;전환 우선 순위 할당 규칙은 다음과 같다. 우선 순위를 할당할 때
 전환 우선순위의 맨 오른쪽부터 시작하여 후속 작업이 차례로 왼쪽으로 한 자리
 이동합니다. 마지막 위치가 할당될 때까지 후속 작업은 다음부터 시작된다.
 가장 오른쪽 첫 번째 위치에서 할당을 시작한다.&lt;/p&gt;
-&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;TransitionLane1 &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0b0000000000000000000000001000000&lt;/span&gt;
-TransitionLane2 &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0b0000000000000000000000010000000&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;TransitionLane1 &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0b0000000000000000000000001000000&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+TransitionLane2 &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0b0000000000000000000000010000000&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;후속 작업은 총 16의 Transition 우선순위와 함께 하나씩 왼쪽으로 이동한다.&lt;/p&gt;
-&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;TransitionLanes &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0b0000000001111111111111111000000&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;TransitionLanes &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0b0000000001111111111111111000000&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;전환 우선순위 작업이 아닌 경우 아래를 보면 다음으로 getCurrentUpdatePriority 함수가 호출되는 것을 볼 수 있습니다. 처음에 프로젝트가 처음 렌더링될 때 이벤트가 위임될 것이라고 언급한 것을 기억하십시오. 루트 컨테이너 및 모든 지원되는 이벤트는 우선 순위에 따라 분류되며 이벤트가 발생하면 setCurrentUpdatePriority 함수가 호출되어 현재 이벤트의 우선 순위를 설정합니다. getCurrentUpdatePriority 함수를 호출하면 이벤트가 트리거될 때 설정된 이벤트 우선 순위도 가져옵니다. 획득한 이벤트 우선 순위가 비어 있지 않으면 이벤트의 우선 순위를 직접 반환합니다.&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;token literal-property property&quot;&gt;updateLane&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; Lane &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;getCurrentUpdatePriority&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; any&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;updateLane &lt;span class=&quot;token operator&quot;&gt;!==&lt;/span&gt; NoLane&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; updateLane&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;updateLane &lt;span class=&quot;token operator&quot;&gt;!==&lt;/span&gt; NoLane&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; updateLane&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;이벤트 우선순위가 위에서 발견되지 않으면 getCurrentEventPriority가 호출되어 React의 외부 이벤트의 우선순위를 가져옵니다.예를 들어 setState 메소드는 setTimeout에서 호출됩니다.&lt;/p&gt;
 &lt;p&gt;마지막으로 찾은 이벤트의 우선 순위를 반환한다.&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;token literal-property property&quot;&gt;eventLane&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; Lane &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;getCurrentEventPriority&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; any&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
@@ -1445,7 +1457,7 @@ scheduleUpdateOnFiber가 주로 사용되는 중요한 위치를 살펴보자.&l
 
   &lt;span class=&quot;token comment&quot;&gt;// 업데이트해야 하는 자식 노드의 레인을 수집하고 부모 Fiber의 자식 Lane을 저장한다.&lt;/span&gt;
   &lt;span class=&quot;token comment&quot;&gt;// 현재 FiberNode의 레인을 업데이트하여 현재 노드를 업데이트해야 함을 나타낸다.&lt;/span&gt;
-  &lt;span class=&quot;token comment&quot;&gt;// 현재 업데이트해야 하는 파이버 노드에서 위로 트래버스하여 루트 노드로 &lt;/span&gt;
+  &lt;span class=&quot;token comment&quot;&gt;// 현재 업데이트해야 하는 파이버 노드에서 위로 트래버스하여 루트 노드로&lt;/span&gt;
   &lt;span class=&quot;token comment&quot;&gt;// 트래버스하고 각 파이버 노드에서 childLanes 속성을 업데이트한다.&lt;/span&gt;
   &lt;span class=&quot;token comment&quot;&gt;// childLanes 값은 현재 노드 아래 업데이트해야 하는 자식 노드가 있음을 나타낸다.&lt;/span&gt;
   &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; root &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;markUpdateLaneFromFiberToRoot&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;fiber&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; lane&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
@@ -1519,7 +1531,7 @@ scheduleUpdateOnFiber가 주로 사용되는 중요한 위치를 살펴보자.&l
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;markRootUpdated&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;
   &lt;span class=&quot;token parameter&quot;&gt;&lt;span class=&quot;token literal-property property&quot;&gt;root&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; FiberRoot&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
   &lt;span class=&quot;token literal-property property&quot;&gt;updateLane&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; Lane&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
-  &lt;span class=&quot;token literal-property property&quot;&gt;eventTime&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; number&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;&lt;/span&gt;
+  &lt;span class=&quot;token literal-property property&quot;&gt;eventTime&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; number&lt;/span&gt;
 &lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
   &lt;span class=&quot;token comment&quot;&gt;// 将当前需要更新的lane添加到fiber root的pendingLanes属性上&lt;/span&gt;
   root&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;pendingLanes &lt;span class=&quot;token operator&quot;&gt;|=&lt;/span&gt; updateLane&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
