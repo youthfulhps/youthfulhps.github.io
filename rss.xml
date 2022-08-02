@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Youthfulhps.dev]]></title><description><![CDATA[Blog posted front-end, troubleshooting!]]></description><link>https://youthfulhps.dev</link><generator>GatsbyJS</generator><lastBuildDate>Mon, 01 Aug 2022 14:19:01 GMT</lastBuildDate><item><title><![CDATA[react-testing]]></title><description><![CDATA[현재 파이브스팟 모바일 웹을 가꾸어 나가고 있습니다. 빠르게 출시하기 위해
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Youthfulhps.dev]]></title><description><![CDATA[Blog posted front-end, troubleshooting!]]></description><link>https://youthfulhps.dev</link><generator>GatsbyJS</generator><lastBuildDate>Tue, 02 Aug 2022 01:30:17 GMT</lastBuildDate><item><title><![CDATA[react-testing]]></title><description><![CDATA[현재 파이브스팟 모바일 웹을 가꾸어 나가고 있습니다. 빠르게 출시하기 위해
 동작하는 프러덕션을 배포하고, 피드백을 취합해서 다음 페이스를 위한 기능적인 살과
 뼈대를 붙여나가고 있는 작업이 한창입니다. Deliver usable products to…]]></description><link>https://youthfulhps.dev/react/react-testing/</link><guid isPermaLink="false">https://youthfulhps.dev/react/react-testing/</guid><pubDate>Mon, 25 Jul 2022 11:07:43 GMT</pubDate><content:encoded>&lt;p&gt;현재 파이브스팟 모바일 웹을 가꾸어 나가고 있습니다. 빠르게 출시하기 위해
 동작하는 프러덕션을 배포하고, 피드백을 취합해서 다음 페이스를 위한 기능적인 살과
@@ -3648,10 +3648,11 @@ generator&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span 
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&quot;https://poiemaweb.com/es6-iteration-for-of&quot;&gt;https://poiemaweb.com/es6-iteration-for-of&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;https://poiemaweb.com/es6-generator&quot;&gt;https://poiemaweb.com/es6-generator&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content:encoded></item><item><title><![CDATA[스펙 주도 개발을 통해 클라이언트 개발 환경을 개선하기 위한 노력들]]></title><description><![CDATA[실무에서 클라이언트를 개발 하다보면 작업이 팬딩상태가 되버리는 경우를 자주 경험합니다.
-기획과 API…]]></description><link>https://youthfulhps.dev/development/benefits-specification-driven-development/</link><guid isPermaLink="false">https://youthfulhps.dev/development/benefits-specification-driven-development/</guid><pubDate>Thu, 28 Oct 2021 09:05:28 GMT</pubDate><content:encoded>&lt;p&gt;실무에서 클라이언트를 개발 하다보면 작업이 팬딩상태가 되버리는 경우를 자주 경험합니다.
-기획과 API 개발이 되지 않아 기다리거나, 마이너한 기획의 변경 사항이 발생하는 경우,
-최종산출물을 다루는 프론트엔드 개발 영역에서의 수정사항은 눈덩이처럼 불어납니다.&lt;/p&gt;
+&lt;/ul&gt;</content:encoded></item><item><title><![CDATA[스펙 주도 개발을 통해 클라이언트 개발 환경을 개선하기 위한 노력들]]></title><description><![CDATA[클라이언트 개발을 하다보면 작업이 대기 상태가 되버리는 경우를 자주 경험합니다.
+기획과 API…]]></description><link>https://youthfulhps.dev/development/benefits-specification-driven-development/</link><guid isPermaLink="false">https://youthfulhps.dev/development/benefits-specification-driven-development/</guid><pubDate>Thu, 28 Oct 2021 09:05:28 GMT</pubDate><content:encoded>&lt;p&gt;클라이언트 개발을 하다보면 작업이 대기 상태가 되버리는 경우를 자주 경험합니다.
+기획과 API 개발이 완료되지 않아 기다리거나, 마이너한 기획의 변경 사항이
+발생하는 경우, 최종 산출물을 다루는 클라이언트 개발 영역에서의 수정사항은
+눈덩이처럼 불어납니다.&lt;/p&gt;
 &lt;p&gt;&lt;span
       class=&quot;gatsby-resp-image-wrapper&quot;
       style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 690px; &quot;
