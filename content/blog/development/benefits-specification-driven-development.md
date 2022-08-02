@@ -3,12 +3,13 @@ title: 스펙 주도 개발을 통해 클라이언트 개발 환경을 개선하
 date: 2021-10-28 09:05:28
 category: development
 thumbnail: ./images/benefits-specification-driven-development/thumbnail.png
-draft: false
+draft: true
 ---
 
-실무에서 클라이언트를 개발 하다보면 작업이 팬딩상태가 되버리는 경우를 자주 경험합니다.
-기획과 API 개발이 되지 않아 기다리거나, 마이너한 기획의 변경 사항이 발생하는 경우,
-최종산출물을 다루는 프론트엔드 개발 영역에서의 수정사항은 눈덩이처럼 불어납니다.
+클라이언트 개발을 하다보면 작업이 대기 상태가 되버리는 경우를 자주 경험합니다.
+기획과 API 개발이 완료되지 않아 기다리거나, 마이너한 기획의 변경 사항이
+발생하는 경우, 최종 산출물을 다루는 클라이언트 개발 영역에서의 수정사항은
+눈덩이처럼 불어납니다.
 
 ![A man with an awkwardly raised hand](./images/benefits-specification-driven-development/thumbnail.png)
 
