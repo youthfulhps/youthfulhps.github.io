@@ -107,7 +107,7 @@ keypress 이벤트에 대한 처리가 지연되고 있음을 경고 플래그�
 즉, 업데이트를 진행하기 위한 각각의 작업의 우선순위를
 부여하여 이를 기준으로 스케쥴러에 의해 작업의 교통 정리가 이루어지기
 위한 일련의 메커니즘과 진행 중인 작업이 우선 순위가 높은 대기 상태의
-작업에 의해 중단될 수 있음을 담아내고 있습니다.
+작업에 의해 중단되거나, 일괄 처리될 수 있음을 담아내고 있습니다.
 
 한편, 리엑트v17.0 이전에서는 작업의 [만료 시간을 기준으로 우선순위를 부여](https://github.com/facebook/react/blob/v16.12.0/packages/react-reconciler/src/ReactFiberExpirationTime.js)하는 메커니즘으로 구현되어 있었습니다.
 반면, 리엑트v17.0 이후에서는 Lane 모델을 착안하여 비트 연산을
@@ -115,14 +115,11 @@ keypress 이벤트에 대한 처리가 지연되고 있음을 경고 플래그�
 전반적인 우선순위 메커니즘을 담고 있는 모델이기 때문에 우선순위 메커니즘에 대해
 이야기하기 전에 Lane 모델에 대해서 살펴봅시다.
 
-_만료 시간을 사용하지 않고, Lane 모델을 사용하게 된 이유에 대해서는
-[react/pull/18796](https://github.com/facebook/react/pull/18796)에 설명되어 있습니다._
-
 ### Lane 모델, 그리고 Lane 우선순위
 
 Lane 모델은 도로의 차선을 모티브로 하여 리엑트에서 작업의 우선순위를
-표현하기 위해 사용됩니다. 스케쥴링 및 조정 작업 과정에서 매우 중요하게
-사용되는 개념입니다. 작업을 나타내는 32비트 데이터로 표현된
+표현하기 위해 사용되었고, 스케쥴링 및 조정 작업 과정에서 매우 중요한 역할을 하는
+개념입니다. 작업을 나타내는 31비트 데이터로 표현된
 비트 마스크를 레인(lane)이라 하고, 고유의 작업 스레드를 표현하고 있습니다.
 
 ```js
@@ -163,9 +160,10 @@ Lane 모델은 우선순위를 두 가지 중요한 컨셉으로 분리합니다
 - _Task Batching, A 작업이 이 그룹 텍스크에 속하는 가?_
 
 Task Prioritization 개념을 통해 작업의 우선순위를 기준으로 작업의
-우선 실행권을 부여하고, Task Batching 이라는 두 개념을 착안하여
-가령 CPU > I/O > CPU 순의 작업 예약이 있다면,
-I/O 작업을 다른 그룹으로 분리하여 CPU 작업의 병목을 방지하도록 합니다.
+우선 실행권을 부여하고, Task Batching 개념을 착안하여
+가령 CPU > I/O > CPU 순의 작업 예약에 대해,
+I/O 작업을 다른 그룹으로 분리하여 일괄 처리함으로서 CPU 작업의 병목을 
+방지할 수 있도록 합니다.
 
 _CPU 작업이 I/O 작업보다 우선순위가 낮아 지속적인 양보가 발생하게 되면 CPU 작업처리에
 진전이 없을 여지를 방지하기 위해 I/O 작업들을 묶어 진행할 수 있도록 하는 것은
@@ -174,8 +172,7 @@ _CPU 작업이 I/O 작업보다 우선순위가 낮아 지속적인 양보가 �
 
 Task Prioritization이 표현되는 각각의 레인이 가지고 있는
 비트 값이 우선순위를 나타내고 있으며, 레인의 이름을 통해
-어떠한 업데이트가 소유할 수 있는 레인인지 파악할 수 있습니다.
-레인 정의 사이에 Task Batching에 사용되는 레인들도 보입니다.
+어떠한 업데이트가 소유할 수 있는 레인인지 파악해볼 수 있습니다.
 
 - _**SyncLane**, 이산적인(discrete) 사용자 상호 작용에 대한 업데이트_
 - _**InputContinuousLane**, 연속적인(continuous) 사용자 상호 작용에 대한 업데이트_
@@ -184,8 +181,8 @@ Task Prioritization이 표현되는 각각의 레인이 가지고 있는
 
 레인 모델이 어떻게 구현되어 있는 지 간단하게 살펴보았다면,
 어떻게 적용되어 사용되는 지 확인해볼 차례입니다.
-리엑트에서 Lane 우선 순위 개념은 크게 이벤트, 스케쥴러, 레인 우선순위에
-걸쳐 적용되어 있는데요. 각각 어떻게 스며들어 있는 지 살펴봅시다.
+리엑트에서 Lane 모델을 기반으로 Lane 우선순위 개념을 이벤트 우선순위와
+스케쥴러 우선순위에 녹여냈는 지 살펴봅시다.
 
 _Lane 모델에 대한 설명은 [deview2021/Inside React (동시성을 구현하는 기술)](https://tv.naver.com/v/23652451)
 과 초기 레인 모델을 구현한 [react/pull/18796](https://github.com/facebook/react/pull/18796)
@@ -193,9 +190,10 @@ PR을 기반으로 작성하였습니다. 추가적인 내용은 레퍼런스를
 
 ### 이벤트 우선순위
 
-리엑트는 사용자 인터렉션에 의해 발생된 이벤트를 인위적으로 구분지은
-기준으로 우선순위를 결정짓는데, 크게 두 종류로 이벤트가 구분지어 루트에
-바인딩될 때 어느 범주에 속한 이벤트인지에 따라 우선 순위가 부여됩니다.
+리엑트는 사용자 인터렉션에 의해 발생된 이벤트를 인위적으로 구분짓고,
+구분된 이벤트를 묶어 우선순위를 결정짓습니다.
+여기서, 크게 두 종요로 구분되어 루트에 바인딩될 때 어느 범주에 속한
+이벤트인지에 따라 우선순위가 부여됩니다.
 
 - _이산적인 이벤트 (e.g. click, keydown, focusin, ..)_
 - _연속적인 이벤트 (e.g. drag, pointermove, scroll, ..)_
@@ -209,13 +207,8 @@ export const DefaultEventPriority: EventPriority = DefaultLane;
 export const IdleEventPriority: EventPriority = IdleLane;
 ```
 
-여기서, 이벤트 우선순위의 정량적인 값들은 31비트로 구성되어 있는 Lane들과 매핑되어
-있는 것을 확인할 수 있습니다.
-
-_그렇다면 이벤트 영역에서 Lane들을 그대로 사용하면 될 것인데, 이벤트 우선순위라는
-변수에 재할당하는 것은 Lane 영역과 이벤트 영역의 의도적인 분리?, 그리고 이벤트들의
-범주가 변해도(가령, click 이벤트가 연속적인 이벤트 범주로 포함된다던지)
-Lane는 변함없이 사용할 수 있도록 하기 위함이 아닌가 감히 추측합니다._
+여기서, 이벤트 우선순위에 할당되는 값들은 앞서 살펴보았던 31비트로 구성되어 있는 Lane들과
+매핑되어 있는 것을 확인하실 수 있습니다.
 
 그리고 각각의 이벤트에 대해 우선순위를 반환하는 함수가 작성되어 있습니다.
 
@@ -257,8 +250,8 @@ _여기서 'message' 이벤트는 따로 처리해주는 것을 확인할 수 �
 구현되어 있습니다. 따라서 'message' 이벤트가 스케쥴러 콜백일 수 있기 때문에
 'message' 이벤트에 대해서는 네이티브 스케쥴러에 대한 현재 우선 순위를 확인하여 반환합니다._
 
-`getEventPriority()` 를 따라 올라가다 보면, 이벤트 우선순위를 구하고
-각각의 이벤트 리스너에 대응되는 이벤트 우선순위를 매핑하여 이를 반환하는 곳에서
+`getEventPriority()` 를 따라 올라가다 보면, 대응되는 이벤트 우선순위를
+각각의 이벤트 리스너에 래핑시키고, 우선순위가 래핑된 이벤트 리스너를 반환하는 곳에서
 사용됩니다.
 
 ```js
@@ -292,7 +285,7 @@ export function createEventListenerWrapperWithPriority(
 }
 ```
 
-이 함수가 호출되는 곳을 따라 올라가보면, 결국 `createRoot()` 에서
+결국 `createRoot()` 에서
 리엑트17 이후 버전의 [이벤트 위임 메커니즘](https://ko.reactjs.org/blog/2020/08/10/react-v17-rc.html#changes-to-event-delegation)
 에 입각하여, 우선 순위가 래핑된 이벤트 리스너들이 모두 루트에 바인딩되게 됩니다.
 
@@ -331,11 +324,11 @@ export function createRoot(
 확인했습니다. 마찬가지로 스케쥴러 우선순위는 이벤트 우선순위를
 기반으로 우선순위를 할당합니다.
 
-가령 이벤트를 통해 setState를 통해 부가적인 상태 업데이트가
+가령 이벤트가 발생하여 setState를 통해 부가적인 상태 업데이트가
 디스패치되면, 업데이트를 위한 객체를 생성하기 이전 requestUpdateLane()
 이 호출됩니다.
 
-<!-- ```js
+```js
 // react-reconciler/src/ReactFiberHooks.new.js
 
 function dispatchSetState<S, A>(
@@ -357,21 +350,21 @@ function dispatchSetState<S, A>(
 
   ...
 }
-``` -->
+```
 
 <!-- TODO: Lane 모델의 적용단계의 함수 플로우를 정리헤야 함-->
 <!-- TODO: ensureRootIsScheduled 함수에 대한 정리가 필요함-->
 
-클릭 이벤트를 트리거하고, setState를 호출하여 업데이트에
+<!-- 클릭 이벤트를 트리거하고, setState를 호출하여 업데이트에
 대한 작업을 생성할 때,
 
 ```js
 Component.prototype.setState = function(partialState, callback) {
   this.updater.enqueueSetState(this, partialState, callback, 'setState');
 };
-```
+``` -->
 
-setState 함수를 호출하여 업데이트를 시작하고 setState는
+<!-- setState 함수를 호출하여 업데이트를 시작하고 setState는
 내부적으로 enqueueSetState 함수를 호출한다.
 
 ```js
@@ -392,12 +385,12 @@ enqueueSetState(inst, payload, callback) {
     const root = scheduleUpdateOnFiber(fiber, lane, eventTime);
     ...
 }
-```
+``` -->
 
-이후 생성된 업데이트 개체의 이벤트 우선순위를 할당받습니다.
-먼저, 업데이트가 필요한 컴포넌트의 Fiber 객체를 얻고, requestUpdateLane
-함수를 호출하여 현재 이벤트의 우선순위를 가져옵니다. requestUpdateLane
-함수가 어떻게 이벤트 우선 순위를 얻는지 살펴봅시다.
+이후 생성된 업데이트 객체의 이벤트 우선순위를 할당받게 됩니다.
+여기서, 업데이트가 필요한 컴포넌트의 Fiber 객체를 받아 `requestUpdateLane()`
+를 통해 현재 이벤트의 우선순위를 가져옵니다. `requestUpdateLane()`이
+어떻게 이벤트 우선순위를 얻어오는 지 살펴봅시다.
 
 ```js
 export function requestUpdateLane(fiber: Fiber): Lane {
@@ -451,14 +444,20 @@ export function requestUpdateLane(fiber: Fiber): Lane {
 }
 ```
 
-동시성 모드가 아닐 때, 먼저 현재 랜더링 모드가 동시 모드인지 확인하고,
-동시 모드가 아닌 경우 동기화 우선 순위가 랜더링에 사용된다.
+먼저 현재 랜더링 모드가 동시성 모드인지 확인하고, 동시성 모드가
+아니라면 SyncLane이 랜더링에 사용됩니다.
 
 ```js
-if ((mode & ConcurrentMode) === NoMode) {
-  return (SyncLane: Lane);
+export function requestUpdateLane(fiber: Fiber): Lane {
+  const mode = fiber.mode;
+  if ((mode & ConcurrentMode) === NoMode) {
+    return (SyncLane: Lane);
+  }
+  ...
 }
 ```
+
+<!-- * 여기서부터 다시 작업 시작!! 내일부터 다시 꼬박꼬박-->
 
 동시성 모드일 때는 먼저 현재 실행 중인 작업이 있는 지 확인한다.
 workInProgressRootRenderLanes는 현재 실행 중인 작업의 Lane우선 순위가 담긴다.
