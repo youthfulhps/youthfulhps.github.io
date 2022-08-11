@@ -315,17 +315,16 @@ export function createRoot(
 }
 ```
 
-<!-- TODO: Lanes, Event, Scheduler 우선순위는 모두
-기저에 Lanes 모델이 있다는 정도로만 설명하면 될 것 같다. -->
+### 스케쥴링 우선순위
 
-### 스케쥴러 우선순위
+스케쥴링 우선순위는 스케쥴러 기반의 리엑트 업데이트 작업이 가지는 
+우선순위입니다. 스케쥴러는 스케쥴링 우선순위를 통해 산발적으로
+발생하는 작업들의 교통정리를 진행합니다.
 
-위에서 이벤트 우선순위가 Lane 우선순위를 참조하여 정의되고 있음을
-확인했습니다. 마찬가지로 스케쥴러 우선순위는 이벤트 우선순위를
-기반으로 우선순위를 할당합니다.
-
+리콘실러는 스케쥴러에게 작업을 전달하기 전에 작업의 우선순위 정보를 포함시켜
+전달하게 되는데,
 가령 이벤트가 발생하여 setState를 통해 부가적인 상태 업데이트가
-디스패치되면, 업데이트를 위한 객체를 생성하기 이전 requestUpdateLane()
+디스패치되면, 업데이트를 위한 객체를 생성하기 이전 `requestUpdateLane()`
 이 호출됩니다.
 
 ```js
@@ -355,44 +354,7 @@ function dispatchSetState<S, A>(
 <!-- TODO: Lane 모델의 적용단계의 함수 플로우를 정리헤야 함-->
 <!-- TODO: ensureRootIsScheduled 함수에 대한 정리가 필요함-->
 
-<!-- 클릭 이벤트를 트리거하고, setState를 호출하여 업데이트에
-대한 작업을 생성할 때,
-
-```js
-Component.prototype.setState = function(partialState, callback) {
-  this.updater.enqueueSetState(this, partialState, callback, 'setState');
-};
-``` -->
-
-<!-- setState 함수를 호출하여 업데이트를 시작하고 setState는
-내부적으로 enqueueSetState 함수를 호출한다.
-
-```js
-enqueueSetState(inst, payload, callback) {
-    const fiber = getInstance(inst); //현재 컴포넌트에 해당하는 Fiber Node 가져오기
-    const eventTime = requestEventTime(); // 이벤트가 트리거된 시간 가져오기
-    const lane = requestUpdateLane(fiber); // 현재 이벤트에 해당하는 Lane 우선순위 가져오기
-
-    // 업데이트 개체를 만들고, 업데이트해야 하는 컨텐츠를 페이로드에 탑재한다.
-    const update = createUpdate(eventTime, lane);
-    update.payload = payload;
-    if (callback !== undefined && callback !== null) {
-      update.callback = callback;
-    }
-
-    // 업데이트 대기열에 업데이트 개체 추가
-    enqueueUpdate(fiber, update, lane);
-    const root = scheduleUpdateOnFiber(fiber, lane, eventTime);
-    ...
-}
-``` -->
-
-이후 생성된 업데이트 객체의 이벤트 우선순위를 할당받게 됩니다.
-여기서, 업데이트가 필요한 컴포넌트의 Fiber 객체를 받아 `requestUpdateLane()`
-를 통해 현재 이벤트의 우선순위를 가져옵니다. `requestUpdateLane()`이
-어떻게 이벤트 우선순위를 얻어오는 지 살펴봅시다.
-
-```js
+<!-- ```js
 export function requestUpdateLane(fiber: Fiber): Lane {
   // 현재 랜더링 모드를 가져옵니다. 동기화 or 동시성 모드
   const mode = fiber.mode;
@@ -442,10 +404,16 @@ export function requestUpdateLane(fiber: Fiber): Lane {
   const eventLane: Lane = (getCurrentEventPriority(): any);
   return eventLane;
 }
-```
+``` -->
 
-먼저 현재 랜더링 모드가 동시성 모드인지 확인하고, 동시성 모드가
-아니라면 SyncLane이 랜더링에 사용됩니다.
+업데이트 객체에 전달되는 우선순위를 구하는 `requestUpdateLane()`
+는 어떻게 이벤트 우선순위를 얻어오는 지 살펴봅시다.
+
+_여기서 Fiber는 작업의 가장 작은 단위를 모델링합니다. Fiber는
+다음 글에서 자세하게 정리할 예정입니다._
+
+먼저 현재 랜더링 모드에 대해 판단하여 동시성 기능을 제공하는 모드가
+아니라면, SyncLane을 반환합니다.
 
 ```js
 export function requestUpdateLane(fiber: Fiber): Lane {
@@ -457,42 +425,94 @@ export function requestUpdateLane(fiber: Fiber): Lane {
 }
 ```
 
-<!-- * 여기서부터 다시 작업 시작!! 내일부터 다시 꼬박꼬박-->
-
-동시성 모드일 때는 먼저 현재 실행 중인 작업이 있는 지 확인한다.
-workInProgressRootRenderLanes는 현재 실행 중인 작업의 Lane우선 순위가 담긴다.
-workInProgressRootRenderLanes가 비어 있지 않다면 실행 중인 작업의
-레인이 직접 반환되고 현재 새 작업이 기존 작업과 함께 일괄적으로 업데이트된다.
+만약, 동시성 기능을 제공하는 모드에서 작업 중이라면, 먼저 현재 실행 중인
+작업이 있는 지 확인합니다. 만약 있다면, 현재 실행 중인 작업의 레인이
+직접 반환되고, 새 작업이 기존 작업과 같은 우선순위를 부여받아 현재 작업과
+함께 업데이트됩니다.
 
 ```js
-if (
-  !deferRenderPhaseUpdateToNextBatch &&
-  (executionContext & RenderContext) !== NoContext &&
-  workInProgressRootRenderLanes !== NoLanes
-) {
-  return pickArbitraryLane(workInProgressRootRenderLanes);
+let workInProgressRootRenderLanes: Lanes = NoLanes;
+
+export function requestUpdateLane(fiber: Fiber): Lane {
+  ...
+  else if (
+    !deferRenderPhaseUpdateToNextBatch &&
+    (executionContext & RenderContext) !== NoContext &&
+    workInProgressRootRenderLanes !== NoLanes
+  ) {
+    return pickArbitraryLane(workInProgressRootRenderLanes);
+  }
+  ...
 }
 ```
 
-위의 항목이 없으면, 현재 이벤트가 Transition 우선 순위인지 여부를 결정하고,
-맞다면, 전환 우선 순위에서 위치를 할당한다.
+```js
+// react-reconciler/src/ReactFiberLane.new.js
 
-전환 우선 순위 할당 규칙은 다음과 같다. 우선 순위를 할당할 때
-전환 우선순위의 맨 오른쪽부터 시작하여 후속 작업이 차례로 왼쪽으로 한 자리
-이동합니다. 마지막 위치가 할당될 때까지 후속 작업은 다음부터 시작된다.
-가장 오른쪽 첫 번째 위치에서 할당을 시작한다.
+export function getHighestPriorityLane(lanes: Lanes): Lane {
+  return lanes & -lanes;
+}
+
+export function pickArbitraryLane(lanes: Lanes): Lane {
+  return getHighestPriorityLane(lanes);
+}
+```
+
+위 조건에서 걸러지지 않았다면, 이제 현재 이벤트가 Transition(전환) 우선
+순위인지 여부를 결정하고 맞다면 적절한 전환 우선순위에 할당하게 됩니다.
+
+```js
+let currentEventTransitionLane: Lanes = NoLanes;
+
+export function requestUpdateLane(fiber: Fiber): Lane {
+  ...
+  const isTransition = requestCurrentTransition() !== NoTransition;
+  if (isTransition) {
+    if (__DEV__ && ReactCurrentBatchConfig.transition !== null) {
+      const transition = ReactCurrentBatchConfig.transition;
+      if (!transition._updatedFibers) {
+        transition._updatedFibers = new Set();
+      }
+
+      transition._updatedFibers.add(fiber);
+    }
+    if (currentEventTransitionLane === NoLane) {
+      currentEventTransitionLane = claimNextTransitionLane();
+    }
+    return currentEventTransitionLane;
+  }
+}
+```
+
+```js
+// react-reconciler/src/ReactFiberLane.new.js
+
+export function claimNextTransitionLane(): Lane {
+  const lane = nextTransitionLane;
+  nextTransitionLane <<= 1;
+  if ((nextTransitionLane & TransitionLanes) === NoLanes) {
+    nextTransitionLane = TransitionLane1;
+  }
+  return lane;
+}
+
+```
+
+이 때, 생성된 작업에 대해 맨 오른쪽 비트를 소유하는 TransitionLane을
+할당하고, 후속으로 생성된 작업에 대해 왼쪽으로 한 자리 이동된 비트를 소유하는
+TransitionLane을 할당합니다. 
 
 ```js
 TransitionLane1 = 0b0000000000000000000000001000000;
 TransitionLane2 = 0b0000000000000000000000010000000;
-```
+...
 
-후속 작업은 총 16의 Transition 우선순위와 함께 하나씩 왼쪽으로 이동한다.
-
-```js
 TransitionLanes = 0b0000000001111111111111111000000;
 ```
 
+<!-- ! 여기까지 정리 완료 -->
+
+전환 우선순위 작업이 아닌 경우 함수가 
 전환 우선순위 작업이 아닌 경우 아래를 보면 다음으로 getCurrentUpdatePriority 함수가 호출되는 것을 볼 수 있습니다. 처음에 프로젝트가 처음 렌더링될 때 이벤트가 위임될 것이라고 언급한 것을 기억하십시오. 루트 컨테이너 및 모든 지원되는 이벤트는 우선 순위에 따라 분류되며 이벤트가 발생하면 setCurrentUpdatePriority 함수가 호출되어 현재 이벤트의 우선 순위를 설정합니다. getCurrentUpdatePriority 함수를 호출하면 이벤트가 트리거될 때 설정된 이벤트 우선 순위도 가져옵니다. 획득한 이벤트 우선 순위가 비어 있지 않으면 이벤트의 우선 순위를 직접 반환합니다.
 
 ```js
@@ -921,170 +941,3 @@ function renderRootConcurrent(root: FiberRoot, lanes: Lanes) {
   }
 ```
 
-<!-- ### Lane
-
-## 동시성 구현을 위한 메커니즘; 이벤트 루프 중단
-
-### render
-
-### schedulePerformWorkUntilDeadline
-
-### messageChannel을 통한 performWorkUntilDeadline 콜백 함수 호출
-
-### flushWork
-
-### flushWork 루프가 돔
-
-### 이후 작업에 대해 cpu가 10ms을 할당해 주었다면, 10ms이 지나면 탈출
-
-### 다시 fluskWork에서 남은 작업이 있는 지 확인
-
-### 남은 작업이 있으면 schedulePerformWorkUntilDeadline 호출
-
-### workLoopConcurrent는 주어진 시간만큼 작업 처리 -->
-
-<!-- 지금까지 알아본 양보를 구현하기 위한 메커니즘은 중단을 발생시키기 위한
-플래그로서 사용됩니다. 양보가 필요한지에 대한 판단을 통해 어떻게
-메인 스레드를 블로킹하지 않는 WorkLoop를 구현했는 지 살펴봅시다.
-
-reactDOMRoot.render를 호출하게 되면, 작업을 예약합니다.
-작업이 예약되게 되면, 예약된 작업에 끝에서 이벤트 루프를 호출합니다.
-
-이벤트 루프가 시작될 때, schedulePerformWorkUntilDeadline 이라는 함수가
-호출됩니다. 이 메서드를 잠시 기억하자.
-
-여기서 메세지 채널을 통해 performWorkUntilDeadline과 통신하게 됩니다.
-performWorkUntilDeadline은 메세지 체널의 콜백함수로서 호출된다.
-
-그리고, performWorkUntilDeadline에서 필요한 일을 flushWork 한다.
-그러면 flush된 flushwork안쪽에서는 루프가 돌게 된다.
-
-에를 들어 cpu가 10ms을 작업의 할당한다면 10ms이 지나면 탈출,
-그리고 flushWork에서 남은 작업이 있는 지 확인
-만약, 남은 작업이 있다면 다시 schedulePerformWorkUntilDeadline를 호출한다.
-
-workLoopConcurrent는 주어진 시간만큼 작업을 처리하는 것이다.
-
-이렇게 해서 스레드를 블로킹하지 않는 루프를 구현
-메인 스레드에게 양보하기 위한 방법 -->
-
-<!-- reactDOMRoot.render를 호출하게 되면, 작업을 예약합니다.
-작업이 예약되게 되면, 예약된 작업에 끝에서 이벤트 루프를 호출합니다.
-
-이벤트 루프가 시작될 때, schedulePerformWorkUntilDeadline 이라는 함수가
-호출됩니다. 이 메서드를 잠시 기억하자.
-
-여기서 메세지 채널을 통해 performWorkUntilDeadline과 통신하게 됩니다.
-performWorkUntilDeadline은 메세지 체널의 콜백함수로서 호출된다.
-
-그리고, performWorkUntilDeadline에서 필요한 일을 flushWork 한다.
-그러면 flush된 flushwork안쪽에서는 루프가 돌게 된다.
-
-에를 들어 cpu가 10ms을 작업의 할당한다면 10ms이 지나면 탈출,
-그리고 flushWork에서 남은 작업이 있는 지 확인
-만약, 남은 작업이 있다면 다시 schedulePerformWorkUntilDeadline를 호출한다.
-
-workLoopConcurrent는 주어진 시간만큼 작업을 처리하는 것이다.
-
-이렇게 해서 스레드를 블로킹하지 않는 루프를 구현
-메인 스레드에게 양보하기 위한 방법
-
-컴포넌트를 순회하면서 메인스레드를 블로킹하지 않는 방법은
-Fiber 아키텍처가 가지고 있다.
-
-Fiber는 랜더링 작업을 미세하게 분할한다.
-자바스크립트 스택을 사용하지 않고 작업을 힙 객체에 펼친다.
-훅의 대수효과를 지원하기 위한 기반이 된다.
-
-파이버 아키텍처를 적용한 리엑트의 랜더링과정은
-더블 버퍼 모델과 유사하다. 프론트 버퍼가 화면을 출력하는 동안,
-백 버퍼가 다음에 그려질 내용을 그려내면서 두 버퍼가 스위칭되며
-랜더링한다.
-
-createRoot를 호출하면 FiberRootNode를 형성한다.
-이건 모든 노드의 루트 노드가 된다.
-
-FiberRootNode의 current를 번갈아가며 변경하면서
-순회 작업을 진행한다. 순회 작업이 마무리되면 current를
-완료된 버퍼를 가르켜 스왑한다.
-
-## 동시성 구현을 위한 메커니즘; 중단
-
-랜더러(renderer) 레이어에서 랜더링 작업이 시작되면 재귀적인 작업으로 중단이 불가능합니다.
-리엑트팀은 중단 메커니즘을 구현하기 위해 랜더러가 작업을 시작하기 전 단계인
-리콘실러 작업 단계에서 중단할 수 있도록 구현해야 했습니다.
-
-결국, 중단 메커니즘은 리콘실러에 많은 로직이 담겨있습니다. -->
-
-<!-- 직접 스케쥴러를 만듦 -->
-<!-- performUntilWork() -->
-
- <!-- ============== Lagacy ===========
-
-우선 순위는 react18에서 새롭게 정의된 useTransition을 통해
-정의할 수 있습니다.
-
-react 공식문서 데모에서는 input 컴포넌트의 변화 랜더링, 목록 컴포넌트 랜더링
-이 두가지 작업의 우선 순위를 구분지었다.
-
-input 컴포넌트의 변화 랜더링은 즉각적으로 적용되어야 하는 랜더링이며,
-목록 컴포넌트 랜더링은 상대적으로 급하지 않은 랜더링이다.
-
-블로킹 랜더링은 1차선 도로이다. 컴포넌트 갱신이 많아지면 CPU의 점유율이 높아지면서
-D, E의 랜더링을 해결할 수 없다.
-
-동시성 랜더링은 2차선 도로라고 생각해보자.
-
-동시성 랜더링에서도 마찬가지로 A, B라는 작업을 진행한다고 생각해보자.
-
-A에 대한 작업을 진행하다가 메인 쓰레드에게 일정시간 양보한다. (yield)
-
-동시성 랜더링은 이전에 언급한 것처럼 하나의 컴포넌트의 랜더링을 잘개 쪼개어 작업한다.
-C의 작업이 마무리되기 전에 D에 대한 입력이 들어오면 C의 작업보다 우선순위가 높은 'D에 대한 입력'을 먼저 처리하게 된다.
-즉, 리스트 랜더링보다는 우선순위가 높은 'D에 대한 입력 처리'를 먼저 진행하게 된다.
-
-그리고, pending 상태에 있었던 낮은 순위 랜더링을 리베이스(git branch의 베이스 지점을 끌어올리는 듯한 동작)을 수행한다.
-
-두 개의 차선에서 하나는 고속 하나는 저속으로 보고 리엑트에서는 이를 lane 이라고 말한다.
-
-## 동시성 랜더링을 위한 API
-
-동시성 모드는 기능 단위로 점진적으로 채택될 수 있도록 리엑트는
-동시성 기능을 추가하였습니다. 단순히 createRoot를 사용한다고 해서
-동시성 모드가 켜지는 것이 아닌, 동시성 기능을 사용했을 때
-동시성 모드가 유효해집니다.
-
-startTransition은 느린 차선의 lane을 만들어 주는 API 이다.
-
-startTransition의 콜백 함수를 전달하면 수도 코드에서 확인할 수 있듯이
-낮은 우선순위를 갖게 된다.
-
-startTransition은 바로 실행된다????
-
-이렇게 낮은 우선순위를 부여받으면 보다 중요한 CPU 사용처에 양보를 할 수 있다.
-
-대규모 화면 업데이트 중 응답성을 유지할 수 있고, 상태 전환 중에 시각적 피드백을 제공할 수 있다.
-
-[deview2021/concurrent](https://ajaxlab.github.io/deview2021/concurrent)
-를 통해 블로킹 랜더링과 비교해보자.
-
-concurrent에서는 짧은 여러개의 스택이 반복적으로 수행되고 있는 것을 확인할 수 있다.
-
-## urgent update vs transition update
-
-그 구분은 어떻게 지어야 할까, 사용자가 오래걸릴 것이라고 예상되는 것들
-하나의 view에서 다른 view로 전환되거나, 전환되는 중간과정이 스킵되어도 문제가 없는 것 (load, refresh)
-
-## HCI 연구 결과가 실제 Ui에 통합되도록 돕는 것
-
-화면 간 전환에서 로딩 중 상태를 너무 많이 표시하면 UX 품질이 낮아짐
-빠르게 처리되기 기대하는 상호작용과 느려도 문제없는 상호작용
-동시성 모드의 목적은 HCI 연구 결과를 추상화하고 구현할 수 있는 방법을 제공하는 것이다.
-
-HCI 연구 결과 확인해보기
-
-## Reference
-
-[Inside React(동시성을 구현하는 기술)](https://tv.naver.com/v/23652451)
-
-[https://github.com/neroneroffy/react-source-code-debug](https://github.com/neroneroffy/react-source-code-debug)
