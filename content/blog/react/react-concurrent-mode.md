@@ -2,7 +2,7 @@
 title: 리엑트 동시성 매커니즘들은 어떻게 구현되어 있을 까 - 01
 date: 2022-06-11 16:06:62
 category: react
-thumbnail: { thumbnailSrc }
+thumbnail: ./images/react-concurrent-mode/thumbnail.png
 draft: false
 ---
 
