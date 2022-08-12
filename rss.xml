@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Youthfulhps.dev]]></title><description><![CDATA[Blog posted front-end, troubleshooting!]]></description><link>https://youthfulhps.dev</link><generator>GatsbyJS</generator><lastBuildDate>Fri, 12 Aug 2022 03:08:09 GMT</lastBuildDate><item><title><![CDATA[react-testing]]></title><description><![CDATA[현재 파이브스팟 모바일 웹을 가꾸어 나가고 있습니다. 빠르게 출시하기 위해
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Youthfulhps.dev]]></title><description><![CDATA[Blog posted front-end, troubleshooting!]]></description><link>https://youthfulhps.dev</link><generator>GatsbyJS</generator><lastBuildDate>Fri, 12 Aug 2022 09:45:48 GMT</lastBuildDate><item><title><![CDATA[react-testing]]></title><description><![CDATA[현재 파이브스팟 모바일 웹을 가꾸어 나가고 있습니다. 빠르게 출시하기 위해
 동작하는 프러덕션을 배포하고, 피드백을 취합해서 다음 페이스를 위한 기능적인 살과
 뼈대를 붙여나가고 있는 작업이 한창입니다. Deliver usable products to…]]></description><link>https://youthfulhps.dev/react/react-testing/</link><guid isPermaLink="false">https://youthfulhps.dev/react/react-testing/</guid><pubDate>Mon, 25 Jul 2022 11:07:43 GMT</pubDate><content:encoded>&lt;p&gt;현재 파이브스팟 모바일 웹을 가꾸어 나가고 있습니다. 빠르게 출시하기 위해
 동작하는 프러덕션을 배포하고, 피드백을 취합해서 다음 페이스를 위한 기능적인 살과
@@ -930,7 +930,7 @@ any를 사용하면 타입 체커가 무력화됩니다.&lt;/p&gt;
 &lt;p&gt;Dan VanderKam. 『&lt;a href=&quot;https://effectivetypescript.com/&quot;&gt;effective typescript&lt;/a&gt;』&lt;/p&gt;
 &lt;p&gt;&lt;a href=&quot;https://github.com/danvk/effective-typescript&quot;&gt;danvk/effective-typescript&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href=&quot;https://toss.tech/article/template-literal-types&quot;&gt;Template Literal Types로 타입 안전하게 코딩하기&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;https://engineering.linecorp.com/ko/blog/typescript-enum-tree-shaking/&quot;&gt;TypeScript enum을 사용하지 않는 게 좋은 이유를 Tree-shaking 관점에서 소개합니다.&lt;/a&gt;&lt;/p&gt;</content:encoded></item><item><title><![CDATA[리엑트 동시성 매커니즘들은 어떻게 구현되어 있을 까]]></title><description><![CDATA[리엑트v18에서 동시성 기능을 정식으로 출시하였습니다.
+&lt;p&gt;&lt;a href=&quot;https://engineering.linecorp.com/ko/blog/typescript-enum-tree-shaking/&quot;&gt;TypeScript enum을 사용하지 않는 게 좋은 이유를 Tree-shaking 관점에서 소개합니다.&lt;/a&gt;&lt;/p&gt;</content:encoded></item><item><title><![CDATA[리엑트 동시성 매커니즘들은 어떻게 구현되어 있을 까 - 01]]></title><description><![CDATA[리엑트v18에서 동시성 기능을 정식으로 출시하였습니다.
 대표적으로, Automatic batching for fewer renders,
 SSR support for Suspense, Fixes for Suspense behavior quirks…]]></description><link>https://youthfulhps.dev/react/react-concurrent-mode/</link><guid isPermaLink="false">https://youthfulhps.dev/react/react-concurrent-mode/</guid><pubDate>Sat, 11 Jun 2022 16:07:02 GMT</pubDate><content:encoded>&lt;p&gt;리엑트v18에서 동시성 기능을 정식으로 출시하였습니다.
 대표적으로, &lt;em&gt;Automatic batching for fewer renders&lt;/em&gt;,
@@ -1010,7 +1010,7 @@ Go 언어의 창시자의 &lt;a href=&quot;https://go.dev/blog/waza-talk&quot;&g
         loading=&quot;lazy&quot;
       /&gt;
     &lt;/span&gt;&lt;/p&gt;
-&lt;h2 id=&quot;리엑트팀은-왜-동시성을-구현하고자-했을-까&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EB%A6%AC%EC%97%91%ED%8A%B8%ED%8C%80%EC%9D%80-%EC%99%9C-%EB%8F%99%EC%8B%9C%EC%84%B1%EC%9D%84-%EA%B5%AC%ED%98%84%ED%95%98%EA%B3%A0%EC%9E%90-%ED%96%88%EC%9D%84-%EA%B9%8C&quot; aria-label=&quot;리엑트팀은 왜 동시성을 구현하고자 했을 까 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;리엑트팀은 왜 동시성을 구현하고자 했을 까&lt;/h2&gt;
+&lt;h2 id=&quot;왜-동시성을-구현하고자-했을-까&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EC%99%9C-%EB%8F%99%EC%8B%9C%EC%84%B1%EC%9D%84-%EA%B5%AC%ED%98%84%ED%95%98%EA%B3%A0%EC%9E%90-%ED%96%88%EC%9D%84-%EA%B9%8C&quot; aria-label=&quot;왜 동시성을 구현하고자 했을 까 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;왜 동시성을 구현하고자 했을 까&lt;/h2&gt;
 &lt;p&gt;리엑트는 사용자 인터페이스를 구축하는 라이브러리로서 핵심 역할인 인터렉션에
 대한 업데이트 과정과 사용자 경험에 대한 HCI 연구 결과를 반영하고 궁극적으로
 기술적으로 결합하는 목표를 가지고 있습니다. 사람과 컴퓨터간의 인터렉션에
@@ -1084,7 +1084,10 @@ keypress 이벤트에 대한 처리가 지연되고 있음을 경고 플래그�
 모델을 기반으로 생각한다면, 사용자는 입력 이벤트에 대해 100ms 이상 소요되는 것을
 동작과 응답 사이의 연결이 지연되고 있음을 인식하게 되며, 이는 사용자 경험의 감점으로
 이어질 수 있습니다.&lt;/p&gt;
-&lt;h2 id=&quot;동시성-구현을-위한-메커니즘-우선-순위&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EB%8F%99%EC%8B%9C%EC%84%B1-%EA%B5%AC%ED%98%84%EC%9D%84-%EC%9C%84%ED%95%9C-%EB%A9%94%EC%BB%A4%EB%8B%88%EC%A6%98-%EC%9A%B0%EC%84%A0-%EC%88%9C%EC%9C%84&quot; aria-label=&quot;동시성 구현을 위한 메커니즘 우선 순위 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;동시성 구현을 위한 메커니즘; 우선 순위&lt;/h2&gt;
+&lt;p&gt;리엑트는 이러한 사용자 경험에 영향을 끼치는 랜더링 업데이트 과정에서
+동시성을 통해 개선된 인터렉션을 쉽게 구현할 수 있도록 하는 구현체를 제공하고자
+했습니다.&lt;/p&gt;
+&lt;h2 id=&quot;작업의-우선순위는-어떻게-할당될-까&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EC%9E%91%EC%97%85%EC%9D%98-%EC%9A%B0%EC%84%A0%EC%88%9C%EC%9C%84%EB%8A%94-%EC%96%B4%EB%96%BB%EA%B2%8C-%ED%95%A0%EB%8B%B9%EB%90%A0-%EA%B9%8C&quot; aria-label=&quot;작업의 우선순위는 어떻게 할당될 까 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;작업의 우선순위는 어떻게 할당될 까&lt;/h2&gt;
 &lt;p&gt;리엑트에서 동시성을 구현하는 첫번 째 메커니즘은 바로 우선순위입니다.&lt;/p&gt;
 &lt;p&gt;우선순위 메커니즘은 업데이트 전반에 걸쳐 적용되어 있습니다.
 사용자 인터렉션이 이벤트를 통해 전달되면 이에 대한 업데이트가
@@ -1138,9 +1141,9 @@ keypress 이벤트에 대한 처리가 지연되고 있음을 경고 플래그�
 &lt;li&gt;&lt;em&gt;Task Prioritization, A 작업이 B 작업보다 급한가?&lt;/em&gt;&lt;/li&gt;
 &lt;li&gt;&lt;em&gt;Task Batching, A 작업이 이 그룹 텍스크에 속하는 가?&lt;/em&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;Task Prioritization 개념을 통해 작업의 우선순위를 기준으로 작업의
-우선 실행권을 부여하고, Task Batching 개념을 착안하여
-가령 CPU &gt; I/O &gt; CPU 순의 작업 예약에 대해,
+&lt;p&gt;작업 우선순위 개념을 통해 작업의 우선순위를 기준으로 작업의
+우선 실행권을 부여하고, 작업 배칭 개념을 착안하여
+가령 CPU, I/O, CPU 순의 작업 예약에 대해,
 I/O 작업을 다른 그룹으로 분리하여 일괄 처리함으로서 CPU 작업의 병목을
 방지할 수 있도록 합니다.&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;CPU 작업이 I/O 작업보다 우선순위가 낮아 지속적인 양보가 발생하게 되면 CPU 작업처리에
@@ -1301,63 +1304,8 @@ PR을 기반으로 작성하였습니다. 추가적인 내용은 레퍼런스를
 
   &lt;span class=&quot;token operator&quot;&gt;...&lt;/span&gt;
 &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;!-- TODO: Lane 모델의 적용단계의 함수 플로우를 정리헤야 함--&gt;
-&lt;!-- TODO: ensureRootIsScheduled 함수에 대한 정리가 필요함--&gt;
-&lt;!-- ```js
-export function requestUpdateLane(fiber: Fiber): Lane {
-  // 현재 랜더링 모드를 가져옵니다. 동기화 or 동시성 모드
-  const mode = fiber.mode;
-  if ((mode &amp; ConcurrentMode) === NoMode) {
-    // 현재 랜더링 모드가 동시성 모드인지 확인하고, NoMode와
-    // 같다면, 동기 모드로 랜더링합니다.
-    return (SyncLane: Lane);
-  } else if (
-    !deferRenderPhaseUpdateToNextBatch &amp;&amp;
-    (executionContext &amp; RenderContext) !== NoContext &amp;&amp;
-    workInProgressRootRenderLanes !== NoLanes
-  ) {
-    // workInProgressRootRenderLanes는 작업 실행 단계에서 업데이트해야 하는 FiberNode
-    // 새 업데이트가 작성되었을 때 workInProgressRootRenderLanes가 비어있지 않음은 실행
-    // 중인 작업이 있음을 의미합니다.
-    // 실행 중인 레인이 직접 반환되고, 현재 새 작업이 기존 작업과 일관적으로 업데이트됩니다.
-    return pickArbitraryLane(workInProgressRootRenderLanes);
-  }
-
-  // 현재 이벤트가 Transition 우선 순위라면 전환 우선 순위를 반환
-  // Transition 우선순위의 할당 규칙은
-  // 생성된 작업 A는 Transition의 첫 번째 비트를 할당한다.
-  // TransitionLane1 = 0b0000000000000000000000001000000
-  // 작업 B가 다시 생성되었으므로, A 위치에서 왼쪽으로 한 비트 이동한다.
-  //： TransitionLane2 = 0b0000000000000000000000010000000
-  // 후속 작업은 마지막 숫자에 도달할 때까지 한 번에 하나씩 뒤로 이동한다.
-  // 16비트의 Transition 우선순위가 있다.:
-  // TransitionLanes = 0b0000000001111111111111111000000
-  // 모든 비트가 사용되면 첫 번째 비트부터 이벤트 전환 우선 순위가 부여된다.
-  const isTransition = requestCurrentTransition() !== NoTransition;
-  if (isTransition) {
-    if (currentEventTransitionLane === NoLane) {
-      currentEventTransitionLane = claimNextTransitionLane();
-    }
-    return currentEventTransitionLane;
-  }
-
-  // onClick등과 같은 반응의 내부 이벤트에서 트리거된 업데이트 이벤트는 이벤트가
-  // 트리거될 때 현재 이벤트에 대한 우선순위를 설정한다. 이 이벤트는 직접 사용할 수 있다.
-  const updateLane: Lane = (getCurrentUpdatePriority(): any);
-  if (updateLane !== NoLane) {
-    return updateLane;
-  }
-
-  // 리엑트 외부의 반응 이벤트에 대해서 (e.g. setTimeout)
-  // 현재 이벤트에 대한 우선순위를 설정한다. 이는 직접 사용할 수 있다.
-  const eventLane: Lane = (getCurrentEventPriority(): any);
-  return eventLane;
-}
-``` --&gt;
 &lt;p&gt;업데이트 객체에 전달되는 우선순위를 구하는 &lt;code class=&quot;language-text&quot;&gt;requestUpdateLane()&lt;/code&gt;
 는 어떻게 이벤트 우선순위를 얻어오는 지 살펴봅시다.&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;여기서 Fiber는 작업의 가장 작은 단위를 모델링합니다. Fiber는
-다음 글에서 자세하게 정리할 예정입니다.&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;먼저 현재 랜더링 모드에 대해 판단하여 동시성 기능을 제공하는 모드가
 아니라면, SyncLane을 반환합니다.&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;requestUpdateLane&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;&lt;span class=&quot;token literal-property property&quot;&gt;fiber&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; Fiber&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; Lane &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
@@ -1433,7 +1381,6 @@ TransitionLane2 &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;
 &lt;span class=&quot;token operator&quot;&gt;...&lt;/span&gt;
 
 TransitionLanes &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0b0000000001111111111111111000000&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;!-- ! 여기까지 정리 완료 --&gt;
 &lt;p&gt;전환 우선순위 작업이 아닌 경우에는 어떻게 처리될까요? 이벤트 우선순위 섹션에서
 우선순위가 래핑된 이벤트 리스너가 모두 루트에 바인딩되는 걸 확인했었는데요.
 여기서 이벤트가 발생하면 &lt;code class=&quot;language-text&quot;&gt;setCurrentUpdatePriority()&lt;/code&gt;가 호출되어
@@ -1477,134 +1424,7 @@ setTimeout에서 호출된 케이스입니다.&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token function&quot;&gt;enqueueUpdate&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;fiber&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; update&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; lane&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;그 이후 스케쥴러 작업을 위해 설정된 우선순위가 사용되게 됩니다.
 사용단계는 다음에 살펴봅시다.&lt;/p&gt;
-&lt;!-- 그 다음 스케쥴러 작업을 위해 scheduleUpdateOnFiber가 호출된다.
-scheduleUpdateOnFiber가 주로 사용되는 중요한 위치를 살펴보자.
-
-```js
-export function scheduleUpdateOnFiber(
-  fiber: Fiber,
-  lane: Lane,
-  eventTime: number,
-): FiberRoot | null {
-  checkForNestedUpdates();
-  ...
-
-  // 업데이트해야 하는 자식 노드의 레인을 수집하고 부모 Fiber의 자식 Lane을 저장한다.
-  // 현재 FiberNode의 레인을 업데이트하여 현재 노드를 업데이트해야 함을 나타낸다.
-  // 현재 업데이트해야 하는 파이버 노드에서 위로 트래버스하여 루트 노드로
-  // 트래버스하고 각 파이버 노드에서 childLanes 속성을 업데이트한다.
-  // childLanes 값은 현재 노드 아래 업데이트해야 하는 자식 노드가 있음을 나타낸다.
-  const root = markUpdateLaneFromFiberToRoot(fiber, lane);
-  if (root === null) {
-    return null;
-  }
-
-  // 현재 업데이트해야 하는 레인을 Fiber Root의 pendingLanes 속성에
-  // 추가하여 실행해야 하는 새 업데이트 작업이 있음을 나타낸다.
-  // 현재 레인의 위치를 계산하고 eventTimes에 이벤트 트리거 시간을 추가한다.
-  markRootUpdated(root, lane, eventTime);
-  ...
-
-  ensureRootIsScheduled(root, eventTime);
-  ...
-  return root;
-}
-```
-
-markUpdateLaneFromFiberToRoot가 함수 내에서 호출되는 것을 볼 수 있습니다.이 함수의 주요 기능은 현재 광섬유 노드의 레인을 업데이트하여 현재 노드를 업데이트해야 함을 표시하고 업데이트해야 하는 자식 노드의 레인을 수집하는 것입니다. 업데이트하고 상위 파이버의 childLanes 속성에 저장합니다. 나중에 업데이트할 때 현재 광섬유 노드가 광섬유 노드의 lannes\*에 따라 업데이트되어야 하는지 여부와 현재 광섬유의 자식 노드가 childLanes에 따라 업데이트되어야 하는지 여부를 판단합니다. markUpdateLaneFromFiberToRoot가 내부적으로 구현되는 방식을 살펴보겠습니다.
-
-```js
-function markUpdateLaneFromFiberToRoot(
-  sourceFiber: Fiber,
-  lane: Lane,
-): FiberRoot | null {
-  // 현재 노드를 업데이트해야 함을 나타내는 현재 노드의 레인 업데이트
-  // 새로운 텍스크의 레인의 현재 FiberNode에 대한 레인 속성은 현재
-  // FiberNode에 해당하는 대체 노드가 비어 있지 않으면
-  // 업데이트 중임을 의미하고, 레인은 대체에서 동기적으로 업데이트된다.
-  sourceFiber.lanes = mergeLanes(sourceFiber.lanes, lane);
-  let alternate = sourceFiber.alternate;
-  if (alternate !== null) {
-    alternate.lanes = mergeLanes(alternate.lanes, lane);
-  }
- ...
-
-  // 현재 업데이트가 필요한 FiberNode에서 루트 광섬유 노드까지 순회하고
-  // 각 광섬유 노드의 childLanes를 업데이트한다.
-  // 미래에 childLanes는 현재 FiberNode 아래에 업데이트해야 하는
-  // 자식 노드가 있는지 확인하는 데 사용된다.
-
-  // 현재 업데이트된 노드에서 Fiber Root Node로 이동하고 각 FiberNode에서
-  // childLanes 속성을 업데이트하여 현재 Fiber 아래 자식노드를 업데이트해야 함을
-  // 나타낸다.
-  let node = sourceFiber;
-  let parent = sourceFiber.return;
-  while (parent !== null) {
-    parent.childLanes = mergeLanes(parent.childLanes, lane);
-    alternate = parent.alternate;
-    if (alternate !== null) {
-      alternate.childLanes = mergeLanes(alternate.childLanes, lane);
-    } else {
-      if (__DEV__) {
-        if ((parent.flags &amp; (Placement | Hydrating)) !== NoFlags) {
-          warnAboutUpdateOnNotYetMountedFiberInDEV(sourceFiber);
-        }
-      }
-    }
-    node = parent;
-    parent = parent.return;
-  }
-
-  // 순회 업데이트가 완료되면 Fiber Root Node가 반환된다.
-  if (node.tag === HostRoot) {
-    const root: FiberRoot = node.stateNode;
-    return root;
-  } else {
-    return null;
-  }
-}
-```
-
-markUpdateLaneFromFiberToRoot가 실행된 후 markRootUpdated 함수가 호출됩니다. 이 함수의 기능은 현재 업데이트된 레인을 Fiber 루트의 pendingLanes 속성에 추가하여 실행할 새 업데이트 작업이 있음을 표시한 다음 기록하는 것입니다. eventTimes 속성의 이벤트 트리거 시간입니다.
-
-updateLane이 0b000100이라고 가정하면, eventTimes에서 다음과 같은 형식이다.
-
-```text
-[-1, -1, 44573.3452, -1， -1...]
-```
-
-```js
-export function markRootUpdated(
-  root: FiberRoot,
-  updateLane: Lane,
-  eventTime: number
-) {
-  // 将当前需要更新的lane添加到fiber root的pendingLanes属性上
-  root.pendingLanes |= updateLane;
-
-  if (updateLane !== IdleLane) {
-    root.suspendedLanes = NoLanes;
-    root.pingedLanes = NoLanes;
-  }
-
-  // eventTimes는 31비트 바이너리를 사용하는 Lane에
-  // 해당하는 31비트 길이의 배열이다.
-  const eventTimes = root.eventTimes;
-  const index = laneToIndex(updateLane);
-  eventTimes[index] = eventTime;
-}
-```
-
-### ensureRootIsScheduled
-
-markRootUpdated 호출이 완료되면 즉시 ensureRootIsScheduled 함수가 호출되어 작업 예약을 시작할 준비가 됩니다.
-ensureRootIsScheduled는 상대적으로 중요한 기능으로, 우선순위가
-높은 텍스크 큐 삽입 및 택스크 기아 문제, 일괄 업데이트를 처리합니다.
-이 함수가 이러한 문제를 어떻게 처리하는 지 살펴보자.
-
-```js
-``` --&gt;
-&lt;h2 id=&quot;동시성-구현을-위한-메커니즘-양보&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EB%8F%99%EC%8B%9C%EC%84%B1-%EA%B5%AC%ED%98%84%EC%9D%84-%EC%9C%84%ED%95%9C-%EB%A9%94%EC%BB%A4%EB%8B%88%EC%A6%98-%EC%96%91%EB%B3%B4&quot; aria-label=&quot;동시성 구현을 위한 메커니즘 양보 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;동시성 구현을 위한 메커니즘; 양보&lt;/h2&gt;
+&lt;h2 id=&quot;작업의-중단과-스레드-양보는-어떻게-이루어-질-까&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EC%9E%91%EC%97%85%EC%9D%98-%EC%A4%91%EB%8B%A8%EA%B3%BC-%EC%8A%A4%EB%A0%88%EB%93%9C-%EC%96%91%EB%B3%B4%EB%8A%94-%EC%96%B4%EB%96%BB%EA%B2%8C-%EC%9D%B4%EB%A3%A8%EC%96%B4-%EC%A7%88-%EA%B9%8C&quot; aria-label=&quot;작업의 중단과 스레드 양보는 어떻게 이루어 질 까 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;작업의 중단과 스레드 양보는 어떻게 이루어 질 까&lt;/h2&gt;
 &lt;p&gt;브라우저는 랜더링 엔진에게 메인 스레드 점유를 위임하게 되면,
 랜더링 과정 중 발생한 사용자 입력에 대해 즉시 처리할 수 없게 됩니다.
 리엑트는 이러한 근본적인 원인을 해결하고자 &lt;strong&gt;모든 랜더링을 인터럽트 가능하도록 하여
@@ -1649,6 +1469,7 @@ ensureRootIsScheduled는 상대적으로 중요한 기능으로, 우선순위가
 메인 스레드는 단일 프레임만큼 아주 짧은 시간동안만 차단되어 있었기 때문에
 양보하지 않습니다.&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;// SchedulerFeatureFlags.js&lt;/span&gt;
+
 &lt;span class=&quot;token keyword&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; frameYieldMs &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; frameYieldMs &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;../SchedulerFeatureFlags&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
 
@@ -1666,8 +1487,7 @@ ensureRootIsScheduled는 상대적으로 중요한 기능으로, 우선순위가
 보류 중인 페인트 혹은 사용자 입력 작업이 존재한다면,
 브라우저가 높은 우선 순위 작업을 수행할 수 있도록 메인 스레드에
 대한 제안 권한을 양보합니다.&lt;/p&gt;
-&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;// Scheduler.js&lt;/span&gt;
-&lt;span class=&quot;token keyword&quot;&gt;let&lt;/span&gt; needsPaint &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;let&lt;/span&gt; needsPaint &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
 
 &lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;requestPaint&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
   &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;
@@ -1693,6 +1513,7 @@ ensureRootIsScheduled는 상대적으로 중요한 기능으로, 우선순위가
 &lt;strong&gt;VDOM의 변경사항을 DOM에 모두 커밋하고 나서 requestPaints() 를 통해
 페인트 작업이 필요하다는 것을 스케쥴러에게 전달하게 됩니다.&lt;/strong&gt;&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;// ReactFiberWorkLoop.new.js&lt;/span&gt;
+
 &lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; requestPaint &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;./Scheduler&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
 
 &lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;commitRootImpl&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;&lt;span class=&quot;token operator&quot;&gt;...&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
@@ -1708,6 +1529,7 @@ isInputPending은 단순히 모든 사용자 이벤트를 동일하게 처리하
 &lt;p&gt;즉 이 검증 단계에서는, 연속적인 이벤트에 대한 처리 작업을 즉시 시작하지 않을 간격을 두고,
 그 시간 동안에는 판단을 온전히 브라우저에게 맡깁니다.&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;// SchedulerFeatureFlags.js&lt;/span&gt;
+
 &lt;span class=&quot;token keyword&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; continuousYieldMs &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;50&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; continuousYieldMs &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;../SchedulerFeatureFlags&apos;&lt;/span&gt;
 
@@ -1734,6 +1556,7 @@ isInputPending은 단순히 모든 사용자 이벤트를 동일하게 처리하
 보류 중인 입력이 없더라도 네트워크 이벤트와 같은 알지 못하는 다른 작업들이
 대기 중일 수 있다는 가정하에 무조건적으로 양보합니다.&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;// SchedulerFeatureFlags.js&lt;/span&gt;
+
 &lt;span class=&quot;token keyword&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; maxYieldMs &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;300&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; maxYieldMs &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;../SchedulerFeatureFlags&apos;&lt;/span&gt;
 
@@ -1761,11 +1584,10 @@ isInputPending은 단순히 모든 사용자 이벤트를 동일하게 처리하
 
   &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
 &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;지금까지 알아본 shouldYieldToHost는 스케쥴러의 &lt;a href=&quot;https://github.com/facebook/react/blob/main/packages/scheduler/src/forks/Scheduler.js#L189&quot;&gt;workLoop&lt;/a&gt;에서 사용됩니다. 현재 진행 중인 작업의 만료시간이 현재 시간에 비해 여유가 있는 시점에서
+&lt;p&gt;지금까지 알아본 &lt;code class=&quot;language-text&quot;&gt;shouldYieldToHost()&lt;/code&gt;는 스케쥴러의 &lt;code class=&quot;language-text&quot;&gt;workLoop()&lt;/code&gt;에서 사용됩니다. 현재 진행 중인 작업의 만료시간이 현재 시간에 비해 여유가 있는 시점에서
 우선 순위가 더 높은 작업이 보류되고 있다면, 메인 스레드에게 제어권을 양보하고, 만료 시간이
 지난 작업에 대해서는 양보하지 않고 동기적으로 바쁘게 작업을 이어나갑니다.&lt;/p&gt;
-&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;// Scheduler.js&lt;/span&gt;
-&lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;workLoop&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;hasTimeRemaining&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; initialTime&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;workLoop&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;hasTimeRemaining&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; initialTime&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
   &lt;span class=&quot;token operator&quot;&gt;...&lt;/span&gt;
   &lt;span class=&quot;token keyword&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;
     currentTask &lt;span class=&quot;token operator&quot;&gt;!==&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;null&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt;
@@ -1784,17 +1606,16 @@ isInputPending은 단순히 모든 사용자 이벤트를 동일하게 처리하
 &lt;a href=&quot;https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberWorkLoop.new.js#L1836&quot;&gt;workLoopConcurrent&lt;/a&gt;
 에서도 사용되는데요. shouldYield를 통해 진행되던 재조정 작업이
 중지될 수 있음이 조건에 담겨있습니다.&lt;/p&gt;
-&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;// ReactFiberWorkLoop.new.js&lt;/span&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;// react-reconciler/src/ReactFiberWorkLoop.new.js&lt;/span&gt;
+
 &lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; shouldYield &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;./Scheduler&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
 &lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;workLoopConcurrent&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
   &lt;span class=&quot;token keyword&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;workInProgress &lt;span class=&quot;token operator&quot;&gt;!==&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;null&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;shouldYield&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
     &lt;span class=&quot;token function&quot;&gt;performUnitOfWork&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;workInProgress&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
   &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
 &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;이를 통해 리콘실러는 workLoopConcurrnet를 통해 현재 작업중이던 루트 혹은 레일(lane)이
-변경되면, 루트에 대기중인 작업들을 모두 비우고, 변경된 레인의 작업이 진행될 수 있도록 합니다.
-(여기서, 레인은 두 가지 이상의 논리적 통제를 다루는 컨텍스트를 의미하는 것 같습니다.
-마치 고속도로의 차선 처럼요.)&lt;/p&gt;
+&lt;p&gt;이를 통해 리콘실러는 &lt;code class=&quot;language-text&quot;&gt;workLoopConcurrent()&lt;/code&gt;를 통해 현재 작업중이던 루트 혹은 Lane이
+변경되면, 루트에 대기중인 작업들을 모두 비우고, 변경된 레인의 작업이 진행될 수 있도록 합니다.&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;renderRootConcurrent&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;&lt;span class=&quot;token literal-property property&quot;&gt;root&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; FiberRoot&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token literal-property property&quot;&gt;lanes&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; Lanes&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
   &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; prevExecutionContext &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; executionContext&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
   executionContext &lt;span class=&quot;token operator&quot;&gt;|=&lt;/span&gt; RenderContext&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
@@ -1819,7 +1640,13 @@ isInputPending은 단순히 모든 사용자 이벤트를 동일하게 처리하
       &lt;span class=&quot;token function&quot;&gt;workLoopConcurrent&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
       &lt;span class=&quot;token operator&quot;&gt;...&lt;/span&gt;
     &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
-  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content:encoded></item><item><title><![CDATA[stale-while-revalidate 전략은 어떻게 활용되고 있을까]]></title><description><![CDATA[클라이언트를 개발하면서 HTTP Cache-Control Extensions for Stale Content의
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&quot;reference&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#reference&quot; aria-label=&quot;reference permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Reference&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;https://deview.kr/2021/sessions/518&quot;&gt;Inside React (동시성을 구현하는 기술)&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://goidle.github.io/react/in-depth-react-preview/&quot;&gt;React 톺아보기 - 01. Preview&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/facebook/react/pull/18796&quot;&gt;github.com/facebook/react/pull/18796&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/facebook/react&quot;&gt;github.com/facebook/react&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://wicg.github.io/is-input-pending/#continuous-events&quot;&gt;wicg.github.io/is-input-pending&lt;/a&gt;&lt;/p&gt;</content:encoded></item><item><title><![CDATA[stale-while-revalidate 전략은 어떻게 활용되고 있을까]]></title><description><![CDATA[클라이언트를 개발하면서 HTTP Cache-Control Extensions for Stale Content의
  확장 디렉티브 전략을 기반으로한
 구현체들을 많이 접하게 되는데요. swr…]]></description><link>https://youthfulhps.dev/web/stale-while-ravalidate/</link><guid isPermaLink="false">https://youthfulhps.dev/web/stale-while-ravalidate/</guid><pubDate>Wed, 01 Jun 2022 16:07:27 GMT</pubDate><content:encoded>&lt;p&gt;클라이언트를 개발하면서 &lt;a href=&quot;https://datatracker.ietf.org/doc/html/rfc5861&quot;&gt;HTTP Cache-Control Extensions for Stale Content&lt;/a&gt;의
 &lt;code class=&quot;language-text&quot;&gt;stale-while-revalidate (swr)&lt;/code&gt; 확장 디렉티브 전략을 기반으로한
