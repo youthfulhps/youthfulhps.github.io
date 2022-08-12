@@ -1,9 +1,9 @@
 ---
-title: 리엑트 동시성 매커니즘들은 어떻게 구현되어 있을 까
+title: 리엑트 동시성 매커니즘들은 어떻게 구현되어 있을 까 - 01
 date: 2022-06-11 16:06:62
 category: react
 thumbnail: { thumbnailSrc }
-draft: true
+draft: false
 ---
 
 리엑트v18에서 동시성 기능을 정식으로 출시하였습니다.
@@ -56,7 +56,7 @@ _'**동시성은 독립적으로 실행되는 프로세스들의 조합이다.**
 
 ![Concurrent task processing](./images/react-concurrent-mode/concurrent-process.png)
 
-## 리엑트팀은 왜 동시성을 구현하고자 했을 까
+## 왜 동시성을 구현하고자 했을 까
 
 리엑트는 사용자 인터페이스를 구축하는 라이브러리로서 핵심 역할인 인터렉션에
 대한 업데이트 과정과 사용자 경험에 대한 HCI 연구 결과를 반영하고 궁극적으로
@@ -97,7 +97,11 @@ keypress 이벤트에 대한 처리가 지연되고 있음을 경고 플래그�
 동작과 응답 사이의 연결이 지연되고 있음을 인식하게 되며, 이는 사용자 경험의 감점으로
 이어질 수 있습니다.
 
-## 동시성 구현을 위한 메커니즘; 우선 순위
+리엑트는 이러한 사용자 경험에 영향을 끼치는 랜더링 업데이트 과정에서
+동시성을 통해 개선된 인터렉션을 쉽게 구현할 수 있도록 하는 구현체를 제공하고자 
+했습니다.
+
+## 작업의 우선순위는 어떻게 할당될 까
 
 리엑트에서 동시성을 구현하는 첫번 째 메커니즘은 바로 우선순위입니다.
 
@@ -161,9 +165,9 @@ Lane 모델은 우선순위를 두 가지 중요한 컨셉으로 분리합니다
 - _Task Prioritization, A 작업이 B 작업보다 급한가?_
 - _Task Batching, A 작업이 이 그룹 텍스크에 속하는 가?_
 
-Task Prioritization 개념을 통해 작업의 우선순위를 기준으로 작업의
-우선 실행권을 부여하고, Task Batching 개념을 착안하여
-가령 CPU > I/O > CPU 순의 작업 예약에 대해,
+작업 우선순위 개념을 통해 작업의 우선순위를 기준으로 작업의
+우선 실행권을 부여하고, 작업 배칭 개념을 착안하여
+가령 CPU, I/O, CPU 순의 작업 예약에 대해,
 I/O 작업을 다른 그룹으로 분리하여 일괄 처리함으로서 CPU 작업의 병목을 
 방지할 수 있도록 합니다.
 
@@ -353,66 +357,8 @@ function dispatchSetState<S, A>(
 }
 ```
 
-<!-- TODO: Lane 모델의 적용단계의 함수 플로우를 정리헤야 함-->
-<!-- TODO: ensureRootIsScheduled 함수에 대한 정리가 필요함-->
-
-<!-- ```js
-export function requestUpdateLane(fiber: Fiber): Lane {
-  // 현재 랜더링 모드를 가져옵니다. 동기화 or 동시성 모드
-  const mode = fiber.mode;
-  if ((mode & ConcurrentMode) === NoMode) {
-    // 현재 랜더링 모드가 동시성 모드인지 확인하고, NoMode와
-    // 같다면, 동기 모드로 랜더링합니다.
-    return (SyncLane: Lane);
-  } else if (
-    !deferRenderPhaseUpdateToNextBatch &&
-    (executionContext & RenderContext) !== NoContext &&
-    workInProgressRootRenderLanes !== NoLanes
-  ) {
-    // workInProgressRootRenderLanes는 작업 실행 단계에서 업데이트해야 하는 FiberNode
-    // 새 업데이트가 작성되었을 때 workInProgressRootRenderLanes가 비어있지 않음은 실행
-    // 중인 작업이 있음을 의미합니다.
-    // 실행 중인 레인이 직접 반환되고, 현재 새 작업이 기존 작업과 일관적으로 업데이트됩니다.
-    return pickArbitraryLane(workInProgressRootRenderLanes);
-  }
-
-  // 현재 이벤트가 Transition 우선 순위라면 전환 우선 순위를 반환
-  // Transition 우선순위의 할당 규칙은
-  // 생성된 작업 A는 Transition의 첫 번째 비트를 할당한다.
-  // TransitionLane1 = 0b0000000000000000000000001000000
-  // 작업 B가 다시 생성되었으므로, A 위치에서 왼쪽으로 한 비트 이동한다.
-  //： TransitionLane2 = 0b0000000000000000000000010000000
-  // 후속 작업은 마지막 숫자에 도달할 때까지 한 번에 하나씩 뒤로 이동한다.
-  // 16비트의 Transition 우선순위가 있다.:
-  // TransitionLanes = 0b0000000001111111111111111000000
-  // 모든 비트가 사용되면 첫 번째 비트부터 이벤트 전환 우선 순위가 부여된다.
-  const isTransition = requestCurrentTransition() !== NoTransition;
-  if (isTransition) {
-    if (currentEventTransitionLane === NoLane) {
-      currentEventTransitionLane = claimNextTransitionLane();
-    }
-    return currentEventTransitionLane;
-  }
-
-  // onClick등과 같은 반응의 내부 이벤트에서 트리거된 업데이트 이벤트는 이벤트가
-  // 트리거될 때 현재 이벤트에 대한 우선순위를 설정한다. 이 이벤트는 직접 사용할 수 있다.
-  const updateLane: Lane = (getCurrentUpdatePriority(): any);
-  if (updateLane !== NoLane) {
-    return updateLane;
-  }
-
-  // 리엑트 외부의 반응 이벤트에 대해서 (e.g. setTimeout)
-  // 현재 이벤트에 대한 우선순위를 설정한다. 이는 직접 사용할 수 있다.
-  const eventLane: Lane = (getCurrentEventPriority(): any);
-  return eventLane;
-}
-``` -->
-
 업데이트 객체에 전달되는 우선순위를 구하는 `requestUpdateLane()`
 는 어떻게 이벤트 우선순위를 얻어오는 지 살펴봅시다.
-
-_여기서 Fiber는 작업의 가장 작은 단위를 모델링합니다. Fiber는
-다음 글에서 자세하게 정리할 예정입니다._
 
 먼저 현재 랜더링 모드에 대해 판단하여 동시성 기능을 제공하는 모드가
 아니라면, SyncLane을 반환합니다.
@@ -512,8 +458,6 @@ TransitionLane2 = 0b0000000000000000000000010000000;
 TransitionLanes = 0b0000000001111111111111111000000;
 ```
 
-<!-- ! 여기까지 정리 완료 -->
-
 전환 우선순위 작업이 아닌 경우에는 어떻게 처리될까요? 이벤트 우선순위 섹션에서
 우선순위가 래핑된 이벤트 리스너가 모두 루트에 바인딩되는 걸 확인했었는데요.
 여기서 이벤트가 발생하면 `setCurrentUpdatePriority()`가 호출되어
@@ -575,135 +519,7 @@ enqueueUpdate(fiber, update, lane);
 그 이후 스케쥴러 작업을 위해 설정된 우선순위가 사용되게 됩니다. 
 사용단계는 다음에 살펴봅시다.
 
-<!-- 그 다음 스케쥴러 작업을 위해 scheduleUpdateOnFiber가 호출된다.
-scheduleUpdateOnFiber가 주로 사용되는 중요한 위치를 살펴보자.
-
-```js
-export function scheduleUpdateOnFiber(
-  fiber: Fiber,
-  lane: Lane,
-  eventTime: number,
-): FiberRoot | null {
-  checkForNestedUpdates();
-  ...
-
-  // 업데이트해야 하는 자식 노드의 레인을 수집하고 부모 Fiber의 자식 Lane을 저장한다.
-  // 현재 FiberNode의 레인을 업데이트하여 현재 노드를 업데이트해야 함을 나타낸다.
-  // 현재 업데이트해야 하는 파이버 노드에서 위로 트래버스하여 루트 노드로
-  // 트래버스하고 각 파이버 노드에서 childLanes 속성을 업데이트한다.
-  // childLanes 값은 현재 노드 아래 업데이트해야 하는 자식 노드가 있음을 나타낸다.
-  const root = markUpdateLaneFromFiberToRoot(fiber, lane);
-  if (root === null) {
-    return null;
-  }
-
-  // 현재 업데이트해야 하는 레인을 Fiber Root의 pendingLanes 속성에
-  // 추가하여 실행해야 하는 새 업데이트 작업이 있음을 나타낸다.
-  // 현재 레인의 위치를 계산하고 eventTimes에 이벤트 트리거 시간을 추가한다.
-  markRootUpdated(root, lane, eventTime);
-  ...
-
-  ensureRootIsScheduled(root, eventTime);
-  ...
-  return root;
-}
-```
-
-markUpdateLaneFromFiberToRoot가 함수 내에서 호출되는 것을 볼 수 있습니다.이 함수의 주요 기능은 현재 광섬유 노드의 레인을 업데이트하여 현재 노드를 업데이트해야 함을 표시하고 업데이트해야 하는 자식 노드의 레인을 수집하는 것입니다. 업데이트하고 상위 파이버의 childLanes 속성에 저장합니다. 나중에 업데이트할 때 현재 광섬유 노드가 광섬유 노드의 lannes\*에 따라 업데이트되어야 하는지 여부와 현재 광섬유의 자식 노드가 childLanes에 따라 업데이트되어야 하는지 여부를 판단합니다. markUpdateLaneFromFiberToRoot가 내부적으로 구현되는 방식을 살펴보겠습니다.
-
-```js
-function markUpdateLaneFromFiberToRoot(
-  sourceFiber: Fiber,
-  lane: Lane,
-): FiberRoot | null {
-  // 현재 노드를 업데이트해야 함을 나타내는 현재 노드의 레인 업데이트
-  // 새로운 텍스크의 레인의 현재 FiberNode에 대한 레인 속성은 현재
-  // FiberNode에 해당하는 대체 노드가 비어 있지 않으면
-  // 업데이트 중임을 의미하고, 레인은 대체에서 동기적으로 업데이트된다.
-  sourceFiber.lanes = mergeLanes(sourceFiber.lanes, lane);
-  let alternate = sourceFiber.alternate;
-  if (alternate !== null) {
-    alternate.lanes = mergeLanes(alternate.lanes, lane);
-  }
- ...
-
-  // 현재 업데이트가 필요한 FiberNode에서 루트 광섬유 노드까지 순회하고
-  // 각 광섬유 노드의 childLanes를 업데이트한다.
-  // 미래에 childLanes는 현재 FiberNode 아래에 업데이트해야 하는
-  // 자식 노드가 있는지 확인하는 데 사용된다.
-
-  // 현재 업데이트된 노드에서 Fiber Root Node로 이동하고 각 FiberNode에서
-  // childLanes 속성을 업데이트하여 현재 Fiber 아래 자식노드를 업데이트해야 함을
-  // 나타낸다.
-  let node = sourceFiber;
-  let parent = sourceFiber.return;
-  while (parent !== null) {
-    parent.childLanes = mergeLanes(parent.childLanes, lane);
-    alternate = parent.alternate;
-    if (alternate !== null) {
-      alternate.childLanes = mergeLanes(alternate.childLanes, lane);
-    } else {
-      if (__DEV__) {
-        if ((parent.flags & (Placement | Hydrating)) !== NoFlags) {
-          warnAboutUpdateOnNotYetMountedFiberInDEV(sourceFiber);
-        }
-      }
-    }
-    node = parent;
-    parent = parent.return;
-  }
-
-  // 순회 업데이트가 완료되면 Fiber Root Node가 반환된다.
-  if (node.tag === HostRoot) {
-    const root: FiberRoot = node.stateNode;
-    return root;
-  } else {
-    return null;
-  }
-}
-```
-
-markUpdateLaneFromFiberToRoot가 실행된 후 markRootUpdated 함수가 호출됩니다. 이 함수의 기능은 현재 업데이트된 레인을 Fiber 루트의 pendingLanes 속성에 추가하여 실행할 새 업데이트 작업이 있음을 표시한 다음 기록하는 것입니다. eventTimes 속성의 이벤트 트리거 시간입니다.
-
-updateLane이 0b000100이라고 가정하면, eventTimes에서 다음과 같은 형식이다.
-
-```text
-[-1, -1, 44573.3452, -1， -1...]
-```
-
-```js
-export function markRootUpdated(
-  root: FiberRoot,
-  updateLane: Lane,
-  eventTime: number
-) {
-  // 将当前需要更新的lane添加到fiber root的pendingLanes属性上
-  root.pendingLanes |= updateLane;
-
-  if (updateLane !== IdleLane) {
-    root.suspendedLanes = NoLanes;
-    root.pingedLanes = NoLanes;
-  }
-
-  // eventTimes는 31비트 바이너리를 사용하는 Lane에
-  // 해당하는 31비트 길이의 배열이다.
-  const eventTimes = root.eventTimes;
-  const index = laneToIndex(updateLane);
-  eventTimes[index] = eventTime;
-}
-```
-
-### ensureRootIsScheduled
-
-markRootUpdated 호출이 완료되면 즉시 ensureRootIsScheduled 함수가 호출되어 작업 예약을 시작할 준비가 됩니다.
-ensureRootIsScheduled는 상대적으로 중요한 기능으로, 우선순위가
-높은 텍스크 큐 삽입 및 택스크 기아 문제, 일괄 업데이트를 처리합니다.
-이 함수가 이러한 문제를 어떻게 처리하는 지 살펴보자.
-
-```js
-``` -->
-
-## 동시성 구현을 위한 메커니즘; 양보
+## 작업의 중단과 스레드 양보는 어떻게 이루어 질 까
 
 브라우저는 랜더링 엔진에게 메인 스레드 점유를 위임하게 되면,
 랜더링 과정 중 발생한 사용자 입력에 대해 즉시 처리할 수 없게 됩니다.
@@ -733,6 +549,7 @@ ensureRootIsScheduled는 상대적으로 중요한 기능으로, 우선순위가
 
 ```js
 // SchedulerFeatureFlags.js
+
 export const frameYieldMs = 5;
 ```
 
@@ -757,7 +574,6 @@ function shouldYieldToHost() {
 대한 제안 권한을 양보합니다.
 
 ```js
-// Scheduler.js
 let needsPaint = false;
 
 function requestPaint() {
@@ -788,6 +604,7 @@ function shouldYieldToHost() {
 
 ```js
 // ReactFiberWorkLoop.new.js
+
 import { requestPaint } from './Scheduler';
 
 function commitRootImpl(...) {
@@ -809,6 +626,7 @@ isInputPending은 단순히 모든 사용자 이벤트를 동일하게 처리하
 
 ```js
 // SchedulerFeatureFlags.js
+
 export const continuousYieldMs = 50;
 ```
 
@@ -842,6 +660,7 @@ function shouldYieldToHost() {
 
 ```js
 // SchedulerFeatureFlags.js
+
 export const maxYieldMs = 300;
 ```
 
@@ -878,12 +697,11 @@ function shouldYieldToHost() {
 }
 ```
 
-지금까지 알아본 shouldYieldToHost는 스케쥴러의 [workLoop](https://github.com/facebook/react/blob/main/packages/scheduler/src/forks/Scheduler.js#L189)에서 사용됩니다. 현재 진행 중인 작업의 만료시간이 현재 시간에 비해 여유가 있는 시점에서
+지금까지 알아본 `shouldYieldToHost()`는 스케쥴러의 `workLoop()`에서 사용됩니다. 현재 진행 중인 작업의 만료시간이 현재 시간에 비해 여유가 있는 시점에서
 우선 순위가 더 높은 작업이 보류되고 있다면, 메인 스레드에게 제어권을 양보하고, 만료 시간이
 지난 작업에 대해서는 양보하지 않고 동기적으로 바쁘게 작업을 이어나갑니다.
 
 ```js
-// Scheduler.js
 function workLoop(hasTimeRemaining, initialTime) {
   ...
   while (
@@ -907,7 +725,8 @@ function workLoop(hasTimeRemaining, initialTime) {
 중지될 수 있음이 조건에 담겨있습니다.
 
 ```js
-// ReactFiberWorkLoop.new.js
+// react-reconciler/src/ReactFiberWorkLoop.new.js
+
 import { shouldYield } from './Scheduler';
 function workLoopConcurrent() {
   while (workInProgress !== null && !shouldYield()) {
@@ -916,10 +735,8 @@ function workLoopConcurrent() {
 }
 ```
 
-이를 통해 리콘실러는 workLoopConcurrnet를 통해 현재 작업중이던 루트 혹은 레일(lane)이
+이를 통해 리콘실러는 `workLoopConcurrent()`를 통해 현재 작업중이던 루트 혹은 Lane이
 변경되면, 루트에 대기중인 작업들을 모두 비우고, 변경된 레인의 작업이 진행될 수 있도록 합니다.
-(여기서, 레인은 두 가지 이상의 논리적 통제를 다루는 컨텍스트를 의미하는 것 같습니다.
-마치 고속도로의 차선 처럼요.)
 
 ```js
 function renderRootConcurrent(root: FiberRoot, lanes: Lanes) {
@@ -948,4 +765,16 @@ function renderRootConcurrent(root: FiberRoot, lanes: Lanes) {
     }
   }
 ```
+
+## Reference
+
+[Inside React (동시성을 구현하는 기술)](https://deview.kr/2021/sessions/518)
+
+[React 톺아보기 - 01. Preview](https://goidle.github.io/react/in-depth-react-preview/)
+
+[github.com/facebook/react/pull/18796](https://github.com/facebook/react/pull/18796)
+
+[github.com/facebook/react](https://github.com/facebook/react)
+
+[wicg.github.io/is-input-pending](https://wicg.github.io/is-input-pending/#continuous-events)
 
