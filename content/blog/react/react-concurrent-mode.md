@@ -1,5 +1,5 @@
 ---
-title: react-concurrent-mode
+title: 리엑트 동시성 매커니즘들은 어떻게 구현되어 있을 까
 date: 2022-06-11 16:06:62
 category: react
 thumbnail: { thumbnailSrc }
@@ -20,8 +20,10 @@ _useDeferredValue_, _SuspenseList_, _Streaming SSR with selective hydration_
 
 이 글을 적게 된 계기는 _'도대체, 동시성이 무엇이길래 리엑트팀에서 5년이라는
 시간을 쏟았으며, 동시성을 위한 메커니즘들의 구현체들이 어떻게 구현되어 있을 까?
-'_ 라는 호기심과 함께, _'리엑트를 사랑하는 개발자로서 최소한의 예의를 보여야 겠다'_
-라는 생각이 들어서 입니다.
+'_ 라는 호기심이었습니다.
+
+_이 글은 대부분 [Inside React (동시성을 구현하는 기술)](https://deview.kr/2021/sessions/518)
+에서 언급한 내용을 정리하고, 인사이트를 얻어 패키지를 살펴본 내용을 위주로 정리되어 있습니다._
 
 ## Concurrent vs Parallelism
 
@@ -512,23 +514,26 @@ TransitionLanes = 0b0000000001111111111111111000000;
 
 <!-- ! 여기까지 정리 완료 -->
 
-전환 우선순위 작업이 아닌 경우 함수가 
-전환 우선순위 작업이 아닌 경우 아래를 보면 다음으로 getCurrentUpdatePriority 함수가 호출되는 것을 볼 수 있습니다. 처음에 프로젝트가 처음 렌더링될 때 이벤트가 위임될 것이라고 언급한 것을 기억하십시오. 루트 컨테이너 및 모든 지원되는 이벤트는 우선 순위에 따라 분류되며 이벤트가 발생하면 setCurrentUpdatePriority 함수가 호출되어 현재 이벤트의 우선 순위를 설정합니다. getCurrentUpdatePriority 함수를 호출하면 이벤트가 트리거될 때 설정된 이벤트 우선 순위도 가져옵니다. 획득한 이벤트 우선 순위가 비어 있지 않으면 이벤트의 우선 순위를 직접 반환합니다.
+전환 우선순위 작업이 아닌 경우에는 어떻게 처리될까요? 이벤트 우선순위 섹션에서
+우선순위가 래핑된 이벤트 리스너가 모두 루트에 바인딩되는 걸 확인했었는데요.
+여기서 이벤트가 발생하면 `setCurrentUpdatePriority()`가 호출되어
+현재 이벤트 우선순위를 반환되어 스케쥴링 우선순위로 사용됩니다.
+
+만약 현재 이벤트 우선순위가 비어있다면, `getCurrentUpdatePriority()`
+에서 외부 이벤트의 우선순위를 가져옵니다. 이런 케이스는 가령, setState가
+setTimeout에서 호출된 케이스입니다.
 
 ```js
-const updateLane: Lane = (getCurrentUpdatePriority(): any);
-if (updateLane !== NoLane) {
-  return updateLane;
+export function requestUpdateLane(fiber: Fiber): Lane {
+  ...
+  const updateLane: Lane = (getCurrentUpdatePriority(): any);
+  if (updateLane !== NoLane) {
+    return updateLane;
+  }
+
+  const eventLane: Lane = (getCurrentEventPriority(): any);
+  return eventLane;
 }
-```
-
-이벤트 우선순위가 위에서 발견되지 않으면 getCurrentEventPriority가 호출되어 React의 외부 이벤트의 우선순위를 가져옵니다.예를 들어 setState 메소드는 setTimeout에서 호출됩니다.
-
-마지막으로 찾은 이벤트의 우선 순위를 반환한다.
-
-```js
-const eventLane: Lane = (getCurrentEventPriority(): any);
-return eventLane;
 ```
 
 이벤트의 우선순위를 얻은 다음, Lane을 사용하면 어떻게 되는 지 알아봅시다.
@@ -542,7 +547,7 @@ export function createUpdate(eventTime: number, lane: Lane): Update<*> {
 
     tag: UpdateState,
     payload: null,
-    callback: null, // 콜백 setState의 두 번째 매개변수 업데이트
+    callback: null,
 
     next: null,
   };
@@ -551,7 +556,7 @@ export function createUpdate(eventTime: number, lane: Lane): Update<*> {
 ```
 
 다음으로 업데이트해야 하는 컨텐츠를 페이로드에 담고,
-업데이트 콜백 함수를 업데이트 개체의 콜백 속성에 담습니다.
+업데이트 콜백 함수를 업데이트 객체의 콜백 속성에 담습니다.
 
 ```js
 update.payload = payload;
@@ -561,13 +566,16 @@ if (callback !== undefined && callback !== null) {
 ```
 
 그 다음 현재 컴포넌트에 해당하는 FiberNode의 업데이트 대기열에
-업데이트 개체를 추가한다.
+업데이트 객체가 추가됩니다.
 
 ```js
 enqueueUpdate(fiber, update, lane);
 ```
 
-그 다음 스케쥴러 작업을 위해 scheduleUpdateOnFiber가 호출된다.
+그 이후 스케쥴러 작업을 위해 설정된 우선순위가 사용되게 됩니다. 
+사용단계는 다음에 살펴봅시다.
+
+<!-- 그 다음 스케쥴러 작업을 위해 scheduleUpdateOnFiber가 호출된다.
 scheduleUpdateOnFiber가 주로 사용되는 중요한 위치를 살펴보자.
 
 ```js
@@ -693,7 +701,7 @@ ensureRootIsScheduled는 상대적으로 중요한 기능으로, 우선순위가
 이 함수가 이러한 문제를 어떻게 처리하는 지 살펴보자.
 
 ```js
-```
+``` -->
 
 ## 동시성 구현을 위한 메커니즘; 양보
 
