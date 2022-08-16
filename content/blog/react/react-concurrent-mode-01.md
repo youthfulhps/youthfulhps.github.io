@@ -2,7 +2,7 @@
 title: 리엑트 동시성 매커니즘들은 어떻게 구현되어 있을 까 - 01
 date: 2022-06-11 16:06:62
 category: react
-thumbnail: ./images/react-concurrent-mode/thumbnail.png
+thumbnail: ./images/react-concurrent-mode-01/thumbnail.png
 draft: false
 ---
 
@@ -47,14 +47,14 @@ _'**동시성은 독립적으로 실행되는 프로세스들의 조합이다.**
 텍스크를 각각의 코어가 작업하는 것과 같이 최소 한 가지 논리적 통제를
 멀티 코어에서 병렬적으로 진행합니다.
 
-![Parallel task processing](./images/react-concurrent-mode/parallelism-process.png)
+![Parallel task processing](./images/react-concurrent-mode-01/parallelism-process.png)
 
 반면 동시성은 최소 두 개의 논리적 통제 흐름을 가지고 있으며,
 잘개 쪼개진 두 개 이상의 작업을 지속적으로 컨텍스트 스위칭하여
 마치 동시에 이루어지는 것처럼 보이도록 합니다.
 강의를 듣다가 내용 정리를 위해 일시정지하고 메모하는 것과 같은 작업 처리 방식입니다.
 
-![Concurrent task processing](./images/react-concurrent-mode/concurrent-process.png)
+![Concurrent task processing](./images/react-concurrent-mode-01/concurrent-process.png)
 
 ## 왜 동시성을 구현하고자 했을 까
 
@@ -87,9 +87,9 @@ _'**동시성은 독립적으로 실행되는 프로세스들의 조합이다.**
 데모처럼 입력값에 대한 픽셀 박스를 랜더링하는 연산이 무거워짐에 따라
 keypress 이벤트에 대한 처리가 지연되고 있음을 경고 플래그를 통해 확인할 수 있습니다.
 
-![Example of blocking rendering](./images/react-concurrent-mode/blocking-rendering-example.png)
+![Example of blocking rendering](./images/react-concurrent-mode-01/blocking-rendering-example.png)
 
-![Delay in processing tasks for keypress](./images/react-concurrent-mode/blocking-rendering-performance.png)
+![Delay in processing tasks for keypress](./images/react-concurrent-mode-01/blocking-rendering-performance.png)
 
 경고 플래그 중 하나의 예시로 keypress 이벤트를 처리하는 데 143.41ms이 소요 되었는데
 [RAIL](https://web.dev/rail/?utm_source=devtools#goals-and-guidelines)
@@ -98,7 +98,7 @@ keypress 이벤트에 대한 처리가 지연되고 있음을 경고 플래그�
 이어질 수 있습니다.
 
 리엑트는 이러한 사용자 경험에 영향을 끼치는 랜더링 업데이트 과정에서
-동시성을 통해 개선된 인터렉션을 쉽게 구현할 수 있도록 하는 구현체를 제공하고자 
+동시성을 통해 개선된 인터렉션을 쉽게 구현할 수 있도록 하는 구현체를 제공하고자
 했습니다.
 
 ## 작업의 우선순위는 어떻게 할당될 까
@@ -168,7 +168,7 @@ Lane 모델은 우선순위를 두 가지 중요한 컨셉으로 분리합니다
 작업 우선순위 개념을 통해 작업의 우선순위를 기준으로 작업의
 우선 실행권을 부여하고, 작업 배칭 개념을 착안하여
 가령 CPU, I/O, CPU 순의 작업 예약에 대해,
-I/O 작업을 다른 그룹으로 분리하여 일괄 처리함으로서 CPU 작업의 병목을 
+I/O 작업을 다른 그룹으로 분리하여 일괄 처리함으로서 CPU 작업의 병목을
 방지할 수 있도록 합니다.
 
 _CPU 작업이 I/O 작업보다 우선순위가 낮아 지속적인 양보가 발생하게 되면 CPU 작업처리에
@@ -323,7 +323,7 @@ export function createRoot(
 
 ### 스케쥴링 우선순위
 
-스케쥴링 우선순위는 스케쥴러 기반의 리엑트 업데이트 작업이 가지는 
+스케쥴링 우선순위는 스케쥴러 기반의 리엑트 업데이트 작업이 가지는
 우선순위입니다. 스케쥴러는 스케쥴링 우선순위를 통해 산발적으로
 발생하는 작업들의 교통정리를 진행합니다.
 
@@ -448,7 +448,7 @@ export function claimNextTransitionLane(): Lane {
 
 이 때, 생성된 작업에 대해 맨 오른쪽 비트를 소유하는 TransitionLane을
 할당하고, 후속으로 생성된 작업에 대해 왼쪽으로 한 자리 이동된 비트를 소유하는
-TransitionLane을 할당합니다. 
+TransitionLane을 할당합니다.
 
 ```js
 TransitionLane1 = 0b0000000000000000000000001000000;
@@ -516,7 +516,7 @@ if (callback !== undefined && callback !== null) {
 enqueueUpdate(fiber, update, lane);
 ```
 
-그 이후 스케쥴러 작업을 위해 설정된 우선순위가 사용되게 됩니다. 
+그 이후 스케쥴러 작업을 위해 설정된 우선순위가 사용되게 됩니다.
 사용단계는 다음에 살펴봅시다.
 
 ## 작업의 중단과 스레드 양보는 어떻게 이루어 질 까
@@ -527,7 +527,7 @@ enqueueUpdate(fiber, update, lane);
 우선순위가 높은 작업이 텍스크 스택에 들어오면 진행중이던 작업을 중단하고 메인 스레드에게
 점유를 양보(yield)할 수 있는 메커니즘을 구현하게 됩니다.**
 
-![When the user's input comes in, rendering is interrupted](./images/react-concurrent-mode/interruption-and-yield.png)
+![When the user's input comes in, rendering is interrupted](./images/react-concurrent-mode-01/interruption-and-yield.png)
 
 페이스북팀은 **메인 스레드를 점유하여 랜더링 연산을 전개하고 있는 과정에서
 사용자의 입력에 대한 처리가 대기 중임을 확인하고 메인 스레드 점유를
@@ -777,4 +777,3 @@ function renderRootConcurrent(root: FiberRoot, lanes: Lanes) {
 [github.com/facebook/react](https://github.com/facebook/react)
 
 [wicg.github.io/is-input-pending](https://wicg.github.io/is-input-pending/#continuous-events)
-
