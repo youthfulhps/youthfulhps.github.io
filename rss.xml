@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Youthfulhps.dev]]></title><description><![CDATA[Blog posted front-end, troubleshooting!]]></description><link>https://youthfulhps.dev</link><generator>GatsbyJS</generator><lastBuildDate>Fri, 12 Aug 2022 10:35:28 GMT</lastBuildDate><item><title><![CDATA[react-testing]]></title><description><![CDATA[현재 파이브스팟 모바일 웹을 가꾸어 나가고 있습니다. 빠르게 출시하기 위해
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Youthfulhps.dev]]></title><description><![CDATA[Blog posted front-end, troubleshooting!]]></description><link>https://youthfulhps.dev</link><generator>GatsbyJS</generator><lastBuildDate>Tue, 16 Aug 2022 15:49:14 GMT</lastBuildDate><item><title><![CDATA[react-testing]]></title><description><![CDATA[현재 파이브스팟 모바일 웹을 가꾸어 나가고 있습니다. 빠르게 출시하기 위해
 동작하는 프러덕션을 배포하고, 피드백을 취합해서 다음 페이스를 위한 기능적인 살과
 뼈대를 붙여나가고 있는 작업이 한창입니다. Deliver usable products to…]]></description><link>https://youthfulhps.dev/react/react-testing/</link><guid isPermaLink="false">https://youthfulhps.dev/react/react-testing/</guid><pubDate>Mon, 25 Jul 2022 11:07:43 GMT</pubDate><content:encoded>&lt;p&gt;현재 파이브스팟 모바일 웹을 가꾸어 나가고 있습니다. 빠르게 출시하기 위해
 동작하는 프러덕션을 배포하고, 피드백을 취합해서 다음 페이스를 위한 기능적인 살과
@@ -932,7 +932,7 @@ any를 사용하면 타입 체커가 무력화됩니다.&lt;/p&gt;
 &lt;p&gt;&lt;a href=&quot;https://toss.tech/article/template-literal-types&quot;&gt;Template Literal Types로 타입 안전하게 코딩하기&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href=&quot;https://engineering.linecorp.com/ko/blog/typescript-enum-tree-shaking/&quot;&gt;TypeScript enum을 사용하지 않는 게 좋은 이유를 Tree-shaking 관점에서 소개합니다.&lt;/a&gt;&lt;/p&gt;</content:encoded></item><item><title><![CDATA[리엑트 동시성 매커니즘들은 어떻게 구현되어 있을 까 - 01]]></title><description><![CDATA[리엑트v18에서 동시성 기능을 정식으로 출시하였습니다.
 대표적으로, Automatic batching for fewer renders,
-SSR support for Suspense, Fixes for Suspense behavior quirks…]]></description><link>https://youthfulhps.dev/react/react-concurrent-mode/</link><guid isPermaLink="false">https://youthfulhps.dev/react/react-concurrent-mode/</guid><pubDate>Sat, 11 Jun 2022 16:07:02 GMT</pubDate><content:encoded>&lt;p&gt;리엑트v18에서 동시성 기능을 정식으로 출시하였습니다.
+SSR support for Suspense, Fixes for Suspense behavior quirks…]]></description><link>https://youthfulhps.dev/react/react-concurrent-mode-01/</link><guid isPermaLink="false">https://youthfulhps.dev/react/react-concurrent-mode-01/</guid><pubDate>Sat, 11 Jun 2022 16:07:02 GMT</pubDate><content:encoded>&lt;p&gt;리엑트v18에서 동시성 기능을 정식으로 출시하였습니다.
 대표적으로, &lt;em&gt;Automatic batching for fewer renders&lt;/em&gt;,
 &lt;em&gt;SSR support for Suspense&lt;/em&gt;, &lt;em&gt;Fixes for Suspense behavior quirks&lt;/em&gt;
 와 같은 내부적인 성능 향상을 이루었고, &lt;em&gt;startTransition&lt;/em&gt;,
@@ -1375,7 +1375,7 @@ PR을 기반으로 작성하였습니다. 추가적인 내용은 레퍼런스를
 &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;이 때, 생성된 작업에 대해 맨 오른쪽 비트를 소유하는 TransitionLane을
 할당하고, 후속으로 생성된 작업에 대해 왼쪽으로 한 자리 이동된 비트를 소유하는
-TransitionLane을 할당합니다. &lt;/p&gt;
+TransitionLane을 할당합니다.&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;TransitionLane1 &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0b0000000000000000000000001000000&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
 TransitionLane2 &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0b0000000000000000000000010000000&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
 &lt;span class=&quot;token operator&quot;&gt;...&lt;/span&gt;
