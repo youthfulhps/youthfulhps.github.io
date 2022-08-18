@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Youthfulhps.dev]]></title><description><![CDATA[Blog posted front-end, troubleshooting!]]></description><link>https://youthfulhps.dev</link><generator>GatsbyJS</generator><lastBuildDate>Tue, 16 Aug 2022 15:49:14 GMT</lastBuildDate><item><title><![CDATA[react-testing]]></title><description><![CDATA[현재 파이브스팟 모바일 웹을 가꾸어 나가고 있습니다. 빠르게 출시하기 위해
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Youthfulhps.dev]]></title><description><![CDATA[Blog posted front-end, troubleshooting!]]></description><link>https://youthfulhps.dev</link><generator>GatsbyJS</generator><lastBuildDate>Thu, 18 Aug 2022 09:41:54 GMT</lastBuildDate><item><title><![CDATA[react-testing]]></title><description><![CDATA[현재 파이브스팟 모바일 웹을 가꾸어 나가고 있습니다. 빠르게 출시하기 위해
 동작하는 프러덕션을 배포하고, 피드백을 취합해서 다음 페이스를 위한 기능적인 살과
 뼈대를 붙여나가고 있는 작업이 한창입니다. Deliver usable products to…]]></description><link>https://youthfulhps.dev/react/react-testing/</link><guid isPermaLink="false">https://youthfulhps.dev/react/react-testing/</guid><pubDate>Mon, 25 Jul 2022 11:07:43 GMT</pubDate><content:encoded>&lt;p&gt;현재 파이브스팟 모바일 웹을 가꾸어 나가고 있습니다. 빠르게 출시하기 위해
 동작하는 프러덕션을 배포하고, 피드백을 취합해서 다음 페이스를 위한 기능적인 살과
@@ -930,23 +930,21 @@ any를 사용하면 타입 체커가 무력화됩니다.&lt;/p&gt;
 &lt;p&gt;Dan VanderKam. 『&lt;a href=&quot;https://effectivetypescript.com/&quot;&gt;effective typescript&lt;/a&gt;』&lt;/p&gt;
 &lt;p&gt;&lt;a href=&quot;https://github.com/danvk/effective-typescript&quot;&gt;danvk/effective-typescript&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href=&quot;https://toss.tech/article/template-literal-types&quot;&gt;Template Literal Types로 타입 안전하게 코딩하기&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;https://engineering.linecorp.com/ko/blog/typescript-enum-tree-shaking/&quot;&gt;TypeScript enum을 사용하지 않는 게 좋은 이유를 Tree-shaking 관점에서 소개합니다.&lt;/a&gt;&lt;/p&gt;</content:encoded></item><item><title><![CDATA[리엑트 동시성 매커니즘들은 어떻게 구현되어 있을 까 - 01]]></title><description><![CDATA[리엑트v18에서 동시성 기능을 정식으로 출시하였습니다.
-대표적으로, Automatic batching for fewer renders,
-SSR support for Suspense, Fixes for Suspense behavior quirks…]]></description><link>https://youthfulhps.dev/react/react-concurrent-mode-01/</link><guid isPermaLink="false">https://youthfulhps.dev/react/react-concurrent-mode-01/</guid><pubDate>Sat, 11 Jun 2022 16:07:02 GMT</pubDate><content:encoded>&lt;p&gt;리엑트v18에서 동시성 기능을 정식으로 출시하였습니다.
-대표적으로, &lt;em&gt;Automatic batching for fewer renders&lt;/em&gt;,
-&lt;em&gt;SSR support for Suspense&lt;/em&gt;, &lt;em&gt;Fixes for Suspense behavior quirks&lt;/em&gt;
-와 같은 내부적인 성능 향상을 이루었고, &lt;em&gt;startTransition&lt;/em&gt;,
-&lt;em&gt;useDeferredValue&lt;/em&gt;, &lt;em&gt;SuspenseList&lt;/em&gt;, &lt;em&gt;Streaming SSR with selective hydration&lt;/em&gt;
+&lt;p&gt;&lt;a href=&quot;https://engineering.linecorp.com/ko/blog/typescript-enum-tree-shaking/&quot;&gt;TypeScript enum을 사용하지 않는 게 좋은 이유를 Tree-shaking 관점에서 소개합니다.&lt;/a&gt;&lt;/p&gt;</content:encoded></item><item><title><![CDATA[리엑트 동시성 매커니즘들은 어떻게 구현되어 있을 까 - 01]]></title><description><![CDATA[리엑트v18에서 동시성 기능을 정식으로 출시하였습니다. 대표적으로,
+Automatic batching for fewer renders, SSR support for
+Suspense, Fixes for Suspense behavior quirks…]]></description><link>https://youthfulhps.dev/react/react-concurrent-mode-01/</link><guid isPermaLink="false">https://youthfulhps.dev/react/react-concurrent-mode-01/</guid><pubDate>Sat, 11 Jun 2022 16:07:02 GMT</pubDate><content:encoded>&lt;p&gt;리엑트v18에서 동시성 기능을 정식으로 출시하였습니다. 대표적으로,
+&lt;em&gt;Automatic batching for fewer renders&lt;/em&gt;, &lt;em&gt;SSR support for
+Suspense&lt;/em&gt;, &lt;em&gt;Fixes for Suspense behavior quirks&lt;/em&gt;와 같은 내부적인
+성능 향상과, &lt;em&gt;startTransition&lt;/em&gt;, &lt;em&gt;useDeferredValue&lt;/em&gt;, &lt;em&gt;SuspenseList&lt;/em&gt;
 과 같은 기능들이 추가되었습니다.&lt;/p&gt;
-&lt;p&gt;리엑트v18에는 동시성 랜더링 기능을 담아내기 위해
-협력적 멀티테스킹, 우선순위 기반 랜더링, 스케쥴링, 중단과 같은
-메커니즘을 구현하였습니다. 기저에 있는 아키텍처를 수정해야 했던 만큼
-5년이라는 시간동안 많은 시행착오를 겪었을 텐데요.&lt;/p&gt;
-&lt;p&gt;이 글을 적게 된 계기는 &lt;em&gt;‘도대체, 동시성이 무엇이길래 리엑트팀에서 5년이라는
+&lt;p&gt;동시성 기능을 담아내기 위해 리엑트팀은 협력적 멀티테스킹, 우선순위 기반 랜더링,
+스케쥴링, 중단과 같은 메커니즘을 담아냈습니다. 기저에 있는 아키텍처를 수정해야
+했던 만큼 5년이라는 시간동안 많은 시행착오를 겪었을 텐데요.&lt;/p&gt;
+&lt;p&gt;이 시리즈는 &lt;em&gt;‘도대체, 동시성이 무엇이길래 리엑트팀에서 5년이라는
 시간을 쏟았으며, 동시성을 위한 메커니즘들의 구현체들이 어떻게 구현되어 있을 까?
-’&lt;/em&gt; 라는 호기심이었습니다.&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;이 글은 대부분 &lt;a href=&quot;https://deview.kr/2021/sessions/518&quot;&gt;Inside React (동시성을 구현하는 기술)&lt;/a&gt;
-에서 언급한 내용을 정리하고, 인사이트를 얻어 패키지를 살펴본 내용을 위주로 정리되어 있습니다.&lt;/em&gt;&lt;/p&gt;
+’&lt;/em&gt; 라는 호기심에 찾아본 구현체들과 레퍼런스들을 차근차근 정리해보고자 합니다.&lt;/p&gt;
+&lt;p&gt;그 첫 번째로, &lt;a href=&quot;https://deview.kr/2021/sessions/518&quot;&gt;Inside React (동시성을 구현하는 기술)&lt;/a&gt;에서 언급한 내용들을 정리하고, 우선순위와 양보 매커니즘이
+어떻게 구현되어 있는 지 살펴보려 합니다.&lt;/p&gt;
 &lt;h2 id=&quot;concurrent-vs-parallelism&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#concurrent-vs-parallelism&quot; aria-label=&quot;concurrent vs parallelism permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Concurrent vs Parallelism&lt;/h2&gt;
 &lt;p&gt;동시성을 설명할 때, 서로 관련있는 병렬성과 함께 설명하곤 합니다.
 하지만, 이 둘은 뚜렷한 차이를 가지고 있으며
@@ -1010,7 +1008,7 @@ Go 언어의 창시자의 &lt;a href=&quot;https://go.dev/blog/waza-talk&quot;&g
         loading=&quot;lazy&quot;
       /&gt;
     &lt;/span&gt;&lt;/p&gt;
-&lt;h2 id=&quot;왜-동시성을-구현하고자-했을-까&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EC%99%9C-%EB%8F%99%EC%8B%9C%EC%84%B1%EC%9D%84-%EA%B5%AC%ED%98%84%ED%95%98%EA%B3%A0%EC%9E%90-%ED%96%88%EC%9D%84-%EA%B9%8C&quot; aria-label=&quot;왜 동시성을 구현하고자 했을 까 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;왜 동시성을 구현하고자 했을 까&lt;/h2&gt;
+&lt;h2 id=&quot;리엑트팀은-왜-동시성-기능을-구현하고자-했을-까&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EB%A6%AC%EC%97%91%ED%8A%B8%ED%8C%80%EC%9D%80-%EC%99%9C-%EB%8F%99%EC%8B%9C%EC%84%B1-%EA%B8%B0%EB%8A%A5%EC%9D%84-%EA%B5%AC%ED%98%84%ED%95%98%EA%B3%A0%EC%9E%90-%ED%96%88%EC%9D%84-%EA%B9%8C&quot; aria-label=&quot;리엑트팀은 왜 동시성 기능을 구현하고자 했을 까 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;리엑트팀은 왜 동시성 기능을 구현하고자 했을 까&lt;/h2&gt;
 &lt;p&gt;리엑트는 사용자 인터페이스를 구축하는 라이브러리로서 핵심 역할인 인터렉션에
 대한 업데이트 과정과 사용자 경험에 대한 HCI 연구 결과를 반영하고 궁극적으로
 기술적으로 결합하는 목표를 가지고 있습니다. 사람과 컴퓨터간의 인터렉션에
@@ -1024,7 +1022,7 @@ Go 언어의 창시자의 &lt;a href=&quot;https://go.dev/blog/waza-talk&quot;&g
 생각해봅시다. 브라우저는 HTML을 파싱하고, 자바스크립트를 실행하며
 랜더트리를 구축하고 그려내는 작업까지 단일 스레드로서 한번에 하나의
 작업만을 수행합니다.&lt;/p&gt;
-&lt;p&gt;때문에 가령 메인 스레드가 자바스크립트 엔진에게 실행권을 위임하여
+&lt;p&gt;때문에 메인 스레드가 자바스크립트 엔진에게 실행권을 위임하여
 자바스크립트 파싱을 시작했다면 그 작업을 멈출 수 없으며,
 작업이 완료될 때까지 이후의 작업을 전개할 수 없습니다.
 리엑트 랜더링 연산 과정도 동일한 절차를 거치게 되며,
@@ -1087,16 +1085,14 @@ keypress 이벤트에 대한 처리가 지연되고 있음을 경고 플래그�
 &lt;p&gt;리엑트는 이러한 사용자 경험에 영향을 끼치는 랜더링 업데이트 과정에서
 동시성을 통해 개선된 인터렉션을 쉽게 구현할 수 있도록 하는 구현체를 제공하고자
 했습니다.&lt;/p&gt;
-&lt;h2 id=&quot;작업의-우선순위는-어떻게-할당될-까&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EC%9E%91%EC%97%85%EC%9D%98-%EC%9A%B0%EC%84%A0%EC%88%9C%EC%9C%84%EB%8A%94-%EC%96%B4%EB%96%BB%EA%B2%8C-%ED%95%A0%EB%8B%B9%EB%90%A0-%EA%B9%8C&quot; aria-label=&quot;작업의 우선순위는 어떻게 할당될 까 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;작업의 우선순위는 어떻게 할당될 까&lt;/h2&gt;
+&lt;h2 id=&quot;동시성-메커니즘-우선순위&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EB%8F%99%EC%8B%9C%EC%84%B1-%EB%A9%94%EC%BB%A4%EB%8B%88%EC%A6%98-%EC%9A%B0%EC%84%A0%EC%88%9C%EC%9C%84&quot; aria-label=&quot;동시성 메커니즘 우선순위 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;동시성 메커니즘; 우선순위&lt;/h2&gt;
 &lt;p&gt;리엑트에서 동시성을 구현하는 첫번 째 메커니즘은 바로 우선순위입니다.&lt;/p&gt;
-&lt;p&gt;우선순위 메커니즘은 업데이트 전반에 걸쳐 적용되어 있습니다.
-사용자 인터렉션이 이벤트를 통해 전달되면 이에 대한 업데이트가
-필요한데, 리엑트는 사용자 중심의 성능 모델 측면에서 이벤트에 대한
-우선순위를 인위적으로 구분짓고, 작업별 우선순위를 부여합니다.&lt;/p&gt;
-&lt;p&gt;즉, 업데이트를 진행하기 위한 각각의 작업의 우선순위를
-부여하여 이를 기준으로 스케쥴러에 의해 작업의 교통 정리가 이루어지기
-위한 일련의 메커니즘과 진행 중인 작업이 우선 순위가 높은 대기 상태의
-작업에 의해 중단되거나, 일괄 처리될 수 있음을 담아내고 있습니다.&lt;/p&gt;
+&lt;p&gt;우선순위 메커니즘은 사용자 인터렉션 발생을 캐치한 리스너에서부터
+업데이트를 위한 작업 생성 과정과 스케쥴링 단계까지 업데이트를 위한
+작업의 우선순위를 할당하기 위한 전반적인 과정에서 쉽게 찾아볼 수 있습니다.&lt;/p&gt;
+&lt;p&gt;그 이후 진행 중인 작업이 우선 순위가 높은 대기 상태의 작업에 의해 중단되거나,
+같은 우선 순위를 가진 작업에 대해서 일괄 처리될 수 있도록 하는 작업 교통정리
+를 하는 작업 실행 단계에서도 확인할 수 있는데요.&lt;/p&gt;
 &lt;p&gt;한편, 리엑트v17.0 이전에서는 작업의 &lt;a href=&quot;https://github.com/facebook/react/blob/v16.12.0/packages/react-reconciler/src/ReactFiberExpirationTime.js&quot;&gt;만료 시간을 기준으로 우선순위를 부여&lt;/a&gt;하는 메커니즘으로 구현되어 있었습니다.
 반면, 리엑트v17.0 이후에서는 Lane 모델을 착안하여 비트 연산을
 기반으로 우선 순위를 부여하는 방식으로 변경되는데요.
