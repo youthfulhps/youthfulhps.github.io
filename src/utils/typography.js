@@ -35,17 +35,23 @@ GitHubTheme.overrideThemeStyles = () => {
     },
 
     ul: {
-      marginBottom: '6px',
+      marginBottom: '18px',
     },
 
     li: {
       marginBottom: '2px',
       fontFamily: 'Pretendard',
+      // fontFamily: 'IBM Plex Sans KR',
     },
 
     p: {
-      fontFamily: 'Pretendard',
+      // fontFamily: 'Pretendard',
+      fontFamily: 'IBM Plex Sans KR',
     },
+
+    'span.gatsby-resp-image-wrapper': {
+      margin: '2em 0',
+    }
   };
 };
 

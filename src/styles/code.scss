@@ -56,9 +56,9 @@ pre[class*='language-']::-webkit-scrollbar {
 /* Code blocks */
 pre[class*='language-'] {
   padding: 1.2em;
-  margin: 1.5em 0;
+  margin: 2em 0;
   overflow: auto;
-  border-radius: 0.6em;
+  border-radius: 0.3em;
 }
 
 :not(pre) > code[class*='language-'],
@@ -68,7 +68,8 @@ pre[class*='language-'] {
 
 /* Inline code */
 :not(pre) > code[class*='language-'] {
-  padding: 0.1em 0.6em;
+  padding: 0.3em 0.6em;
+  margin: 0 0.2rem;
   border-radius: 0.2em;
   white-space: normal;
   background: $inline-dimmed-color;
@@ -76,7 +77,8 @@ pre[class*='language-'] {
 }
 
 .dark :not(pre) > code[class*='language-'] {
-  padding: 0.1em 0.6em;
+  padding: 0.35em 0.6em;
+  margin: 0 0.2rem;
   border-radius: 0.2em;
   white-space: normal;
   background: $inline-dimmed-color;
