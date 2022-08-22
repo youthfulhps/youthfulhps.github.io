@@ -46,6 +46,7 @@ GitHubTheme.overrideThemeStyles = () => {
 
     p: {
       // fontFamily: 'Pretendard',
+      lineHeight: '1.8',
       fontFamily: 'IBM Plex Sans KR',
     },
 
