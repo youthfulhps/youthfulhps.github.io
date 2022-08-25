@@ -1,5 +1,5 @@
 ---
-title: 리엑트 동시성 매커니즘들은 어떻게 구현되어 있을 까 - 01
+title: 리엑트 동시성 메커니즘들은 어떻게 구현되어 있을 까 - 01
 date: 2022-06-11 16:06:62
 category: react
 thumbnail: ./images/react-concurrent-mode-01/thumbnail.png
@@ -20,8 +20,8 @@ Suspense_, _Fixes for Suspense behavior quirks_와 같은 내부적인
 시간을 쏟았으며, 동시성을 위한 메커니즘들의 구현체들이 어떻게 구현되어 있을 까?
 '_ 라는 호기심에 찾아본 구현체들과 레퍼런스들을 차근차근 정리해보고자 합니다.
 
-그 첫 번째로, [Inside React (동시성을 구현하는 기술)](https://deview.kr/2021/sessions/518)에서 언급한 내용들을 정리하고, 우선순위와 양보 매커니즘이
-어떻게 구현되어 있는 지 살펴보려 합니다.
+그 첫 번째로, [Inside React (동시성을 구현하는 기술)](https://deview.kr/2021/sessions/518)
+에서 언급한 내용들을 정리하고, 우선순위와 양보 메커니즘이 어떻게 구현되어 있는 지 살펴보려 합니다.
 
 ## Concurrent vs Parallelism
 
@@ -718,7 +718,8 @@ function shouldYieldToHost() {
 }
 ```
 
-지금까지 알아본 `shouldYieldToHost()`는 스케쥴러의 `workLoop()`에서 사용됩니다. 현재 진행 중인 작업의 만료시간이 현재 시간에 비해 여유가 있는 시점에서
+지금까지 알아본 `shouldYieldToHost()`는 스케쥴러의 `workLoop()`에서 사용됩니다. 
+현재 진행 중인 작업의 만료시간이 현재 시간에 비해 여유가 있는 시점에서
 우선 순위가 더 높은 작업이 보류되고 있다면, 메인 스레드에게 제어권을 양보하고, 만료 시간이
 지난 작업에 대해서는 양보하지 않고 동기적으로 바쁘게 작업을 이어나갑니다.
 
