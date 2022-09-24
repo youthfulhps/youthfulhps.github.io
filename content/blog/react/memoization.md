@@ -321,6 +321,80 @@ function bailoutOnAlreadyFinishedWork(
 복잡하고 험난했지만, 이전 props와 새로운 props가 동일하다면 마지막 랜더링된 결과를
 재사용하기 위해 React.memo로 감싸주면 되겠구나 이해할 수 있었습니다.
 
+## useCallback, 참조 동일성에 최적화된 컴포넌트에 유효하다
+
+리엑트는 props의 변경 여부를 얕은 비교를 통해 판단합니다. 자바스크립트에서 원시 타입 값은
+참조값이 다르더라도 값이 같다면 일치 연산자(strict equality operator)에 의해 참이
+판단되지만, 객체, 배열, 함수와 같은 객체는 같은 참조값이 아니라면, 즉 서로 다른 메모리에
+할당되어 있다면 거짓으로 판단됩니다.
+
+가령 부모 컴포넌트의 상태가 변경되면, 내부에 선언되어 있는 함수들은 모두 새로운 메모리에
+작성됩니다. 결국 자식 컴포넌트 입장에서 이전 onClick의 참조값과 새로운 onClick의 참조값이
+변경되었으니, 자식 컴포넌트도 리랜더링이 발생합니다.
+
+```js
+const ChildA = ({ onClick }) => {
+  return <button onClick={onClick}>ChildA</button>
+}
+
+const ChildB = ({onClick}) => {
+  return <button onClick={onClick}>ChildB</button>
+}
+
+function Parent() {
+  const [isGood, setIsGood] = useState(false); 
+  const handleChildAClick = () => {
+    setIsGood(!isGood);
+  }
+
+  const handleChildBClick = () => {
+    console.log('ChildB clicked!');
+  }
+
+  return (
+    <>
+      <ChildA onClick={handleChildAClick} />
+      <ChildB onClick={handleChildBClick} />
+    </>
+  )
+}
+```
+
+여기서, ChildA에 전달되는 클릭 핸들러는 isGood 상태에 의존적인 핸들러로 useCallback을
+사용해도 의존된 값이 항상 변경되니 무용지물입니다.
+하지만, ChildB는 부모 컴포넌트의 상태에 독립적인 핸들러를 전달받음에도 ChildA의 버튼이
+클릭되면 새롭게 생성되는 ChildB 클릭 핸들러로 인해 리랜더링이 발생하는 것은 억울합니다.
+
+![Rerendering chart of childB component](./images/memoization/childB-rerendering-chart.png)
+
+<!-- 결국 요점은, 객체인 함수를 자식 컴포넌트에게 props로 콜백으로 전달되는 함수가 매번 새롭게
+생성되는 것을 막기 위해 useCallback으로 핸들러를 감싸준다고 해서 최적화가 이루어지는 것이 아니고,
+이를 참조의 동일성에 최적화된 자식 컴포넌트, 즉 React.memo로 감싸져 있는 컴포넌트에 전달할 때
+유효한 최적화가 이루어집니다. -->
+
+그럼, ChildB에게 전달되는 핸들러를 useCallback으로 감싸주면 리랜더링을 방지할 수 있을 것 같지만,
+기대와는 다르게 마찬가지로 리랜더링이 발생합니다.
+
+```js
+const handleChildBClick = useCallback(() => {
+  console.log('ChildB clicked!');
+},[])
+```
+
+![Rerendering chart of childB component with useCallback](./images/memoization/childB-rerendering-chart-with-useCallback.png)
+
+useCallback은 참조 동일성에 최적화된 컴포넌트에 유효합니다. 즉, 부모 컴포넌트의 상태에 독립적인 콜백을
+useCallback으로 감싸고, 전달받는 자식 컴포넌트 또한 React.memo로 감싸서 props를 얕은 비교하는
+과정을 통해 직전 자식 트리를 재사용하는 과정이 포함할 수 있도록 해야 합니다.
+
+```js
+const ChildB = memo(({onClick}) => {
+  return <button onClick={onClick}>ChildB</button>
+})
+```
+
+![Rerendering chart of childB component with useCallback and memo](./images/memoization/childB-rerendering-chart-with-useCallback-and-memo.png)
+
 ## Reference
 
 <https://ko.reactjs.org/docs/hooks-reference.html#usecallback>
