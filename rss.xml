@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Youthfulhps.dev]]></title><description><![CDATA[Blog posted front-end, troubleshooting!]]></description><link>https://youthfulhps.dev</link><generator>GatsbyJS</generator><lastBuildDate>Sat, 24 Sep 2022 14:32:24 GMT</lastBuildDate><item><title><![CDATA[비로소 알게된 리엑트 메모이제이션]]></title><description><![CDATA[…]]></description><link>https://youthfulhps.dev/react/memoization/</link><guid isPermaLink="false">https://youthfulhps.dev/react/memoization/</guid><pubDate>Wed, 21 Sep 2022 11:10:23 GMT</pubDate><content:encoded>&lt;p&gt;보통 어플리케이션에서 최적화를 위해 메모이제이션 기법을 통해 이전에 계산한 값을 메모리에
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Youthfulhps.dev]]></title><description><![CDATA[Blog posted front-end, troubleshooting!]]></description><link>https://youthfulhps.dev</link><generator>GatsbyJS</generator><lastBuildDate>Sat, 24 Sep 2022 16:17:50 GMT</lastBuildDate><item><title><![CDATA[비로소 알게된 리엑트 메모이제이션]]></title><description><![CDATA[…]]></description><link>https://youthfulhps.dev/react/memoization/</link><guid isPermaLink="false">https://youthfulhps.dev/react/memoization/</guid><pubDate>Wed, 21 Sep 2022 11:10:23 GMT</pubDate><content:encoded>&lt;p&gt;보통 어플리케이션에서 최적화를 위해 메모이제이션 기법을 통해 이전에 계산한 값을 메모리에
 저장해두고, 동일하게 다시 사용할 수 있는 곳에서 재사용하여 반복적으로 발생하는 계산의
 리소스를 줄이는 기법을 사용하곤 합니다.&lt;/p&gt;
 &lt;p&gt;리엑트에서도 메모이제이션을 쉽게 구현할 수 있도록 도와주는 API들이 존재하는데요.
@@ -241,6 +241,121 @@ MemoComponent로 구분되어 업데이트 작업이 진행되는데, 우리가 
 &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;복잡하고 험난했지만, 이전 props와 새로운 props가 동일하다면 마지막 랜더링된 결과를
 재사용하기 위해 React.memo로 감싸주면 되겠구나 이해할 수 있었습니다.&lt;/p&gt;
+&lt;h2 id=&quot;usecallback-참조-동일성에-최적화된-컴포넌트에-유효하다&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#usecallback-%EC%B0%B8%EC%A1%B0-%EB%8F%99%EC%9D%BC%EC%84%B1%EC%97%90-%EC%B5%9C%EC%A0%81%ED%99%94%EB%90%9C-%EC%BB%B4%ED%8F%AC%EB%84%8C%ED%8A%B8%EC%97%90-%EC%9C%A0%ED%9A%A8%ED%95%98%EB%8B%A4&quot; aria-label=&quot;usecallback 참조 동일성에 최적화된 컴포넌트에 유효하다 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;useCallback, 참조 동일성에 최적화된 컴포넌트에 유효하다&lt;/h2&gt;
+&lt;p&gt;리엑트는 props의 변경 여부를 얕은 비교를 통해 판단합니다. 자바스크립트에서 원시 타입 값은
+참조값이 다르더라도 값이 같다면 일치 연산자(strict equality operator)에 의해 참이
+판단되지만, 객체, 배열, 함수와 같은 객체는 같은 참조값이 아니라면, 즉 서로 다른 메모리에
+할당되어 있다면 거짓으로 판단됩니다.&lt;/p&gt;
+&lt;p&gt;가령 부모 컴포넌트의 상태가 변경되면, 내부에 선언되어 있는 함수들은 모두 새로운 메모리에
+작성됩니다. 결국 자식 컴포넌트 입장에서 이전 onClick의 참조값과 새로운 onClick의 참조값이
+변경되었으니, 자식 컴포넌트도 리랜더링이 발생합니다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;token function-variable function&quot;&gt;ChildA&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; onClick &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;button onClick&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;onClick&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;ChildA&lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;/&lt;/span&gt;button&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;token function-variable function&quot;&gt;ChildB&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;onClick&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;button onClick&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;onClick&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;ChildB&lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;/&lt;/span&gt;button&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;Parent&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;isGood&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; setIsGood&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;useState&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token boolean&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt; 
+  &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;token function-variable function&quot;&gt;handleChildAClick&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token function&quot;&gt;setIsGood&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;!&lt;/span&gt;isGood&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+  &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;token function-variable function&quot;&gt;handleChildBClick&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    console&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;ChildB clicked!&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+  &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;
+    &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;
+      &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;ChildA onClick&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;handleChildAClick&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;
+      &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;ChildB onClick&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;handleChildBClick&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;
+    &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;여기서, ChildA에 전달되는 클릭 핸들러는 isGood 상태에 의존적인 핸들러로 useCallback을
+사용해도 의존된 값이 항상 변경되니 무용지물입니다.
+하지만, ChildB는 부모 컴포넌트의 상태에 독립적인 핸들러를 전달받음에도 ChildA의 버튼이
+클릭되면 새롭게 생성되는 ChildB 클릭 핸들러로 인해 리랜더링이 발생하는 것은 억울합니다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 643px; &quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 24.333333333333332%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAFCAYAAABFA8wzAAAACXBIWXMAAAsTAAALEwEAmpwYAAABE0lEQVQY052O30rCYADF90ZdRE8R9AI9S2/QTV11UUgQZhiYjyBo0FykQW3TZFaIuk+Xc81tftt+fbouuu7A4fy5OBzNjyFa5yyCmGWc46rsS3AjEH7ESuVQ5ST4pDO0WSQg45RUdRvkeb5VKSWmaaIFTpNg2CKfGvDVRYou4aS79cyfwOsU3jNYjVqwdBiNxliWjSsEm7lMjUqZYts22nH1hNO7M0qNMpXHOpV2jYpRo6z0+lcLX+dKv6U5eGDmuljmC+9DhyxLi6dZxlu/j6aPJxhTF30qaM88dDEvOCvY/sN7VzD4Dpl7C55fe/SdD4IwIlU3Y/XQsnto/ANHjTX7NzEH1YS9S8luSbJznnB4YfEDsl9sDG6rQH4AAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;Rerendering chart of childB component&quot;
+        title=&quot;Rerendering chart of childB component&quot;
+        src=&quot;/static/d6bf574a3af106c463ddcadd467ea2ec/b5bda/childB-rerendering-chart.png&quot;
+        srcset=&quot;/static/d6bf574a3af106c463ddcadd467ea2ec/5a46d/childB-rerendering-chart.png 300w,
+/static/d6bf574a3af106c463ddcadd467ea2ec/0a47e/childB-rerendering-chart.png 600w,
+/static/d6bf574a3af106c463ddcadd467ea2ec/b5bda/childB-rerendering-chart.png 643w&quot;
+        sizes=&quot;(max-width: 643px) 100vw, 643px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;!-- 결국 요점은, 객체인 함수를 자식 컴포넌트에게 props로 콜백으로 전달되는 함수가 매번 새롭게
+생성되는 것을 막기 위해 useCallback으로 핸들러를 감싸준다고 해서 최적화가 이루어지는 것이 아니고,
+이를 참조의 동일성에 최적화된 자식 컴포넌트, 즉 React.memo로 감싸져 있는 컴포넌트에 전달할 때
+유효한 최적화가 이루어집니다. --&gt;
+&lt;p&gt;그럼, ChildB에게 전달되는 핸들러를 useCallback으로 감싸주면 리랜더링을 방지할 수 있을 것 같지만,
+기대와는 다르게 마찬가지로 리랜더링이 발생합니다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; handleChildBClick &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;useCallback&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  console&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;ChildB clicked!&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 650px; &quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 24%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAFCAYAAABFA8wzAAAACXBIWXMAAAsTAAALEwEAmpwYAAABCUlEQVQY052Oy0rDUBRF81X2Kxz5KzoWf0CRNjrUDn0MBTEgorOK6UxMtDbF2EfS9N3c3tw8lrfBzhy5YZ294RwO2xAKkrRgsZTECUQSlimMdR7PVqh0vdeIKa5zTyggVxlK321UFEXpSaIweu4D/dYT824DObSJek36vq1zExG8sArtEhk8M/EfiUcOwzDgzXHxfZ9EKdb/cj2yLMfYNffYPzvg8OaYqnVCzaphWibVO83GNTXrlKPbKpeNKybTMe+uQ8drI4TY9Cyn0Qp82mEXL+rTGQ3wfun8wWfUY7CYMJ3NeXU+8L6+WcSifJXluqFuafAPmXbK9oVk51pSOZds1VMqdaVJ+QHZp2rQp/rpiwAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;Rerendering chart of childB component with useCallback&quot;
+        title=&quot;Rerendering chart of childB component with useCallback&quot;
+        src=&quot;/static/70bd67b3e24d84747e8eb1a2103ebf5c/a6d36/childB-rerendering-chart-with-useCallback.png&quot;
+        srcset=&quot;/static/70bd67b3e24d84747e8eb1a2103ebf5c/5a46d/childB-rerendering-chart-with-useCallback.png 300w,
+/static/70bd67b3e24d84747e8eb1a2103ebf5c/0a47e/childB-rerendering-chart-with-useCallback.png 600w,
+/static/70bd67b3e24d84747e8eb1a2103ebf5c/a6d36/childB-rerendering-chart-with-useCallback.png 650w&quot;
+        sizes=&quot;(max-width: 650px) 100vw, 650px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;useCallback은 참조 동일성에 최적화된 컴포넌트에 유효합니다. 즉, 부모 컴포넌트의 상태에 독립적인 콜백을
+useCallback으로 감싸고, 전달받는 자식 컴포넌트 또한 React.memo로 감싸서 props를 얕은 비교하는
+과정을 통해 직전 자식 트리를 재사용하는 과정이 포함할 수 있도록 해야 합니다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; ChildB &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;memo&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;onClick&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;button onClick&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;onClick&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;ChildB&lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;/&lt;/span&gt;button&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 664px; &quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 23.333333333333332%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAFCAYAAABFA8wzAAAACXBIWXMAAAsTAAALEwEAmpwYAAAA7klEQVQY032Qz0rDQBCH81SCj6DP4CN58ahoRE9SUPDoXa8egqYJNQbEHGJDa9J2083++dxsclARB76Z2Z0fw48JjAEhYVFvEa7/2MKngmUHzUb52dphZU30dEcpQEuNdpo+rLWePrpOEST3h1TRCTo7w7yGVHFInYbY/Nz/6Sz0mOyUdXyEertmPq+YTlOKoqDfZVzyOHfB5OGGZplD64bi3dUR8ZvCa5Alq1VDmsTM0gTZCkavPgf8eA71L75rmo3geZYTJS+UiwbpTtUq6wl6m/4G4y3+Q5th/fGjYu+q5eBWsj9R7Fwodi8HvgDsKnfUBZx89wAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;Rerendering chart of childB component with useCallback and memo&quot;
+        title=&quot;Rerendering chart of childB component with useCallback and memo&quot;
+        src=&quot;/static/d7911b2f9b50d1bec5cd11a36004542f/31493/childB-rerendering-chart-with-useCallback-and-memo.png&quot;
+        srcset=&quot;/static/d7911b2f9b50d1bec5cd11a36004542f/5a46d/childB-rerendering-chart-with-useCallback-and-memo.png 300w,
+/static/d7911b2f9b50d1bec5cd11a36004542f/0a47e/childB-rerendering-chart-with-useCallback-and-memo.png 600w,
+/static/d7911b2f9b50d1bec5cd11a36004542f/31493/childB-rerendering-chart-with-useCallback-and-memo.png 664w&quot;
+        sizes=&quot;(max-width: 664px) 100vw, 664px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+    &lt;/span&gt;&lt;/p&gt;
 &lt;h2 id=&quot;reference&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#reference&quot; aria-label=&quot;reference permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Reference&lt;/h2&gt;
 &lt;p&gt;&lt;a href=&quot;https://ko.reactjs.org/docs/hooks-reference.html#usecallback&quot;&gt;https://ko.reactjs.org/docs/hooks-reference.html#usecallback&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href=&quot;https://ko.reactjs.org/docs/hooks-reference.html#usememo&quot;&gt;https://ko.reactjs.org/docs/hooks-reference.html#usememo&lt;/a&gt;&lt;/p&gt;
