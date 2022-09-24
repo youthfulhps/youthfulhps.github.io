@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Youthfulhps.dev]]></title><description><![CDATA[Blog posted front-end, troubleshooting!]]></description><link>https://youthfulhps.dev</link><generator>GatsbyJS</generator><lastBuildDate>Wed, 21 Sep 2022 14:58:19 GMT</lastBuildDate><item><title><![CDATA[비로소 알게된 리엑트 메모이제이션]]></title><description><![CDATA[…]]></description><link>https://youthfulhps.dev/react/memoization/</link><guid isPermaLink="false">https://youthfulhps.dev/react/memoization/</guid><pubDate>Wed, 21 Sep 2022 11:10:23 GMT</pubDate><content:encoded>&lt;p&gt;보통 어플리케이션에서 최적화를 위해 메모이제이션 기법을 통해 이전에 계산한 값을 메모리에
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Youthfulhps.dev]]></title><description><![CDATA[Blog posted front-end, troubleshooting!]]></description><link>https://youthfulhps.dev</link><generator>GatsbyJS</generator><lastBuildDate>Sat, 24 Sep 2022 14:32:24 GMT</lastBuildDate><item><title><![CDATA[비로소 알게된 리엑트 메모이제이션]]></title><description><![CDATA[…]]></description><link>https://youthfulhps.dev/react/memoization/</link><guid isPermaLink="false">https://youthfulhps.dev/react/memoization/</guid><pubDate>Wed, 21 Sep 2022 11:10:23 GMT</pubDate><content:encoded>&lt;p&gt;보통 어플리케이션에서 최적화를 위해 메모이제이션 기법을 통해 이전에 계산한 값을 메모리에
 저장해두고, 동일하게 다시 사용할 수 있는 곳에서 재사용하여 반복적으로 발생하는 계산의
 리소스를 줄이는 기법을 사용하곤 합니다.&lt;/p&gt;
 &lt;p&gt;리엑트에서도 메모이제이션을 쉽게 구현할 수 있도록 도와주는 API들이 존재하는데요.
@@ -7,10 +7,10 @@
 &lt;p&gt;&lt;em&gt;“생성(create)” 함수와 그것의 의존성 값의 배열을 전달하세요. useMemo는 의존성이
 변경되었을 때에만 메모이제이션된 값만 다시 계산 할 것입니다. 이 최적화는 모든 렌더링 시의
 고비용 계산을 방지하게 해 줍니다.&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;사실, useMemo를 포함해서 useCallback과 React.memo에 대한 의론적인 배움을 얻고
+&lt;p&gt;사실, useMemo를 포함하여 useCallback과 React.memo에 대한 의론적인 배움을 얻고
 사용해왔지만 최근 다시금 공식 문서를 읽었을 때, 문서에서 말하는 고비용의 기준은 무엇인지,
 사용할 수는 있지만 보장되어 있지 않다는 문구의 의미는 무엇인지 등등, 역시 명확한 기준을 제공하지
-않는 모습을 보면서 내가 적절하게 잘 이해하고 적재적소에 사용하고 있고, 실질적인 성능 최적화를
+않는 리엑트의 모습을 보면서 내가 적절하게 잘 이해하고 적재적소에 사용하며, 실질적인 성능 최적화를
 이루고 있는 건가에 대한 의구심이 들었습니다.&lt;/p&gt;
 &lt;p&gt;이 글은 갑자기 낯설게 느껴지는 리엑트 메모이제이션에 대한 찝찝함을 이겨내고자 조금 더 깊게
 알아보고, 가능하면 최적화에 대한 스스로의 기준도 정해보려 합니다. 비슷한 고민을 하시는 분들에게
@@ -19,7 +19,8 @@
 &lt;p&gt;우선 우리가 잘 알고 있는 리엑트의 메모이제이션을 위한 API를 살펴봅시다. 그 첫 번째로 useMemo는
 값을 메모이제이션합니다. 같은 말로, 메모이제이션된 값을 반환합니다.&lt;/p&gt;
 &lt;p&gt;리엑트에서 사용되는 훅들은 &lt;a href=&quot;https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberHooks.new.js#L2599&quot;&gt;HookDispatcher&lt;/a&gt;
-라는 이름으로 내부에서 공유되는데, 여기서 useMemo를 찾아볼 수 있습니다.&lt;/p&gt;
+라는 이름으로 Disaptcher 인터페이스를 갖는 객체로 래핑되어 내부에서 공유되는데,
+여기서 useMemo를 찾아볼 수 있습니다.&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;ts&quot;&gt;&lt;pre class=&quot;language-ts&quot;&gt;&lt;code class=&quot;language-ts&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; HooksDispatcher&lt;span class=&quot;token operator&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; Dispatcher &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
   &lt;span class=&quot;token operator&quot;&gt;...&lt;/span&gt;
   useMemo&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; updateMemo&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
@@ -132,8 +133,118 @@ useMemo의 역할을 코드로 확인해봅시다.&lt;/p&gt;
   hook&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;memoizedState &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;callback&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; nextDeps&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
   &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; callback&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
 &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;우리가 잘 이해하고 있는 것 처럼, useMemo는 콜백 함수의 연산 반환값을, useCallback을 콜백 자체를
-메모이제이션하는 기능 차이를 확인할 수 있었습니다.&lt;/p&gt;</content:encoded></item><item><title><![CDATA[react-testing]]></title><description><![CDATA[현재 파이브스팟 모바일 웹을 가꾸어 나가고 있습니다. 빠르게 출시하기 위해
+&lt;p&gt;우리가 잘 이해하고 있는 것 처럼, useMemo는 콜백 함수의 연산 반환값을, useCallback은
+콜백 자체를 메모이제이션하는 기능 차이를 확인할 수 있었습니다.&lt;/p&gt;
+&lt;h2 id=&quot;reactmemo-마지막-랜더링된-결과를-재사용한다&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#reactmemo-%EB%A7%88%EC%A7%80%EB%A7%89-%EB%9E%9C%EB%8D%94%EB%A7%81%EB%90%9C-%EA%B2%B0%EA%B3%BC%EB%A5%BC-%EC%9E%AC%EC%82%AC%EC%9A%A9%ED%95%9C%EB%8B%A4&quot; aria-label=&quot;reactmemo 마지막 랜더링된 결과를 재사용한다 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;React.memo, 마지막 랜더링된 결과를 재사용한다&lt;/h2&gt;
+&lt;p&gt;React.memo는 고차 컴포넌트로서 감싼 컴포넌트 랜더링 결과를 메모이징하고, 동일한 props로
+동일한 결과를 랜더링하는 경우에 대하여 다시 랜더링하지 않고, 다시 마지막으로 랜더링된 결과를
+재사용합니다.&lt;/p&gt;
+&lt;p&gt;공식문서에 첨언된 내용에는, React.memo가 props 변화에만 영향을 준다고 설명합니다. 즉,
+컴포넌트 리랜더링이 발생하는 케이스들 중에서 부모 컴포넌트로부터 전달받은 props의 변화로 인해
+발생하는 리랜더링 최적화를 담당합니다.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/facebook/react/blob/main/packages/react/src/ReactMemo.js&quot;&gt;React.memo&lt;/a&gt;의 구현체를 살펴보면, 엄청난 일이 벌어질 것 같은 예상과는 달리 명확한 단일의 역할만을 담당하고
+있는 고차 컴포넌트의 면모를 잘 보여줍니다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;ts&quot;&gt;&lt;pre class=&quot;language-ts&quot;&gt;&lt;code class=&quot;language-ts&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;// Symbol.for(&apos;react.memo&apos;);&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token constant&quot;&gt;REACT_MEMO_TYPE&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;shared/ReactSymbols&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token operator&quot;&gt;...&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token generic-function&quot;&gt;&lt;span class=&quot;token function&quot;&gt;memo&lt;/span&gt;&lt;span class=&quot;token generic class-name&quot;&gt;&lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;Props&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;
+  type&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; React$ElementType&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+  compare&lt;span class=&quot;token operator&quot;&gt;?&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;oldProps&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; Props&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; newProps&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; Props&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token builtin&quot;&gt;boolean&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token operator&quot;&gt;...&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; elementType &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    $$&lt;span class=&quot;token keyword&quot;&gt;typeof&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token constant&quot;&gt;REACT_MEMO_TYPE&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    type&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    compare&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; compare &lt;span class=&quot;token operator&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;undefined&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;?&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;null&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; compare&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;token operator&quot;&gt;...&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; elementType&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;개인적으로 생각하는 주목할 점은, React.memo로 감싼 컴포넌트가 react.memo 심볼을
+요소 유형 태그로 할당받게 된다는 점입니다.&lt;/p&gt;
+&lt;p&gt;컴포넌트 재조정을 위한 작업을 생성하는 리엑트 리콘실러에서 beginWork() 라는 함수에서는
+위에서 언급한 요소의 유형 태그를 통해 어떤 방식으로 업데이트를 진행할 지 결정합니다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;ts&quot;&gt;&lt;pre class=&quot;language-ts&quot;&gt;&lt;code class=&quot;language-ts&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;beginWork&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;
+  current&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; Fiber &lt;span class=&quot;token operator&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+  workInProgress&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; Fiber&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+  renderLanes&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; Lanes&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; Fiber &lt;span class=&quot;token operator&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;null&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token operator&quot;&gt;...&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;switch&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;workInProgress&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;tag&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token operator&quot;&gt;...&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;case&lt;/span&gt; MemoComponent&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;token operator&quot;&gt;...&lt;/span&gt;
+      resolvedProps &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;resolveDefaultProps&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;type&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;type&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; resolvedProps&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+      &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;updateMemoComponent&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;
+        current&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+        workInProgress&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+        type&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+        resolvedProps&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+        renderLanes&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;token operator&quot;&gt;...&lt;/span&gt;
+  &lt;span class=&quot;token operator&quot;&gt;...&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;여기서, React.memo에서 할당된 ‘react.memo’ 심볼 유형 태그를 가진 컴포넌트는
+MemoComponent로 구분되어 업데이트 작업이 진행되는데, 우리가 흔히 사용하는 함수형
+컴포넌트와 다르게 업데이트 과정이 진행될 것이라고 짐작할 수 있습니다.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;beginWork()를 간추려 첨부했지만, 엄청난 일은 여기서 일어나고 있었구나 싶을 정도로
+요소 유형별 각기 다른 업데이트 방식으로 분류됩니다. 모두 살펴보기엔 일이 커지니 (사실, 무섭습니다.)
+메모 컴포넌트가 어떻게 업데이트되는 지 살펴봅시다.&lt;/em&gt;&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;ts&quot;&gt;&lt;pre class=&quot;language-ts&quot;&gt;&lt;code class=&quot;language-ts&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;updateMemoComponent&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;
+  current&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; Fiber &lt;span class=&quot;token operator&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+  workInProgress&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; Fiber&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+  Component&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token builtin&quot;&gt;any&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+  nextProps&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token builtin&quot;&gt;any&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+  renderLanes&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; Lanes&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;null&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;|&lt;/span&gt; Fiber &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token operator&quot;&gt;...&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; currentChild &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;current&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;child&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token builtin&quot;&gt;any&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; Fiber&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; hasScheduledUpdateOrContext &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;checkScheduledUpdateOrContext&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;
+    current&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    renderLanes&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;!&lt;/span&gt;hasScheduledUpdateOrContext&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; prevProps &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; currentChild&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;memoizedProps&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;// Default to shallow comparison&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;let&lt;/span&gt; compare &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; Component&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;compare&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    compare &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; compare &lt;span class=&quot;token operator&quot;&gt;!==&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;null&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;?&lt;/span&gt; compare &lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; shallowEqual&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;compare&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;prevProps&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; nextProps&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; current&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;ref &lt;span class=&quot;token operator&quot;&gt;===&lt;/span&gt; workInProgress&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;ref&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;bailoutOnAlreadyFinishedWork&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;current&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; workInProgress&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; renderLanes&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+  workInProgress&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;flags &lt;span class=&quot;token operator&quot;&gt;|=&lt;/span&gt; PerformedWork&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; newChild &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;createWorkInProgress&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;currentChild&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; nextProps&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  newChild&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;ref &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; workInProgress&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;ref&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  newChild&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;return &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; workInProgress&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  workInProgress&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;child &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; newChild&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; newChild&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;  &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;React.memo가 전달받는 컴포넌트와 props 비교 기준이 되는 compare은 이곳에서 사용되는데요.
+만약 compare을 전달하지 않는다면, shallowEqual 즉, 얕은 비교를 통해 이전 props와
+새로운 props를 비교하고, 이 둘이 같지 않다고 판단되면 새롭게 자식트리가 조정됩니다.&lt;/p&gt;
+&lt;p&gt;반면, 동일하다고 판단되면 bailoutOnAlreadyFinishedWork()에 의해서 이전에 사용된 자식트리가
+클론되어 재사용됩니다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;ts&quot;&gt;&lt;pre class=&quot;language-ts&quot;&gt;&lt;code class=&quot;language-ts&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;bailoutOnAlreadyFinishedWork&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;
+  current&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; Fiber &lt;span class=&quot;token operator&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+  workInProgress&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; Fiber&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+  renderLanes&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; Lanes&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; Fiber &lt;span class=&quot;token operator&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;null&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token operator&quot;&gt;...&lt;/span&gt;
+  &lt;span class=&quot;token comment&quot;&gt;// This fiber doesn&apos;t have work, but its subtree does. Clone the child&lt;/span&gt;
+  &lt;span class=&quot;token comment&quot;&gt;// fibers and continue.&lt;/span&gt;
+  &lt;span class=&quot;token function&quot;&gt;cloneChildFibers&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;current&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; workInProgress&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; workInProgress&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;child&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;복잡하고 험난했지만, 이전 props와 새로운 props가 동일하다면 마지막 랜더링된 결과를
+재사용하기 위해 React.memo로 감싸주면 되겠구나 이해할 수 있었습니다.&lt;/p&gt;
+&lt;h2 id=&quot;reference&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#reference&quot; aria-label=&quot;reference permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Reference&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;https://ko.reactjs.org/docs/hooks-reference.html#usecallback&quot;&gt;https://ko.reactjs.org/docs/hooks-reference.html#usecallback&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://ko.reactjs.org/docs/hooks-reference.html#usememo&quot;&gt;https://ko.reactjs.org/docs/hooks-reference.html#usememo&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://ko.reactjs.org/docs/react-api.html#reactmemo&quot;&gt;https://ko.reactjs.org/docs/react-api.html#reactmemo&lt;/a&gt;&lt;/p&gt;</content:encoded></item><item><title><![CDATA[react-testing]]></title><description><![CDATA[현재 파이브스팟 모바일 웹을 가꾸어 나가고 있습니다. 빠르게 출시하기 위해
 동작하는 프러덕션을 배포하고, 피드백을 취합해서 다음 페이스를 위한 기능적인 살과
 뼈대를 붙여나가고 있는 작업이 한창입니다. Deliver usable products to…]]></description><link>https://youthfulhps.dev/react/react-testing/</link><guid isPermaLink="false">https://youthfulhps.dev/react/react-testing/</guid><pubDate>Mon, 25 Jul 2022 11:07:43 GMT</pubDate><content:encoded>&lt;p&gt;현재 파이브스팟 모바일 웹을 가꾸어 나가고 있습니다. 빠르게 출시하기 위해
 동작하는 프러덕션을 배포하고, 피드백을 취합해서 다음 페이스를 위한 기능적인 살과
