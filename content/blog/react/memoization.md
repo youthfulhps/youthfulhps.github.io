@@ -3,7 +3,7 @@ title: 비로소 알게된 리엑트 메모이제이션
 date: 2022-09-21 11:09:83
 category: react
 thumbnail: { thumbnailSrc }
-draft: true
+draft: false
 ---
 
 보통 어플리케이션에서 최적화를 위해 메모이제이션 기법을 통해 이전에 계산한 값을 메모리에
@@ -18,10 +18,10 @@ _“생성(create)” 함수와 그것의 의존성 값의 배열을 전달하�
 변경되었을 때에만 메모이제이션된 값만 다시 계산 할 것입니다. 이 최적화는 모든 렌더링 시의
 고비용 계산을 방지하게 해 줍니다._
 
-사실, useMemo를 포함해서 useCallback과 React.memo에 대한 의론적인 배움을 얻고
+사실, useMemo를 포함하여 useCallback과 React.memo에 대한 의론적인 배움을 얻고
 사용해왔지만 최근 다시금 공식 문서를 읽었을 때, 문서에서 말하는 고비용의 기준은 무엇인지,
 사용할 수는 있지만 보장되어 있지 않다는 문구의 의미는 무엇인지 등등, 역시 명확한 기준을 제공하지
-않는 모습을 보면서 내가 적절하게 잘 이해하고 적재적소에 사용하고 있고, 실질적인 성능 최적화를
+않는 리엑트의 모습을 보면서 내가 적절하게 잘 이해하고 적재적소에 사용하며, 실질적인 성능 최적화를
 이루고 있는 건가에 대한 의구심이 들었습니다.
 
 이 글은 갑자기 낯설게 느껴지는 리엑트 메모이제이션에 대한 찝찝함을 이겨내고자 조금 더 깊게
@@ -34,7 +34,8 @@ _“생성(create)” 함수와 그것의 의존성 값의 배열을 전달하�
 값을 메모이제이션합니다. 같은 말로, 메모이제이션된 값을 반환합니다.
 
 리엑트에서 사용되는 훅들은 [HookDispatcher](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberHooks.new.js#L2599)
-라는 이름으로 내부에서 공유되는데, 여기서 useMemo를 찾아볼 수 있습니다.
+라는 이름으로 Disaptcher 인터페이스를 갖는 객체로 래핑되어 내부에서 공유되는데,
+여기서 useMemo를 찾아볼 수 있습니다.
 
 ```ts
 const HooksDispatcher...: Dispatcher = {
@@ -188,5 +189,142 @@ function updateCallback<T>(callback: T, deps: Array<mixed> | void | null): T {
 }
 ```
 
-우리가 잘 이해하고 있는 것 처럼, useMemo는 콜백 함수의 연산 반환값을, useCallback을 콜백 자체를
-메모이제이션하는 기능 차이를 확인할 수 있었습니다.
+우리가 잘 이해하고 있는 것 처럼, useMemo는 콜백 함수의 연산 반환값을, useCallback은
+콜백 자체를 메모이제이션하는 기능 차이를 확인할 수 있었습니다.
+
+## React.memo, 마지막 랜더링된 결과를 재사용한다
+
+React.memo는 고차 컴포넌트로서 감싼 컴포넌트 랜더링 결과를 메모이징하고, 동일한 props로
+동일한 결과를 랜더링하는 경우에 대하여 다시 랜더링하지 않고, 다시 마지막으로 랜더링된 결과를
+재사용합니다.
+
+공식문서에 첨언된 내용에는, React.memo가 props 변화에만 영향을 준다고 설명합니다. 즉,
+컴포넌트 리랜더링이 발생하는 케이스들 중에서 부모 컴포넌트로부터 전달받은 props의 변화로 인해
+발생하는 리랜더링 최적화를 담당합니다.
+
+[React.memo](https://github.com/facebook/react/blob/main/packages/react/src/ReactMemo.js)의 구현체를 살펴보면, 엄청난 일이 벌어질 것 같은 예상과는 달리 명확한 단일의 역할만을 담당하고
+있는 고차 컴포넌트의 면모를 잘 보여줍니다.
+
+```ts
+// Symbol.for('react.memo');
+import {REACT_MEMO_TYPE} from 'shared/ReactSymbols';
+...
+
+export function memo<Props>(
+  type: React$ElementType,
+  compare?: (oldProps: Props, newProps: Props) => boolean,
+) {
+  ...
+  const elementType = {
+    $$typeof: REACT_MEMO_TYPE,
+    type,
+    compare: compare === undefined ? null : compare,
+  };
+  ...
+  return elementType;
+}
+```
+
+개인적으로 생각하는 주목할 점은, React.memo로 감싼 컴포넌트가 react.memo 심볼을
+요소 유형 태그로 할당받게 된다는 점입니다.
+
+컴포넌트 재조정을 위한 작업을 생성하는 리엑트 리콘실러에서 beginWork() 라는 함수에서는
+위에서 언급한 요소의 유형 태그를 통해 어떤 방식으로 업데이트를 진행할 지 결정합니다.
+
+```ts
+function beginWork(
+  current: Fiber | null,
+  workInProgress: Fiber,
+  renderLanes: Lanes,
+): Fiber | null {
+  ...
+  switch (workInProgress.tag) {
+    ...
+    case MemoComponent: {
+      ...
+      resolvedProps = resolveDefaultProps(type.type, resolvedProps);
+      return updateMemoComponent(
+        current,
+        workInProgress,
+        type,
+        resolvedProps,
+        renderLanes,
+      );
+    }
+    ...
+  ...
+}
+```
+
+여기서, React.memo에서 할당된 'react.memo' 심볼 유형 태그를 가진 컴포넌트는
+MemoComponent로 구분되어 업데이트 작업이 진행되는데, 우리가 흔히 사용하는 함수형
+컴포넌트와 다르게 업데이트 과정이 진행될 것이라고 짐작할 수 있습니다.
+
+_beginWork()를 간추려 첨부했지만, 엄청난 일은 여기서 일어나고 있었구나 싶을 정도로
+요소 유형별 각기 다른 업데이트 방식으로 분류됩니다. 모두 살펴보기엔 일이 커지니 (사실, 무섭습니다.)
+메모 컴포넌트가 어떻게 업데이트되는 지 살펴봅시다._
+
+```ts
+function updateMemoComponent(
+  current: Fiber | null,
+  workInProgress: Fiber,
+  Component: any,
+  nextProps: any,
+  renderLanes: Lanes,
+): null | Fiber {
+  ...
+  const currentChild = ((current.child: any): Fiber);
+  const hasScheduledUpdateOrContext = checkScheduledUpdateOrContext(
+    current,
+    renderLanes,
+  );
+  if (!hasScheduledUpdateOrContext) {
+    const prevProps = currentChild.memoizedProps;
+    // Default to shallow comparison
+    let compare = Component.compare;
+    compare = compare !== null ? compare : shallowEqual;
+    if (compare(prevProps, nextProps) && current.ref === workInProgress.ref) {
+      return bailoutOnAlreadyFinishedWork(current, workInProgress, renderLanes);
+    }
+  }
+
+  workInProgress.flags |= PerformedWork;
+  const newChild = createWorkInProgress(currentChild, nextProps);
+  newChild.ref = workInProgress.ref;
+  newChild.return = workInProgress;
+  workInProgress.child = newChild;
+  return newChild;
+}  
+```
+
+React.memo가 전달받는 컴포넌트와 props 비교 기준이 되는 compare은 이곳에서 사용되는데요.
+만약 compare을 전달하지 않는다면, shallowEqual 즉, 얕은 비교를 통해 이전 props와
+새로운 props를 비교하고, 이 둘이 같지 않다고 판단되면 새롭게 자식트리가 조정됩니다.
+
+반면, 동일하다고 판단되면 bailoutOnAlreadyFinishedWork()에 의해서 이전에 사용된 자식트리가
+클론되어 재사용됩니다.
+
+```ts
+function bailoutOnAlreadyFinishedWork(
+  current: Fiber | null,
+  workInProgress: Fiber,
+  renderLanes: Lanes,
+): Fiber | null {
+  ...
+  // This fiber doesn't have work, but its subtree does. Clone the child
+  // fibers and continue.
+  cloneChildFibers(current, workInProgress);
+  return workInProgress.child;
+}
+```
+
+복잡하고 험난했지만, 이전 props와 새로운 props가 동일하다면 마지막 랜더링된 결과를
+재사용하기 위해 React.memo로 감싸주면 되겠구나 이해할 수 있었습니다.
+
+## Reference
+
+<https://ko.reactjs.org/docs/hooks-reference.html#usecallback>
+
+<https://ko.reactjs.org/docs/hooks-reference.html#usememo>
+
+<https://ko.reactjs.org/docs/react-api.html#reactmemo>
