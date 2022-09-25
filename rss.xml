@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Youthfulhps.dev]]></title><description><![CDATA[Blog posted front-end, troubleshooting!]]></description><link>https://youthfulhps.dev</link><generator>GatsbyJS</generator><lastBuildDate>Sat, 24 Sep 2022 16:17:50 GMT</lastBuildDate><item><title><![CDATA[비로소 알게된 리엑트 메모이제이션]]></title><description><![CDATA[…]]></description><link>https://youthfulhps.dev/react/memoization/</link><guid isPermaLink="false">https://youthfulhps.dev/react/memoization/</guid><pubDate>Wed, 21 Sep 2022 11:10:23 GMT</pubDate><content:encoded>&lt;p&gt;보통 어플리케이션에서 최적화를 위해 메모이제이션 기법을 통해 이전에 계산한 값을 메모리에
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Youthfulhps.dev]]></title><description><![CDATA[Blog posted front-end, troubleshooting!]]></description><link>https://youthfulhps.dev</link><generator>GatsbyJS</generator><lastBuildDate>Sun, 25 Sep 2022 04:20:56 GMT</lastBuildDate><item><title><![CDATA[비로소 알게된 리엑트 메모이제이션]]></title><description><![CDATA[…]]></description><link>https://youthfulhps.dev/react/memoization/</link><guid isPermaLink="false">https://youthfulhps.dev/react/memoization/</guid><pubDate>Wed, 21 Sep 2022 11:10:23 GMT</pubDate><content:encoded>&lt;p&gt;보통 어플리케이션에서 최적화를 위해 메모이제이션 기법을 통해 이전에 계산한 값을 메모리에
 저장해두고, 동일하게 다시 사용할 수 있는 곳에서 재사용하여 반복적으로 발생하는 계산의
 리소스를 줄이는 기법을 사용하곤 합니다.&lt;/p&gt;
 &lt;p&gt;리엑트에서도 메모이제이션을 쉽게 구현할 수 있도록 도와주는 API들이 존재하는데요.
@@ -1293,7 +1293,7 @@ any를 사용하면 타입 체커가 무력화됩니다.&lt;/p&gt;
 &lt;p&gt;&lt;a href=&quot;https://toss.tech/article/template-literal-types&quot;&gt;Template Literal Types로 타입 안전하게 코딩하기&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href=&quot;https://engineering.linecorp.com/ko/blog/typescript-enum-tree-shaking/&quot;&gt;TypeScript enum을 사용하지 않는 게 좋은 이유를 Tree-shaking 관점에서 소개합니다.&lt;/a&gt;&lt;/p&gt;</content:encoded></item><item><title><![CDATA[리엑트 동시성 매커니즘들은 어떻게 구현되어 있을까 - 01]]></title><description><![CDATA[리엑트v18에서 동시성 기능을 정식으로 출시하였습니다. 대표적으로,
 Automatic batching for fewer renders, SSR support for
-Suspense, Fixes for Suspense behavior quirks…]]></description><link>https://youthfulhps.dev/react/react-concurrent-mode-01/</link><guid isPermaLink="false">https://youthfulhps.dev/react/react-concurrent-mode-01/</guid><pubDate>Sat, 11 Jun 2022 16:07:02 GMT</pubDate><content:encoded>&lt;p&gt;리엑트v18에서 동시성 기능을 정식으로 출시하였습니다. 대표적으로,
+Suspense, Fixes for Suspense behavior quirks…]]></description><link>https://youthfulhps.dev/react/react-concurrent-mode/</link><guid isPermaLink="false">https://youthfulhps.dev/react/react-concurrent-mode/</guid><pubDate>Sat, 11 Jun 2022 16:07:02 GMT</pubDate><content:encoded>&lt;p&gt;리엑트v18에서 동시성 기능을 정식으로 출시하였습니다. 대표적으로,
 &lt;em&gt;Automatic batching for fewer renders&lt;/em&gt;, &lt;em&gt;SSR support for
 Suspense&lt;/em&gt;, &lt;em&gt;Fixes for Suspense behavior quirks&lt;/em&gt;와 같은 내부적인
 성능 향상과, &lt;em&gt;startTransition&lt;/em&gt;, &lt;em&gt;useDeferredValue&lt;/em&gt;, &lt;em&gt;SuspenseList&lt;/em&gt;
@@ -2044,7 +2044,7 @@ isInputPending은 단순히 모든 사용자 이벤트를 동일하게 처리하
 &lt;p&gt;&lt;a href=&quot;https://wicg.github.io/is-input-pending/#continuous-events&quot;&gt;wicg.github.io/is-input-pending&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href=&quot;https://juejin.cn/post/7008802041602506765&quot;&gt;React 소스 코드 파싱 우선 순위 Lane 모델&lt;/a&gt;&lt;/p&gt;</content:encoded></item><item><title><![CDATA[리엑트 동시성 매커니즘들은 어떻게 구현되어 있을까 - 01]]></title><description><![CDATA[리엑트v18에서 동시성 기능을 정식으로 출시하였습니다. 대표적으로,
 Automatic batching for fewer renders, SSR support for
-Suspense, Fixes for Suspense behavior quirks…]]></description><link>https://youthfulhps.dev/react/react-concurrent-mode/</link><guid isPermaLink="false">https://youthfulhps.dev/react/react-concurrent-mode/</guid><pubDate>Sat, 11 Jun 2022 16:07:02 GMT</pubDate><content:encoded>&lt;p&gt;리엑트v18에서 동시성 기능을 정식으로 출시하였습니다. 대표적으로,
+Suspense, Fixes for Suspense behavior quirks…]]></description><link>https://youthfulhps.dev/react/react-concurrent-mode-01/</link><guid isPermaLink="false">https://youthfulhps.dev/react/react-concurrent-mode-01/</guid><pubDate>Sat, 11 Jun 2022 16:07:02 GMT</pubDate><content:encoded>&lt;p&gt;리엑트v18에서 동시성 기능을 정식으로 출시하였습니다. 대표적으로,
 &lt;em&gt;Automatic batching for fewer renders&lt;/em&gt;, &lt;em&gt;SSR support for
 Suspense&lt;/em&gt;, &lt;em&gt;Fixes for Suspense behavior quirks&lt;/em&gt;와 같은 내부적인
 성능 향상과, &lt;em&gt;startTransition&lt;/em&gt;, &lt;em&gt;useDeferredValue&lt;/em&gt;, &lt;em&gt;SuspenseList&lt;/em&gt;
