@@ -3,7 +3,7 @@ title: 비로소 알게된 리엑트 메모이제이션
 date: 2022-09-21 11:09:83
 category: react
 thumbnail: { thumbnailSrc }
-draft: false
+draft: true
 ---
 
 보통 어플리케이션에서 최적화를 위해 메모이제이션 기법을 통해 이전에 계산한 값을 메모리에
