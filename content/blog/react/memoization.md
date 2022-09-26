@@ -395,6 +395,45 @@ const ChildB = memo(({onClick}) => {
 
 ![Rerendering chart of childB component with useCallback and memo](./images/memoization/childB-rerendering-chart-with-useCallback-and-memo.png)
 
+## 메모이제이션, 어떻게 사용하면 좋을까
+
+리엑트 메모이제이션에 대해 조금 더 깊게 이해해보기 위해 구현체도 살펴보고, 예제도 간단하게
+구현해보았습니다.
+
+개념이 명확해지고 어느정도 자신감을 얻었지만 가능하면 최적화에 대한 스스로의 기준도 정해보겠다던
+목표에는 아직 닿지 못한 것 같아 최적화에 대해 먼저 고민하고 정리해주신 레퍼런스들을 읽고
+추합해보면서 개인적인 첨언도 정리해볼까 합니다.
+
+### 최적화를 위한 코드도 비용이다
+
+자주 간과하기 쉬운 주제인 것 같습니다. 가령, 위 단락의 예시에서 ChildA에게 전달하는 핸들러에도
+useCallback으로 감싸주었다고 생각해봅시다. 그렇다면, 잦은 변경이 발생하는 isGood 상태값에
+의존적인 콜백은 결국 모든 랜더링 과정에서 새롭게 작성될 겁니다.
+
+결론적으로는 useCallback을 사용하나, 사용하지 않으나 같은 과정이 유발되는데, 여기서 useCallback의
+사용으로 인해 늘어난 코드만큼 비용 또한 늘어났다는 것을 기억해야 합니다.
+
+['When to useMemo and useCallback' 를 읽고](https://www.rinae.dev/posts/review-when-to-usememo-and-usecallback#%EB%8D%94-%EB%A7%8E%EC%9D%80-%ED%95%A8%EC%88%98-%ED%98%B8%EC%B6%9C-%EB%8D%94-%EB%A7%8E%EC%9D%80-%EC%BD%94%EB%93%9C%EB%8A%94-%EA%B2%B0%EA%B5%AD-%EB%8D%94-%EB%A7%8E%EC%9D%80-%EB%B9%84%EC%9A%A9%EC%9D%84-%EC%B4%88%EB%9E%98%ED%95%9C%EB%8B%A4)
+
+### 최적화 코드를 이슈 원인으로 열어두자
+
+특정 이슈를 만났을 때, '로직의 문제' 로만 국한되어 이슈를 디버깅한 경우가 자주 있었습니다.
+아직 부족한 실력탓에 여러 번 삽질 끝에서야 '메모이제이션된 값이 적절하게 업데이트되지 않았음을
+깨닫습니다.
+
+내가 과거에 작성한 최적화 코드라면, 아마 어설픈 사용으로 디버깅에 고생할 현재는 생각하지 않고 열심히
+뿌듯해 했을텐데요. 우연히 적용한 최적화가 아니라, 최적화를 하겠다고 스스로 약속을 하고
+습관이 될 때까지 항상 상기하는 것이 중요하지 않을까 싶은 대목입니다.
+
+### lint와 꼭 함께 사용하자
+
+리엑트 메모이제이션 API를 사용할 때, deps에 의존성을 가진 참조값을 추가하지 않는 경우도 종종 발생합니다.
+이러한 점검을 린팅 도구에게 맡겨 휴먼 에러를 최소화할 수 있습니다.
+
+['When to useMemo and useCallback' 를 읽고](https://www.rinae.dev/posts/review-when-to-usememo-and-usecallback#%EA%B6%81%EA%B7%B9%EC%A0%81%EC%9C%BC%EB%A1%9C-%EB%A7%90%ED%95%98%EA%B3%A0%EC%9E%90-%ED%95%98%EB%8A%94-%EA%B2%83)
+
+[eslint-plugin-react-hooks](https://www.npmjs.com/package/eslint-plugin-react-hooks)
+
 ## Reference
 
 <https://ko.reactjs.org/docs/hooks-reference.html#usecallback>
