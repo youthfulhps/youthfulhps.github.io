@@ -417,7 +417,7 @@ useCallback으로 감싸주었다고 생각해봅시다. 그렇다면, 잦은 �
 
 ### 최적화 코드를 이슈 원인으로 열어두자
 
-특정 이슈를 만났을 때, '로직의 문제' 로만 국한되어 이슈를 디버깅한 경우가 자주 있었습니다.
+특정 이슈를 만났을 때, '로직의 문제' 로만 국한되어 접근을 한 경우가 자주 있었습니다.
 아직 부족한 실력탓에 여러 번 삽질 끝에서야 '메모이제이션된 값이 적절하게 업데이트되지 않았음을
 깨닫습니다.
 
@@ -433,6 +433,18 @@ useCallback으로 감싸주었다고 생각해봅시다. 그렇다면, 잦은 �
 ['When to useMemo and useCallback' 를 읽고](https://www.rinae.dev/posts/review-when-to-usememo-and-usecallback#%EA%B6%81%EA%B7%B9%EC%A0%81%EC%9C%BC%EB%A1%9C-%EB%A7%90%ED%95%98%EA%B3%A0%EC%9E%90-%ED%95%98%EB%8A%94-%EA%B2%83)
 
 [eslint-plugin-react-hooks](https://www.npmjs.com/package/eslint-plugin-react-hooks)
+
+### 의존된 참조값이 많음을 의심하자
+
+하단 레퍼런스에서는, 범위 내의 소수들을 모두 구하고 랜더링하는 작업을 진행합니다. 이런 경우 우리가 흔히
+생각하는 '고비용 계산'의 정말 좋은 예시라고 생각합니다.
+
+하지만 쉽게 와닿지 않는다면, 메모이제이션한 값 혹은 콜백이 의존한 외부 값들의 정량적인 양으로
+최적화에 대한 의심을 해볼 수 있을 겁니다.
+의존한 값이 많으면, 의존한 값이 변경됨에 따른 이펙트들에 의해 영향을 받을 가능성이 높고, 위의 예시처럼
+의존된 값의 잦은 변경으로 인해 최적화 하나 마나가 될 수 있는 케이스를 유발할 수 있게 됩니다.
+
+[[번역] useMemo 그리고 useCallback 이해하기](https://medium.com/@yujso66/%EB%B2%88%EC%97%AD-usememo-%EA%B7%B8%EB%A6%AC%EA%B3%A0-usecallback-%EC%9D%B4%ED%95%B4%ED%95%98%EA%B8%B0-844620cd41a1)
 
 ## Reference
 
