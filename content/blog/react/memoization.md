@@ -1,5 +1,6 @@
 ---
-title: 비로소 알게된 리엑트 메모이제이션
+title: 리엑트 메모이제이션 셀프 코칭
+description: 리엑트 메모이제이션에 대해 조금 더 깊게 살펴보고, 잘 쓰기 위한 기준에 대해 스스로 질문해봅니다.
 date: 2022-09-21 11:09:83
 category: react
 thumbnail: { thumbnailSrc }
@@ -367,11 +368,6 @@ function Parent() {
 
 ![Rerendering chart of childB component](./images/memoization/childB-rerendering-chart.png)
 
-<!-- 결국 요점은, 객체인 함수를 자식 컴포넌트에게 props로 콜백으로 전달되는 함수가 매번 새롭게
-생성되는 것을 막기 위해 useCallback으로 핸들러를 감싸준다고 해서 최적화가 이루어지는 것이 아니고,
-이를 참조의 동일성에 최적화된 자식 컴포넌트, 즉 React.memo로 감싸져 있는 컴포넌트에 전달할 때
-유효한 최적화가 이루어집니다. -->
-
 그럼, ChildB에게 전달되는 핸들러를 useCallback으로 감싸주면 리랜더링을 방지할 수 있을 것 같지만,
 기대와는 다르게 마찬가지로 리랜더링이 발생합니다.
 
@@ -395,7 +391,7 @@ const ChildB = memo(({onClick}) => {
 
 ![Rerendering chart of childB component with useCallback and memo](./images/memoization/childB-rerendering-chart-with-useCallback-and-memo.png)
 
-## 메모이제이션, 어떻게 사용하면 좋을까
+## 메모이제이션, 어떻게 잘 사용할 수 있을까
 
 리엑트 메모이제이션에 대해 조금 더 깊게 이해해보기 위해 구현체도 살펴보고, 예제도 간단하게
 구현해보았습니다.
@@ -418,10 +414,10 @@ useCallback으로 감싸주었다고 생각해봅시다. 그렇다면, 잦은 �
 ### 최적화 코드를 이슈 원인으로 열어두자
 
 특정 이슈를 만났을 때, '로직의 문제' 로만 국한되어 접근을 한 경우가 자주 있었습니다.
-아직 부족한 실력탓에 여러 번 삽질 끝에서야 '메모이제이션된 값이 적절하게 업데이트되지 않았음을
+아직 부족한 실력탓에 여러 번 삽질 끝에서야 메모이제이션된 값이 적절하게 업데이트되지 않았음을
 깨닫습니다.
 
-내가 과거에 작성한 최적화 코드라면, 아마 어설픈 사용으로 디버깅에 고생할 현재는 생각하지 않고 열심히
+내가 과거에 작성한 최적화 코드라면, 아마 어설프고 우연한 사용으로 디버깅에 고생할 현재는 생각하지 않고 열심히
 뿌듯해 했을텐데요. 우연히 적용한 최적화가 아니라, 최적화를 하겠다고 스스로 약속을 하고
 습관이 될 때까지 항상 상기하는 것이 중요하지 않을까 싶은 대목입니다.
 
@@ -445,6 +441,13 @@ useCallback으로 감싸주었다고 생각해봅시다. 그렇다면, 잦은 �
 의존된 값의 잦은 변경으로 인해 최적화 하나 마나가 될 수 있는 케이스를 유발할 수 있게 됩니다.
 
 [[번역] useMemo 그리고 useCallback 이해하기](https://medium.com/@yujso66/%EB%B2%88%EC%97%AD-usememo-%EA%B7%B8%EB%A6%AC%EA%B3%A0-usecallback-%EC%9D%B4%ED%95%B4%ED%95%98%EA%B8%B0-844620cd41a1)
+
+### 상단 컴포넌트일수록 효과적이다
+
+자식 컴포넌트의 리랜더링에 대한 큰 책임은 부모 컴포넌트가 가집니다. 책임이 큰 상단 컴포넌트에 적용된
+최적화일수록 효과적입니다.
+
+[리액트의 useCallback useMemo, 정확하게 사용하고 있을까](https://yceffort.kr/2022/04/best-practice-useCallback-useMemo#usememo%EC%99%80-usecallback%EC%9D%84-%EC%82%AC%EC%9A%A9%ED%95%B4%EC%95%BC-%ED%95%98%EB%8A%94-%EA%B2%BD%EC%9A%B0)
 
 ## Reference
 
