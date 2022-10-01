@@ -3,9 +3,11 @@ title: 리엑트 메모이제이션 셀프 코칭
 description: 리엑트 메모이제이션에 대해 조금 더 깊게 살펴보고, 잘 쓰기 위한 기준에 대해 스스로 질문해봅니다.
 date: 2022-09-21 11:09:83
 category: react
-thumbnail: './images/memoization/thumbnail.png'
+thumbnail: { thumbnail }
 draft: false
 ---
+
+![A person who searches for values in complex records](./images/memoization/thumbnail.png)
 
 보통 어플리케이션에서 최적화를 위해 메모이제이션 기법을 통해 이전에 계산한 값을 메모리에
 저장해두고, 동일하게 다시 사용할 수 있는 곳에서 재사용하여 반복적으로 발생하는 계산의
