@@ -3,8 +3,8 @@ title: 리엑트 메모이제이션 셀프 코칭
 description: 리엑트 메모이제이션에 대해 조금 더 깊게 살펴보고, 잘 쓰기 위한 기준에 대해 스스로 질문해봅니다.
 date: 2022-09-21 11:09:83
 category: react
-thumbnail: { thumbnailSrc }
-draft: true
+thumbnail: './images/memoization/thumbnail.png'
+draft: false
 ---
 
 보통 어플리케이션에서 최적화를 위해 메모이제이션 기법을 통해 이전에 계산한 값을 메모리에
@@ -25,9 +25,9 @@ _“생성(create)” 함수와 그것의 의존성 값의 배열을 전달하�
 않는 리엑트의 모습을 보면서 내가 적절하게 잘 이해하고 적재적소에 사용하며, 실질적인 성능 최적화를
 이루고 있는 건가에 대한 의구심이 들었습니다.
 
-이 글은 갑자기 낯설게 느껴지는 리엑트 메모이제이션에 대한 찝찝함을 이겨내고자 조금 더 깊게
-알아보고, 가능하면 최적화에 대한 스스로의 기준도 정해보려 합니다. 비슷한 고민을 하시는 분들에게
-도움이 될 수 있으면 좋겠습니다.
+이 글은 갑자기 낯설게 느껴지는 리엑트 메모이제이션에 대한 찝찝함을 이겨내고자 셀프 코칭해보며
+조금 더 깊게 알아보고, 가능하면 최적화에 대한 스스로의 기준도 정해보려 합니다. 비슷한 고민을
+하시는 분들에게 도움이 될 수 있으면 좋겠습니다.
 
 ## useMemo, 메모이제이션된 값을 반환한다
 
@@ -54,7 +54,7 @@ useMemo의 역할을 코드로 확인해봅시다.
 ```ts
 function updateMemo<T>(
   nextCreate: () => T,
-  deps: Array<mixed> | void | null,
+  deps: Array<mixed> | void | null
 ): T {
   const hook = updateWorkInProgressHook();
   const nextDeps = deps === undefined ? null : deps;
@@ -102,11 +102,11 @@ nextDeps는 파라미터로 전달받은 deps를, prevState는 직전 랜더링 
 
 ```ts
 export type Hook = {
-  memoizedState: any,
-  baseState: any,
-  baseQueue: Update<any, any> | null,
-  queue: any,
-  next: Hook | null,
+  memoizedState: any;
+  baseState: any;
+  baseQueue: Update<any, any> | null;
+  queue: any;
+  next: Hook | null;
 };
 ```
 
@@ -193,7 +193,7 @@ function updateCallback<T>(callback: T, deps: Array<mixed> | void | null): T {
 우리가 잘 이해하고 있는 것 처럼, useMemo는 콜백 함수의 연산 반환값을, useCallback은
 콜백 자체를 메모이제이션하는 기능 차이를 확인할 수 있었습니다.
 
-## React.memo, 마지막 랜더링된 결과를 재사용한다
+## React.memo, 랜더링된 결과를 재사용한다
 
 React.memo는 고차 컴포넌트로서 감싼 컴포넌트 랜더링 결과를 메모이징하고, 동일한 props로
 동일한 결과를 랜더링하는 경우에 대하여 다시 랜더링하지 않고, 다시 마지막으로 랜더링된 결과를
@@ -295,7 +295,7 @@ function updateMemoComponent(
   newChild.return = workInProgress;
   workInProgress.child = newChild;
   return newChild;
-}  
+}
 ```
 
 React.memo가 전달받는 컴포넌트와 props 비교 기준이 되는 compare은 이곳에서 사용되는데요.
@@ -335,29 +335,29 @@ function bailoutOnAlreadyFinishedWork(
 
 ```js
 const ChildA = ({ onClick }) => {
-  return <button onClick={onClick}>ChildA</button>
-}
+  return <button onClick={onClick}>ChildA</button>;
+};
 
-const ChildB = ({onClick}) => {
-  return <button onClick={onClick}>ChildB</button>
-}
+const ChildB = ({ onClick }) => {
+  return <button onClick={onClick}>ChildB</button>;
+};
 
 function Parent() {
-  const [isGood, setIsGood] = useState(false); 
+  const [isGood, setIsGood] = useState(false);
   const handleChildAClick = () => {
     setIsGood(!isGood);
-  }
+  };
 
   const handleChildBClick = () => {
     console.log('ChildB clicked!');
-  }
+  };
 
   return (
     <>
       <ChildA onClick={handleChildAClick} />
       <ChildB onClick={handleChildBClick} />
     </>
-  )
+  );
 }
 ```
 
@@ -374,7 +374,7 @@ function Parent() {
 ```js
 const handleChildBClick = useCallback(() => {
   console.log('ChildB clicked!');
-},[])
+}, []);
 ```
 
 ![Rerendering chart of childB component with useCallback](./images/memoization/childB-rerendering-chart-with-useCallback.png)
@@ -384,9 +384,9 @@ useCallback으로 감싸고, 전달받는 자식 컴포넌트 또한 React.memo�
 과정을 통해 직전 자식 트리를 재사용하는 과정이 포함할 수 있도록 해야 합니다.
 
 ```js
-const ChildB = memo(({onClick}) => {
-  return <button onClick={onClick}>ChildB</button>
-})
+const ChildB = memo(({ onClick }) => {
+  return <button onClick={onClick}>ChildB</button>;
+});
 ```
 
 ![Rerendering chart of childB component with useCallback and memo](./images/memoization/childB-rerendering-chart-with-useCallback-and-memo.png)
@@ -421,22 +421,14 @@ useCallback으로 감싸주었다고 생각해봅시다. 그렇다면, 잦은 �
 뿌듯해 했을텐데요. 우연히 적용한 최적화가 아니라, 최적화를 하겠다고 스스로 약속을 하고
 습관이 될 때까지 항상 상기하는 것이 중요하지 않을까 싶은 대목입니다.
 
-### lint와 꼭 함께 사용하자
-
-리엑트 메모이제이션 API를 사용할 때, deps에 의존성을 가진 참조값을 추가하지 않는 경우도 종종 발생합니다.
-이러한 점검을 린팅 도구에게 맡겨 휴먼 에러를 최소화할 수 있습니다.
-
-['When to useMemo and useCallback' 를 읽고](https://www.rinae.dev/posts/review-when-to-usememo-and-usecallback#%EA%B6%81%EA%B7%B9%EC%A0%81%EC%9C%BC%EB%A1%9C-%EB%A7%90%ED%95%98%EA%B3%A0%EC%9E%90-%ED%95%98%EB%8A%94-%EA%B2%83)
-
-[eslint-plugin-react-hooks](https://www.npmjs.com/package/eslint-plugin-react-hooks)
-
 ### 의존된 참조값이 많음을 의심하자
 
 하단 레퍼런스에서는, 범위 내의 소수들을 모두 구하고 랜더링하는 작업을 진행합니다. 이런 경우 우리가 흔히
-생각하는 '고비용 계산'의 정말 좋은 예시라고 생각합니다.
+생각하는 '고비용 계산'의 정말 좋은 예시라고 생각합니다. 더불어 인터렉션에 의해 체이닝된 메서드들의 계산을
+요구한다면 메모이제이션된 값을 사용할 수 있을 지 충분한 고려가 필요합니다.
 
-하지만 쉽게 와닿지 않는다면, 메모이제이션한 값 혹은 콜백이 의존한 외부 값들의 정량적인 양으로
-최적화에 대한 의심을 해볼 수 있을 겁니다.
+하지만 '고비용 계산'의 기준이 쉽게 와닿지 않는다면, 메모이제이션한 값 혹은 콜백이 의존한 외부 값들의
+정량적인 양으로 최적화에 대한 의심을 해볼 수 있을 겁니다.
 의존한 값이 많으면, 의존한 값이 변경됨에 따른 이펙트들에 의해 영향을 받을 가능성이 높고, 위의 예시처럼
 의존된 값의 잦은 변경으로 인해 최적화 하나 마나가 될 수 있는 케이스를 유발할 수 있게 됩니다.
 
@@ -444,10 +436,44 @@ useCallback으로 감싸주었다고 생각해봅시다. 그렇다면, 잦은 �
 
 ### 상단 컴포넌트일수록 효과적이다
 
-자식 컴포넌트의 리랜더링에 대한 큰 책임은 부모 컴포넌트가 가집니다. 책임이 큰 상단 컴포넌트에 적용된
-최적화일수록 효과적입니다.
+자식 컴포넌트의 리랜더링에 대한 큰 책임은 부모 컴포넌트가 가집니다. 때문에, 책임이 큰 상단 컴포넌트일수록
+최적화에 예민하게 접근해야 합니다.
+
+개인적으로 여러 컴포넌트에 상태 의존성 주입이 필요한 경우 Context API를 사용하곤 하는데, 일반적으로
+컨텍스트가 가진 상태에 의존적인 많은 하위 트리를 지닙니다. 즉, 컨텍스트의 상태 변화는 많은 리랜더링을
+발생시킨다는 것을 명심하고 useMemo, useCallback을 적극적으로 사용해야 합니다.
+
+```jsx
+...
+const contextState = useMemo(
+  () => ({
+    isGood,
+    setIsGood,
+  }),
+  [isGood]
+);
+
+return <CountContext.Provider value={contextState} />;
+```
 
 [리액트의 useCallback useMemo, 정확하게 사용하고 있을까](https://yceffort.kr/2022/04/best-practice-useCallback-useMemo#usememo%EC%99%80-usecallback%EC%9D%84-%EC%82%AC%EC%9A%A9%ED%95%B4%EC%95%BC-%ED%95%98%EB%8A%94-%EA%B2%BD%EC%9A%B0)
+
+### lint와 꼭 함께 사용하자
+
+리엑트 메모이제이션 API를 사용할 때, deps에 의존성을 가진 참조값을 추가하지 않는 경우도 종종 발생합니다.
+이러한 점검을 린팅 도구에게 맡겨 휴먼 에러를 최소화할 수 있습니다.
+
+[hooks-reference#useCallback](https://ko.reactjs.org/docs/hooks-reference.html#usecallback)
+
+[eslint-plugin-react-hooks](https://www.npmjs.com/package/eslint-plugin-react-hooks)
+
+## 마치면서
+
+리엑트 메모이제이션을 위한 API들이 어떻게 구현되어 있는 지, 그리고 적절한 사용 기준을 정리해보았는데요.
+아무렴 궁극적인 목표는 습관성(?) 최적화입니다. 기능 개발을 하면서 당연하게 사용되는 메모이제이션 API,
+그리고 소수점 초단위의 성능 향상을 고려할 줄 아는 개발을 꿈꿉니다.
+
+잘못된 부분이 있다면, 이슈를 통해 자유로운 지적 부탁드리며, 긴 글 읽어주셔서 감사합니다!
 
 ## Reference
 
