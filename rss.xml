@@ -1,4 +1,25 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Youthfulhps.dev]]></title><description><![CDATA[Blog posted front-end, troubleshooting!]]></description><link>https://youthfulhps.dev</link><generator>GatsbyJS</generator><lastBuildDate>Sat, 01 Oct 2022 10:35:37 GMT</lastBuildDate><item><title><![CDATA[리엑트 메모이제이션 셀프 코칭]]></title><description><![CDATA[…]]></description><link>https://youthfulhps.dev/react/memoization/</link><guid isPermaLink="false">https://youthfulhps.dev/react/memoization/</guid><pubDate>Wed, 21 Sep 2022 11:10:23 GMT</pubDate><content:encoded>&lt;p&gt;보통 어플리케이션에서 최적화를 위해 메모이제이션 기법을 통해 이전에 계산한 값을 메모리에
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Youthfulhps.dev]]></title><description><![CDATA[Blog posted front-end, troubleshooting!]]></description><link>https://youthfulhps.dev</link><generator>GatsbyJS</generator><lastBuildDate>Sat, 01 Oct 2022 11:17:06 GMT</lastBuildDate><item><title><![CDATA[리엑트 메모이제이션 셀프 코칭]]></title><description><![CDATA[…]]></description><link>https://youthfulhps.dev/react/memoization/</link><guid isPermaLink="false">https://youthfulhps.dev/react/memoization/</guid><pubDate>Wed, 21 Sep 2022 11:10:23 GMT</pubDate><content:encoded>&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 978px; &quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 55.99999999999999%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAALCAYAAAB/Ca1DAAAACXBIWXMAABYlAAAWJQFJUiTwAAACxklEQVQoz12RW0iTYRiA/9x56jZ3UNvmfndorenm3FzGlgckSjsoakVWooJoSTchkXQgKqIyosBICoUONxGkFJVFZURQhKbdmEGSQhJ0E9RtF0/fnDd28cDLx/c+70ly+aNYXEEi66LU1zVTsqGWgrVlmBweMs15aAxmFLosFFq9QIsyhUaLQq0hYwn1MiJWqZE8gfVYCkNUhyJ0NDRTVF6LUxQxO9egz7Fjyi0gXpYkVBxFm20SQj2qlHxJmhanSceSxe5Fl5PPWqdMeXEEuzdM6s0gRAqdkVDJeiLhGIUFPsxWhxAtC9Xa/0iLJaNI1ButaLLNSBkZKEXbqQSVRofeYMLnCxIsdNNdt5m6REL8UaEUicoV3aVQo0iNbFntJccmi/EcuBwyzQE3DqsNVaYJpxzEmuemsSzK9Y49bE9WkZ3rxWRzimTtSqlqeYfmfA8mqwuDRaa9vYfe+h0EZR82d4icXA+SlEl15RYG+06Q2FCDUxzQYfej0hnEFGmpclmYQsqyusU1XWTozRSHYiT9AdxOL75QBbFwnPNHj/Hy+WvGX3/g6dgbJt9P091+QBSSkNR6gQ5JdCupRKwU+C0G/BYjniwtRYVBSmUPriwdJWUbGTp1nNtHDvFi5DFvxt8xO7vA3PxPJqa+0tbWhV2/itWZSvJ1Ao1EnloUqdz0jJq6VzTUXKapaivbt/VRnriCt2gf4VAlVy8PsPj9F3NzP5j9ssjM5++CeQYGx4hXPKIqcpiKwF6CsQeEI8NIu0ubKC3ahcNXS+v+bvovXaP/6ihbN7Zyof8mv//8ZWZmgY+Ts0xPf2Xy0zc6Ow/hNso0JntpTbawN9ZCfeIi2+JHkbpKAzREw8g2O8cPHubJ3XsMnzvDjRN9vH82ztTbCZ7ef8jI0G1ejY5xtruHpFhPi8dHbzxKf+0mBvbs5M7JPm6dOc0/P+Z1358vUm4AAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;A person who searches for values in complex records&quot;
+        title=&quot;A person who searches for values in complex records&quot;
+        src=&quot;/static/a74f6a6ddb4b017b1700cbe4d3036caf/914c7/thumbnail.png&quot;
+        srcset=&quot;/static/a74f6a6ddb4b017b1700cbe4d3036caf/5a46d/thumbnail.png 300w,
+/static/a74f6a6ddb4b017b1700cbe4d3036caf/0a47e/thumbnail.png 600w,
+/static/a74f6a6ddb4b017b1700cbe4d3036caf/914c7/thumbnail.png 978w&quot;
+        sizes=&quot;(max-width: 978px) 100vw, 978px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;보통 어플리케이션에서 최적화를 위해 메모이제이션 기법을 통해 이전에 계산한 값을 메모리에
 저장해두고, 동일하게 다시 사용할 수 있는 곳에서 재사용하여 반복적으로 발생하는 계산의
 리소스를 줄이는 기법을 사용하곤 합니다.&lt;/p&gt;
 &lt;p&gt;리엑트에서도 메모이제이션을 쉽게 구현할 수 있도록 도와주는 API들이 존재하는데요.
