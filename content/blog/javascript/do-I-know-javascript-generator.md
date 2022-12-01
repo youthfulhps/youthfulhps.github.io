@@ -4,6 +4,7 @@ date: 2021-11-21 22:05:01
 category: javascript
 thumbnail: ./images/do-i-know-javascript-generator/intro.png
 draft: false
+description: 자바스크립트의 제네레이터 문법을 되새겨봅니다.
 ---
 
 리덕스 사가는 ES6에 새롭게 도입된 제네레이터 (Generator) 문법을 사용하여 유용하게 비동기 처리를 할 수 있게 해줍니다.

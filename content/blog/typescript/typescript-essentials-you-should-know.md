@@ -4,6 +4,7 @@ date: 2022-06-14 10:06:39
 category: typescript
 thumbnail: ./images/typescript-essentials-you-should-know/thumbnail.png
 draft: false
+description: 단순히 자바스크립트에 타입을 부여한 언어라고 생각하고 싶지 않았어요.
 ---
 
 ![A man who thinks about whether to use any type](./images/typescript-essentials-you-should-know/thumbnail.png)

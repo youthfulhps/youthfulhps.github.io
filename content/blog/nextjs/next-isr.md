@@ -4,6 +4,7 @@ date: 2022-01-08 21:05:76
 category: nextjs
 thumbnail: ./images/next-isr/thumbnail.png
 draft: false
+description: 증분 정적 생성의 타임라인을 살펴봅니다.
 ---
 
 최근 CRA 프로젝트를 넥스트로 이관하는 작업이 한창입니다. 넥스트는 서버 사이드 랜더링과 동시에 클라이언트 사이드 랜더링을

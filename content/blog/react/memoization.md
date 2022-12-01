@@ -1,10 +1,10 @@
 ---
 title: 리엑트 메모이제이션 셀프 코칭
-description: 리엑트 메모이제이션에 대해 조금 더 깊게 살펴보고, 잘 쓰기 위한 기준에 대해 스스로 질문해봅니다.
 date: 2022-09-21 11:09:83
 category: react
 thumbnail: './images/memoization/thumbnail.png'
 draft: false
+description: 리엑트 최적화, 적절하게 잘하고 계시나요?
 ---
 
 ![A person who searches for values in complex records](./images/memoization/thumbnail.png)

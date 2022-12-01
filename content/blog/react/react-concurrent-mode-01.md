@@ -4,6 +4,7 @@ date: 2022-06-11 16:06:62
 category: react
 thumbnail: ./images/react-concurrent-mode-01/thumbnail.png
 draft: false
+description: 5년이라는 시간을 투자한 리엑트 동시성 기능의 정식 릴리즈, 결국 george지는 건 나.
 ---
 
 리엑트v18에서 동시성 기능을 정식으로 출시하였습니다. 대표적으로,

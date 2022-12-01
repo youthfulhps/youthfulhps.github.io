@@ -4,6 +4,7 @@ date: 2022-05-31 14:05:04
 category: infra
 thumbnail: ../../../public/banner.png
 draft: false
+description: 모바일 환경이라면 이미지 사이즈를 줄여 보내주세요.
 ---
 
 [사용자 경험 품질 향상을 위한 이미지 최적화](https://youthfulhps.dev/web/image-optimization/)에서 온디멘드 이미지 리사이징

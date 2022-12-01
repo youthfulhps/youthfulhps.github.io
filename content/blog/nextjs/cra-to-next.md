@@ -4,6 +4,7 @@ date: 2021-12-26 21:05:09
 category: nextjs
 thumbnail: ./images/cra-to-next/thumbnail.png
 draft: false
+description: 빌드 이슈는 고개를 들어주세요.
 ---
 
 웹 개발을 하면서 정량적인 지표를 보는 것에 재미가 들린 요즘, 지표는

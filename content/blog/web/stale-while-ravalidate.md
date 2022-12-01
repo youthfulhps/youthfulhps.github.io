@@ -4,6 +4,7 @@ date: 2022-06-01 16:06:87
 category: web
 thumbnail: ./images/stale-while-revalidate/swr-flow-2.png
 draft: false
+description: 심심찮게 등장하는 swr 캐싱 전략을 간단하게 살펴봅니다.
 ---
 
 클라이언트를 개발하면서 [HTTP Cache-Control Extensions for Stale Content](https://datatracker.ietf.org/doc/html/rfc5861)의

@@ -4,6 +4,7 @@ date: 2021-08-10 10:05:79
 category: infra
 thumbnail: ../../../public/banner.png
 draft: false
+description: AWS를 통해 클라이언트를 호스팅해본 경험을 공유합니다.
 ---
 
 사내에서 사용되는 클라이언트 인프라는 이미 구축되어 있는 경우가 많아

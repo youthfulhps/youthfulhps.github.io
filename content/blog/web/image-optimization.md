@@ -4,6 +4,7 @@ date: 2022-05-29 16:05:05
 category: web
 thumbnail: ../../../public/banner.png
 draft: false
+description: 브라우저에게 예쁨 받는 이미지를 랜더링하기 위한 최소한의 노력
 ---
 
 많은 이미지를 다루는 페이지의 경우, 이미지 최적화에 신경쓰지 않으면 사용자 경험 지표에서 많은 감점을 받기 쉽습니다.

@@ -4,6 +4,7 @@ date: 2022-03-19 00:05:02
 category: javascript
 thumbnail: ./images/javascript-prototype/thumbnail.png
 draft: false
+description: 프로토타입이 그러니까 이게 뭐냐면..
 ---
 
 자바스크립트는 프로토타입 기반의 객체 지향 프로그래밍 언어입니다. 개인적으로 프로토타입에 대한 큰 그림을 이해하고 있다고 생각했는데,
