@@ -1,4 +1,113 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Youthfulhps.dev]]></title><description><![CDATA[Blog posted front-end, troubleshooting!]]></description><link>https://youthfulhps.dev</link><generator>GatsbyJS</generator><lastBuildDate>Thu, 01 Dec 2022 06:40:40 GMT</lastBuildDate><item><title><![CDATA[리엑트 개발 환경 구축기]]></title><description><![CDATA[실무에서 create-react-app…]]></description><link>https://youthfulhps.dev/development/react-boilerplate/</link><guid isPermaLink="false">https://youthfulhps.dev/development/react-boilerplate/</guid><pubDate>Fri, 21 Oct 2022 00:10:16 GMT</pubDate><content:encoded>&lt;blockquote&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Youthfulhps.dev]]></title><description><![CDATA[Blog posted front-end, troubleshooting!]]></description><link>https://youthfulhps.dev</link><generator>GatsbyJS</generator><lastBuildDate>Sat, 10 Dec 2022 17:30:42 GMT</lastBuildDate><item><title><![CDATA[정규 표현식을 알아보자]]></title><description><![CDATA[…]]></description><link>https://youthfulhps.dev/javascript/regular-expression/</link><guid isPermaLink="false">https://youthfulhps.dev/javascript/regular-expression/</guid><pubDate>Wed, 07 Dec 2022 15:12:26 GMT</pubDate><content:encoded>&lt;p&gt;최근 정규 표현식을 마주하는 일이 잦아진 것 같습니다. 주로 문자열의 유효성 검사를
+위해 작성되었던 정규 표현식들과, 에디터에서 특정 문자열 검색을 위해 정규식 검색을
+사용하곤 합니다.&lt;/p&gt;
+&lt;p&gt;사실 정규 표현식을 사용할때면, 이미 작성되어 있는 표현식들을 짜집어 사용하거나,
+구글링해야 하는 경우가 부지기수였는데요. 이번 기회에 생각하는대로 표현식을 작성
+할 수 있도록 공부한 내용을 정리해보려 합니다.&lt;/p&gt;
+&lt;h2 id=&quot;정규-표현식&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EC%A0%95%EA%B7%9C-%ED%91%9C%ED%98%84%EC%8B%9D&quot; aria-label=&quot;정규 표현식 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;정규 표현식&lt;/h2&gt;
+&lt;p&gt;정규 표현식(Regular Expression)은 특정 규칙을 가진 문자열의 집합을 표현하고자
+고안된 형식 언어입니다. 대부분의 텍스트 에디터, 프로그래밍 언어에서 문자열의 검색과
+치환을 위해 정규 표현식을 문법으로 내장하고 있거나, 표준 라이브러리를 제공합니다.&lt;/p&gt;
+&lt;p&gt;자바스크립트는 정규 표현식의 문법을 구현체에 담아 RegExp 객체로 제공하고 있는데요.
+이는 정규 표현식의 패턴을 사용해 텍스트를 판별할 때 사용할 수 있습니다.&lt;/p&gt;
+&lt;p&gt;간단한 예제부터 살펴봅시다. 다음은 특정 문자열에서 ‘Hello’ 라는 단어를 찾고자
+작성된 정규 표현식입니다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 1200px; &quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 55.99999999999999%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAALCAYAAAB/Ca1DAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAx0lEQVQoz82RzQqCUBSEryhW4E9oRmlSCwsCc2GLIpW78RXa3cxFUIKQT+CrTyG0SkPChYth4Ax8zDmHEELQsZpDjuO+9Jn/Bey0oeu6YIwhCAL4vo84jmFZFmzbrjJFUdoDDcNAFIbIsgeK4okkuSDPc6RpCkopyrKEaZpN638DRVF8e/2dBEGApmmVt27I8wSH/QT0NEN0nGKsDiBJClRVhSzLv2D1wNGQBzuvcb9ucWMbrJY65uYCnreD4zjQdb0HX+4N8AXy5fD1MeRqygAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;Introduction regular expression example&quot;
+        title=&quot;Introduction regular expression example&quot;
+        src=&quot;/static/4dd573b2f77564ddf70812a8938f21fc/c1b63/intro-regex-example.png&quot;
+        srcset=&quot;/static/4dd573b2f77564ddf70812a8938f21fc/5a46d/intro-regex-example.png 300w,
+/static/4dd573b2f77564ddf70812a8938f21fc/0a47e/intro-regex-example.png 600w,
+/static/4dd573b2f77564ddf70812a8938f21fc/c1b63/intro-regex-example.png 1200w,
+/static/4dd573b2f77564ddf70812a8938f21fc/d61c2/intro-regex-example.png 1800w,
+/static/4dd573b2f77564ddf70812a8938f21fc/df88b/intro-regex-example.png 1906w&quot;
+        sizes=&quot;(max-width: 1200px) 100vw, 1200px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;문자열에서 ‘Hello’가 하이라이팅된 것을 확인할 수 있습니다. 그렇다면, 정규 표현식이
+어떻게 구성되어 있는 지 알아봅시다.&lt;/p&gt;
+&lt;h2 id=&quot;정규-표현식의-구성&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EC%A0%95%EA%B7%9C-%ED%91%9C%ED%98%84%EC%8B%9D%EC%9D%98-%EA%B5%AC%EC%84%B1&quot; aria-label=&quot;정규 표현식의 구성 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;정규 표현식의 구성&lt;/h2&gt;
+&lt;p&gt;정규 표현식은 크게 패턴(Pattern)과 플래그(Flag)로 구성되어 있는데요. 패턴의 시작과
+끝을 &lt;code class=&quot;language-text&quot;&gt;/&lt;/code&gt; 로 구분짓고, 그 뒤로 플래그가 붙게 됩니다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 1200px; &quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 62.66666666666667%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAANCAYAAACpUE5eAAAACXBIWXMAABYlAAAWJQFJUiTwAAAAzElEQVQ4y+VSuwqDQBA8X7+h2AmComeh2Cn4QEQUK238AxErv37EDYZoDCSQzmLYY3dmWGaPMcbwZ9zeUBRFqoIg0HvHlXjnvBluA0VRvtpAkiSCLMsH4ydHVVUEQYCu6zDPM6qqwjAM6PseTdOgKAqUZQnXdcE5h+d5mKYJ4zgiyzK0bUscXdcfhoZhwLZthGEI3/dJvBHrukae59RPkgRxHMNxHJimiSiKYFkW0jTFsiy0jKZpvx3lNdvz7BTXUXTGVfBb78NB7vixVxfMIr87KQKOAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;Regular expression composition&quot;
+        title=&quot;Regular expression composition&quot;
+        src=&quot;/static/0df3995cc64ea59baf72cbb68462534b/c1b63/regex-composition.png&quot;
+        srcset=&quot;/static/0df3995cc64ea59baf72cbb68462534b/5a46d/regex-composition.png 300w,
+/static/0df3995cc64ea59baf72cbb68462534b/0a47e/regex-composition.png 600w,
+/static/0df3995cc64ea59baf72cbb68462534b/c1b63/regex-composition.png 1200w,
+/static/0df3995cc64ea59baf72cbb68462534b/d61c2/regex-composition.png 1800w,
+/static/0df3995cc64ea59baf72cbb68462534b/97a96/regex-composition.png 2400w,
+/static/0df3995cc64ea59baf72cbb68462534b/5fe07/regex-composition.png 3422w&quot;
+        sizes=&quot;(max-width: 1200px) 100vw, 1200px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;패턴은 일치하는 텍스트가 준수해야 하는 ‘패턴’을 표현하기 위해 사용하고, 우리가 흔히
+사용하는 &lt;strong&gt;문자 그대로의 정규 문자와, 특별한 의미를 담는 메타 문자로서 패턴을 표현&lt;/strong&gt;
+할 수 있습니다.&lt;/p&gt;
+&lt;p&gt;그 다음으로 플래그는 옵션입니다. 즉 사용하지 않아도 되며, 이 때는 문자열 내 검색
+매칭 대상의 첫 번째 매칭 대상을 찾게되면 검색을 종료하고 이를 반환합니다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;javascript&quot;&gt;&lt;pre class=&quot;language-javascript&quot;&gt;&lt;code class=&quot;language-javascript&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; target &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;가장 큰 약점은 약점을 보일 것에 대한 두려움이다.&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; regexr &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token regex&quot;&gt;&lt;span class=&quot;token regex-delimiter&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;token regex-source language-regex&quot;&gt;약점&lt;/span&gt;&lt;span class=&quot;token regex-delimiter&quot;&gt;/&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+console&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;target&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;match&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;regexr&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;// [&apos;약점&apos;, 5, &apos;가장 큰 약점은...&apos;];&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;만약 문자열 내 패턴에 일치하는 대상을 모두 반환하고 싶다면, &lt;code class=&quot;language-text&quot;&gt;g&lt;/code&gt; 플래그를 사용할 수
+있습니다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;javascript&quot;&gt;&lt;pre class=&quot;language-javascript&quot;&gt;&lt;code class=&quot;language-javascript&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; target &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;가장 큰 약점은 약점을 보일 것에 대한 두려움이다.&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; regexr &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token regex&quot;&gt;&lt;span class=&quot;token regex-delimiter&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;token regex-source language-regex&quot;&gt;약점&lt;/span&gt;&lt;span class=&quot;token regex-delimiter&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;token regex-flags&quot;&gt;g&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+console&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;target&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;match&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;regexr&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;// [&apos;약점&apos;, &apos;약점&apos;];&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;참고로, 자바스크립트의 &lt;code class=&quot;language-text&quot;&gt;String.prototype.match()&lt;/code&gt; 메서드는 정규 표현식에
+&lt;code class=&quot;language-text&quot;&gt;g&lt;/code&gt;가 포함되어 있지 않다면 첫 번째 매칭대상과 함께 index, input을 함께 반환하며,
+반대로 &lt;code class=&quot;language-text&quot;&gt;g&lt;/code&gt;가 포함되어 있다면 일치하는 모든 대상을 포함하는 배열을 반환합니다.&lt;/p&gt;
+&lt;p&gt;또한 플래그는 다중으로 사용할 수 있는데요. 영문을 패턴으로 검색할 때 대소문자 구분없이
+모든 대상을 반환받고 싶다면, 대소문자 구분을 무시하라는 의미의 &lt;code class=&quot;language-text&quot;&gt;i&lt;/code&gt;와 모든 대상 검색을
+의미하는 &lt;code class=&quot;language-text&quot;&gt;g&lt;/code&gt; 플래그를 함께 사용하여 표현할 수 있습니다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;javascript&quot;&gt;&lt;pre class=&quot;language-javascript&quot;&gt;&lt;code class=&quot;language-javascript&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; target &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;The biggest weakness is the fear of showing weakness.&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; regexr &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token regex&quot;&gt;&lt;span class=&quot;token regex-delimiter&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;token regex-source language-regex&quot;&gt;The&lt;/span&gt;&lt;span class=&quot;token regex-delimiter&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;token regex-flags&quot;&gt;g&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; regexrWithIgnoreCase &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token regex&quot;&gt;&lt;span class=&quot;token regex-delimiter&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;token regex-source language-regex&quot;&gt;The&lt;/span&gt;&lt;span class=&quot;token regex-delimiter&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;token regex-flags&quot;&gt;gi&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+console&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;target&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;match&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;regexr&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;// [&apos;The&apos;]&lt;/span&gt;
+console&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;target&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;match&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;regexrWithIgnoreCase&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;// [&quot;The&quot;, &quot;the&quot;]&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;개인적으로 가장 많이 사용하는 &lt;code class=&quot;language-text&quot;&gt;g&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;i&lt;/code&gt; 플래그들과 함께 자바스크립트가 지원하는
+플래그 6개들은 다음과 같습니다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;i, 대소문자 구분을 무시하고 검색합니다.&lt;/li&gt;
+&lt;li&gt;g, 패턴과 일치하는 모든 대상을 검색합니다.&lt;/li&gt;
+&lt;li&gt;m, 다중 행 모드로 검색합니다.&lt;/li&gt;
+&lt;li&gt;s, 메타문자 &lt;code class=&quot;language-text&quot;&gt;.&lt;/code&gt;이 개행 문자 &lt;code class=&quot;language-text&quot;&gt;\n&lt;/code&gt;도 포함하는 ‘dotall’ 모드로 검색합니다.&lt;/li&gt;
+&lt;li&gt;u, 유티코드 전체를 지원하여 검색합니다.&lt;/li&gt;
+&lt;li&gt;y, 문자 내 특정 위치에서 검색을 진행하는 ‘sticky’ 모드로 검색합니다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;몇 가지 추가적인 플래그들이 존재합니다.&lt;/p&gt;
+&lt;p&gt;위 hello 예시에서 정규식은 어떤 문법을 통해 구성되어 있는지?&lt;/p&gt;
+&lt;p&gt;문법에 대한 하나하나 설명&lt;/p&gt;
+&lt;h2 id=&quot;reference&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#reference&quot; aria-label=&quot;reference permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Reference&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/String/match&quot;&gt;https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/String/match&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content:encoded></item><item><title><![CDATA[리엑트 개발 환경 구축기]]></title><description><![CDATA[실무에서 create-react-app…]]></description><link>https://youthfulhps.dev/development/react-boilerplate/</link><guid isPermaLink="false">https://youthfulhps.dev/development/react-boilerplate/</guid><pubDate>Fri, 21 Oct 2022 00:10:16 GMT</pubDate><content:encoded>&lt;blockquote&gt;
 &lt;p&gt;&lt;em&gt;실무에서 create-react-app 사용하나요?&lt;/em&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;최근에 우연히 프론트엔드 개발자를 준비하시는 지인분께서 하신 질문인데, 생각보다 개운하게
