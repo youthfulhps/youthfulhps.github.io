@@ -4,7 +4,7 @@ date: 2022-12-07 15:12:26
 category: development
 thumbnail: ./images/regular-expression/thumbnail.png
 draft: false
-description: 해석하고 있는 척 그만하고 싶어요.
+description: 해석되어가고 있는 척 그만하고 싶어요.
 ---
 
 ![thumbnail](./images/regular-expression/thumbnail.png)
@@ -14,7 +14,7 @@ description: 해석하고 있는 척 그만하고 싶어요.
 사용하곤 했는데요.
 
 사실 정규 표현식을 사용할 때면, 이미 작성되어 있는 표현식들을 꿰맞추어 사용하거나,
-구글링해야 하는 경우가 부지기수였는데요. 거창한 이유보다는, 잘 사용해 보고 싶은
+구글링해야 하는 경우가 부지기수였습니다. 해서 거창한 이유보다는, 잘 사용해 보고 싶은
 생각이 들어 공부하게 된 내용을 정리해 보려 합니다.
 
 ## 정규 표현식
