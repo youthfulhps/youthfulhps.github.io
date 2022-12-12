@@ -4,7 +4,7 @@ date: 2022-12-07 15:12:26
 category: development
 thumbnail: ./images/regular-expression/thumbnail.png
 draft: false
-description: 이해하고 있는 척 그만하고 싶어요.
+description: 해석하고 있는 척 그만하고 싶어요.
 ---
 
 ![thumbnail](./images/regular-expression/thumbnail.png)
