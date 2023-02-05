@@ -46,13 +46,13 @@ GitHubTheme.overrideThemeStyles = () => {
 
     p: {
       // fontFamily: 'Pretendard',
-      lineHeight: '1.8',
+      lineHeight: '2',
       fontFamily: 'IBM Plex Sans KR',
     },
 
     'span.gatsby-resp-image-wrapper': {
       margin: '2em 0',
-    }
+    },
   };
 };
 
