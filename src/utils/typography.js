@@ -31,7 +31,7 @@ GitHubTheme.overrideThemeStyles = () => {
     },
 
     h3: {
-      fontFamily: 'Catamaran',
+      fontFamily: 'Pretendard',
     },
 
     ul: {
@@ -41,13 +41,11 @@ GitHubTheme.overrideThemeStyles = () => {
     li: {
       marginBottom: '2px',
       fontFamily: 'Pretendard',
-      // fontFamily: 'IBM Plex Sans KR',
     },
 
     p: {
-      // fontFamily: 'Pretendard',
+      fontFamily: 'Pretendard',
       lineHeight: '2',
-      fontFamily: 'IBM Plex Sans KR',
     },
 
     'span.gatsby-resp-image-wrapper': {
