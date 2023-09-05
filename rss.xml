@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Youthfulhps.dev]]></title><description><![CDATA[Blog posted front-end, troubleshooting!]]></description><link>https://youthfulhps.dev</link><generator>GatsbyJS</generator><lastBuildDate>Thu, 18 May 2023 14:47:23 GMT</lastBuildDate><item><title><![CDATA[2023 상반기 회고]]></title><description><![CDATA[벌써 202…]]></description><link>https://youthfulhps.dev/essay/2023-first-half-retrospect/</link><guid isPermaLink="false">https://youthfulhps.dev/essay/2023-first-half-retrospect/</guid><pubDate>Sun, 14 May 2023 01:05:26 GMT</pubDate><content:encoded>&lt;p&gt;벌써 2023년 상반기가 지나갔다. 정말 정신없이 시간이 빠르게 흐르는 것 같아, 지나간 시간에 대한
-회고와 함께 남은 하반기에 대한 목표 정리와 계획을 정리해 보려 한다.&lt;/p&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Youthfulhps.dev]]></title><description><![CDATA[Blog posted front-end, troubleshooting!]]></description><link>https://youthfulhps.dev</link><generator>GatsbyJS</generator><lastBuildDate>Tue, 05 Sep 2023 04:41:45 GMT</lastBuildDate><item><title><![CDATA[2023 상반기 회고]]></title><description><![CDATA[벌써 202…]]></description><link>https://youthfulhps.dev/essay/2023-first-half-retrospect/</link><guid isPermaLink="false">https://youthfulhps.dev/essay/2023-first-half-retrospect/</guid><pubDate>Sun, 14 May 2023 01:05:26 GMT</pubDate><content:encoded>&lt;p&gt;벌써 2023년 상반기가 지나갔다. 정말 정신없이 시간이 빠르게 흐르는 것 같아, 지나간 시간에 대한
+회고와 함께 남은 하반기에 대한 목표 정리와 계획을 간단히 정리해 보려 한다.&lt;/p&gt;
 &lt;p&gt;사실 회고록을 적겠노라 시도한 적이 여러 번 있었지만 투박한 글 솜씨와 밋밋한 인생사에 접었던 적이 많았는데,
 이번 상반기는 더 바쁘고 엄격하게, 그럼에도 더 행복한 하반기를 시작하기 위한 세이브 기점으로 나쁘지 않은
 단락이었던 것 같아 기쁜 마음으로 첫 회고록을 남긴다.&lt;/p&gt;
@@ -84,7 +84,7 @@
     &lt;/span&gt;
 &lt;a href=&quot;https://blog.crisp.se/2016/01/25/henrikkniberg/making-sense-of-mvp&quot;&gt;이미지 출처&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;MVP 프로젝트를 기획하는 방식에 대해 잘 표현한 그림을 다시금 꺼내보며, 스케이트보드 단계의 제품을 다운로드
-해주신 8분께 감사드린다 (그렌절)&lt;/p&gt;
+해주신 8분께 감사드린다. (그렌절)&lt;/p&gt;
 &lt;h2 id=&quot;앓고리즘&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EC%95%93%EA%B3%A0%EB%A6%AC%EC%A6%98&quot; aria-label=&quot;앓고리즘 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;앓고리즘&lt;/h2&gt;
 &lt;p&gt;정말이지 알고리즘 공부는 꺼내들기 쉽지 않았는데, 성장 그래프의 가파른 경사는 도대체 어디 있는지 성취감을 느끼기
 쉽지 않은 카테고리가 아닌가 싶다.&lt;/p&gt;
@@ -309,7 +309,7 @@
 더 욕심 내보면, 한동안 리엑트 동시성이 궁금해 관련 레퍼런스를 찾아보고 소스 코드를 들여다보면서 나름대로
 톺아봤는데, 결론은 바닐라 자바스크립트와 영어에 더 친숙한 사람이 되고 싶다는 생각이 들었다.&lt;/p&gt;
 &lt;p&gt;리엑트팀이 동시성 기능을 구현하기 위해 로우한 레벨에서부터 패키지를 업데이트했는데, 관련 PR들에서 구현체에
-대한 구체적인 개념들을 설명해 주고 있고, 이슈 티켓들이 직면한 문제들과 고민거리들을 공짜로 보여주고 있는데
+대한 구체적인 개념들을 설명해 주고 있고, 이슈 티켓들이 직면한 문제들과 고민거리들을 가까이 보여주고 있다.
 까막눈으로 살기엔 너무 아까운 내용들이다. 더 열심히 사는 연습을 할 수 있다면, 자바스크립트와 영어를 꾸준히
 공부할 수 있는 시작점이 될 수 있으면 좋겠다.&lt;/p&gt;</content:encoded></item><item><title><![CDATA[긴급한 작업에 낮은 우선순위를 부여하는 리엑트 훅]]></title><description><![CDATA[…]]></description><link>https://youthfulhps.dev/react/concurrent-feature-hooks/</link><guid isPermaLink="false">https://youthfulhps.dev/react/concurrent-feature-hooks/</guid><pubDate>Mon, 24 Apr 2023 13:05:20 GMT</pubDate><content:encoded>&lt;p&gt;리엑트 동시성 기능을 공부하면서 어렵고 복잡한 메커니즘이지만, 결국 사용자 경험을 개선하기 위한 목표들을 추상화해서
 기술적으로 풀어낸 결과물이라고 생각하면 꽤나 여운이 남습니다.&lt;/p&gt;
