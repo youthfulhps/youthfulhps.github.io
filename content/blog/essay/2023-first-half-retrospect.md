@@ -3,7 +3,7 @@ title: 2023 상반기 회고
 date: 2023-05-14 01:05:26
 category: essay
 thumbnail: { thumbnailSrc }
-description: 왜이렇게 즐거운진 나도 몰라요
+description: 왜이렇게 즐거운진 나도 몰라요.
 draft: false
 ---
 
