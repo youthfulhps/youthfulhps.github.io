@@ -325,22 +325,24 @@ if (
   'value' in node.init.quasi.quasis[0] &&
   isObject(node.init.quasi.quasis[0].value)
 ) {
+  const sassScript = generateConcatenatedCSSTemplateLiteral(
+    node.init.quasi.quasis,
+  );
+
+  const parsedCSS = parseSass(sassScript);
+
   const componentDeclaration: ComponentDeclaration = {
     name: node.id.name,
     tag: node.init.tag.property.name,
-    styles: extractStylePropertyAndValue(
-      node.init.quasi.quasis[0].value.raw
-        .split(/[\n;]+/)
-        .filter((style: string) => !!style)
-        .map((style: string) => style.trim()),
-    ),
+    styles: parsedCSS,
   };
 
   componentDeclarations.push(componentDeclaration);
 }
 ```
 
-이로서 추상 구문 트리의 모든 레벨을 순회하여 styled를 통해 정의된 컴포넌트의 정보를 추출할 수 있었다.
+스타일 정의를 추출하는 작업은 sass, css 파서에게 맡겼다. sass 컴파일을 통해 css로 변환하고, 해당 css를 파싱해서 해당 컴포넌트의 스타일 정의와 값, 내부에
+정의되어 있는 클래스 또한 추출할 수 있었다. 이렇게 정의된 컴포넌트의 정보를 추상 구문 트리에서 획득했다.
 
 ## 2. 추출된 스타일 정의를 유틸리티 클래스로 변환하기
 
@@ -602,20 +604,13 @@ function Component() {
 
 ## 남은 과제
 
-단번에 모든 스타일된 컴포넌트 코드 스타일을 커버할 수 있는 변환기를 만들겠노라 목표하진 않았지만, 아직 조건부 스타일을 위한 보간(interpolation)이나 내부적으로
-사용될 클래스 정의를 어떻게 처리해야 할지 고민이 크다.
+단번에 모든 스타일된 컴포넌트 코드 스타일을 커버할 수 있는 변환기를 만들겠노라 목표하진 않았지만, 아직 조건부 스타일을 위한 보간 (interpolation)을 어떻게
+처리해야 할 지 고민이 크다.
 
 ```ts
 const Card = styled.div<{isSelected: boolean}>`
   ...
   border-width: ${({isSelected}) => isSelected ? '4px' : '2px'};  // ?
-  
-  .title {  // ?
-    ...
-  }
-  
-  .description {  // ?
-    ...
 `;
 ```
 
@@ -630,12 +625,7 @@ const Card = styled.div<{isSelected: boolean}>`
 }}>
 ```
 
-클래스의 경우 다음과 같이 임의의 클래스 선언으로 유틸리티 클래스를 할당해줄 수 있지만, styled의 인자로 전달된 리터럴은 추상 구문 트리에서 단순한 문자열로
-해석된다. 즉, 중첩된 클래스를 안전하게 해석하는 데 한계가 있을 수 있다. 클래스 정의의 시작점과 끝점을 찾아 문자열을 잘라내고 css 파서로 조작을 시도해 보고 있다.
-
-```js
-<div className="[&>.title]:... [&>.description]:...">
-```
+스타일 추출을 위해 sass 컴파일을 진행할 때 보간을 만나면 문법 에러를 발생시키기 때문에 현재 버전에서는 보간문을 모두 unset 속성으로 대체하여 변환하고 있다.
 
 ## 마치면서
 
