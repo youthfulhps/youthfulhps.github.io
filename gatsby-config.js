@@ -1,4 +1,4 @@
-const metaConfig = require('./gatsby-meta-config')
+const metaConfig = require('./gatsby-meta-config');
 
 module.exports = {
   siteMetadata: metaConfig,
@@ -8,6 +8,13 @@ module.exports = {
       options: {
         path: `${__dirname}/content/blog`,
         name: `blog`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        path: `${__dirname}/content/TIL`,
+        name: `TIL`,
       },
     },
     {
@@ -121,4 +128,4 @@ module.exports = {
     `gatsby-plugin-lodash`,
     `gatsby-plugin-sitemap`,
   ],
-}
+};
