@@ -24,8 +24,8 @@ export function useCategory(DEST) {
     );
   }, []);
 
-  const selectTypeCategory = useCallback(category => {
-    setTypeCategory(category);
+  const selectTypeCategory = useCallback(typeCategory => {
+    setTypeCategory(typeCategory);
     adjustScroll();
     window.history.pushState(
       { category, typeCategory },
