@@ -1,6 +1,6 @@
 ---
 title: 함수 호출 방식에 따라 동적으로 결정되는 this
-date: 2023-10-06 13:05:26
+date: 2023-06-10 13:05:26
 category: javascript
 thumbnail: { thumbnailSrc }
 description: 자바스크립트 this
