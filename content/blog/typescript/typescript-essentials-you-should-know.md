@@ -322,7 +322,7 @@ type NamedVariable = (Input | Output) & { name: string };
 ```
 
 type은 튜플과 배열 타입도 간결하게 표현할 수 있습니다.
-물론 interface로도 구현이 가능하지만, 튜플에서
+물론 interface로도 표현이 가능하지만, 튜플에서
 사용할 수 있는 concat과 같은 메서드를 사용할 수 없기 때문에
 튜플은 type을 통해 구현하는 것이 낫습니다.
 
@@ -330,6 +330,18 @@ type은 튜플과 배열 타입도 간결하게 표현할 수 있습니다.
 type Pair = [number, number];
 type StringList = string[];
 type NamedNums = [string, ...number[]];
+```
+
+```ts
+interface ITuple {
+  0: string;
+  1: number;
+}
+
+const foo: ITuple = ['0', 1];
+
+foo.concat();
+// Property 'concat' does not exist on type 'ITuple'.(2339)
 ```
 
 반면 인터페이스는 속성을 확장하는 '선언 병합'
@@ -422,8 +434,7 @@ any 타입의 적용 범위를 좁게 제한해야 합니다.
 
 ## 7. 타입스크립트 기본형 타입과 객체 래퍼 타입은 다르다
 
-자바스크립트는 일곱 가지 기본 타입(number, boolean, null,
-undefined, symbol, bigint)이 있습니다. 기본형들은
+자바스크립트는 여섯 가지의 원시 타입(number, string, boolean, undefined, null, Symbol)이 있습니다. 기본형들은
 불변이고 메서드를 가지고 있지 않다는 점에서 객체와 구분됩니다.
 
 하지만 기본형인 string은 메서드가 호출이 되어 마치 메서드를
