@@ -8,6 +8,16 @@ draft: false
 type: TIL
 ---
 
+### TL;TR
+
+클로저는 자신이 생성될 때의 스코프에서 알 수 있었던 변수 중 언젠가 자신이 실행될 때 사용할 변수들만 기억하여 유지시키는 함수다.
+
+이는 자바스크립트에서의 함수가 일급 객체(함수)로 평가되어 함수의 반환값으로 사용될 수 있는 특성과, 클로저라 칭하는 내부 함수 객체가
+생성될 때 [[Environment]] 내부 슬롯이 현재 실행되고 있는 실행 컨텍스트의 스코프를 저장하고, 이를 렉시컬 환경의 외부 렉시컬 환경에
+대한 참조를 구성할 때 사용되어 외부 스코프가 소멸되어도 자신이 참조하고 있는 식별자를 기억할 수 있게 된다.
+
+## 일급 객체(함수)
+
 클로저는 함수를 일급 객체로 취급하는 함수형 프로그래밍 언어에서 사용되는 중요한 특성이다.
 여기서 일급 객체이자 일급 함수라는 것은 다음과 같은 조건을 충족한다.
 
@@ -156,3 +166,91 @@ innerFunc(20); // 30
 ```
 
 ![클로저 디버거](./images/closure/closure-debugger.png)
+
+## 활용
+
+### 1. 은닉
+
+클로저는 상태를 안전하게 변경하고 유지하기 위해 사용되는데 리엑트의 useState가 클로저의 은닉 활용의 사례를 잘 보여준다.
+특정 함수(useState)에게만 상태 변경을 허용하도록 하여 예상치 못한 상태 변경의 가능성을 제거할 뿐만 아니라 외부에서
+지역 변수에 접근하지 못하도록 private한 지역 변수(\_idx)를 통해 외부에서 참조하거나 변경할 수 없도록 한다.
+
+(리엑트의 useState를 클로저를 통해 간단하게 구현한 것.)
+
+```js
+let hooks = [];
+let idx = 0;
+
+function useState(initialValue) {
+  const state = hooks[idx] || initialValue;
+  const _idx = idx;
+
+  function setState(newValue) {
+    hooks[_idx] = newValue;
+  }
+  idx++;
+
+  return [state, setState];
+}
+
+const [count, setCount] = useState(0);
+```
+
+## 실수
+
+var은 함수 스코프를 가진다. 따라서 for문에서 정의된 i의 경우 전역 변수가 된다.
+해당 전역 변수는 for문에 의해 0~3까지 할당된다. 이후 i를 반환하는 함수를 호출했으니, 3이 세 번 반환된다.
+
+```js
+var funcs = [];
+
+for (var i = 0; i < 3; i++) {
+  funcs[i] = function() {
+    return i;
+  };
+}
+
+for (var j = 0; j < funcs.length; j++) {
+  console.log(funcs[j]());
+}
+
+// 3
+// 3
+// 3
+```
+
+즉시 실행 함수에서 반환하는 클로저를 생성하여 클로저로 하여금 즉시 실행 함수의 매개변수의 값을 기억하도록 하는 방법으로 해결할 수 있다.
+
+```js
+var funcs = [];
+
+for (var i = 0; i < 3; i++) {
+  funcs[i] = (function(id) {
+    return function() {
+      return id;
+    };
+  })(i);
+}
+
+for (var j = 0; j < funcs.length; j++) {
+  console.log(funcs[j]());
+}
+```
+
+또한 블록 스코프를 따르는 let을 사용하면 쉽게 해결 가능하다. 다음과 같이 for문이 반복해서 실행될 때 마다 해당 블록에서 선언과 할당된
+지역 변수의 값을 유지하기 위해 전역 렉시컬 환경의 선언적 환경 레코드가 새롭게 생성되어 대체된다.
+이후 해당 코드 블록이 종료되면 기존의 선언적 환경 레코드로 다시 복구된다.
+
+```js
+const funcs = [];
+
+for (let i = 0; i < 3; i++) {
+  funcs[i] = function() {
+    return i;
+  };
+}
+
+for (let j = 0; j < funcs.length; j++) {
+  console.log(funcs[j]());
+}
+```
