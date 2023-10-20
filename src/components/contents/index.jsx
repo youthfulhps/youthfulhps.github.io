@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 
 import { ThumbnailContainer } from '../thumbnail-container';
 import { ThumbnailItem } from '../thumbnail-item';
-import { CATEGORY_TYPE } from '../../constants';
+import { CATEGORY_TYPE, TYPE_CATEGORY } from '../../constants';
 
 export const Contents = ({
   posts,
@@ -22,6 +22,11 @@ export const Contents = ({
         ({ node }) =>
           typeCategory === CATEGORY_TYPE.ALL ||
           (node.frontmatter?.type ?? 'BLOG') === typeCategory
+      )
+      .filter(({ node }) =>
+        typeCategory === CATEGORY_TYPE.ALL
+          ? (node.frontmatter?.type ?? 'BLOG') === 'BLOG'
+          : (node.frontmatter?.type ?? 'BLOG') === typeCategory
       )
       .slice(0, count * countOfInitialPost)
   );
