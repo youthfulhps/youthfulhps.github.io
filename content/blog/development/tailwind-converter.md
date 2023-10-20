@@ -8,23 +8,23 @@ draft: false
 ---
 
 [tailwind-converter](https://www.npmjs.com/package/@youthfulhps/tailwind-converter) 라이브러리를 릴리즈하게 되었다.
-[styled-components](https://www.npmjs.com/package/styled-components)를 통해 정의된 코드레벨의 컴포넌트 스타일을 추출하여 
-[tailwindCSS](https://tailwindcss.com/)에서 제공하는 유틸리티 클래스로 변환하고, 해당 컴포넌트의 사용처를 찾아 변환된 스타일 클래스들을 할당, 
+[styled-components](https://www.npmjs.com/package/styled-components)를 통해 정의된 코드레벨의 컴포넌트 스타일을 추출하여
+[tailwindCSS](https://tailwindcss.com/)에서 제공하는 유틸리티 클래스로 변환하고, 해당 컴포넌트의 사용처를 찾아 변환된 스타일 클래스들을 할당,
 최종적으로 코드를 반환하는 도구이다.
 
 - **before**
-![tailwind-converter를 통해 변환하기 전 코드](./images/tailwind-converter/before.png)
+  ![tailwind-converter를 통해 변환하기 전 코드](./images/tailwind-converter/before.png)
 - **after**
-![tailwind-convert를 통해 변환된 코드](./images/tailwind-converter/after.png)
+  ![tailwind-convert를 통해 변환된 코드](./images/tailwind-converter/after.png)
 
-간단한 예제에서는 그럴싸하게 동작하지만, 아직 실무에서 사용되는 복잡한 정의의 컴포넌트를 완벽하게 변환하기까지, 혹은 완벽하게 변환이 가능한 것인지도 모를 단계이자, 
+간단한 예제에서는 그럴싸하게 동작하지만, 아직 실무에서 사용되는 복잡한 정의의 컴포넌트를 완벽하게 변환하기까지, 혹은 완벽하게 변환이 가능한 것인지도 모를 단계이자,
 아직 많은 이슈와 챌린지들을 직면하고 있다.
 
 그래도 1차적으로 목표했던 기능이 완성되었고, 라이브러리를 제작하면서 배우고 고민했던 것들을 기록하기 위해 회고를 남겨보려 한다.
 
 ## 동기
 
-사내 내부적으로 프론트엔드 파트 통합을 준비하면서 각 파트의 기술 스택 통일에 대한 필요성을 느꼈다. 결과적으로 스타일링을 위해 사용되는 도구로는 tailwindCSS가 
+사내 내부적으로 프론트엔드 파트 통합을 준비하면서 각 파트의 기술 스택 통일에 대한 필요성을 느꼈다. 결과적으로 스타일링을 위해 사용되는 도구로는 tailwindCSS가
 채택되고, styled-components를 사용하고 있는 레거시 스타일 정의에 대해 리팩토링과 마이그레이션이 필요한 상황이었다.
 
 다만 해당 작업이 지엽적이고 반복적인 작업에 피로가 꽤나 쌓일 만한 작업이었으며, 수반되는 QA도 무시할 수 없었다. 별수 있나 받아들이고 시간 날 때마다 마이그레이션
@@ -46,16 +46,16 @@ draft: false
 
 처음엔 코드 파일을 스크랩해서 정규식을 통해 정의된 컴포넌트의 스타일을 추출해 보려 했으나 절대 안전한 방법이 아니라는 걸 금방 깨달았다.
 컨벤션이 정해져 있다고 한들 다양한 코드 스타일을 감당할 만한 정규식을 기대하기는 어려웠고, 더 엄격한 정규식을 사용하면 예외적인 문자열이 포함되거나, 원하는 문자열이
-제외되는 경우가 많았다. 
+제외되는 경우가 많았다.
 
-결론부터 말하자면 추상 구문 트리를 조작하는 것으로 접근 방식을 사용했다. 사실 추상 구문 트리를 조작해야겠다는 생각이 쉽게 떠오른 것은 아니었는데, 한창 어떻게 풀어낼 수
+결론부터 말하자면 추상 구문 트리를 조작하는 것으로 접근 방식을 정했다. 사실 추상 구문 트리를 조작해야겠다는 생각이 쉽게 떠오른 것은 아니었는데, 한창 어떻게 풀어낼 수
 있을 까 고민하던 중 우연히 익숙하게 사용한 [prettier](https://prettier.io/)로 코드 포매팅을 했는데, 자바스크립트 문법을 읽기 쉽게 코드를 포매팅해준다면,
 prettier는 문자열 덩어리에서 자바스크립트를 어떻게 해석할 수 있는 것인가에 대한 의문이 생겼다.
 
 > 추상 구문 트리는 프로그래밍 언어로 작성된 소스 코드의 추상 구문 구조의 트리이다. 이 트리의 각 노드는 소스 코드에서 발생되는 구조를 나타낸다.
 > [위키 백과/추상 구문 트리] 중
 
-결국 코드 텍스트에서 트리 구조의 데이터 구조를 만들어내고, 코드에 있는 각각의 아이템을 통해 노드를 구성한 구조가 추상 구문 트리이다. [babel](https://babeljs.io/)에서 
+결국 코드 텍스트에서 트리 구조의 데이터 구조를 만들어내고, 코드에 있는 각각의 아이템을 통해 노드를 구성한 구조가 추상 구문 트리이다. [babel](https://babeljs.io/)에서
 자바스크립트를 컴파일링할때나, prettier, eslint와 같이 포매팅 혹은 컨벤션 이슈를 체크하는 도구들 또한 추상 구문 트리를 기반으로 코드를 해석하고 조작한다.
 
 간단하게 예시를 살펴보자. 다음과 같은 코드로 추상 구문 트리를 생성한 결과이다.
@@ -64,7 +64,7 @@ prettier는 문자열 덩어리에서 자바스크립트를 어떻게 해석할 
 const Title = styled.h1`
   font-size: 1.5em;
   text-align: center;
-  color: #BF4F74;
+  color: #bf4f74;
 `;
 ```
 
@@ -206,8 +206,8 @@ const Title = styled.h1`
 }
 ```
 
-즉 코드를 통해 생성된 추상 구문 트리를 조작하면 코드가 재생성될 때 유효하게 조작된 결과를 얻을 수 있을 것이다. 사실 매우 복잡한 추상 구문 트리를 직접 조작하기란 
-절대 쉽지 않다. 다만 가장 안전한 방법이다. **추상 구문 트리의 조작이 유효하지 않다면 에러가 발생하게 되는데, 인위적인 조작이 유효한지 프로그래밍적으로 
+즉 코드를 통해 생성된 추상 구문 트리를 조작하면 코드가 재생성될 때 유효하게 조작된 결과를 얻을 수 있을 것이다. 사실 매우 복잡한 추상 구문 트리를 직접 조작하기란
+절대 쉽지 않다. 다만 가장 안전한 방법이다. **추상 구문 트리의 조작이 유효하지 않다면 에러가 발생하게 되는데, 인위적인 조작이 유효한지 프로그래밍적으로
 판단할 수 있다는 것은 정말 큰 장점이라고 생각했다.**
 
 _이하 구현 과정과 예시에서 자바스크립트 코드를 파싱하고 조작하기 위한 도구로 prettier를 사용합니다. 일반적으로 babel에서 제공하는 parser, generator를
@@ -216,8 +216,8 @@ _이하 구현 과정과 예시에서 자바스크립트 코드를 파싱하고 
 
 ## 1. 선언된 컴포넌트 정보 추출하기
 
-우선 추상 구문 트리에서 스타일된 컴포넌트에 대한 정보가 담긴 노드를 조건에 맞게 찾아내야 했다. 여기서 주의해야 하는 것은 변수 선언은 함수 선언문 혹은 
-if-else, switch와 같은 상태문 내부에서도 선언될 수 있다는 것이다. 개인적으로 스타일된 컴포넌트를 정의 할땐 디폴트 격의 함수와 같은 레벨에 작성했지만, 
+우선 추상 구문 트리에서 스타일된 컴포넌트에 대한 정보가 담긴 노드를 조건에 맞게 찾아내야 했다. 여기서 주의해야 하는 것은 변수 선언은 함수 선언문 혹은
+if-else, switch와 같은 상태문 내부에서도 선언될 수 있다는 것이다. 개인적으로 스타일된 컴포넌트를 정의 할땐 디폴트 격의 함수와 같은 레벨에 작성했지만,
 다른 스코프 내부에서 스타일된 컴포넌트를 정의해도 전혀 문제 될 것이 없다.
 
 ```js
@@ -225,11 +225,11 @@ if-else, switch와 같은 상태문 내부에서도 선언될 수 있다는 것�
 const Title = styled.h1`
   font-size: 1.5em;
   text-align: center;
-  color: #BF4F74;
+  color: #bf4f74;
 `;
 
 function Component() {
-  return <Title>...</Title>
+  return <Title>...</Title>;
 }
 ```
 
@@ -237,27 +237,27 @@ function Component() {
 function Component() {
   // component variable declaration
   const Title = styled.h1`
-  font-size: 1.5em;
-  text-align: center;
-  color: #BF4F74;
-`;
-  
+    font-size: 1.5em;
+    text-align: center;
+    color: #bf4f74;
+  `;
+
   if (isOpen) {
     // component variable declaration
     const SubTitle = styled.h1`
       font-size: 0.5em;
       text-align: center;
-      color: #BF4F74;
+      color: #bf4f74;
     `;
-    
-    return <SubTitle>...</SubTitle>
+
+    return <SubTitle>...</SubTitle>;
   }
-  
-  return <Title>...</Title>
+
+  return <Title>...</Title>;
 }
 ```
 
-즉 추상 구문 트리에서 스타일된 컴포넌트 코드 정보가 담긴 노드를 찾으려면, 트리에 존재하는 모든 노드를 레벨에 상관없이 재귀적으로 순회해 주어야 했다. 또한 노드의 
+즉 추상 구문 트리에서 스타일된 컴포넌트 코드 정보가 담긴 노드를 찾으려면, 트리에 존재하는 모든 노드를 레벨에 상관없이 재귀적으로 순회해 주어야 했다. 또한 노드의
 타입별로 구조가 달랐기 때문에 재귀 함수를 어떻게 짜야 될지 정말 감이 오질 않았다. 머리를 쥐어뜯다 결국 사수님께 조언을 구해 노드 객체의 프로퍼티의 값이 배열 혹은
 객체인 경우 모두 재귀 호출을 하는 방식으로 순회를 구현할 수 있었다.
 
@@ -286,8 +286,7 @@ function recursion(node: unknown) {
 ```
 
 이제 모든 노드를 순회하면서 styled 라는 이름을 가진 TaggedTemplateExpression 타입의 표현문이 초기 할당된 변수 선언 타입을 가진 노드라는 주요 조건을 걸어
-조건을 충족하는 노드에서 스타일된 컴포넌트의 이름과 태그 그리고 스타일 정의를 추출했다. 
-
+조건을 충족하는 노드에서 스타일된 컴포넌트의 이름과 태그 그리고 스타일 정의를 추출했다.
 
 ```js
 if (
@@ -309,7 +308,7 @@ if (
   'type' in node.init.tag.object &&
   'name' in node.init.tag.object &&
   node.init.tag.object.type === 'Identifier' &&
-  node.init.tag.object.name === 'styled' &&  // styled 함수를 사용했는가
+  node.init.tag.object.name === 'styled' && // styled 함수를 사용했는가
   'property' in node.init.tag &&
   isObject(node.init.tag.property) &&
   'name' in node.init.tag.property &&
@@ -326,7 +325,7 @@ if (
   isObject(node.init.quasi.quasis[0].value)
 ) {
   const sassScript = generateConcatenatedCSSTemplateLiteral(
-    node.init.quasi.quasis,
+    node.init.quasi.quasis
   );
 
   const parsedCSS = parseSass(sassScript);
@@ -387,11 +386,11 @@ export function convertCss({ property, value }: CSSStyleEntity) {
   if (!TAILWINDCLASS[property][processedValue]) {
     // 스타일 속성에 할당된 값과 대응되는 키가 없다면,
     // 즉 유효한 속성에 할당된 값과 대응되는 유틸리티 클래스가 없다면,
-    // 임의의 값을 전달하는 형태로 클래스를 생성하여 반환한다. 
+    // 임의의 값을 전달하는 형태로 클래스를 생성하여 반환한다.
     // ex) text-[7px]
     return `${TAILWINDCLASS[property]['arbitrary']}-[${value}]`;
   }
-  
+
   // 스타일 속성에 할당된 값과 대응되는 키가 있다면,
   // 해당 키의 값을 반환한다.
   // ex) text-base
@@ -430,7 +429,7 @@ export function preprocessSpacing(value: string) {
 }
 ```
 
-축약된 값을 할당할 수 있는 padding, margin, border과 같은 속성을 쪼개는 과정이 포함된다. 
+축약된 값을 할당할 수 있는 padding, margin, border과 같은 속성을 쪼개는 과정이 포함된다.
 (background 또한 축약 속성이나, 아직 값을 적절하게 쪼개내지 못했다..)
 
 ```js
@@ -480,11 +479,11 @@ function preprocessBorderShorthand(value: string): StyleEntity[] {
       value: borderStyle,
     },
   ];
-  
+
   if (borderWidth) {
     ...
   }
-  
+
   ...
 }
 ```
@@ -493,8 +492,8 @@ function preprocessBorderShorthand(value: string): StyleEntity[] {
 
 ```text
 const before = [
-  "font-size:1.5em", 
-  "text-align:center", 
+  "font-size:1.5em",
+  "text-align:center",
   "color:#bf4f74"
 ]
 
@@ -513,13 +512,13 @@ function Component() {
   if (isOpen) {
     return <Title>...</Title>
   }
-  
+
   switch(type) {
     case 'primary':
       return <PrimaryTitle>...</PrimaryTitle>
     ...
   }
-  
+
   return <SubTitle>...</SubTitle>
 }
 ```
@@ -542,22 +541,22 @@ if (
   'selfClosing' in node
 ) {
   const elementName = node.name.name;
-  
+
   // 추출된 컴포넌트 정보들에서 본 노드의 이름과 동일한 정보가 있는지 찾는다.
   const targetComponentDeclarations = componentDeclarations.filter(
-    (componentDeclaration) => componentDeclaration.name === elementName,
+    componentDeclaration => componentDeclaration.name === elementName
   );
 
   if (targetComponentDeclarations.length) {
-    // 만약 있다면, 
+    // 만약 있다면,
     // 해당 노드의 속성 배열에 className 존재 여부를 판단한다.
     // 판단 여부에 따라 className의 값을 이어붙이거나, 새롭게 생성한다.
     const { tag, styles } = targetComponentDeclarations[0];
     const newAttributes = generateJSXOpeningElementClassNameAttribute(
       node.attributes,
-      convertStyles(styles),
+      convertStyles(styles)
     );
-    
+
     // 열린 태그의 컴포넌트 이름을 태그명으로 덮어쓴다.
     node.name.name = tag;
     // 열린 태그의 속성 배열을 새롭게 생성된 속성 배열로 덮어쓴다.
@@ -588,17 +587,17 @@ function Component() {
     <Wrapper>
       <Title>Hello World!</Title>
     </Wrapper>
-  )
+  );
 }
 ```
 
 ```js
 function Component() {
   return (
-    <section className='p-16 bg-#ffefd5'>
-      <h1 className='text-2xl text-center text-[#bf4f74]'>Hello World!</h1>
+    <section className="p-16 bg-#ffefd5">
+      <h1 className="text-2xl text-center text-[#bf4f74]">Hello World!</h1>
     </section>
-  )
+  );
 }
 ```
 
@@ -608,9 +607,8 @@ function Component() {
 처리해야 할 지 고민이 크다.
 
 ```ts
-const Card = styled.div<{isSelected: boolean}>`
-  ...
-  border-width: ${({isSelected}) => isSelected ? '4px' : '2px'};  // ?
+const Card = styled.div<{ isSelected: boolean }>`
+  ... border-width: ${({ isSelected }) => (isSelected ? '4px' : '2px')}; // ?
 `;
 ```
 
@@ -631,5 +629,3 @@ const Card = styled.div<{isSelected: boolean}>`
 
 실무에서 사용하려 제작한 스크립트를 라이브러리로 제작하면서 배운 점이 많다. 추상 구문 트리를 조작하여 코드를 전처리한다는 접근법은 이후에도 유사한 작업을 처리할 때
 유용하게 사용될 것 같다. 위에서 언급한 과제들이 남아있지만 유사한 작업을 진행 중이신 분들에게 개선된 개발자 경험에 있어 작게나마 도움이 될 수 있으면 좋겠다.
-
-
