@@ -112,3 +112,7 @@ TLS 핸드 쉐이크를 진행한다.
 
 HTTP1.1 부터 도입된 keep-alive로 인해 요청이 종료되어도 바로 연결이 끊기지 않는 것이 일반적이고, keep-alive timeout에 설정된 시간이 흐른뒤
 연결이 종료된다.
+
+## Reference
+
+- [브라우저 주소창에 URL을 치면 일어나는 일들](https://maxkim-j.github.io/posts/packet-travel)
