@@ -1,6 +1,6 @@
 ---
 title: 브라우저 주소창에 URL을 검색하면 일어나는 일들
-date: 2023-12-10 13:05:26
+date: 2023-10-21 13:05:26
 category: network
 thumbnail: { thumbnailSrc }
 description: 단골 질문
