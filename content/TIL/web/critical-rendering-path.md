@@ -148,7 +148,7 @@ script 태그를 통해 얻는 자바스크립트 자원은 컨텐츠, 스타일
 
 - background, color, boax-shadow, border-radius, text-decoration 등
 
-반면 리플로우는 기하학적인 위치나 공간이 변경되었을떄 발생한다. 해당 요소의 자식, 부모 또한 레이아웃을 다시 그려내야 하기 떄문이다.
+반면 리플로우는 기하학적인 위치나 공간이 변경되었을때 발생한다. 해당 요소의 자식, 부모 또한 레이아웃을 다시 그려내야 하기 때문이다.
 
 - 윈도우 리사이징, 폰트, 내용 변화, 인라인 스타일 수정 등
 - position, width, height, top, right, border, display, float, font-size, weight 등
