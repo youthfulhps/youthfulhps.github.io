@@ -1,5 +1,5 @@
 ---
-title: 스펙 주도 개발을 통해 클라이언트 개발 환경을 개선하기 위한 노력들
+title: OpenAPI 스펙 주도 개발을 통해 클라이언트 개발 환경을 개선하기 위한 노력들
 description: openapi generator 사용하세요!
 date: 2021-10-28 09:05:28
 category: development
