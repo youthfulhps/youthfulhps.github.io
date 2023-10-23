@@ -1,9 +1,10 @@
 ---
 title: 스펙 주도 개발을 통해 클라이언트 개발 환경을 개선하기 위한 노력들
+description: openapi generator 사용하세요!
 date: 2021-10-28 09:05:28
 category: development
 thumbnail: ./images/benefits-specification-driven-development/thumbnail.png
-draft: true
+draft: false
 ---
 
 클라이언트 개발을 하다보면 작업이 대기 상태가 되버리는 경우를 자주 경험합니다.
@@ -74,7 +75,7 @@ _openapi-generator는 jvm 환경에서 동작하기 때문에,
 {
   "modelPackage": "src/model",
   "apiPackage": "src/api",
-  "withSeparateModelsAndApi": true,
+  "withSeparateModelsAndApi": true
 }
 ```
 
@@ -138,15 +139,19 @@ API 목킹도 좋지만 정적인 목 데이터가 필요한 경우도 있습니
 ```js
 let mergedInterfaces = '';
 
-// 인터페이스가 담겨있는 파일을 모두 순회해서 
+// 인터페이스가 담겨있는 파일을 모두 순회해서
 // import 문이 제거된 인터페이스 파일들을 모두 병합한다.
-fs.readdirSync(outputFolder).forEach((fileName) => {
+fs.readdirSync(outputFolder).forEach(fileName => {
   const rawCode = fs.readFileSync(`${outputFolder}/${fileName}`, 'utf8');
 
   mergedInterfaces += getRawCodeRemovedImportStatement(rawCode);
 });
 
-fs.writeFileSync(`${outputFolder}/mergedInterfaces.ts`, mergedInterfaces, 'utf8');
+fs.writeFileSync(
+  `${outputFolder}/mergedInterfaces.ts`,
+  mergedInterfaces,
+  'utf8'
+);
 ```
 
 이후 병합된 인터페이스 파일 중 원하는 인터페이스를 입력으로 전달받아, 생성된 결과를 다시
@@ -154,12 +159,16 @@ fs.writeFileSync(`${outputFolder}/mergedInterfaces.ts`, mergedInterfaces, 'utf8'
 
 ```js
 const mocked = mock({
-  files: [ '../allInterfaces.ts' ],
-  interfaces: [ 'Admin' ],
+  files: ['../allInterfaces.ts'],
+  interfaces: ['Admin'],
   language: 'typescript',
 });
 
-fs.writeFileSync(`mocks/${outputFileName}.js`, `export const mock${mocked}`, 'utf8');
+fs.writeFileSync(
+  `mocks/${outputFileName}.js`,
+  `export const mock${mocked}`,
+  'utf8'
+);
 ```
 
 _생성된 결과물은 [데모](https://github.com/youthfulhps-tutorial/interface-mock-data-generator)
