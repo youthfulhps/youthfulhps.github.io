@@ -17,21 +17,27 @@ GitHubTheme.overrideThemeStyles = () => {
     },
 
     h1: {
-      fontWeight: 800,
-      lineHeight: 1.2,
-      fontFamily: 'Catamaran',
+      fontWeight: 600,
+      lineHeight: 1.4,
+      fontFamily: 'Pretendard',
+      letterSpacing: '-0.05rem',
+      borderBottom: 'none',
     },
 
     h2: {
-      fontWeight: 700,
+      fontWeight: 600,
       lineHeight: 1.2,
       marginTop: '56px',
       marginBottom: '20px',
-      fontFamily: 'Catamaran',
+      fontFamily: 'Pretendard',
+      letterSpacing: '-0.05rem',
+      borderBottom: 'none',
     },
 
     h3: {
+      fontWeight: 600,
       fontFamily: 'Pretendard',
+      letterSpacing: '-0.05rem',
     },
 
     ul: {

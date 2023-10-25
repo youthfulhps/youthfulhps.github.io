@@ -1,7 +1,7 @@
 import { graphql } from 'gatsby';
 import _ from 'lodash';
 import React, { useMemo, useRef, useEffect, useState } from 'react';
-import { Bio } from '../components/bio';
+// import { Bio } from '../components/bio';
 import { Category } from '../components/category';
 import { TypeCategory } from '../components/type-category';
 import { Contents } from '../components/contents';
@@ -70,7 +70,7 @@ export default ({ data, location }) => {
   return (
     <Layout location={location} title={siteMetadata.title}>
       <Head title={HOME_TITLE} keywords={siteMetadata.keywords} />
-      <Bio ref={bioRef} />
+      {/*<Bio ref={bioRef} />*/}
       <div className="category-wrapper">
         <TypeCategory
           categories={lengthCategories}
