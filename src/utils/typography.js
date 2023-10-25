@@ -18,9 +18,9 @@ GitHubTheme.overrideThemeStyles = () => {
 
     h1: {
       fontWeight: 600,
-      lineHeight: 1.4,
+      lineHeight: 1.6,
       fontFamily: 'Pretendard',
-      letterSpacing: '-0.05rem',
+      letterSpacing: '-0.08rem',
       borderBottom: 'none',
     },
 
@@ -30,14 +30,14 @@ GitHubTheme.overrideThemeStyles = () => {
       marginTop: '56px',
       marginBottom: '20px',
       fontFamily: 'Pretendard',
-      letterSpacing: '-0.05rem',
+      letterSpacing: '-0.06rem',
       borderBottom: 'none',
     },
 
     h3: {
       fontWeight: 600,
       fontFamily: 'Pretendard',
-      letterSpacing: '-0.05rem',
+      letterSpacing: '-0.06rem',
     },
 
     ul: {
