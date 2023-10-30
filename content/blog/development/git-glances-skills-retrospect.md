@@ -569,6 +569,39 @@ describe('Contribution 컴포넌트는 유저의 오늘 기여도 정보를 랜�
 
 ## 프로젝트 구조
 
+components, hooks, utils 별로 디렉토리를 구성하고 로직 레벨과 UI를 융합하기 위해 상단 디렉토리로 다시 거슬러 올라가 의존성을 찾아내는 경험이 어쩌면 당연시 되었다.
+더불어 코드 베이스가 커지면서 원하는 의존성이 어디에 위치해 있는지 해당 의존성과 관련된 코드의 기억을 더듬어 검색해 디렉토리를 찾아내곤 한다.
+
+```js
+import { getSortedLanguageList } from '../../../../utils/language';
+```
+
+그러다 우연히 이전 회사 리드분의 프로젝트 구조를 보고선 카톡을 보내 해당 프로젝트 구조의 레퍼런스를 얻었다.
+[지역성의 원칙을 고려한 패키지 구조: 기능별로 나누기](https://ahnheejong.name/articles/package-structure-with-the-principal-of-locality-in-mind/)에서
+잘 설명하고 있어 레퍼런스를 읽어보면 좋다.
+
+받아드리기 나름이지만, 개인적으로는 캐시 미스를 최소화할 수 있는 지역성이 발생하는 단위인 기능별로 프로젝트를 구성해서 기능별 맥락 블록을 머리 속 캐시에
+적재한 상태로 작업하면 거대한 코드 베이스 속에서 헤매이지 않도록 프로젝트 구조에 반영했어야 했고, 마침 섹션별로 독립적인 기능을 구사하는 프로젝트에서는 맥락을
+빠르게 잡는 장점과 더불어 기능 개발의 시작과 끝, 그리고 코드 수정 범위를 예상하는 데 큰 도움이 되었다.
+
+최종적으로 마치 작은 프로젝트처럼 동작하는 기능들의 모임들로 디렉토리가 갖춰졌다.
+
+```js
+src
+├─ Contribution
+│  └─ components
+│  └─ queries
+│  └─ test
+│  └─ utils
+├─ Daily
+├─ Language
+├─ Notification
+├─ Refactor
+├─ ...
+├─ _layout
+├─ _shared
+```
+
 ## react
 
 ## react-query
@@ -581,3 +614,4 @@ describe('Contribution 컴포넌트는 유저의 오늘 기여도 정보를 랜�
 
 - [프론트엔드 개발환경의 이해: Babel](https://jeonghwan-kim.github.io/series/2019/12/22/frontend-dev-env-babel.html)
 - [React 개발 환경 구축하며 알게된 자잘한 것들](https://maxkim-j.github.io/posts/frontend-tooling-ideas/)
+- [지역성의 원칙을 고려한 패키지 구조: 기능별로 나누기](https://ahnheejong.name/articles/package-structure-with-the-principal-of-locality-in-mind/)
