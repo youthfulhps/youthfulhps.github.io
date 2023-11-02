@@ -1,16 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Youthfulhps.dev]]></title><description><![CDATA[Blog posted front-end, troubleshooting!]]></description><link>https://youthfulhps.dev</link><generator>GatsbyJS</generator><lastBuildDate>Mon, 30 Oct 2023 16:31:58 GMT</lastBuildDate><item><title><![CDATA[웹 제품을 만들기 위한 개발 환경과 기술 스택 되짚어보기]]></title><description><![CDATA[GitGlances…]]></description><link>https://youthfulhps.dev/development/git-glances-skills-retrospect/</link><guid isPermaLink="false">https://youthfulhps.dev/development/git-glances-skills-retrospect/</guid><pubDate>Mon, 23 Oct 2023 09:10:35 GMT</pubDate><content:encoded>&lt;p&gt;GitGlances라는 웹과 크롬 익스텐션 제품을 만들기 위한 개발 환경 구축과 선택한 기술 스택에 대해서 되짚어보려 한다.
-이미 환경이 구축되어 있는 프로젝트에 합류해 개발하게 된 경험이 많아 직접 초기 단계부터 환경을 만들어가는 작업은 낯설기도 하면서 클라이언트 개발 환경을
-다시금 공부하기 좋은 경험이었다.&lt;/p&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Youthfulhps.dev]]></title><description><![CDATA[Blog posted front-end, troubleshooting!]]></description><link>https://youthfulhps.dev</link><generator>GatsbyJS</generator><lastBuildDate>Thu, 02 Nov 2023 08:10:38 GMT</lastBuildDate><item><title><![CDATA[웹 제품을 만들기 위한 개발 환경과 기술 스택 되짚어보기]]></title><description><![CDATA[GitGlances…]]></description><link>https://youthfulhps.dev/development/git-glances-skills-retrospect/</link><guid isPermaLink="false">https://youthfulhps.dev/development/git-glances-skills-retrospect/</guid><pubDate>Mon, 23 Oct 2023 09:10:35 GMT</pubDate><content:encoded>&lt;p&gt;&lt;a href=&quot;https://github.com/youthfulhps/git-glances&quot;&gt;GitGlances&lt;/a&gt;라는 웹과 크롬 익스텐션 제품을 동시에 만들기 위한 개발 환경 구축과 선택한 기술 스택에
+대한 늦은 회고이다. 이미 환경이 구축되어 있는 프로젝트에 합류해 개발하게 된 경험이 많아 초기 단계부터 환경을 만들어가는 작업은 낯설기도 하면서 클라이언트 개발 환경을
+다시 정리하기 좋은 경험이었다.&lt;/p&gt;
 &lt;h2 id=&quot;패키지-매니저&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%ED%8C%A8%ED%82%A4%EC%A7%80-%EB%A7%A4%EB%8B%88%EC%A0%80&quot; aria-label=&quot;패키지 매니저 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;패키지 매니저&lt;/h2&gt;
-&lt;p&gt;패키지 매니저는 패키지 의존성 관리와 프로젝트의 메타데이터, 스크립트 등 관리 포인트들을 묶어 손쉽게 관리할 수 있도록 도와준다.
-npm을 시작으로 yarn, pnpm 등 여러 패키지가 있지만, 프로젝트를 시작한 시점에 가장 자주 사용하고 익숙했던 yarn을 사용했다.
-(현재는 pnpm을 주로 사용하곤 한다.)&lt;/p&gt;
-&lt;p&gt;yarn의 경우 깊어지는 의존성에 따라 중복 설치되는 의존성들을 호이스팅시켜 플랫하게 관리하는 컨셉을 가지고 있다. 참고로 현재는 pnpm을 주로 사용하곤 한다.
-pnpm은 심링크와 하드링크를 통해 프로젝트에서 필요한 의존성을 로컬 디스크의 상위 스토어에 설치된 의존성을 가리켜 사용하는 &lt;code class=&quot;language-text&quot;&gt;Content-addressable-storage&lt;/code&gt;
-전략을 통해 여러 프로젝트에서 중복되게 사용되는 의존성에 대한 중복 설치를 방지하고 있다. 이 컨셉이 적잖게 충격이었다.&lt;/p&gt;
-&lt;deckgo-highlight-code language=&quot;shell&quot;  &gt;
-          &lt;code slot=&quot;code&quot;&gt;~$ yarn init&lt;/code&gt;
-        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;프로젝트 관리를 용이하게 도와주는 패키지 매니저는 패키지 의존성 관리와 프로젝트의 메타데이터, 스크립트 등 관리 포인트를 묶어 한곳에서 관리할 수 있도록 도와준다.
+&lt;code class=&quot;language-text&quot;&gt;npm&lt;/code&gt;을 시작으로 &lt;code class=&quot;language-text&quot;&gt;yarn&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;pnpm&lt;/code&gt; 등 여러 패키지가 있지만, 프로젝트를 시작한 시점에 가장 자주 사용하고 익숙했던 &lt;code class=&quot;language-text&quot;&gt;yarn&lt;/code&gt;을 사용했다.&lt;/p&gt;
 &lt;deckgo-highlight-code language=&quot;json&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;{
   &amp;quot;name&amp;quot;: &amp;quot;git-glances&amp;quot;,
@@ -22,19 +15,95 @@ pnpm은 심링크와 하드링크를 통해 프로젝트에서 필요한 의존�
   ...
 }&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;yarn&lt;/code&gt;은 lockfile을 도입해 협업 과정에서 일관된 의존성 버전 관리를 보장하고, 깊어지는 의존성 트리에 따라 중복 설치되는 의존성들을 호이스팅시켜 플랫하게
+관리하는 컨셉을 가지고 있는 것이 특징이다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 1200px; &quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 44.33333333333333%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAJCAYAAAAywQxIAAAACXBIWXMAAAsTAAALEwEAmpwYAAAB3UlEQVQoz3WSTW/TQBCG87s4cOCv9MqBnhAIiXLohRsHDiDUqO0RVWqlHgCpQgSIEAWpRFQktMGxHSf+jr8dN7Yfdp009MKsRruafefdd3amVdUV0oIsYpKGOEWGK86LxRV1XSPvq2qJSbMYK7Rx5imuwE1ChyxPmjuJkfhWVZbUIhBpv1B2H6C07+N1D6gaUNmAGhcJVyLm/T5l+HKTixf3sD6/ZiFitcCtCWnoRLL7B2N/C3XnIdnp8SpaC6UL4SWlcGn5eIC2/xhtb4vs7GSZW94g9K2Ek4Mf9HtT3LxE9xLCecl4rItycqIwYl7kLK2iEDLdDCaJ3CspT5CtnpeEai/g1eY3vhyqJJnL1FRJk4jRaITjOA0wFAxnnxTGisu51+GrcYQfmNimxSyY4fs+nudRCqUtt1J46z7jsujys2vw4eic0E8xrSlxFDeEvY86Tzfe0Dkc0PY22NZuY0SXGJqJ57u4jo2uqRTFnFY/6bA9vMM75znvd3T2Hn3HGHoo6hDLstelyE9tmrNa12VmecHEDtBNH9uPRVNq1taLhQq/TcZs1ZL6X5f/45JY1cb0BxfESSrGZjVn0neNuzwZ3mIy7zeKyhtjIxOX56qZzeu4tCSOCcRfyon4CycioMX8YrlFAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;yarn의 의존성 호이스팅&quot;
+        title=&quot;yarn의 의존성 호이스팅&quot;
+        src=&quot;/static/e605658d9d980dc7db0d62f04630b1fe/c1b63/dependency-hoisting.png&quot;
+        srcset=&quot;/static/e605658d9d980dc7db0d62f04630b1fe/5a46d/dependency-hoisting.png 300w,
+/static/e605658d9d980dc7db0d62f04630b1fe/0a47e/dependency-hoisting.png 600w,
+/static/e605658d9d980dc7db0d62f04630b1fe/c1b63/dependency-hoisting.png 1200w,
+/static/e605658d9d980dc7db0d62f04630b1fe/21b4d/dependency-hoisting.png 1280w&quot;
+        sizes=&quot;(max-width: 1200px) 100vw, 1200px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://toss.tech/article/node-modules-and-yarn-berry&quot;&gt;이미지 출처&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;의존성 호이스팅을 통해 디스크 공간을 세이브할 수 있다는 장점이 있지만, 특정 의존성 패키지의 의존성이 호이스팅되어 프로젝트에 직접 추가하지 않은 의존성이 문제없이
+불러올 수 있게 되는 유령 의존성 (Phantom Dependency) 현상이 발생하기도 한다.&lt;/p&gt;
+&lt;p&gt;외람된 이야기지만, 현재는 &lt;code class=&quot;language-text&quot;&gt;pnpm&lt;/code&gt;를 주로 사용한다. &lt;code class=&quot;language-text&quot;&gt;pnpm&lt;/code&gt;은 심링크, 하드링크를 통해 프로젝트에서 의존성을 로컬 디스크의 상위 스토어에 설치된 의존성과 연결시켜
+사용하는 &lt;code class=&quot;language-text&quot;&gt;Content-addressable-storage&lt;/code&gt; 전략을 통해 여러 프로젝트에서 중복되게 사용되는 의존성에 대한 중복 설치를 방지하고 있다. 이 컨셉이 적잖게 충격이었다.&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;yarn&lt;/code&gt;의 경우 깊어지는 의존성에 따라 중복 설치되는 의존성들을 호이스팅시켜 플랫하게 관리하는 컨셉을 가지고 있다. 참고로 현재는 pnpm을 주로 사용하곤 한다.
+pnpm은 심링크와 하드링크를 통해 프로젝트에서 필요한 의존성을 로컬 디스크의 상위 스토어에 설치된 의존성을 가리켜 사용하는 &lt;code class=&quot;language-text&quot;&gt;Content-addressable-storage&lt;/code&gt;
+전략을 통해 여러 프로젝트에서 중복되게 사용되는 의존성에 대한 중복 설치를 방지하고 있다. 이 컨셉이 적잖게 충격이었다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 1080px; &quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 47.66666666666667%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAACXBIWXMAAA7rAAAO6wFxzYGVAAABn0lEQVQoz22SSY/UMBCF8///DBL31nABhGDEIhbRg6YnTezE+xIn3ZweVU6MhtEcnlKq2F+9clUX5hVNsVygXMRZKvRCwYSMtFxrPpEen32quP/vWoIvtsujCZCkySVInyB8hElz/dfEZ+f1ikxqxTjfxbIFmi6yO45tSAT1UD7DxUROI06TpgIBPhXEvOA8OXz82ePTsYeg4lygOhxcwRgWCOWqWqXRxs2ldTDjCdZo9HKC1g6ewMcHicOHb7i5/Y57acjpnw1o8wpPgdodNuBEsaDL3HbMBc4NGIwlhzPyvODuPOLF4S1e3rzDSerafqB8J/yMKRZyZ6piWao8QUbr8VvZCj6rATrxkFbMlyt+DQqH91/x6vbHDuR3LOjSDsjrSrr8A6Zlg/K7MfBE7VofYKiIDwH3QuP15yPefLlDP5l6tzpsgP+0bHB2w3HalR/lPbmx1D6LnTVjzwJ9ijRlGgZNO/CUyZmmSavIbg1tREAoNG0C8XkGNj0L1J7ejtbEcfU80+rQ+qRE6zThQUgM1OJI0xfa1sKSvnI38Bd2B/P/hvRypAAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;pnpm의 node_modules 디렉토리 구조&quot;
+        title=&quot;pnpm의 node_modules 디렉토리 구조&quot;
+        src=&quot;/static/11f7c87ca58e7f7d79107b3a347267db/302a4/pnpm-node-modules-example.png&quot;
+        srcset=&quot;/static/11f7c87ca58e7f7d79107b3a347267db/5a46d/pnpm-node-modules-example.png 300w,
+/static/11f7c87ca58e7f7d79107b3a347267db/0a47e/pnpm-node-modules-example.png 600w,
+/static/11f7c87ca58e7f7d79107b3a347267db/302a4/pnpm-node-modules-example.png 1080w&quot;
+        sizes=&quot;(max-width: 1080px) 100vw, 1080px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://pnpm.io/motivation&quot;&gt;이미지 출처&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&quot;번들러&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EB%B2%88%EB%93%A4%EB%9F%AC&quot; aria-label=&quot;번들러 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;번들러&lt;/h2&gt;
-&lt;p&gt;CommonJS와 같은 모듈 시스템 등장 이래로 규모가 큰 코드 베이스와 모듈화된 코드 파일 관리를 통해 프로젝트를 제작 및 관리한다.
-여기서 모듈은 단순히 모듈화된 스크립트 뿐만 아니라 CSS, 이미지 등 웹을 구성하기 위한 모든 자원을 모듈이라 한다.&lt;/p&gt;
-&lt;p&gt;번들러는 모듈 내의 파일 단위와 변수 유효 범위를 유지한채 하나의 파일로 모듈들을 묶어 페이지 구성을 위한 모듈들을 요청함에 따라 정량적으로 늘어나는 요청 횟수를
-최소화할 수 있다. 원한다면 코드 스플리팅을 통해 원하는 모듈을 따로 번들링하여 원하는 때에 로드할 수 있고 사용하지 않은 코드들을 제거(트리 쉐이킹)할 수 있다.&lt;/p&gt;
-&lt;p&gt;최근 웹팩 대비 빌드 속도가 엄청나게 개선된 esbuild가 많은 관심을 받고 있고, 최근 실무에서는 vite를 주로 사용하면서 웹팩에 비해 커스텀이나 설정이 간결해졌다는
-느낌을 많이 받아 번들러 선정단계에서 많은 고민이 있었다.&lt;/p&gt;
-&lt;p&gt;하지만 결과적으로 웹팩을 결정했다. 여러 이유가 있겠지만, 최근 번들러들이 간결한 설정을 제공하는 만큼 실무에서 번들러에 문제가 생겨 건드려야 하는 일이 생기면
-웹팩일 가능성이 높겠거니 싶어 개선점 적용에 부담이 적은 개인 프로젝트에서 만큼은 웹팩을 다루어보는 것도 즐겁지 않을까 싶었다.&lt;/p&gt;
-&lt;deckgo-highlight-code language=&quot;shell&quot;  &gt;
-          &lt;code slot=&quot;code&quot;&gt;~$ yarn add --dev webpack webpack-cli&lt;/code&gt;
-        &lt;/deckgo-highlight-code&gt;
-&lt;p&gt;웹팩의 config 파일은 다음과 같은 기본 구조를 가진다.&lt;/p&gt;
+&lt;p&gt;모듈 시스템을 기반으로 형성된 거대한 코드 베이스와 CSS, 이미지 등 웹을 구성하기 위한 모든 자원을 모듈이라 한다. 번들러는 스크립트 모듈 내의 파일 단위와
+변수 유효 범위를 유지한 채 웹을 구성하는 모든 모듈들을 하나의 번들로 생성한다.&lt;/p&gt;
+&lt;p&gt;하나로 묶인 번들은 정량적인 요청 횟수를 줄여 브라우저별로 상이한 요청 횟수 제한에서 안전할 수 있으며, 원한다면 코드 스플리팅을 통해 원하는 때 분리된 번들을 로드할
+수 있고, 사용하지 않은 코드들을 트리 쉐이킹해 번들링 과정에서 제거할 수 있다.&lt;/p&gt;
+&lt;p&gt;최근 &lt;code class=&quot;language-text&quot;&gt;webpack&lt;/code&gt;과 비교했을 때 빌드 속도가 현저히 개선된 &lt;code class=&quot;language-text&quot;&gt;esbuild&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;vite&lt;/code&gt;와 같은 번들러들이 많은 관심을 받고 있고, 최근 실무에서는 &lt;code class=&quot;language-text&quot;&gt;vite&lt;/code&gt;를 주로
+사용하는데 역시나 번들링 설정이 매우 간결하고 개발자 친화적이다.&lt;/p&gt;
+&lt;p&gt;하지만 개선된 번들러를 신나게 칭찬하고선 &lt;code class=&quot;language-text&quot;&gt;webpack&lt;/code&gt;을 사용하기로 결정했다. 아직 번들러 시장에서 점유율이 견고할 뿐만 아니라, 실무에서 번들러에 문제가 생겨
+누군가 해결해야 한다면 그 대상이 &lt;code class=&quot;language-text&quot;&gt;webpack&lt;/code&gt;일 가능성이 높지 않을까 싶어 설정 수정과 적용에 있어 부담이 적은 개인 프로젝트에서 다루어보는 것도 즐겁지 않을까
+싶어서다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 1200px; &quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 42.33333333333334%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAICAYAAAD5nd/tAAAACXBIWXMAABYlAAAWJQFJUiTwAAABKklEQVQoz41R2XLEMAjL/39qt7udxBdgsCqcbR/61GQ0MDLiPM7zxOPxQG0VpRT03rHWwv5p8/vx/4PDzODT8VbeSe48SPrjUqB94at/osn4jfuL9baHqaFoRfMOiwkPx3CBxI06Gzrfho/N7zdXQqBh1NzwNTcOGQzSsUUpvqxs34IiIlZs8YjBBJkk+XFzRGehNgdeg02Z4lBVTI69R2SHL3vu1qffc0dwNwHYBHQuiC0MospCkcA1Ak2TYwxXdIgISleOvXCK40n/YnDVDHaKfNumjm5BYdA6i8d9CK5oObOxS9Aec04Ylx0mmMqdVV55yg5Y2oiKJYXtVbbwht7YbxljqR878ZHXiambTGi74NrJCasHsmCuJUePd1fKFSWf/uZphcdN+w3z53TGc9UxhgAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;npm 번들러 다운로드 수 비교&quot;
+        title=&quot;npm 번들러 다운로드 수 비교&quot;
+        src=&quot;/static/62d6bff4f93a180deeea69d3aefad338/c1b63/bundler-comparison.png&quot;
+        srcset=&quot;/static/62d6bff4f93a180deeea69d3aefad338/5a46d/bundler-comparison.png 300w,
+/static/62d6bff4f93a180deeea69d3aefad338/0a47e/bundler-comparison.png 600w,
+/static/62d6bff4f93a180deeea69d3aefad338/c1b63/bundler-comparison.png 1200w,
+/static/62d6bff4f93a180deeea69d3aefad338/d61c2/bundler-comparison.png 1800w,
+/static/62d6bff4f93a180deeea69d3aefad338/97a96/bundler-comparison.png 2400w,
+/static/62d6bff4f93a180deeea69d3aefad338/ba168/bundler-comparison.png 2644w&quot;
+        sizes=&quot;(max-width: 1200px) 100vw, 1200px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;webpack&lt;/code&gt;의 설정 파일은 기본적으로 다음과 같은 구조를 가진다. 몇 가지 필수적인 설정을 살펴보자.&lt;/p&gt;
 &lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;var path = require(&amp;#39;path&amp;#39;);
 
@@ -48,8 +117,8 @@ module.exports = {
 };&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
 &lt;h3 id=&quot;entry-output&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#entry-output&quot; aria-label=&quot;entry output permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;entry, output&lt;/h3&gt;
-&lt;p&gt;번들링이 시작되는 진입점을 entry 포인트로 제공하고, 번들링된 결과를 output 경로에 반환하는 설정이다. 외람된 이야기지만, entry 진입점은 다중일 수 있고
-멀티 페이지 앱을 만들기 위해 각각의 페이지별로 번들링 할 수 있다.&lt;/p&gt;
+&lt;p&gt;번들링이 시작되는 진입점은 &lt;code class=&quot;language-text&quot;&gt;entry&lt;/code&gt; 포인트로 제공하고 그 결과를 &lt;code class=&quot;language-text&quot;&gt;output&lt;/code&gt;에 반환한다. 싱글 페이지 어플리케이션을 제작할 경우 진입점을 하나로 두어 모든 페이지를 하나의
+번들로 구성할 수 있고, 진입점을 여러 개로 나누어 멀티 페이지 어플리케이션을 구성하는 페이지 별 번들을 생성할 수도 있다.&lt;/p&gt;
 &lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;entry: {
   login: &amp;#39;./src/LoginPage.js&amp;#39;,
@@ -57,8 +126,7 @@ module.exports = {
 }&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
 &lt;h3 id=&quot;loader&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#loader&quot; aria-label=&quot;loader permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;loader&lt;/h3&gt;
-&lt;p&gt;웹팩이 모듈들을 해석할 때 자바스크립트 파일이 아닌 웹 자원(HTML, CSS, 이미지, 폰트 파일 등)을 변환할 수 있도록 각각의 모듈에 대해 로더를 지정해주어야 한다.
-module이라는 프로퍼티 명을 사용한다.&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;webpack&lt;/code&gt;은 자바스크립트 파일이 아닌 &lt;code class=&quot;language-text&quot;&gt;image&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;css&lt;/code&gt; 등과 같은 자원들을 해석하고 변환할 수 있도록 &lt;code class=&quot;language-text&quot;&gt;loader&lt;/code&gt;를 제공해주어야 한다.&lt;/p&gt;
 &lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;// ...
 module: {
@@ -89,8 +157,8 @@ module: {
   ];
 }&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
-&lt;p&gt;여기서 기억해두면 좋은 것은 로더를 적용할 파일 유형이 같다면 규칙 배열에 먼저 오는 로더가 적용되고, 하나의 규칙에 여러 개의 로더를 사용할 수 있다면
-use 배열에 제공되는 로더 중 가장 오른쪽 로더가 먼저 적용된다.&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;loader&lt;/code&gt;를 적용할 파일 유형이 같다면 &lt;code class=&quot;language-text&quot;&gt;rules&lt;/code&gt; 에서 먼저 오는 &lt;code class=&quot;language-text&quot;&gt;loader&lt;/code&gt;가 적용되고, 하나의 &lt;code class=&quot;language-text&quot;&gt;rule&lt;/code&gt;에 여러 개의 &lt;code class=&quot;language-text&quot;&gt;loader&lt;/code&gt;를 사용할 수 있다면, &lt;code class=&quot;language-text&quot;&gt;use&lt;/code&gt;
+배열의 뒤에서부터 &lt;code class=&quot;language-text&quot;&gt;loader&lt;/code&gt;가 적용된다.&lt;/p&gt;
 &lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;// css-loader가 style-loader보다 우선 적용
 module: {
@@ -118,8 +186,8 @@ modules: {
 }&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
 &lt;h3 id=&quot;plugin&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#plugin&quot; aria-label=&quot;plugin permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;plugin&lt;/h3&gt;
-&lt;p&gt;웹팩의 플러그인은 웹팩의 기본적인 동작에 추가적인 기능을 제공하는 데 사용된다. 로더는 자바스크립트 파일이 아닌 모듈들에 대해서 해석하고 변환할 수 있는
-과정에 관여하지만, 플러그인은 해당 결과물에 대해 형태를 바꾸거나 기본적인 번들링 과정 외에 추가적인 작업을 지시할 때 사용한다.&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;webpack&lt;/code&gt;의 &lt;code class=&quot;language-text&quot;&gt;plugin&lt;/code&gt;은 &lt;code class=&quot;language-text&quot;&gt;webpack&lt;/code&gt;의 기본적인 번들링 동작에 추가적인 동작과 기능을 부가하는 데 사용된다. 가령 해당 결과물의 형태를 조작하거나, 추가적인
+작업을 지시할 때 사용한다.&lt;/p&gt;
 &lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;plugins: [
   new CleanWebpackPlugin(),
@@ -161,52 +229,56 @@ modules: {
   }),
 ];&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;프로젝트를 제작할 때 다음과 같은 &lt;code class=&quot;language-text&quot;&gt;plugin&lt;/code&gt;들을 사용했다. 초기 설정을 구성할 때 일괄적으로 적용해 주었다면 좋았겠지만, 빌드 결과물에 에셋 파일이 포함되어 있지 않다던지,
+보일러 플레이트를 사용할 때는 당연하게 생각했던 &lt;code class=&quot;language-text&quot;&gt;index.html&lt;/code&gt; 파일이 생성되어 있지 않는 등 석연치 않은 불편함을 하나씩 느끼면서 &lt;code class=&quot;language-text&quot;&gt;plugin&lt;/code&gt;을 추가해 보는 것도
+그 역할을 깨닫기 좋은 경험이었다.&lt;/p&gt;
 &lt;h3 id=&quot;cleanwebpackplugin&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#cleanwebpackplugin&quot; aria-label=&quot;cleanwebpackplugin permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;CleanWebpackPlugin&lt;/h3&gt;
-&lt;p&gt;빌드를 새롭게 진행할 때 이전 결과물을 정리해주는 플러그인이다. 기존 빌드 결과물에 해시가 따로 없어 구분이 어렵지 않도록 output 디렉토리를
-정리해준다.&lt;/p&gt;
-&lt;deckgo-highlight-code language=&quot;js&quot;  highlight-lines=&quot;2&quot;&gt;
-          &lt;code slot=&quot;code&quot;&gt;plugins: [
-  new CleanWebpackPlugin(),
-  ...
-]&lt;/code&gt;
+&lt;p&gt;새롭게 빌드를 진행하기 전에 &lt;code class=&quot;language-text&quot;&gt;output&lt;/code&gt; 디렉토리를 정리해준다. 빌드 결과물들이 쌓여 구분이 어려워지거나 직접 제거해주어야 하는 난감한 상황을 방지한다.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;new CleanWebpackPlugin();&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
 &lt;h3 id=&quot;htmlwebpackplugin&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#htmlwebpackplugin&quot; aria-label=&quot;htmlwebpackplugin permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;HtmlWebpackPlugin&lt;/h3&gt;
-&lt;p&gt;번들링이 완료된 자바스크립트 파일을 script 태그를 통해 불러오는 HTML 파일을 생성해주는 플러그인이다.&lt;/p&gt;
-&lt;deckgo-highlight-code language=&quot;js&quot;  highlight-lines=&quot;3,6&quot;&gt;
-          &lt;code slot=&quot;code&quot;&gt;plugins: [
-  ...
-  new HtmlWebpackPlugin({
-    template: path.resolve(__dirname, &amp;#39;public&amp;#39;, &amp;#39;index.html&amp;#39;),
-    hash: false,
-  }),
-  ...
-]&lt;/code&gt;
+&lt;p&gt;번들링이 완료된 자바스크립트 파일을 &lt;code class=&quot;language-text&quot;&gt;script&lt;/code&gt; 태그를 통해 로드하는 HTML 파일을 생성해준다.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;new HtmlWebpackPlugin({
+  template: path.resolve(__dirname, &amp;#39;public&amp;#39;, &amp;#39;index.html&amp;#39;),
+  hash: false,
+});&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
-&lt;deckgo-highlight-code language=&quot;html&quot;  &gt;
-          &lt;code slot=&quot;code&quot;&gt;&amp;lt;!DOCTYPE html&amp;gt;&amp;#39;
+&lt;deckgo-highlight-code language=&quot;html&quot;  highlight-lines=&quot;5&quot;&gt;
+          &lt;code slot=&quot;code&quot;&gt;&amp;lt;!DOCTYPE html&amp;gt;
 &amp;lt;html&amp;gt;
-  &amp;lt;head&amp;gt;
-    ...
-  &amp;lt;/head&amp;gt;
+  &amp;lt;head&amp;gt;&amp;lt;/head&amp;gt;
   &amp;lt;body&amp;gt;
     &amp;lt;script defer=&amp;quot;defer&amp;quot; src=&amp;quot;main.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
   &amp;lt;/body&amp;gt;
 &amp;lt;/html&amp;gt;&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
 &lt;h3 id=&quot;copywebpackplugin&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#copywebpackplugin&quot; aria-label=&quot;copywebpackplugin permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;CopyWebpackPlugin&lt;/h3&gt;
-&lt;p&gt;원하는 모듈을 복사해서 빌드 결과물에 포함시켜주는 플러그인이다. 주로 이미지와 같은 에셋을 대상으로 사용했다.&lt;/p&gt;
+&lt;p&gt;원하는 모듈을 복사해서 빌드 결과물에 포함시켜준다. 주로 &lt;code class=&quot;language-text&quot;&gt;image&lt;/code&gt;와 같은 에셋을 대상으로 사용했다.&lt;/p&gt;
 &lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
-          &lt;code slot=&quot;code&quot;&gt;&lt;/code&gt;
+          &lt;code slot=&quot;code&quot;&gt;new CopyWebpackPlugin({
+  patterns: [
+    {
+      from: path.resolve(__dirname, &amp;#39;public/*.png&amp;#39;),
+      to() {
+        return &amp;#39;[name][ext]&amp;#39;;
+        },
+      },
+      {
+        from: path.resolve(__dirname, &amp;#39;public/icons&amp;#39;),
+        to() {
+          return &amp;#39;icons/[name][ext]&amp;#39;;
+        },
+      },
+...
+});&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
-&lt;ul&gt;
-&lt;li&gt;CopyWebpackPlugin, 원하는 모듈을 복사해서 빌드 결과물에 포함시켜준다. 주로 에셋들을 대상으로 사용했다.’&lt;/li&gt;
-&lt;/ul&gt;
 &lt;h3 id=&quot;부가적인-설정들&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EB%B6%80%EA%B0%80%EC%A0%81%EC%9D%B8-%EC%84%A4%EC%A0%95%EB%93%A4&quot; aria-label=&quot;부가적인 설정들 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;부가적인 설정들&lt;/h3&gt;
-&lt;p&gt;부가적으로 개발 과정에서 빌드 결과물 새로고침을 위해 webpack-dev-server를 사용했다. 코드를 수정하고 웹팩 명령어를 실행하지 않아도 빌드 후 결과물을 통해
-새로고침해주는 웹팩 기반의 필수적인 기능이다.&lt;/p&gt;
+&lt;h3 id=&quot;webpack-dev-server&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#webpack-dev-server&quot; aria-label=&quot;webpack dev server permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;webpack-dev-server&lt;/h3&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;webpack-dev-server&lt;/code&gt;는 개발 과정에서 코드를 수정하고 &lt;code class=&quot;language-text&quot;&gt;webpack&lt;/code&gt; 명령어를 따로 실행하지 않아도 변경된 결과물을 새롭게 적용해준다.&lt;/p&gt;
 &lt;deckgo-highlight-code language=&quot;shell&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;~$ yarn add --dev webpack-dev-server
-// 설정 추가 후
 ~$ webpack serve&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
 &lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
@@ -220,47 +292,21 @@ devServer: {
   historyApiFallback: true,
 }&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
-&lt;p&gt;실험적인 기능으로는 topLevelAwait를 사용했다. ES2022에 새롭게 등장한 기능인데 async로 감싼 await를 구성하기 위해 임의의 함수를 작성하지
-않아도 돼서 좋은 경험이었다.&lt;/p&gt;
+&lt;h3 id=&quot;experiments&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#experiments&quot; aria-label=&quot;experiments permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;experiments&lt;/h3&gt;
+&lt;p&gt;ES2022 기능 중 하나인 &lt;code class=&quot;language-text&quot;&gt;top-level await&lt;/code&gt;를 사용해보기 위해 &lt;code class=&quot;language-text&quot;&gt;experiments&lt;/code&gt; 속성을 추가해주었다.&lt;/p&gt;
 &lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;experiments: {
   topLevelAwait: true,
 }&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
-&lt;p&gt;더불어 일반적이진 않지만, 본 프로젝트는 웹과 크롬 익스텐션을 동시에 빌드할 수 있도록 구성한 프로젝트여서 번들링 과정에서 분기를 주어야 했고, 환경 변수를 통해
-빌드 환경을 분기처리해서 진입점을 구분짓고, 크롬 익스텐션 빌드에 필요한 에셋을 구성할 수 있도록 했다.&lt;/p&gt;
-&lt;deckgo-highlight-code language=&quot;javascript&quot;  highlight-lines=&quot;3 8 13&quot;&gt;
-          &lt;code slot=&quot;code&quot;&gt;module.exports = ({ ENV, TARGET }) =&amp;gt; {
-  const isProd = ENV === &amp;#39;production&amp;#39;;
-  const isWeb = TARGET === &amp;#39;web&amp;#39;;
-
-  return {
-    mode: isProd ? &amp;#39;production&amp;#39; : &amp;#39;development&amp;#39;,
-    devtool: isProd ? &amp;#39;hidden-source-map&amp;#39; : &amp;#39;source-map&amp;#39;,
-    entry: isWeb ? &amp;#39;./src/Web.tsx&amp;#39; : &amp;#39;./src/Extension.tsx&amp;#39;,
-    ...
-      new CopyWebpackPlugin({
-        patterns: [
-          ...,
-          ...(!isWeb
-            ? [
-              {
-                from: path.resolve(__dirname, &amp;#39;public/favicon.png&amp;#39;),
-                to: &amp;#39;icons/icon16.png&amp;#39;,
-              },
-            ]
-            : []),
-        ],
-      }),&lt;/code&gt;
-        &lt;/deckgo-highlight-code&gt;
 &lt;h2 id=&quot;트랜스컴파일러&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%ED%8A%B8%EB%9E%9C%EC%8A%A4%EC%BB%B4%ED%8C%8C%EC%9D%BC%EB%9F%AC&quot; aria-label=&quot;트랜스컴파일러 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;트랜스컴파일러&lt;/h2&gt;
-&lt;p&gt;브라우저마다 해석가능한 자바스크립트 스펙이 조금씩 다르다. 크롬에서는 동작하지만, 윈도우 익스플로워에서는 동작이 안되는 것과 같고, mdn의 자바스크립트 참고서에서
-문법에 대한 &lt;a href=&quot;https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Promise#%EB%B8%8C%EB%9D%BC%EC%9A%B0%EC%A0%80_%ED%98%B8%ED%99%98%EC%84%B1&quot;&gt;브라우저 호환성&lt;/a&gt;
-을 제공을 해주는 이유이다.&lt;/p&gt;
-&lt;p&gt;babel은 이러한 크로스 브라우징 이슈를 해결하기 위해 브라우저에서 이해할 수 있는 스펙의 자바스크립트로 내가 작성한 코드를 적당히 트랜스파일링해준다.
-일반적으로 코드를 파싱해서 추상 구문 트리로 변환하고, 추상 구문 트리를 통해 브라우저가 해석할 수 있는 적당한 스펙의 자바스크립트로 코드 재생성 과정을 진행한다.&lt;/p&gt;
-&lt;p&gt;babel은 자바스크립트 외에 react에 포함된 jsx 문법이나, 타입스크립트로 작성된 코드를 자바스크립트로 변환하기 위해 몇 가지 플러그인들을 제공했지만, 유사한 목적을
-이루기 위한 플러그인들을 묶은 프리셋을 제공한다.&lt;/p&gt;
+&lt;p&gt;브라우저마다 해석 가능한 자바스크립트 스펙 한계가 조금씩 달라 참고서에서 &lt;a href=&quot;https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Promise#%EB%B8%8C%EB%9D%BC%EC%9A%B0%EC%A0%80_%ED%98%B8%ED%99%98%EC%84%B1&quot;&gt;브라우저 호환성&lt;/a&gt;
+를 제공해주곤 한다.&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;babel&lt;/code&gt;은 이러한 크로스 브라우징 이슈를 해결하기 위해 브라우저에서 이해할 수 있는 스펙의 자바스크립트로 트랜스파일링 해준다. 일반적으로 코드를 분석해서 추상 구문
+트리를 생성하고, 추상 구문 트리를 통해 브라우저가 해석할 수 있는 적당한 스펙의 자바스크립트로 코드를 재생성한다.&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;babel&lt;/code&gt;의 설정 파일은 일반적으로 &lt;code class=&quot;language-text&quot;&gt;presets&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;plugins&lt;/code&gt;을 나열한다. &lt;code class=&quot;language-text&quot;&gt;plugin&lt;/code&gt;은 가령 자바스크립트 파일에 포함된 &lt;code class=&quot;language-text&quot;&gt;react&lt;/code&gt; 개발 구문과 &lt;code class=&quot;language-text&quot;&gt;jsx&lt;/code&gt;,
+타입스크립트로 작성된 코드를 트랜스파일링 과정에서 해석할 수 있도록 도와주는 역할을 한다. &lt;code class=&quot;language-text&quot;&gt;plugin&lt;/code&gt;은 종종 하나의 목적을 이루고자 의존적으로 추가해 주어야 하는
+&lt;code class=&quot;language-text&quot;&gt;plugin&lt;/code&gt;들이 있는데, 이들을 묶어둔 것이 &lt;code class=&quot;language-text&quot;&gt;preset&lt;/code&gt;이다.&lt;/p&gt;
 &lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;module.exports = {
   presets: [
@@ -281,8 +327,8 @@ devServer: {
 };&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
 &lt;h3 id=&quot;babel-env&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#babel-env&quot; aria-label=&quot;babel env permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;babel-env&lt;/h3&gt;
-&lt;p&gt;env 프리셋은 브라우저 버전을 제공해 해당 브라우저를 타겟으로 동작 가능한 코드를 재생산하고, 폴리필을 제공하는 데 사용된다.
-가령 ECMAScript2015의 Promise를 babel을 통해 코드를 변환하면 다음과 같은 결과를 얻는데&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;babel-env&lt;/code&gt;은 브라우저와 버전을 제공해 해당 브라우저에서 동작 가능한 코드를 생산하고, 고스펙의 코드의 경우 &lt;code class=&quot;language-text&quot;&gt;polyfill&lt;/code&gt;을 제공하는 데 사용된다.
+가령 &lt;code class=&quot;language-text&quot;&gt;ES2015&lt;/code&gt;의 &lt;code class=&quot;language-text&quot;&gt;Promise&lt;/code&gt; 객체를 트랜스파일링하면 다음과 같은 결과를 얻게 되는데,&lt;/p&gt;
 &lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;new Promise();&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
@@ -291,8 +337,8 @@ devServer: {
 
 new Promise();&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
-&lt;p&gt;여전히 Promise로 유지되는 코드는 Promise 문법을 해석할 수 없는 윈도우 익스플로어와 같은 브라우저에서 레퍼런스 에러를 던진다.
-env 프리셋은 이러한 이슈에 맞서 Promise를 해석할 수 있도록 코드 조각을 제공하여 문제를 해결한다.&lt;/p&gt;
+&lt;p&gt;여전히 &lt;code class=&quot;language-text&quot;&gt;Promise&lt;/code&gt;로 유지되는 코드는 윈도우 익스플로어와 같은 브라우저에서 해석이 불가능해 레퍼런스 에러를 던진다. &lt;code class=&quot;language-text&quot;&gt;babel-env&lt;/code&gt;는 이러한 이슈에 맞서
+&lt;code class=&quot;language-text&quot;&gt;Promise&lt;/code&gt;를 해석할 수 있도록 &lt;code class=&quot;language-text&quot;&gt;polyfill&lt;/code&gt;이라는 코드 조각을 제공하여 문제를 해결한다.&lt;/p&gt;
 &lt;deckgo-highlight-code language=&quot;javascript&quot;  highlight-lines=&quot;4,8&quot;&gt;
           &lt;code slot=&quot;code&quot;&gt;[
   &amp;quot;@babel/preset-env&amp;quot;,
@@ -314,7 +360,7 @@ require(&amp;#39;core-js/modules/es6.object.to-string&amp;#39;);
 new Promise();&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
 &lt;h3 id=&quot;babelpreset-react&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#babelpreset-react&quot; aria-label=&quot;babelpreset react permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;@babel/preset-react&lt;/h3&gt;
-&lt;p&gt;리엑트를 위한 프리셋도 마찬가지로 브라우저에서 리엑트에서 사용되는 구문을 해석 가능하도록 코드를 변환하는데 사용된다.&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;react&lt;/code&gt;를 위한 &lt;code class=&quot;language-text&quot;&gt;preset&lt;/code&gt;도 브라우저에서 해석 가능한 코드로 변환하는데 사용된다.&lt;/p&gt;
 &lt;deckgo-highlight-code language=&quot;jsx&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;import React from &amp;#39;react&amp;#39;;
 
@@ -342,10 +388,8 @@ export default Component;&lt;/code&gt;
           &lt;code slot=&quot;code&quot;&gt;const foo = 1;&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
 &lt;h3 id=&quot;babel-loader&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#babel-loader&quot; aria-label=&quot;babel loader permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;babel-loader&lt;/h3&gt;
-&lt;p&gt;babel은 일반적으로 webpack과 함께 사용한다. 개발 단계에서 트랜스파일링된 코드를 사용할 일이 크게 없기 떄문에 빌드 과정에서 적절한 스팩의 자바스크립트로 변환한 후
-이를 번들링할 수 있도록 제공한다.&lt;/p&gt;
-&lt;p&gt;babel을 webpack에서 사용하기 위한 babel-loader가 제공된다. 트랜스파일링과 번들링을 마친 빌드 파일을 제공하는 패키지가 담겨있는 node_modules
-은 제외시켰다.&lt;/p&gt;
+&lt;p&gt;위에서 살펴본 &lt;code class=&quot;language-text&quot;&gt;babel&lt;/code&gt;은 일반적으로 &lt;code class=&quot;language-text&quot;&gt;webpack&lt;/code&gt;과 함께 사용한다. 빌드 과정에서 적절한 스펙의 자바스크립트로 트랜스파일링 한 뒤 이를 번들링하기 위함인데,
+이는 &lt;code class=&quot;language-text&quot;&gt;babel-loader&lt;/code&gt;를 통해 기능을 제공한다.&lt;/p&gt;
 &lt;deckgo-highlight-code language=&quot;js&quot;  highlight-lines=&quot;1 6,10&quot;&gt;
           &lt;code slot=&quot;code&quot;&gt;// webpack.config.js
 module.exports = {
@@ -363,11 +407,10 @@ module.exports = {
 };&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
 &lt;h3 id=&quot;babel-loader와-babelconfigjs&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#babel-loader%EC%99%80-babelconfigjs&quot; aria-label=&quot;babel loader와 babelconfigjs permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;babel-loader와 babel.config.js&lt;/h3&gt;
-&lt;p&gt;babel-loader의 옵션으로 프리셋과 플러그인들을 제공할 수 있어 babel 설정 파일을 따로 구성할 필요 없지만, 만약 프로젝트 루트 폴더에 babel 설정 파일이
-존재한다면 babel-loader가 적용될 때 해당 설정을 읽어드리기 때문에 옵션과 설정을 제공하는 방법은 자유롭게 선택 가능하다.&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;webpack&lt;/code&gt;에 적용 가능한 &lt;code class=&quot;language-text&quot;&gt;babel-loader&lt;/code&gt;의 옵션으로 &lt;code class=&quot;language-text&quot;&gt;presets&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;plugins&lt;/code&gt;를 제공할 수 있어 &lt;code class=&quot;language-text&quot;&gt;babel&lt;/code&gt; 설정 파일을 따로 구성할 필요는 없지만,
+만약 프로젝트 루트 폴더에 &lt;code class=&quot;language-text&quot;&gt;babel&lt;/code&gt; 설정 파일이 존재한다면 &lt;code class=&quot;language-text&quot;&gt;babel-loader&lt;/code&gt;가 적용될 때 해당 설정을 읽어드리기 때문에 설정을 제공하는 방법은 자유롭게 선택 가능하다.&lt;/p&gt;
 &lt;h2 id=&quot;테스트&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%ED%85%8C%EC%8A%A4%ED%8A%B8&quot; aria-label=&quot;테스트 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;테스트&lt;/h2&gt;
-&lt;p&gt;테스트는 jest 환경에서 리엑트 테스트를 위해 testing-library를 사용했다. 타입스크립트 기반으로 코드가 구성되어 있기 때문에 ts-jest를 사용해
-설정을 구성했다. 테스트를 진행하는데 있어 필요한 프리셋과, 테스트 환경을 지정해주었고, test-library 환경 셋업 파일을 기본적으로 제공한다.&lt;/p&gt;
+&lt;p&gt;테스트는 &lt;code class=&quot;language-text&quot;&gt;jest&lt;/code&gt; 환경에서 리엑트 테스트를 위해 &lt;code class=&quot;language-text&quot;&gt;testing-library&lt;/code&gt;를 사용하고 &lt;code class=&quot;language-text&quot;&gt;ts-jest preset&lt;/code&gt;을 통해 타입스크립트 기반 코드를 커버했다.&lt;/p&gt;
 &lt;deckgo-highlight-code language=&quot;ts&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;import type { JestConfigWithTsJest } from &amp;#39;ts-jest&amp;#39;;
 
@@ -380,8 +423,7 @@ const config: JestConfigWithTsJest = {
 
 export default config;&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
-&lt;p&gt;부가적으로 만약 모듈을 불러오는 경로에 별칭을 부여해서 축약해 사용했다면, jest에게도 제공해주어야 했다. 웹팩의 alias 속성을 넣어주는 것과
-동일하다.&lt;/p&gt;
+&lt;p&gt;만약 모듈을 불러오는 경로에 별칭을 부여해서 축약해 사용했다면, &lt;code class=&quot;language-text&quot;&gt;jest&lt;/code&gt; 환경에도 알려주어야 한다. &lt;code class=&quot;language-text&quot;&gt;webpack&lt;/code&gt;의 &lt;code class=&quot;language-text&quot;&gt;alias&lt;/code&gt; 속성과 동일하다.&lt;/p&gt;
 &lt;deckgo-highlight-code language=&quot;ts&quot;  highlight-lines=&quot;3,7&quot;&gt;
           &lt;code slot=&quot;code&quot;&gt;const config: JestConfigWithTsJest = {
   ...,
@@ -393,8 +435,7 @@ export default config;&lt;/code&gt;
 }
 }&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
-&lt;p&gt;또한 타입스크립트에서 자바스크립트로 변환해 테스트할 때 변환된 결과가 개발 결과물과 동일하게 유지하기 위해 프로젝트에서 사용되는 타입스크립트 및
-babel 설정 파일을 제공할 수 있다.&lt;/p&gt;
+&lt;p&gt;또한 타입스크립트를 변환해 테스트할 때 변환된 결과가 개발 결과물과 동일하도록 프로젝트에서 사용하는 타입스크립트 및 &lt;code class=&quot;language-text&quot;&gt;babel&lt;/code&gt; 설정 파일을 제공했다.&lt;/p&gt;
 &lt;deckgo-highlight-code language=&quot;ts&quot;  highlight-lines=&quot;3,12&quot;&gt;
           &lt;code slot=&quot;code&quot;&gt;const config: JestConfigWithTsJest = {
   ...,
@@ -412,13 +453,13 @@ babel 설정 파일을 제공할 수 있다.&lt;/p&gt;
 }&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
 &lt;h3 id=&quot;순수한-함수와-섹션-통합-단위-테스트&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EC%88%9C%EC%88%98%ED%95%9C-%ED%95%A8%EC%88%98%EC%99%80-%EC%84%B9%EC%85%98-%ED%86%B5%ED%95%A9-%EB%8B%A8%EC%9C%84-%ED%85%8C%EC%8A%A4%ED%8A%B8&quot; aria-label=&quot;순수한 함수와 섹션 통합 단위 테스트 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;순수한 함수와 섹션 통합 단위 테스트&lt;/h3&gt;
-&lt;p&gt;‘정령 나는 테스트 코드를 의지하고 필요로 할까, 아니면 공개된 프로젝트라서 구색 맞추기 위함인걸까?’ 강한 결합들로 이루어진 코드를 작성하고
+&lt;p&gt;‘정령 나는 테스트 코드를 의지하고 필요로 할까, 아니면 공개된 프로젝트라서 구색 맞추기 위함인 걸까?’ 강한 결합들로 이루어진 코드를 작성하고
 나서 테스트 코드를 작성할 때 후회하며 들었던 생각이다. 다시 한번 실패하는 테스트 코드가 구현 코드보다 먼저 작성되어야 한다는 걸 느꼈다.&lt;/p&gt;
 &lt;p&gt;100%의 테스트 커버리지를 자랑하는 것도 좋겠지만, 테스트 코드 작성 이유에 대해 경험을 통해 동의할 수 있는 부분들을 위주로 커버하려 했다.
-그 시작점은 사이드 이펙트가 없는 순수한 함수 테스트이다. moment와 같은 라이브러리에서 제공하는 함수들을 사용하는 함수들의 테스트는 moment
-자체적으로 잘 테스트했으리라 기대하고, 내가 작성한 유틸 함수들만 테스트했다.&lt;/p&gt;
-&lt;p&gt;급하게 구현한 유틸 함수들의 로직이 나중에 봤을 때 구구절절 불편하게 느껴질 때가 분명히 있다. 이때 테스트 코드는 리팩토링의 부담을 덜어주고
-리팩토링한 결과에 대해 프로그래밍적으로 동일성 여부를 확인할 수 있다.&lt;/p&gt;
+그 시작점은 사이드 이펙트가 없는 순수한 함수 테스트이다. &lt;code class=&quot;language-text&quot;&gt;moment.js&lt;/code&gt;와 같이 의존성 모듈에서 제공하는 함수들을 사용하는 함수들의 테스트는
+패키지에게 테스트를 맡길 수 있을 거라 기대하고, 내가 작성한 함수들에만 집중했다.&lt;/p&gt;
+&lt;p&gt;순수한 함수들의 테스트를 작성해두면 나중에 로직이 구구절절 불편하게 느껴질 때 함수의 결과가 이전과 동일하다는 것을 프로그래밍적으로 의지한 채
+리팩토링해 낼 수 있다.&lt;/p&gt;
 &lt;deckgo-highlight-code language=&quot;ts&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;export const getSortedLanguageList: SortedLanguageList = mergedLanguageList =&amp;gt; {
   return Object.entries(mergedLanguageList)
@@ -436,9 +477,32 @@ babel 설정 파일을 제공할 수 있다.&lt;/p&gt;
   });
 });&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
-&lt;p&gt;그 다음으로 진행한 테스트는 섹션별 임의로 생성한 가짜 데이터로 의존성을 해결한 통합 테스트였다. 진행한 프로젝트는 섹션별로 각각의 기능을 담고 있는
-구조로 구성했기 때문에 섹션 단위로 통합 테스트를 진행했다. 서버에 가져온 데이터라 가정한 가짜 데이터와 강한 결합을 이루고 있는 전역 상태를 주입해 의존성을
-해결해주었다.&lt;/p&gt;
+&lt;p&gt;다음으로 커버한 테스트는 섹션별 통합 테스트이다. 본 프로젝트에서는 각각의 독립적인 기능을 담고 있는 섹션(아래 이미지의 빨간 박스)을 통합 테스트 단위로 잡았고,
+서버에서 가져온 데이터라 가정한 가짜 데이터들과 전역 상태를 주입해 의존성을 해결해 주었다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 1200px; &quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 64.99999999999999%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAANCAYAAACpUE5eAAAACXBIWXMAAAsTAAALEwEAmpwYAAACBklEQVQ4y4WTXW/TMBSGe424WpsmsZM2WWLH+WizdG0jxMSHGCuso6KsEkhD4mpX+xMIIQS/+uXYXfrF0C5e+djyefwe+7hl2wyOwzc6nD+k/+3R660mMNrbwHbGfwH2bt699HqrCZjrwe66Rl2SRetWl6Frc4o5jQfJJJdyGO+ZceNQJ/t+iGo8Re9YwKW47weQnEF6HDFzIUh95oF7fTDmwyGA5/WQpgXycggpFTECY6SlHbF+BPXyAvLVBSarr3h9+QFhEcIrI1iKThcuJqnCoBwhSTLEcUKQDHk+3MQbYNey0Zc5GG30wpCAN5gtV2gnHE9ITwnYJp3EMQQlamADbWLtdAfooBclOKlrjKdjTN9fYfbxGlxwtCVHh6ROFSohEIkUcSQxHtfkKkVE8dnZC8znCzpAwiKWKdkLYmTlqSnhzWKF88/fMM0yTNPUgEakjACNs3WZKYqihFK5yds61I8SBFhen+PqssaXm3eYf5oh0gBVQBDkWDsTyiRrqCCgjqvRBFk2oJIHW2Cnw5ApH7++z/Hn5wK/f8xwd/uMkiTdGbmgxOWkNhCp7yxWCN4+R0QVpEkOQQdpt9tXpt7hnKMcClRlglGlUOSS2mPdY5wU0mbdLmZOo0sVudxfr5H4fS/u/ZR228GR1pGDTsfZa2JLN/xuYx/OH/opjdxH/vFjf/wvVeVsDwMMzPIAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;GitGlances 통합 테스트 범위&quot;
+        title=&quot;GitGlances 통합 테스트 범위&quot;
+        src=&quot;/static/e81c813cd195f8a1a0b13da30a786d4d/c1b63/git-glances.png&quot;
+        srcset=&quot;/static/e81c813cd195f8a1a0b13da30a786d4d/5a46d/git-glances.png 300w,
+/static/e81c813cd195f8a1a0b13da30a786d4d/0a47e/git-glances.png 600w,
+/static/e81c813cd195f8a1a0b13da30a786d4d/c1b63/git-glances.png 1200w,
+/static/e81c813cd195f8a1a0b13da30a786d4d/d61c2/git-glances.png 1800w,
+/static/e81c813cd195f8a1a0b13da30a786d4d/97a96/git-glances.png 2400w,
+/static/e81c813cd195f8a1a0b13da30a786d4d/8c76b/git-glances.png 2954w&quot;
+        sizes=&quot;(max-width: 1200px) 100vw, 1200px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+    &lt;/span&gt;&lt;/p&gt;
 &lt;deckgo-highlight-code language=&quot;tsx&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;import { render, screen } from &amp;#39;@testing-library/react&amp;#39;;
 import { ContributionsCollection } from &amp;#39;@shared/apis/contribution&amp;#39;;
@@ -476,21 +540,21 @@ describe(&amp;#39;Contribution 컴포넌트는 유저의 오늘 기여도 정보
 });&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
 &lt;h2 id=&quot;프로젝트-구조&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EA%B5%AC%EC%A1%B0&quot; aria-label=&quot;프로젝트 구조 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;프로젝트 구조&lt;/h2&gt;
-&lt;p&gt;components, hooks, utils 별로 디렉토리를 구성하고 로직 레벨과 UI를 융합하기 위해 상단 디렉토리로 다시 거슬러 올라가 의존성을 찾아내는 경험이 어쩌면 당연시 되었다.
-더불어 코드 베이스가 커지면서 원하는 의존성이 어디에 위치해 있는지 해당 의존성과 관련된 코드의 기억을 더듬어 검색해 디렉토리를 찾아내곤 한다.&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;components&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;hooks&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;utils&lt;/code&gt; 별로 디렉토리를 구성하고 로직 레벨과 UI를 융합하기 위해 거대한 코드 베이스를 다시 거슬러 올라가기도 하고, 원하는 의존성이
+어디에 위치에 했는지 관련된 코드의 기억을 더듬어 검색해보기도 한다.&lt;/p&gt;
 &lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;import { getSortedLanguageList } from &amp;#39;../../../../utils/language&amp;#39;;&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
-&lt;p&gt;그러다 우연히 이전 회사 리드분의 프로젝트 구조를 보고선 카톡을 보내 해당 프로젝트 구조의 레퍼런스를 얻었다.
-&lt;a href=&quot;https://ahnheejong.name/articles/package-structure-with-the-principal-of-locality-in-mind/&quot;&gt;지역성의 원칙을 고려한 패키지 구조: 기능별로 나누기&lt;/a&gt;에서
-잘 설명하고 있어 레퍼런스를 읽어보면 좋다.&lt;/p&gt;
-&lt;p&gt;받아드리기 나름이지만, 개인적으로는 캐시 미스를 최소화할 수 있는 지역성이 발생하는 단위인 기능별로 프로젝트를 구성해서 기능별 맥락 블록을 머리 속 캐시에
-적재한 상태로 작업하면 거대한 코드 베이스 속에서 헤매이지 않도록 프로젝트 구조에 반영했어야 했고, 마침 섹션별로 독립적인 기능을 구사하는 프로젝트에서는 맥락을
-빠르게 잡는 장점과 더불어 기능 개발의 시작과 끝, 그리고 코드 수정 범위를 예상하는 데 큰 도움이 되었다.&lt;/p&gt;
-&lt;p&gt;최종적으로 마치 작은 프로젝트처럼 동작하는 기능들의 모임들로 디렉토리가 갖춰졌다.&lt;/p&gt;
+&lt;p&gt;본 프로젝트도 초기에는 동일한 구조로 진행하다가 레퍼런스 삼아 이전 회사 리드 분의 프로젝트 구조를 보고선 카톡을 드려 해당 프로젝트의 레퍼런스를 얻어냈다.
+&lt;a href=&quot;https://ahnheejong.name/articles/package-structure-with-the-principal-of-locality-in-mind/&quot;&gt;지역성의 원칙을 고려한 패키지 구조: 기능별로 나누기&lt;/a&gt;
+를 읽어보면 프로젝트 구조를 잡는데도 많은 고민을 담아내는 것에 놀라울 따름이다.&lt;/p&gt;
+&lt;p&gt;받아들이기 나름이지만, 섹션별로 각각의 기능을 구사하는 제품을 제작하고 있었기 때문에 글에서 언급하는 ‘캐시 미스’를 최소화할 수 있는 지역성이 발생하는 기능별 단위로
+디렉토리를 구성했고, 작업 중인 기능의 맥락 블록을 머릿속에 적재한 상태로 작업해 코드 베이스 속에서 헤매지 않고 원하는 의존성을 찾아낼 수 있었다. 더불어
+그 수정 범위 또한 예측 가능해지는 장점도 있다.&lt;/p&gt;
 &lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;src
 ├─ Contribution
+│  └─ atoms
 │  └─ components
 │  └─ queries
 │  └─ test
@@ -504,14 +568,232 @@ describe(&amp;#39;Contribution 컴포넌트는 유저의 오늘 기여도 정보
 ├─ _shared&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
 &lt;h2 id=&quot;react&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#react&quot; aria-label=&quot;react permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;react&lt;/h2&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;react v.18&lt;/code&gt;은 동시성 기능을 담아내기 위해 5년에 가까운 시간을 들여 기저의 아키텍처부터 멘탈 모델을 고안해 만든 대규모 업데이트를 포함하고 있다. 충분한
+공부가 필요했고 &lt;a href=&quot;https://youthfulhps.dev/react/react-concurrent-mode-01/&quot;&gt;메커니즘 구현체에 대해 열심히 톺아본 결과물&lt;/a&gt;을 글로 정리해 보기도 했다.&lt;/p&gt;
+&lt;h3 id=&quot;suspense&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#suspense&quot; aria-label=&quot;suspense permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Suspense&lt;/h3&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;Suspense&lt;/code&gt;는 자신이 감싼 하위 컴포넌트에서 &lt;code class=&quot;language-text&quot;&gt;throw&lt;/code&gt;된 &lt;code class=&quot;language-text&quot;&gt;promise&lt;/code&gt;가 &lt;code class=&quot;language-text&quot;&gt;resolve&lt;/code&gt;될 때까지 하위 컴포넌트 작업을 낮은 우선순위로 레인을 변경해 우선순위를
+다른 작업에 넘겨주는 역할을 한다. 그러곤 하위 컴포넌트 랜더링을 보장받을 수 있을 때까지 &lt;code class=&quot;language-text&quot;&gt;fallback&lt;/code&gt;에 제공된 노드를 노출시킨다.&lt;/p&gt;
+&lt;p&gt;여기서 &lt;code class=&quot;language-text&quot;&gt;promise&lt;/code&gt;는 &lt;code class=&quot;language-text&quot;&gt;React.lazy&lt;/code&gt;를 통해 동적으로 필요한 자원을 로드하는 것, 컨텐츠 랜더링에 사용될 데이터 요청하는 것을 포함한 기다릴 수 있는 모든 것이
+그 대상이 되고, 덕분에 개발자를 피곤하게 했던 데이터 패칭에 대한 성공 여부에 따른 UI 구성 분기를 선언적으로 할 수 있게 한다.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;const resource = fetchProfileData();
+function App() {
+  return (
+    &amp;lt;ErrorBoundary fallback={&amp;lt;Error /&amp;gt;}&amp;gt;
+      &amp;lt;Suspense fallback={&amp;lt;Loader /&amp;gt;}&amp;gt;
+        &amp;lt;UserProfile /&amp;gt;
+      &amp;lt;/Suspense&amp;gt;
+    &amp;lt;/ErrorBoundary&amp;gt;
+  );
+}
+
+function UserProfile() {
+  const user = resource.user.read();
+  return &amp;lt;div&amp;gt;{user.userName}&amp;lt;/div&amp;gt;;
+}&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;&lt;em&gt;Suspense에 대한 내용은 따로 자세히 정리할 예정으로 본 글에서는 축약해 정리했습니다.&lt;/em&gt;&lt;/p&gt;
+&lt;h3 id=&quot;error-boundary&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#error-boundary&quot; aria-label=&quot;error boundary permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Error Boundary&lt;/h3&gt;
+&lt;p&gt;자바스크립트로부터 발생하는 에러가 리엑트 내부 상태들을 훼손하고 제품 전체의 랜더링 문제를 발생시켰지만, 리엑트는 이를 대응할 만한 적절한 방법을 제공하지 않았었다.
+그러다 &lt;code class=&quot;language-text&quot;&gt;react v16&lt;/code&gt;에서 새롭게 에러 경계라는 새로운 개념을 도입해 발생한 에러가 퍼지는 경계를 두어 앱 전역으로 에러가 영향을 끼치는 것을 제한하고, 랜더링 이슈가 발생한
+컴포넌트 대신 &lt;code class=&quot;language-text&quot;&gt;fallback&lt;/code&gt;으로 전환될 수 있도록 한다.&lt;/p&gt;
+&lt;p&gt;에러 경계는 &lt;code class=&quot;language-text&quot;&gt;static getDerivedStateFromError()&lt;/code&gt; 혹은 &lt;code class=&quot;language-text&quot;&gt;componentDidCatch()&lt;/code&gt; 가 선언된 클래스 컴포넌트로 구현할 수 있고, 이 컴포넌트 자체가
+에러의 경계가 된다.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;class ErrorBoundary extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { hasError: false };
+  }
+
+  static getDerivedStateFromError(error) {
+    // 다음 렌더링에서 폴백 UI가 보이도록 상태를 업데이트 합니다.
+    return { hasError: true };
+  }
+
+  componentDidCatch(error, errorInfo) {
+    // 에러 리포팅 서비스에 에러를 기록할 수도 있습니다.
+    logErrorToMyService(error, errorInfo);
+  }
+
+  render() {
+    if (this.state.hasError) {
+      // 폴백 UI를 커스텀하여 렌더링할 수 있습니다.
+      return &amp;lt;h1&amp;gt;Something went wrong.&amp;lt;/h1&amp;gt;;
+    }
+
+    return this.props.children;
+  }
+}&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;에러가 발생하면 &lt;code class=&quot;language-text&quot;&gt;fallback&lt;/code&gt;이 노출될 수 있도록 상태를 업데이트하는 것은 &lt;code class=&quot;language-text&quot;&gt;static getDerivedStateFromError()&lt;/code&gt;이 담당하고,
+에러 정보를 기록하기 위헤 &lt;code class=&quot;language-text&quot;&gt;componentDidCatch()&lt;/code&gt;가 사용된다.
+프로젝트에서는 각각의 섹션별로 에러 경계를 두고 다른 기능을 담당하는 섹션에 에러가 번져나가지 않도록 막았다.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;tsx&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;...
+
+const initialState: ErrorBoundaryState = {
+  hasError: false,
+  error: null,
+  errorMessage: null,
+};
+
+class ErrorBoundary extends React.Component&amp;lt;ErrorBoundaryProps, ErrorBoundaryState&amp;gt; {
+  constructor(props: ErrorBoundaryProps) {
+    super(props);
+    this.state = initialState;
+  }
+
+  static getDerivedStateFromError(error: any) {
+    return {
+      hasError: true,
+      error,
+      errorMessage: typeof error.message === &amp;#39;string&amp;#39; ? error.message : null,
+    };
+  }
+
+  resetErrorBoundaryState = () =&amp;gt; {
+    const { reset } = this.props;
+    this.setState({ ...initialState });
+    if (reset) reset();
+  };
+
+  render() {
+    const { hasError, error, errorMessage } = this.state;
+    const { children, gridArea, hasToken } = this.props;
+
+    if (!hasToken) {
+      return &amp;lt;PulseSection gridArea={gridArea} /&amp;gt;;
+    }
+
+    if (hasError &amp;amp;&amp;amp; error) {
+      return (
+        &amp;lt;Error
+          errorMessage={errorMessage}
+          reset={this.resetErrorBoundaryState}
+          gridArea={gridArea}
+        /&amp;gt;
+      );
+    }
+
+    return children;
+  }
+}
+
+export default ErrorBoundary;&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;에러 경계 컴포넌트는 &lt;code class=&quot;language-text&quot;&gt;Suspense&lt;/code&gt;와 함께 사용하기 좋다. &lt;code class=&quot;language-text&quot;&gt;Suspense&lt;/code&gt;는 로딩 중의 &lt;code class=&quot;language-text&quot;&gt;fallback&lt;/code&gt;을 담당하고, &lt;code class=&quot;language-text&quot;&gt;ErrorBoundary&lt;/code&gt;를 통해
+&lt;code class=&quot;language-text&quot;&gt;promise&lt;/code&gt;의 &lt;code class=&quot;language-text&quot;&gt;reject&lt;/code&gt;에 담긴 에러를 핸들링한다.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;tsx&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;function SuspenseBoundary({ children, gridArea = &amp;#39;&amp;#39; }: SuspenseBoundaryProps) {
+  const { reset } = useQueryErrorResetBoundary();
+  const gitGlancesTokenValue = useRecoilValue(tokenAtom);
+
+  return (
+    &amp;lt;ErrorBoundary
+      reset={reset}
+      gridArea={gridArea}
+      hasToken={!!gitGlancesTokenValue}
+    &amp;gt;
+      &amp;lt;Suspense fallback={&amp;lt;SectionSpinner gridArea={gridArea} /&amp;gt;}&amp;gt;
+        {children}
+      &amp;lt;/Suspense&amp;gt;
+    &amp;lt;/ErrorBoundary&amp;gt;
+  );
+}&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;deckgo-highlight-code language=&quot;tsx&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;// UserProfile 섹션에서 발생한 에러는 Language 섹션에 영향을 끼치지 않는다.
+&amp;lt;SuspenseBoundary gridArea=&amp;quot;Profile&amp;quot;&amp;gt;
+  &amp;lt;UserProfile /&amp;gt;
+&amp;lt;/SuspenseBoundary&amp;gt;
+&amp;lt;SuspenseBoundary gridArea=&amp;quot;Language&amp;quot;&amp;gt;
+  &amp;lt;Language /&amp;gt;
+&amp;lt;/SuspenseBoundary&amp;gt;&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
 &lt;h2 id=&quot;react-query&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#react-query&quot; aria-label=&quot;react query permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;react-query&lt;/h2&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;react-query&lt;/code&gt;는 뷰를 구성하는 데 필요한 데이터를 사용하기 위해 요청 작성과 응답을 받은 직후 데이터 참조 및 예외 처리를 해주어야 하는 개발자 책임을 위임할 수 있게 한다.&lt;/p&gt;
+&lt;p&gt;쿼리라는 각각의 인스턴스가 필요한 데이터를 알아서 캐싱, 리패칭해 요청 시점이 데이터 참조의 직전이 아니더라도 뷰에서 필요로 하는 최신화된 데이터를 사용할 수 있도록
+보장해 준다. 관행처럼 리덕스 미들웨어에 비동기 로직을 담아 서버 상태 값을 매번 최신화해 주어야 했던 책임을 라이브러리에게 위임한다는 것은 충분히 좋은 경험이었다.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;ts&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;const useContributionsCollectionQuery = (from: string, to: string) =&amp;gt; {
+  const { data: contributionsCollection } = useQuery&amp;lt;
+    ContributionsCollection,
+    AxiosError
+  &amp;gt;({
+    queryKey: [&amp;#39;contributionsCollection&amp;#39;, from, to],
+    refetchOnWindowFocus: true,
+    queryFn: async () =&amp;gt; {
+      const { data } = await getContributionsCollection(from, to);
+      const destructuredContributionsCollection = getDestructuredContributionsCollection(
+        data
+      );
+
+      return destructuredContributionsCollection;
+    },
+  });
+
+  return contributionsCollection as ContributionsCollection;
+};
+
+export default useContributionsCollectionQuery;&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;react-query&lt;/code&gt;에서는 쿼리를 &lt;code class=&quot;language-text&quot;&gt;stale&lt;/code&gt;하게 혹은 &lt;code class=&quot;language-text&quot;&gt;inactive&lt;/code&gt; 상태의 쿼리를 특정 기간 동안 캐싱할 것인지 결정할 수 있는 &lt;code class=&quot;language-text&quot;&gt;staleTime&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;cacheTime&lt;/code&gt;을 지정할 수 있다.
+본 프로젝트의 기능을 예시로 들면, &lt;code class=&quot;language-text&quot;&gt;notification&lt;/code&gt;이나 &lt;code class=&quot;language-text&quot;&gt;contribution&lt;/code&gt;의 경우 앱이 새롭게 마운트되거나, 포커스를 받았을 때 즉시 업데이트해주어야 했지만, 한달 단위의
+트랜드 레포지토리를 보여주는 &lt;code class=&quot;language-text&quot;&gt;trends&lt;/code&gt;섹션의 경우 즉시 업데이트가 될 필요가 없어 하루 정도 쿼리를 &lt;code class=&quot;language-text&quot;&gt;fresh&lt;/code&gt;하게 유지해줘도 크게 문제되지 않았을 것이다.&lt;/p&gt;
+&lt;p&gt;정말 아쉽게도 본 프로젝트에서 &lt;code class=&quot;language-text&quot;&gt;graphql&lt;/code&gt;로 구성된 github API를 사용했는데, &lt;code class=&quot;language-text&quot;&gt;graphql&lt;/code&gt;은 일반적으로 POST 메서드를 사용해 쿼리를 바디에 담아 요청을 전달하는 구조여서
+GET 메서드를 통해 얻은 데이터를 가지는 쿼리처럼 상태를 제어할 수 없어 기민하게 API 요청을 최적화할 수 없었다.&lt;/p&gt;
 &lt;h2 id=&quot;recoil&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#recoil&quot; aria-label=&quot;recoil permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;recoil&lt;/h2&gt;
-&lt;h2 id=&quot;tailwindcss&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#tailwindcss&quot; aria-label=&quot;tailwindcss permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;tailwindCSS&lt;/h2&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;recoil&lt;/code&gt;은 &lt;code class=&quot;language-text&quot;&gt;atom&lt;/code&gt; 단위로 전역 상태를 구성하고, &lt;code class=&quot;language-text&quot;&gt;selector&lt;/code&gt;를 통해 소비자에게 전역 상태를 구독, 업데이트할 수 있는 API를 제공한다. 리덕스를 다시 생각해 보면
+서버로부터 전달받은 데이터와 클라이언트의 전역 상태가 공존하는 스토어 구조였지만, 서버 상태 관리를 &lt;code class=&quot;language-text&quot;&gt;react-query&lt;/code&gt;에게 맡기고 &lt;code class=&quot;language-text&quot;&gt;recoil&lt;/code&gt;은 클라이언트의 전역 상태에
+집중할 수 있도록 사용했다.&lt;/p&gt;
+&lt;p&gt;더불어, 브라우저 스토어와 상태를 동기화시켜 &lt;code class=&quot;language-text&quot;&gt;persist&lt;/code&gt;하게 유지시켜 주어야 하는 전역 상태를 관리하기 용이했다. &lt;code class=&quot;language-text&quot;&gt;atom effects&lt;/code&gt;는 &lt;code class=&quot;language-text&quot;&gt;atom&lt;/code&gt;을 동기화하거나 초기화하기
+위해 사용되는데 페이지가 새로고침 되었을 때 &lt;code class=&quot;language-text&quot;&gt;localStorage&lt;/code&gt;와 같은 브라우저 스토어에서 저장해 두었던 이전 상태를 불러와 &lt;code class=&quot;language-text&quot;&gt;atom&lt;/code&gt;을 초기화한다.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;ts&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;import { AtomEffect } from &amp;#39;recoil&amp;#39;;
+import {
+  getChromeStorageItem,
+  setChromeStorageItem,
+} from &amp;#39;@shared/utils/chrome&amp;#39;;
+
+const localStorageEffect = &amp;lt;AtomDataType&amp;gt;(key: string) =&amp;gt; {
+  const effects: AtomEffect&amp;lt;AtomDataType&amp;gt; = ({ setSelf, onSet }) =&amp;gt; {
+    const savedValue = localStorage.getItem(key);
+    if (savedValue != null) {
+      setSelf(JSON.parse(savedValue));
+    }
+
+    onSet((newValue, _, isReset) =&amp;gt; {
+      if (isReset) {
+        localStorage.removeItem(key);
+      } else {
+        localStorage.setItem(key, JSON.stringify(newValue));
+      }
+    });
+  };
+
+  return effects;
+};&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;deckgo-highlight-code language=&quot;ts&quot;  highlight-lines=&quot;8&quot;&gt;
+          &lt;code slot=&quot;code&quot;&gt;export const dailyRepoAtom = atom&amp;lt;AtomRepoState&amp;gt;({
+  key: &amp;#39;dailyRepo&amp;#39;,
+  default: {
+    prevRepo: null,
+    updatedAt: &amp;#39;&amp;#39;,
+    hasTodayContribution: false,
+  },
+  effects: [storageEffect&amp;lt;AtomRepoState&amp;gt;(&amp;#39;dailyRepo&amp;#39;)],
+});&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
 &lt;h2 id=&quot;reference&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#reference&quot; aria-label=&quot;reference permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Reference&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&quot;https://jeonghwan-kim.github.io/series/2019/12/22/frontend-dev-env-babel.html&quot;&gt;프론트엔드 개발환경의 이해: Babel&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;https://maxkim-j.github.io/posts/frontend-tooling-ideas/&quot;&gt;React 개발 환경 구축하며 알게된 자잘한 것들&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;https://ahnheejong.name/articles/package-structure-with-the-principal-of-locality-in-mind/&quot;&gt;지역성의 원칙을 고려한 패키지 구조: 기능별로 나누기&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://maxkim-j.github.io/posts/suspense-argibraic-effect/&quot;&gt;Suspense for Data Fetching의 작동 원리와 컨셉 (feat.대수적 효과)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://maxkim-j.github.io/posts/react-query-preview&quot;&gt;React-Query 살펴보기&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://recoiljs.org/docs/guides/atom-effects/&quot;&gt;Atom Effects&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;</content:encoded></item><item><title><![CDATA[중요 랜더링 경로]]></title><description><![CDATA[중요 랜더링 경로(Critical Rendering Path)는 브라우저가 HTML, CSS, Javascript를 화면에 픽셀로 변환하는 일련의 과정을 말한다. 중요 랜더링 경로 1. HTML을 통해 DOM 트리를 생성한다.  이미지 출처…]]></description><link>https://youthfulhps.dev/TIL/web/critical-rendering-path/</link><guid isPermaLink="false">https://youthfulhps.dev/TIL/web/critical-rendering-path/</guid><pubDate>Sun, 22 Oct 2023 13:05:26 GMT</pubDate><content:encoded>&lt;p&gt;중요 랜더링 경로(Critical Rendering Path)는 브라우저가 HTML, CSS, Javascript를 화면에 픽셀로 변환하는 일련의 과정을 말한다.&lt;/p&gt;
 &lt;h2 id=&quot;중요-랜더링-경로&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EC%A4%91%EC%9A%94-%EB%9E%9C%EB%8D%94%EB%A7%81-%EA%B2%BD%EB%A1%9C&quot; aria-label=&quot;중요 랜더링 경로 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;중요 랜더링 경로&lt;/h2&gt;
 &lt;h3 id=&quot;1-html을-통해-dom-트리를-생성한다&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#1-html%EC%9D%84-%ED%86%B5%ED%95%B4-dom-%ED%8A%B8%EB%A6%AC%EB%A5%BC-%EC%83%9D%EC%84%B1%ED%95%9C%EB%8B%A4&quot; aria-label=&quot;1 html을 통해 dom 트리를 생성한다 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;1. HTML을 통해 DOM 트리를 생성한다.&lt;/h3&gt;
