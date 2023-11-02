@@ -8,7 +8,7 @@ draft: true
 
 리엑트v18에서 동시성 기능을 정식으로 출시하였습니다. 대표적으로,
 _Automatic batching for fewer renders_, _SSR support for
-Suspense_, _Fixes for Suspense behavior quirks_와 같은 내부적인
+Suspense_, *Fixes for Suspense behavior quirks*와 같은 내부적인
 성능 향상과, _startTransition_, _useDeferredValue_, _SuspenseList_
 과 같은 기능들이 추가되었습니다.
 
@@ -452,7 +452,6 @@ export function claimNextTransitionLane(): Lane {
   }
   return lane;
 }
-
 ```
 
 이 때, 생성된 작업에 대해 맨 오른쪽 비트를 소유하는 `TransitionLane`을
