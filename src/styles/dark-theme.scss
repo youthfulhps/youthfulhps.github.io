@@ -40,13 +40,22 @@ body.dark {
 
   .post-container {
     a {
-      color: $dark-inline-text-color;
+      color: $text-decoration-color;
       text-decoration: underline;
       text-decoration-color: $text-decoration-color;
 
       &:hover {
         text-decoration: none;
       }
+    }
+
+    :not(pre) > code[class*='language-'] {
+      padding: 0 0.4em 0.2em;
+      margin: 0 0.15rem;
+      border-radius: 0.3em;
+      white-space: normal;
+      background: #e0e0e0;
+      color: $inline-text-color;
     }
   }
 
@@ -61,6 +70,14 @@ body.dark {
     &:hover {
       text-shadow: $dark-hover-text-shadow;
     }
+
+    .blog {
+      background: #cad5db;
+    }
+
+    .til {
+      background: #c7d1d1;
+    }
   }
 
   .footer {
@@ -72,6 +89,7 @@ body.dark {
 
   // post
   blockquote {
+    color: rgba(255, 255, 255, 0.822);
     border-left: 4px solid rgba(255, 255, 255, 0.822);
   }
 

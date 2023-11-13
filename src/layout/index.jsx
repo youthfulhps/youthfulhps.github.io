@@ -6,16 +6,9 @@ import { Footer } from '../components/footer';
 import { rhythm } from '../utils/typography';
 
 import './index.scss';
-import * as Dom from '../utils/dom';
-import { THEME } from '../constants';
 
 export const Layout = ({ location, title, children }) => {
   const rootPath = `${__PATH_PREFIX__}/`;
-
-  useEffect(() => {
-    Dom.addClassToBody(THEME.LIGHT);
-    Dom.removeClassToBody(THEME.DARK);
-  }, []);
 
   return (
     <React.Fragment>
@@ -28,7 +21,7 @@ export const Layout = ({ location, title, children }) => {
           padding: `${rhythm(1.5)} ${rhythm(3 / 4)}`,
         }}
       >
-        {/*<ThemeSwitch />*/}
+        <ThemeSwitch />
         <Header title={title} location={location} rootPath={rootPath} />
         {children}
         <Footer />
