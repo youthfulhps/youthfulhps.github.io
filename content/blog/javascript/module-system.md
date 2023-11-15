@@ -4,7 +4,7 @@ date: 2023-11-09 13:05:26
 category: javascript
 thumbnail: { thumbnailSrc }
 description: 왜 import가 안돼?
-draft:
+draft: true
 ---
 
 최근 라이브러리를 제작하면서 CommonJS와 ECMAScript 모듈 시스템(이하 ESM)에 대한 모듈 시스템 포맷이 혼란스러웠던 기억이 있다. 패키지를 빌드할 떄 각각의
