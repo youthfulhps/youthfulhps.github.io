@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Youthfulhps.dev]]></title><description><![CDATA[Blog posted front-end, troubleshooting!]]></description><link>https://youthfulhps.dev</link><generator>GatsbyJS</generator><lastBuildDate>Wed, 15 Nov 2023 10:01:48 GMT</lastBuildDate><item><title><![CDATA[혼란스러운 자바스크립트 모듈 시스템]]></title><description><![CDATA[최근 라이브러리를 제작하면서 CommonJS와 ECMAScript 모듈 시스템(이하 ESM…]]></description><link>https://youthfulhps.dev/javascript/module-system/</link><guid isPermaLink="false">https://youthfulhps.dev/javascript/module-system/</guid><pubDate>Thu, 09 Nov 2023 13:05:26 GMT</pubDate><content:encoded>&lt;p&gt;최근 라이브러리를 제작하면서 CommonJS와 ECMAScript 모듈 시스템(이하 ESM)에 대한 모듈 시스템 포맷이 혼란스러웠던 기억이 있다. 패키지를 빌드할 떄 각각의
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Youthfulhps.dev]]></title><description><![CDATA[Blog posted front-end, troubleshooting!]]></description><link>https://youthfulhps.dev</link><generator>GatsbyJS</generator><lastBuildDate>Thu, 16 Nov 2023 02:21:12 GMT</lastBuildDate><item><title><![CDATA[혼란스러운 자바스크립트 모듈 시스템]]></title><description><![CDATA[최근 라이브러리를 제작하면서 CommonJS와 ECMAScript 모듈 시스템(이하 ESM…]]></description><link>https://youthfulhps.dev/javascript/module-system/</link><guid isPermaLink="false">https://youthfulhps.dev/javascript/module-system/</guid><pubDate>Thu, 09 Nov 2023 13:05:26 GMT</pubDate><content:encoded>&lt;p&gt;최근 라이브러리를 제작하면서 CommonJS와 ECMAScript 모듈 시스템(이하 ESM)에 대한 모듈 시스템 포맷이 혼란스러웠던 기억이 있다. 패키지를 빌드할 떄 각각의
 모듈 시스템을 사용하는 포맷으로 빌드 결과물을 만들어 주어야 했는데, 사실 &lt;code class=&quot;language-text&quot;&gt;import&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;require&lt;/code&gt; 등 구문 정도의 차이를 이해했을 뿐 모듈 시스템의 구조적인
 차이나 &lt;code class=&quot;language-text&quot;&gt;node.js&lt;/code&gt;에서 ESM을 지원하기 시작했다는 것이 라이브러리 제작자에게 주는 파장에 대해 크게 고민해본 적이 없었기 때문일 것이다.&lt;/p&gt;
 &lt;p&gt;특히나 최신 프론트엔드 개발 환경에 익숙한 개발자라면 ESM을 일상적으로 사용하고 있어 가령 &lt;code class=&quot;language-text&quot;&gt;require&lt;/code&gt;이 번들링에 어떤 영향을 끼치는 지 궁금해 하기란 사실 쉽지 않다고 생각한다.
@@ -536,9 +536,6 @@ build: {
 불러올 수 있게 되는 유령 의존성 (Phantom Dependency) 현상이 발생하기도 한다.&lt;/p&gt;
 &lt;p&gt;외람된 이야기지만, 현재는 &lt;code class=&quot;language-text&quot;&gt;pnpm&lt;/code&gt;를 주로 사용한다. &lt;code class=&quot;language-text&quot;&gt;pnpm&lt;/code&gt;은 심링크, 하드링크를 통해 프로젝트에서 의존성을 로컬 디스크의 상위 스토어에 설치된 의존성과 연결시켜
 사용하는 &lt;code class=&quot;language-text&quot;&gt;Content-addressable-storage&lt;/code&gt; 전략을 통해 여러 프로젝트에서 중복되게 사용되는 의존성에 대한 중복 설치를 방지하고 있다. 이 컨셉이 적잖게 충격이었다.&lt;/p&gt;
-&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;yarn&lt;/code&gt;의 경우 깊어지는 의존성에 따라 중복 설치되는 의존성들을 호이스팅시켜 플랫하게 관리하는 컨셉을 가지고 있다. 참고로 현재는 pnpm을 주로 사용하곤 한다.
-pnpm은 심링크와 하드링크를 통해 프로젝트에서 필요한 의존성을 로컬 디스크의 상위 스토어에 설치된 의존성을 가리켜 사용하는 &lt;code class=&quot;language-text&quot;&gt;Content-addressable-storage&lt;/code&gt;
-전략을 통해 여러 프로젝트에서 중복되게 사용되는 의존성에 대한 중복 설치를 방지하고 있다. 이 컨셉이 적잖게 충격이었다.&lt;/p&gt;
 &lt;p&gt;&lt;span
       class=&quot;gatsby-resp-image-wrapper&quot;
       style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 1080px; &quot;
@@ -737,7 +734,7 @@ modules: {
   hash: false,
 });&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
-&lt;deckgo-highlight-code language=&quot;html&quot;  highlight-lines=&quot;5&quot;&gt;
+&lt;deckgo-highlight-code language=&quot;html&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;&amp;lt;!DOCTYPE html&amp;gt;
 &amp;lt;html&amp;gt;
   &amp;lt;head&amp;gt;&amp;lt;/head&amp;gt;
@@ -755,15 +752,15 @@ modules: {
       from: path.resolve(__dirname, &amp;#39;public/*.png&amp;#39;),
       to() {
         return &amp;#39;[name][ext]&amp;#39;;
-        },
       },
-      {
-        from: path.resolve(__dirname, &amp;#39;public/icons&amp;#39;),
-        to() {
-          return &amp;#39;icons/[name][ext]&amp;#39;;
-        },
+    },
+    {
+      from: path.resolve(__dirname, &amp;#39;public/icons&amp;#39;),
+      to() {
+        return &amp;#39;icons/[name][ext]&amp;#39;;
       },
-...
+    },
+  ],
 });&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
 &lt;h3 id=&quot;부가적인-설정들&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EB%B6%80%EA%B0%80%EC%A0%81%EC%9D%B8-%EC%84%A4%EC%A0%95%EB%93%A4&quot; aria-label=&quot;부가적인 설정들 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;부가적인 설정들&lt;/h3&gt;
@@ -853,7 +850,7 @@ new Promise();&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
 &lt;h3 id=&quot;babelpreset-react&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#babelpreset-react&quot; aria-label=&quot;babelpreset react permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;@babel/preset-react&lt;/h3&gt;
 &lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;react&lt;/code&gt;를 위한 &lt;code class=&quot;language-text&quot;&gt;preset&lt;/code&gt;도 브라우저에서 해석 가능한 코드로 변환하는데 사용된다.&lt;/p&gt;
-&lt;deckgo-highlight-code language=&quot;jsx&quot;  &gt;
+&lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;import React from &amp;#39;react&amp;#39;;
 
 function Component() {
@@ -873,6 +870,7 @@ function Component() {
 export default Component;&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
 &lt;h3 id=&quot;babelpreset-typescript&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#babelpreset-typescript&quot; aria-label=&quot;babelpreset typescript permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;@babel/preset-typescript&lt;/h3&gt;
+&lt;p&gt;타입스크립트를 해석하기 위한 프리셋 또한 제공한다.&lt;/p&gt;
 &lt;deckgo-highlight-code language=&quot;ts&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;const foo: number = 1;&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
@@ -1041,8 +1039,8 @@ describe(&amp;#39;Contribution 컴포넌트는 유저의 오늘 기여도 정보
 &lt;a href=&quot;https://ahnheejong.name/articles/package-structure-with-the-principal-of-locality-in-mind/&quot;&gt;지역성의 원칙을 고려한 패키지 구조: 기능별로 나누기&lt;/a&gt;
 를 읽어보면 프로젝트 구조를 잡는데도 많은 고민을 담아내는 것에 놀라울 따름이다.&lt;/p&gt;
 &lt;p&gt;받아들이기 나름이지만, 섹션별로 각각의 기능을 구사하는 제품을 제작하고 있었기 때문에 글에서 언급하는 ‘캐시 미스’를 최소화할 수 있는 지역성이 발생하는 기능별 단위로
-디렉토리를 구성했고, 작업 중인 기능의 맥락 블록을 머릿속에 적재한 상태로 작업해 코드 베이스 속에서 헤매지 않고 원하는 의존성을 찾아낼 수 있었다. 더불어
-그 수정 범위 또한 예측 가능해지는 장점도 있다.&lt;/p&gt;
+디렉토리를 구성했고, 작업 중인 기능의 맥락 블록을 기능별 디렉토리로 기준 삼아 머릿속에 적재한 상태로 작업해 코드 베이스 속에서 헤매지 않고 원하는 의존성을 찾아낼 수 있었다.
+더불어 그 수정 범위 또한 예측 가능해지는 장점도 있다.&lt;/p&gt;
 &lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;src
 ├─ Contribution
@@ -1267,7 +1265,7 @@ const localStorageEffect = &amp;lt;AtomDataType&amp;gt;(key: string) =&amp;gt; {
   return effects;
 };&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
-&lt;deckgo-highlight-code language=&quot;ts&quot;  highlight-lines=&quot;8&quot;&gt;
+&lt;deckgo-highlight-code language=&quot;ts&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;export const dailyRepoAtom = atom&amp;lt;AtomRepoState&amp;gt;({
   key: &amp;#39;dailyRepo&amp;#39;,
   default: {
