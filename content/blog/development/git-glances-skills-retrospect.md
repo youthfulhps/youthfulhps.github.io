@@ -41,10 +41,6 @@ draft: false
 외람된 이야기지만, 현재는 `pnpm`를 주로 사용한다. `pnpm`은 심링크, 하드링크를 통해 프로젝트에서 의존성을 로컬 디스크의 상위 스토어에 설치된 의존성과 연결시켜
 사용하는 `Content-addressable-storage` 전략을 통해 여러 프로젝트에서 중복되게 사용되는 의존성에 대한 중복 설치를 방지하고 있다. 이 컨셉이 적잖게 충격이었다.
 
-`yarn`의 경우 깊어지는 의존성에 따라 중복 설치되는 의존성들을 호이스팅시켜 플랫하게 관리하는 컨셉을 가지고 있다. 참고로 현재는 pnpm을 주로 사용하곤 한다.
-pnpm은 심링크와 하드링크를 통해 프로젝트에서 필요한 의존성을 로컬 디스크의 상위 스토어에 설치된 의존성을 가리켜 사용하는 `Content-addressable-storage`
-전략을 통해 여러 프로젝트에서 중복되게 사용되는 의존성에 대한 중복 설치를 방지하고 있다. 이 컨셉이 적잖게 충격이었다.
-
 ![pnpm의 node_modules 디렉토리 구조](./images/git-glances-skill-retrospect/pnpm-node-modules-example.png)
 
 [이미지 출처](https://pnpm.io/motivation)
@@ -229,7 +225,7 @@ new HtmlWebpackPlugin({
 });
 ```
 
-```html{5}
+```html
 <!DOCTYPE html>
 <html>
   <head></head>
@@ -250,15 +246,15 @@ new CopyWebpackPlugin({
       from: path.resolve(__dirname, 'public/*.png'),
       to() {
         return '[name][ext]';
-        },
       },
-      {
-        from: path.resolve(__dirname, 'public/icons'),
-        to() {
-          return 'icons/[name][ext]';
-        },
+    },
+    {
+      from: path.resolve(__dirname, 'public/icons'),
+      to() {
+        return 'icons/[name][ext]';
       },
-...
+    },
+  ],
 });
 ```
 
@@ -371,7 +367,7 @@ new Promise();
 
 `react`를 위한 `preset`도 브라우저에서 해석 가능한 코드로 변환하는데 사용된다.
 
-```jsx
+```js
 import React from 'react';
 
 function Component() {
@@ -393,6 +389,8 @@ export default Component;
 ```
 
 ### @babel/preset-typescript
+
+타입스크립트를 해석하기 위한 프리셋 또한 제공한다.
 
 ```ts
 const foo: number = 1;
@@ -566,8 +564,8 @@ import { getSortedLanguageList } from '../../../../utils/language';
 를 읽어보면 프로젝트 구조를 잡는데도 많은 고민을 담아내는 것에 놀라울 따름이다.
 
 받아들이기 나름이지만, 섹션별로 각각의 기능을 구사하는 제품을 제작하고 있었기 때문에 글에서 언급하는 '캐시 미스'를 최소화할 수 있는 지역성이 발생하는 기능별 단위로
-디렉토리를 구성했고, 작업 중인 기능의 맥락 블록을 머릿속에 적재한 상태로 작업해 코드 베이스 속에서 헤매지 않고 원하는 의존성을 찾아낼 수 있었다. 더불어
-그 수정 범위 또한 예측 가능해지는 장점도 있다.
+디렉토리를 구성했고, 작업 중인 기능의 맥락 블록을 기능별 디렉토리로 기준 삼아 머릿속에 적재한 상태로 작업해 코드 베이스 속에서 헤매지 않고 원하는 의존성을 찾아낼 수 있었다.
+더불어 그 수정 범위 또한 예측 가능해지는 장점도 있다.
 
 ```js
 src
@@ -820,7 +818,7 @@ const localStorageEffect = <AtomDataType>(key: string) => {
 };
 ```
 
-```ts{8}
+```ts
 export const dailyRepoAtom = atom<AtomRepoState>({
   key: 'dailyRepo',
   default: {
