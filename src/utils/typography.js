@@ -51,7 +51,7 @@ GitHubTheme.overrideThemeStyles = () => {
 
     p: {
       fontFamily: 'Pretendard',
-      lineHeight: '2',
+      lineHeight: '2.1',
     },
 
     'span.gatsby-resp-image-wrapper': {

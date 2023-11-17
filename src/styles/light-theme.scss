@@ -55,6 +55,10 @@ body.light {
       background: $inline-dimmed-color;
       color: $inline-text-color;
     }
+
+    deckgo-highlight-code {
+      margin: 2em 0;
+    }
   }
 
   .thumbnail {
