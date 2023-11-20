@@ -35,7 +35,7 @@ draft: false
 
 > javascript, not just for browsers any more!
 
-`CommonJS`는 자바스크립트를 브라우저 뿐만 아니라, 서버사이드를 포함한 다양한 환경에서 범용적으로 사용할 수 있도록 [다양한 기능](https://arstechnica.com/information-technology/2009/12/commonjs-effort-sets-javascript-on-path-for-world-domination/)
+`CommonJS`는 자바스크립트를 브라우저 외에도 서버사이드를 포함한 다양한 환경에서 범용적으로 사용할 수 있도록 [다양한 기능](https://arstechnica.com/information-technology/2009/12/commonjs-effort-sets-javascript-on-path-for-world-domination/)
 들을 표준화했고, 이때 제작된 모듈 시스템은 `node.js`에서 사용되는 모듈 시스템의 근본이 된다.
 
 ### 모듈 불러오기
@@ -275,9 +275,6 @@ console.log(Circle); // {}
 
 대표적인 비교점은 아무래도 모듈을 동적, 그리고 동기적으로 불러올 수 있는 동작이 불러오는 결과일 것이다. `ESM`에 익숙한 개발자라면
 비교적 유연해 보일 수 있지만 브라우저를 중심으로 하는 자바스크립트 생태계에서 기준이 되기란 쉽지 않았는데, 대표적인 이유로 트리쉐이킹 문제를 꼽는다.
-
-서버사이드에서 모듈의 크기를 최소화해야 한다는 접근이 크게 중요하지 않았지만, 브라우저에서도 `CommonJS`를 사용하기 시작하면서
-모듈 크기와 성능의 상관관계가 깊어지기 시작했다.
 
 `CommonJS`는 동적으로 모듈을 불러올 수 있는 동작 때문에 런타임에 들어서야 모듈 평가가 이루어지는 `CommonJS` 모듈 시스템 구조상 참조되지 않은
 대상을 제거해도 되는지에 대한 가늠하기 어렵다.
