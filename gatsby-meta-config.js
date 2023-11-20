@@ -3,16 +3,17 @@ module.exports = {
   description: `Blog posted front-end, troubleshooting!`,
   author: `youthfulhps`,
   introduction: `프론트엔드 주니어 개발자, 트러블슈팅에 대한 고민의 흔적을 기록으로 남기는 것을 좋아합니다.`,
-  siteUrl: `https://youthfulhps.dev`, 
+  siteUrl: `https://youthfulhps.dev`,
+  thumbnail: 'static/banner.png',
   social: {
-    twitter: ``, 
-    github: `youthfulhps`, 
-    medium: ``, 
-    facebook: ``, 
-    linkedin: ``, 
-    instagram: `youthfulhps`, 
+    twitter: ``,
+    github: `youthfulhps`,
+    medium: ``,
+    facebook: ``,
+    linkedin: ``,
+    instagram: `youthfulhps`,
   },
-  icon: `static/favicon.png`, 
+  icon: `static/favicon.png`,
   keywords: [`blog`, 'javascript', 'web', 'react', 'frontend', 'development'],
   comment: {
     disqusShortName: 'youthfulhps', // Your disqus-short-name. check disqus.com.
@@ -29,5 +30,4 @@ module.exports = {
   },
   ga: 'G-7RNTEYXV6R', // Add your google analytics tranking ID
   ad: '', // Add your google adsense publisherId `ca-pub-xxxxxxxxxx`
-
-}
+};

@@ -1,15 +1,15 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import Helmet from 'react-helmet'
-import { StaticQuery, graphql } from 'gatsby'
+import React from 'react';
+import PropTypes from 'prop-types';
+import Helmet from 'react-helmet';
+import { StaticQuery, graphql } from 'gatsby';
 
-export function Head({ description, lang, meta, keywords, title }) {
+export function Head({ description, lang, meta, keywords, title, thumbnail }) {
   return (
     <StaticQuery
       query={detailsQuery}
       render={data => {
         const metaDescription =
-          description || data.site.siteMetadata.description
+          description || data.site.siteMetadata.description;
         return (
           <Helmet
             htmlAttributes={{
@@ -25,6 +25,14 @@ export function Head({ description, lang, meta, keywords, title }) {
               {
                 property: `og:title`,
                 content: title,
+              },
+              {
+                property: 'og:image',
+                content: thumbnail,
+              },
+              {
+                property: 'twitter:image',
+                content: thumbnail,
               },
               {
                 property: `og:description`,
@@ -61,17 +69,17 @@ export function Head({ description, lang, meta, keywords, title }) {
               )
               .concat(meta)}
           />
-        )
+        );
       }}
     />
-  )
+  );
 }
 
 Head.defaultProps = {
   lang: `en`,
   meta: [],
   keywords: [],
-}
+};
 
 Head.propTypes = {
   description: PropTypes.string,
@@ -79,16 +87,18 @@ Head.propTypes = {
   meta: PropTypes.array,
   keywords: PropTypes.arrayOf(PropTypes.string),
   title: PropTypes.string.isRequired,
-}
+  thumbnail: PropTypes.string,
+};
 
 const detailsQuery = graphql`
   query DefaultSEOQuery {
     site {
       siteMetadata {
+        thumbnail
         title
         description
         author
       }
     }
   }
-`
+`;

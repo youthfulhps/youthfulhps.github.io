@@ -31,7 +31,11 @@ export default ({ data, pageContext, location }) => {
 
   return (
     <Layout location={location} title={title}>
-      <Head title={postTitle} description={description} />
+      <Head
+        title={postTitle}
+        description={description}
+        thumbnail={metaData.thumbnail}
+      />
       <PostTitle title={postTitle} />
       <PostDate date={date} />
       <PostContainer html={post.html} />
@@ -63,6 +67,7 @@ export const pageQuery = graphql`
         description
         author
         siteUrl
+        thumbnail
         comment {
           disqusShortName
           utterances
