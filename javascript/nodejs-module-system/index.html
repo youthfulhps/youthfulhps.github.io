@@ -106,7 +106,7 @@
 <blockquote>
 <p>javascript, not just for browsers any more!</p>
 </blockquote>
-<p><code class="language-text">CommonJS</code>는 자바스크립트를 브라우저 뿐만 아니라, 서버사이드를 포함한 다양한 환경에서 범용적으로 사용할 수 있도록 <a href="https://arstechnica.com/information-technology/2009/12/commonjs-effort-sets-javascript-on-path-for-world-domination/">다양한 기능</a>
+<p><code class="language-text">CommonJS</code>는 자바스크립트를 브라우저 외에도 서버사이드를 포함한 다양한 환경에서 범용적으로 사용할 수 있도록 <a href="https://arstechnica.com/information-technology/2009/12/commonjs-effort-sets-javascript-on-path-for-world-domination/">다양한 기능</a>
 들을 표준화했고, 이때 제작된 모듈 시스템은 <code class="language-text">node.js</code>에서 사용되는 모듈 시스템의 근본이 된다.</p>
 <h3 id="모듈-불러오기" style="position:relative;"><a href="#%EB%AA%A8%EB%93%88-%EB%B6%88%EB%9F%AC%EC%98%A4%EA%B8%B0" aria-label="모듈 불러오기 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>모듈 불러오기</h3>
 <p>모듈 시스템의 기본적인 동작인 모듈을 불러오고, 내보내는 기능들을 코드에서 살펴보자. <code class="language-text">CommonJS</code>는 <code class="language-text">require</code> 함수를 통해 모듈을 불러와 사용한다.
@@ -309,8 +309,6 @@ console.log(Circle); // {}</code>
 괜히 겸허해진다. 사실 단점이라고 하기보단 이후에 등장한 자바스크립트의 공식적인 모듈 시스템과 비교에 가깝다.</p>
 <p>대표적인 비교점은 아무래도 모듈을 동적, 그리고 동기적으로 불러올 수 있는 동작이 불러오는 결과일 것이다. <code class="language-text">ESM</code>에 익숙한 개발자라면
 비교적 유연해 보일 수 있지만 브라우저를 중심으로 하는 자바스크립트 생태계에서 기준이 되기란 쉽지 않았는데, 대표적인 이유로 트리쉐이킹 문제를 꼽는다.</p>
-<p>서버사이드에서 모듈의 크기를 최소화해야 한다는 접근이 크게 중요하지 않았지만, 브라우저에서도 <code class="language-text">CommonJS</code>를 사용하기 시작하면서
-모듈 크기와 성능의 상관관계가 깊어지기 시작했다.</p>
 <p><code class="language-text">CommonJS</code>는 동적으로 모듈을 불러올 수 있는 동작 때문에 런타임에 들어서야 모듈 평가가 이루어지는 <code class="language-text">CommonJS</code> 모듈 시스템 구조상 참조되지 않은
 대상을 제거해도 되는지에 대한 가늠하기 어렵다.</p>
 <p>그러나 일체 불가능한 것은 아니다. 번들러 차원에서 <code class="language-text">CommonJS</code>에서 트리쉐이킹이 가능하도록 플러그인들이나 기능을 제공하는 경우도 있다. 가령 <code class="language-text">webpack</code>의 경우
