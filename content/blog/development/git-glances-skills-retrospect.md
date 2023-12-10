@@ -513,7 +513,7 @@ describe('...', () => {
 다음으로 커버한 테스트는 섹션별 통합 테스트이다. 본 프로젝트에서는 각각의 독립적인 기능을 담고 있는 섹션(아래 이미지의 빨간 박스)을 통합 테스트 단위로 잡았고,
 서버에서 가져온 데이터라 가정한 가짜 데이터들과 전역 상태를 주입해 의존성을 해결해 주었다.
 
-![GitGlances 통합 테스트 범위](./images/git-glances-skill-retrospect/git-glances-section-capture.png)
+![GitGlances 통합 테스트 범위](./images/git-glances-skill-retrospect/git-glances-section-test.png)
 
 ```tsx
 import { render, screen } from '@testing-library/react';
