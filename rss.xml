@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Youthfulhps.dev]]></title><description><![CDATA[Blog posted front-end, troubleshooting!]]></description><link>https://youthfulhps.dev</link><generator>GatsbyJS</generator><lastBuildDate>Mon, 20 Nov 2023 05:09:08 GMT</lastBuildDate><item><title><![CDATA[node.js에서 하나의 모듈 시스템을 사용하는 날이 올까]]></title><description><![CDATA[…]]></description><link>https://youthfulhps.dev/javascript/nodejs-module-system/</link><guid isPermaLink="false">https://youthfulhps.dev/javascript/nodejs-module-system/</guid><pubDate>Thu, 09 Nov 2023 13:05:26 GMT</pubDate><content:encoded>&lt;p&gt;최근 라이브러리를 제작하면서 &lt;code class=&quot;language-text&quot;&gt;CommonJS&lt;/code&gt;와 &lt;code class=&quot;language-text&quot;&gt;ECMAScript&lt;/code&gt; 모듈 시스템(이하 &lt;code class=&quot;language-text&quot;&gt;ESM&lt;/code&gt;)에 대한 모듈 시스템 포맷이 혼란스러웠던 기억이 있다. 패키지를 빌드할 때 각각의
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Youthfulhps.dev]]></title><description><![CDATA[Blog posted front-end, troubleshooting!]]></description><link>https://youthfulhps.dev</link><generator>GatsbyJS</generator><lastBuildDate>Sun, 10 Dec 2023 14:11:34 GMT</lastBuildDate><item><title><![CDATA[node.js에서 하나의 모듈 시스템을 사용하는 날이 올까]]></title><description><![CDATA[…]]></description><link>https://youthfulhps.dev/javascript/nodejs-module-system/</link><guid isPermaLink="false">https://youthfulhps.dev/javascript/nodejs-module-system/</guid><pubDate>Thu, 09 Nov 2023 13:05:26 GMT</pubDate><content:encoded>&lt;p&gt;최근 라이브러리를 제작하면서 &lt;code class=&quot;language-text&quot;&gt;CommonJS&lt;/code&gt;와 &lt;code class=&quot;language-text&quot;&gt;ECMAScript&lt;/code&gt; 모듈 시스템(이하 &lt;code class=&quot;language-text&quot;&gt;ESM&lt;/code&gt;)에 대한 모듈 시스템 포맷이 혼란스러웠던 기억이 있다. 패키지를 빌드할 때 각각의
 모듈 시스템을 사용하는 포맷으로 빌드 결과물을 만들어 주어야 했는데, 사실 &lt;code class=&quot;language-text&quot;&gt;import&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;require&lt;/code&gt; 등 구문 정도의 차이를 이해했을 뿐 모듈 시스템의 구조적인
 라이브러리 제작자로서 대응해 주어야 하는 작업에 대해 크게 고민해 본 적이 없었기 때문일 것이다.&lt;/p&gt;
 &lt;p&gt;특히나 최신 프론트엔드 개발 환경에 익숙한 개발자라면 &lt;code class=&quot;language-text&quot;&gt;ESM&lt;/code&gt;을 일상적으로 사용하고 있어 가령 &lt;code class=&quot;language-text&quot;&gt;require&lt;/code&gt;이 번들링에 어떤 영향을 끼치는지 궁금해 하기란 사실 쉽지 않은 일이고,
@@ -521,6 +521,30 @@ build: {
 &lt;/ul&gt;</content:encoded></item><item><title><![CDATA[웹 제품을 만들기 위한 개발 환경과 기술 스택 되짚어보기]]></title><description><![CDATA[GitGlances…]]></description><link>https://youthfulhps.dev/development/git-glances-skills-retrospect/</link><guid isPermaLink="false">https://youthfulhps.dev/development/git-glances-skills-retrospect/</guid><pubDate>Mon, 23 Oct 2023 09:10:35 GMT</pubDate><content:encoded>&lt;p&gt;&lt;a href=&quot;https://github.com/youthfulhps/git-glances&quot;&gt;GitGlances&lt;/a&gt;라는 웹과 크롬 익스텐션 제품을 동시에 만들기 위한 개발 환경 구축과 선택한 기술 스택에
 대한 늦은 회고이다. 이미 환경이 구축되어 있는 프로젝트에 합류해 개발하게 된 경험이 많아 초기 단계부터 환경을 만들어가는 작업은 낯설기도 하면서 클라이언트 개발 환경을
 다시 정리하기 좋은 경험이었다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 1200px; &quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 49.66666666666666%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAACXBIWXMAABYlAAAWJQFJUiTwAAABwElEQVQoz21Ty27bMBD0tSkkUaREixSph/WKbVmS4UMCGEjbWz+g1/TUx/9/wXTJ2Ekc9LBYPrQzszvUinMOxhjiOL4NHsPdfYzr/XXtahl7O1u5hbUF1usMSZJCShcZpJDgERWFVBCyG6CrCEE5p9pMZ0jT1N97wDzPYYz1wAVlc1+i+75H8aVB/rWGeaiQZUQipS8SQkApjbKg78sSJYUT5AEdm0gl2r7Hftxj3I6oHlt0v2dsfu5x//eI4/MjCiq21npQV9N1Hc7nM5bliMPhgKZpvOpVFAQ4PX1DNy34fPcJwV0AvRRof81onkfs/pzQ/5i8AteWSARYFEGTQteRI0hJUJIkLwodaj8MmObFKxAxh6q0V5lNBvZUoZs3BLj2rfpQa2hrkOvc7x3RK6CfIV3W9YYOOMIwpGEnSJggQ2JIMuZkS1/EBZkUkRk9zawuoJx58o3oAsihtUKzqbDdDhjHHQwRNF2LgZS3lFNSV9a13ztzHKjKFHVUkXLtw7X9CqhUira12G0bzNNArmtkNCNjjJ+Ra0cpRUTWZ6f2ZW7pJd7NkF/eV0SsYRghCMLLQ2e3D56x//8A78K5/w+oqgM/W/rf9wAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;GitGlances&quot;
+        title=&quot;GitGlances&quot;
+        src=&quot;/static/ca6b32a54d4e91fbcf7d06611d241fd0/c1b63/git-glances.png&quot;
+        srcset=&quot;/static/ca6b32a54d4e91fbcf7d06611d241fd0/5a46d/git-glances.png 300w,
+/static/ca6b32a54d4e91fbcf7d06611d241fd0/0a47e/git-glances.png 600w,
+/static/ca6b32a54d4e91fbcf7d06611d241fd0/c1b63/git-glances.png 1200w,
+/static/ca6b32a54d4e91fbcf7d06611d241fd0/d61c2/git-glances.png 1800w,
+/static/ca6b32a54d4e91fbcf7d06611d241fd0/97a96/git-glances.png 2400w,
+/static/ca6b32a54d4e91fbcf7d06611d241fd0/58260/git-glances.png 3404w&quot;
+        sizes=&quot;(max-width: 1200px) 100vw, 1200px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+    &lt;/span&gt;&lt;/p&gt;
 &lt;h2 id=&quot;패키지-매니저&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%ED%8C%A8%ED%82%A4%EC%A7%80-%EB%A7%A4%EB%8B%88%EC%A0%80&quot; aria-label=&quot;패키지 매니저 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;패키지 매니저&lt;/h2&gt;
 &lt;p&gt;프로젝트 관리를 용이하게 도와주는 패키지 매니저는 패키지 의존성 관리와 프로젝트의 메타데이터, 스크립트 등 관리 포인트를 묶어 한곳에서 관리할 수 있도록 도와준다.
 &lt;code class=&quot;language-text&quot;&gt;npm&lt;/code&gt;을 시작으로 &lt;code class=&quot;language-text&quot;&gt;yarn&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;pnpm&lt;/code&gt; 등 여러 패키지가 있지만, 프로젝트를 시작한 시점에 가장 자주 사용하고 익숙했던 &lt;code class=&quot;language-text&quot;&gt;yarn&lt;/code&gt;을 사용했다.&lt;/p&gt;
@@ -1003,19 +1027,19 @@ export default config;&lt;/code&gt;
     &gt;
       &lt;span
     class=&quot;gatsby-resp-image-background-image&quot;
-    style=&quot;padding-bottom: 64.99999999999999%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAANCAYAAACpUE5eAAAACXBIWXMAAAsTAAALEwEAmpwYAAACBklEQVQ4y4WTXW/TMBSGe424WpsmsZM2WWLH+WizdG0jxMSHGCuso6KsEkhD4mpX+xMIIQS/+uXYXfrF0C5e+djyefwe+7hl2wyOwzc6nD+k/+3R660mMNrbwHbGfwH2bt699HqrCZjrwe66Rl2SRetWl6Frc4o5jQfJJJdyGO+ZceNQJ/t+iGo8Re9YwKW47weQnEF6HDFzIUh95oF7fTDmwyGA5/WQpgXycggpFTECY6SlHbF+BPXyAvLVBSarr3h9+QFhEcIrI1iKThcuJqnCoBwhSTLEcUKQDHk+3MQbYNey0Zc5GG30wpCAN5gtV2gnHE9ITwnYJp3EMQQlamADbWLtdAfooBclOKlrjKdjTN9fYfbxGlxwtCVHh6ROFSohEIkUcSQxHtfkKkVE8dnZC8znCzpAwiKWKdkLYmTlqSnhzWKF88/fMM0yTNPUgEakjACNs3WZKYqihFK5yds61I8SBFhen+PqssaXm3eYf5oh0gBVQBDkWDsTyiRrqCCgjqvRBFk2oJIHW2Cnw5ApH7++z/Hn5wK/f8xwd/uMkiTdGbmgxOWkNhCp7yxWCN4+R0QVpEkOQQdpt9tXpt7hnKMcClRlglGlUOSS2mPdY5wU0mbdLmZOo0sVudxfr5H4fS/u/ZR228GR1pGDTsfZa2JLN/xuYx/OH/opjdxH/vFjf/wvVeVsDwMMzPIAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+    style=&quot;padding-bottom: 49.66666666666666%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAACXBIWXMAABYlAAAWJQFJUiTwAAABxUlEQVQoz21Ty46bQBD0NRsBwzxgBhgwBoxYMMZxpKxkKdrc8gM5bk6J9v+/oNIzi3dtKYdSz4OuruoeNpxzMMYQx/E9uAN/B19xvb+uXS5jH2cbt7C2RJpqSKmQJAppoqFFAhlxiJCBh+yO6CpCUMwpV2caSil/7wnzPEdRWE9sKTZDienniPa5Qf28Rfe0Ra41FUt8khACxmSoyhJlVaEiOEGe0FUTKkG732OcRkzDhP6pRfP3iPr3iO71hK8v37Cj5MJaT+pyuq7D5XLBspxwOBzQNI1XvYmCAOfvP9DNCz4/fELwEGB3suj/HNG9TBhfz5h+zShIoSRbUgqwKEJGCp0jV0CRICnlm0LHuu97zMeFPrDgMUdZZ15lNedozhWmpYZJU2/Vw6TIbIE8y/1e+ULypod0Wdc7OuAIw5AsSQhGSoIYigbzxVZeHRc02YiGsaee1SVM4vr6UWgl5Mgyg2a3xTD0mKZH6lWBpmvRk/KWoiJ1VV37vSbrjtRoQ462NIzMw9l+JzRGoW0tHocGx7mnqWfQ1KOiKHyPnB1jjB+Ki87iW9/Uipse8vV9RVQ1DCMEQbg+dHb/4Bn7/w9wAzf9f3kVA6Z77BR6AAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
   &gt;&lt;/span&gt;
   &lt;img
         class=&quot;gatsby-resp-image-image&quot;
         alt=&quot;GitGlances 통합 테스트 범위&quot;
         title=&quot;GitGlances 통합 테스트 범위&quot;
-        src=&quot;/static/e81c813cd195f8a1a0b13da30a786d4d/c1b63/git-glances.png&quot;
-        srcset=&quot;/static/e81c813cd195f8a1a0b13da30a786d4d/5a46d/git-glances.png 300w,
-/static/e81c813cd195f8a1a0b13da30a786d4d/0a47e/git-glances.png 600w,
-/static/e81c813cd195f8a1a0b13da30a786d4d/c1b63/git-glances.png 1200w,
-/static/e81c813cd195f8a1a0b13da30a786d4d/d61c2/git-glances.png 1800w,
-/static/e81c813cd195f8a1a0b13da30a786d4d/97a96/git-glances.png 2400w,
-/static/e81c813cd195f8a1a0b13da30a786d4d/8c76b/git-glances.png 2954w&quot;
+        src=&quot;/static/46fba44ce362836cf244a3e82664960e/c1b63/git-glances-section-capture.png&quot;
+        srcset=&quot;/static/46fba44ce362836cf244a3e82664960e/5a46d/git-glances-section-capture.png 300w,
+/static/46fba44ce362836cf244a3e82664960e/0a47e/git-glances-section-capture.png 600w,
+/static/46fba44ce362836cf244a3e82664960e/c1b63/git-glances-section-capture.png 1200w,
+/static/46fba44ce362836cf244a3e82664960e/d61c2/git-glances-section-capture.png 1800w,
+/static/46fba44ce362836cf244a3e82664960e/97a96/git-glances-section-capture.png 2400w,
+/static/46fba44ce362836cf244a3e82664960e/58260/git-glances-section-capture.png 3404w&quot;
         sizes=&quot;(max-width: 1200px) 100vw, 1200px&quot;
         style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
         loading=&quot;lazy&quot;
@@ -3051,18 +3075,19 @@ console.log(pre.prefixArray([&amp;#39;Lee&amp;#39;, &amp;#39;Kim&amp;#39;]));&lt
     &gt;
       &lt;span
     class=&quot;gatsby-resp-image-background-image&quot;
-    style=&quot;padding-bottom: 48.33333333333333%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAACXBIWXMAAAsTAAALEwEAmpwYAAABrElEQVQoz42SXWvbMBiFfVMCu9jNSCTLjp06lj/kjzQrce24dUvako1BYYxAQ2F0u9o/6MXYoL/89JWymbQw1osHWbJ0dHx8LMYEGHfA92Av4K9A63AuYJmFkQ32DHqpYTvYK9gZIcEoVkjyGWwvgOMdQrgTcHcM5roYOY6BCxeO48G23R4hxgb97NE53w+MsCWPG/jHNYKqxen2Hic3X/Cui/H2PMSbpY9B64GXIWb5HFGcIopShGFsRikTBIE0816wXl1DlgWiIke7uUO32WKwHOOg8zA4I8HVIZz3JBAkvWCWlSiKI1RVg8WiRl23SNMcwyGHtWwbnLRnqNoO69uvuLy9hz9PIWYSPJ/CJndhphBHyjjR6MNa6OLiEk1zSrTG7Yjyt9RRgY+fzrG+qnD3bYOb7WckUkFFGVIaNTJMECcZYspb81dUqbKPoP/kD1chfj90+PWwxuPPNX58X9IGCUkbAxmjzkssVI7gT24hOVnN5lBanC7RzvT6ZDLdCQohSN2jcKcG358865fQf5TYX3NfzPe7aDFG1aDO6UCHQ9vk8L/Ojf7ZRYEn0GochHsJI5MAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+    style=&quot;padding-bottom: 49.66666666666666%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAACXBIWXMAABYlAAAWJQFJUiTwAAABwElEQVQoz21Ty27bMBD0tSkkUaREixSph/WKbVmS4UMCGEjbWz+g1/TUx/9/wXTJ2Ekc9LBYPrQzszvUinMOxhjiOL4NHsPdfYzr/XXtahl7O1u5hbUF1usMSZJCShcZpJDgERWFVBCyG6CrCEE5p9pMZ0jT1N97wDzPYYz1wAVlc1+i+75H8aVB/rWGeaiQZUQipS8SQkApjbKg78sSJYUT5AEdm0gl2r7Hftxj3I6oHlt0v2dsfu5x//eI4/MjCiq21npQV9N1Hc7nM5bliMPhgKZpvOpVFAQ4PX1DNy34fPcJwV0AvRRof81onkfs/pzQ/5i8AteWSARYFEGTQteRI0hJUJIkLwodaj8MmObFKxAxh6q0V5lNBvZUoZs3BLj2rfpQa2hrkOvc7x3RK6CfIV3W9YYOOMIwpGEnSJggQ2JIMuZkS1/EBZkUkRk9zawuoJx58o3oAsihtUKzqbDdDhjHHQwRNF2LgZS3lFNSV9a13ztzHKjKFHVUkXLtw7X9CqhUira12G0bzNNArmtkNCNjjJ+Ra0cpRUTWZ6f2ZW7pJd7NkF/eV0SsYRghCMLLQ2e3D56x//8A78K5/w+oqgM/W/rf9wAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
   &gt;&lt;/span&gt;
   &lt;img
         class=&quot;gatsby-resp-image-image&quot;
         alt=&quot;Git glances app view&quot;
         title=&quot;Git glances app view&quot;
-        src=&quot;/static/cd90daaf90afdd7b28398befb8481f2e/c1b63/git-glances.png&quot;
-        srcset=&quot;/static/cd90daaf90afdd7b28398befb8481f2e/5a46d/git-glances.png 300w,
-/static/cd90daaf90afdd7b28398befb8481f2e/0a47e/git-glances.png 600w,
-/static/cd90daaf90afdd7b28398befb8481f2e/c1b63/git-glances.png 1200w,
-/static/cd90daaf90afdd7b28398befb8481f2e/d61c2/git-glances.png 1800w,
-/static/cd90daaf90afdd7b28398befb8481f2e/9efb3/git-glances.png 1894w&quot;
+        src=&quot;/static/ca6b32a54d4e91fbcf7d06611d241fd0/c1b63/git-glances.png&quot;
+        srcset=&quot;/static/ca6b32a54d4e91fbcf7d06611d241fd0/5a46d/git-glances.png 300w,
+/static/ca6b32a54d4e91fbcf7d06611d241fd0/0a47e/git-glances.png 600w,
+/static/ca6b32a54d4e91fbcf7d06611d241fd0/c1b63/git-glances.png 1200w,
+/static/ca6b32a54d4e91fbcf7d06611d241fd0/d61c2/git-glances.png 1800w,
+/static/ca6b32a54d4e91fbcf7d06611d241fd0/97a96/git-glances.png 2400w,
+/static/ca6b32a54d4e91fbcf7d06611d241fd0/58260/git-glances.png 3404w&quot;
         sizes=&quot;(max-width: 1200px) 100vw, 1200px&quot;
         style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
         loading=&quot;lazy&quot;
