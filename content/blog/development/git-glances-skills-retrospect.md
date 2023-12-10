@@ -11,6 +11,8 @@ draft: false
 대한 늦은 회고이다. 이미 환경이 구축되어 있는 프로젝트에 합류해 개발하게 된 경험이 많아 초기 단계부터 환경을 만들어가는 작업은 낯설기도 하면서 클라이언트 개발 환경을
 다시 정리하기 좋은 경험이었다.
 
+![GitGlances](./images/git-glances-skill-retrospect/git-glances.png)
+
 ## 패키지 매니저
 
 프로젝트 관리를 용이하게 도와주는 패키지 매니저는 패키지 의존성 관리와 프로젝트의 메타데이터, 스크립트 등 관리 포인트를 묶어 한곳에서 관리할 수 있도록 도와준다.
@@ -511,7 +513,7 @@ describe('...', () => {
 다음으로 커버한 테스트는 섹션별 통합 테스트이다. 본 프로젝트에서는 각각의 독립적인 기능을 담고 있는 섹션(아래 이미지의 빨간 박스)을 통합 테스트 단위로 잡았고,
 서버에서 가져온 데이터라 가정한 가짜 데이터들과 전역 상태를 주입해 의존성을 해결해 주었다.
 
-![GitGlances 통합 테스트 범위](./images/git-glances-skill-retrospect/git-glances.png)
+![GitGlances 통합 테스트 범위](./images/git-glances-skill-retrospect/git-glances-section-capture.png)
 
 ```tsx
 import { render, screen } from '@testing-library/react';
