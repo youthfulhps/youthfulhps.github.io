@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Youthfulhps.dev]]></title><description><![CDATA[Blog posted front-end, troubleshooting!]]></description><link>https://youthfulhps.dev</link><generator>GatsbyJS</generator><lastBuildDate>Sun, 10 Dec 2023 14:11:34 GMT</lastBuildDate><item><title><![CDATA[node.js에서 하나의 모듈 시스템을 사용하는 날이 올까]]></title><description><![CDATA[…]]></description><link>https://youthfulhps.dev/javascript/nodejs-module-system/</link><guid isPermaLink="false">https://youthfulhps.dev/javascript/nodejs-module-system/</guid><pubDate>Thu, 09 Nov 2023 13:05:26 GMT</pubDate><content:encoded>&lt;p&gt;최근 라이브러리를 제작하면서 &lt;code class=&quot;language-text&quot;&gt;CommonJS&lt;/code&gt;와 &lt;code class=&quot;language-text&quot;&gt;ECMAScript&lt;/code&gt; 모듈 시스템(이하 &lt;code class=&quot;language-text&quot;&gt;ESM&lt;/code&gt;)에 대한 모듈 시스템 포맷이 혼란스러웠던 기억이 있다. 패키지를 빌드할 때 각각의
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Youthfulhps.dev]]></title><description><![CDATA[Blog posted front-end, troubleshooting!]]></description><link>https://youthfulhps.dev</link><generator>GatsbyJS</generator><lastBuildDate>Sun, 10 Dec 2023 15:21:13 GMT</lastBuildDate><item><title><![CDATA[node.js에서 하나의 모듈 시스템을 사용하는 날이 올까]]></title><description><![CDATA[…]]></description><link>https://youthfulhps.dev/javascript/nodejs-module-system/</link><guid isPermaLink="false">https://youthfulhps.dev/javascript/nodejs-module-system/</guid><pubDate>Thu, 09 Nov 2023 13:05:26 GMT</pubDate><content:encoded>&lt;p&gt;최근 라이브러리를 제작하면서 &lt;code class=&quot;language-text&quot;&gt;CommonJS&lt;/code&gt;와 &lt;code class=&quot;language-text&quot;&gt;ECMAScript&lt;/code&gt; 모듈 시스템(이하 &lt;code class=&quot;language-text&quot;&gt;ESM&lt;/code&gt;)에 대한 모듈 시스템 포맷이 혼란스러웠던 기억이 있다. 패키지를 빌드할 때 각각의
 모듈 시스템을 사용하는 포맷으로 빌드 결과물을 만들어 주어야 했는데, 사실 &lt;code class=&quot;language-text&quot;&gt;import&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;require&lt;/code&gt; 등 구문 정도의 차이를 이해했을 뿐 모듈 시스템의 구조적인
 라이브러리 제작자로서 대응해 주어야 하는 작업에 대해 크게 고민해 본 적이 없었기 때문일 것이다.&lt;/p&gt;
 &lt;p&gt;특히나 최신 프론트엔드 개발 환경에 익숙한 개발자라면 &lt;code class=&quot;language-text&quot;&gt;ESM&lt;/code&gt;을 일상적으로 사용하고 있어 가령 &lt;code class=&quot;language-text&quot;&gt;require&lt;/code&gt;이 번들링에 어떤 영향을 끼치는지 궁금해 하기란 사실 쉽지 않은 일이고,
@@ -527,19 +527,17 @@ build: {
     &gt;
       &lt;span
     class=&quot;gatsby-resp-image-background-image&quot;
-    style=&quot;padding-bottom: 49.66666666666666%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAACXBIWXMAABYlAAAWJQFJUiTwAAABwElEQVQoz21Ty27bMBD0tSkkUaREixSph/WKbVmS4UMCGEjbWz+g1/TUx/9/wXTJ2Ekc9LBYPrQzszvUinMOxhjiOL4NHsPdfYzr/XXtahl7O1u5hbUF1usMSZJCShcZpJDgERWFVBCyG6CrCEE5p9pMZ0jT1N97wDzPYYz1wAVlc1+i+75H8aVB/rWGeaiQZUQipS8SQkApjbKg78sSJYUT5AEdm0gl2r7Hftxj3I6oHlt0v2dsfu5x//eI4/MjCiq21npQV9N1Hc7nM5bliMPhgKZpvOpVFAQ4PX1DNy34fPcJwV0AvRRof81onkfs/pzQ/5i8AteWSARYFEGTQteRI0hJUJIkLwodaj8MmObFKxAxh6q0V5lNBvZUoZs3BLj2rfpQa2hrkOvc7x3RK6CfIV3W9YYOOMIwpGEnSJggQ2JIMuZkS1/EBZkUkRk9zawuoJx58o3oAsihtUKzqbDdDhjHHQwRNF2LgZS3lFNSV9a13ztzHKjKFHVUkXLtw7X9CqhUira12G0bzNNArmtkNCNjjJ+Ra0cpRUTWZ6f2ZW7pJd7NkF/eV0SsYRghCMLLQ2e3D56x//8A78K5/w+oqgM/W/rf9wAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
+    style=&quot;padding-bottom: 49.33333333333333%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAACXBIWXMAABYlAAAWJQFJUiTwAAABxklEQVQoz2VSSY7bQAz0KQkw1tabpNbW2qzAii17BolPmUOCAeL/P6hCti3YwBwoUFyKrGJvhBCI4xgJW5Lc7e4LNgHxZGuN9++98VPvhj/WWqRpBqUNtJIwJoORBjIikJAKQx74AFqXEBTLqNeWFkppH99womkaONeiLCvUdY3C1XCvE/IfDuJ7DrWzyKkxz3MPKqVEluVwjfP1bddSzt42lEIiJsc5h+PxiNPxhGbuoT9G6L8D1MeA4XpC3Tm0VMNslFZo2w6/399xuVywLAumaUIUxdiEQYD96xuGw4JvX78geAmgXI703wT9p0d5nbG7npERLaM1NBmzKooCXdf7TdM0pbi5UY6iCCOh//x1oaktlFTQRQZ77mDmCsXSoj6QT01KKU9XEmhOgBVJZIzx+vMgD8jXtVWJeZ6RUSKkAZoEzlSK6CVEvI3wVjU+568eRhB9hbR3KGg7HsJAPOgGSPqxoKwhC9z3PV2txDDtcCBN+RCCgBoSfhjHW6MUvqeuW6Jek188KK/oLPZ+v8f5fIIj6iWBjwTAGiWJgCWKLWnGA1aaaWY9kNZPGq5vi4UOwxDbbQDWNSbj/+c8xx+P/7Nx3X/5cAGtwOzq3wAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
   &gt;&lt;/span&gt;
   &lt;img
         class=&quot;gatsby-resp-image-image&quot;
         alt=&quot;GitGlances&quot;
         title=&quot;GitGlances&quot;
-        src=&quot;/static/ca6b32a54d4e91fbcf7d06611d241fd0/c1b63/git-glances.png&quot;
-        srcset=&quot;/static/ca6b32a54d4e91fbcf7d06611d241fd0/5a46d/git-glances.png 300w,
-/static/ca6b32a54d4e91fbcf7d06611d241fd0/0a47e/git-glances.png 600w,
-/static/ca6b32a54d4e91fbcf7d06611d241fd0/c1b63/git-glances.png 1200w,
-/static/ca6b32a54d4e91fbcf7d06611d241fd0/d61c2/git-glances.png 1800w,
-/static/ca6b32a54d4e91fbcf7d06611d241fd0/97a96/git-glances.png 2400w,
-/static/ca6b32a54d4e91fbcf7d06611d241fd0/58260/git-glances.png 3404w&quot;
+        src=&quot;/static/ce68ca638d873dbdad38db1221c7afde/c1b63/git-glances.png&quot;
+        srcset=&quot;/static/ce68ca638d873dbdad38db1221c7afde/5a46d/git-glances.png 300w,
+/static/ce68ca638d873dbdad38db1221c7afde/0a47e/git-glances.png 600w,
+/static/ce68ca638d873dbdad38db1221c7afde/c1b63/git-glances.png 1200w,
+/static/ce68ca638d873dbdad38db1221c7afde/21b4d/git-glances.png 1280w&quot;
         sizes=&quot;(max-width: 1200px) 100vw, 1200px&quot;
         style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
         loading=&quot;lazy&quot;
@@ -1027,19 +1025,17 @@ export default config;&lt;/code&gt;
     &gt;
       &lt;span
     class=&quot;gatsby-resp-image-background-image&quot;
-    style=&quot;padding-bottom: 49.66666666666666%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAACXBIWXMAABYlAAAWJQFJUiTwAAABxUlEQVQoz21Ty46bQBD0NRsBwzxgBhgwBoxYMMZxpKxkKdrc8gM5bk6J9v+/oNIzi3dtKYdSz4OuruoeNpxzMMYQx/E9uAN/B19xvb+uXS5jH2cbt7C2RJpqSKmQJAppoqFFAhlxiJCBh+yO6CpCUMwpV2caSil/7wnzPEdRWE9sKTZDienniPa5Qf28Rfe0Ra41FUt8khACxmSoyhJlVaEiOEGe0FUTKkG732OcRkzDhP6pRfP3iPr3iO71hK8v37Cj5MJaT+pyuq7D5XLBspxwOBzQNI1XvYmCAOfvP9DNCz4/fELwEGB3suj/HNG9TBhfz5h+zShIoSRbUgqwKEJGCp0jV0CRICnlm0LHuu97zMeFPrDgMUdZZ15lNedozhWmpYZJU2/Vw6TIbIE8y/1e+ULypod0Wdc7OuAIw5AsSQhGSoIYigbzxVZeHRc02YiGsaee1SVM4vr6UWgl5Mgyg2a3xTD0mKZH6lWBpmvRk/KWoiJ1VV37vSbrjtRoQ462NIzMw9l+JzRGoW0tHocGx7mnqWfQ1KOiKHyPnB1jjB+Ki87iW9/Uipse8vV9RVQ1DCMEQbg+dHb/4Bn7/w9wAzf9f3kVA6Z77BR6AAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+    style=&quot;padding-bottom: 49.33333333333333%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAACXBIWXMAABYlAAAWJQFJUiTwAAAB0klEQVQoz2VSybLTQAzMCagiscezebyP7RiDTeIkj0dOvANLFbz//59GmiQkVRzkRRq11N2zklJCCIGEI0muISDoLbhGkVDIa9zOyGuee8VD74ofeZ4jTR20sTBaIbUOubZIhYSNBHTMA+9AtyUk5Rz15mUOrU3Ir7jQNA28b1GVFaq6xtSW+PI0YN7V6D45zB8duiJDmmUBVCkF5zL4xqOm823XIsvyy4ZKqkDPe4/9fo9lf8Bp9tC/BqgfW4ifA/avC6a+QU0AeUHbGI227fDt5QXn8xnLsmAcR8TEZBVtNphOT9juFrx7+wbr9xuMrYX9PUJ938L9mXF8PWBbZVBEyxgT6BZFga7rw6ZpmlLeXijHcYyB0J+/nmlqS3Q0htJid/IYdyWmg8fz4tE4aiBATXQVgWYEyBJZa4P+PCgAsrt5VWKeZzgqRDTAUGNFpuj1BmYT4Vw1oZZIMiaKIfsKae9R0HZa6wDEul4AST8WlDVkQ/q+J9dK9OMHfCZN3dWIhoTfDsOlUcnQU9ctUa/pu7hTvqHz1ZmmCcfjAZ6oM/hAAKxRkkgyoyA3e2rO/tFMXR6AjHnQ8Ha3WOgoirAmmqyroOD/xzrn75f//+BzfwETfALCbP1+VAAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
   &gt;&lt;/span&gt;
   &lt;img
         class=&quot;gatsby-resp-image-image&quot;
         alt=&quot;GitGlances 통합 테스트 범위&quot;
         title=&quot;GitGlances 통합 테스트 범위&quot;
-        src=&quot;/static/46fba44ce362836cf244a3e82664960e/c1b63/git-glances-section-capture.png&quot;
-        srcset=&quot;/static/46fba44ce362836cf244a3e82664960e/5a46d/git-glances-section-capture.png 300w,
-/static/46fba44ce362836cf244a3e82664960e/0a47e/git-glances-section-capture.png 600w,
-/static/46fba44ce362836cf244a3e82664960e/c1b63/git-glances-section-capture.png 1200w,
-/static/46fba44ce362836cf244a3e82664960e/d61c2/git-glances-section-capture.png 1800w,
-/static/46fba44ce362836cf244a3e82664960e/97a96/git-glances-section-capture.png 2400w,
-/static/46fba44ce362836cf244a3e82664960e/58260/git-glances-section-capture.png 3404w&quot;
+        src=&quot;/static/2a1a7b5961cb7146ae2a0aefc5a49edc/c1b63/git-glances-section-test.png&quot;
+        srcset=&quot;/static/2a1a7b5961cb7146ae2a0aefc5a49edc/5a46d/git-glances-section-test.png 300w,
+/static/2a1a7b5961cb7146ae2a0aefc5a49edc/0a47e/git-glances-section-test.png 600w,
+/static/2a1a7b5961cb7146ae2a0aefc5a49edc/c1b63/git-glances-section-test.png 1200w,
+/static/2a1a7b5961cb7146ae2a0aefc5a49edc/21b4d/git-glances-section-test.png 1280w&quot;
         sizes=&quot;(max-width: 1200px) 100vw, 1200px&quot;
         style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
         loading=&quot;lazy&quot;
@@ -3075,19 +3071,17 @@ console.log(pre.prefixArray([&amp;#39;Lee&amp;#39;, &amp;#39;Kim&amp;#39;]));&lt
     &gt;
       &lt;span
     class=&quot;gatsby-resp-image-background-image&quot;
-    style=&quot;padding-bottom: 49.66666666666666%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAACXBIWXMAABYlAAAWJQFJUiTwAAABwElEQVQoz21Ty27bMBD0tSkkUaREixSph/WKbVmS4UMCGEjbWz+g1/TUx/9/wXTJ2Ekc9LBYPrQzszvUinMOxhjiOL4NHsPdfYzr/XXtahl7O1u5hbUF1usMSZJCShcZpJDgERWFVBCyG6CrCEE5p9pMZ0jT1N97wDzPYYz1wAVlc1+i+75H8aVB/rWGeaiQZUQipS8SQkApjbKg78sSJYUT5AEdm0gl2r7Hftxj3I6oHlt0v2dsfu5x//eI4/MjCiq21npQV9N1Hc7nM5bliMPhgKZpvOpVFAQ4PX1DNy34fPcJwV0AvRRof81onkfs/pzQ/5i8AteWSARYFEGTQteRI0hJUJIkLwodaj8MmObFKxAxh6q0V5lNBvZUoZs3BLj2rfpQa2hrkOvc7x3RK6CfIV3W9YYOOMIwpGEnSJggQ2JIMuZkS1/EBZkUkRk9zawuoJx58o3oAsihtUKzqbDdDhjHHQwRNF2LgZS3lFNSV9a13ztzHKjKFHVUkXLtw7X9CqhUira12G0bzNNArmtkNCNjjJ+Ra0cpRUTWZ6f2ZW7pJd7NkF/eV0SsYRghCMLLQ2e3D56x//8A78K5/w+oqgM/W/rf9wAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
+    style=&quot;padding-bottom: 49.33333333333333%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAACXBIWXMAABYlAAAWJQFJUiTwAAABxklEQVQoz2VSSY7bQAz0KQkw1tabpNbW2qzAii17BolPmUOCAeL/P6hCti3YwBwoUFyKrGJvhBCI4xgJW5Lc7e4LNgHxZGuN9++98VPvhj/WWqRpBqUNtJIwJoORBjIikJAKQx74AFqXEBTLqNeWFkppH99womkaONeiLCvUdY3C1XCvE/IfDuJ7DrWzyKkxz3MPKqVEluVwjfP1bddSzt42lEIiJsc5h+PxiNPxhGbuoT9G6L8D1MeA4XpC3Tm0VMNslFZo2w6/399xuVywLAumaUIUxdiEQYD96xuGw4JvX78geAmgXI703wT9p0d5nbG7npERLaM1NBmzKooCXdf7TdM0pbi5UY6iCCOh//x1oaktlFTQRQZ77mDmCsXSoj6QT01KKU9XEmhOgBVJZIzx+vMgD8jXtVWJeZ6RUSKkAZoEzlSK6CVEvI3wVjU+568eRhB9hbR3KGg7HsJAPOgGSPqxoKwhC9z3PV2txDDtcCBN+RCCgBoSfhjHW6MUvqeuW6Jek188KK/oLPZ+v8f5fIIj6iWBjwTAGiWJgCWKLWnGA1aaaWY9kNZPGq5vi4UOwxDbbQDWNSbj/+c8xx+P/7Nx3X/5cAGtwOzq3wAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
   &gt;&lt;/span&gt;
   &lt;img
         class=&quot;gatsby-resp-image-image&quot;
         alt=&quot;Git glances app view&quot;
         title=&quot;Git glances app view&quot;
-        src=&quot;/static/ca6b32a54d4e91fbcf7d06611d241fd0/c1b63/git-glances.png&quot;
-        srcset=&quot;/static/ca6b32a54d4e91fbcf7d06611d241fd0/5a46d/git-glances.png 300w,
-/static/ca6b32a54d4e91fbcf7d06611d241fd0/0a47e/git-glances.png 600w,
-/static/ca6b32a54d4e91fbcf7d06611d241fd0/c1b63/git-glances.png 1200w,
-/static/ca6b32a54d4e91fbcf7d06611d241fd0/d61c2/git-glances.png 1800w,
-/static/ca6b32a54d4e91fbcf7d06611d241fd0/97a96/git-glances.png 2400w,
-/static/ca6b32a54d4e91fbcf7d06611d241fd0/58260/git-glances.png 3404w&quot;
+        src=&quot;/static/ce68ca638d873dbdad38db1221c7afde/c1b63/git-glances.png&quot;
+        srcset=&quot;/static/ce68ca638d873dbdad38db1221c7afde/5a46d/git-glances.png 300w,
+/static/ce68ca638d873dbdad38db1221c7afde/0a47e/git-glances.png 600w,
+/static/ce68ca638d873dbdad38db1221c7afde/c1b63/git-glances.png 1200w,
+/static/ce68ca638d873dbdad38db1221c7afde/21b4d/git-glances.png 1280w&quot;
         sizes=&quot;(max-width: 1200px) 100vw, 1200px&quot;
         style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
         loading=&quot;lazy&quot;
