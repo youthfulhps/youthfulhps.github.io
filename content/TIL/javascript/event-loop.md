@@ -1,9 +1,9 @@
 ---
-title: 이벤트 루프
+title: 자바스크립트가 구동되는 환경의 이벤트 루프
 date: 2023-10-06 13:10:26
 category: javascript
 thumbnail: { thumbnailSrc }
-description: 이벤트 루프
+description: 자바스크립트 엔진이 구동되는 환경에서 동시성을 구현하는 방식.
 draft: false
 type: TIL
 ---

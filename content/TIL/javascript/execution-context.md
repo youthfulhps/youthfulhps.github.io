@@ -1,9 +1,9 @@
 ---
-title: 실행 컨텍스트
+title: 실행 가능한 코드가 실행되기 위한 환경
 date: 2023-10-04 01:05:26
 category: javascript
 thumbnail: { thumbnailSrc }
-description: 자바스크립트 실행 컨텍스트
+description: 그래서 이렇군.
 draft: false
 type: TIL
 ---

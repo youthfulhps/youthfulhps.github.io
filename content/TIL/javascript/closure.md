@@ -1,9 +1,9 @@
 ---
-title: 클로저
+title: 자바스크립트의 클로저
 date: 2023-08-10 13:05:26
 category: javascript
 thumbnail: { thumbnailSrc }
-description: 클로저
+description: 함수형 프로그래밍.
 draft: false
 type: TIL
 ---

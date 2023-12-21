@@ -1,9 +1,9 @@
 ---
-title: 중요 랜더링 경로
+title: 브라우저의 중요 랜더링 경로
 date: 2023-10-22 13:05:26
 category: web
 thumbnail: { thumbnailSrc }
-description: 단골 질문
+description: 브라우저의 랜더링 과정을 정리합니다.
 draft: false
 type: TIL
 ---

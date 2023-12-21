@@ -3,7 +3,7 @@ title: 브라우저 주소창에 URL을 검색하면 일어나는 일들
 date: 2023-10-21 13:05:26
 category: network
 thumbnail: { thumbnailSrc }
-description: 단골 질문
+description: 내가 순서대로 기억할 수 있을 정도만.
 draft: false
 type: TIL
 ---
