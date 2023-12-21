@@ -779,10 +779,7 @@ export default useContributionsCollectionQuery;
 
 `react-query`에서는 쿼리를 `stale`하게 혹은 `inactive` 상태의 쿼리를 특정 기간 동안 캐싱할 것인지 결정할 수 있는 `staleTime`, `cacheTime`을 지정할 수 있다.
 본 프로젝트의 기능을 예시로 들면, `notification`이나 `contribution`의 경우 앱이 새롭게 마운트되거나, 포커스를 받았을 때 즉시 업데이트해주어야 했지만, 한달 단위의
-트랜드 레포지토리를 보여주는 `trends`섹션의 경우 즉시 업데이트가 될 필요가 없어 하루 정도 쿼리를 `fresh`하게 유지해줘도 크게 문제되지 않았을 것이다.
-
-정말 아쉽게도 본 프로젝트에서 `graphql`로 구성된 github API를 사용했는데, `graphql`은 일반적으로 POST 메서드를 사용해 쿼리를 바디에 담아 요청을 전달하는 구조여서
-GET 메서드를 통해 얻은 데이터를 가지는 쿼리처럼 상태를 제어할 수 없어 기민하게 API 요청을 최적화할 수 없었다.
+트랜드 레포지토리를 보여주는 `trends`섹션의 경우 즉시 업데이트가 될 필요가 없어 하루 정도 쿼리를 `fresh`하게 유지해줘도 크게 문제되지 않는다는 점을 고려했다.
 
 ## recoil
 
