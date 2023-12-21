@@ -23,11 +23,6 @@ export const Contents = ({
           typeCategory === CATEGORY_TYPE.ALL ||
           (node.frontmatter?.type ?? 'BLOG') === typeCategory
       )
-      .filter(({ node }) =>
-        typeCategory === CATEGORY_TYPE.ALL
-          ? (node.frontmatter?.type ?? 'BLOG') === 'BLOG'
-          : (node.frontmatter?.type ?? 'BLOG') === typeCategory
-      )
       .slice(0, count * countOfInitialPost)
   );
 
