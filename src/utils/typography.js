@@ -42,6 +42,7 @@ GitHubTheme.overrideThemeStyles = () => {
 
     ul: {
       marginBottom: '18px',
+      lineHeight: '2.1',
     },
 
     li: {
