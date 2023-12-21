@@ -4,7 +4,7 @@ date: 2023-10-21 13:05:26
 category: network
 thumbnail: { thumbnailSrc }
 description: 내가 순서대로 기억할 수 있을 정도만.
-draft: false
+draft: true
 type: TIL
 ---
 

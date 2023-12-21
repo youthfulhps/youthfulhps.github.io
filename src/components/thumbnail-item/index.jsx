@@ -18,7 +18,7 @@ export const ThumbnailItem = ({ node }) => {
       <div key={node.fields.slug}>
         <h3>{node.frontmatter.title || node.fields.slug}</h3>
         <div className={'description-wrapper'}>
-          <TagList tagList={tagList} />
+          {/*<TagList tagList={tagList} />*/}
           <p
             dangerouslySetInnerHTML={{
               __html: node.frontmatter.description || node.excerpt,

@@ -4,7 +4,7 @@ date: 2023-10-22 13:05:26
 category: web
 thumbnail: { thumbnailSrc }
 description: 브라우저의 랜더링 과정을 정리합니다.
-draft: false
+draft: true
 type: TIL
 ---
 

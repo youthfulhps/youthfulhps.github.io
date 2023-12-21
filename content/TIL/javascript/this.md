@@ -4,7 +4,7 @@ date: 2023-06-10 13:05:26
 category: javascript
 thumbnail: { thumbnailSrc }
 description: 자바스크립트 this
-draft: false
+draft: true
 type: TIL
 ---
 
