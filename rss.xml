@@ -1,11 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Youthfulhps.dev]]></title><description><![CDATA[Blog posted front-end, troubleshooting!]]></description><link>https://youthfulhps.dev</link><generator>GatsbyJS</generator><lastBuildDate>Sun, 24 Dec 2023 09:23:31 GMT</lastBuildDate><item><title><![CDATA[timezone]]></title><description><![CDATA[타임존(TimeZone…]]></description><link>https://youthfulhps.dev/javascript/time-handling/</link><guid isPermaLink="false">https://youthfulhps.dev/javascript/time-handling/</guid><pubDate>Sat, 23 Dec 2023 19:12:36 GMT</pubDate><content:encoded>&lt;p&gt;타임존(TimeZone)은 로컬 시간이 동일한 지역을 일컫는 말이다. 국가별로 각자의 타임존을 가지고 있고, 면적이 넓은 국가의 경우
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Youthfulhps.dev]]></title><description><![CDATA[Blog posted front-end, troubleshooting!]]></description><link>https://youthfulhps.dev</link><generator>GatsbyJS</generator><lastBuildDate>Sun, 24 Dec 2023 16:05:23 GMT</lastBuildDate><item><title><![CDATA[timezone]]></title><description><![CDATA[타임존(TimeZone…]]></description><link>https://youthfulhps.dev/javascript/time-handling/</link><guid isPermaLink="false">https://youthfulhps.dev/javascript/time-handling/</guid><pubDate>Sat, 23 Dec 2023 19:12:36 GMT</pubDate><content:encoded>&lt;p&gt;타임존(TimeZone)은 로컬 시간이 동일한 지역을 일컫는 말이다. 국가별로 각자의 타임존을 가지고 있고, 면적이 넓은 국가의 경우
 지역별로 여러 타임존을 가지고 있는 경우도 있다.&lt;/p&gt;
 &lt;p&gt;그나저나 타임존도 기준점이 필요하다. 지구가 계속 자전하고 있어 지역별로 낮과 밤이 다른데, 0시라고 결정할 수 있는 기준이 있어야
 시간차를 통해 타임존도 결정할 수 있다.&lt;/p&gt;
 &lt;p&gt;지구 표면상 북극점과 남극점의 최단 거리로 이었을 때 그려지는 세로 선을 자오선(子午線)이라 하는데, 18세기 영국, 프랑스, 독일, 덴마크 등
-각 국에서는 자국의 수도를 지나는 자오선을 기준으로 삼았다. 여기서도 표준이 되는 자오선 즉 본초 자오선을 결정해야 했고,
-1884년 워싱턴 D.C에서 열린 국제 자오선 회의에서 영국 그리니치 천문대를 지나는 자오선이 본초 자오선으로 채택되었고, 본초 자오선이
-현재 경도 0도의 기준이 된다.&lt;/p&gt;
+각 국에서는 자국의 수도를 지나는 자오선을 모든 자오선들의 기준으로 삼았다. 하지만 여기서도 원형 큐의 시작점을 약속하듯이 원형 지구의 경도 0도라 칭하는 자오선 즉,
+본초 자오선을 결정해야 했고, 1884년 워싱턴 D.C에서 열린 국제 자오선 회의에서 영국 그리니치 천문대를 지나는 자오선이 본초 자오선으로 채택되었다.&lt;/p&gt;
 &lt;p&gt;&lt;span
       class=&quot;gatsby-resp-image-wrapper&quot;
       style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 522px; &quot;
@@ -26,10 +25,39 @@
         loading=&quot;lazy&quot;
       /&gt;
     &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://m.post.naver.com/viewer/postView.naver?volumeNo=32031087&amp;#x26;memberNo=39920442&quot;&gt;이미지 출처&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;이를 토대로 &lt;strong&gt;그리니치 평균시 (Greenwich Mean Time, GMT)&lt;/strong&gt;가 표준시로 사용되어 오다, 지구 자전이 조금씩 늦어지는 영향으로 인해
 차이가 발생했고, 1972년부터 전 세계 50개 국가 실험실에서 보유한 400개 이상의 세슘 시계를 기반으로 하는
-&lt;strong&gt;협정 세계시 (Coordinated Universal Time, UTC)&lt;/strong&gt;가 국제 협정시로 사용되기 시작했다.&lt;/p&gt;
-&lt;p&gt;GMT과 UTC는 소숫점 단위의 미세한 시간차밖에 없어 혼용되곤 하지만, 소프트웨어상에서는 UTC를 사용한다는 표현이 적절하다.&lt;/p&gt;</content:encoded></item><item><title><![CDATA[타입스크립트의 배열 타입, 어떤 걸 써야하나]]></title><description><![CDATA[@Tanstack/query의 메인테이너인 tkDodo…]]></description><link>https://youthfulhps.dev/TIL/typescript/array-types/</link><guid isPermaLink="false">https://youthfulhps.dev/TIL/typescript/array-types/</guid><pubDate>Thu, 21 Dec 2023 13:05:26 GMT</pubDate><content:encoded>&lt;p&gt;&lt;a href=&quot;https://github.com/TanStack/query&quot;&gt;@Tanstack/query&lt;/a&gt;의 메인테이너인 &lt;a href=&quot;https://tkdodo.eu/blog/&quot;&gt;tkDodo&lt;/a&gt;가 위와 같은 결과에 대해
+&lt;strong&gt;협정 세계시 (Coordinated Universal Time, UTC)&lt;/strong&gt;가 국제 협정시로 사용되기 시작했다.
+GMT과 UTC는 소숫점 단위의 미세한 시간차밖에 없어 혼용되곤 하지만, 소프트웨어상에서는 UTC를 사용한다는 표현이 적절하다.&lt;/p&gt;
+&lt;p&gt;시간의 시작점으로부터 각각의 타임존의 차이는 오프셋(Offset)으로 표현한다. 가령 한국 표준 시간(Korea Standard Time, KST)의 경우 UTC+09:00로
+표현하는데, 이는 표준시보다 9시간이 빠르다는 의미이다. UTC 기준 오전 12시라면 한국은 오전 9시가 된다.&lt;/p&gt;
+&lt;p&gt;아래 세계 시간대의 이미지처럼 영국의 런던에 위치하는 그리니치 천문대를 기준으로 각 지역에서의 타임존을 가지고 있다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 1200px; &quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 54%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAALCAYAAAB/Ca1DAAAACXBIWXMAABJ0AAASdAHeZh94AAACt0lEQVQozx2SaXPaVhSG+df50pk2nTLp4uk+iSdNa7dJXRtobIFBSGIRIAmEFrQgJIQxxolxMY7d/oKnt/10z9xz73m3U0jaxxiKhNGXyHrHuM0yulwibbwkO3uBo58R2lUujRJhX2bYr7MYSczEaZsqqSNxbZ7i9RV8S6LwT9omTQLmWZv7oISlVBj2qqyOPyE9eILrtlmsTB7mMotkjBFNWcxMZGtEZyj+LBU2kwZh7JHkPQplRcXsvOb9+AfW3a+x1Qqab5Or+1zW93H8DlnW4kJ/RV1VaPQU0sH3HEhndNWXbPuf0az8TKN/hB++oRCNdCaOQmjusSp9hCZLVNo1LqMzHmd9vMDCHx0ylb/l6M8TfOUrgsrnHJ2XGVp7XLQ/xtEqmEGThVOj8BjJpNMQe/I7l6dPUE5+QbVbvMtkNqGO5/bIzH1SwaZWPcZpfUdS+xTD/gLTKxKMnou+hBP4RBOFwp3XIBX6o0zn4nyPQHvLMLRYZxp3UQ/b+I258Yzr6pfUy4dIrTekSpFh/Rkd6wXLWZ0PwsPAE2qcOoWNoDkTA+OFxS5ViPU6Ve2Qq7jCXdhlYIkERz+S154iVY6wpwPeuSUS9QS5UyWPz9mM6/ieRhiJgatemWjQIM4NHhYtclvnvHdAMnjK7fiUIA5IZiqZVEST/sCd6mznKu8nXfpOj2j0K9fd19iezcQXHt5PmqRD5X/J22mTtd8VjF6xdJ6zC1siOZt03mVd+4agI+GlJjsBvAkHoh7hdIoizCLeeEA01UQoiUYiJE8vTB7Fw7Wr4g1+4iZtcB93cD3BQgB9iGXyQAyIddZhldv/Apu5rPIm29FbIrFevrgv7DKTPI1YXAU8XNnczBwhccTN0uI2NsTCToQ3XXZzg6t5xGzh85cA32auqBNurh3+XjrkWUA2t/gXY6vWWwA4vWsAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;세계 타임존&quot;
+        title=&quot;세계 타임존&quot;
+        src=&quot;/static/1954f18c839050eee2f9f89925a8dff2/c1b63/world-time-zones-map.png&quot;
+        srcset=&quot;/static/1954f18c839050eee2f9f89925a8dff2/5a46d/world-time-zones-map.png 300w,
+/static/1954f18c839050eee2f9f89925a8dff2/0a47e/world-time-zones-map.png 600w,
+/static/1954f18c839050eee2f9f89925a8dff2/c1b63/world-time-zones-map.png 1200w,
+/static/1954f18c839050eee2f9f89925a8dff2/d61c2/world-time-zones-map.png 1800w,
+/static/1954f18c839050eee2f9f89925a8dff2/97a96/world-time-zones-map.png 2400w,
+/static/1954f18c839050eee2f9f89925a8dff2/d9ed5/world-time-zones-map.png 2880w&quot;
+        sizes=&quot;(max-width: 1200px) 100vw, 1200px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://ko.wikipedia.org/wiki/%EC%8B%9C%EA%B0%84%EB%8C%80&quot;&gt;이미지 출처&lt;/a&gt;&lt;/p&gt;</content:encoded></item><item><title><![CDATA[타입스크립트의 배열 타입, 어떤 걸 써야하나]]></title><description><![CDATA[@Tanstack/query의 메인테이너인 tkDodo…]]></description><link>https://youthfulhps.dev/TIL/typescript/array-types/</link><guid isPermaLink="false">https://youthfulhps.dev/TIL/typescript/array-types/</guid><pubDate>Thu, 21 Dec 2023 13:05:26 GMT</pubDate><content:encoded>&lt;p&gt;&lt;a href=&quot;https://github.com/TanStack/query&quot;&gt;@Tanstack/query&lt;/a&gt;의 메인테이너인 &lt;a href=&quot;https://tkdodo.eu/blog/&quot;&gt;tkDodo&lt;/a&gt;가 위와 같은 결과에 대해
 의견을 적은 글이 있어 정리해본다. 스치듯 고민해볼 만한 이슈에 진심인 걸 보면 배울점이 넘쳐난다.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&quot;./images/array-types/x-poll.png&quot; alt=&quot;타입스크립트의 배열 타입 중 어떤 걸 선호하는지에 대한 투표&quot;&gt;&lt;/p&gt;
 &lt;p&gt;기능적 차이는 크게 없지만, 투표 결과는 투표 결과는 &lt;code class=&quot;language-text&quot;&gt;string[]&lt;/code&gt;을 주로 사용하는 경우가 압도적으로 많았다. 그럼 왜 &lt;code class=&quot;language-text&quot;&gt;string[]&lt;/code&gt;을 많이 사용하는가?
