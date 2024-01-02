@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Youthfulhps.dev]]></title><description><![CDATA[Blog posted front-end, troubleshooting!]]></description><link>https://youthfulhps.dev</link><generator>GatsbyJS</generator><lastBuildDate>Mon, 01 Jan 2024 08:07:40 GMT</lastBuildDate><item><title><![CDATA[timezone]]></title><description><![CDATA[타임존(TimeZone…]]></description><link>https://youthfulhps.dev/javascript/time-handling/</link><guid isPermaLink="false">https://youthfulhps.dev/javascript/time-handling/</guid><pubDate>Sat, 23 Dec 2023 19:12:36 GMT</pubDate><content:encoded>&lt;p&gt;타임존(TimeZone)은 로컬 시간이 동일한 지역을 일컫는 말이다. 국가별로 각자의 타임존을 가지고 있고, 면적이 넓은 국가의 경우
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Youthfulhps.dev]]></title><description><![CDATA[Blog posted front-end, troubleshooting!]]></description><link>https://youthfulhps.dev</link><generator>GatsbyJS</generator><lastBuildDate>Tue, 02 Jan 2024 16:14:13 GMT</lastBuildDate><item><title><![CDATA[timezone]]></title><description><![CDATA[타임존(TimeZone…]]></description><link>https://youthfulhps.dev/javascript/time-handling/</link><guid isPermaLink="false">https://youthfulhps.dev/javascript/time-handling/</guid><pubDate>Sat, 23 Dec 2023 19:12:36 GMT</pubDate><content:encoded>&lt;p&gt;타임존(TimeZone)은 로컬 시간이 동일한 지역을 일컫는 말이다. 국가별로 각자의 타임존을 가지고 있고, 면적이 넓은 국가의 경우
 지역별로 여러 타임존을 가지고 있는 경우도 있다.&lt;/p&gt;
 &lt;p&gt;그나저나 타임존도 기준점이 필요하다. 지구가 계속 자전하고 있어 지역별로 낮과 밤이 다른데, 0시라고 결정할 수 있는 기준이 있어야
 시간차를 통해 타임존도 결정할 수 있다.&lt;/p&gt;
@@ -68,8 +68,32 @@ DST를 실시한다면 1시로 시간을 조정해야 한다. 여름에는 일�
 &lt;p&gt;한국에서도 88 서울 올림픽 중계를 위해 30분을 앞당긴 서머 타임을 적용한 전례가 있는데, 생활 리듬을 깨고 혼란스럽다는 비난 여론으로
 인해 올림픽이 끝난 이후로는 시행되지 않았다. 이처럼, 영구적일 것만 같던 타임존의 오프셋은 모종의 이유로 계속 달라질 수 있기 때문에
 시스템화를 위해서 역사적인 변경 내역과 더불어 현재 표준시와 DST 적용 내역을 기록하고 공유하고 적용해야 한다.&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;https://www.iana.org/time-zones&quot;&gt;IANA 타임존 데이터베이스&lt;/a&gt;는 전 세계 모든 지역의 표준시와 DST 변경 내역을 담고 있으며
-개발자와 역사학자들이 이를 관리하고 있다.&lt;/p&gt;
+&lt;p&gt;데이터베이스 기반으로 관리되고 있는 타임존 중 &lt;a href=&quot;https://www.iana.org/time-zones&quot;&gt;IANA 타임존 데이터베이스&lt;/a&gt;는 리눅스, 유닉스,
+java, php 등에서 내부적으로 사용하고 있는 데이터베이스로 타임존에 대한 기록 중 가장 신뢰받고 있다.&lt;/p&gt;
+&lt;p&gt;UNIX 시간 이후의 데이터를 정확하게 보장하고 있고, 대륙 혹은 대양명과 특이하게 국가명이 아닌 도시명을
+조합한 규칙으로 이름을 붙여 관리한다. 예로 서울의 타임존은 Asia/Seoul 이다.&lt;/p&gt;
+&lt;h3 id=&quot;시간의-표현&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EC%8B%9C%EA%B0%84%EC%9D%98-%ED%91%9C%ED%98%84&quot; aria-label=&quot;시간의 표현 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;시간의 표현&lt;/h3&gt;
+&lt;p&gt;사용자의 타임존에 의존하여 서버로 전달하는 시간의 표현을 담은 데이터는 각각 다른 타임존을 처리해줄 필요가 있다. 가령 서울에서의 오전 9시에
+생성된 시간 데이터는 영국에선 오전 0시로 보여져야 한다.&lt;/p&gt;
+&lt;p&gt;즉 사용자의 다양한 타임존을 고려했을 때, 서버로 전달되는 시간의 표현은 오프셋을 담고 있거나, 해당 클라이언트의 타임존 정보까지 포함되어 있는
+값이어야 한다.&lt;/p&gt;
+&lt;p&gt;일반적으로 이러한 시간의 표현은 UTC를 기준으로 하는 유닉스 시간이나, 오프셋 정보가 포함된 ISO-8601와 같은 형태로 전송한다.&lt;/p&gt;
+&lt;h3 id=&quot;유닉스-시간&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EC%9C%A0%EB%8B%89%EC%8A%A4-%EC%8B%9C%EA%B0%84&quot; aria-label=&quot;유닉스 시간 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;유닉스 시간&lt;/h3&gt;
+&lt;p&gt;유닉스 시간은 시각을 나타내는 방식이다. 1970.01.01 00:00:00 UTC 부터의 경과한 시간을 초로 환산하여 정수로 나타낸 것이다.
+자바스크립트의 Date 객체의 getTime() 메서드를 통해 구해낼 수 있다.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;const current = new Date();
+console.log(current.getTime()); // 1704210993948&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;여담으로, 유닉스 시간은 &lt;a href=&quot;https://ko.wikipedia.org/wiki/2038%EB%85%84_%EB%AC%B8%EC%A0%9C&quot;&gt;2038년 문제&lt;/a&gt;라고 불리는
+문제와 점점 가까워지고 있다. 대부분의 32비트 시스템에서 초 시간을 저장하는 데 이용되는 자료 형식은 32비트 정수형인데, 이 형식이 표현할 수 있는
+최후의 시각은 2038년 1월 19일 화요일 03:14:07 UTC 이다. 1970년 1월 1일 자정을 기준으로 2147483647초가 흐른 시각인데, 이 시각 이후의
+시각은 범위를 초과하여 내부적으로 음수로 표현되어 문제를 야기한다.&lt;/p&gt;
+&lt;p&gt;부호 없는 32비트나 64비트, 혹은 태양의 수명보다 훨씬 긴 시간을 표현할 수 있는 128비트로 대체하면 해결된다곤 하지만 아직 이 문제의 간단한 해결책은 없다고 한다.&lt;/p&gt;
+&lt;h3 id=&quot;iso-8601&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#iso-8601&quot; aria-label=&quot;iso 8601 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;ISO-8601&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&quot;https://ko.wikipedia.org/wiki/ISO_8601&quot;&gt;ISO-8601&lt;/a&gt;은 날짜와 시간과 관련된 데이터 교환을 다루는 국제 표준으로 1988년에 처음으로 공개되었다.
+시간 작성에 있어 다른 관례를 가진 나라들간의 데이터가 오갈때 발생하는 잡음을 없애고자 만들어진 표준으로 년도-월-일로 구성된 날짜 표기, 연도가 없는 날짜, 연중 일자,
+그리고 조합된 UTC 날짜 및 시간 등을 표준화하고 있다.&lt;/p&gt;
 &lt;h3 id=&quot;자바스크립트와-타임존&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%EC%99%80-%ED%83%80%EC%9E%84%EC%A1%B4&quot; aria-label=&quot;자바스크립트와 타임존 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;자바스크립트와 타임존&lt;/h3&gt;
 &lt;p&gt;자바스크립트에서는 일반적으로 설치된 OS의 설정된 타임존을 따르게 되어 있고, 명시적으로 타임존을 변경할 수가 없다. 더불어 데이터베이스
 표준에 대한 명세도 명확하지 않고 브라우저마다 타임존 연산 또한 다르게 동작할 수 있다.&lt;/p&gt;</content:encoded></item><item><title><![CDATA[타입스크립트의 배열 타입, 어떤 걸 써야하나]]></title><description><![CDATA[@Tanstack/query의 메인테이너인 tkDodo…]]></description><link>https://youthfulhps.dev/TIL/typescript/array-types/</link><guid isPermaLink="false">https://youthfulhps.dev/TIL/typescript/array-types/</guid><pubDate>Thu, 21 Dec 2023 13:05:26 GMT</pubDate><content:encoded>&lt;p&gt;&lt;a href=&quot;https://github.com/TanStack/query&quot;&gt;@Tanstack/query&lt;/a&gt;의 메인테이너인 &lt;a href=&quot;https://tkdodo.eu/blog/&quot;&gt;tkDodo&lt;/a&gt;가 위와 같은 결과에 대해
