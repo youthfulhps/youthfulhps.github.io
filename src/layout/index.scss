@@ -2,10 +2,9 @@
 @import '../styles/light-theme.scss';
 @import '../styles/dark-theme.scss';
 @import url(https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css);
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;700&display=swap');
 
 body {
-  font-family: 'IBM Plex Sans KR', 'Noto Sans KR', sans-serif;
+  font-family: 'Pretendard', 'Noto Sans KR', sans-serif;
   background-color: $light-background-color;
   -webkit-text-size-adjust: antialiased;
   -moz-osx-font-smoothing: grayscale;
