@@ -136,7 +136,7 @@ var zonedDate = Date.inZone(zoneIdentifier, dateString);
 var calendarDate = Date.withCalendar('Hijri', dateString);
 ```
 
-더불어 `Date`의 API를 추가하여 날짜 계산을 더 쉽게 만들 수도 있다.
+또한 `Date`의 API를 추가하여 날짜 계산을 더 쉽게 만들 수도 있다.
 
 ```js
 var myDate = new Date();
@@ -156,8 +156,99 @@ myDate.addDays(7);
 이는 자바스크립트에서 현실적으로 기존 동작과 호환성을 유지하도록 하여 현재 동작하고 있는 웹에 문제가 생기지 않도록 하는 것을 목적으로 두고 있는데, 위에서 언급한
 문제들 중 현재 웹을 손상시키지 않고는 고칠 수 없는 문제들이 존재한다. Maggie Pint가 Temporal이라는 새로운 API를 제안한 이유일 것이다.
 
-### 가변성
+현재 `Date` 객체는 가변적이라는 근본적인 문제를 안고 있다. 가령 오늘 날짜를 표현하는 `Date`의 인스턴스를 받아 일주일을 더한 `Date` 객체를 반환하는 함수가
+있다고 생각해보자.
+
+```js
+function addOneWeek(myDate) {
+  myDate.setDate(myDate.getDate() + 7);
+  return myDate;
+}
+
+const today = new Date();
+const oneWeekFromNow = addOneWeek(today);
+
+console.log(
+  `today is ${today.toLocaleString()}, and one week from today will be ${oneWeekFromNow.toLocaleString()}`
+);
+//today is 4/16/2017, 10:58:10 AM, and one week from today will be 4/16/2017, 10:58:10 AM
+```
+
+직관적으로 `today`와 `oneWeekFromNow`는 다른 날짜이지만, 가변적인 인스턴스로 인해 예상치 못한 결과를 만나게 된다. 안정성을 높이기 위해 `Date` 객체의
+`setter`가 반환하는 값이 변경된 날짜 정보를 가지는 새로운 인스턴스가 되어야 한다.
+
+하지만 `Date` 객체에 불변성을 주입해 개선한다면 현재 동작하고 있는 웹들이 많은 손상을 입게 되고, 가변적인 `Date` 인스턴스의 특성에 따라 구현되어 있는
+많은 코드 베이스나 라이브러리의 수정이 필요하기 때문에 호환성을 무시한 업데이트가 될 것이다.
+
+다른 문제로는 ECMA262 표준에서 날짜 문자열 구문 분석에 대한 규칙을 거의 설명하고 있지 않는다는 점이다.
+
+> ECMAScript defines a string interchange format for date-times based upon a simplification of the ISO 8601 Extended Format. The format is as follows: YYYY-MM-DDTHH:mm:ss.sssZ
+
+자바스크립트는 날짜 교환 형식으로 ISO8601 형식을 따르겠다고 명시되어 있다. 이후 다음과 같은 인용문이 포함되어 있다.
+
+> When the time zone offset is absent, date-only forms are interpreted as a UTC time and date-time forms are interpreted as a local time.
+
+즉 시간을 지정하지 않으면 오프셋이 0인 UTC 값으로 해석되고, 시간을 지정하면 로컬 시간으로 해석하겠다는 의미를 담고 있다.
+이러한 동작은 시간이 지정되어 있지 않은 날짜 데이터 형식을 교환할 때 데이터를 소비하는 시스템상의 타임존에 의존하여 시간을 해석한다는 의미가 되는데,
+모두 로컬 시간으로 해석되는 안정적인 해석의 규칙이 필요하다.
+
+```js
+const date = new Date('2024-01-07');
+console.log(date); // 2024-01-07T00:00:00.000Z
+
+const dateTime = new Date('2024-01-07T08:30');
+console.log(dateTime); // 2024-01-06T23:30:00.000Z
+```
+
+그 외에도 `Date` 객체의 월이 0부터 시작하는 직관적이지 못한 문제들도 있다.
+
+```js
+const date = new Date(2024, 1, 7);
+console.log(date); // 2024-02-06T15:00:00.000Z
+```
+
+## Temporal
+
+TC39에서 새롭게 제안된 [Temporal API](https://tc39.es/proposal-temporal/docs/)는 웹 호환성과 현실성을 고려하여
+날짜와 시간을 처리하는 새로운 API를 도입하고자 제안되었고, 현재 [Stage 3](https://github.com/tc39/proposals#stage-3) 단계이다.
+
+모질라의 `Date` 객체에 대한 챕터에서 `Temporal API`에 대해 노트해두어 `Date` 객체가 가지고 있는 문제들과 개선 방안에 대해
+공유해주고 있다.
 
 ![모질라 문서 Date 챕터의 Temporal API에 대한 언급](./images/time-handling/temporal-api-note.png)
 
-최근 TC39에서 새롭게 제안된 [Temporal API](https://tc39.es/proposal-temporal/docs/)는
+Temporal API는 날짜 및 시간 계산을 위해 사용하기 쉬운 API를 제공하고, DST을 포함한 모든 타임존을 안정적으로 지원하며,
+불변한 객체를 제공하고 엄격하게 지정된 문자열 형식 구문 분석을 제공하여 개발자로 하여금 더 직관적이고 친화적인 날짜와 시간
+처리가 가능하도록 한다.
+
+아직 실험단계인 만큼 Temporal API는 [polyfill](https://github.com/tc39/proposal-temporal#polyfills)을 설치하여 사용해볼 수 있다.
+
+UTC 시간을 특정 타임존의 시간으로 쉽게 변환할 수 있게 되었다.
+
+```js
+import { Temporal } from '@js-temporal/polyfill';
+
+const now = Temporal.Now.instant();
+const hourInSeoul = now.toZonedDateTimeISO('Asia/Seoul').hour;
+```
+
+날짜에 일수를 직관적으로 추가할 수 있다.
+
+```js
+const calendar = new Intl.DateTimeFormat().resolvedOptions().calendar;
+const today = Temporal.Now.plainDate(calendar, 'Asia/Seoul');
+const oneWeekFromNow = today.add({ days: 7 });
+
+console.log(oneWeekFromNow.day);
+```
+
+두 날짜는 다음과 같이 비교할 수 있다.
+
+```js
+const date1 = Temporal.PlainDate.from({ year: 2024, month: 1, day: 1 });
+const date2 = Temporal.PlainDate.from({ year: 2024, month: 1, day: 11 });
+
+const isAfter = Temporal.PlainDate.compare(date2, date1) > 0;
+```
+
+더 다양한 API는 [Temporal Cookbook](https://tc39.es/proposal-temporal/docs/cookbook.html)에서 확인할 수 있다.
