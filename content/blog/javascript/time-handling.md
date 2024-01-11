@@ -225,42 +225,7 @@ Temporal API는 날짜 및 시간 계산을 위해 사용하기 쉬운 API를 �
 불변한 객체를 제공하고 엄격하게 지정된 문자열 형식 구문 분석과 날짜 전용(date-only), 시간 전용(time-only) 및 기타 용도에 대한 별도 클래스를 제공함으로서
 개발자로 하여금 더 직관적이고 친화적인 날짜와 시간 처리가 가능하도록 돕는다.
 
-### 정확한 시간과 벽시계 시간의 구분
-
-`Temporal`은 크게 두 가지 시간으로 구분짓는 주요한 컨셉을 가지고 있다. 시간의 기준이 되는 UTC 시간을 가지는 정확한 시간 (Exact Time)과, 국가별로 통제되는 타임존과 DST 시행에
-의존적으로 언제든 변동될 수 있는 벽시계 시간 (Wall-Clock Time, 혹은 로컬 시간)인데, 이는 타임존을 가지는 시간을 처리하는 데 있어 모호한 기준을 해소하고자 설계되었다.
-
-정확한 시간을 구하기 위해 `Instant`를 사용할 수 있다. ISO-8601 포맷 형식의 문자열을 메서드에 제공하거나, 현재를 다루는 `Now`의 `instant()`를 사용한다.
-`instant`는 나노 초 단위의 정밀도를 갖는 단일 시점의 유닉스 시간을 반환한다.
-
-```js
-const instant = Temporal.Instant.from('2024-01-11T12:37+09:00');
-const now = Temporal.Now.instant();
-
-console.log(now.epochNanoseconds); // 1704903634968634962n
-console.log(instant.epochNanoseconds); // 1704903634968634962n
-
-console.log(now.year); // undefined
-```
-
-만약 ISO-8601 포맷의 UTC 정보가 포함된 시간 문자열을 구하고 싶다면 `toString()`을 사용할 수 있다. `from`의 파라미터로 오프셋 정보가 포함된 시간 문자열을
-전달했지만, `instant`는 UTC 시간으로 반환하는 것을 확인할 수 있다.
-
-```js
-const instant = Temporal.Instant.from('2024-01-11T12:37+09:00');
-console.log(instant.toString()); // 2024-01-11T03:37:00Z
-```
-
-`instant`는 시간대 또는 달력 정보가 포함되어 있지 않은 정확한 시간을 표현하기 때문에 연도, 월, 일 또는 시간을 구해낼 수 없다. 만약 구하고 싶다면 `Temporal`
-에서 제공하는 API를 통해 타임존과 달력 정보를 부여하여 벽시계 시간으로 변환하여 정보를 취할 수 있다.
-
-[//]: # 'wall time clock을 위한 메서드 소개'
-
-## 지속성과 상호 운용성을 위한 문자열 표현
-
-zonedDateTime, Instant 는 정확한 시간을 나타냄.. 벽시계를 구해내려면 Plain이 붙은 메서드를 사용함
-
-아직 실험단계인 만큼 Temporal은 [polyfill](https://github.com/tc39/proposal-temporal#polyfills)을 통해 사용해볼 수 있다.
+아직 실험단계인 만큼 [polyfill](https://github.com/tc39/proposal-temporal#polyfills)을 통해 사용해볼 수 있다.
 다양한 API는 [Temporal Cookbook](https://tc39.es/proposal-temporal/docs/cookbook.html)에서 확인할 수 있는데 앞서 몇 가지 간단하게 살펴보자.
 
 UTC 시간을 특정 타임존의 시간으로 쉽게 변환할 수 있게 되었다.
@@ -275,8 +240,11 @@ const hourInSeoul = now.toZonedDateTimeISO('Asia/Seoul').hour;
 날짜에 일수를 직관적으로 추가할 수 있다.
 
 ```js
-const calendar = new Intl.DateTimeFormat().resolvedOptions().calendar;
-const today = Temporal.Now.plainDate(calendar, 'Asia/Seoul');
+const { calendar, timeZone } = new Intl.DateTimeFormat('en-US', {
+  timeZone: 'Asia/Seoul',
+}).resolvedOptions();
+
+const today = Temporal.Now.plainDate(calendar, timeZone);
 const oneWeekFromNow = today.add({ days: 7 });
 
 console.log(oneWeekFromNow.day);
@@ -291,4 +259,81 @@ const date2 = Temporal.PlainDate.from({ year: 2024, month: 1, day: 11 });
 const isAfter = Temporal.PlainDate.compare(date2, date1) > 0;
 ```
 
-더 다양한 API는 [Temporal Cookbook](https://tc39.es/proposal-temporal/docs/cookbook.html)에서 확인할 수 있다.
+### 정확한 시간과 벽시계 시간의 구분
+
+`Temporal`은 크게 두 가지 시간으로 구분짓는 주요한 컨셉을 가지고 있다. 시간의 기준이 되는 UTC 시간을 가지는 정확한 시간 (Exact Time)과, 국가별로 통제되는 타임존과 DST 시행에
+의존적으로 언제든 변동될 수 있는 벽시계 시간 (Wall-Clock Time, 혹은 로컬 시간)인데, 이는 타임존을 가지는 시간을 처리하는 데 있어 모호한 기준을 해소하고자 설계되었다.
+
+정확한 시간을 구하고자 한다면 `Instant`를 사용할 수 있다. ISO-8601 포맷 형식의 문자열을 메서드에 제공하거나, 현재를 다루는 `Now`의 `instant()`를 사용한다.
+`instant`는 나노 초 단위의 정밀도를 갖는 단일 시점의 유닉스 시간을 반환한다.
+
+```js
+const instant = Temporal.Instant.from('2024-01-11T12:37+09:00');
+const now = Temporal.Now.instant();
+
+console.log(now.epochNanoseconds);
+console.log(instant.epochNanoseconds); // 1704903634968634962n
+```
+
+만약 ISO-8601 포맷의 UTC 정보가 포함된 시간 문자열을 구하고 싶다면 `toString()`을 사용할 수 있다. `from`의 파라미터로 오프셋 정보가 포함된 시간 문자열을
+전달했지만, `Instant`는 UTC 시간으로 반환하는 것을 확인할 수 있다.
+
+```js
+const instant = Temporal.Instant.from('2024-01-11T12:37+09:00');
+console.log(instant.toString()); // 2024-01-11T03:37:00Z
+```
+
+반면 타임존과 달력에 의존된 벽시계 시간 정보를 구하고자 한다면, `ZonedDateTime`을 사용할 수 있다. `ZonedDateTime`은 타임존과 달력에 대한 정보를
+가지고 있으며, 지구의 특정 지역 관점에서 특정 시간을 표현하는 데 사용한다.
+
+```js
+const zonedDateTime = Temporal.ZonedDateTime.from(
+  '2024-01-21T03:24:30+09:00[Asia/Seoul]'
+);
+console.log(zonedDateTime.toString()); // 2024-01-21T03:24:30+09:00[Asia/Seoul]
+
+const { calendar, timeZone } = new Intl.DateTimeFormat('en-US', {
+  timeZone: 'Asia/Seoul',
+}).resolvedOptions();
+
+const zonedNow = Temporal.Now.zonedDateTime(calendar, timeZone);
+console.log(zonedNow.toString()); // 2024-01-12T01:51:01.54286152+09:00[Asia/Seoul][u-ca=gregory]
+
+const zonedDateTime2 = Temporal.ZonedDateTime.from({
+  timeZone: 'America/Los_Angeles',
+  year: 1995,
+  month: 12,
+  day: 7,
+  hour: 3,
+  minute: 24,
+  second: 30,
+  millisecond: 0,
+  microsecond: 3,
+  nanosecond: 500,
+});
+
+console.log(zonedDateTime2.toString()); // 1995-12-07T03:24:30.0000035-08:00[America/Los_Angeles]
+```
+
+```js
+const { year, month, monthCode, day, hour, minute, second, ...rest } = zonedNow;
+```
+
+여기서 `ZonedDateTime`이 반환하는 문자열이 타임존과 달력 정보까지 포함되어 있어 낯설 수 있는데, 잠시 `Temporal` 내부적으로 사용되는 문자열 표현에 대해
+살펴보자.
+
+## 지속성과 상호 운용성을 위한 문자열 표현
+
+`Temporal`는 지속성과 상호 운용성을 위한 문자열 표현을 공통적으로 사용하고 있다. ISO-8601 포맷의 문자열과 타임존 정보, 그리고 달력 정보를 가지고 있다.
+
+![Temporal의 지속성 모델](./images/time-handling/persistence-model.svg)
+
+[이미지 출처](https://tc39.es/proposal-temporal/docs/index.html#string-persistence-parsing-and-formatting)
+
+[//]: # 'TODO: 추가 설명'
+
+## Plain
+
+타임존과 달력 정보가 포함되지 않은 단순 날짜와 시간에 대한 처리를 하고자 한다면 Plain 접두사가 붙은 메서드들을 사용할 수 있다.
+
+[//]: # 'TODO: 추가 설명'
