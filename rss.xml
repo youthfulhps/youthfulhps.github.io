@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Youthfulhps.dev]]></title><description><![CDATA[Blog posted front-end, troubleshooting!]]></description><link>https://youthfulhps.dev</link><generator>GatsbyJS</generator><lastBuildDate>Thu, 11 Jan 2024 17:03:05 GMT</lastBuildDate><item><title><![CDATA[자바스크립트와 시간에 대한 이런저런 이야기]]></title><description><![CDATA[개인적으로 기술적이라기보단 궁금해서 찾아본 시간에 대한 이야기. 기준시와 타임존 타임존 (TimeZone…]]></description><link>https://youthfulhps.dev/javascript/time-handling/</link><guid isPermaLink="false">https://youthfulhps.dev/javascript/time-handling/</guid><pubDate>Sat, 23 Dec 2023 19:12:36 GMT</pubDate><content:encoded>&lt;p&gt;개인적으로 기술적이라기보단 궁금해서 찾아본 시간에 대한 이야기.&lt;/p&gt;
-&lt;h2 id=&quot;기준시와-타임존&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EA%B8%B0%EC%A4%80%EC%8B%9C%EC%99%80-%ED%83%80%EC%9E%84%EC%A1%B4&quot; aria-label=&quot;기준시와 타임존 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;기준시와 타임존&lt;/h2&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Youthfulhps.dev]]></title><description><![CDATA[Blog posted front-end, troubleshooting!]]></description><link>https://youthfulhps.dev</link><generator>GatsbyJS</generator><lastBuildDate>Fri, 12 Jan 2024 08:27:56 GMT</lastBuildDate><item><title><![CDATA[자바스크립트와 타임존, 그리고 Temporal]]></title><description><![CDATA[기준시와 타임존 타임존 (TimeZone…]]></description><link>https://youthfulhps.dev/javascript/timezone/</link><guid isPermaLink="false">https://youthfulhps.dev/javascript/timezone/</guid><pubDate>Sat, 23 Dec 2023 19:12:36 GMT</pubDate><content:encoded>&lt;h2 id=&quot;기준시와-타임존&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EA%B8%B0%EC%A4%80%EC%8B%9C%EC%99%80-%ED%83%80%EC%9E%84%EC%A1%B4&quot; aria-label=&quot;기준시와 타임존 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;기준시와 타임존&lt;/h2&gt;
 &lt;p&gt;타임존 (TimeZone)은 로컬 시간이 동일한 지역을 일컫는 말이다. 국가별로 타임존을 가지고 있고, 면적이 넓은 국가의 경우 지역별로 여러 타임존을 가지고 있는 경우도 있다.
 그나저나 타임존도 기준이 필요하다. 지구의 자전에 의해 지역별로 낮과 밤이 생겨나는데, 거리가 먼 지역 간 시간에 대한 이야기를 나눌 수 있도록 0시라 칭할 수 있는
 기준이 필요하고, 기준을 통해 얻어낸 시간차를 통해 각각의 타임존을 결정할 수 있다.&lt;/p&gt;
@@ -28,7 +27,7 @@
       /&gt;
     &lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href=&quot;https://m.post.naver.com/viewer/postView.naver?volumeNo=32031087&amp;#x26;memberNo=39920442&quot;&gt;이미지 출처&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;이로서 세계 시간의 기준이 되는 0시는 그리니치 천문대를 지나는 자오선이 기준이 되었고, 이 시간을 &lt;strong&gt;그리니치 평균시 (Greenwich Mean Time, GMT)&lt;/strong&gt;로 칭했다.
+&lt;p&gt;이로써 세계 시간의 기준이 되는 0시는 그리니치 천문대를 지나는 자오선이 기준이 되었고, 이 시간을 &lt;strong&gt;그리니치 평균시 (Greenwich Mean Time, GMT)&lt;/strong&gt;로 칭했다.
 GMT는 지구의 자전으로 인해 지역 사이에 생기는 낮과 밤의 차이를 인위적으로 조정하기 위해 고안된 시간의 구분선인 타임존의 기준시가 된다.&lt;/p&gt;
 &lt;p&gt;그런데 GMT에 문제가 하나 있었으니, 지구 자전이 조금씩 늦어지는 영향으로 인해 시간에 미세한 차이가 생겨났다. 이는 보다 정확한 시간 기준이 필요하다는 목소리와 함께
 1972년부터 전 세계 50개 국가 실험실에서 보유한 400개 이상의 세슘 시계를 기반으로 하는 &lt;strong&gt;협정 세계시 (Coordinated Universal Time, UTC)&lt;/strong&gt;가 생겨났고,
@@ -37,7 +36,7 @@ UTC를 국제 협정시로 사용되기 시작했다. 사실 GMT와 UTC는 소�
 &lt;h2 id=&quot;오프셋&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EC%98%A4%ED%94%84%EC%85%8B&quot; aria-label=&quot;오프셋 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;오프셋&lt;/h2&gt;
 &lt;p&gt;시간의 표준이 되는 표준시로부터 각각의 타임존의 시간차는 오프셋 (Offset)으로 표현한다. 가령 한국 표준 시간(Korea Standard Time, KST)의 경우 UTC+09:00로
 표기되는데, 이는 표준시보다 9시간이 빠르다는 의미이며 UTC 기준 오전 12시라면 한국은 오전 9시가 된다.&lt;/p&gt;
-&lt;p&gt;전세계 타임존은 다음과 같이 영국의 런던에 위치하는 그리니치 천문대를 중심으로 그려낼 수 있다.&lt;/p&gt;
+&lt;p&gt;전 세계 타임존은 다음과 같이 영국의 런던에 위치하는 그리니치 천문대를 중심으로 그려낼 수 있다.&lt;/p&gt;
 &lt;p&gt;&lt;span
       class=&quot;gatsby-resp-image-wrapper&quot;
       style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 1200px; &quot;
@@ -68,7 +67,7 @@ UTC를 국제 협정시로 사용되기 시작했다. 사실 GMT와 UTC는 소�
 혹은 경제적인 이유로 변할 수 있다. 여러 이유 중에서 타임존의 오프셋이 변하는 가장 일반적인 원인은 일광 시간 절약제 (Daylight Saving Time, DST)의
 시행과 해제이다.&lt;/p&gt;
 &lt;p&gt;흔히 서머 타임 (Summer Time)이라 불리는 DST는 표준시를 원래 시간보다 한 시간 앞당긴 시간을 사용하는 것을 말하는데, 여름에는 일조 시간이 길어 활동을 보다
-일찍 시작할 수 있고 외부 활동 하기에 더 밝은 상태의 시간을 활용하여 경제적인 이점을 얻고자 제안된 정책이다.&lt;/p&gt;
+일찍 시작할 수 있고 외부 활동하기에 더 밝은 상태의 시간을 활용하여 경제적인 이점을 얻고자 제안된 정책이다.&lt;/p&gt;
 &lt;p&gt;가령 0시에 DST를 시행한다면 시행된 시간이 1시로 조정되는 것인데, 미국 주식 시장이 일반적으로 3월부터 11월까지 오후 10시 30분에 개장하는 것도 해당 기간에
 DST가 시행된 사례이다. 한국에서도 88 서울 올림픽 중계를 위해 30분 앞당긴 서머 타임을 적용한 전례가 있는데, 생활 리듬을 깨고 혼란스럽다는 비난 여론으로 인해
 올림픽이 끝난 이후로는 시행되지 않았다.&lt;/p&gt;
@@ -99,15 +98,15 @@ DST가 시행된 사례이다. 한국에서도 88 서울 올림픽 중계를 위
 &lt;p&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=8jOQGVmTNw4&quot;&gt;이미지 출처&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;이처럼 영구적일 것만 같던 타임존의 오프셋은 여러 이유로 변경될 수 있는데, 이를 시스템상에서 적용하려면 분명 현재 표준시와 DST 시행 내역, 그리고 역사적인
 변경 오프셋 변경 내역 또한 기록되고 공유되어야 한다.&lt;/p&gt;
-&lt;p&gt;오늘 날 소프트웨어상에서 해당 정보들을 다루고 관리하기 위해 데이터베이스 기반으로 시스템화 되어 있는데, 그 중 &lt;a href=&quot;https://www.iana.org/time-zones&quot;&gt;IANA 타임존 데이터베이스&lt;/a&gt;가
+&lt;p&gt;오늘날 소프트웨어상에서 해당 정보들을 다루고 관리하기 위해 데이터베이스 기반으로 시스템화되어 있는데, 그중 &lt;a href=&quot;https://www.iana.org/time-zones&quot;&gt;IANA 타임존 데이터베이스&lt;/a&gt;가
 리눅스, 유닉스, 자바 등에서 내부적으로 사용하고 있는 데이터베이스로, 타임존에 대한 기록 중 가장 신뢰받고 있다. 유닉스 시간 이후의 데이터를 정확하게
 보장되는 타임존 정보를 대륙 혹은 대양명과 (국가명이 아닌) 도시명으로 조합한 규칙으로 명명하여 관리한다. 예로 서울의 타임존은 Asia/Seoul이다.&lt;/p&gt;
 &lt;h2 id=&quot;시간의-표현&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EC%8B%9C%EA%B0%84%EC%9D%98-%ED%91%9C%ED%98%84&quot; aria-label=&quot;시간의 표현 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;시간의 표현&lt;/h2&gt;
 &lt;p&gt;시간의 기준이 생겼고, 타임존을 지정했다. 더불어 이를 데이터베이스로 관리하여 시스템상에서 관리할 수 있게 되었다. 그렇다면 API 상에서 시간 데이터는 어떻게 표현하여
-주고 받을 수 있을까. 가령 각각의 타임존에 속하는 클라이언트들에서 서버로 시간을 전달하거나, 시간 데이터를 생성한 클라이언트 타임존이 변경되면 이에 따라 보여지는
-시간 또한 타임존의 오프셋에 맞게 계산되어 보여져야 한다. 영국에서 생성된 오전 0시 온라인 미팅이 한국에서는 오전 9시로 보여야 하는 것처럼 말이다.&lt;/p&gt;
+주고받을 수 있을까. 가령 각각의 타임존에 속하는 클라이언트들에서 서버로 시간을 전달하거나, 시간 데이터를 생성한 클라이언트 타임존이 변경되면 이에 따라 보이는
+시간 또한 타임존의 오프셋에 맞게 계산되어 보여야 한다. 영국에서 생성된 오전 0시 온라인 미팅이 한국에서는 오전 9시로 보여야 하는 것처럼 말이다.&lt;/p&gt;
 &lt;p&gt;결론적으로 타임존에 의존하여 서버로 전달하는 시간의 표현을 담은 데이터는 사용자 타임존의 오프셋을 담고 있거나, 타임존 정보까지 포함되어 있어야 한다.
-일반적으로 이러한 시간의 표현은 UTC를 기준으로 하는 유닉스 시간이나 오프셋 정보가 포함된 ISO-8601와 같은 표준 포맷에 맞춰 교환한다.&lt;/p&gt;
+일반적으로 이러한 시간의 표현은 UTC를 기준으로 하는 유닉스 시간이나 오프셋 정보가 포함된 ISO-8601과 같은 표준 포맷에 맞춰 교환한다.&lt;/p&gt;
 &lt;h3 id=&quot;유닉스-시간&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EC%9C%A0%EB%8B%89%EC%8A%A4-%EC%8B%9C%EA%B0%84&quot; aria-label=&quot;유닉스 시간 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;유닉스 시간&lt;/h3&gt;
 &lt;p&gt;&lt;a href=&quot;https://ko.wikipedia.org/wiki/%EC%9C%A0%EB%8B%89%EC%8A%A4_%EC%8B%9C%EA%B0%84&quot;&gt;유닉스 시간&lt;/a&gt;은 1970년 1월 1일 00:00:00 UTC를 기준으로
 경과한 시간을 초로 환산하여 정수로 나타내 시간을 표현한다. 자바스크립트에서도 쉽게 구할 수 있다.&lt;/p&gt;
@@ -116,13 +115,13 @@ DST가 시행된 사례이다. 한국에서도 88 서울 올림픽 중계를 위
 console.log(current.getTime()); // 1704210993948&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
 &lt;p&gt;여담으로, 유닉스 시간은 &lt;a href=&quot;https://ko.wikipedia.org/wiki/2038%EB%85%84_%EB%AC%B8%EC%A0%9C&quot;&gt;2038년 문제&lt;/a&gt;라고 불리는 문제와 점점 가까워지고 있다.
-32비트 시스템에서 초 시간을 저장하기 위해 32비트 정수형 자료 형식을 사용하는데, 이 형식이 표현할 수 있는 최후의 시각은 2038년 1월 19일 화요일 03:14:07 UTC 이다.
+32비트 시스템에서 초 시간을 저장하기 위해 32비트 정수형 자료 형식을 사용하는데, 이 형식이 표현할 수 있는 최후의 시각은 2038년 1월 19일 화요일 03:14:07 UTC이다.
 1970년 1월 1일 자정을 기준으로 2147483647초가 흐른 시각인데, 이 시각 이후의 시각은 범위를 초과하여 내부적으로 음수로 표현되어 문제를 야기한다.&lt;/p&gt;
 &lt;p&gt;부호 없는 32비트나 64비트, 혹은 태양의 수명보다 훨씬 긴 시간을 표현할 수 있는 128비트로 대체하면 해결할 수 있다고 예상하지만, 아직 이 문제의 간단한 해결책은 아직 없다고 한다.&lt;/p&gt;
 &lt;h3 id=&quot;iso-8601&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#iso-8601&quot; aria-label=&quot;iso 8601 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;ISO-8601&lt;/h3&gt;
 &lt;p&gt;&lt;a href=&quot;https://ko.wikipedia.org/wiki/ISO_8601&quot;&gt;ISO-8601&lt;/a&gt;은 날짜와 시간과 관련된 데이터 교환을 다루는 국제 표준으로 1988년에 처음으로 공개되었다.
-시간 작성에 있어 다른 관례를 가진 나라들간의 데이터가 오갈때 발생하는 잡음을 없애고자 만들어진 표준으로 시간 단위의 가장 큰 것부터 작은 것으로 정렬하여 표기한다.
-ISO-8601은 여러 포맷을 사용하고 있는데 그 중 소프트웨어상에서 자주 접하는 포맷의 표현은 다음과 같다.&lt;/p&gt;
+시간 작성에 있어 다른 관례를 가진 나라들 간의 데이터가 오 갈때 발생하는 잡음을 없애고자 만들어진 표준으로 시간 단위의 가장 큰 것부터 작은 것으로 정렬하여 표기한다.
+ISO-8601은 여러 포맷을 사용하고 있는데 그중 소프트웨어상에서 자주 접하는 포맷의 표현은 다음과 같다.&lt;/p&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -141,14 +140,14 @@ ISO-8601은 여러 포맷을 사용하고 있는데 그 중 소프트웨어상�
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;p&gt;위처럼 UTC 시간인 경우, 시간 뒤에 빈칸없이 Z를 추가해주어야 한다. 여기서 Z는 오프셋이 0인 UTC를 위한 지역 지정자로 ‘+00:00’를 표현한다.
-만약 타임존의 시간이 UTC보다 한시간 앞선다면, 빈칸없이 ‘+01:00’을 표기해야 한다.&lt;/p&gt;
+&lt;p&gt;위처럼 UTC 시간인 경우, 시간 뒤에 빈칸 없이 Z를 추가해 주어야 한다. 여기서 Z는 오프셋이 0인 UTC를 위한 지역 지정자로 ‘+00:00’를 표현한다.
+만약 타임존의 시간이 UTC보다 한 시간 앞선다면, 빈칸 없이 ‘+01:00’을 표기해야 한다.&lt;/p&gt;
 &lt;h2 id=&quot;자바스크립트와-타임존&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%EC%99%80-%ED%83%80%EC%9E%84%EC%A1%B4&quot; aria-label=&quot;자바스크립트와 타임존 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;자바스크립트와 타임존&lt;/h2&gt;
 &lt;p&gt;자바스크립트에서는 일반적으로 클라이언트가 동작하는 OS의 설정된 타임존을 따르게 되어 있고, 명시적으로 타임존을 변경할 수 없다. 또한 타임존 데이터베이스에 대한
 명세도 명확하게 기술되어 있지 않고 IANA 타임존 데이터베이스를 권장하는 정도의 명세만 서술되어 있다.&lt;/p&gt;
 &lt;p&gt;자바스크립트에서 날짜와 시간을 처리하기 위해 &lt;code class=&quot;language-text&quot;&gt;Date&lt;/code&gt; 객체를 사용하는데, 네이티브 객체라는 점에서 브라우저마다 다르게 동작하는 경우들이 발생하곤 하며, &lt;code class=&quot;language-text&quot;&gt;Date&lt;/code&gt;
 자체적으로 제공하는 기능들이 복잡한 연산을 하기엔 아쉬운 부분들이 많아 자연스럽게 &lt;a href=&quot;https://momentjs.com/&quot;&gt;moment.js&lt;/a&gt;와 같은 라이브러리를 찾게 된다.&lt;/p&gt;
-&lt;p&gt;그도 그럴것이 자바스크립트의 창시자인 &lt;a href=&quot;https://ko.wikipedia.org/wiki/%EB%B8%8C%EB%A0%8C%EB%8D%98_%EC%95%84%EC%9D%B4%ED%81%AC&quot;&gt;Brendan Eich&lt;/a&gt;는
+&lt;p&gt;그도 그럴 것이 자바스크립트의 창시자인 &lt;a href=&quot;https://ko.wikipedia.org/wiki/%EB%B8%8C%EB%A0%8C%EB%8D%98_%EC%95%84%EC%9D%B4%ED%81%AC&quot;&gt;Brendan Eich&lt;/a&gt;는
 자바스크립트 언어를 작성하고 이를 Netscape에 적용하는 데 단 10일밖에 부여받지 못해서 프로그래밍 언어의 필수적인 요소라고 할 수 있는 날짜 처리와 관련된 구현체를
 구조적으로 설계하기엔 짧은 기간이었다. 해서 그 당시 많은 인기를 얻고 있었던 Java처럼 만들라는 요구에 &lt;code class=&quot;language-text&quot;&gt;java.Util.Date&lt;/code&gt;를 모방하여 자바스크립트에 구현체를 완성했다고 한다.&lt;/p&gt;
 &lt;p&gt;그러나 모방에 대상이었던 &lt;code class=&quot;language-text&quot;&gt;java.Util.Date&lt;/code&gt;의 메서드들은 1997년 Java 1.1 릴리즈에서 더 이상 사용되지 않고 대체되었지만, 자바스크립트에서는 여전히 모방된 Date API를 사용하고 있다.&lt;/p&gt;
@@ -188,7 +187,7 @@ myDate.addDays(7);&lt;/code&gt;
 &lt;p&gt;이는 자바스크립트에서 현실적으로 기존 동작과 호환성을 유지하도록 하여 현재 동작하고 있는 웹에 문제가 생기지 않도록 하는 것을 목적으로 두고 있는데, 위에서 언급한
 문제들 중 현재 웹을 손상시키지 않고는 고칠 수 없는 문제들이 존재한다. Maggie Pint가 Temporal이라는 새로운 API를 제안한 이유일 것이다.&lt;/p&gt;
 &lt;p&gt;현재 &lt;code class=&quot;language-text&quot;&gt;Date&lt;/code&gt; 객체는 가변적이라는 근본적인 문제를 안고 있다. 가령 오늘 날짜를 표현하는 &lt;code class=&quot;language-text&quot;&gt;Date&lt;/code&gt;의 인스턴스를 받아 일주일을 더한 &lt;code class=&quot;language-text&quot;&gt;Date&lt;/code&gt; 객체를 반환하는 함수가
-있다고 생각해보자.&lt;/p&gt;
+있다고 생각해 보자.&lt;/p&gt;
 &lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;function addOneWeek(myDate) {
   myDate.setDate(myDate.getDate() + 7);
@@ -256,9 +255,9 @@ console.log(date); // 2024-02-06T15:00:00.000Z&lt;/code&gt;
     &lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date&quot;&gt;이미지 출처&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;Temporal API는 날짜 및 시간 계산을 위해 사용하기 쉬운 API를 제공하고, DST을 포함한 모든 타임존을 안정적으로 지원하며,
-불변한 객체를 제공하고 엄격하게 지정된 문자열 형식 구문 분석과 날짜 전용(date-only), 시간 전용(time-only) 및 기타 용도에 대한 별도 클래스를 제공함으로서
-개발자로 하여금 더 직관적이고 친화적인 날짜와 시간 처리가 가능하도록 돕는다.&lt;/p&gt;
-&lt;p&gt;아직 실험단계인 만큼 &lt;a href=&quot;https://github.com/tc39/proposal-temporal#polyfills&quot;&gt;polyfill&lt;/a&gt;을 통해 사용해볼 수 있다.
+불변한 객체를 제공하고 엄격하게 지정된 문자열 형식 구문 분석과 날짜 전용(date-only), 시간 전용(time-only) 및 기타 용도에 대한 별도 클래스를 제공함으로써
+개발자로 하여금 더 직관적이고 친화적인 날짜와 시간 처리가 가능하도록 돕는다. 또한 &lt;code class=&quot;language-text&quot;&gt;Temporal&lt;/code&gt;은 IANA 타임존 데이터베이스를 기반으로 타임존과 DST를 다루고 있다.&lt;/p&gt;
+&lt;p&gt;아직 실험 단계인 만큼 &lt;a href=&quot;https://github.com/tc39/proposal-temporal#polyfills&quot;&gt;polyfill&lt;/a&gt;을 통해 사용해 볼 수 있다.
 다양한 API는 &lt;a href=&quot;https://tc39.es/proposal-temporal/docs/cookbook.html&quot;&gt;Temporal Cookbook&lt;/a&gt;에서 확인할 수 있는데 앞서 몇 가지 간단하게 살펴보자.&lt;/p&gt;
 &lt;p&gt;UTC 시간을 특정 타임존의 시간으로 쉽게 변환할 수 있게 되었다.&lt;/p&gt;
 &lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
@@ -286,7 +285,7 @@ const date2 = Temporal.PlainDate.from({ year: 2024, month: 1, day: 11 });
 const isAfter = Temporal.PlainDate.compare(date2, date1) &amp;gt; 0;&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
 &lt;h3 id=&quot;정확한-시간과-벽시계-시간의-구분&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EC%A0%95%ED%99%95%ED%95%9C-%EC%8B%9C%EA%B0%84%EA%B3%BC-%EB%B2%BD%EC%8B%9C%EA%B3%84-%EC%8B%9C%EA%B0%84%EC%9D%98-%EA%B5%AC%EB%B6%84&quot; aria-label=&quot;정확한 시간과 벽시계 시간의 구분 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;정확한 시간과 벽시계 시간의 구분&lt;/h3&gt;
-&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;Temporal&lt;/code&gt;은 크게 두 가지 시간으로 구분짓는 주요한 컨셉을 가지고 있다. 시간의 기준이 되는 UTC 시간을 가지는 정확한 시간 (Exact Time)과, 국가별로 통제되는 타임존과 DST 시행에
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;Temporal&lt;/code&gt;은 크게 두 가지 시간으로 구분 짓는 주요한 컨셉을 가지고 있다. 시간의 기준이 되는 UTC 시간을 가지는 정확한 시간 (Exact Time)과, 국가별로 통제되는 타임존과 DST 시행에
 의존적으로 언제든 변동될 수 있는 벽시계 시간 (Wall-Clock Time, 혹은 로컬 시간)인데, 이는 타임존을 가지는 시간을 처리하는 데 있어 모호한 기준을 해소하고자 설계되었다.&lt;/p&gt;
 &lt;p&gt;정확한 시간을 구하고자 한다면 &lt;code class=&quot;language-text&quot;&gt;Instant&lt;/code&gt;를 사용할 수 있다. ISO-8601 포맷 형식의 문자열을 메서드에 제공하거나, 현재를 다루는 &lt;code class=&quot;language-text&quot;&gt;Now&lt;/code&gt;의 &lt;code class=&quot;language-text&quot;&gt;instant()&lt;/code&gt;를 사용한다.
 &lt;code class=&quot;language-text&quot;&gt;instant&lt;/code&gt;는 나노 초 단위의 정밀도를 갖는 단일 시점의 유닉스 시간을 반환한다.&lt;/p&gt;
@@ -342,8 +341,53 @@ console.log(zonedDateTime2.toString()); // 1995-12-07T03:24:30.0000035-08:00[Ame
 &lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;Temporal&lt;/code&gt;는 지속성과 상호 운용성을 위한 문자열 표현을 공통적으로 사용하고 있다. ISO-8601 포맷의 문자열과 타임존 정보, 그리고 달력 정보를 가지고 있다.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&quot;/19b31bca3057e8b7a4e6f24f930f509b/persistence-model.svg&quot; alt=&quot;Temporal의 지속성 모델&quot;&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href=&quot;https://tc39.es/proposal-temporal/docs/index.html#string-persistence-parsing-and-formatting&quot;&gt;이미지 출처&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id=&quot;plain&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#plain&quot; aria-label=&quot;plain permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Plain&lt;/h2&gt;
-&lt;p&gt;타임존과 달력 정보가 포함되지 않은 단순 날짜와 시간에 대한 처리를 하고자 한다면 Plain 접두사가 붙은 메서드들을 사용할 수 있다.&lt;/p&gt;</content:encoded></item><item><title><![CDATA[타입스크립트의 배열 타입, 어떤 걸 써야하나]]></title><description><![CDATA[@Tanstack/query의 메인테이너인 tkDodo…]]></description><link>https://youthfulhps.dev/TIL/typescript/array-types/</link><guid isPermaLink="false">https://youthfulhps.dev/TIL/typescript/array-types/</guid><pubDate>Thu, 21 Dec 2023 13:05:26 GMT</pubDate><content:encoded>&lt;p&gt;&lt;a href=&quot;https://github.com/TanStack/query&quot;&gt;@Tanstack/query&lt;/a&gt;의 메인테이너인 &lt;a href=&quot;https://tkdodo.eu/blog/&quot;&gt;tkDodo&lt;/a&gt;가 위와 같은 결과에 대해
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;Temporal&lt;/code&gt;은 기계가 읽을 수 있는, 사람이 읽을 수 있는 두 가지 유형의 문자열 표현을 가지고 있다. 기계로 읽을 수 있는 형식의 문자열은 프로그래밍적으로 모호하지 않도록
+설계되어 있어 최종적으로 사용자에게 노출되기엔 적합하지 않지만, 효율적인 구문 분석을 위해 최적화되어 있는 구조이다.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;&amp;#39;2022-02-28&amp;#39;;
+&amp;#39;2022-02-28T11:06:00.092121729+08:00[Asia/Shanghai][u-ca=chinese]&amp;#39;;
+&amp;#39;2022-02-28T03:06:00.092121729Z&amp;#39;;&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;반면 사람이 읽을 수 있는 형식은 로컬화되어 있으며 언어의 규칙과 사용자에게 보여지는 응용 프로그램에서 최종적으로 사용자에게 보여주기 적합한 구조로 이루어져 있다.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;&amp;#39;2/28/2022, 11:06:00 AM PST&amp;#39;;
+&amp;#39;Monday, February 28, 2022&amp;#39;;
+&amp;#39;正月28日 GMT+8 11:06:00&amp;#39;;
+&amp;#39;2024. 1. 21. 오전 3시 24분 30초 GMT+9&amp;#39;;&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;h2 id=&quot;타임존과-관련없는-시간을-다루기-위한-plain&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%ED%83%80%EC%9E%84%EC%A1%B4%EA%B3%BC-%EA%B4%80%EB%A0%A8%EC%97%86%EB%8A%94-%EC%8B%9C%EA%B0%84%EC%9D%84-%EB%8B%A4%EB%A3%A8%EA%B8%B0-%EC%9C%84%ED%95%9C-plain&quot; aria-label=&quot;타임존과 관련없는 시간을 다루기 위한 plain permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;타임존과 관련없는 시간을 다루기 위한 Plain&lt;/h2&gt;
+&lt;p&gt;타임존과 달력 정보가 포함되지 않은 순수 날짜와 시간에 대한 처리를 하고자 한다면 &lt;code class=&quot;language-text&quot;&gt;Plain&lt;/code&gt; 접두사가 붙은 클래스나 메서드들을 사용할 수 있다.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;const dateTime = Temporal.PlainDateTime.from({
+  year: 2024,
+  month: 1,
+  day: 12,
+  hour: 15,
+});
+console.log(dateTime.toString()); // 2024-01-12T15:00:00&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;const date = Temporal.PlainDate.from({ year: 2024, month: 1, day: 12 });
+console.log(date.toString()); // 2024-01-12&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;const time = Temporal.PlainTime.from({
+  hour: 19,
+  minute: 39,
+  second: 9,
+  millisecond: 68,
+  microsecond: 346,
+  nanosecond: 205,
+});
+console.log(time.toString()); // 19:39:09.068346205&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;h2 id=&quot;reference&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#reference&quot; aria-label=&quot;reference permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Reference&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://meetup.nhncloud.com/posts/125&quot;&gt;자바스크립트에서 타임존 다루기 (1)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://meetup.nhncloud.com/posts/130&quot;&gt;자바스크립트에서 타임존 다루기 (2)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://tc39.es/proposal-temporal/docs/index.html&quot;&gt;tc39.es/proposal-temporal&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://2ality.com/2021/06/temporal-api.html&quot;&gt;Temporal: getting started with JavaScript’s new date time API&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content:encoded></item><item><title><![CDATA[타입스크립트의 배열 타입, 어떤 걸 써야하나]]></title><description><![CDATA[@Tanstack/query의 메인테이너인 tkDodo…]]></description><link>https://youthfulhps.dev/TIL/typescript/array-types/</link><guid isPermaLink="false">https://youthfulhps.dev/TIL/typescript/array-types/</guid><pubDate>Thu, 21 Dec 2023 13:05:26 GMT</pubDate><content:encoded>&lt;p&gt;&lt;a href=&quot;https://github.com/TanStack/query&quot;&gt;@Tanstack/query&lt;/a&gt;의 메인테이너인 &lt;a href=&quot;https://tkdodo.eu/blog/&quot;&gt;tkDodo&lt;/a&gt;가 위와 같은 결과에 대해
 의견을 적은 글이 있어 정리해본다. 스치듯 고민해볼 만한 이슈에 진심인 걸 보면 배울점이 넘쳐난다.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&quot;./images/array-types/x-poll.png&quot; alt=&quot;타입스크립트의 배열 타입 중 어떤 걸 선호하는지에 대한 투표&quot;&gt;&lt;/p&gt;
 &lt;p&gt;기능적 차이는 크게 없지만, 투표 결과는 투표 결과는 &lt;code class=&quot;language-text&quot;&gt;string[]&lt;/code&gt;을 주로 사용하는 경우가 압도적으로 많았다. 그럼 왜 &lt;code class=&quot;language-text&quot;&gt;string[]&lt;/code&gt;을 많이 사용하는가?
@@ -6089,7 +6133,7 @@ any를 사용하면 타입 체커가 무력화됩니다.&lt;/p&gt;
 &lt;p&gt;&lt;a href=&quot;https://toss.tech/article/template-literal-types&quot;&gt;Template Literal Types로 타입 안전하게 코딩하기&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href=&quot;https://engineering.linecorp.com/ko/blog/typescript-enum-tree-shaking/&quot;&gt;TypeScript enum을 사용하지 않는 게 좋은 이유를 Tree-shaking 관점에서 소개합니다.&lt;/a&gt;&lt;/p&gt;</content:encoded></item><item><title><![CDATA[리엑트 동시성 매커니즘들은 어떻게 구현되어 있을까 - 01]]></title><description><![CDATA[리엑트v18에서 동시성 기능을 정식으로 출시하였습니다. 대표적으로,
 Automatic batching for fewer renders, SSR support for
-Suspense, Fixes for Suspense behavior quirks…]]></description><link>https://youthfulhps.dev/react/react-concurrent-mode/</link><guid isPermaLink="false">https://youthfulhps.dev/react/react-concurrent-mode/</guid><pubDate>Sat, 11 Jun 2022 16:07:02 GMT</pubDate><content:encoded>&lt;p&gt;리엑트v18에서 동시성 기능을 정식으로 출시하였습니다. 대표적으로,
+Suspense, Fixes for Suspense behavior quirks…]]></description><link>https://youthfulhps.dev/react/react-concurrent-mode-01/</link><guid isPermaLink="false">https://youthfulhps.dev/react/react-concurrent-mode-01/</guid><pubDate>Sat, 11 Jun 2022 16:07:02 GMT</pubDate><content:encoded>&lt;p&gt;리엑트v18에서 동시성 기능을 정식으로 출시하였습니다. 대표적으로,
 &lt;em&gt;Automatic batching for fewer renders&lt;/em&gt;, &lt;em&gt;SSR support for
 Suspense&lt;/em&gt;, &lt;em&gt;Fixes for Suspense behavior quirks&lt;/em&gt;와 같은 내부적인
 성능 향상과, &lt;em&gt;startTransition&lt;/em&gt;, &lt;em&gt;useDeferredValue&lt;/em&gt;, &lt;em&gt;SuspenseList&lt;/em&gt;
@@ -6896,7 +6940,7 @@ function workLoopConcurrent() {
 &lt;p&gt;&lt;a href=&quot;https://wicg.github.io/is-input-pending/#continuous-events&quot;&gt;wicg.github.io/is-input-pending&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href=&quot;https://juejin.cn/post/7008802041602506765&quot;&gt;React 소스 코드 파싱 우선 순위 Lane 모델&lt;/a&gt;&lt;/p&gt;</content:encoded></item><item><title><![CDATA[리엑트 동시성 매커니즘들은 어떻게 구현되어 있을까 - 01]]></title><description><![CDATA[리엑트v18에서 동시성 기능을 정식으로 출시하였습니다. 대표적으로,
 Automatic batching for fewer renders, SSR support for
-Suspense, Fixes for Suspense behavior quirks…]]></description><link>https://youthfulhps.dev/react/react-concurrent-mode-01/</link><guid isPermaLink="false">https://youthfulhps.dev/react/react-concurrent-mode-01/</guid><pubDate>Sat, 11 Jun 2022 16:07:02 GMT</pubDate><content:encoded>&lt;p&gt;리엑트v18에서 동시성 기능을 정식으로 출시하였습니다. 대표적으로,
+Suspense, Fixes for Suspense behavior quirks…]]></description><link>https://youthfulhps.dev/react/react-concurrent-mode/</link><guid isPermaLink="false">https://youthfulhps.dev/react/react-concurrent-mode/</guid><pubDate>Sat, 11 Jun 2022 16:07:02 GMT</pubDate><content:encoded>&lt;p&gt;리엑트v18에서 동시성 기능을 정식으로 출시하였습니다. 대표적으로,
 &lt;em&gt;Automatic batching for fewer renders&lt;/em&gt;, &lt;em&gt;SSR support for
 Suspense&lt;/em&gt;, &lt;em&gt;Fixes for Suspense behavior quirks&lt;/em&gt;와 같은 내부적인
 성능 향상과, &lt;em&gt;startTransition&lt;/em&gt;, &lt;em&gt;useDeferredValue&lt;/em&gt;, &lt;em&gt;SuspenseList&lt;/em&gt;
