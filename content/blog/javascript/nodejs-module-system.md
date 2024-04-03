@@ -117,7 +117,6 @@ console.log('index run completed!');
 // index:...
 // Module2 loading...
 // Module2 run completed!
-// index 종료!
 // Module1 load complete and run!
 // Module2 load complete and run!
 // index run completed!
@@ -145,7 +144,7 @@ console.log(module1, module2, module3);
 // Module1 Module1 Module1
 ```
 
-만약 캐싱을 지우고 싶다면, `require.cache`에 접근해 제거할 수 있다.
+만약 캐시를 지우고 싶다면, `require.cache`에 접근해 제거할 수 있다.
 
 ```js
 const module1 = require('./module1');
@@ -207,7 +206,7 @@ console.log(module.exports === exports); // true
 즉 `exports`는 `module.exports`가 기본적으로 내보낼 객체를 동일하게 가리키고 있어 위와 같이 객체에 새로운 키를 추가하여 내보낼 객체에 새로운 프로퍼티를
 할당하는 것은 어느 것을 사용해도 동일한 결과를 얻는다.
 
-그러나 주의해야 할 점은 `exports`나 `module.exports`에 새로운 함수나 객체를 할당해 내보내는 경우이다. 다음과 같이 다음과 같이 `Square` 클래스를 `module.exports`
+그러나 주의해야 할 점은 `exports`나 `module.exports`에 새로운 함수나 객체를 할당해 내보내는 경우이다. 다음과 같이 `Square` 클래스를 `module.exports`
 에 할당하여 내보낸다면, `module.exports`는 새로운 객체를 참조하게 되어 `exports`와 참조 대상이 상이해진다.
 
 ```js
