@@ -177,7 +177,6 @@ console.log(&#39;index run completed!&#39;);
 // index:...
 // Module2 loading...
 // Module2 run completed!
-// index 종료!
 // Module1 load complete and run!
 // Module2 load complete and run!
 // index run completed!</code>
@@ -200,7 +199,7 @@ console.log(module1, module2, module3);
 // Run Module1!
 // Module1 Module1 Module1</code>
         </deckgo-highlight-code>
-<p>만약 캐싱을 지우고 싶다면, <code class="language-text">require.cache</code>에 접근해 제거할 수 있다.</p>
+<p>만약 캐시를 지우고 싶다면, <code class="language-text">require.cache</code>에 접근해 제거할 수 있다.</p>
 <deckgo-highlight-code language="js"  >
           <code slot="code">const module1 = require(&#39;./module1&#39;);
 
@@ -252,7 +251,7 @@ console.log(module.exports === exports); // true</code>
 <a href="https://nodejs.org/api/modules.html#exports">공식 문서</a>에서 알 수 있듯 <code class="language-text">exports</code>는 단지 <code class="language-text">module.exports</code>의 축약된 <code class="language-text">shortcut</code>인 것이다.</p>
 <p>즉 <code class="language-text">exports</code>는 <code class="language-text">module.exports</code>가 기본적으로 내보낼 객체를 동일하게 가리키고 있어 위와 같이 객체에 새로운 키를 추가하여 내보낼 객체에 새로운 프로퍼티를
 할당하는 것은 어느 것을 사용해도 동일한 결과를 얻는다.</p>
-<p>그러나 주의해야 할 점은 <code class="language-text">exports</code>나 <code class="language-text">module.exports</code>에 새로운 함수나 객체를 할당해 내보내는 경우이다. 다음과 같이 다음과 같이 <code class="language-text">Square</code> 클래스를 <code class="language-text">module.exports</code>
+<p>그러나 주의해야 할 점은 <code class="language-text">exports</code>나 <code class="language-text">module.exports</code>에 새로운 함수나 객체를 할당해 내보내는 경우이다. 다음과 같이 <code class="language-text">Square</code> 클래스를 <code class="language-text">module.exports</code>
 에 할당하여 내보낸다면, <code class="language-text">module.exports</code>는 새로운 객체를 참조하게 되어 <code class="language-text">exports</code>와 참조 대상이 상이해진다.</p>
 <deckgo-highlight-code language="js"  >
           <code slot="code">module.exports = class Square {
