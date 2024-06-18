@@ -36,6 +36,15 @@ module.exports = {
       options: {
         plugins: [
           {
+            resolve: `gatsby-remark-mermaid`,
+            options: /** @type {import('gatsby-remark-mermaid').Options} */ ({
+              mermaidConfig: {
+                theme: 'dark',
+                themeCSS: '.label {line-height: normal; font-size: 0.55rem;}',
+              },
+            }),
+          },
+          {
             resolve: `gatsby-remark-katex`,
             options: {
               strict: `ignore`,

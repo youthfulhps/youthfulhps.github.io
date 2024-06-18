@@ -53,6 +53,16 @@ GitHubTheme.overrideThemeStyles = () => {
     p: {
       fontFamily: 'Pretendard',
       lineHeight: '2.1',
+
+      svg: {
+        // maxHeight: 400,
+        maxWidth: 'none !important',
+        width: '100%',
+        backgroundColor: '#272A36',
+        borderRadius: '4px',
+        padding: '2rem 4rem',
+        margin: '1rem 0',
+      },
     },
 
     'span.gatsby-resp-image-wrapper': {
