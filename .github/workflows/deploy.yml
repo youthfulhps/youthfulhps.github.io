@@ -23,6 +23,9 @@ jobs:
       - name: Resolve Dependencies
         run: yarn
 
+      - name: Playwright install
+        run: yarn playwright install
+
       - name: Build production
         run: yarn build
 
