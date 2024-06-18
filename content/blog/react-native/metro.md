@@ -2,7 +2,7 @@
 title: Metro 번들러의 컨셉 톺아보기
 date: 2024-05-07 00:05:38
 category: react-native
-description: 빠져가는 머리카락.
+description: 모듈 해석과 변환 과정을 살펴봅니다.
 thumbnail: { thumbnailSrc }
 draft: false
 ---
