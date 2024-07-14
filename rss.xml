@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Youthfulhps.dev]]></title><description><![CDATA[프론트엔드 주니어 개발자, 트러블슈팅에 대한 고민의 흔적을 기록으로 남기는 것을 좋아합니다.]]></description><link>https://youthfulhps.dev</link><generator>GatsbyJS</generator><lastBuildDate>Mon, 01 Jul 2024 13:38:53 GMT</lastBuildDate><item><title><![CDATA[Metro 번들러의 컨셉 톺아보기]]></title><description><![CDATA[…]]></description><link>https://youthfulhps.dev/react-native/metro/</link><guid isPermaLink="false">https://youthfulhps.dev/react-native/metro/</guid><pubDate>Tue, 07 May 2024 00:05:38 GMT</pubDate><content:encoded>&lt;p&gt;최근 리엑트 네이티브를 통해 사내 신사업 앱 개발을 담당하게 되었다. 사실 네이티브 플랫폼은 익숙지 않았고, 과거 세 달 정도 개발했던 경험이 분명 좋지는 못했던 기억에
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Youthfulhps.dev]]></title><description><![CDATA[프론트엔드 주니어 개발자, 트러블슈팅에 대한 고민의 흔적을 기록으로 남기는 것을 좋아합니다.]]></description><link>https://youthfulhps.dev</link><generator>GatsbyJS</generator><lastBuildDate>Sun, 14 Jul 2024 11:56:39 GMT</lastBuildDate><item><title><![CDATA[Metro 번들러의 컨셉 톺아보기]]></title><description><![CDATA[…]]></description><link>https://youthfulhps.dev/react-native/metro/</link><guid isPermaLink="false">https://youthfulhps.dev/react-native/metro/</guid><pubDate>Tue, 07 May 2024 00:05:38 GMT</pubDate><content:encoded>&lt;p&gt;최근 리엑트 네이티브를 통해 사내 신사업 앱 개발을 담당하게 되었다. 사실 네이티브 플랫폼은 익숙지 않았고, 과거 세 달 정도 개발했던 경험이 분명 좋지는 못했던 기억에
 고민이 많았다.&lt;/p&gt;
 &lt;p&gt;그럼에도 프로젝트를 완수하고 싶었다. 회사에 돈을 벌어다 줄 채널을 늘려야 했고, 에자일 TF팀으로서 본보기를 보여야 했으며, 플랫폼에 한정되지 않은 리엑트 개발자가
 되고 싶은 것도 동기부여 삼을 수 있었고, 프로젝트를 맡게 되면 스스로 쉽게 사명감 같은 뜨거운 것들을 만들어내는 것에 익숙한 것도 한몫했다.&lt;/p&gt;
@@ -1623,10 +1623,10 @@ function wrapModule(
       /&gt;
     &lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href=&quot;https://m.post.naver.com/viewer/postView.naver?volumeNo=32031087&amp;#x26;memberNo=39920442&quot;&gt;이미지 출처&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;이로써 세계 시간의 기준이 되는 0시는 그리니치 천문대를 지나는 자오선이 기준이 되었고, 이 시간을 **그리니치 평균시(Greenwich Mean Time, GMT)**로 칭했다.
+&lt;p&gt;이로써 세계 시간의 기준이 되는 0시는 그리니치 천문대를 지나는 자오선이 기준이 되었고, 이 시간을 그리니치 평균시(Greenwich Mean Time, GMT)로 칭했다.
 GMT는 지구의 자전으로 인해 지역 사이에 생기는 낮과 밤의 차이를 인위적으로 조정하기 위해 고안된 시간의 구분선인 타임존의 기준시가 된다.&lt;/p&gt;
 &lt;p&gt;그런데 GMT에 문제가 하나 있었으니, 지구 자전이 조금씩 늦어지는 영향으로 인해 시간에 미세한 차이가 생겨났다. 이는 보다 정확한 시간 기준이 필요하다는 목소리와 함께
-1972년부터 전 세계 50개 국가 실험실에서 보유한 400개 이상의 세슘 시계를 기반으로 하는 **협정 세계시(Coordinated Universal Time, UTC)**가 생겨났고,
+1972년부터 전 세계 50개 국가 실험실에서 보유한 400개 이상의 세슘 시계를 기반으로 하는 협정 세계시(Coordinated Universal Time, UTC)가 생겨났고,
 UTC를 국제 협정시로 사용되기 시작했다. 사실 GMT와 UTC는 소숫점 단위의 미세한 시간차밖에 없어 혼용될 때도 많다. 하지만, 소프트웨어상에서는 UTC를 사용한다는 표현이
 적절하다.&lt;/p&gt;
 &lt;h2 id=&quot;오프셋&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EC%98%A4%ED%94%84%EC%85%8B&quot; aria-label=&quot;오프셋 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;오프셋&lt;/h2&gt;
