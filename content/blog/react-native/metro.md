@@ -368,7 +368,7 @@ function resolve(context, moduleName, platform) {
 
 ### HasteModule로서 해석을 시도한다
 
-자바스크립트 모듈 시스템의 일환으로 정석 리소스에 대한 종속성 관리를 위해 고안된 `Haste`를 통해 대상 모듈 해석을 시도한다. 사실 `Haste`라는
+자바스크립트 모듈 시스템의 일환으로 정적 리소스에 대한 종속성 관리를 위해 고안된 `Haste`를 통해 대상 모듈 해석을 시도한다. 사실 `Haste`라는
 키워드 자체를 `Metro`를 공부하며 처음 접했다. 며칠 동안 찾아봐도 그럴싸한 레퍼런스를 찾기 어려워 과연 본 섹션을 잘 정리해 낼 수 있을까도 의문이었는데,
 구 페이스북에서 `Haste` 모듈 시스템을 사용해 온 흔적들과 `Metro` 패키지의 구현체들을 토대로 정리해보려 한다. (옳고 그름이 명확하지 않을 수 있으니 넘어가셔도 좋습니다.)
 
@@ -761,6 +761,7 @@ class WorkerFarm {
 
 흔히 테스트 도구로 잘 알려진 `jest` 패키지 중 하나인 [jest-worker](https://github.com/jestjs/jest/tree/v30.0.0-alpha.5/packages/jest-worker)는
 `Metro`에서 무거운 변환 작업을 포크된 여러 개의 하위 프로세스에서 병렬적으로 처리하기 위한 메커니즘의 실제 솔루션이며, 이를 `WorkerFarm`에 담아낸 것이다.
+참고로 `jest-worker`는 `node.js`의 [worker_threads](https://nodejs.org/api/worker_threads.html)를 사용하고 있다.
 
 _외람된 이야기지만, 위에서 본 [metro-file-map](https://github.com/facebook/metro/tree/v0.80.9/packages/metro-file-map)도
 [jest-haste-map](https://github.com/jestjs/jest/tree/v30.0.0-alpha.5/packages/jest-haste-map)을 포크하여 구성한 패키지라고 한다._
