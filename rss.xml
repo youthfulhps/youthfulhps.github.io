@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Youthfulhps.dev]]></title><description><![CDATA[프론트엔드 주니어 개발자, 트러블슈팅에 대한 고민의 흔적을 기록으로 남기는 것을 좋아합니다.]]></description><link>https://youthfulhps.dev</link><generator>GatsbyJS</generator><lastBuildDate>Tue, 06 Aug 2024 00:03:40 GMT</lastBuildDate><item><title><![CDATA[Metro 번들러의 컨셉 톺아보기]]></title><description><![CDATA[…]]></description><link>https://youthfulhps.dev/react-native/metro/</link><guid isPermaLink="false">https://youthfulhps.dev/react-native/metro/</guid><pubDate>Tue, 07 May 2024 00:05:38 GMT</pubDate><content:encoded>&lt;p&gt;최근 리엑트 네이티브를 통해 사내 신사업 앱 개발을 담당하게 되었다. 사실 네이티브 플랫폼은 익숙지 않았고, 과거 세 달 정도 개발했던 경험이 분명 좋지는 못했던 기억에
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Youthfulhps.dev]]></title><description><![CDATA[프론트엔드 주니어 개발자, 트러블슈팅에 대한 고민의 흔적을 기록으로 남기는 것을 좋아합니다.]]></description><link>https://youthfulhps.dev</link><generator>GatsbyJS</generator><lastBuildDate>Mon, 23 Sep 2024 00:06:18 GMT</lastBuildDate><item><title><![CDATA[Metro 번들러의 컨셉 톺아보기]]></title><description><![CDATA[…]]></description><link>https://youthfulhps.dev/react-native/metro/</link><guid isPermaLink="false">https://youthfulhps.dev/react-native/metro/</guid><pubDate>Tue, 07 May 2024 00:05:38 GMT</pubDate><content:encoded>&lt;p&gt;최근 리엑트 네이티브를 통해 사내 신사업 앱 개발을 담당하게 되었다. 사실 네이티브 플랫폼은 익숙지 않았고, 과거 세 달 정도 개발했던 경험이 분명 좋지는 못했던 기억에
 고민이 많았다.&lt;/p&gt;
 &lt;p&gt;그럼에도 프로젝트를 완수하고 싶었다. 회사에 돈을 벌어다 줄 채널을 늘려야 했고, 에자일 TF팀으로서 본보기를 보여야 했으며, 플랫폼에 한정되지 않은 리엑트 개발자가
 되고 싶은 것도 동기부여 삼을 수 있었고, 프로젝트를 맡게 되면 스스로 쉽게 사명감 같은 뜨거운 것들을 만들어내는 것에 익숙한 것도 한몫했다.&lt;/p&gt;
-&lt;p&gt;프로젝트 베타 버전의 앱이 나오고 QA를 진행하는 시점에서 뿌듯함보다는 작업을 하면서 느낀 부족함이 더 크게 다가온다. 개인적으로 개발에 있어 한계를 타파시켜 주는
+&lt;p&gt;프로젝트 알파 버전의 앱이 나오고 QA를 진행하는 시점에서 뿌듯함보다는 작업을 하면서 느낀 부족함이 더 크게 다가온다. 개인적으로 개발에 있어 한계를 타파시켜 주는
 도구들을 사용할 때면 해당 도구의 기저에 있는 구현체들이 궁금해진다. 리엑트 네이티브도 마찬가지다. 리엑트 네이티브를 통해 크로스 플랫폼 앱 개발을 쉽게 할 수 있다는
 훅보다는, 어떻게 가능하게 만들었는지가 더 관심을 끈다. 그리고 이런 궁금증들이 해소가 되고 나서야 비로소 사용할 명분을 찾은 기분이 든다.&lt;/p&gt;
 &lt;p&gt;짧은 회고는 이쯤 하고, 급하게 담당한 프로젝트 출시를 앞두고 지금이라도 리엑트 네이티브에 대해 조금 더 깊이 살펴보려 한다. &lt;a href=&quot;https://geundung.dev/126&quot;&gt;React Native Under The Hood&lt;/a&gt;는
@@ -7786,6 +7786,818 @@ any를 사용하면 타입 체커가 무력화됩니다.&lt;/p&gt;
 &lt;p&gt;&lt;a href=&quot;https://toss.tech/article/template-literal-types&quot;&gt;Template Literal Types로 타입 안전하게 코딩하기&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href=&quot;https://engineering.linecorp.com/ko/blog/typescript-enum-tree-shaking/&quot;&gt;TypeScript enum을 사용하지 않는 게 좋은 이유를 Tree-shaking 관점에서 소개합니다.&lt;/a&gt;&lt;/p&gt;</content:encoded></item><item><title><![CDATA[리엑트 동시성 매커니즘들은 어떻게 구현되어 있을까 - 01]]></title><description><![CDATA[리엑트v18에서 동시성 기능을 정식으로 출시하였습니다. 대표적으로,
 Automatic batching for fewer renders, SSR support for
+Suspense, Fixes for Suspense behavior quirks…]]></description><link>https://youthfulhps.dev/react/react-concurrent-mode/</link><guid isPermaLink="false">https://youthfulhps.dev/react/react-concurrent-mode/</guid><pubDate>Sat, 11 Jun 2022 16:07:02 GMT</pubDate><content:encoded>&lt;p&gt;리엑트v18에서 동시성 기능을 정식으로 출시하였습니다. 대표적으로,
+&lt;em&gt;Automatic batching for fewer renders&lt;/em&gt;, &lt;em&gt;SSR support for
+Suspense&lt;/em&gt;, &lt;em&gt;Fixes for Suspense behavior quirks&lt;/em&gt;와 같은 내부적인
+성능 향상과, &lt;em&gt;startTransition&lt;/em&gt;, &lt;em&gt;useDeferredValue&lt;/em&gt;, &lt;em&gt;SuspenseList&lt;/em&gt;
+과 같은 기능들이 추가되었습니다.&lt;/p&gt;
+&lt;p&gt;동시성 기능을 담아내기 위해 리엑트팀은 협력적 멀티테스킹, 우선순위 기반 랜더링,
+스케쥴링, 중단과 같은 메커니즘을 담아냈습니다. 기저에 있는 아키텍처를 수정해야
+했던 만큼 5년이라는 시간동안 많은 시행착오를 겪었을 텐데요.&lt;/p&gt;
+&lt;p&gt;이 시리즈는 &lt;em&gt;‘도대체, 동시성이 무엇이길래 리엑트팀에서 5년이라는
+시간을 쏟았으며, 동시성을 위한 메커니즘들의 구현체들이 어떻게 구현되어 있을까?
+’&lt;/em&gt; 라는 호기심에 찾아본 구현체들과 레퍼런스들을 차근차근 정리해보고자 합니다.&lt;/p&gt;
+&lt;p&gt;그 첫 번째로, &lt;a href=&quot;https://deview.kr/2021/sessions/518&quot;&gt;Inside React (동시성을 구현하는 기술)&lt;/a&gt;에서 언급한 내용들을 정리하고, 우선순위와 양보 매커니즘이
+어떻게 구현되어 있는 지 살펴보려 합니다.&lt;/p&gt;
+&lt;h2 id=&quot;concurrent-vs-parallelism&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#concurrent-vs-parallelism&quot; aria-label=&quot;concurrent vs parallelism permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Concurrent vs Parallelism&lt;/h2&gt;
+&lt;p&gt;동시성을 설명할 때, 서로 관련있는 병렬성과 함께 설명하곤 합니다.
+하지만, 이 둘은 뚜렷한 차이를 가지고 있으며
+Go 언어의 창시자의 &lt;a href=&quot;https://go.dev/blog/waza-talk&quot;&gt;Concurrency is not parallelism&lt;/a&gt;
+발표 서문에는 다음과 같이 동시성과 병렬성을 비교합니다.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;’&lt;strong&gt;동시성은 독립적으로 실행되는 프로세스들의 조합이다.&lt;/strong&gt;’
+‘병렬성은 연관된 복수의 연산들을 동시에 실행하는 것이다.’
+’&lt;strong&gt;동시성은 여러 일을 한꺼번에 다루는 문제에 관한 것이다.&lt;/strong&gt;’
+‘병렬성은 여러 일을 한꺼번에 실행하는 방법에 관한 것이다.’&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;아주 멜랑꼴리한데 발표에서 언급한 문구를 빌려 정리하자면,
+&lt;strong&gt;동시성은 프로세서가 하나만 있는 경우, 병렬 처리를 가능케 하지만 병렬처리는 아닙니다.&lt;/strong&gt;
+즉, 하나의 스레드로 작업을 순차적으로 처리하지만,
+마치 여러 개의 스레드가 사용되고 있는 것처럼 보이게 하는 것이고,
+동시성은 싱글 코어에서도 동작하지만, 병렬성은 두 개 이상의 코어가 필요합니다.&lt;/p&gt;
+&lt;p&gt;병렬성은 예를 들어 GPU를 통해 이미지를 랜더링할 때 R, G, B를 연산하는
+텍스크를 각각의 코어가 작업하는 것과 같이 최소 한 가지 논리적 통제를
+멀티 코어에서 병렬적으로 진행합니다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 864px; &quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 56.333333333333336%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAALCAYAAAB/Ca1DAAAACXBIWXMAAAsTAAALEwEAmpwYAAAA+0lEQVR42q2S226DMAyG+/7vxw1I3KENitIAJuQE/+xUoHQtmjRhKUrs2J/txDdcLLdc2bYNMUas65rOuX3XZd/vc5+PQGst6rpGURRomuYI9N6nJUJEqKoKZVlCa30keQGKIXiHST8wThN61WMcR9BiMbGeA8VXEiulDttbhZErsZw5crAANT2eQBuxLMsLUKp2ziVoCOEc6OYZkQRIDNQMHEBuhTHmH0Buww0a4X5Hx+1+q6/UUk8eA1f6GyiwmQs4bVkyEbfquL22bUEzoes6+BATUCrKgfKu+9ue/rJklB+UXZyNee6Og2SUZO0ifnL359hcPthXAH8AyLlhpaFJlWgAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;Parallel task processing&quot;
+        title=&quot;&quot;
+        src=&quot;/static/e2d146e61c5b9a19bb4476de300b308a/9cab2/parallelism-process.png&quot;
+        srcset=&quot;/static/e2d146e61c5b9a19bb4476de300b308a/5a46d/parallelism-process.png 300w,
+/static/e2d146e61c5b9a19bb4476de300b308a/0a47e/parallelism-process.png 600w,
+/static/e2d146e61c5b9a19bb4476de300b308a/9cab2/parallelism-process.png 864w&quot;
+        sizes=&quot;(max-width: 864px) 100vw, 864px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;반면 동시성은 최소 두 개의 논리적 통제 흐름을 가지고 있으며,
+잘개 쪼개진 두 개 이상의 작업을 지속적으로 컨텍스트 스위칭하여
+마치 동시에 이루어지는 것처럼 보이도록 합니다.
+강의를 듣다가 내용 정리를 위해 일시정지하고 메모하는 것과 같은 작업 처리 방식입니다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 864px; &quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 55.99999999999999%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAALCAYAAAB/Ca1DAAAACXBIWXMAABYlAAAWJQFJUiTwAAABIElEQVR42rWSW0+EMBCF+f9/z30iRB8gugKl9A69cJx2Zd1V9kltMiGdMl/PnGmFP17V98S2bTjK7fmj84dA6xyapsHp6YSu65BSLIB1XUvkpZRCXdclOOc/Lqn2RPQeRghoY8AFL4XWrdBaw9NZjvIvhRMzhvMb3LKUfL4spfQFjLTx1iBqBUWAWc+QUkIvEc4tpWAH5qXHAW37DKk0pmkCY+zaQQFmuqd2A6nLQGlEATqfCOjugFnhYjSE5IgxXf3d274ozD4RILARI5/wPp2LP8x4AiuC3QPtzNG+viDEeDyUEAIseRZITd/35KPGMAzwpCADbxVmpxT5JycGT3UPp2xyu3kQ1pZ2L19RQJGUxBs1+tOaoydU/fvD/i3wA0PdYEKy+BpoAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;Concurrent task processing&quot;
+        title=&quot;&quot;
+        src=&quot;/static/1c01ef1b6acac66076081b5b3e947f91/9cab2/concurrent-process.png&quot;
+        srcset=&quot;/static/1c01ef1b6acac66076081b5b3e947f91/5a46d/concurrent-process.png 300w,
+/static/1c01ef1b6acac66076081b5b3e947f91/0a47e/concurrent-process.png 600w,
+/static/1c01ef1b6acac66076081b5b3e947f91/9cab2/concurrent-process.png 864w&quot;
+        sizes=&quot;(max-width: 864px) 100vw, 864px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;h2 id=&quot;리엑트팀은-왜-동시성-기능을-구현하고자-했을까&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EB%A6%AC%EC%97%91%ED%8A%B8%ED%8C%80%EC%9D%80-%EC%99%9C-%EB%8F%99%EC%8B%9C%EC%84%B1-%EA%B8%B0%EB%8A%A5%EC%9D%84-%EA%B5%AC%ED%98%84%ED%95%98%EA%B3%A0%EC%9E%90-%ED%96%88%EC%9D%84%EA%B9%8C&quot; aria-label=&quot;리엑트팀은 왜 동시성 기능을 구현하고자 했을까 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;리엑트팀은 왜 동시성 기능을 구현하고자 했을까&lt;/h2&gt;
+&lt;p&gt;리엑트는 사용자 인터페이스를 구축하는 라이브러리로서 핵심 역할인 인터렉션에
+대한 업데이트 과정과 사용자 경험에 대한 HCI 연구 결과를 반영하고 궁극적으로
+기술적으로 결합하는 목표를 가지고 있습니다. 사람과 컴퓨터간의 인터렉션에
+대한 연구 결과들을 추상화해서 리엑트 코어의 개선 목표로 삼고 이를
+구현합니다.&lt;/p&gt;
+&lt;p&gt;가령, 화면 간 전환에서 로딩 중 상태를 너무 많이 표시하면 UX 품질이
+낮아지는 문제라던지, 빠르게 처리되기를 기대하는 상호작용들과 느려도 문제없는
+상호작용을 구분짓고 이를 적용해서 효과적으로 사용자 인터페이스에 구현할 수 있는
+방법들을 제공하기 위함입니다.&lt;/p&gt;
+&lt;p&gt;조금 더 와닿을 수 있게 우리의 구현체들이 동작하는 브라우저 환경에서
+생각해봅시다. 브라우저는 HTML을 파싱하고, 자바스크립트를 실행하며
+랜더트리를 구축하고 그려내는 작업까지 단일 스레드로서 한번에 하나의
+작업만을 수행합니다.&lt;/p&gt;
+&lt;p&gt;때문에 메인 스레드가 자바스크립트 엔진에게 실행권을 위임하여
+자바스크립트 파싱을 시작했다면 그 작업을 멈출 수 없으며,
+작업이 완료될 때까지 이후의 작업을 전개할 수 없습니다.
+리엑트 랜더링 연산 과정도 동일한 절차를 거치게 되며,
+이 때 매우 무거운 랜더링 연산 과정이 시작되면 이후의 작업들이 다소
+긴 시간 동안 대기 상태가 되는 블로킹 랜더링이 발생합니다.&lt;/p&gt;
+&lt;p&gt;재조정을 위한 리엑트의 비교 알고리즘은 매우 최적화되어 있어
+블로킹되는 이슈가 자주 발생하지 않아 공감하기 어려울 수 있지만,
+&lt;a href=&quot;https://ajaxlab.github.io/deview2021/blocking&quot;&gt;deview2021/blocking&lt;/a&gt;
+데모처럼 입력값에 대한 픽셀 박스를 랜더링하는 연산이 무거워짐에 따라
+keypress 이벤트에 대한 처리가 지연되고 있음을 경고 플래그를 통해 확인할 수 있습니다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 1200px; &quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 56.333333333333336%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAALCAYAAAB/Ca1DAAAACXBIWXMAABYlAAAWJQFJUiTwAAACUElEQVR42nWS63LaMBCFef9XaqczbSc0vsqW5AsmJtxakkAAGww2t68b2pn+qmbO7Gq1Onuk3R73dfuH2+0euVY1zac+bWA59hVdlNN6huNXTw6v/G/1rkJwvt64CM+HPUvuRQ7O3Zl2/kb3sqZdrDhOX2l+LTmIbbsLnSTecfoL8eU6vdXuhMomROkIJYizMWFS/kExIRyM78iFfNPB8nhjuTsLLixrgdxf7c/83JzYNBd6x+7KetfwXu953Yqtjrx/2PrA+sNfi7/Z37HdH9g1LdWuo6ob9s2eWvymOlFLvD0LYdNUDKYJxcyQjSxDWzJ9GlIOS0xeoG2KLSNGYnO/ZJYrRklKkg8pnhK0ySlMQlxaDscjveVqQ6w9itzgpC4mseRpTChNCHWMch1i4xEYh0SHpKEicDWZduTcJwwtUWSJPSHcd0JYb8myhIFW6DSlnyie1CNWpbLXqCBg4iRkfoEq+ugwI5TOx35CGitspoidjzyX9nqit90upFJEnvkMRImfaPI8YG7lG6yP+yiKA4N5iEj6vqiVgv2EXBdkpY+X+BgVkQ49mnZPb73dEFjNl4EnHe5LRQ8T56JkwCAzRBILtYsfh9g8w9ofpErLCwoRYeQPR4QjEZEqLk0jY1O9o3SC8aV67KED+bMwItAB+cN3jPuDb+ozvnJQnovzGIoiV8hFneRGbh81dEjldW13kC7XFePxlF+zKYtJzuJlTiEzN5y/MB/PWLyWPC+fGU+kw89TRsM3fr6seH/bMJ8tmL/OZaS2VMs3bpczvwHvPB85q/jg7QAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;Example of blocking rendering&quot;
+        title=&quot;&quot;
+        src=&quot;/static/219e96397b3d85a667ab72d28b32c3da/c1b63/blocking-rendering-example.png&quot;
+        srcset=&quot;/static/219e96397b3d85a667ab72d28b32c3da/5a46d/blocking-rendering-example.png 300w,
+/static/219e96397b3d85a667ab72d28b32c3da/0a47e/blocking-rendering-example.png 600w,
+/static/219e96397b3d85a667ab72d28b32c3da/c1b63/blocking-rendering-example.png 1200w,
+/static/219e96397b3d85a667ab72d28b32c3da/d8817/blocking-rendering-example.png 1238w&quot;
+        sizes=&quot;(max-width: 1200px) 100vw, 1200px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 1200px; &quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 43.99999999999999%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAJCAYAAAAywQxIAAAACXBIWXMAABYlAAAWJQFJUiTwAAAB60lEQVR42lXPvW7TUBiA4dwkCzNi4QJ6B0zAhgQSQiyIAQYGQEigbghaUdI4JE6ctHaTOLbj499jB+LEfvniBlSGo/Mj+fH7ddylh+f5uO6S2XyB7TjMZjPmiyWXts1kYrVvSZqSeEuyJCEfW+R9g3Q4IDnvshoNUQODsN+ls85ctJqQJzOKxEFHFqlvUsp76p0RT16Red9J3G+sTp8SX3wmevuA4M0j1Msj1MNbhI9vEzy5g/fsHp0iS9BxgE6UrIBMBSSBj5b33P9JevlBdpPck5rJe3KBU+s1rnFMaLwg/HRE+u4u3sf7LI6fC6jX8rGmzDWF1jJSSRwWlOvfJKFiJeOnKiFeZXiOh1qu8G0He+AyH11gGz0mZz9kGUzPTDq6hFw3FGvQZUOaQRQ1lL9AqYblYn+Xc9gwdxoCD+Z2gzXcMR01DLsN3RMwvwZMv4yl8B/YCFiTZQ1xXLdgHO3w3V17j9SOxdWWVVC3+9SssK2KcW9D/3TDqJsy7avrwiwXrPgL1gewaRHPrQ9gfQOUOnMj4BazV2GcbKS0YmRsD4UCFuV+1TLyvrD5H4xugL7szo6L8VbAHeZ5Ra8FpdKo6OzHTaVqv+f6UBhV7Q+UIH5bKOfwGgyl0J3VXA1yHKtqkX2hKeDYqPgDkZGX4XXYjjAAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;Delay in processing tasks for keypress&quot;
+        title=&quot;&quot;
+        src=&quot;/static/815e3dae1953dd73e6539b5104895244/c1b63/blocking-rendering-performance.png&quot;
+        srcset=&quot;/static/815e3dae1953dd73e6539b5104895244/5a46d/blocking-rendering-performance.png 300w,
+/static/815e3dae1953dd73e6539b5104895244/0a47e/blocking-rendering-performance.png 600w,
+/static/815e3dae1953dd73e6539b5104895244/c1b63/blocking-rendering-performance.png 1200w,
+/static/815e3dae1953dd73e6539b5104895244/2eb79/blocking-rendering-performance.png 1256w&quot;
+        sizes=&quot;(max-width: 1200px) 100vw, 1200px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;경고 플래그 중 하나의 예시로 keypress 이벤트를 처리하는 데 143.41ms이 소요 되었는데
+&lt;a href=&quot;https://web.dev/rail/?utm_source=devtools#goals-and-guidelines&quot;&gt;RAIL&lt;/a&gt;
+모델을 기반으로 생각한다면, 사용자는 입력 이벤트에 대해 100ms 이상 소요되는 것을
+동작과 응답 사이의 연결이 지연되고 있음을 인식하게 되며, 이는 사용자 경험의 감점으로
+이어질 수 있습니다.&lt;/p&gt;
+&lt;p&gt;리엑트는 이러한 사용자 경험에 영향을 끼치는 랜더링 업데이트 과정에서
+동시성을 통해 개선된 인터렉션을 쉽게 구현할 수 있도록 하는 구현체를 제공하고자
+했습니다.&lt;/p&gt;
+&lt;h2 id=&quot;동시성-메커니즘-우선순위&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EB%8F%99%EC%8B%9C%EC%84%B1-%EB%A9%94%EC%BB%A4%EB%8B%88%EC%A6%98-%EC%9A%B0%EC%84%A0%EC%88%9C%EC%9C%84&quot; aria-label=&quot;동시성 메커니즘 우선순위 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;동시성 메커니즘; 우선순위&lt;/h2&gt;
+&lt;p&gt;리엑트에서 동시성을 구현하는 첫번 째 메커니즘은 바로 우선순위입니다. 인터렉션에 의해
+발생한 이벤트와 업데이트 작업들이 어떻게 우선순위는 어떻게 결정되고 할당되는 지
+궁금했는데요. 그 과정에 대해 차근차근 살펴봅시다.&lt;/p&gt;
+&lt;p&gt;우선순위 메커니즘은 사용자 인터렉션 발생을 캐치한 리스너에서부터
+작업 생성 과정과 스케쥴링 단계까지 업데이트를 위한
+작업의 우선순위를 할당하기 위한 전반적인 과정에서 쉽게 찾아볼 수 있습니다.&lt;/p&gt;
+&lt;p&gt;그 이후 진행 중인 작업이 우선 순위가 높은 대기 상태의 작업에 의해 중단되거나,
+같은 우선 순위를 가진 작업에 대해서 일괄 처리될 수 있도록 하는 작업 교통정리
+를 하는 작업 실행 단계에서도 확인할 수 있는데요.&lt;/p&gt;
+&lt;p&gt;한편, 리엑트v17.0 이전에서는 작업의 &lt;a href=&quot;https://github.com/facebook/react/blob/v16.12.0/packages/react-reconciler/src/ReactFiberExpirationTime.js&quot;&gt;만료 시간을 기준으로 우선순위를 부여&lt;/a&gt;하는 메커니즘으로 구현되어 있었습니다.
+반면, 리엑트v17.0 이후에서는 Lane 모델을 착안하여 비트 연산을
+기반으로 우선 순위를 부여하는 방식으로 변경되었는데요.
+먼저, 전반적인 우선순위 메커니즘 기저의 구현체인 Lane을 살펴봅시다.&lt;/p&gt;
+&lt;h3 id=&quot;lane-모델-그리고-lane-우선순위&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#lane-%EB%AA%A8%EB%8D%B8-%EA%B7%B8%EB%A6%AC%EA%B3%A0-lane-%EC%9A%B0%EC%84%A0%EC%88%9C%EC%9C%84&quot; aria-label=&quot;lane 모델 그리고 lane 우선순위 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Lane 모델, 그리고 Lane 우선순위&lt;/h3&gt;
+&lt;p&gt;Lane 모델은 도로의 차선을 모티브로 하여 리엑트에서 우선순위를
+표현하기 위해 구현된 31비트 데이터로 표현된 비트맵입니다.
+작업의 스케쥴링 및 조정 작업 과정의 우선순위를 가진 고유의 작업 스레드를
+표현합니다.&lt;/p&gt;
+&lt;p&gt;실제 레인의 구현에서 확인할 수 있듯, 기본적으로 더 작은 숫자로 표현된
+레인이 높은 우선순위를 갖습니다.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;// react-reconciler/src/ReactFiberLane.new.js
+
+export type Lanes = number;
+export type Lane = number;
+export type LaneMap&amp;lt;T&amp;gt; = Array&amp;lt;T&amp;gt;;
+
+export const TotalLanes = 31;
+
+export const NoLanes: Lanes = /*                        */ 0b0000000000000000000000000000000;
+export const NoLane: Lane = /*                          */ 0b0000000000000000000000000000000;
+export const SyncLane: Lane = /*                        */ 0b0000000000000000000000000000001;
+export const InputContinuousHydrationLane: Lane = /*    */ 0b0000000000000000000000000000010;
+export const InputContinuousLane: Lane = /*             */ 0b0000000000000000000000000000100;
+export const DefaultHydrationLane: Lane = /*            */ 0b0000000000000000000000000001000;
+export const DefaultLane: Lane = /*                     */ 0b0000000000000000000000000010000;
+const TransitionHydrationLane: Lane = /*                */ 0b0000000000000000000000000100000;
+const TransitionLanes: Lanes = /*                       */ 0b0000000001111111111111111000000;
+const TransitionLane1: Lane = /*                        */ 0b0000000000000000000000001000000;
+...
+const RetryLanes: Lanes = /*                            */ 0b0000111110000000000000000000000;
+const RetryLane1: Lane = /*                             */ 0b0000000010000000000000000000000;
+...
+
+export const SomeRetryLane: Lane = RetryLane1;
+export const SelectiveHydrationLane: Lane = /*          */ 0b0001000000000000000000000000000;
+const NonIdleLanes: Lanes = /*                          */ 0b0001111111111111111111111111111;
+export const IdleHydrationLane: Lane = /*               */ 0b0010000000000000000000000000000;
+export const IdleLane: Lane = /*                        */ 0b0100000000000000000000000000000;
+export const OffscreenLane: Lane = /*                   */ 0b1000000000000000000000000000000;&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;Lane 모델은 우선순위를 두 가지 중요한 컨셉으로 분리합니다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;Task Prioritization, A 작업이 B 작업보다 급한가?&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Task Batching, A 작업이 이 그룹 텍스크에 속하는 가?&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;작업 우선순위 개념을 통해 작업의 우선순위를 기준으로 작업의
+우선 실행권을 부여하고, 작업 배칭 개념을 착안하여
+가령 CPU, I/O, CPU 순의 작업 예약에 대해,
+I/O 작업을 다른 그룹으로 분리하여 일괄 처리함으로서 CPU 작업의 병목을
+방지할 수 있도록 합니다.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;CPU 작업이 I/O 작업보다 우선순위가 낮아 지속적인 양보가 발생하게 되면 CPU 작업처리에
+진전이 없을 여지를 방지하기 위해 I/O 작업들을 묶어 진행할 수 있도록 하는 것은
+리엑트v18에서 제공하는 &lt;a href=&quot;https://github.com/reactwg/react-18/discussions/21&quot;&gt;Automatic Batching&lt;/a&gt;
+의 기저에 있는 동작 방식인듯 합니다. 깊이 있게 살펴볼 부분들이 차고 넘치네요.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Task Prioritization이 표현되는 각각의 레인이 가지고 있는
+비트 값이 우선순위를 나타내고 있으며, 레인의 이름을 통해
+어떠한 업데이트가 소유할 수 있는 레인인지 파악해볼 수 있습니다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;&lt;strong&gt;SyncLane&lt;/strong&gt;, 이산적인(discrete) 사용자 상호 작용에 대한 업데이트&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;&lt;strong&gt;InputContinuousLane&lt;/strong&gt;, 연속적인(continuous) 사용자 상호 작용에 대한 업데이트&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;&lt;strong&gt;DefaultLane&lt;/strong&gt;, setTimeout, 네트워크 요청 등에 의해 생성된 업데이트&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;&lt;strong&gt;TransitionLane&lt;/strong&gt;, Suspense, useTransition, useDefferredValue에 의해 생성된 업데이트&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;레인 모델이 어떻게 구현되어 있는 지 간단하게 살펴보았다면,
+어떻게 적용되어 사용되는 지 확인해볼 차례입니다.
+리엑트에서 Lane 모델을 기반으로 Lane 우선순위 개념을 이벤트 우선순위와
+스케쥴러 우선순위에 녹여냈는 지 살펴봅시다.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;레인에 대한 추가적인 내용은 초기 레인 모델을 구현한 &lt;a href=&quot;https://github.com/facebook/react/pull/18796&quot;&gt;react/pull/18796&lt;/a&gt;
+PR을 참고하시면 좋습니다.&lt;/em&gt;&lt;/p&gt;
+&lt;h3 id=&quot;이벤트-우선순위&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EC%9D%B4%EB%B2%A4%ED%8A%B8-%EC%9A%B0%EC%84%A0%EC%88%9C%EC%9C%84&quot; aria-label=&quot;이벤트 우선순위 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;이벤트 우선순위&lt;/h3&gt;
+&lt;p&gt;리엑트는 사용자 인터렉션에 의해 발생된 이벤트를 인위적으로 구분짓고,
+구분된 이벤트를 묶어 우선순위를 결정짓습니다.
+여기서, 크게 두 종류로 구분되어 루트에 바인딩될 때 어느 범주에 속한
+이벤트인지에 따라 우선순위가 부여됩니다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;이산적인 이벤트 (e.g. click, keydown, focusin, ..)&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;연속적인 이벤트 (e.g. drag, pointermove, scroll, ..)&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;// react-reconciler/src/ReactEventPriority.new.js
+
+export const DiscreteEventPriority: EventPriority = SyncLane;
+export const ContinuousEventPriority: EventPriority = InputContinuousLane;
+export const DefaultEventPriority: EventPriority = DefaultLane;
+export const IdleEventPriority: EventPriority = IdleLane;&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;잠시 이산적인 이벤트와 연속적인 이벤트를 구분짓는 이유를 생각해보자면,
+가령 사용자가 문서를 읽다가, 문서에 참조되어 있는 링크를 클릭하는
+이산적인 이벤트를 발생시켰다면 이는 즉각적으로 반응하기를 원할겁니다.&lt;/p&gt;
+&lt;p&gt;반면 문서를 읽을 때 시선의 흐름에 따라 사용자가 포인터를 움직였다면,
+이로 인해 발생한 연속적인 이벤트에 대해서는 사용자 입장에서 성능에 영향을
+줄 것이라 생각하기 힘들고, 또한 빠르게 반응해주기를 원하는 이벤트라고
+간주하기 어려울 수 있기 때문입니다.
+관련해서 &lt;a href=&quot;https://wicg.github.io/is-input-pending/#continuous-events&quot;&gt;연속적인 이벤트(Continuous events)&lt;/a&gt;를 참고할 수 있습니다.&lt;/p&gt;
+&lt;p&gt;다시 돌아와, 앞서 살펴보았던 31비트로 구성된 Lane 값들이 이벤트 우선순위
+할당되는 값으로 사용되고 있으며, 각각의 이벤트에 대해 우선순위를 반환하는 함수가
+구현되어 있는 것을 확인할 수 있습니다.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;// react-dom/src/events/ReactDOMEventListener.js
+
+export function getEventPriority(domEventName: DOMEventName): * {
+  switch (domEventName) {
+    case &amp;#39;cancel&amp;#39;:
+    case &amp;#39;click&amp;#39;:
+    case &amp;#39;close&amp;#39;:
+    case &amp;#39;contextmenu&amp;#39;:
+    ...
+      return DiscreteEventPriority;
+    case &amp;#39;drag&amp;#39;:
+    case &amp;#39;dragenter&amp;#39;:
+    case &amp;#39;dragexit&amp;#39;:
+    case &amp;#39;dragleave&amp;#39;:
+    ...
+      return ContinuousEventPriority;
+    case &amp;#39;message&amp;#39;: {
+      const schedulerPriority = getCurrentSchedulerPriorityLevel();
+      switch (schedulerPriority) {
+        case ImmediateSchedulerPriority:
+          return DiscreteEventPriority;
+        case UserBlockingSchedulerPriority:
+          return ContinuousEventPriority;
+        ...
+      }
+    }
+    default:
+      return DefaultEventPriority;
+  }
+}&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;&lt;em&gt;여기서 ‘message’ 이벤트는 따로 처리해주는 것을 확인할 수 있는데, 협력적 스케쥴링 모델을
+사용하고, 정확한 스케쥴링 타임을 위해 리엑트 스케쥴러에서는 MessageChannel API를 기반으로
+구현되어 있습니다. 따라서 ‘message’ 이벤트가 스케쥴러 콜백일 수 있기 때문에
+‘message’ 이벤트에 대해서는 네이티브 스케쥴러에 대한 현재 우선 순위를 확인하여 반환합니다.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;getEventPriority()&lt;/code&gt; 를 따라 올라가다 보면, 대응되는 이벤트 우선순위를
+각각의 이벤트 리스너에 래핑시키고, 우선순위가 래핑된 이벤트 리스너를 반환하는 곳에서
+사용됩니다.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;// react-dom/src/events/ReactDOMEventListener.js
+
+export function createEventListenerWrapperWithPriority(
+  targetContainer: EventTarget,
+  domEventName: DOMEventName,
+  eventSystemFlags: EventSystemFlags
+): Function {
+  const eventPriority = getEventPriority(domEventName);
+  let listenerWrapper;
+  switch (eventPriority) {
+    case DiscreteEventPriority:
+      listenerWrapper = dispatchDiscreteEvent;
+      break;
+    case ContinuousEventPriority:
+      listenerWrapper = dispatchContinuousEvent;
+      break;
+    case DefaultEventPriority:
+    default:
+      listenerWrapper = dispatchEvent;
+      break;
+  }
+  return listenerWrapper.bind(
+    null,
+    domEventName,
+    eventSystemFlags,
+    targetContainer
+  );
+}&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;결국 &lt;code class=&quot;language-text&quot;&gt;createRoot()&lt;/code&gt; 에서
+리엑트17 이후 버전의 &lt;a href=&quot;https://ko.reactjs.org/blog/2020/08/10/react-v17-rc.html#changes-to-event-delegation&quot;&gt;이벤트 위임 메커니즘&lt;/a&gt;
+에 입각하여, 우선 순위가 래핑된 이벤트 리스너들이 모두 루트에 바인딩되게 됩니다.&lt;/p&gt;
+&lt;p&gt;이를 통해 사용자 상호 인터렉션에 따라 발생한 이벤트 우선순위는,
+우선순위가 래핑된 이벤트 리스너를 통해 주입받을 수 있게 됩니다.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;// react-dom/src/client/ReactDOMRoot.js
+
+export function createRoot(
+  container: Element | Document | DocumentFragment,
+  options?: CreateRootOptions,
+): RootType {
+  ...
+  const root = createContainer(
+    ...
+  );
+  markContainerAsRoot(root.current, container);
+
+  const rootContainerElement: Document | Element | DocumentFragment =
+    container.nodeType === COMMENT_NODE
+      ? (container.parentNode: any)
+      : container;
+  listenToAllSupportedEvents(rootContainerElement); //**
+
+  return new ReactDOMRoot(root);
+}&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;h3 id=&quot;스케쥴링-우선순위&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EC%8A%A4%EC%BC%80%EC%A5%B4%EB%A7%81-%EC%9A%B0%EC%84%A0%EC%88%9C%EC%9C%84&quot; aria-label=&quot;스케쥴링 우선순위 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;스케쥴링 우선순위&lt;/h3&gt;
+&lt;p&gt;스케쥴링 우선순위는 스케쥴러 기반의 리엑트 업데이트 작업이 가지는
+우선순위입니다. 스케쥴러는 스케쥴링 우선순위를 통해 산발적으로
+발생하는 작업들의 교통정리를 진행합니다.&lt;/p&gt;
+&lt;p&gt;가령 이벤트가 발생하여 setState를 통해 부가적인 상태 업데이트가
+디스패치되면, 리콘실러는 업데이트 작업의 정보를 담은 객체를 생성하여
+스케쥴러에게 전달하게 되는데, 업데이트 객체를 생성하는 단계에서
+작업의 스케쥴링 우선순위를 구하기 위한 단계가 포함됩니다.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;// react-reconciler/src/ReactFiberHooks.new.js
+
+function dispatchSetState&amp;lt;S, A&amp;gt;(
+  fiber: Fiber,
+  queue: UpdateQueue&amp;lt;S, A&amp;gt;,
+  action: A,
+) {
+  ...
+
+  const lane = requestUpdateLane(fiber);
+
+  const update: Update&amp;lt;S, A&amp;gt; = {
+    lane,
+    action,
+    hasEagerState: false,
+    eagerState: null,
+    next: (null: any),
+  };
+
+  ...
+}&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;업데이트 객체에 전달되는 우선순위를 구하는 &lt;code class=&quot;language-text&quot;&gt;requestUpdateLane()&lt;/code&gt;
+는 어떻게 이벤트 우선순위를 얻어오는 지 살펴봅시다.&lt;/p&gt;
+&lt;h3 id=&quot;requestupdatelane&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#requestupdatelane&quot; aria-label=&quot;requestupdatelane permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;requestUpdateLane&lt;/h3&gt;
+&lt;p&gt;리엑트는 동시성 기능을 담은 모드와 기존 레거시 모드를 함께 제공하고
+있기 때문에, 먼저 동시성 기능이 제공되는 모드인지 확인하는 과정을
+거칩니다. 만약 아니라면, 우선순위가 가장 높은 &lt;code class=&quot;language-text&quot;&gt;SyncLane&lt;/code&gt;을 반환합니다.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;export function requestUpdateLane(fiber: Fiber): Lane {
+  const mode = fiber.mode;
+  if ((mode &amp;amp; ConcurrentMode) === NoMode) {
+    return (SyncLane: Lane);
+  }
+  ...
+}&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;한편 동시성 기능을 제공하는 모드라면, 먼저 현재 실행 중인 작업이 있는 지
+확인합니다. 만약 있다면, 현재 실행 중인 작업의 레인이 직접 반환되고,
+새 작업이 기존 작업과 같은 우선순위를 부여받게 됩니다.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;let workInProgressRootRenderLanes: Lanes = NoLanes;
+
+export function requestUpdateLane(fiber: Fiber): Lane {
+  ...
+  else if (
+    !deferRenderPhaseUpdateToNextBatch &amp;amp;&amp;amp;
+    (executionContext &amp;amp; RenderContext) !== NoContext &amp;amp;&amp;amp;
+    workInProgressRootRenderLanes !== NoLanes
+  ) {
+    return pickArbitraryLane(workInProgressRootRenderLanes);
+  }
+  ...
+}&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;// react-reconciler/src/ReactFiberLane.new.js
+
+export function getHighestPriorityLane(lanes: Lanes): Lane {
+  return lanes &amp;amp; -lanes;
+}
+
+export function pickArbitraryLane(lanes: Lanes): Lane {
+  return getHighestPriorityLane(lanes);
+}&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;위 조건에 포함되지 않았다면, 이제 현재 이벤트가 전환 우선 순위인지에 대한
+여부를 결정하고 맞다면 적절한 전환 우선순위에 할당하게 됩니다.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;let currentEventTransitionLane: Lanes = NoLanes;
+
+export function requestUpdateLane(fiber: Fiber): Lane {
+  ...
+  const isTransition = requestCurrentTransition() !== NoTransition;
+  if (isTransition) {
+    if (__DEV__ &amp;amp;&amp;amp; ReactCurrentBatchConfig.transition !== null) {
+      const transition = ReactCurrentBatchConfig.transition;
+      if (!transition._updatedFibers) {
+        transition._updatedFibers = new Set();
+      }
+
+      transition._updatedFibers.add(fiber);
+    }
+    if (currentEventTransitionLane === NoLane) {
+      currentEventTransitionLane = claimNextTransitionLane();
+    }
+    return currentEventTransitionLane;
+  }
+}&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;// react-reconciler/src/ReactFiberLane.new.js
+
+export function claimNextTransitionLane(): Lane {
+  const lane = nextTransitionLane;
+  nextTransitionLane &amp;lt;&amp;lt;= 1;
+  if ((nextTransitionLane &amp;amp; TransitionLanes) === NoLanes) {
+    nextTransitionLane = TransitionLane1;
+  }
+  return lane;
+}&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;이 때, 생성된 작업에 대해 맨 오른쪽 비트를 소유하는 &lt;code class=&quot;language-text&quot;&gt;TransitionLane&lt;/code&gt;을
+할당하고, 그 이후에 생성된 전환 작업은 비트가 왼쪽으로 한 자리 이동한
+레인 즉, 우선순위가 보다 낮은 &lt;code class=&quot;language-text&quot;&gt;TransitionLane&lt;/code&gt;이 할당합니다.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;TransitionLane1 = 0b0000000000000000000000001000000;
+TransitionLane2 = 0b0000000000000000000000010000000;
+...
+
+TransitionLanes = 0b0000000001111111111111111000000;&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;전환 우선순위 작업이 아닌 경우에는 어떻게 처리될까요? 이벤트 우선순위 섹션에서
+우선순위가 래핑된 이벤트 리스너가 모두 루트에 바인딩되는 걸 확인했었는데요.
+여기서 이벤트가 발생하면 &lt;code class=&quot;language-text&quot;&gt;getCurrentUpdatePriority()&lt;/code&gt;가 호출되어
+현재 이벤트 우선순위가 반환되어 스케쥴링 우선순위로 사용됩니다.&lt;/p&gt;
+&lt;p&gt;만약 현재 이벤트 우선순위가 비어있다면 동일하게 &lt;code class=&quot;language-text&quot;&gt;getCurrentUpdatePriority()&lt;/code&gt;
+에서 외부 이벤트의 우선순위를 가져옵니다. 이런 케이스는 가령, &lt;code class=&quot;language-text&quot;&gt;setState&lt;/code&gt;가
+&lt;code class=&quot;language-text&quot;&gt;setTimeout&lt;/code&gt;에서 호출된 케이스입니다.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;export function requestUpdateLane(fiber: Fiber): Lane {
+  ...
+  const updateLane: Lane = (getCurrentUpdatePriority(): any);
+  if (updateLane !== NoLane) {
+    return updateLane;
+  }
+
+  const eventLane: Lane = (getCurrentEventPriority(): any);
+  return eventLane;
+}&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;결과적으로 얻어진 스케쥴링 우선순위는 업데이트 객체에 할당됩니다.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;export function createUpdate(eventTime: number, lane: Lane): Update&amp;lt;*&amp;gt; {
+  const update: Update&amp;lt;*&amp;gt; = {
+    eventTime,
+    lane,
+
+    tag: UpdateState,
+    payload: null,
+    callback: null,
+
+    next: null,
+  };
+  return update;
+}&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;다음으로 업데이트해야 하는 컨텐츠와 업데이트 콜백 함수를
+담아 업데이트 객체를 완성하게 되고, 현재 컴포넌트에 해당하는
+Fiber 노드의 업데이트 대기열에 업데이트 객체가 추가됩니다.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;update.payload = payload;
+if (callback !== undefined &amp;amp;&amp;amp; callback !== null) {
+  update.callback = callback;
+}&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;enqueueUpdate(fiber, update, lane);&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;위와 같은 과정들을 통해 리엑트는 Lane 모델을 기반으로 우선순위
+메커니즘을 구현하고 실제 이벤트의 발생과 작업 생성 단계에서
+어떻게 적절한 우선순위를 할당하는 지 그 과정을 살펴보았습니다.&lt;/p&gt;
+&lt;h2 id=&quot;동시성-메커니즘-양보&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EB%8F%99%EC%8B%9C%EC%84%B1-%EB%A9%94%EC%BB%A4%EB%8B%88%EC%A6%98-%EC%96%91%EB%B3%B4&quot; aria-label=&quot;동시성 메커니즘 양보 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;동시성 메커니즘; 양보&lt;/h2&gt;
+&lt;p&gt;각각의 작업에 대해 우선순위가 어떻게 할당되는 지 확인했다면,
+이제 우선순위를 기준으로 현재 진행 중인 작업이 점유하고 있는
+메인 스레드가 대기 중인 높은 작업에 의해 중단되고 메인 스레드의 점유를
+양보하는 지 알아봅시다.&lt;/p&gt;
+&lt;p&gt;브라우저는 랜더링 엔진에게 메인 스레드 점유를 위임하게 되면,
+랜더링 과정 중 발생한 사용자 입력에 대해 즉시 처리할 수 없게 되기 때문에
+사용자가 즉각적으로 반응하고 처리되기를 기대하는 이벤트에 대해
+랜더링 작업 중에는 처리할 수 없게 되는데요.&lt;/p&gt;
+&lt;p&gt;리엑트는 이러한 근본적인 원인을 해결하고자 모든 랜더링을 인터럽트 가능하도록 하여
+우선순위가 높은 작업이 텍스크 스택에 들어오면 진행중이던 작업을 중단하고 메인 스레드에게
+점유를 양보할 수 있는 메커니즘을 구현하게 됩니다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 1200px; &quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 56.333333333333336%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAALCAYAAAB/Ca1DAAAACXBIWXMAABYlAAAWJQFJUiTwAAAAwUlEQVR42rWSzQ6DIBCEff/3q4m3HoxJrYVFBBF/piwxHtqqNbab7IEQPmZmN8FGTdO09MvF6psEP65VYN/3yLIMlzRFnueL4o4q6KrEQ0hIITCO4zbQe49hGGJrpXAvCggp45mB2lBsIkLTNPsKjTHonIMPCm0AlsUVVCu0bfue5Z5lfsC/uhlogoobA3UNa+1xIBdb41xiXq5DFTIjRZ+nfXTKbJ+taq0XB6eAbF+ESXIEp9eGi63z+nyj7G+L/QRio2Xb6qv/ngAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;When the user&amp;#39;s input comes in, rendering is interrupted&quot;
+        title=&quot;&quot;
+        src=&quot;/static/e2ceddd26691f38b0dec421c08a40c58/c1b63/interruption-and-yield.png&quot;
+        srcset=&quot;/static/e2ceddd26691f38b0dec421c08a40c58/5a46d/interruption-and-yield.png 300w,
+/static/e2ceddd26691f38b0dec421c08a40c58/0a47e/interruption-and-yield.png 600w,
+/static/e2ceddd26691f38b0dec421c08a40c58/c1b63/interruption-and-yield.png 1200w,
+/static/e2ceddd26691f38b0dec421c08a40c58/d61c2/interruption-and-yield.png 1800w,
+/static/e2ceddd26691f38b0dec421c08a40c58/97a96/interruption-and-yield.png 2400w,
+/static/e2ceddd26691f38b0dec421c08a40c58/5fe07/interruption-and-yield.png 3422w&quot;
+        sizes=&quot;(max-width: 1200px) 100vw, 1200px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;하지만 메인스레드를 양보하기 이전에, 메인 스레드를 점유하여 랜더링 연산을
+전개하고 있는 과정에서 사용자의 입력에 대한 처리가 대기 중임을 확인하고
+메인 스레드 점유를 양보해야 하는 지에 대해 판단하는 것이 더 우선적으로
+가능해야 했습니다.&lt;/p&gt;
+&lt;p&gt;이를 위해 페이스북은 메인스레드를 점유당하고 있는 상황에서 우선순위가 높은 작업이
+대기 중임을 확인하는 구현체인 &lt;a href=&quot;https://wicg.github.io/is-input-pending/&quot;&gt;isInputPending&lt;/a&gt;
+를 브라우저 API에 처음으로 기여하게 됩니다.&lt;/p&gt;
+&lt;p&gt;실제로 리엑트의 &lt;a href=&quot;https://github.com/facebook/react/blob/main/packages/scheduler/src/forks/Scheduler.js&quot;&gt;스케쥴러&lt;/a&gt; 에는
+&lt;code class=&quot;language-text&quot;&gt;isInputPending&lt;/code&gt;을 사용하기 위해 호스트 환경에 의존적인 API를 사용할 수 있는 지에
+대해 판단하는 플래그들이 존재합니다.&lt;/p&gt;
+&lt;h3 id=&quot;shouldyieldtohost&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#shouldyieldtohost&quot; aria-label=&quot;shouldyieldtohost permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;shouldYieldToHost&lt;/h3&gt;
+&lt;p&gt;이제 랜더링 과정에서 우선순위가 높은 작업이 대기 중임을 확인할 수 있는 구현체를
+사용해서 내부적으로 어떻게 양보가 이루어질 수 있도록 구현되어 있는 지 확인해봅시다.&lt;/p&gt;
+&lt;p&gt;양보가 필요한 상황인지를 판단하기 위한 첫 검증은 현재 작업을
+처리하기 위해 얼마만큼의 시간을 소요했는 지를 확인합니다.
+경과된 시간이 &lt;code class=&quot;language-text&quot;&gt;frameInterval&lt;/code&gt; 값보다 작다면, 메인 스레드는 단일 프레임만큼
+아주 짧은 시간동안만 차단되어 있었기 때문에 양보를 거절합니다.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;// SchedulerFeatureFlags.js
+
+export const frameYieldMs = 5;&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;import { frameYieldMs } from &amp;#39;../SchedulerFeatureFlags&amp;#39;;
+
+let frameInterval = frameYieldMs;
+
+function shouldYieldToHost() {
+  const timeElapsed = getCurrentTime() - startTime;
+
+  if (timeElapsed &amp;lt; frameInterval) {
+    return false;
+  }
+  ...
+}&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;이후의 스코프에서는 메인 스레드가 무시할 수 없는 시간 동안 차단되었을 때
+대기 중인 페인트 혹은 사용자 입력 작업이 존재한다면,
+브라우저가 높은 우선 순위 작업을 수행할 수 있도록 메인 스레드에
+대한 점유를 양보합니다.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;let needsPaint = false;
+
+function requestPaint() {
+  if (
+    enableIsInputPending &amp;amp;&amp;amp;
+    navigator !== undefined &amp;amp;&amp;amp;
+    navigator.scheduling !== undefined &amp;amp;&amp;amp;
+    navigator.scheduling.isInputPending !== undefined
+  ) {
+    needsPaint = true;
+  }
+}
+
+function shouldYieldToHost() {
+  ...
+  if (enableIsInputPending) {
+    if (needsPaint) {
+      return true;
+    }
+  }
+  ...
+}&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;여기서 &lt;code class=&quot;language-text&quot;&gt;requestPaints()&lt;/code&gt; 는 isInputPending API를 사용할 수 있는 지,
+사용할 수 있다면 현재 사용자 입력에 대한 페인트 작업이 대기 중인지를 판단하여
+&lt;code class=&quot;language-text&quot;&gt;needsPaint&lt;/code&gt; 플래그를 반환하게 역할을 하는데요.&lt;/p&gt;
+&lt;p&gt;이를 통해 리콘실러는 VDOM의 변경사항을 DOM에 모두 커밋하고
+&lt;code class=&quot;language-text&quot;&gt;requestPaints()&lt;/code&gt;를 호출하여 페인트 작업이 필요하다는 것을 스케쥴러에게 전달할 수 있게 됩니다.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;// ReactFiberWorkLoop.new.js
+
+import { requestPaint } from &amp;#39;./Scheduler&amp;#39;;
+
+function commitRootImpl(...) {
+  ...
+  requestPaint();
+}&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;다음으로는 경과된 시간이 연속적인 입력 인터벌보다 짧은 지 검증합니다.
+&lt;a href=&quot;#%EC%9D%B4%EB%B2%A4%ED%8A%B8-%EC%9A%B0%EC%84%A0%EC%88%9C%EC%9C%84&quot;&gt;이벤트 우선순위&lt;/a&gt;에서 이산적, 연속적인 이벤트를 구분짓는 같은 맥락으로,
+isInputPending은 단순히 모든 사용자 이벤트를 동일하게 처리하지 않고,
+&lt;a href=&quot;https://wicg.github.io/is-input-pending/#continuous-events&quot;&gt;연속적인 이벤트&lt;/a&gt; (e.g. click)와 이산적인 이벤트 (e.g. mouseover)를 구분지어
+&lt;strong&gt;연속적인 이벤트에 대해 양보가 너무 자주 발생하게 되는 것을 방지합니다.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;즉 이 검증 단계에서는, 연속적인 이벤트에 대한 처리 작업을 즉시 시작하지 않을 간격을 두고,
+그 시간 동안에는 판단을 온전히 브라우저에게 맡깁니다.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;// SchedulerFeatureFlags.js
+
+export const continuousYieldMs = 50;&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;import { continuousYieldMs } from &amp;#39;../SchedulerFeatureFlags&amp;#39;
+
+const continuousInputInterval = continuousYieldMs;
+
+const isInputPending =
+  typeof navigator !== &amp;#39;undefined&amp;#39; &amp;amp;&amp;amp;
+  navigator.scheduling !== undefined &amp;amp;&amp;amp;
+  navigator.scheduling.isInputPending !== undefined
+    ? navigator.scheduling.isInputPending.bind(navigator.scheduling)
+    : null;
+
+function shouldYieldToHost() {
+  ...
+  if (timeElapsed &amp;lt; continuousInputInterval) {
+    if (isInputPending !== null) {
+      return isInputPending();
+    }
+  }
+  ...
+}&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;마지막으로 최대 간격 이내에 보류 중인 연속적이거나, 이산적인 모든 이벤트에 대해
+양보합니다. 이후 모든 분기 처리가 담지 못한 케이스에 대해서는,
+보류 중인 입력이 없더라도 네트워크 이벤트와 같은 외부 이벤트에 의한 작업들이
+대기 중일 수 있다는 가정하에 무조건적으로 양보하게 됩니다.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;// SchedulerFeatureFlags.js
+
+export const maxYieldMs = 300;&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;import { maxYieldMs } from &amp;#39;../SchedulerFeatureFlags&amp;#39;
+
+function shouldYieldToHost() {
+    ...
+    else if (timeElapsed &amp;lt; maxInterval) {
+      // Yield if there&amp;#39;s either a pending discrete or continuous input.
+      if (isInputPending !== null) {
+        return isInputPending(continuousOptions);
+      }
+    } else {
+      return true;
+    }
+  }
+
+  return true;
+}&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;초기에 분기처리 되었던 호스트 환경에 의존적인 isInputPending API를
+사용할 수 없는 경우 또한 무조건적으로 양보합니다.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;function shouldYieldToHost() {
+  ...
+  if (enableIsInputPending) {
+    ...
+  }
+
+  return true;
+}&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;지금까지 알아본 &lt;code class=&quot;language-text&quot;&gt;shouldYieldToHost()&lt;/code&gt;는 스케쥴러의 &lt;code class=&quot;language-text&quot;&gt;workLoop()&lt;/code&gt;에서 사용됩니다. 현재 진행 중인 작업의 만료시간이 현재 시간에 비해 여유가 있는 시점에서
+우선 순위가 더 높은 작업이 보류되고 있다면, 메인 스레드에게 제어권을 양보하고, 만료 시간이
+지난 작업에 대해서는 양보하지 않고 동기적으로 바쁘게 작업을 이어나갑니다.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;function workLoop(hasTimeRemaining, initialTime) {
+  ...
+  while (
+    currentTask !== null &amp;amp;&amp;amp;
+    !(enableSchedulerDebugging &amp;amp;&amp;amp; isSchedulerPaused)
+  ) {
+    if (
+      currentTask.expirationTime &amp;gt; currentTime &amp;amp;&amp;amp;
+      (!hasTimeRemaining || shouldYieldToHost())
+    ) {
+      break;
+    }
+  ...
+  }
+}&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;추가적으로 스케쥴러가 아닌, 동시성 모드에서 컴포넌트를 재조정하는 작업이 담긴
+&lt;code class=&quot;language-text&quot;&gt;workLoopConcurrent()&lt;/code&gt; 에서도 사용되는데요. &lt;code class=&quot;language-text&quot;&gt;shouldYieldToHost()&lt;/code&gt; 통해
+진행되던 재조정 작업이 중지될 수 있음이 조건에 담겨있습니다.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;// react-reconciler/src/ReactFiberWorkLoop.new.js
+
+import { shouldYield } from &amp;#39;./Scheduler&amp;#39;;
+function workLoopConcurrent() {
+  while (workInProgress !== null &amp;amp;&amp;amp; !shouldYield()) {
+    performUnitOfWork(workInProgress);
+  }
+}&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;이를 통해 리콘실러는 &lt;code class=&quot;language-text&quot;&gt;workLoopConcurrent()&lt;/code&gt;를 통해 현재 작업중이던 루트 혹은 Lane이
+변경되면, 루트에 대기중인 작업들을 모두 비우고, 변경된 레인의 작업이 진행될 수 있도록 합니다.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;function renderRootConcurrent(root: FiberRoot, lanes: Lanes) {
+  const prevExecutionContext = executionContext;
+  executionContext |= RenderContext;
+  const prevDispatcher = pushDispatcher();
+
+  if (workInProgressRoot !== root || workInProgressRootRenderLanes !== lanes) {
+    ...
+        const memoizedUpdaters = root.memoizedUpdaters;
+        if (memoizedUpdaters.size &amp;gt; 0) {
+          restorePendingUpdaters(root, workInProgressRootRenderLanes);
+          memoizedUpdaters.clear();
+        }
+
+        movePendingFibersToMemoized(root, lanes);
+      }
+    }
+  }
+  ...
+
+  do {
+    try {
+      workLoopConcurrent();
+      ...
+    }
+  }&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;h3 id=&quot;마치면서&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EB%A7%88%EC%B9%98%EB%A9%B4%EC%84%9C&quot; aria-label=&quot;마치면서 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;마치면서&lt;/h3&gt;
+&lt;p&gt;리엑트의 동시성 기능을 담은 구현체들을 살펴보았습니다. 이번 글에서는
+전반적인 동시성 기능에 대한 서론과 우선순위가 어떻게 할당되는 지, 그리고
+어떻게 메인스레드 점유가 양보되는 지에 대해 알아보았는데요.&lt;/p&gt;
+&lt;p&gt;공부를 하면 할수록 사용자 인터페이스를 구축하는 기능을 제공하는 리엑트가
+사용자 경험과 사용성 개선을 위해 고민하고 쉽게 구현할 수 있는 기능들을
+제공하기 위해 얼마나 노력하는 지 느낄 수 있어 큰 자극을 얻을 수 있었습니다.&lt;/p&gt;
+&lt;p&gt;한글로 정리된 글들이 많지 않아 다양한 레퍼런스들을 찾아보고, 흩어진 자료를
+모아 정리하려는 목적으로 글을 정리해보았습니다. 직접 리엑트 구현체 코드들을
+들여다보면서 어려움이 많았는데, 어설프게 정리하고 싶지 않아 생각보다 오랜 시간
+끙끙댔던 시간이었는데요.
+아직 살펴볼 내용들이 차고 넘치기 때문에 끊고 다음 글에서 이어서 정리하는
+시간을 가지려 합니다.&lt;/p&gt;
+&lt;p&gt;사실, 리엑트에서 제공하는 동시성 기능 API들을 어떻게 사용하는 지 알아보고
+적절하게 사용을 즐기는 공부를 하면 마음 편하겠지만, 직접 구현체들의 내막을
+들여다보고 나서 그 이해가 동시성 기능 API들을 사용할 때 보다 더 깊은
+사용법을 이끌어낼 수 있지 않을까 하는 기대를 합니다.&lt;/p&gt;
+&lt;p&gt;잘못된 설명이나, 얕은 지식으로 어설프게 설명되어 있는 부분에 대해서는 언제든
+지적해주시면 다시금 수정하고 정리할 수 있도록 하겠습니다. 감사합니다 :)&lt;/p&gt;
+&lt;h2 id=&quot;reference&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#reference&quot; aria-label=&quot;reference permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Reference&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;https://deview.kr/2021/sessions/518&quot;&gt;Inside React (동시성을 구현하는 기술)&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://dev.to/okmttdhr/what-is-lane-in-react-4np7&quot;&gt;What is “Lane” in React?&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://goidle.github.io/react/in-depth-react-preview/&quot;&gt;React 톺아보기 - 01. Preview&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/facebook/react/pull/18796&quot;&gt;github.com/facebook/react/pull/18796&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/facebook/react&quot;&gt;github.com/facebook/react&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://wicg.github.io/is-input-pending/#continuous-events&quot;&gt;wicg.github.io/is-input-pending&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://juejin.cn/post/7008802041602506765&quot;&gt;React 소스 코드 파싱 우선 순위 Lane 모델&lt;/a&gt;&lt;/p&gt;</content:encoded></item><item><title><![CDATA[리엑트 동시성 매커니즘들은 어떻게 구현되어 있을까 - 01]]></title><description><![CDATA[리엑트v18에서 동시성 기능을 정식으로 출시하였습니다. 대표적으로,
+Automatic batching for fewer renders, SSR support for
 Suspense, _Fixes for Suspense behavior quirks…]]></description><link>https://youthfulhps.dev/react/react-concurrent-mode-01/</link><guid isPermaLink="false">https://youthfulhps.dev/react/react-concurrent-mode-01/</guid><pubDate>Sat, 11 Jun 2022 16:07:02 GMT</pubDate><content:encoded>&lt;p&gt;리엑트v18에서 동시성 기능을 정식으로 출시하였습니다. 대표적으로,
 &lt;em&gt;Automatic batching for fewer renders&lt;/em&gt;, &lt;em&gt;SSR support for
 Suspense&lt;/em&gt;, _Fixes for Suspense behavior quirks_와 같은 내부적인
@@ -8259,818 +9071,6 @@ export function claimNextTransitionLane(): Lane {
   return lane;
 }
 &lt;/code&gt;
-        &lt;/deckgo-highlight-code&gt;
-&lt;p&gt;이 때, 생성된 작업에 대해 맨 오른쪽 비트를 소유하는 &lt;code class=&quot;language-text&quot;&gt;TransitionLane&lt;/code&gt;을
-할당하고, 그 이후에 생성된 전환 작업은 비트가 왼쪽으로 한 자리 이동한
-레인 즉, 우선순위가 보다 낮은 &lt;code class=&quot;language-text&quot;&gt;TransitionLane&lt;/code&gt;이 할당합니다.&lt;/p&gt;
-&lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
-          &lt;code slot=&quot;code&quot;&gt;TransitionLane1 = 0b0000000000000000000000001000000;
-TransitionLane2 = 0b0000000000000000000000010000000;
-...
-
-TransitionLanes = 0b0000000001111111111111111000000;&lt;/code&gt;
-        &lt;/deckgo-highlight-code&gt;
-&lt;p&gt;전환 우선순위 작업이 아닌 경우에는 어떻게 처리될까요? 이벤트 우선순위 섹션에서
-우선순위가 래핑된 이벤트 리스너가 모두 루트에 바인딩되는 걸 확인했었는데요.
-여기서 이벤트가 발생하면 &lt;code class=&quot;language-text&quot;&gt;getCurrentUpdatePriority()&lt;/code&gt;가 호출되어
-현재 이벤트 우선순위가 반환되어 스케쥴링 우선순위로 사용됩니다.&lt;/p&gt;
-&lt;p&gt;만약 현재 이벤트 우선순위가 비어있다면 동일하게 &lt;code class=&quot;language-text&quot;&gt;getCurrentUpdatePriority()&lt;/code&gt;
-에서 외부 이벤트의 우선순위를 가져옵니다. 이런 케이스는 가령, &lt;code class=&quot;language-text&quot;&gt;setState&lt;/code&gt;가
-&lt;code class=&quot;language-text&quot;&gt;setTimeout&lt;/code&gt;에서 호출된 케이스입니다.&lt;/p&gt;
-&lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
-          &lt;code slot=&quot;code&quot;&gt;export function requestUpdateLane(fiber: Fiber): Lane {
-  ...
-  const updateLane: Lane = (getCurrentUpdatePriority(): any);
-  if (updateLane !== NoLane) {
-    return updateLane;
-  }
-
-  const eventLane: Lane = (getCurrentEventPriority(): any);
-  return eventLane;
-}&lt;/code&gt;
-        &lt;/deckgo-highlight-code&gt;
-&lt;p&gt;결과적으로 얻어진 스케쥴링 우선순위는 업데이트 객체에 할당됩니다.&lt;/p&gt;
-&lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
-          &lt;code slot=&quot;code&quot;&gt;export function createUpdate(eventTime: number, lane: Lane): Update&amp;lt;*&amp;gt; {
-  const update: Update&amp;lt;*&amp;gt; = {
-    eventTime,
-    lane,
-
-    tag: UpdateState,
-    payload: null,
-    callback: null,
-
-    next: null,
-  };
-  return update;
-}&lt;/code&gt;
-        &lt;/deckgo-highlight-code&gt;
-&lt;p&gt;다음으로 업데이트해야 하는 컨텐츠와 업데이트 콜백 함수를
-담아 업데이트 객체를 완성하게 되고, 현재 컴포넌트에 해당하는
-Fiber 노드의 업데이트 대기열에 업데이트 객체가 추가됩니다.&lt;/p&gt;
-&lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
-          &lt;code slot=&quot;code&quot;&gt;update.payload = payload;
-if (callback !== undefined &amp;amp;&amp;amp; callback !== null) {
-  update.callback = callback;
-}&lt;/code&gt;
-        &lt;/deckgo-highlight-code&gt;
-&lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
-          &lt;code slot=&quot;code&quot;&gt;enqueueUpdate(fiber, update, lane);&lt;/code&gt;
-        &lt;/deckgo-highlight-code&gt;
-&lt;p&gt;위와 같은 과정들을 통해 리엑트는 Lane 모델을 기반으로 우선순위
-메커니즘을 구현하고 실제 이벤트의 발생과 작업 생성 단계에서
-어떻게 적절한 우선순위를 할당하는 지 그 과정을 살펴보았습니다.&lt;/p&gt;
-&lt;h2 id=&quot;동시성-메커니즘-양보&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EB%8F%99%EC%8B%9C%EC%84%B1-%EB%A9%94%EC%BB%A4%EB%8B%88%EC%A6%98-%EC%96%91%EB%B3%B4&quot; aria-label=&quot;동시성 메커니즘 양보 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;동시성 메커니즘; 양보&lt;/h2&gt;
-&lt;p&gt;각각의 작업에 대해 우선순위가 어떻게 할당되는 지 확인했다면,
-이제 우선순위를 기준으로 현재 진행 중인 작업이 점유하고 있는
-메인 스레드가 대기 중인 높은 작업에 의해 중단되고 메인 스레드의 점유를
-양보하는 지 알아봅시다.&lt;/p&gt;
-&lt;p&gt;브라우저는 랜더링 엔진에게 메인 스레드 점유를 위임하게 되면,
-랜더링 과정 중 발생한 사용자 입력에 대해 즉시 처리할 수 없게 되기 때문에
-사용자가 즉각적으로 반응하고 처리되기를 기대하는 이벤트에 대해
-랜더링 작업 중에는 처리할 수 없게 되는데요.&lt;/p&gt;
-&lt;p&gt;리엑트는 이러한 근본적인 원인을 해결하고자 모든 랜더링을 인터럽트 가능하도록 하여
-우선순위가 높은 작업이 텍스크 스택에 들어오면 진행중이던 작업을 중단하고 메인 스레드에게
-점유를 양보할 수 있는 메커니즘을 구현하게 됩니다.&lt;/p&gt;
-&lt;p&gt;&lt;span
-      class=&quot;gatsby-resp-image-wrapper&quot;
-      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 1200px; &quot;
-    &gt;
-      &lt;span
-    class=&quot;gatsby-resp-image-background-image&quot;
-    style=&quot;padding-bottom: 56.333333333333336%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAALCAYAAAB/Ca1DAAAACXBIWXMAABYlAAAWJQFJUiTwAAAAwUlEQVR42rWSzQ6DIBCEff/3q4m3HoxJrYVFBBF/piwxHtqqNbab7IEQPmZmN8FGTdO09MvF6psEP65VYN/3yLIMlzRFnueL4o4q6KrEQ0hIITCO4zbQe49hGGJrpXAvCggp45mB2lBsIkLTNPsKjTHonIMPCm0AlsUVVCu0bfue5Z5lfsC/uhlogoobA3UNa+1xIBdb41xiXq5DFTIjRZ+nfXTKbJ+taq0XB6eAbF+ESXIEp9eGi63z+nyj7G+L/QRio2Xb6qv/ngAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
-  &gt;&lt;/span&gt;
-  &lt;img
-        class=&quot;gatsby-resp-image-image&quot;
-        alt=&quot;When the user&amp;#39;s input comes in, rendering is interrupted&quot;
-        title=&quot;&quot;
-        src=&quot;/static/e2ceddd26691f38b0dec421c08a40c58/c1b63/interruption-and-yield.png&quot;
-        srcset=&quot;/static/e2ceddd26691f38b0dec421c08a40c58/5a46d/interruption-and-yield.png 300w,
-/static/e2ceddd26691f38b0dec421c08a40c58/0a47e/interruption-and-yield.png 600w,
-/static/e2ceddd26691f38b0dec421c08a40c58/c1b63/interruption-and-yield.png 1200w,
-/static/e2ceddd26691f38b0dec421c08a40c58/d61c2/interruption-and-yield.png 1800w,
-/static/e2ceddd26691f38b0dec421c08a40c58/97a96/interruption-and-yield.png 2400w,
-/static/e2ceddd26691f38b0dec421c08a40c58/5fe07/interruption-and-yield.png 3422w&quot;
-        sizes=&quot;(max-width: 1200px) 100vw, 1200px&quot;
-        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
-        loading=&quot;lazy&quot;
-        decoding=&quot;async&quot;
-      /&gt;
-    &lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;하지만 메인스레드를 양보하기 이전에, 메인 스레드를 점유하여 랜더링 연산을
-전개하고 있는 과정에서 사용자의 입력에 대한 처리가 대기 중임을 확인하고
-메인 스레드 점유를 양보해야 하는 지에 대해 판단하는 것이 더 우선적으로
-가능해야 했습니다.&lt;/p&gt;
-&lt;p&gt;이를 위해 페이스북은 메인스레드를 점유당하고 있는 상황에서 우선순위가 높은 작업이
-대기 중임을 확인하는 구현체인 &lt;a href=&quot;https://wicg.github.io/is-input-pending/&quot;&gt;isInputPending&lt;/a&gt;
-를 브라우저 API에 처음으로 기여하게 됩니다.&lt;/p&gt;
-&lt;p&gt;실제로 리엑트의 &lt;a href=&quot;https://github.com/facebook/react/blob/main/packages/scheduler/src/forks/Scheduler.js&quot;&gt;스케쥴러&lt;/a&gt; 에는
-&lt;code class=&quot;language-text&quot;&gt;isInputPending&lt;/code&gt;을 사용하기 위해 호스트 환경에 의존적인 API를 사용할 수 있는 지에
-대해 판단하는 플래그들이 존재합니다.&lt;/p&gt;
-&lt;h3 id=&quot;shouldyieldtohost&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#shouldyieldtohost&quot; aria-label=&quot;shouldyieldtohost permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;shouldYieldToHost&lt;/h3&gt;
-&lt;p&gt;이제 랜더링 과정에서 우선순위가 높은 작업이 대기 중임을 확인할 수 있는 구현체를
-사용해서 내부적으로 어떻게 양보가 이루어질 수 있도록 구현되어 있는 지 확인해봅시다.&lt;/p&gt;
-&lt;p&gt;양보가 필요한 상황인지를 판단하기 위한 첫 검증은 현재 작업을
-처리하기 위해 얼마만큼의 시간을 소요했는 지를 확인합니다.
-경과된 시간이 &lt;code class=&quot;language-text&quot;&gt;frameInterval&lt;/code&gt; 값보다 작다면, 메인 스레드는 단일 프레임만큼
-아주 짧은 시간동안만 차단되어 있었기 때문에 양보를 거절합니다.&lt;/p&gt;
-&lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
-          &lt;code slot=&quot;code&quot;&gt;// SchedulerFeatureFlags.js
-
-export const frameYieldMs = 5;&lt;/code&gt;
-        &lt;/deckgo-highlight-code&gt;
-&lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
-          &lt;code slot=&quot;code&quot;&gt;import { frameYieldMs } from &amp;#39;../SchedulerFeatureFlags&amp;#39;;
-
-let frameInterval = frameYieldMs;
-
-function shouldYieldToHost() {
-  const timeElapsed = getCurrentTime() - startTime;
-
-  if (timeElapsed &amp;lt; frameInterval) {
-    return false;
-  }
-  ...
-}&lt;/code&gt;
-        &lt;/deckgo-highlight-code&gt;
-&lt;p&gt;이후의 스코프에서는 메인 스레드가 무시할 수 없는 시간 동안 차단되었을 때
-대기 중인 페인트 혹은 사용자 입력 작업이 존재한다면,
-브라우저가 높은 우선 순위 작업을 수행할 수 있도록 메인 스레드에
-대한 점유를 양보합니다.&lt;/p&gt;
-&lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
-          &lt;code slot=&quot;code&quot;&gt;let needsPaint = false;
-
-function requestPaint() {
-  if (
-    enableIsInputPending &amp;amp;&amp;amp;
-    navigator !== undefined &amp;amp;&amp;amp;
-    navigator.scheduling !== undefined &amp;amp;&amp;amp;
-    navigator.scheduling.isInputPending !== undefined
-  ) {
-    needsPaint = true;
-  }
-}
-
-function shouldYieldToHost() {
-  ...
-  if (enableIsInputPending) {
-    if (needsPaint) {
-      return true;
-    }
-  }
-  ...
-}&lt;/code&gt;
-        &lt;/deckgo-highlight-code&gt;
-&lt;p&gt;여기서 &lt;code class=&quot;language-text&quot;&gt;requestPaints()&lt;/code&gt; 는 isInputPending API를 사용할 수 있는 지,
-사용할 수 있다면 현재 사용자 입력에 대한 페인트 작업이 대기 중인지를 판단하여
-&lt;code class=&quot;language-text&quot;&gt;needsPaint&lt;/code&gt; 플래그를 반환하게 역할을 하는데요.&lt;/p&gt;
-&lt;p&gt;이를 통해 리콘실러는 VDOM의 변경사항을 DOM에 모두 커밋하고
-&lt;code class=&quot;language-text&quot;&gt;requestPaints()&lt;/code&gt;를 호출하여 페인트 작업이 필요하다는 것을 스케쥴러에게 전달할 수 있게 됩니다.&lt;/p&gt;
-&lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
-          &lt;code slot=&quot;code&quot;&gt;// ReactFiberWorkLoop.new.js
-
-import { requestPaint } from &amp;#39;./Scheduler&amp;#39;;
-
-function commitRootImpl(...) {
-  ...
-  requestPaint();
-}&lt;/code&gt;
-        &lt;/deckgo-highlight-code&gt;
-&lt;p&gt;다음으로는 경과된 시간이 연속적인 입력 인터벌보다 짧은 지 검증합니다.
-&lt;a href=&quot;#%EC%9D%B4%EB%B2%A4%ED%8A%B8-%EC%9A%B0%EC%84%A0%EC%88%9C%EC%9C%84&quot;&gt;이벤트 우선순위&lt;/a&gt;에서 이산적, 연속적인 이벤트를 구분짓는 같은 맥락으로,
-isInputPending은 단순히 모든 사용자 이벤트를 동일하게 처리하지 않고,
-&lt;a href=&quot;https://wicg.github.io/is-input-pending/#continuous-events&quot;&gt;연속적인 이벤트&lt;/a&gt; (e.g. click)와 이산적인 이벤트 (e.g. mouseover)를 구분지어
-&lt;strong&gt;연속적인 이벤트에 대해 양보가 너무 자주 발생하게 되는 것을 방지합니다.&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;즉 이 검증 단계에서는, 연속적인 이벤트에 대한 처리 작업을 즉시 시작하지 않을 간격을 두고,
-그 시간 동안에는 판단을 온전히 브라우저에게 맡깁니다.&lt;/p&gt;
-&lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
-          &lt;code slot=&quot;code&quot;&gt;// SchedulerFeatureFlags.js
-
-export const continuousYieldMs = 50;&lt;/code&gt;
-        &lt;/deckgo-highlight-code&gt;
-&lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
-          &lt;code slot=&quot;code&quot;&gt;import { continuousYieldMs } from &amp;#39;../SchedulerFeatureFlags&amp;#39;
-
-const continuousInputInterval = continuousYieldMs;
-
-const isInputPending =
-  typeof navigator !== &amp;#39;undefined&amp;#39; &amp;amp;&amp;amp;
-  navigator.scheduling !== undefined &amp;amp;&amp;amp;
-  navigator.scheduling.isInputPending !== undefined
-    ? navigator.scheduling.isInputPending.bind(navigator.scheduling)
-    : null;
-
-function shouldYieldToHost() {
-  ...
-  if (timeElapsed &amp;lt; continuousInputInterval) {
-    if (isInputPending !== null) {
-      return isInputPending();
-    }
-  }
-  ...
-}&lt;/code&gt;
-        &lt;/deckgo-highlight-code&gt;
-&lt;p&gt;마지막으로 최대 간격 이내에 보류 중인 연속적이거나, 이산적인 모든 이벤트에 대해
-양보합니다. 이후 모든 분기 처리가 담지 못한 케이스에 대해서는,
-보류 중인 입력이 없더라도 네트워크 이벤트와 같은 외부 이벤트에 의한 작업들이
-대기 중일 수 있다는 가정하에 무조건적으로 양보하게 됩니다.&lt;/p&gt;
-&lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
-          &lt;code slot=&quot;code&quot;&gt;// SchedulerFeatureFlags.js
-
-export const maxYieldMs = 300;&lt;/code&gt;
-        &lt;/deckgo-highlight-code&gt;
-&lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
-          &lt;code slot=&quot;code&quot;&gt;import { maxYieldMs } from &amp;#39;../SchedulerFeatureFlags&amp;#39;
-
-function shouldYieldToHost() {
-    ...
-    else if (timeElapsed &amp;lt; maxInterval) {
-      // Yield if there&amp;#39;s either a pending discrete or continuous input.
-      if (isInputPending !== null) {
-        return isInputPending(continuousOptions);
-      }
-    } else {
-      return true;
-    }
-  }
-
-  return true;
-}&lt;/code&gt;
-        &lt;/deckgo-highlight-code&gt;
-&lt;p&gt;초기에 분기처리 되었던 호스트 환경에 의존적인 isInputPending API를
-사용할 수 없는 경우 또한 무조건적으로 양보합니다.&lt;/p&gt;
-&lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
-          &lt;code slot=&quot;code&quot;&gt;function shouldYieldToHost() {
-  ...
-  if (enableIsInputPending) {
-    ...
-  }
-
-  return true;
-}&lt;/code&gt;
-        &lt;/deckgo-highlight-code&gt;
-&lt;p&gt;지금까지 알아본 &lt;code class=&quot;language-text&quot;&gt;shouldYieldToHost()&lt;/code&gt;는 스케쥴러의 &lt;code class=&quot;language-text&quot;&gt;workLoop()&lt;/code&gt;에서 사용됩니다. 현재 진행 중인 작업의 만료시간이 현재 시간에 비해 여유가 있는 시점에서
-우선 순위가 더 높은 작업이 보류되고 있다면, 메인 스레드에게 제어권을 양보하고, 만료 시간이
-지난 작업에 대해서는 양보하지 않고 동기적으로 바쁘게 작업을 이어나갑니다.&lt;/p&gt;
-&lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
-          &lt;code slot=&quot;code&quot;&gt;function workLoop(hasTimeRemaining, initialTime) {
-  ...
-  while (
-    currentTask !== null &amp;amp;&amp;amp;
-    !(enableSchedulerDebugging &amp;amp;&amp;amp; isSchedulerPaused)
-  ) {
-    if (
-      currentTask.expirationTime &amp;gt; currentTime &amp;amp;&amp;amp;
-      (!hasTimeRemaining || shouldYieldToHost())
-    ) {
-      break;
-    }
-  ...
-  }
-}&lt;/code&gt;
-        &lt;/deckgo-highlight-code&gt;
-&lt;p&gt;추가적으로 스케쥴러가 아닌, 동시성 모드에서 컴포넌트를 재조정하는 작업이 담긴
-&lt;code class=&quot;language-text&quot;&gt;workLoopConcurrent()&lt;/code&gt; 에서도 사용되는데요. &lt;code class=&quot;language-text&quot;&gt;shouldYieldToHost()&lt;/code&gt; 통해
-진행되던 재조정 작업이 중지될 수 있음이 조건에 담겨있습니다.&lt;/p&gt;
-&lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
-          &lt;code slot=&quot;code&quot;&gt;// react-reconciler/src/ReactFiberWorkLoop.new.js
-
-import { shouldYield } from &amp;#39;./Scheduler&amp;#39;;
-function workLoopConcurrent() {
-  while (workInProgress !== null &amp;amp;&amp;amp; !shouldYield()) {
-    performUnitOfWork(workInProgress);
-  }
-}&lt;/code&gt;
-        &lt;/deckgo-highlight-code&gt;
-&lt;p&gt;이를 통해 리콘실러는 &lt;code class=&quot;language-text&quot;&gt;workLoopConcurrent()&lt;/code&gt;를 통해 현재 작업중이던 루트 혹은 Lane이
-변경되면, 루트에 대기중인 작업들을 모두 비우고, 변경된 레인의 작업이 진행될 수 있도록 합니다.&lt;/p&gt;
-&lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
-          &lt;code slot=&quot;code&quot;&gt;function renderRootConcurrent(root: FiberRoot, lanes: Lanes) {
-  const prevExecutionContext = executionContext;
-  executionContext |= RenderContext;
-  const prevDispatcher = pushDispatcher();
-
-  if (workInProgressRoot !== root || workInProgressRootRenderLanes !== lanes) {
-    ...
-        const memoizedUpdaters = root.memoizedUpdaters;
-        if (memoizedUpdaters.size &amp;gt; 0) {
-          restorePendingUpdaters(root, workInProgressRootRenderLanes);
-          memoizedUpdaters.clear();
-        }
-
-        movePendingFibersToMemoized(root, lanes);
-      }
-    }
-  }
-  ...
-
-  do {
-    try {
-      workLoopConcurrent();
-      ...
-    }
-  }&lt;/code&gt;
-        &lt;/deckgo-highlight-code&gt;
-&lt;h3 id=&quot;마치면서&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EB%A7%88%EC%B9%98%EB%A9%B4%EC%84%9C&quot; aria-label=&quot;마치면서 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;마치면서&lt;/h3&gt;
-&lt;p&gt;리엑트의 동시성 기능을 담은 구현체들을 살펴보았습니다. 이번 글에서는
-전반적인 동시성 기능에 대한 서론과 우선순위가 어떻게 할당되는 지, 그리고
-어떻게 메인스레드 점유가 양보되는 지에 대해 알아보았는데요.&lt;/p&gt;
-&lt;p&gt;공부를 하면 할수록 사용자 인터페이스를 구축하는 기능을 제공하는 리엑트가
-사용자 경험과 사용성 개선을 위해 고민하고 쉽게 구현할 수 있는 기능들을
-제공하기 위해 얼마나 노력하는 지 느낄 수 있어 큰 자극을 얻을 수 있었습니다.&lt;/p&gt;
-&lt;p&gt;한글로 정리된 글들이 많지 않아 다양한 레퍼런스들을 찾아보고, 흩어진 자료를
-모아 정리하려는 목적으로 글을 정리해보았습니다. 직접 리엑트 구현체 코드들을
-들여다보면서 어려움이 많았는데, 어설프게 정리하고 싶지 않아 생각보다 오랜 시간
-끙끙댔던 시간이었는데요.
-아직 살펴볼 내용들이 차고 넘치기 때문에 끊고 다음 글에서 이어서 정리하는
-시간을 가지려 합니다.&lt;/p&gt;
-&lt;p&gt;사실, 리엑트에서 제공하는 동시성 기능 API들을 어떻게 사용하는 지 알아보고
-적절하게 사용을 즐기는 공부를 하면 마음 편하겠지만, 직접 구현체들의 내막을
-들여다보고 나서 그 이해가 동시성 기능 API들을 사용할 때 보다 더 깊은
-사용법을 이끌어낼 수 있지 않을까 하는 기대를 합니다.&lt;/p&gt;
-&lt;p&gt;잘못된 설명이나, 얕은 지식으로 어설프게 설명되어 있는 부분에 대해서는 언제든
-지적해주시면 다시금 수정하고 정리할 수 있도록 하겠습니다. 감사합니다 :)&lt;/p&gt;
-&lt;h2 id=&quot;reference&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#reference&quot; aria-label=&quot;reference permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Reference&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&quot;https://deview.kr/2021/sessions/518&quot;&gt;Inside React (동시성을 구현하는 기술)&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;https://dev.to/okmttdhr/what-is-lane-in-react-4np7&quot;&gt;What is “Lane” in React?&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;https://goidle.github.io/react/in-depth-react-preview/&quot;&gt;React 톺아보기 - 01. Preview&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;https://github.com/facebook/react/pull/18796&quot;&gt;github.com/facebook/react/pull/18796&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;https://github.com/facebook/react&quot;&gt;github.com/facebook/react&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;https://wicg.github.io/is-input-pending/#continuous-events&quot;&gt;wicg.github.io/is-input-pending&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;https://juejin.cn/post/7008802041602506765&quot;&gt;React 소스 코드 파싱 우선 순위 Lane 모델&lt;/a&gt;&lt;/p&gt;</content:encoded></item><item><title><![CDATA[리엑트 동시성 매커니즘들은 어떻게 구현되어 있을까 - 01]]></title><description><![CDATA[리엑트v18에서 동시성 기능을 정식으로 출시하였습니다. 대표적으로,
-Automatic batching for fewer renders, SSR support for
-Suspense, Fixes for Suspense behavior quirks…]]></description><link>https://youthfulhps.dev/react/react-concurrent-mode/</link><guid isPermaLink="false">https://youthfulhps.dev/react/react-concurrent-mode/</guid><pubDate>Sat, 11 Jun 2022 16:07:02 GMT</pubDate><content:encoded>&lt;p&gt;리엑트v18에서 동시성 기능을 정식으로 출시하였습니다. 대표적으로,
-&lt;em&gt;Automatic batching for fewer renders&lt;/em&gt;, &lt;em&gt;SSR support for
-Suspense&lt;/em&gt;, &lt;em&gt;Fixes for Suspense behavior quirks&lt;/em&gt;와 같은 내부적인
-성능 향상과, &lt;em&gt;startTransition&lt;/em&gt;, &lt;em&gt;useDeferredValue&lt;/em&gt;, &lt;em&gt;SuspenseList&lt;/em&gt;
-과 같은 기능들이 추가되었습니다.&lt;/p&gt;
-&lt;p&gt;동시성 기능을 담아내기 위해 리엑트팀은 협력적 멀티테스킹, 우선순위 기반 랜더링,
-스케쥴링, 중단과 같은 메커니즘을 담아냈습니다. 기저에 있는 아키텍처를 수정해야
-했던 만큼 5년이라는 시간동안 많은 시행착오를 겪었을 텐데요.&lt;/p&gt;
-&lt;p&gt;이 시리즈는 &lt;em&gt;‘도대체, 동시성이 무엇이길래 리엑트팀에서 5년이라는
-시간을 쏟았으며, 동시성을 위한 메커니즘들의 구현체들이 어떻게 구현되어 있을까?
-’&lt;/em&gt; 라는 호기심에 찾아본 구현체들과 레퍼런스들을 차근차근 정리해보고자 합니다.&lt;/p&gt;
-&lt;p&gt;그 첫 번째로, &lt;a href=&quot;https://deview.kr/2021/sessions/518&quot;&gt;Inside React (동시성을 구현하는 기술)&lt;/a&gt;에서 언급한 내용들을 정리하고, 우선순위와 양보 매커니즘이
-어떻게 구현되어 있는 지 살펴보려 합니다.&lt;/p&gt;
-&lt;h2 id=&quot;concurrent-vs-parallelism&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#concurrent-vs-parallelism&quot; aria-label=&quot;concurrent vs parallelism permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Concurrent vs Parallelism&lt;/h2&gt;
-&lt;p&gt;동시성을 설명할 때, 서로 관련있는 병렬성과 함께 설명하곤 합니다.
-하지만, 이 둘은 뚜렷한 차이를 가지고 있으며
-Go 언어의 창시자의 &lt;a href=&quot;https://go.dev/blog/waza-talk&quot;&gt;Concurrency is not parallelism&lt;/a&gt;
-발표 서문에는 다음과 같이 동시성과 병렬성을 비교합니다.&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;’&lt;strong&gt;동시성은 독립적으로 실행되는 프로세스들의 조합이다.&lt;/strong&gt;’
-‘병렬성은 연관된 복수의 연산들을 동시에 실행하는 것이다.’
-’&lt;strong&gt;동시성은 여러 일을 한꺼번에 다루는 문제에 관한 것이다.&lt;/strong&gt;’
-‘병렬성은 여러 일을 한꺼번에 실행하는 방법에 관한 것이다.’&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;아주 멜랑꼴리한데 발표에서 언급한 문구를 빌려 정리하자면,
-&lt;strong&gt;동시성은 프로세서가 하나만 있는 경우, 병렬 처리를 가능케 하지만 병렬처리는 아닙니다.&lt;/strong&gt;
-즉, 하나의 스레드로 작업을 순차적으로 처리하지만,
-마치 여러 개의 스레드가 사용되고 있는 것처럼 보이게 하는 것이고,
-동시성은 싱글 코어에서도 동작하지만, 병렬성은 두 개 이상의 코어가 필요합니다.&lt;/p&gt;
-&lt;p&gt;병렬성은 예를 들어 GPU를 통해 이미지를 랜더링할 때 R, G, B를 연산하는
-텍스크를 각각의 코어가 작업하는 것과 같이 최소 한 가지 논리적 통제를
-멀티 코어에서 병렬적으로 진행합니다.&lt;/p&gt;
-&lt;p&gt;&lt;span
-      class=&quot;gatsby-resp-image-wrapper&quot;
-      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 864px; &quot;
-    &gt;
-      &lt;span
-    class=&quot;gatsby-resp-image-background-image&quot;
-    style=&quot;padding-bottom: 56.333333333333336%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAALCAYAAAB/Ca1DAAAACXBIWXMAAAsTAAALEwEAmpwYAAAA+0lEQVR42q2S226DMAyG+/7vxw1I3KENitIAJuQE/+xUoHQtmjRhKUrs2J/txDdcLLdc2bYNMUas65rOuX3XZd/vc5+PQGst6rpGURRomuYI9N6nJUJEqKoKZVlCa30keQGKIXiHST8wThN61WMcR9BiMbGeA8VXEiulDttbhZErsZw5crAANT2eQBuxLMsLUKp2ziVoCOEc6OYZkQRIDNQMHEBuhTHmH0Buww0a4X5Hx+1+q6/UUk8eA1f6GyiwmQs4bVkyEbfquL22bUEzoes6+BATUCrKgfKu+9ue/rJklB+UXZyNee6Og2SUZO0ifnL359hcPthXAH8AyLlhpaFJlWgAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
-  &gt;&lt;/span&gt;
-  &lt;img
-        class=&quot;gatsby-resp-image-image&quot;
-        alt=&quot;Parallel task processing&quot;
-        title=&quot;&quot;
-        src=&quot;/static/e2d146e61c5b9a19bb4476de300b308a/9cab2/parallelism-process.png&quot;
-        srcset=&quot;/static/e2d146e61c5b9a19bb4476de300b308a/5a46d/parallelism-process.png 300w,
-/static/e2d146e61c5b9a19bb4476de300b308a/0a47e/parallelism-process.png 600w,
-/static/e2d146e61c5b9a19bb4476de300b308a/9cab2/parallelism-process.png 864w&quot;
-        sizes=&quot;(max-width: 864px) 100vw, 864px&quot;
-        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
-        loading=&quot;lazy&quot;
-        decoding=&quot;async&quot;
-      /&gt;
-    &lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;반면 동시성은 최소 두 개의 논리적 통제 흐름을 가지고 있으며,
-잘개 쪼개진 두 개 이상의 작업을 지속적으로 컨텍스트 스위칭하여
-마치 동시에 이루어지는 것처럼 보이도록 합니다.
-강의를 듣다가 내용 정리를 위해 일시정지하고 메모하는 것과 같은 작업 처리 방식입니다.&lt;/p&gt;
-&lt;p&gt;&lt;span
-      class=&quot;gatsby-resp-image-wrapper&quot;
-      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 864px; &quot;
-    &gt;
-      &lt;span
-    class=&quot;gatsby-resp-image-background-image&quot;
-    style=&quot;padding-bottom: 55.99999999999999%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAALCAYAAAB/Ca1DAAAACXBIWXMAABYlAAAWJQFJUiTwAAABIElEQVR42rWSW0+EMBCF+f9/z30iRB8gugKl9A69cJx2Zd1V9kltMiGdMl/PnGmFP17V98S2bTjK7fmj84dA6xyapsHp6YSu65BSLIB1XUvkpZRCXdclOOc/Lqn2RPQeRghoY8AFL4XWrdBaw9NZjvIvhRMzhvMb3LKUfL4spfQFjLTx1iBqBUWAWc+QUkIvEc4tpWAH5qXHAW37DKk0pmkCY+zaQQFmuqd2A6nLQGlEATqfCOjugFnhYjSE5IgxXf3d274ozD4RILARI5/wPp2LP8x4AiuC3QPtzNG+viDEeDyUEAIseRZITd/35KPGMAzwpCADbxVmpxT5JycGT3UPp2xyu3kQ1pZ2L19RQJGUxBs1+tOaoydU/fvD/i3wA0PdYEKy+BpoAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
-  &gt;&lt;/span&gt;
-  &lt;img
-        class=&quot;gatsby-resp-image-image&quot;
-        alt=&quot;Concurrent task processing&quot;
-        title=&quot;&quot;
-        src=&quot;/static/1c01ef1b6acac66076081b5b3e947f91/9cab2/concurrent-process.png&quot;
-        srcset=&quot;/static/1c01ef1b6acac66076081b5b3e947f91/5a46d/concurrent-process.png 300w,
-/static/1c01ef1b6acac66076081b5b3e947f91/0a47e/concurrent-process.png 600w,
-/static/1c01ef1b6acac66076081b5b3e947f91/9cab2/concurrent-process.png 864w&quot;
-        sizes=&quot;(max-width: 864px) 100vw, 864px&quot;
-        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
-        loading=&quot;lazy&quot;
-        decoding=&quot;async&quot;
-      /&gt;
-    &lt;/span&gt;&lt;/p&gt;
-&lt;h2 id=&quot;리엑트팀은-왜-동시성-기능을-구현하고자-했을까&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EB%A6%AC%EC%97%91%ED%8A%B8%ED%8C%80%EC%9D%80-%EC%99%9C-%EB%8F%99%EC%8B%9C%EC%84%B1-%EA%B8%B0%EB%8A%A5%EC%9D%84-%EA%B5%AC%ED%98%84%ED%95%98%EA%B3%A0%EC%9E%90-%ED%96%88%EC%9D%84%EA%B9%8C&quot; aria-label=&quot;리엑트팀은 왜 동시성 기능을 구현하고자 했을까 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;리엑트팀은 왜 동시성 기능을 구현하고자 했을까&lt;/h2&gt;
-&lt;p&gt;리엑트는 사용자 인터페이스를 구축하는 라이브러리로서 핵심 역할인 인터렉션에
-대한 업데이트 과정과 사용자 경험에 대한 HCI 연구 결과를 반영하고 궁극적으로
-기술적으로 결합하는 목표를 가지고 있습니다. 사람과 컴퓨터간의 인터렉션에
-대한 연구 결과들을 추상화해서 리엑트 코어의 개선 목표로 삼고 이를
-구현합니다.&lt;/p&gt;
-&lt;p&gt;가령, 화면 간 전환에서 로딩 중 상태를 너무 많이 표시하면 UX 품질이
-낮아지는 문제라던지, 빠르게 처리되기를 기대하는 상호작용들과 느려도 문제없는
-상호작용을 구분짓고 이를 적용해서 효과적으로 사용자 인터페이스에 구현할 수 있는
-방법들을 제공하기 위함입니다.&lt;/p&gt;
-&lt;p&gt;조금 더 와닿을 수 있게 우리의 구현체들이 동작하는 브라우저 환경에서
-생각해봅시다. 브라우저는 HTML을 파싱하고, 자바스크립트를 실행하며
-랜더트리를 구축하고 그려내는 작업까지 단일 스레드로서 한번에 하나의
-작업만을 수행합니다.&lt;/p&gt;
-&lt;p&gt;때문에 메인 스레드가 자바스크립트 엔진에게 실행권을 위임하여
-자바스크립트 파싱을 시작했다면 그 작업을 멈출 수 없으며,
-작업이 완료될 때까지 이후의 작업을 전개할 수 없습니다.
-리엑트 랜더링 연산 과정도 동일한 절차를 거치게 되며,
-이 때 매우 무거운 랜더링 연산 과정이 시작되면 이후의 작업들이 다소
-긴 시간 동안 대기 상태가 되는 블로킹 랜더링이 발생합니다.&lt;/p&gt;
-&lt;p&gt;재조정을 위한 리엑트의 비교 알고리즘은 매우 최적화되어 있어
-블로킹되는 이슈가 자주 발생하지 않아 공감하기 어려울 수 있지만,
-&lt;a href=&quot;https://ajaxlab.github.io/deview2021/blocking&quot;&gt;deview2021/blocking&lt;/a&gt;
-데모처럼 입력값에 대한 픽셀 박스를 랜더링하는 연산이 무거워짐에 따라
-keypress 이벤트에 대한 처리가 지연되고 있음을 경고 플래그를 통해 확인할 수 있습니다.&lt;/p&gt;
-&lt;p&gt;&lt;span
-      class=&quot;gatsby-resp-image-wrapper&quot;
-      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 1200px; &quot;
-    &gt;
-      &lt;span
-    class=&quot;gatsby-resp-image-background-image&quot;
-    style=&quot;padding-bottom: 56.333333333333336%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAALCAYAAAB/Ca1DAAAACXBIWXMAABYlAAAWJQFJUiTwAAACUElEQVR42nWS63LaMBCFef9XaqczbSc0vsqW5AsmJtxakkAAGww2t68b2pn+qmbO7Gq1Onuk3R73dfuH2+0euVY1zac+bWA59hVdlNN6huNXTw6v/G/1rkJwvt64CM+HPUvuRQ7O3Zl2/kb3sqZdrDhOX2l+LTmIbbsLnSTecfoL8eU6vdXuhMomROkIJYizMWFS/kExIRyM78iFfNPB8nhjuTsLLixrgdxf7c/83JzYNBd6x+7KetfwXu953Yqtjrx/2PrA+sNfi7/Z37HdH9g1LdWuo6ob9s2eWvymOlFLvD0LYdNUDKYJxcyQjSxDWzJ9GlIOS0xeoG2KLSNGYnO/ZJYrRklKkg8pnhK0ySlMQlxaDscjveVqQ6w9itzgpC4mseRpTChNCHWMch1i4xEYh0SHpKEicDWZduTcJwwtUWSJPSHcd0JYb8myhIFW6DSlnyie1CNWpbLXqCBg4iRkfoEq+ugwI5TOx35CGitspoidjzyX9nqit90upFJEnvkMRImfaPI8YG7lG6yP+yiKA4N5iEj6vqiVgv2EXBdkpY+X+BgVkQ49mnZPb73dEFjNl4EnHe5LRQ8T56JkwCAzRBILtYsfh9g8w9ofpErLCwoRYeQPR4QjEZEqLk0jY1O9o3SC8aV67KED+bMwItAB+cN3jPuDb+ozvnJQnovzGIoiV8hFneRGbh81dEjldW13kC7XFePxlF+zKYtJzuJlTiEzN5y/MB/PWLyWPC+fGU+kw89TRsM3fr6seH/bMJ8tmL/OZaS2VMs3bpczvwHvPB85q/jg7QAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
-  &gt;&lt;/span&gt;
-  &lt;img
-        class=&quot;gatsby-resp-image-image&quot;
-        alt=&quot;Example of blocking rendering&quot;
-        title=&quot;&quot;
-        src=&quot;/static/219e96397b3d85a667ab72d28b32c3da/c1b63/blocking-rendering-example.png&quot;
-        srcset=&quot;/static/219e96397b3d85a667ab72d28b32c3da/5a46d/blocking-rendering-example.png 300w,
-/static/219e96397b3d85a667ab72d28b32c3da/0a47e/blocking-rendering-example.png 600w,
-/static/219e96397b3d85a667ab72d28b32c3da/c1b63/blocking-rendering-example.png 1200w,
-/static/219e96397b3d85a667ab72d28b32c3da/d8817/blocking-rendering-example.png 1238w&quot;
-        sizes=&quot;(max-width: 1200px) 100vw, 1200px&quot;
-        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
-        loading=&quot;lazy&quot;
-        decoding=&quot;async&quot;
-      /&gt;
-    &lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span
-      class=&quot;gatsby-resp-image-wrapper&quot;
-      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 1200px; &quot;
-    &gt;
-      &lt;span
-    class=&quot;gatsby-resp-image-background-image&quot;
-    style=&quot;padding-bottom: 43.99999999999999%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAJCAYAAAAywQxIAAAACXBIWXMAABYlAAAWJQFJUiTwAAAB60lEQVR42lXPvW7TUBiA4dwkCzNi4QJ6B0zAhgQSQiyIAQYGQEigbghaUdI4JE6ctHaTOLbj499jB+LEfvniBlSGo/Mj+fH7ddylh+f5uO6S2XyB7TjMZjPmiyWXts1kYrVvSZqSeEuyJCEfW+R9g3Q4IDnvshoNUQODsN+ls85ctJqQJzOKxEFHFqlvUsp76p0RT16Red9J3G+sTp8SX3wmevuA4M0j1Msj1MNbhI9vEzy5g/fsHp0iS9BxgE6UrIBMBSSBj5b33P9JevlBdpPck5rJe3KBU+s1rnFMaLwg/HRE+u4u3sf7LI6fC6jX8rGmzDWF1jJSSRwWlOvfJKFiJeOnKiFeZXiOh1qu8G0He+AyH11gGz0mZz9kGUzPTDq6hFw3FGvQZUOaQRQ1lL9AqYblYn+Xc9gwdxoCD+Z2gzXcMR01DLsN3RMwvwZMv4yl8B/YCFiTZQ1xXLdgHO3w3V17j9SOxdWWVVC3+9SssK2KcW9D/3TDqJsy7avrwiwXrPgL1gewaRHPrQ9gfQOUOnMj4BazV2GcbKS0YmRsD4UCFuV+1TLyvrD5H4xugL7szo6L8VbAHeZ5Ra8FpdKo6OzHTaVqv+f6UBhV7Q+UIH5bKOfwGgyl0J3VXA1yHKtqkX2hKeDYqPgDkZGX4XXYjjAAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
-  &gt;&lt;/span&gt;
-  &lt;img
-        class=&quot;gatsby-resp-image-image&quot;
-        alt=&quot;Delay in processing tasks for keypress&quot;
-        title=&quot;&quot;
-        src=&quot;/static/815e3dae1953dd73e6539b5104895244/c1b63/blocking-rendering-performance.png&quot;
-        srcset=&quot;/static/815e3dae1953dd73e6539b5104895244/5a46d/blocking-rendering-performance.png 300w,
-/static/815e3dae1953dd73e6539b5104895244/0a47e/blocking-rendering-performance.png 600w,
-/static/815e3dae1953dd73e6539b5104895244/c1b63/blocking-rendering-performance.png 1200w,
-/static/815e3dae1953dd73e6539b5104895244/2eb79/blocking-rendering-performance.png 1256w&quot;
-        sizes=&quot;(max-width: 1200px) 100vw, 1200px&quot;
-        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
-        loading=&quot;lazy&quot;
-        decoding=&quot;async&quot;
-      /&gt;
-    &lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;경고 플래그 중 하나의 예시로 keypress 이벤트를 처리하는 데 143.41ms이 소요 되었는데
-&lt;a href=&quot;https://web.dev/rail/?utm_source=devtools#goals-and-guidelines&quot;&gt;RAIL&lt;/a&gt;
-모델을 기반으로 생각한다면, 사용자는 입력 이벤트에 대해 100ms 이상 소요되는 것을
-동작과 응답 사이의 연결이 지연되고 있음을 인식하게 되며, 이는 사용자 경험의 감점으로
-이어질 수 있습니다.&lt;/p&gt;
-&lt;p&gt;리엑트는 이러한 사용자 경험에 영향을 끼치는 랜더링 업데이트 과정에서
-동시성을 통해 개선된 인터렉션을 쉽게 구현할 수 있도록 하는 구현체를 제공하고자
-했습니다.&lt;/p&gt;
-&lt;h2 id=&quot;동시성-메커니즘-우선순위&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EB%8F%99%EC%8B%9C%EC%84%B1-%EB%A9%94%EC%BB%A4%EB%8B%88%EC%A6%98-%EC%9A%B0%EC%84%A0%EC%88%9C%EC%9C%84&quot; aria-label=&quot;동시성 메커니즘 우선순위 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;동시성 메커니즘; 우선순위&lt;/h2&gt;
-&lt;p&gt;리엑트에서 동시성을 구현하는 첫번 째 메커니즘은 바로 우선순위입니다. 인터렉션에 의해
-발생한 이벤트와 업데이트 작업들이 어떻게 우선순위는 어떻게 결정되고 할당되는 지
-궁금했는데요. 그 과정에 대해 차근차근 살펴봅시다.&lt;/p&gt;
-&lt;p&gt;우선순위 메커니즘은 사용자 인터렉션 발생을 캐치한 리스너에서부터
-작업 생성 과정과 스케쥴링 단계까지 업데이트를 위한
-작업의 우선순위를 할당하기 위한 전반적인 과정에서 쉽게 찾아볼 수 있습니다.&lt;/p&gt;
-&lt;p&gt;그 이후 진행 중인 작업이 우선 순위가 높은 대기 상태의 작업에 의해 중단되거나,
-같은 우선 순위를 가진 작업에 대해서 일괄 처리될 수 있도록 하는 작업 교통정리
-를 하는 작업 실행 단계에서도 확인할 수 있는데요.&lt;/p&gt;
-&lt;p&gt;한편, 리엑트v17.0 이전에서는 작업의 &lt;a href=&quot;https://github.com/facebook/react/blob/v16.12.0/packages/react-reconciler/src/ReactFiberExpirationTime.js&quot;&gt;만료 시간을 기준으로 우선순위를 부여&lt;/a&gt;하는 메커니즘으로 구현되어 있었습니다.
-반면, 리엑트v17.0 이후에서는 Lane 모델을 착안하여 비트 연산을
-기반으로 우선 순위를 부여하는 방식으로 변경되었는데요.
-먼저, 전반적인 우선순위 메커니즘 기저의 구현체인 Lane을 살펴봅시다.&lt;/p&gt;
-&lt;h3 id=&quot;lane-모델-그리고-lane-우선순위&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#lane-%EB%AA%A8%EB%8D%B8-%EA%B7%B8%EB%A6%AC%EA%B3%A0-lane-%EC%9A%B0%EC%84%A0%EC%88%9C%EC%9C%84&quot; aria-label=&quot;lane 모델 그리고 lane 우선순위 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Lane 모델, 그리고 Lane 우선순위&lt;/h3&gt;
-&lt;p&gt;Lane 모델은 도로의 차선을 모티브로 하여 리엑트에서 우선순위를
-표현하기 위해 구현된 31비트 데이터로 표현된 비트맵입니다.
-작업의 스케쥴링 및 조정 작업 과정의 우선순위를 가진 고유의 작업 스레드를
-표현합니다.&lt;/p&gt;
-&lt;p&gt;실제 레인의 구현에서 확인할 수 있듯, 기본적으로 더 작은 숫자로 표현된
-레인이 높은 우선순위를 갖습니다.&lt;/p&gt;
-&lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
-          &lt;code slot=&quot;code&quot;&gt;// react-reconciler/src/ReactFiberLane.new.js
-
-export type Lanes = number;
-export type Lane = number;
-export type LaneMap&amp;lt;T&amp;gt; = Array&amp;lt;T&amp;gt;;
-
-export const TotalLanes = 31;
-
-export const NoLanes: Lanes = /*                        */ 0b0000000000000000000000000000000;
-export const NoLane: Lane = /*                          */ 0b0000000000000000000000000000000;
-export const SyncLane: Lane = /*                        */ 0b0000000000000000000000000000001;
-export const InputContinuousHydrationLane: Lane = /*    */ 0b0000000000000000000000000000010;
-export const InputContinuousLane: Lane = /*             */ 0b0000000000000000000000000000100;
-export const DefaultHydrationLane: Lane = /*            */ 0b0000000000000000000000000001000;
-export const DefaultLane: Lane = /*                     */ 0b0000000000000000000000000010000;
-const TransitionHydrationLane: Lane = /*                */ 0b0000000000000000000000000100000;
-const TransitionLanes: Lanes = /*                       */ 0b0000000001111111111111111000000;
-const TransitionLane1: Lane = /*                        */ 0b0000000000000000000000001000000;
-...
-const RetryLanes: Lanes = /*                            */ 0b0000111110000000000000000000000;
-const RetryLane1: Lane = /*                             */ 0b0000000010000000000000000000000;
-...
-
-export const SomeRetryLane: Lane = RetryLane1;
-export const SelectiveHydrationLane: Lane = /*          */ 0b0001000000000000000000000000000;
-const NonIdleLanes: Lanes = /*                          */ 0b0001111111111111111111111111111;
-export const IdleHydrationLane: Lane = /*               */ 0b0010000000000000000000000000000;
-export const IdleLane: Lane = /*                        */ 0b0100000000000000000000000000000;
-export const OffscreenLane: Lane = /*                   */ 0b1000000000000000000000000000000;&lt;/code&gt;
-        &lt;/deckgo-highlight-code&gt;
-&lt;p&gt;Lane 모델은 우선순위를 두 가지 중요한 컨셉으로 분리합니다.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;em&gt;Task Prioritization, A 작업이 B 작업보다 급한가?&lt;/em&gt;&lt;/li&gt;
-&lt;li&gt;&lt;em&gt;Task Batching, A 작업이 이 그룹 텍스크에 속하는 가?&lt;/em&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;작업 우선순위 개념을 통해 작업의 우선순위를 기준으로 작업의
-우선 실행권을 부여하고, 작업 배칭 개념을 착안하여
-가령 CPU, I/O, CPU 순의 작업 예약에 대해,
-I/O 작업을 다른 그룹으로 분리하여 일괄 처리함으로서 CPU 작업의 병목을
-방지할 수 있도록 합니다.&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;CPU 작업이 I/O 작업보다 우선순위가 낮아 지속적인 양보가 발생하게 되면 CPU 작업처리에
-진전이 없을 여지를 방지하기 위해 I/O 작업들을 묶어 진행할 수 있도록 하는 것은
-리엑트v18에서 제공하는 &lt;a href=&quot;https://github.com/reactwg/react-18/discussions/21&quot;&gt;Automatic Batching&lt;/a&gt;
-의 기저에 있는 동작 방식인듯 합니다. 깊이 있게 살펴볼 부분들이 차고 넘치네요.&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;Task Prioritization이 표현되는 각각의 레인이 가지고 있는
-비트 값이 우선순위를 나타내고 있으며, 레인의 이름을 통해
-어떠한 업데이트가 소유할 수 있는 레인인지 파악해볼 수 있습니다.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;em&gt;&lt;strong&gt;SyncLane&lt;/strong&gt;, 이산적인(discrete) 사용자 상호 작용에 대한 업데이트&lt;/em&gt;&lt;/li&gt;
-&lt;li&gt;&lt;em&gt;&lt;strong&gt;InputContinuousLane&lt;/strong&gt;, 연속적인(continuous) 사용자 상호 작용에 대한 업데이트&lt;/em&gt;&lt;/li&gt;
-&lt;li&gt;&lt;em&gt;&lt;strong&gt;DefaultLane&lt;/strong&gt;, setTimeout, 네트워크 요청 등에 의해 생성된 업데이트&lt;/em&gt;&lt;/li&gt;
-&lt;li&gt;&lt;em&gt;&lt;strong&gt;TransitionLane&lt;/strong&gt;, Suspense, useTransition, useDefferredValue에 의해 생성된 업데이트&lt;/em&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;레인 모델이 어떻게 구현되어 있는 지 간단하게 살펴보았다면,
-어떻게 적용되어 사용되는 지 확인해볼 차례입니다.
-리엑트에서 Lane 모델을 기반으로 Lane 우선순위 개념을 이벤트 우선순위와
-스케쥴러 우선순위에 녹여냈는 지 살펴봅시다.&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;레인에 대한 추가적인 내용은 초기 레인 모델을 구현한 &lt;a href=&quot;https://github.com/facebook/react/pull/18796&quot;&gt;react/pull/18796&lt;/a&gt;
-PR을 참고하시면 좋습니다.&lt;/em&gt;&lt;/p&gt;
-&lt;h3 id=&quot;이벤트-우선순위&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EC%9D%B4%EB%B2%A4%ED%8A%B8-%EC%9A%B0%EC%84%A0%EC%88%9C%EC%9C%84&quot; aria-label=&quot;이벤트 우선순위 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;이벤트 우선순위&lt;/h3&gt;
-&lt;p&gt;리엑트는 사용자 인터렉션에 의해 발생된 이벤트를 인위적으로 구분짓고,
-구분된 이벤트를 묶어 우선순위를 결정짓습니다.
-여기서, 크게 두 종류로 구분되어 루트에 바인딩될 때 어느 범주에 속한
-이벤트인지에 따라 우선순위가 부여됩니다.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;em&gt;이산적인 이벤트 (e.g. click, keydown, focusin, ..)&lt;/em&gt;&lt;/li&gt;
-&lt;li&gt;&lt;em&gt;연속적인 이벤트 (e.g. drag, pointermove, scroll, ..)&lt;/em&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
-          &lt;code slot=&quot;code&quot;&gt;// react-reconciler/src/ReactEventPriority.new.js
-
-export const DiscreteEventPriority: EventPriority = SyncLane;
-export const ContinuousEventPriority: EventPriority = InputContinuousLane;
-export const DefaultEventPriority: EventPriority = DefaultLane;
-export const IdleEventPriority: EventPriority = IdleLane;&lt;/code&gt;
-        &lt;/deckgo-highlight-code&gt;
-&lt;p&gt;잠시 이산적인 이벤트와 연속적인 이벤트를 구분짓는 이유를 생각해보자면,
-가령 사용자가 문서를 읽다가, 문서에 참조되어 있는 링크를 클릭하는
-이산적인 이벤트를 발생시켰다면 이는 즉각적으로 반응하기를 원할겁니다.&lt;/p&gt;
-&lt;p&gt;반면 문서를 읽을 때 시선의 흐름에 따라 사용자가 포인터를 움직였다면,
-이로 인해 발생한 연속적인 이벤트에 대해서는 사용자 입장에서 성능에 영향을
-줄 것이라 생각하기 힘들고, 또한 빠르게 반응해주기를 원하는 이벤트라고
-간주하기 어려울 수 있기 때문입니다.
-관련해서 &lt;a href=&quot;https://wicg.github.io/is-input-pending/#continuous-events&quot;&gt;연속적인 이벤트(Continuous events)&lt;/a&gt;를 참고할 수 있습니다.&lt;/p&gt;
-&lt;p&gt;다시 돌아와, 앞서 살펴보았던 31비트로 구성된 Lane 값들이 이벤트 우선순위
-할당되는 값으로 사용되고 있으며, 각각의 이벤트에 대해 우선순위를 반환하는 함수가
-구현되어 있는 것을 확인할 수 있습니다.&lt;/p&gt;
-&lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
-          &lt;code slot=&quot;code&quot;&gt;// react-dom/src/events/ReactDOMEventListener.js
-
-export function getEventPriority(domEventName: DOMEventName): * {
-  switch (domEventName) {
-    case &amp;#39;cancel&amp;#39;:
-    case &amp;#39;click&amp;#39;:
-    case &amp;#39;close&amp;#39;:
-    case &amp;#39;contextmenu&amp;#39;:
-    ...
-      return DiscreteEventPriority;
-    case &amp;#39;drag&amp;#39;:
-    case &amp;#39;dragenter&amp;#39;:
-    case &amp;#39;dragexit&amp;#39;:
-    case &amp;#39;dragleave&amp;#39;:
-    ...
-      return ContinuousEventPriority;
-    case &amp;#39;message&amp;#39;: {
-      const schedulerPriority = getCurrentSchedulerPriorityLevel();
-      switch (schedulerPriority) {
-        case ImmediateSchedulerPriority:
-          return DiscreteEventPriority;
-        case UserBlockingSchedulerPriority:
-          return ContinuousEventPriority;
-        ...
-      }
-    }
-    default:
-      return DefaultEventPriority;
-  }
-}&lt;/code&gt;
-        &lt;/deckgo-highlight-code&gt;
-&lt;p&gt;&lt;em&gt;여기서 ‘message’ 이벤트는 따로 처리해주는 것을 확인할 수 있는데, 협력적 스케쥴링 모델을
-사용하고, 정확한 스케쥴링 타임을 위해 리엑트 스케쥴러에서는 MessageChannel API를 기반으로
-구현되어 있습니다. 따라서 ‘message’ 이벤트가 스케쥴러 콜백일 수 있기 때문에
-‘message’ 이벤트에 대해서는 네이티브 스케쥴러에 대한 현재 우선 순위를 확인하여 반환합니다.&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;getEventPriority()&lt;/code&gt; 를 따라 올라가다 보면, 대응되는 이벤트 우선순위를
-각각의 이벤트 리스너에 래핑시키고, 우선순위가 래핑된 이벤트 리스너를 반환하는 곳에서
-사용됩니다.&lt;/p&gt;
-&lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
-          &lt;code slot=&quot;code&quot;&gt;// react-dom/src/events/ReactDOMEventListener.js
-
-export function createEventListenerWrapperWithPriority(
-  targetContainer: EventTarget,
-  domEventName: DOMEventName,
-  eventSystemFlags: EventSystemFlags
-): Function {
-  const eventPriority = getEventPriority(domEventName);
-  let listenerWrapper;
-  switch (eventPriority) {
-    case DiscreteEventPriority:
-      listenerWrapper = dispatchDiscreteEvent;
-      break;
-    case ContinuousEventPriority:
-      listenerWrapper = dispatchContinuousEvent;
-      break;
-    case DefaultEventPriority:
-    default:
-      listenerWrapper = dispatchEvent;
-      break;
-  }
-  return listenerWrapper.bind(
-    null,
-    domEventName,
-    eventSystemFlags,
-    targetContainer
-  );
-}&lt;/code&gt;
-        &lt;/deckgo-highlight-code&gt;
-&lt;p&gt;결국 &lt;code class=&quot;language-text&quot;&gt;createRoot()&lt;/code&gt; 에서
-리엑트17 이후 버전의 &lt;a href=&quot;https://ko.reactjs.org/blog/2020/08/10/react-v17-rc.html#changes-to-event-delegation&quot;&gt;이벤트 위임 메커니즘&lt;/a&gt;
-에 입각하여, 우선 순위가 래핑된 이벤트 리스너들이 모두 루트에 바인딩되게 됩니다.&lt;/p&gt;
-&lt;p&gt;이를 통해 사용자 상호 인터렉션에 따라 발생한 이벤트 우선순위는,
-우선순위가 래핑된 이벤트 리스너를 통해 주입받을 수 있게 됩니다.&lt;/p&gt;
-&lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
-          &lt;code slot=&quot;code&quot;&gt;// react-dom/src/client/ReactDOMRoot.js
-
-export function createRoot(
-  container: Element | Document | DocumentFragment,
-  options?: CreateRootOptions,
-): RootType {
-  ...
-  const root = createContainer(
-    ...
-  );
-  markContainerAsRoot(root.current, container);
-
-  const rootContainerElement: Document | Element | DocumentFragment =
-    container.nodeType === COMMENT_NODE
-      ? (container.parentNode: any)
-      : container;
-  listenToAllSupportedEvents(rootContainerElement); //**
-
-  return new ReactDOMRoot(root);
-}&lt;/code&gt;
-        &lt;/deckgo-highlight-code&gt;
-&lt;h3 id=&quot;스케쥴링-우선순위&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EC%8A%A4%EC%BC%80%EC%A5%B4%EB%A7%81-%EC%9A%B0%EC%84%A0%EC%88%9C%EC%9C%84&quot; aria-label=&quot;스케쥴링 우선순위 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;스케쥴링 우선순위&lt;/h3&gt;
-&lt;p&gt;스케쥴링 우선순위는 스케쥴러 기반의 리엑트 업데이트 작업이 가지는
-우선순위입니다. 스케쥴러는 스케쥴링 우선순위를 통해 산발적으로
-발생하는 작업들의 교통정리를 진행합니다.&lt;/p&gt;
-&lt;p&gt;가령 이벤트가 발생하여 setState를 통해 부가적인 상태 업데이트가
-디스패치되면, 리콘실러는 업데이트 작업의 정보를 담은 객체를 생성하여
-스케쥴러에게 전달하게 되는데, 업데이트 객체를 생성하는 단계에서
-작업의 스케쥴링 우선순위를 구하기 위한 단계가 포함됩니다.&lt;/p&gt;
-&lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
-          &lt;code slot=&quot;code&quot;&gt;// react-reconciler/src/ReactFiberHooks.new.js
-
-function dispatchSetState&amp;lt;S, A&amp;gt;(
-  fiber: Fiber,
-  queue: UpdateQueue&amp;lt;S, A&amp;gt;,
-  action: A,
-) {
-  ...
-
-  const lane = requestUpdateLane(fiber);
-
-  const update: Update&amp;lt;S, A&amp;gt; = {
-    lane,
-    action,
-    hasEagerState: false,
-    eagerState: null,
-    next: (null: any),
-  };
-
-  ...
-}&lt;/code&gt;
-        &lt;/deckgo-highlight-code&gt;
-&lt;p&gt;업데이트 객체에 전달되는 우선순위를 구하는 &lt;code class=&quot;language-text&quot;&gt;requestUpdateLane()&lt;/code&gt;
-는 어떻게 이벤트 우선순위를 얻어오는 지 살펴봅시다.&lt;/p&gt;
-&lt;h3 id=&quot;requestupdatelane&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#requestupdatelane&quot; aria-label=&quot;requestupdatelane permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;requestUpdateLane&lt;/h3&gt;
-&lt;p&gt;리엑트는 동시성 기능을 담은 모드와 기존 레거시 모드를 함께 제공하고
-있기 때문에, 먼저 동시성 기능이 제공되는 모드인지 확인하는 과정을
-거칩니다. 만약 아니라면, 우선순위가 가장 높은 &lt;code class=&quot;language-text&quot;&gt;SyncLane&lt;/code&gt;을 반환합니다.&lt;/p&gt;
-&lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
-          &lt;code slot=&quot;code&quot;&gt;export function requestUpdateLane(fiber: Fiber): Lane {
-  const mode = fiber.mode;
-  if ((mode &amp;amp; ConcurrentMode) === NoMode) {
-    return (SyncLane: Lane);
-  }
-  ...
-}&lt;/code&gt;
-        &lt;/deckgo-highlight-code&gt;
-&lt;p&gt;한편 동시성 기능을 제공하는 모드라면, 먼저 현재 실행 중인 작업이 있는 지
-확인합니다. 만약 있다면, 현재 실행 중인 작업의 레인이 직접 반환되고,
-새 작업이 기존 작업과 같은 우선순위를 부여받게 됩니다.&lt;/p&gt;
-&lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
-          &lt;code slot=&quot;code&quot;&gt;let workInProgressRootRenderLanes: Lanes = NoLanes;
-
-export function requestUpdateLane(fiber: Fiber): Lane {
-  ...
-  else if (
-    !deferRenderPhaseUpdateToNextBatch &amp;amp;&amp;amp;
-    (executionContext &amp;amp; RenderContext) !== NoContext &amp;amp;&amp;amp;
-    workInProgressRootRenderLanes !== NoLanes
-  ) {
-    return pickArbitraryLane(workInProgressRootRenderLanes);
-  }
-  ...
-}&lt;/code&gt;
-        &lt;/deckgo-highlight-code&gt;
-&lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
-          &lt;code slot=&quot;code&quot;&gt;// react-reconciler/src/ReactFiberLane.new.js
-
-export function getHighestPriorityLane(lanes: Lanes): Lane {
-  return lanes &amp;amp; -lanes;
-}
-
-export function pickArbitraryLane(lanes: Lanes): Lane {
-  return getHighestPriorityLane(lanes);
-}&lt;/code&gt;
-        &lt;/deckgo-highlight-code&gt;
-&lt;p&gt;위 조건에 포함되지 않았다면, 이제 현재 이벤트가 전환 우선 순위인지에 대한
-여부를 결정하고 맞다면 적절한 전환 우선순위에 할당하게 됩니다.&lt;/p&gt;
-&lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
-          &lt;code slot=&quot;code&quot;&gt;let currentEventTransitionLane: Lanes = NoLanes;
-
-export function requestUpdateLane(fiber: Fiber): Lane {
-  ...
-  const isTransition = requestCurrentTransition() !== NoTransition;
-  if (isTransition) {
-    if (__DEV__ &amp;amp;&amp;amp; ReactCurrentBatchConfig.transition !== null) {
-      const transition = ReactCurrentBatchConfig.transition;
-      if (!transition._updatedFibers) {
-        transition._updatedFibers = new Set();
-      }
-
-      transition._updatedFibers.add(fiber);
-    }
-    if (currentEventTransitionLane === NoLane) {
-      currentEventTransitionLane = claimNextTransitionLane();
-    }
-    return currentEventTransitionLane;
-  }
-}&lt;/code&gt;
-        &lt;/deckgo-highlight-code&gt;
-&lt;deckgo-highlight-code language=&quot;js&quot;  &gt;
-          &lt;code slot=&quot;code&quot;&gt;// react-reconciler/src/ReactFiberLane.new.js
-
-export function claimNextTransitionLane(): Lane {
-  const lane = nextTransitionLane;
-  nextTransitionLane &amp;lt;&amp;lt;= 1;
-  if ((nextTransitionLane &amp;amp; TransitionLanes) === NoLanes) {
-    nextTransitionLane = TransitionLane1;
-  }
-  return lane;
-}&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
 &lt;p&gt;이 때, 생성된 작업에 대해 맨 오른쪽 비트를 소유하는 &lt;code class=&quot;language-text&quot;&gt;TransitionLane&lt;/code&gt;을
 할당하고, 그 이후에 생성된 전환 작업은 비트가 왼쪽으로 한 자리 이동한
