@@ -162,7 +162,7 @@ CloudFront에서 뷰어 응답으로 빠르게 컨텐츠를 전달합니다.</p>
       />
     </span></p>
 <p>다음 단계에서는 <code class="language-text">정책 생성</code> 을 통해 JSON 편집을 통해 권한을 편집합니다.
-아래와 동일하게 작성하셔도 무방합니다.</p>
+(예시 프로젝트를 위한 퍼블릭한 권한입니다.)</p>
 <deckgo-highlight-code language="json"  >
           <code slot="code">{
   &quot;Version&quot;: &quot;2012-10-17&quot;,
@@ -280,16 +280,16 @@ CloudFront에서 뷰어 응답으로 빠르게 컨텐츠를 전달합니다.</p>
 <deckgo-highlight-code language="js"  >
           <code slot="code">// Dependencies resolved
 
-const querystring = require(&#39;querystring&#39;)
-const AWS = require(&#39;aws-sdk&#39;)</code>
+const querystring = require(&#39;querystring&#39;);
+const AWS = require(&#39;aws-sdk&#39;);</code>
         </deckgo-highlight-code>
 <p><strong>람다 함수에서 바디를 조작했다면, 그 결과가 1MB 이하여야 했습니다.</strong> 만약 1MB 보다 크다면, 이미지의 퀄리티를 단계적으로 낮추는 방법으로 접근했습니다.</p>
 <deckgo-highlight-code language="js"  >
-          <code slot="code">const MEGABYTE = 1046528
-const byteLength = Buffer.byteLength(resizedImage, &#39;base64&#39;)
+          <code slot="code">const MEGABYTE = 1046528;
+const byteLength = Buffer.byteLength(resizedImage, &#39;base64&#39;);
 
 if (byteLength &gt; MEGABYTE) {
-  resizedImage.toFormat(requiredFormat, { quality: 90 })
+  resizedImage.toFormat(requiredFormat, { quality: 90 });
 }</code>
         </deckgo-highlight-code>
 <p><strong>퀄리티 저하의 한계점을 넘어가거나, 타임 아웃이 되면 원본을 반환했습니다.</strong>
@@ -349,6 +349,6 @@ if (byteLength &gt; MEGABYTE) {
           <script
             id="gatsby-chunk-mapping"
           >
-            window.___chunkMapping="{\"app\":[\"/app-838efda16fe9da5a909d.js\"],\"component---cache-caches-gatsby-plugin-offline-app-shell-js\":[\"/component---cache-caches-gatsby-plugin-offline-app-shell-js-98aadc3a28e150b82889.js\"],\"component---src-pages-404-js\":[\"/component---src-pages-404-js-d6b6816ababeae25fd0d.js\"],\"component---src-pages-about-js\":[\"/component---src-pages-about-js-3b772694bc67a138e6be.js\"],\"component---src-pages-index-js\":[\"/component---src-pages-index-js-600ecfad561331a02b7b.js\"],\"component---src-templates-blog-post-js\":[\"/component---src-templates-blog-post-js-0a9317b781bd7c62e1a1.js\"]}";
+            window.___chunkMapping="{\"app\":[\"/app-838efda16fe9da5a909d.js\"],\"component---cache-caches-gatsby-plugin-offline-app-shell-js\":[\"/component---cache-caches-gatsby-plugin-offline-app-shell-js-98aadc3a28e150b82889.js\"],\"component---src-pages-404-js\":[\"/component---src-pages-404-js-d6b6816ababeae25fd0d.js\"],\"component---src-pages-about-js\":[\"/component---src-pages-about-js-3b772694bc67a138e6be.js\"],\"component---src-pages-index-js\":[\"/component---src-pages-index-js-600ecfad561331a02b7b.js\"],\"component---src-templates-blog-post-js\":[\"/component---src-templates-blog-post-js-a8e0c23b6d34d652cc30.js\"]}";
           </script>
-        <script>window.___webpackCompilationHash="928d054e850b37246f37";</script><script src="/webpack-runtime-5257c5694df6efc05a92.js" async></script><script src="/framework-af49c75efa6628746631.js" async></script><script src="/app-838efda16fe9da5a909d.js" async></script><!-- slice-end id="_gatsby-scripts-1" --></body></html>
+        <script>window.___webpackCompilationHash="bd85d79889f3ae56343f";</script><script src="/webpack-runtime-dc05fd5cc7c8d2f7c319.js" async></script><script src="/framework-af49c75efa6628746631.js" async></script><script src="/app-838efda16fe9da5a909d.js" async></script><!-- slice-end id="_gatsby-scripts-1" --></body></html>
