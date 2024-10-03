@@ -52,7 +52,7 @@ https://...cloudfront/sample-image.jpg?w=500&h=300
 ![create-iam](./images/image-optimization-with-cloudfront/create-iam.png)
 
 다음 단계에서는 `정책 생성` 을 통해 JSON 편집을 통해 권한을 편집합니다.
-아래와 동일하게 작성하셔도 무방합니다.
+(예시 프로젝트를 위한 퍼블릭한 권한입니다.)
 
 ```json
 {
@@ -120,18 +120,18 @@ https://...cloudfront/sample-image.jpg?w=500&h=300
 ```js
 // Dependencies resolved
 
-const querystring = require('querystring')
-const AWS = require('aws-sdk')
+const querystring = require('querystring');
+const AWS = require('aws-sdk');
 ```
 
 **람다 함수에서 바디를 조작했다면, 그 결과가 1MB 이하여야 했습니다.** 만약 1MB 보다 크다면, 이미지의 퀄리티를 단계적으로 낮추는 방법으로 접근했습니다.
 
 ```js
-const MEGABYTE = 1046528
-const byteLength = Buffer.byteLength(resizedImage, 'base64')
+const MEGABYTE = 1046528;
+const byteLength = Buffer.byteLength(resizedImage, 'base64');
 
 if (byteLength > MEGABYTE) {
-  resizedImage.toFormat(requiredFormat, { quality: 90 })
+  resizedImage.toFormat(requiredFormat, { quality: 90 });
 }
 ```
 
