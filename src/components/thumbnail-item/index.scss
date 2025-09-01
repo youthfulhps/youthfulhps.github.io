@@ -2,21 +2,21 @@
 
 .thumbnail {
   display: block;
-  padding: 4px;
+  // padding: 4px;
   padding-bottom: 4px;
   box-shadow: none;
   transition: text-shadow 0.3s, opacity 0.4s;
   opacity: 0;
 
   .description-wrapper {
-    heiight: 100%;
+    height: 100%;
     display: flex;
     align-items: center;
   }
 
   h3 {
     font-size: 1.1rem;
-    margin: 1rem 0 !important;
+    // margin: 1rem 0 !important;
   }
 
   p {

@@ -52,7 +52,6 @@
     "react-helmet": "^6.1.0",
     "react-switch": "^7.0.0",
     "react-typography": "^0.16.13",
-    "rehype-mermaid": "^3.0.0",
     "smooth-scroll": "^16.0.0",
     "smoothscroll-polyfill": "^0.4.4",
     "typeface-catamaran": "0.0.54",

@@ -37,12 +37,12 @@ module.exports = {
         plugins: [
           {
             resolve: `gatsby-remark-mermaid`,
-            options: /** @type {import('gatsby-remark-mermaid').Options} */ ({
+            options: {
               mermaidConfig: {
                 theme: 'dark',
-                themeCSS: '.label {line-height: normal; font-size: 0.55rem;}',
+                themeCSS: '.label {line-height: normal; font-size: 0.7em;}',
               },
-            }),
+            },
           },
           {
             resolve: `gatsby-remark-katex`,
@@ -66,6 +66,9 @@ module.exports = {
           },
           {
             resolve: `gatsby-remark-highlight-code`,
+            options: {
+              theme: 'nord',
+            },
           },
           {
             resolve: `gatsby-remark-responsive-iframe`,
