@@ -2,8 +2,7 @@
 
 .thumbnail {
   display: block;
-  // padding: 4px;
-  padding-bottom: 4px;
+  padding-bottom: 4px !important;
   box-shadow: none;
   transition: text-shadow 0.3s, opacity 0.4s;
   opacity: 0;

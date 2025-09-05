@@ -39,6 +39,9 @@ body.dark {
   }
 
   .post-container {
+    h3 {
+      margin-top: 2em;
+    }
     a {
       text-shadow: $dark-text-shadow;
       color: $dark-light-font-color;
@@ -56,7 +59,7 @@ body.dark {
     em {
       font-style: italic;
       font-size: 0.9em;
-      color: #999999;
+      opacity: 0.8;
       font-weight: 400;
       letter-spacing: 0.02em;
     }
@@ -135,6 +138,7 @@ body.dark {
       );
       transition: all 0.3s ease;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      position: relative;
 
       // mermaid 노드 스타일링
       .node rect {
@@ -148,16 +152,56 @@ body.dark {
       .node text {
         fill: $dark-light-font-color !important;
       }
+
+      // mermaid 엣지 라벨 스타일링 (선 중간 텍스트)
+      .edgeLabel {
+        & > p {
+          color: $dark-light-font-color !important;
+        }
+      }
+
+      .edgeLabel rect {
+        fill: rgba(35, 39, 47, 0.9) !important;
+        stroke: rgba(255, 255, 255, 0.2) !important;
+        stroke-width: 1px !important;
+      }
+
+      .edgeLabel text {
+        fill: $dark-light-font-color !important;
+      }
+
+      // 클릭 가능한 Mermaid 다이어그램 호버 효과
+      &[role='button'] {
+        cursor: zoom-in !important;
+
+        &:hover {
+          opacity: 1;
+          transform: translateY(-2px);
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+          border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        &:focus {
+          outline: 2px solid #007acc;
+          outline-offset: 2px;
+        }
+      }
+    }
+
+    .mermaid-zoom-overlay {
+      background: rgba(0, 0, 0, 0.8) !important;
     }
   }
 
   .thumbnail {
     h3 {
+      font-size: 1rem;
       color: $dark-light-font-color;
     }
     p {
       color: $dark-gray-font-color;
-      opacity: 0.7;
+      font-size: 0.75rem;
+      opacity: 0.5;
     }
     &:hover {
       text-shadow: $dark-hover-text-shadow;
@@ -215,6 +259,19 @@ body.dark {
     p {
       margin: 0;
       font-size: 0.95em;
+    }
+
+    &.warning {
+      font-size: 0.8em;
+      background: linear-gradient(
+        135deg,
+        $dark-yellow-bg-color,
+        rgba(30, 25, 0, 0.95)
+      );
+      border: 1px solid rgba(251, 191, 36, 0.3);
+      border-left: 4px solid $dark-yellow-border-color;
+      color: $dark-yellow-text-color;
+      box-shadow: 0 1px 8px rgba(251, 191, 36, 0.1);
     }
   }
 

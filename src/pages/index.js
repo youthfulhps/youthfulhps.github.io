@@ -70,19 +70,6 @@ export default ({ data, location }) => {
   return (
     <Layout location={location} title={siteMetadata.title}>
       <Head title={HOME_TITLE} keywords={siteMetadata.keywords} />
-      {/*<Bio ref={bioRef} />*/}
-      <div className="category-wrapper">
-        {/*<TypeCategory*/}
-        {/*  categories={lengthCategories}*/}
-        {/*  category={typeCategory}*/}
-        {/*  selectCategory={selectTypeCategory}*/}
-        {/*/>*/}
-        <Category
-          categories={categories}
-          category={category}
-          selectCategory={selectCategory}
-        />
-      </div>
       <Contents
         posts={posts}
         countOfInitialPost={countOfInitialPost}
@@ -115,7 +102,7 @@ export const pageQuery = graphql`
             slug
           }
           frontmatter {
-            date(formatString: "MMMM DD, YYYY")
+            date(formatString: "YYYY.MM.DD")
             title
             description
             category
