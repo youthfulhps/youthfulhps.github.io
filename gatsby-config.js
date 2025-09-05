@@ -62,6 +62,7 @@ module.exports = {
             options: {
               margin: 36,
               scrollOffset: 0,
+              background: 'rgba(0, 0, 0, 0.8)',
             },
           },
           {
@@ -140,6 +141,7 @@ module.exports = {
     `gatsby-plugin-offline`,
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-sass`,
+    `gatsby-plugin-postcss`,
     `gatsby-plugin-lodash`,
     `gatsby-plugin-sitemap`,
   ],
