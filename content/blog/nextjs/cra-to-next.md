@@ -7,6 +7,8 @@ draft: false
 description: 빌드 이슈는 고개를 들어주세요.
 ---
 
+<blockquote class="warning">작성한 지 2년이 지난 글이에요. 지금과는 맞지 않을 수도 있지만, 당시의 고민과 노력이 담겨있습니다.</blockquote>
+
 웹 개발을 하면서 정량적인 지표를 보는 것에 재미가 들린 요즘, 지표는
 엄청난 동기를 부여하곤 합니다.
 최근 [Lighthouse](https://developers.google.com/web/tools/lighthouse)로
@@ -50,8 +52,8 @@ next.js를 설치해주어야 합니다. `react-scripts` 와
 
 ## 환경 변수 업데이트
 
-환경 변수의 접두어를 변경해주어야 합니다. CRA 프로젝트는 REACT\_APP 이라는 접두어를
-사용하는 반면, [next.js](https://nextjs.org/docs/basic-features/environment-variables#exposing-environment-variables-to-the-browser)는 NEXT\_PUBLIC 이라는 접두어를 사용합니다.
+환경 변수의 접두어를 변경해주어야 합니다. CRA 프로젝트는 REACT_APP 이라는 접두어를
+사용하는 반면, [next.js](https://nextjs.org/docs/basic-features/environment-variables#exposing-environment-variables-to-the-browser)는 NEXT_PUBLIC 이라는 접두어를 사용합니다.
 
 ```shell
 //.env
@@ -80,15 +82,15 @@ module.exports = {
     config.module.rules.push({
       test: /\.svg$/,
       use: ['@svgr/webpack'],
-    })
+    });
 
-    return config
+    return config;
   },
-}
+};
 ```
 
 ```tsx
-import Icon from '@assets/icons/Icon.svg'
+import Icon from '@assets/icons/Icon.svg';
 ```
 
 ## \_app 생성
@@ -124,12 +126,12 @@ meta, script 와 같은 태그들이 추가됩니다.
 `index.html` 파일에 구성되어 있는 요소들을 하나 씩 옮겨주시면 됩니다.
 
 ```tsx
-import Document, { Html, Head, Main, NextScript } from 'next/document'
+import Document, { Html, Head, Main, NextScript } from 'next/document';
 
 class MyDocument extends Document {
   static async getInitialProps(ctx) {
-    const initialProps = await Document.getInitialProps(ctx)
-    return { ...initialProps }
+    const initialProps = await Document.getInitialProps(ctx);
+    return { ...initialProps };
   }
 
   render() {
@@ -141,11 +143,11 @@ class MyDocument extends Document {
           <NextScript />
         </body>
       </Html>
-    )
+    );
   }
 }
 
-export default MyDocument
+export default MyDocument;
 ```
 
 주위하실 점은 head 태그에 추가되는 title, link, viewport 와 같은 태그들은
@@ -335,20 +337,20 @@ import Document, {
   Main,
   NextScript,
   DocumentContext,
-} from 'next/document'
-import { ServerStyleSheet } from 'styled-components'
+} from 'next/document';
+import { ServerStyleSheet } from 'styled-components';
 
 class MyDocument extends Document {
   static async getInitialProps(ctx: DocumentContext) {
-    const sheet = new ServerStyleSheet()
-    const originalRenderPage = ctx.renderPage
+    const sheet = new ServerStyleSheet();
+    const originalRenderPage = ctx.renderPage;
     try {
       ctx.renderPage = () =>
         originalRenderPage({
           enhanceApp: App => props => sheet.collectStyles(<App {...props} />),
-        })
+        });
 
-      const initialProps = await Document.getInitialProps(ctx)
+      const initialProps = await Document.getInitialProps(ctx);
       return {
         ...initialProps,
         styles: (
@@ -357,9 +359,9 @@ class MyDocument extends Document {
             {sheet.getStyleElement()}
           </>
         ),
-      }
+      };
     } finally {
-      sheet.seal()
+      sheet.seal();
     }
   }
 
@@ -372,11 +374,11 @@ class MyDocument extends Document {
           <NextScript />
         </body>
       </Html>
-    )
+    );
   }
 }
 
-export default MyDocument
+export default MyDocument;
 ```
 
 ## 마치면서

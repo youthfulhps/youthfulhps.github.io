@@ -21,8 +21,6 @@ export const Layout = ({ location, title, children }) => {
           padding: `${rhythm(1.5)} ${rhythm(3 / 4)}`,
         }}
       >
-        <ThemeSwitch />
-        <Header title={title} location={location} rootPath={rootPath} />
         {children}
         <Footer />
       </div>

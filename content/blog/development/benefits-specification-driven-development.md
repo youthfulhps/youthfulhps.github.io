@@ -7,6 +7,8 @@ thumbnail: ./images/benefits-specification-driven-development/thumbnail.png
 draft: false
 ---
 
+<blockquote class="warning">작성한 지 2년이 지난 글이에요. 지금과는 맞지 않을 수도 있지만, 당시의 고민과 노력이 담겨있습니다.</blockquote>
+
 클라이언트 개발을 하다보면 작업이 대기 상태가 되버리는 경우를 자주 경험합니다.
 기획과 API 개발이 완료되지 않아 기다리거나, 마이너한 기획의 변경 사항이
 발생하는 경우, 최종 산출물을 다루는 클라이언트 개발 영역에서의 수정사항은

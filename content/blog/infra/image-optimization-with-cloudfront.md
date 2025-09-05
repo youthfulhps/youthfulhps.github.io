@@ -7,6 +7,8 @@ draft: false
 description: 모바일 환경이라면 이미지 사이즈를 줄여 보내주세요.
 ---
 
+<blockquote class="warning">작성한 지 2년이 지난 글이에요. 지금과는 맞지 않을 수도 있지만, 당시의 고민과 노력이 담겨있습니다.</blockquote>
+
 [사용자 경험 품질 향상을 위한 이미지 최적화](https://youthfulhps.dev/web/image-optimization/)에서 온디멘드 이미지 리사이징
 에 대한 이야기를 공유해드렸습니다. 이번 글에서는 CloudFront에서 `lambda@edge` 를 통해 직접 구현해본 과정을 정리해보려 합니다.
 
