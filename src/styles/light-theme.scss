@@ -234,7 +234,7 @@ body.light {
     position: relative;
     transition: all 0.3s ease;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-
+    font-size: 0.8em;
     &::before {
       content: '"';
       position: absolute;
@@ -258,7 +258,6 @@ body.light {
         $light-yellow-bg-color,
         rgba(255, 248, 220, 0.95)
       );
-      font-size: 0.8em;
       border: 1px solid rgba(245, 158, 11, 0.3);
       border-left: 4px solid $light-yellow-border-color;
       color: $light-yellow-text-color;

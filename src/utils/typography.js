@@ -40,10 +40,20 @@ GitHubTheme.overrideThemeStyles = () => {
     ul: {
       marginBottom: '18px',
       lineHeight: '2.1',
+      listStyle: 'disc',
+      paddingLeft: '1.5rem',
+    },
+    ol: {
+      marginBottom: '18px',
+      lineHeight: '2.1',
+      listStyle: 'decimal',
+      paddingLeft: '1.5rem',
     },
     li: {
       marginBottom: '2px',
       fontFamily: 'Pretendard',
+      fontSize: '0.925rem',
+      lineHeight: '2.1',
     },
     'p:not(svg p)': {
       fontFamily: 'Pretendard',
