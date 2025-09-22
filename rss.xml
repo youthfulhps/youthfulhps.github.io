@@ -1,4 +1,266 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Youthfulhps.dev]]></title><description><![CDATA[프론트엔드 주니어 개발자, 트러블슈팅에 대한 고민의 흔적을 기록으로 남기는 것을 좋아합니다.]]></description><link>https://youthfulhps.dev</link><generator>GatsbyJS</generator><lastBuildDate>Fri, 05 Sep 2025 14:51:47 GMT</lastBuildDate><item><title><![CDATA[babel의 핵심 변환 파이프라인]]></title><description><![CDATA[…]]></description><link>https://youthfulhps.dev/web/babel-transpilation/</link><guid isPermaLink="false">https://youthfulhps.dev/web/babel-transpilation/</guid><pubDate>Fri, 05 Sep 2025 17:08:16 GMT</pubDate><content:encoded>&lt;p&gt;브라우저들이 가지고 있는 자바스크립트 엔진은 일반적으로 표준화되어 있지만, 호환 가능한 코드의 미묘한 차이가 존재한다. &lt;code class=&quot;language-text&quot;&gt;babel&lt;/code&gt;은 개발자가
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Youthfulhps.dev]]></title><description><![CDATA[프론트엔드 주니어 개발자, 트러블슈팅에 대한 고민의 흔적을 기록으로 남기는 것을 좋아합니다.]]></description><link>https://youthfulhps.dev</link><generator>GatsbyJS</generator><lastBuildDate>Mon, 22 Sep 2025 12:30:43 GMT</lastBuildDate><item><title><![CDATA[Google Analytics MCP를 통한 데이터 분석]]></title><description><![CDATA[여러 컨텍스트에서 를 제공하기 시작하면서 개발 단계에 도움을 많이 받고 있다.
+가령 를 통해 단순한 UI…]]></description><link>https://youthfulhps.dev/development/google-analytics-mcp/</link><guid isPermaLink="false">https://youthfulhps.dev/development/google-analytics-mcp/</guid><pubDate>Mon, 22 Sep 2025 14:09:05 GMT</pubDate><content:encoded>&lt;p&gt;여러 컨텍스트에서 &lt;code class=&quot;language-text&quot;&gt;Model Context Protocol(MCP)&lt;/code&gt;를 제공하기 시작하면서 개발 단계에 도움을 많이 받고 있다.
+가령 &lt;a href=&quot;https://github.com/GLips/Figma-Context-MCP&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;Figma-Context-MCP&lt;/code&gt;&lt;/a&gt;를 통해 단순한 UI 구현을 요청하고선,
+다른 비즈니스 로직을 짜는 것에 충분히 익숙해져 있다.&lt;/p&gt;
+&lt;p&gt;본 글에서는 구글 에널리틱스 데이터를 자연어로 분석하는 방법을 소개해보려 한다. 복잡한 분석 대시보드 설정 없이도 간단한 질문으로 원하는
+인사이트를 얻을 수 있다. 해당 &lt;code class=&quot;language-text&quot;&gt;MCP&lt;/code&gt;는 &lt;code class=&quot;language-text&quot;&gt;cursor&lt;/code&gt;에서 사용해볼 수 있도록 연동해보자.&lt;/p&gt;
+&lt;h3 id=&quot;google-analytics-mcp&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#google-analytics-mcp&quot; aria-label=&quot;google analytics mcp permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;google-analytics-mcp&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/googleanalytics/google-analytics-mcp&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;google-analytics-mcp&lt;/code&gt;&lt;/a&gt;는 아직 실험 단계이지만, 대시보드 설정과
+쿼리 작성 과정을 대신하여 직관적인 질문으로 실시간 데이터 접근과 다양한 메트릭 분석이 가능하다.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;지난 7일간 DAU는 상승 추세인가요?&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;지난 180일 동안 내 Google 애널리틱스 속성에서 가장 인기 있는 이벤트는 무엇인가요?&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&quot;사전-준비사항&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EC%82%AC%EC%A0%84-%EC%A4%80%EB%B9%84%EC%82%AC%ED%95%AD&quot; aria-label=&quot;사전 준비사항 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;사전 준비사항&lt;/h3&gt;
+&lt;p&gt;우선 &lt;code class=&quot;language-text&quot;&gt;MCP&lt;/code&gt;를 사용하기 위해 이미 속성을 제공하고 있는 컨테이너와 구글 클라우드 계정이 필요하며, &lt;code class=&quot;language-text&quot;&gt;MCP&lt;/code&gt; 서버를 실행하기 위해 파이썬 런타임이
+제공되어야 한다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Python 3.10 이상&lt;/li&gt;
+&lt;li&gt;Google Analytics 4 프로퍼티&lt;/li&gt;
+&lt;li&gt;Google Cloud 계정&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;구글-클라우드-콘솔-설정&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EA%B5%AC%EA%B8%80-%ED%81%B4%EB%9D%BC%EC%9A%B0%EB%93%9C-%EC%BD%98%EC%86%94-%EC%84%A4%EC%A0%95&quot; aria-label=&quot;구글 클라우드 콘솔 설정 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;구글 클라우드 콘솔 설정&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&quot;https://console.cloud.google.com&quot;&gt;Google Cloud Console&lt;/a&gt;에서 새 프로젝트 생성 혹은 기존 프로젝트를 선택하고,
+&lt;code class=&quot;language-text&quot;&gt;API 및 서비스&lt;/code&gt; -&gt; &lt;code class=&quot;language-text&quot;&gt;라이브러리&lt;/code&gt; 탭으로 이동해 &lt;code class=&quot;language-text&quot;&gt;Google Analytics Data API&lt;/code&gt;를 활성화한다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 1200px; &quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 24.666666666666664%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAFCAYAAABFA8wzAAAACXBIWXMAABYlAAAWJQFJUiTwAAAAtklEQVR42p2PSw7CMAxEc/8TskBigVRCKS1R/nHSwS6kApZYspw82eOxCs5h1heQd0DJQE7AuuLfUOV8wv14QLpqwDyAm+b3AOM9Ukp7o+PFMaav4RAiLPMQA3t4mVDrOIDGC9oyseAMTBo0T8hUUYm2RsmcM2qt21BnpZSNS+1MFXYxszu3LGgpAsRNzIwxIBb8dChMBHp4vkKYtXZfplprKDxYuXbbwujtroe4+GXylxSxfvITzG2IRoUmpMIAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;구글 클라우드 콘솔의 API 및 서비스 선택&quot;
+        title=&quot;&quot;
+        src=&quot;/static/a16347ecc88996b5a49a0c78d8ba2278/c1b63/api-service.png&quot;
+        srcset=&quot;/static/a16347ecc88996b5a49a0c78d8ba2278/5a46d/api-service.png 300w,
+/static/a16347ecc88996b5a49a0c78d8ba2278/0a47e/api-service.png 600w,
+/static/a16347ecc88996b5a49a0c78d8ba2278/c1b63/api-service.png 1200w,
+/static/a16347ecc88996b5a49a0c78d8ba2278/d61c2/api-service.png 1800w,
+/static/a16347ecc88996b5a49a0c78d8ba2278/9cac8/api-service.png 2288w&quot;
+        sizes=&quot;(max-width: 1200px) 100vw, 1200px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 1028px; &quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 27.333333333333332%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAFCAYAAABFA8wzAAAACXBIWXMAABYlAAAWJQFJUiTwAAAA7klEQVR42qWPS0/DMBCE+/9/Dycg3EoSkRNSoxZoaajykPKycWzHaexh7XLhzEqj9ay1Y38bUDHGUZYVGOdQSuM/tVmWBVVdQ0wCSmtor3kO8l4qRdJ0nsG/Bbp+QNv1wft51TQoLpdw52cbc13xUZRoRwEmFFomMXCJjjonryh4+g0MJFWNsm7oQYNJquBPn2f0w3gLdMURX/Er3pI9jkmOw/MO7/EOpzSHyPfA+XBjcS40YwyklH8wrbXwpAHZZVuwu0d00Qv6+wRDlGJ8StE/pNBZBhdHsH7JWZLDlYg0/cTCBe/D1nWFoUA/+wGZfn4M15hBGQAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;구글 에널리틱스 데이터 API 활성화&quot;
+        title=&quot;&quot;
+        src=&quot;/static/7de45481a5c7b83d3a3ae95ca423e3e9/35a31/ga-data-api.png&quot;
+        srcset=&quot;/static/7de45481a5c7b83d3a3ae95ca423e3e9/5a46d/ga-data-api.png 300w,
+/static/7de45481a5c7b83d3a3ae95ca423e3e9/0a47e/ga-data-api.png 600w,
+/static/7de45481a5c7b83d3a3ae95ca423e3e9/35a31/ga-data-api.png 1028w&quot;
+        sizes=&quot;(max-width: 1028px) 100vw, 1028px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;h3 id=&quot;서비스-계정-생성&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EC%84%9C%EB%B9%84%EC%8A%A4-%EA%B3%84%EC%A0%95-%EC%83%9D%EC%84%B1&quot; aria-label=&quot;서비스 계정 생성 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;서비스 계정 생성&lt;/h3&gt;
+&lt;p&gt;마찬가지로 &lt;code class=&quot;language-text&quot;&gt;API 및 서비스&lt;/code&gt; -&gt; &lt;code class=&quot;language-text&quot;&gt;사용자 인증 정보&lt;/code&gt; 탭으로 이동해 서비스 계정을 생성해야 한다. 이때 이름은 자유롭게 입력하고,
+권한 설정을 건너뛰고 생성한다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 1200px; &quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 20.666666666666668%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAECAYAAACOXx+WAAAACXBIWXMAABYlAAAWJQFJUiTwAAAAiUlEQVR42o2QzQ7CIBCEef+HUw+mB+NFa1pCQWhky19hRPTgkUm+005md5YREaRUcM7ho1LQp58xTyPU4QRxPCNeL2BaG0ycN6iGbt53wYXAai221eB1v2EeBujHCGaMgVQKMaVG2vcuXA0NMSLljFwvnZcF8qnBQgjwdfhtUbr59+e6gCy1t70Bg5k3pcMo1zkAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;서비스 계정 생성&quot;
+        title=&quot;&quot;
+        src=&quot;/static/6379f56d108574b119a7d144b3bba733/c1b63/create-credentials.png&quot;
+        srcset=&quot;/static/6379f56d108574b119a7d144b3bba733/5a46d/create-credentials.png 300w,
+/static/6379f56d108574b119a7d144b3bba733/0a47e/create-credentials.png 600w,
+/static/6379f56d108574b119a7d144b3bba733/c1b63/create-credentials.png 1200w,
+/static/6379f56d108574b119a7d144b3bba733/5df5d/create-credentials.png 1572w&quot;
+        sizes=&quot;(max-width: 1200px) 100vw, 1200px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+    &lt;/span&gt;
+&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 1200px; &quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 16%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAADCAYAAACTWi8uAAAACXBIWXMAABYlAAAWJQFJUiTwAAAAd0lEQVR42m2OyQrDMAxE8//f2UNNEggO1JK1TMf2oVAieGgbDdrcHb33iZkBSJgHui2kBzwSEczUZq564SSh1KvFrDcRwb4fKKWg1ooRdwuct+Mgr9PwUR6pojWZho03wt6Mj1jifTkxmtJwCP4ZXw6edj8NHudf29jsEi5fDEgAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;서비스 계정 생성&quot;
+        title=&quot;&quot;
+        src=&quot;/static/42090224cc012aed5ca671d347daaa7e/c1b63/create-credentials-2.png&quot;
+        srcset=&quot;/static/42090224cc012aed5ca671d347daaa7e/5a46d/create-credentials-2.png 300w,
+/static/42090224cc012aed5ca671d347daaa7e/0a47e/create-credentials-2.png 600w,
+/static/42090224cc012aed5ca671d347daaa7e/c1b63/create-credentials-2.png 1200w,
+/static/42090224cc012aed5ca671d347daaa7e/5148a/create-credentials-2.png 1228w&quot;
+        sizes=&quot;(max-width: 1200px) 100vw, 1200px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;h3 id=&quot;json-키-다운로드&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#json-%ED%82%A4-%EB%8B%A4%EC%9A%B4%EB%A1%9C%EB%93%9C&quot; aria-label=&quot;json 키 다운로드 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;JSON 키 다운로드&lt;/h3&gt;
+&lt;p&gt;생성된 서비스 계정을 사용하기 위해 해당 계정 상세로 들어가 키 탭으로 이동, 키 추가를 통해 키를 새롭게 생성하고,
+생성된 &lt;code class=&quot;language-text&quot;&gt;JSON&lt;/code&gt; 로컬에 저장한다. 여기까지가 API 활성화 과정이다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 902px; &quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 35.66666666666667%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAHCAYAAAAIy204AAAACXBIWXMAABYlAAAWJQFJUiTwAAABFklEQVR42p1Q2U7DMBDM//8NQkLiA0C0alAp5ZDKQ2mby0lqOz7aGOxhu08goT50pNGM1utZe7NxDLDOQyoNax2GwZB69oZpMRjDNMZC6QHq1Osc147HESkBMSZm5r2D3Pcod1tqlBBCQGsNKSX6vkfX9VwTbcu+rmuUZclnVVXxwN/IrP9Go75QqIRKUEgn6ELBQ06hQjTk96w1BXRdx6GOXvgfMuESnkXCokmYFwEbNWK5VnjbWnyUDi9rjVVhqSbx/inRSkvrMAgh0FcT80+gm9yjnuQQ0xmahxl0nkP7BEWDtI9QB1KiIu8C7SrhLLLD9RXEukSxWMHvNgi3N0AYcSmymN8hvs4Rl49IxPg0BVK6OPAHDJMZzR69JhYAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;서비스 계정 키 생성&quot;
+        title=&quot;&quot;
+        src=&quot;/static/e40d1ec305a2fb0d1e1d59821c082805/58213/create-key.png&quot;
+        srcset=&quot;/static/e40d1ec305a2fb0d1e1d59821c082805/5a46d/create-key.png 300w,
+/static/e40d1ec305a2fb0d1e1d59821c082805/0a47e/create-key.png 600w,
+/static/e40d1ec305a2fb0d1e1d59821c082805/58213/create-key.png 902w&quot;
+        sizes=&quot;(max-width: 902px) 100vw, 902px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;h3 id=&quot;ga4-액세스-권한-부여&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#ga4-%EC%95%A1%EC%84%B8%EC%8A%A4-%EA%B6%8C%ED%95%9C-%EB%B6%80%EC%97%AC&quot; aria-label=&quot;ga4 액세스 권한 부여 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;GA4 액세스 권한 부여&lt;/h3&gt;
+&lt;p&gt;이제 구글 에널리틱스에서 권한을 설정해야 한다. 우선 &lt;code class=&quot;language-text&quot;&gt;JSON&lt;/code&gt; 파일에서 &lt;code class=&quot;language-text&quot;&gt;client_email&lt;/code&gt;을 복사해 구글 에널리틱스 관리 -&gt;
+속성 -&gt; 속성 엑세스 관리에서 복사해둔 서비스 계정을 추가하고, 뷰어 권한을 부여해준다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 1200px; &quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 52.66666666666667%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAALCAYAAAB/Ca1DAAAACXBIWXMAABYlAAAWJQFJUiTwAAABAUlEQVR42qWSXU7EMAyE9/5H4SY8cwSeFrXatE5iO3+DnSKQ0Eq0otI8ND+fPePc7vcPLOsKUUVt7bJKbQA63t4FL6+EG6WMEAIy8zygpVwWi4JiREzxAMbEEAM2A44xcPXze2EnBDJgoIxHrGDOSCnNiq33S9JaDRixOXCPCdu2Tz3Mesr5K5t6Wp6/wyaQrCsiQrWNbtX+Y/kb6AMh+ykeslWL4jaeXx5ngCJiljfLkQ/Z1NjWVAuIB2of1zr0DJZlnfl5h15ARKcc7mC1NZYKkoHf/KcdBuvwByQoqhOerQizYM8ew/jb8hbtHbI9G+EJOGwbgDtKGzM1n9M4afkT5VZenzggbhYAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;뷰어 권한을 가진 클라우드 계정 추가&quot;
+        title=&quot;&quot;
+        src=&quot;/static/87408382aa127d57f667f6a6f96fb89f/c1b63/ga-property-viewer.png&quot;
+        srcset=&quot;/static/87408382aa127d57f667f6a6f96fb89f/5a46d/ga-property-viewer.png 300w,
+/static/87408382aa127d57f667f6a6f96fb89f/0a47e/ga-property-viewer.png 600w,
+/static/87408382aa127d57f667f6a6f96fb89f/c1b63/ga-property-viewer.png 1200w,
+/static/87408382aa127d57f667f6a6f96fb89f/d61c2/ga-property-viewer.png 1800w,
+/static/87408382aa127d57f667f6a6f96fb89f/97a96/ga-property-viewer.png 2400w,
+/static/87408382aa127d57f667f6a6f96fb89f/3b2f8/ga-property-viewer.png 2790w&quot;
+        sizes=&quot;(max-width: 1200px) 100vw, 1200px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;h3 id=&quot;property-id-확인&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#property-id-%ED%99%95%EC%9D%B8&quot; aria-label=&quot;property id 확인 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Property ID 확인&lt;/h3&gt;
+&lt;p&gt;속성 -&gt; 속성 세부 정보 탭으로 들어가 우측 상단 속성 ID를 복사한다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 1200px; &quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 11.666666666666666%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAACCAYAAABYBvyLAAAACXBIWXMAABYlAAAWJQFJUiTwAAAASklEQVR42pXMQQqAMAwAwf7/eYIgInhWCwYhbWoaVp+gh7lOOkXYj4yWirX7P2tYNeQyVI2kWpA3dXci4rveCaDnDV9GfJ2p08ADWqObxjEnDywAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;속성 아이디 복사&quot;
+        title=&quot;&quot;
+        src=&quot;/static/8f6727bcb7bded4a3f697a21939432d7/c1b63/property-id.png&quot;
+        srcset=&quot;/static/8f6727bcb7bded4a3f697a21939432d7/5a46d/property-id.png 300w,
+/static/8f6727bcb7bded4a3f697a21939432d7/0a47e/property-id.png 600w,
+/static/8f6727bcb7bded4a3f697a21939432d7/c1b63/property-id.png 1200w,
+/static/8f6727bcb7bded4a3f697a21939432d7/d61c2/property-id.png 1800w,
+/static/8f6727bcb7bded4a3f697a21939432d7/97a96/property-id.png 2400w,
+/static/8f6727bcb7bded4a3f697a21939432d7/ca640/property-id.png 2406w&quot;
+        sizes=&quot;(max-width: 1200px) 100vw, 1200px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;h3 id=&quot;mcp-서버-설치&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#mcp-%EC%84%9C%EB%B2%84-%EC%84%A4%EC%B9%98&quot; aria-label=&quot;mcp 서버 설치 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;MCP 서버 설치&lt;/h3&gt;
+&lt;p&gt;마지막으로 &lt;code class=&quot;language-text&quot;&gt;MCP&lt;/code&gt; 서버 설치가 필요하다. 깃헙 저장소 패키지를 설치하는 방법도 제공하지만,
+&lt;code class=&quot;language-text&quot;&gt;pip&lt;/code&gt;를 통해 패키지를 설치하는 방법이 간단하다.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;shell&quot; theme=&quot;nord&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;~$ pip install google-analytics-mcp
+~$ python -m ga4_mcp_server --help&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;h3 id=&quot;cursor-mcp-설정&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#cursor-mcp-%EC%84%A4%EC%A0%95&quot; aria-label=&quot;cursor mcp 설정 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Cursor MCP 설정&lt;/h3&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;GOOGLE_APPLICATION_CREDENTIALS&lt;/code&gt;은 위에서 발급받은 json 파일의 실제 로컬 경로를,
+&lt;code class=&quot;language-text&quot;&gt;GA4_PROPERTY_ID&lt;/code&gt;는 GA 속성 ID를 넣어준다.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;json&quot; theme=&quot;nord&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;{
+  &amp;quot;mcpServers&amp;quot;: {
+    &amp;quot;ga4-analytics&amp;quot;: {
+      &amp;quot;command&amp;quot;: &amp;quot;python3&amp;quot;,
+      &amp;quot;args&amp;quot;: [&amp;quot;-m&amp;quot;, &amp;quot;ga4_mcp_server&amp;quot;],
+      &amp;quot;env&amp;quot;: {
+        &amp;quot;GOOGLE_APPLICATION_CREDENTIALS&amp;quot;: &amp;quot;/path/to/your/service-account-key.json&amp;quot;,
+        &amp;quot;GA4_PROPERTY_ID&amp;quot;: &amp;quot;123456789&amp;quot;
+      }
+    }
+  }
+}&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;h3 id=&quot;테스트&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%ED%85%8C%EC%8A%A4%ED%8A%B8&quot; aria-label=&quot;테스트 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;테스트&lt;/h3&gt;
+&lt;p&gt;위 과정을 잘 마무리했다면, 다음과 같이 mcp 서버를 사용할 수 있다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 1100px; &quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 38.666666666666664%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAICAYAAAD5nd/tAAAACXBIWXMAABYlAAAWJQFJUiTwAAABAUlEQVR42pWS2YqDQBBF+0EyT2I0asQFCYpL1LiLWRTx///pzlQPLbOECfNwqEs3dbuWZtfrFff7nSM0xcfjwXXTNLhcLijL8k+qqkKe52AieZqmzYQgTbRt+9Lsm2Hf9xjHERQJUeEwDJzb7bY9SHdFUSAIAoRh+BTWtR3quuatCchY6K7ruMn5fEaWZUjTFEmSPCWKIjDtcIDrurAsC7Ztw3EcHD7O9vs9VFXlkFYU5SWe54Ht3nYwTROGYfBEWZYhSRIYY/+GPJjv+yBOpxOOxyN0XefxK1Q9QZqSqIOfaJr2WSEthIYuvsy6rpjneVuC0MuycE3bpFnFcfwLmuE72yvk+fr8Y5AAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;GA MCP 활용 예시&quot;
+        title=&quot;&quot;
+        src=&quot;/static/787b7f6bd52664bd05e27a83865acd7f/99f37/cursor-example.png&quot;
+        srcset=&quot;/static/787b7f6bd52664bd05e27a83865acd7f/5a46d/cursor-example.png 300w,
+/static/787b7f6bd52664bd05e27a83865acd7f/0a47e/cursor-example.png 600w,
+/static/787b7f6bd52664bd05e27a83865acd7f/99f37/cursor-example.png 1100w&quot;
+        sizes=&quot;(max-width: 1100px) 100vw, 1100px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+    &lt;/span&gt;&lt;/p&gt;</content:encoded></item><item><title><![CDATA[배관공 기술부터 배우세요]]></title><description><![CDATA[제프리 힌튼, AI의 아버지라 불리는 본 교수님은 AI…]]></description><link>https://youthfulhps.dev/essay/godfather-of-ai-retrospect/</link><guid isPermaLink="false">https://youthfulhps.dev/essay/godfather-of-ai-retrospect/</guid><pubDate>Sun, 07 Sep 2025 22:09:42 GMT</pubDate><content:encoded>&lt;blockquote&gt;&lt;a href=&apos;https://www.youtube.com/watch?v=giT0ytynSqg&apos; target=&apos;_blank&apos;&gt;Godfather of AI: I Tried to Warn Them, But We’ve Already Lost Control! Geoffrey Hinton&lt;/a&gt;를 보고 작성한 회고입니다.&lt;/blockquote&gt;
+&lt;p&gt;제프리 힌튼, AI의 아버지라 불리는 본 교수님은 AI를 접해본 사람이라면 모두 알고 있을 인물이다. 나 역시도 연구실에서 학부 연구생을 하던 시절
+신경망 모델 구조, 역전파 알고리즘을 통한 노드 가중치 업데이트 등과 같은 모델 학습법에 대한 초석을 세우신 분이며 손 글씨로 적힌 숫자를 인식하는
+&lt;a href=&quot;https://en.wikipedia.org/wiki/AlexNet&quot;&gt;AlexNet&lt;/a&gt;은 CNN에 대해 공부하는 서적에 단골로 등장하는 모델이 되었다.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Trained to be a plumber.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;‘배관공 기술부터 배우세요’, 위 영상의 진행자가 ‘박사님 자녀들이 “뭘 하면 좋을까?”하고 물어본다면 뭐라고 하시겠어요?‘라는 질문에
+이와 같이 답한다. 수십년간 AI가 어떻게 하면 더 똑똑해질 수 있을까 연구하시던, 그리고 같은 고민을 이어가기 위해 공부하는 많은 사람들 중 한사람으로서
+매우 직설적인 답변에 잠시 공기가 가라앉는 기분이었다.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Yeah. So mundane intellectual labour is like having strong muscles.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;이전 산업 혁명들은 근육을 대체하는 역할들을 했다. 지금의 AI 혁명은 인간의 두뇌를 대체하려고 한다. 굴착을 위해 인력을 동원하는 시대가 지나갔듯
+단순한 지적 노동은 이제 AI로 대체될 것이다.&lt;/p&gt;</content:encoded></item><item><title><![CDATA[babel의 핵심 변환 파이프라인]]></title><description><![CDATA[…]]></description><link>https://youthfulhps.dev/web/babel-transpilation/</link><guid isPermaLink="false">https://youthfulhps.dev/web/babel-transpilation/</guid><pubDate>Fri, 05 Sep 2025 17:08:16 GMT</pubDate><content:encoded>&lt;p&gt;브라우저들이 가지고 있는 자바스크립트 엔진은 일반적으로 표준화되어 있지만, 호환 가능한 코드의 미묘한 차이가 존재한다. &lt;code class=&quot;language-text&quot;&gt;babel&lt;/code&gt;은 개발자가
 작성한 최신 &lt;code class=&quot;language-text&quot;&gt;ECMAScript&lt;/code&gt; 기능이 담긴 한 벌의 코드를 통해 제품이 제공되는 이전 환경들과의 호환성을 유지할 수 있도록 하는 사전 설정 도구인 컴파일러 및
 변환 시스템이다.&lt;/p&gt;
 &lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;babel&lt;/code&gt;의 기원은 &lt;code class=&quot;language-text&quot;&gt;ECMAScript6 (ES6)&lt;/code&gt; 코드를 &lt;code class=&quot;language-text&quot;&gt;ECMAScript5 (ES5)&lt;/code&gt;로 변환하기 위해 설계된 &lt;a href=&quot;https://www.npmjs.com/package/6to5&quot;&gt;6to5&lt;/a&gt;로 시작되어,
