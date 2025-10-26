@@ -9,7 +9,7 @@ draft: false
 
 [tailwind-converter](https://www.npmjs.com/package/@youthfulhps/tailwind-converter) 라이브러리를 출시하게 되었다. [styled-components](https://www.npmjs.com/package/styled-components)를 통해 정의된 코드레벨의 컴포넌트 스타일을 추출하여 [tailwindCSS](https://tailwindcss.com/)에서 제공하는 유틸리티 클래스로 변환하고, 해당 컴포넌트의 사용처를 찾아 변환된 스타일 클래스들을 할당, 최종적으로 코드를 반환하는 도구이다.
 
-```ts
+```tsx
 // before
 import React from 'react';
 import styled from 'styled-components';
@@ -42,7 +42,7 @@ function Component() {
 export default Component;
 ```
 
-```ts
+```tsx
 // after
 import React from 'react';
 import styled from 'styled-components';
@@ -692,7 +692,7 @@ function Component() {
 
 단번에 모든 스타일된 컴포넌트 코드 스타일을 커버할 수 있는 변환기를 만들겠노라 목표하진 않았지만, 아직 조건부 스타일을 위한 보간 (interpolation)을 어떻게 처리해야 할 지 고민이 크다.
 
-```ts
+```tsx
 const Card = styled.div<{ isSelected: boolean }>`
   ... border-width: ${({ isSelected }) => (isSelected ? '4px' : '2px')}; // ?
 `;
