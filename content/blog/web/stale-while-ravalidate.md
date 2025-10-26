@@ -3,7 +3,7 @@ title: stale-while-revalidate 전략은 어떻게 활용되고 있을까
 date: 2022-06-01 16:06:87
 category: web
 thumbnail: ./images/stale-while-revalidate/swr-flow-2.png
-draft: false
+draft: true
 description: 심심찮게 등장하는 swr 캐싱 전략을 간단하게 살펴봅니다.
 ---
 
