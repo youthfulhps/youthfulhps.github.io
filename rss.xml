@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Youthfulhps.dev]]></title><description><![CDATA[프론트엔드 주니어 개발자, 트러블슈팅에 대한 고민의 흔적을 기록으로 남기는 것을 좋아합니다.]]></description><link>https://youthfulhps.dev</link><generator>GatsbyJS</generator><lastBuildDate>Mon, 22 Sep 2025 12:30:43 GMT</lastBuildDate><item><title><![CDATA[Google Analytics MCP를 통한 데이터 분석]]></title><description><![CDATA[여러 컨텍스트에서 를 제공하기 시작하면서 개발 단계에 도움을 많이 받고 있다.
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Youthfulhps.dev]]></title><description><![CDATA[프론트엔드 주니어 개발자, 트러블슈팅에 대한 고민의 흔적을 기록으로 남기는 것을 좋아합니다.]]></description><link>https://youthfulhps.dev</link><generator>GatsbyJS</generator><lastBuildDate>Tue, 28 Oct 2025 00:57:01 GMT</lastBuildDate><item><title><![CDATA[Google Analytics MCP를 통한 데이터 분석]]></title><description><![CDATA[여러 컨텍스트에서 를 제공하기 시작하면서 개발 단계에 도움을 많이 받고 있다.
 가령 를 통해 단순한 UI…]]></description><link>https://youthfulhps.dev/development/google-analytics-mcp/</link><guid isPermaLink="false">https://youthfulhps.dev/development/google-analytics-mcp/</guid><pubDate>Mon, 22 Sep 2025 14:09:05 GMT</pubDate><content:encoded>&lt;p&gt;여러 컨텍스트에서 &lt;code class=&quot;language-text&quot;&gt;Model Context Protocol(MCP)&lt;/code&gt;를 제공하기 시작하면서 개발 단계에 도움을 많이 받고 있다.
 가령 &lt;a href=&quot;https://github.com/GLips/Figma-Context-MCP&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;Figma-Context-MCP&lt;/code&gt;&lt;/a&gt;를 통해 단순한 UI 구현을 요청하고선,
 다른 비즈니스 로직을 짜는 것에 충분히 익숙해져 있다.&lt;/p&gt;
@@ -6467,79 +6467,91 @@ console.log(a); // 10;&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
 &lt;p&gt;만약 if문의 코드 블록이 실행되면, &lt;strong&gt;let, const의 식별자가 관리되는 선언적 환경 레코드를 갖는 렉시컬 환경이 새롭게 생성되고
 이를 통해 글로벌 렉시컬 환경의 선언적 환경 레코드를 교체한다.이후 코드 블록의 실행이 종료되면 기존 글로벌 렉시컬 환경으로
-다시 교체하여 코드 블록의 외부 코드의 전개를 보장한다.&lt;/strong&gt; 이는 블록 레벨 스코프를 구현하는 메커니즘이다.&lt;/p&gt;</content:encoded></item><item><title><![CDATA[tailwind-converter 제작기]]></title><description><![CDATA[tailwind-converter 라이브러리를 릴리즈하게 되었다.
-styled-components를 통해 정의된 코드레벨의 컴포넌트 스타일을 추출하여
-tailwindCSS…]]></description><link>https://youthfulhps.dev/development/tailwind-converter/</link><guid isPermaLink="false">https://youthfulhps.dev/development/tailwind-converter/</guid><pubDate>Tue, 05 Sep 2023 13:10:06 GMT</pubDate><content:encoded>&lt;p&gt;&lt;a href=&quot;https://www.npmjs.com/package/@youthfulhps/tailwind-converter&quot;&gt;tailwind-converter&lt;/a&gt; 라이브러리를 릴리즈하게 되었다.
-&lt;a href=&quot;https://www.npmjs.com/package/styled-components&quot;&gt;styled-components&lt;/a&gt;를 통해 정의된 코드레벨의 컴포넌트 스타일을 추출하여
-&lt;a href=&quot;https://tailwindcss.com/&quot;&gt;tailwindCSS&lt;/a&gt;에서 제공하는 유틸리티 클래스로 변환하고, 해당 컴포넌트의 사용처를 찾아 변환된 스타일 클래스들을 할당,
-최종적으로 코드를 반환하는 도구이다.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;before&lt;/strong&gt;
-&lt;span
-      class=&quot;gatsby-resp-image-wrapper&quot;
-      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 1200px; &quot;
-    &gt;
-      &lt;span
-    class=&quot;gatsby-resp-image-background-image&quot;
-    style=&quot;padding-bottom: 95.66666666666666%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAATCAYAAACQjC21AAAACXBIWXMAAAsTAAALEwEAmpwYAAADI0lEQVR42o2UWXPaVhiG+Ru9aZNiswntEmKTQCAJBNgYxzgY4yweu9MkbScddzoRNOn0ple9zo/o9D++fY+EU+y6y8UzRzBnHn2rcjdXf2Aa/YAn0RrH0Ts8GSY4GSSYxwlOyWK8xrPZz+QDlgdrLCcJzg/IYYIVuZgmeH60wWL0PX59+ztyp8M1lM8NKHIHSqkFPd+AKtUh7TkoPLJR+tJGZb+Oct7hs4XiYwulW/i7TMTdLz4r4sXsHXKryS9w9jy4tSO07AM0KxFaZoC2HfG/EC0rhCH1oJZ86OUMo5JhSoSnLfcpreGr+XvkzkbvYRXasK0hTDWA3ziEro8hFxkxUQWlDG2LXv4Lo9KBVfXTSK9PNkw5XjOaNibRGKEXIfZjmHIPcuEBWfnvMoFNYSVP4XxN4WiDatFh2D04Wg86L8j7HtSCS6H3nzLzk9Bkygly5+OfoOWbMIwBlGqP4gEcfQjFGEGVA2iU7sqMezJTolDuQroVLjkWnu1iGIzhNkJ06wM0zIhdD6GxGdoDUe3KLMlDTQj3THx9SqGYM0Ouw69HaBoibZ+XRP1cSrx/kXmp7I7wqRCOEjahgUkwwqATod8MYcn+nW7eEd2TWVUPjpIJXwnh6nDNEXFQU/pwVD+N8p+KL1LcldnVDCGs7pt4vaDwYrpGKV9jRN2so6mkm8rM/yET1NVM+OaMwhfTDXzKAnsCi3WscUNqimiGl7Jb/IdkNTkTyhR+I4QrLrdZaGJuzxAYMddvCNeO0dYCuFwpu9rJuC/aygQNISyY+HZJ4TOmXMnbODIOEHPtOtEMfW+CuDXAsBWh5wy4QUfo8UWBFsKRO58iEzhCqHWhUPjdOYUvjzcc3iY6agRH6vK5DT0dGZf1c7dpug9GJmSO4qG5K7yef+BHoMHLvXSFbMVnDUm1m87XLY5AyahvEakKWjprXrLx9oK7/HL6I/THJjx+iloVDrLJiGxGWm7wrQ4HfIeSwwwIT30HS2qg+KiCN4sb5JLrjxh3VpiFV5gFlzjuE54nUcZ8cInTLU+HGYv4EmeC0SWWZDW5wkl4jt9uPuJPlTmMIRwo++0AAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
-  &gt;&lt;/span&gt;
-  &lt;img
-        class=&quot;gatsby-resp-image-image&quot;
-        alt=&quot;tailwind-converter를 통해 변환하기 전 코드&quot;
-        title=&quot;&quot;
-        src=&quot;/static/13ba738127b9e0a50b34f4025d05e1a1/c1b63/before.png&quot;
-        srcset=&quot;/static/13ba738127b9e0a50b34f4025d05e1a1/5a46d/before.png 300w,
-/static/13ba738127b9e0a50b34f4025d05e1a1/0a47e/before.png 600w,
-/static/13ba738127b9e0a50b34f4025d05e1a1/c1b63/before.png 1200w,
-/static/13ba738127b9e0a50b34f4025d05e1a1/eee07/before.png 1628w&quot;
-        sizes=&quot;(max-width: 1200px) 100vw, 1200px&quot;
-        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
-        loading=&quot;lazy&quot;
-        decoding=&quot;async&quot;
-      /&gt;
-    &lt;/span&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;after&lt;/strong&gt;
-&lt;span
-      class=&quot;gatsby-resp-image-wrapper&quot;
-      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 1200px; &quot;
-    &gt;
-      &lt;span
-    class=&quot;gatsby-resp-image-background-image&quot;
-    style=&quot;padding-bottom: 98.33333333333334%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAACXBIWXMAAAsTAAALEwEAmpwYAAADcklEQVR42oWU227iVhSGeZBKo0kmkGCMjc8GHzDGNoZwGnJAmUOVzECSoWov5n5UtVTTqlKfoTd9zr//xk5Cpaa9+LQt2/r877WWd+WH679wefojrk63uBr/TLZ4w/XddIv3sy1uzr9idfkb1stfsbr4ipvFFh/OtvhIVufkYovby194/wu+fPoTlaG/hvxCR13y0ThqQzl0oNQdnBxaOHphoH5kQ6o6XMkrG7WXxo7jBw4MSHz34BsJefAWldfR93CrXfjuHJ4+hielCOwEnpnCNxN0jD40qQel1oV6EqFFNEGdSBF0roYUQ666mCcrVCbhBkY1gKZl0JWEsglUNUezFkI9DqHsoT5wElJcoNVD6BQ3uJNZfIPKKLxD1wmR94eIvRR5bwitIb4Y7qT/JxMYFMpC2Kcwp7DVcOGqMTp6zG2EfOhDYWqltifbE+3LHoVVG/P+NSrj8B7yQQeKnEBmbQyuppJCVgZQmFStBc/K9BKj0aXQKoTT6B6R1UUcj+CxGYGVw9EHaFKoCuFx8LxMEgQwS+HrhMJRdAtb6yByEritHto6Uza41ar/D5n2jMwohc2ahYUQ5sEaTsvDMB4g8ROOSswXu7va/Vu9HmRGKRNYMoVMuEhFDZlQq7vwOG9CFtoxWvX/kj2JjIZIVwgVJjzLKJzEd6gd2vxC0d1mNXi2XsZeMrPxhF0Kz4Vw0b+Hx/HotDjYdgbHzPjFsru7GnLoBfWA4pK9lCZxmoXwQghn/VvEcoSZM0WHv1rbz+E5GUKr90hgRZzRLgIzKu/x2giJuNeF1RSzSuFAJMzuYCltjNr8U5IRkuEEo16GeZbhNE6RdvpI/ZRTEGPApiVejH47QxaM2cQRMmeAUOG/TuFSCKfxGk2eMEN1BN8awPby3YHQtZnEidDjbKbhBD0+S3XuQOnCIa4a7WgrBS0hzEXC9J416sCT+3A4Ltqxv6ubqJOol1b3ee2zXgW7RsjsbMNnrX3YzQAuP/AoXOYbtGptOGyE3YhgcrhtIkbB5IBbcoEtaBY4Ja5S0FHFMWbjasTDYdH7AO3AhM90LtNoGpPp4jBw+bfY7J7Ngj/ReuDE5s4KDMmF9ErBWXKFyufrPzjhKyxHGyyHn3CVE65vTjd4O97gnWCywXvyrWBKZhtcl9zMN/i4+I731/hp8zv+BhhXrPRAd120AAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
-  &gt;&lt;/span&gt;
-  &lt;img
-        class=&quot;gatsby-resp-image-image&quot;
-        alt=&quot;tailwind-convert를 통해 변환된 코드&quot;
-        title=&quot;&quot;
-        src=&quot;/static/6606337acff3e876267a50f0c10223a6/c1b63/after.png&quot;
-        srcset=&quot;/static/6606337acff3e876267a50f0c10223a6/5a46d/after.png 300w,
-/static/6606337acff3e876267a50f0c10223a6/0a47e/after.png 600w,
-/static/6606337acff3e876267a50f0c10223a6/c1b63/after.png 1200w,
-/static/6606337acff3e876267a50f0c10223a6/eee07/after.png 1628w&quot;
-        sizes=&quot;(max-width: 1200px) 100vw, 1200px&quot;
-        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
-        loading=&quot;lazy&quot;
-        decoding=&quot;async&quot;
-      /&gt;
-    &lt;/span&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;간단한 예제에서는 그럴싸하게 동작하지만, 아직 실무에서 사용되는 복잡한 정의의 컴포넌트를 완벽하게 변환하기까지, 혹은 완벽하게 변환이 가능한 것인지도 모를 단계이자,
-아직 많은 이슈와 챌린지들을 직면하고 있다.&lt;/p&gt;
-&lt;p&gt;그래도 1차적으로 목표했던 기능이 완성되었고, 라이브러리를 제작하면서 배우고 고민했던 것들을 기록하기 위해 회고를 남겨보려 한다.&lt;/p&gt;
+다시 교체하여 코드 블록의 외부 코드의 전개를 보장한다.&lt;/strong&gt; 이는 블록 레벨 스코프를 구현하는 메커니즘이다.&lt;/p&gt;</content:encoded></item><item><title><![CDATA[tailwind-converter 제작기]]></title><description><![CDATA[tailwind-converter 라이브러리를 출시하게 되었다. styled-components를 통해 정의된 코드레벨의 컴포넌트 스타일을 추출하여 tailwindCSS…]]></description><link>https://youthfulhps.dev/development/tailwind-converter/</link><guid isPermaLink="false">https://youthfulhps.dev/development/tailwind-converter/</guid><pubDate>Tue, 05 Sep 2023 13:10:06 GMT</pubDate><content:encoded>&lt;p&gt;&lt;a href=&quot;https://www.npmjs.com/package/@youthfulhps/tailwind-converter&quot;&gt;tailwind-converter&lt;/a&gt; 라이브러리를 출시하게 되었다. &lt;a href=&quot;https://www.npmjs.com/package/styled-components&quot;&gt;styled-components&lt;/a&gt;를 통해 정의된 코드레벨의 컴포넌트 스타일을 추출하여 &lt;a href=&quot;https://tailwindcss.com/&quot;&gt;tailwindCSS&lt;/a&gt;에서 제공하는 유틸리티 클래스로 변환하고, 해당 컴포넌트의 사용처를 찾아 변환된 스타일 클래스들을 할당, 최종적으로 코드를 반환하는 도구이다.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;tsx&quot; theme=&quot;nord&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;// before
+import React from &amp;#39;react&amp;#39;;
+import styled from &amp;#39;styled-components&amp;#39;;
+
+const Title = styled.h1`
+  font-size: 1.5em;
+  text-align: center;
+  color: #bf4f74;
+`;
+
+const Wrapper = styled.section`
+  padding: 4em;
+  background: #ffefd5;
+
+  .description {
+    font-size: 1.2em;
+    color: #5a5ae6;
+  }
+`;
+
+function Component() {
+  return (
+    &amp;lt;Wrapper&amp;gt;
+      &amp;lt;Title&amp;gt;Hello World!&amp;lt;/Title&amp;gt;
+      &amp;lt;span className=&amp;quot;description&amp;quot;&amp;gt;Welcome!&amp;lt;/span&amp;gt;
+    &amp;lt;/Wrapper&amp;gt;
+  );
+}
+
+export default Component;&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;deckgo-highlight-code language=&quot;tsx&quot; theme=&quot;nord&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;// after
+import React from &amp;#39;react&amp;#39;;
+import styled from &amp;#39;styled-components&amp;#39;;
+
+const Title = styled.h1`
+  font-size: 1.5em;
+  text-align: center;
+  color: #bf4f74;
+`;
+
+const Wrapper = styled.section`
+  padding: 4em;
+  background: #ffefd5;
+
+  .description {
+    font-size: 1.2em;
+    color: #5a5ae6;
+  }
+`;
+
+function Component() {
+  return (
+    &amp;lt;section className=&amp;quot;p-16 bg-[#ffefd5] [&amp;amp;&amp;gt;.description]:text-[1.2em] [&amp;amp;&amp;gt;.description]:text-[#5a5ae6]&amp;quot;&amp;gt;
+      &amp;lt;h1 className=&amp;quot;text-2xl text-center text-[#bf4f74]&amp;quot;&amp;gt;Hello World!&amp;lt;/h1&amp;gt;
+      &amp;lt;span className=&amp;quot;description&amp;quot;&amp;gt;Welcome!&amp;lt;/span&amp;gt;
+    &amp;lt;/section&amp;gt;
+  );
+}
+
+export default Component;&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;간단한 예제에서는 그럴싸하게 동작하지만, 아직 실무에서 사용되는 복잡한 정의의 컴포넌트를 완벽하게 변환하기까지
+많은 이슈와 챌린지들을 직면하고 있다. 하지만 1차적으로 목표했던 기능을 완성하였고, 라이브러리를 제작하면서 배우고 고민했던 것들을
+기록하기 위해 회고를 남긴다.&lt;/p&gt;
 &lt;h2 id=&quot;동기&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EB%8F%99%EA%B8%B0&quot; aria-label=&quot;동기 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;동기&lt;/h2&gt;
-&lt;p&gt;사내 내부적으로 프론트엔드 파트 통합을 준비하면서 각 파트의 기술 스택 통일에 대한 필요성을 느꼈다. 결과적으로 스타일링을 위해 사용되는 도구로는 tailwindCSS가
-채택되고, styled-components를 사용하고 있는 레거시 스타일 정의에 대해 리팩토링과 마이그레이션이 필요한 상황이었다.&lt;/p&gt;
-&lt;p&gt;다만 해당 작업이 지엽적이고 반복적인 작업에 피로가 꽤나 쌓일 만한 작업이었으며, 수반되는 QA도 무시할 수 없었다. 별수 있나 받아들이고 시간 날 때마다 마이그레이션
-작업을 했다. 당연한 이야기지만, 다음과 같은 과정을 반복했다.&lt;/p&gt;
+&lt;p&gt;사내 내부적으로 프론트엔드 파트 통합을 준비하면서 각 파트의 기술 스택 통일에 대한 필요성을 느꼈다. 다수의 제품이 &lt;code class=&quot;language-text&quot;&gt;tailwindCSS&lt;/code&gt;를
+사용하고 있었기 때문에, &lt;code class=&quot;language-text&quot;&gt;styled-components&lt;/code&gt;를 사용하고 있는 레거시 스타일 정의에 대해 리팩토링과 마이그레이션을 진행해서
+공통의 스타일 정의를 사용할 수 있는 환경을 구축해야 했다.&lt;/p&gt;
+&lt;p&gt;다만 해당 작업이 지엽적이고 반복적인 작업이라 꽤 높은 피로도가 수반되는 작업이었고, QA 또한 무시할 수 없었다.
+마이그레이션하는 작업을 정리하자면 다음과 같다.&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;정의된 컴포넌트의 스타일을 확인한다.&lt;/li&gt;
-&lt;li&gt;스타일 속성과 값에 대응하는 tailwind 유틸리티 클래스를 찾는다.&lt;/li&gt;
-&lt;li&gt;해당 컴포넌트의 사용처에서 열린 태그를 찾아 className 속성에 해당 유틸리티 클래스를 할당한다.&lt;/li&gt;
+&lt;li&gt;스타일 속성과 값에 대응하는 &lt;code class=&quot;language-text&quot;&gt;tailwindCSS&lt;/code&gt;의 유틸리티 클래스를 찾는다.&lt;/li&gt;
+&lt;li&gt;해당 컴포넌트의 사용처에서 열린 태그를 찾아 &lt;code class=&quot;language-text&quot;&gt;className&lt;/code&gt; 속성에 해당 유틸리티 클래스를 할당한다.&lt;/li&gt;
+&lt;li&gt;열린 태그와 닫힌 태그를 찾아, 요소로 대체한다.&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;그러다 문뜩 코드 수정을 발생시키는 위 과정들을 수행하는 프로그램을 작성해 볼 수 있겠다는 생각이 들었다. 한정된 스타일 속성들과 이에 대응되는 유틸리티 클래스가
-명확했고, styled 함수를 사용하는 코드 구조나 컴포넌트 사용처의 열린 태그가 가진 className 속성에 할당하는 과정 또한 문법적으로 제약이 있었기 때문이다.&lt;/p&gt;
-&lt;p&gt;다만 코드란 게 다양한 스타일을 가지고 있기 때문에 모든 스타일을 대응할 수 있을 것이라고는 장담할 수는 없었지만, 우선 이러한 컨셉을 증명해 보기 위해 단순하게 정의된
-기본적인 스타일 속성들에 대해 위 과정을 대신 수행해 주는 스크립트를 작성해 보자는 것을 첫 번째 목표로 삼았다.&lt;/p&gt;
+&lt;p&gt;그러다 문뜩 위처럼 작업 리스트를 위처럼 정의할 수 있다면, 이 과정을 수행하는 프로그램을 만들어 볼 수 있겠다는 생각이 들었다.
+한정된 스타일 속성들과 이에 대응되는 유틸리티 클래스가 명확했고, &lt;code class=&quot;language-text&quot;&gt;styled&lt;/code&gt; 태그 템플릿 리터럴 함수를 사용하는 코드 구조나
+컴포넌트 사용처의 열린 태그가 가진 &lt;code class=&quot;language-text&quot;&gt;className&lt;/code&gt; 속성에 할당하는 과정 또한 문법적으로 제약이 명확했기 때문이다.&lt;/p&gt;
+&lt;p&gt;다만 코드란 게 다양한 스타일을 가지고 있어 모든 스타일을 대응할 수 있을 것이라고 장담할 수는 없었지만, 우선 이러한 컨셉을 증명해 보기 위해
+단순하게 정의된 기본적인 스타일 속성들에 대해 위 과정을 대신 수행하는 스크립트를 작성해 보는 것을 첫 번쨰 목표로 삼았다.&lt;/p&gt;
 &lt;h2 id=&quot;추상-구문-트리를-조작할-수-있구나&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EC%B6%94%EC%83%81-%EA%B5%AC%EB%AC%B8-%ED%8A%B8%EB%A6%AC%EB%A5%BC-%EC%A1%B0%EC%9E%91%ED%95%A0-%EC%88%98-%EC%9E%88%EA%B5%AC%EB%82%98&quot; aria-label=&quot;추상 구문 트리를 조작할 수 있구나 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;추상 구문 트리를 조작할 수 있구나&lt;/h2&gt;
 &lt;p&gt;&lt;span
       class=&quot;gatsby-resp-image-wrapper&quot;
@@ -6564,172 +6576,186 @@ tailwindCSS…]]></description><link>https://youthfulhps.dev/development/tailwin
       /&gt;
     &lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;처음엔 코드 파일을 스크랩해서 정규식을 통해 정의된 컴포넌트의 스타일을 추출해 보려 했으나 절대 안전한 방법이 아니라는 걸 금방 깨달았다.
-컨벤션이 정해져 있다고 한들 다양한 코드 스타일을 감당할 만한 정규식을 기대하기는 어려웠고, 더 엄격한 정규식을 사용하면 예외적인 문자열이 포함되거나, 원하는 문자열이
-제외되는 경우가 많았다.&lt;/p&gt;
-&lt;p&gt;결론부터 말하자면 추상 구문 트리를 조작하는 것으로 접근 방식을 정했다. 사실 추상 구문 트리를 조작해야겠다는 생각이 쉽게 떠오른 것은 아니었는데, 한창 어떻게 풀어낼 수
-있을 까 고민하던 중 우연히 익숙하게 사용한 &lt;a href=&quot;https://prettier.io/&quot;&gt;prettier&lt;/a&gt;로 코드 포매팅을 했는데, 자바스크립트 문법을 읽기 쉽게 코드를 포매팅해준다면,
-prettier는 문자열 덩어리에서 자바스크립트를 어떻게 해석할 수 있는 것인가에 대한 의문이 생겼다.&lt;/p&gt;
+컨벤션이 정해져 있다고 한들 다양한 코드 스타일을 감당할 만한 정규식을 기대하기는 어려웠고, 더 엄격한 정규식을 사용하면 예외적인 문자열이 포함되거나, 원하는 문자열이 제외되는 경우가 많았다.&lt;/p&gt;
+&lt;p&gt;결론부터 말하자면, 추상 구문 트리를 조작하는 전략을 취했다. 사실 추상 구문 트리를 조작해야겠다는 생각이 쉽게 떠오른 것은 아니었는데,
+한창 고민하며 작업하던 중 우연히 익숙하게 사용한 &lt;code class=&quot;language-text&quot;&gt;prettier&lt;/code&gt;의 코드 포매팅은 어떻게 문자열 덩어리에서 각기 다른 문법에 따라 읽기 좋은
+코드를 재생산 해내는지에 대한 기술적인 의문이 생겼다.&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;추상 구문 트리는 프로그래밍 언어로 작성된 소스 코드의 추상 구문 구조의 트리이다. 이 트리의 각 노드는 소스 코드에서 발생되는 구조를 나타낸다.
 [위키 백과/추상 구문 트리] 중&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;결국 코드 텍스트에서 트리 구조의 데이터 구조를 만들어내고, 코드에 있는 각각의 아이템을 통해 노드를 구성한 구조가 추상 구문 트리이다. &lt;a href=&quot;https://babeljs.io/&quot;&gt;babel&lt;/a&gt;에서
-자바스크립트를 컴파일링할때나, prettier, eslint와 같이 포매팅 혹은 컨벤션 이슈를 체크하는 도구들 또한 추상 구문 트리를 기반으로 코드를 해석하고 조작한다.&lt;/p&gt;
-&lt;p&gt;간단하게 예시를 살펴보자. 다음과 같은 코드로 추상 구문 트리를 생성한 결과이다.&lt;/p&gt;
+&lt;p&gt;결국 문자열로 이루어진 코드 텍스트를 분석해 각각의 토큰들의 정보를 노드로 구성하여 관계에 따라 트리 구조로 구성한 것이 추상 구문 트리이다.
+&lt;a href=&quot;https://babeljs.io/&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;babel&lt;/code&gt;&lt;/a&gt;에서 자바스크립트를 컴파일 할 때나, &lt;code class=&quot;language-text&quot;&gt;prettier&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;eslint&lt;/code&gt;와 같은 도구들 모두 추상 구문 트리를
+기반으로 코드를 해석하고 조작한다.&lt;/p&gt;
+&lt;p&gt;간단하게 예시를 살펴보자. 다음과 같은 코드를 추상 구문 트리로 생성한 결과이다.&lt;/p&gt;
 &lt;deckgo-highlight-code language=&quot;js&quot; theme=&quot;nord&quot;  &gt;
-          &lt;code slot=&quot;code&quot;&gt;const Title = styled.h1`
+          &lt;code slot=&quot;code&quot;&gt;const { parse } = require(&amp;#39;@babel/parser&amp;#39;);
+
+const code = `const Title = styled.h1`
   font-size: 1.5em;
   text-align: center;
   color: #bf4f74;
-`;&lt;/code&gt;
+``;
+
+const ast = parse(code, {
+  sourceType: &amp;#39;module&amp;#39;,
+  plugins: [],
+});&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
-&lt;deckgo-highlight-code language=&quot;json&quot; theme=&quot;nord&quot;  &gt;
-          &lt;code slot=&quot;code&quot;&gt;{
-  &amp;quot;type&amp;quot;: &amp;quot;File&amp;quot;,
-  &amp;quot;start&amp;quot;: 0,
-  &amp;quot;end&amp;quot;: 87,
-  &amp;quot;loc&amp;quot;: {
-    &amp;quot;start&amp;quot;: {...},
-    &amp;quot;end&amp;quot;: {...},
+&lt;details&gt;
+  &lt;summary&gt;&lt;deckgo-highlight-code language=&quot;javascript&quot;&gt;
+&lt;code slot=&quot;code&quot;&gt;console.log(JSON.stringify(ast, null, 2));&lt;/code&gt;
+  &lt;/deckgo-highlight-code&gt;&lt;/summary&gt;
+  &lt;deckgo-highlight-code language=&quot;json&quot;&gt;
+&lt;code slot=&quot;code&quot;&gt;
+{
+  &quot;type&quot;: &quot;File&quot;,
+  &quot;start&quot;: 0,
+  &quot;end&quot;: 87,
+  &quot;loc&quot;: {
+    &quot;start&quot;: {...},
+    &quot;end&quot;: {...},
   },
-  &amp;quot;range&amp;quot;: [0, 87],
-  &amp;quot;errors&amp;quot;: [],
-  &amp;quot;program&amp;quot;: {
-    &amp;quot;type&amp;quot;: &amp;quot;Program&amp;quot;,
-    &amp;quot;start&amp;quot;: 0,
-    &amp;quot;end&amp;quot;: 87,
-    &amp;quot;loc&amp;quot;: {
-      &amp;quot;start&amp;quot;: {...},
-      &amp;quot;end&amp;quot;: {...},
+  &quot;range&quot;: [0, 87],
+  &quot;errors&quot;: [],
+  &quot;program&quot;: {
+    &quot;type&quot;: &quot;Program&quot;,
+    &quot;start&quot;: 0,
+    &quot;end&quot;: 87,
+    &quot;loc&quot;: {
+      &quot;start&quot;: {...},
+      &quot;end&quot;: {...},
     },
-    &amp;quot;range&amp;quot;: [0, 87],
-    &amp;quot;sourceType&amp;quot;: &amp;quot;module&amp;quot;,
-    &amp;quot;interpreter&amp;quot;: null,
-    &amp;quot;body&amp;quot;: [
+    &quot;range&quot;: [0, 87],
+    &quot;sourceType&quot;: &quot;module&quot;,
+    &quot;interpreter&quot;: null,
+    &quot;body&quot;: [
       {
-        &amp;quot;type&amp;quot;: &amp;quot;VariableDeclaration&amp;quot;,
-        &amp;quot;start&amp;quot;: 0,
-        &amp;quot;end&amp;quot;: 87,
-        &amp;quot;loc&amp;quot;: {
-          &amp;quot;loc&amp;quot;: {
-            &amp;quot;start&amp;quot;: {...},
-            &amp;quot;end&amp;quot;: {...},
+        &quot;type&quot;: &quot;VariableDeclaration&quot;,
+        &quot;start&quot;: 0,
+        &quot;end&quot;: 87,
+        &quot;loc&quot;: {
+          &quot;loc&quot;: {
+            &quot;start&quot;: {...},
+            &quot;end&quot;: {...},
           },
         },
-        &amp;quot;range&amp;quot;: [0, 87],
-        &amp;quot;declarations&amp;quot;: [
+        &quot;range&quot;: [0, 87],
+        &quot;declarations&quot;: [
           {
-            &amp;quot;type&amp;quot;: &amp;quot;VariableDeclarator&amp;quot;,
-            &amp;quot;start&amp;quot;: 6,
-            &amp;quot;end&amp;quot;: 86,
-            &amp;quot;loc&amp;quot;: {
-              &amp;quot;start&amp;quot;: {...},
-              &amp;quot;end&amp;quot;: {...},
+            &quot;type&quot;: &quot;VariableDeclarator&quot;,
+            &quot;start&quot;: 6,
+            &quot;end&quot;: 86,
+            &quot;loc&quot;: {
+              &quot;start&quot;: {...},
+              &quot;end&quot;: {...},
             },
-            &amp;quot;range&amp;quot;: [6, 86],
-            &amp;quot;id&amp;quot;: {
-              &amp;quot;type&amp;quot;: &amp;quot;Identifier&amp;quot;,
-              &amp;quot;start&amp;quot;: 6,
-              &amp;quot;end&amp;quot;: 11,
-              &amp;quot;loc&amp;quot;: {
-                &amp;quot;start&amp;quot;: {...},
-                &amp;quot;end&amp;quot;: {...},
+            &quot;range&quot;: [6, 86],
+            &quot;id&quot;: {
+              &quot;type&quot;: &quot;Identifier&quot;,
+              &quot;start&quot;: 6,
+              &quot;end&quot;: 11,
+              &quot;loc&quot;: {
+                &quot;start&quot;: {...},
+                &quot;end&quot;: {...},
               },
-              &amp;quot;range&amp;quot;: [6, 11],
-              &amp;quot;name&amp;quot;: &amp;quot;Title&amp;quot;
+              &quot;range&quot;: [6, 11],
+              &quot;name&quot;: &quot;Title&quot;
             },
-            &amp;quot;init&amp;quot;: {
-              &amp;quot;type&amp;quot;: &amp;quot;TaggedTemplateExpression&amp;quot;,
-              &amp;quot;start&amp;quot;: 14,
-              &amp;quot;end&amp;quot;: 86,
-              &amp;quot;loc&amp;quot;: {
-                &amp;quot;start&amp;quot;: {...},
-                &amp;quot;end&amp;quot;: {...},
+            &quot;init&quot;: {
+              &quot;type&quot;: &quot;TaggedTemplateExpression&quot;,
+              &quot;start&quot;: 14,
+              &quot;end&quot;: 86,
+              &quot;loc&quot;: {
+                &quot;start&quot;: {...},
+                &quot;end&quot;: {...},
               },
-              &amp;quot;range&amp;quot;: [14, 86],
-              &amp;quot;tag&amp;quot;: {
-                &amp;quot;type&amp;quot;: &amp;quot;MemberExpression&amp;quot;,
-                &amp;quot;start&amp;quot;: 14,
-                &amp;quot;end&amp;quot;: 23,
-                &amp;quot;loc&amp;quot;: {
-                  &amp;quot;start&amp;quot;: {...},
-                  &amp;quot;end&amp;quot;: {...},
+              &quot;range&quot;: [14, 86],
+              &quot;tag&quot;: {
+                &quot;type&quot;: &quot;MemberExpression&quot;,
+                &quot;start&quot;: 14,
+                &quot;end&quot;: 23,
+                &quot;loc&quot;: {
+                  &quot;start&quot;: {...},
+                  &quot;end&quot;: {...},
                 },
-                &amp;quot;range&amp;quot;: [14, 23],
-                &amp;quot;object&amp;quot;: {
-                  &amp;quot;type&amp;quot;: &amp;quot;Identifier&amp;quot;,
-                  &amp;quot;start&amp;quot;: 14,
-                  &amp;quot;end&amp;quot;: 20,
-                  &amp;quot;loc&amp;quot;: {
-                    &amp;quot;start&amp;quot;: {...},
-                    &amp;quot;end&amp;quot;: {...},
+                &quot;range&quot;: [14, 23],
+                &quot;object&quot;: {
+                  &quot;type&quot;: &quot;Identifier&quot;,
+                  &quot;start&quot;: 14,
+                  &quot;end&quot;: 20,
+                  &quot;loc&quot;: {
+                    &quot;start&quot;: {...},
+                    &quot;end&quot;: {...},
                   },
-                  &amp;quot;range&amp;quot;: [14, 20],
-                  &amp;quot;name&amp;quot;: &amp;quot;styled&amp;quot;
+                  &quot;range&quot;: [14, 20],
+                  &quot;name&quot;: &quot;styled&quot;
                 },
-                &amp;quot;computed&amp;quot;: false,
-                &amp;quot;property&amp;quot;: {
-                  &amp;quot;type&amp;quot;: &amp;quot;Identifier&amp;quot;,
-                  &amp;quot;start&amp;quot;: 21,
-                  &amp;quot;end&amp;quot;: 23,
-                  &amp;quot;loc&amp;quot;: {
-                    &amp;quot;start&amp;quot;: {...},
-                    &amp;quot;end&amp;quot;: {...},
+                &quot;computed&quot;: false,
+                &quot;property&quot;: {
+                  &quot;type&quot;: &quot;Identifier&quot;,
+                  &quot;start&quot;: 21,
+                  &quot;end&quot;: 23,
+                  &quot;loc&quot;: {
+                    &quot;start&quot;: {...},
+                    &quot;end&quot;: {...},
                   },
-                  &amp;quot;range&amp;quot;: [21, 23],
-                  &amp;quot;name&amp;quot;: &amp;quot;h1&amp;quot;
+                  &quot;range&quot;: [21, 23],
+                  &quot;name&quot;: &quot;h1&quot;
                 }
               },
-              &amp;quot;quasi&amp;quot;: {
-                &amp;quot;type&amp;quot;: &amp;quot;TemplateLiteral&amp;quot;,
-                &amp;quot;start&amp;quot;: 23,
-                &amp;quot;end&amp;quot;: 86,
-                &amp;quot;loc&amp;quot;: {
-                  &amp;quot;start&amp;quot;: {...},
-                  &amp;quot;end&amp;quot;: {...},
+              &quot;quasi&quot;: {
+                &quot;type&quot;: &quot;TemplateLiteral&quot;,
+                &quot;start&quot;: 23,
+                &quot;end&quot;: 86,
+                &quot;loc&quot;: {
+                  &quot;start&quot;: {...},
+                  &quot;end&quot;: {...},
                 },
-                &amp;quot;range&amp;quot;: [23, 86],
-                &amp;quot;expressions&amp;quot;: [],
-                &amp;quot;quasis&amp;quot;: [
+                &quot;range&quot;: [23, 86],
+                &quot;expressions&quot;: [],
+                &quot;quasis&quot;: [
                   {
-                    &amp;quot;type&amp;quot;: &amp;quot;TemplateElement&amp;quot;,
-                    &amp;quot;start&amp;quot;: 24,
-                    &amp;quot;end&amp;quot;: 85,
-                    &amp;quot;loc&amp;quot;: {
-                      &amp;quot;start&amp;quot;: {...},
-                      &amp;quot;end&amp;quot;: {...},
+                    &quot;type&quot;: &quot;TemplateElement&quot;,
+                    &quot;start&quot;: 24,
+                    &quot;end&quot;: 85,
+                    &quot;loc&quot;: {
+                      &quot;start&quot;: {...},
+                      &quot;end&quot;: {...},
                     },
-                    &amp;quot;range&amp;quot;: [24, 85],
-                    &amp;quot;value&amp;quot;: {
-                      &amp;quot;raw&amp;quot;: &amp;quot;\n  font-size: 1.5em;\n  text-align: center;\n  color: #BF4F74;\n&amp;quot;,
-                      &amp;quot;cooked&amp;quot;: &amp;quot;\n  font-size: 1.5em;\n  text-align: center;\n  color: #BF4F74;\n&amp;quot;
+                    &quot;range&quot;: [24, 85],
+                    &quot;value&quot;: {
+                      &quot;raw&quot;: &quot;\n  font-size: 1.5em;\n  text-align: center;\n  color: #BF4F74;\n&quot;,
+                      &quot;cooked&quot;: &quot;\n  font-size: 1.5em;\n  text-align: center;\n  color: #BF4F74;\n&quot;
                     },
-                    &amp;quot;tail&amp;quot;: true
+                    &quot;tail&quot;: true
                   }
                 ]
               }
             }
           }
         ],
-        &amp;quot;kind&amp;quot;: &amp;quot;const&amp;quot;
+        &quot;kind&quot;: &quot;const&quot;
       }
     ],
-    &amp;quot;directives&amp;quot;: []
+    &quot;directives&quot;: []
   },
-  &amp;quot;comments&amp;quot;: [],
-  &amp;quot;tokens&amp;quot;: [...]
-}&lt;/code&gt;
-        &lt;/deckgo-highlight-code&gt;
-&lt;p&gt;즉 코드를 통해 생성된 추상 구문 트리를 조작하면 코드가 재생성될 때 유효하게 조작된 결과를 얻을 수 있을 것이다. 사실 매우 복잡한 추상 구문 트리를 직접 조작하기란
-절대 쉽지 않다. 다만 가장 안전한 방법이다. &lt;strong&gt;추상 구문 트리의 조작이 유효하지 않다면 에러가 발생하게 되는데, 인위적인 조작이 유효한지 프로그래밍적으로
-판단할 수 있다는 것은 정말 큰 장점이라고 생각했다.&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;이하 구현 과정과 예시에서 자바스크립트 코드를 파싱하고 조작하기 위한 도구로 prettier를 사용합니다. 일반적으로 babel에서 제공하는 parser, generator를
-사용하지만, prettier에서도 내부적으로 동일한 parser를 사용하고 있다는 점과, 코드 조작을 위한 &lt;a href=&quot;https://prettier.io/docs/en/api&quot;&gt;API&lt;/a&gt;를 제공하고
-있다는 점을 감안하여 선택하였습니다.&lt;/em&gt;&lt;/p&gt;
-&lt;h2 id=&quot;1-선언된-컴포넌트-정보-추출하기&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#1-%EC%84%A0%EC%96%B8%EB%90%9C-%EC%BB%B4%ED%8F%AC%EB%84%8C%ED%8A%B8-%EC%A0%95%EB%B3%B4-%EC%B6%94%EC%B6%9C%ED%95%98%EA%B8%B0&quot; aria-label=&quot;1 선언된 컴포넌트 정보 추출하기 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;1. 선언된 컴포넌트 정보 추출하기&lt;/h2&gt;
-&lt;p&gt;우선 추상 구문 트리에서 스타일된 컴포넌트에 대한 정보가 담긴 노드를 조건에 맞게 찾아내야 했다. 여기서 주의해야 하는 것은 변수 선언은 함수 선언문 혹은
-if-else, switch와 같은 상태문 내부에서도 선언될 수 있다는 것이다. 개인적으로 스타일된 컴포넌트를 정의 할땐 디폴트 격의 함수와 같은 레벨에 작성했지만,
-다른 스코프 내부에서 스타일된 컴포넌트를 정의해도 전혀 문제 될 것이 없다.&lt;/p&gt;
+  &quot;comments&quot;: [],
+  &quot;tokens&quot;: [...]
+}
+&lt;/code&gt;
+  &lt;/deckgo-highlight-code&gt;
+&lt;/details&gt;
+&lt;p&gt;위 결과를 보면, 추상 구문 트리를 조작하는 것이 쉽지 않을 것이란 걸 직감적으로 알 수 있다. 하지만, 가장 안전한 방법이다.
+추상 구문 트리의 조작이 유효하지 않다면, 코드 분석, 변환, 재생성 과정에서 에러가 발생하게 되는데, 이는 인위적인 조작이
+유효한지 프로그래밍적으로 판단할 수 있다는 것이다. 이는 매우 큰 장점이다.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;이하 구현 과정에서는 &lt;code class=&quot;language-text&quot;&gt;prettier&lt;/code&gt;에서 제공하는 API를 사용합니다. 내부적으로 &lt;code class=&quot;language-text&quot;&gt;babel&lt;/code&gt;에서 제공하는 &lt;code class=&quot;language-text&quot;&gt;parser&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;generator&lt;/code&gt;
+를 사용하고 있습니다.&lt;/em&gt;&lt;/p&gt;
+&lt;h2 id=&quot;변환기-제작-과정&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EB%B3%80%ED%99%98%EA%B8%B0-%EC%A0%9C%EC%9E%91-%EA%B3%BC%EC%A0%95&quot; aria-label=&quot;변환기 제작 과정 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;변환기 제작 과정&lt;/h2&gt;
+&lt;h3 id=&quot;1-선언된-컴포넌트-정보-추출하기&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#1-%EC%84%A0%EC%96%B8%EB%90%9C-%EC%BB%B4%ED%8F%AC%EB%84%8C%ED%8A%B8-%EC%A0%95%EB%B3%B4-%EC%B6%94%EC%B6%9C%ED%95%98%EA%B8%B0&quot; aria-label=&quot;1 선언된 컴포넌트 정보 추출하기 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;1. 선언된 컴포넌트 정보 추출하기&lt;/h3&gt;
+&lt;p&gt;우선 추상 구문 트리에서 스타일된 컴포넌트에 대한 정보가 담긴 노드를 조건에 맞게 찾아내야 했다. 여기서 주의해야 할 것은 변수 선언은
+함수 선언문 혹은 &lt;code class=&quot;language-text&quot;&gt;if-else&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;switch&lt;/code&gt; 같은 상태문 내부에서도 선언될 수 있다는 것이다.&lt;/p&gt;
+&lt;p&gt;개인적으로 스타일된 컴포넌트의 정의는 컴포넌트 파일 모듈 스코프의 최상단에 작성해 레벨이 일정했지만, 다른 스코프 내부에서 스타일된 컴포넌트를 정의해도 문제 될 것 없다.&lt;/p&gt;
 &lt;deckgo-highlight-code language=&quot;js&quot; theme=&quot;nord&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;// component variable declaration
 const Title = styled.h1`
@@ -6766,8 +6792,9 @@ function Component() {
 }&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
 &lt;p&gt;즉 추상 구문 트리에서 스타일된 컴포넌트 코드 정보가 담긴 노드를 찾으려면, 트리에 존재하는 모든 노드를 레벨에 상관없이 재귀적으로 순회해 주어야 했다. 또한 노드의
-타입별로 구조가 달랐기 때문에 재귀 함수를 어떻게 짜야 될지 정말 감이 오질 않았다. 머리를 쥐어뜯다 결국 사수님께 조언을 구해 노드 객체의 프로퍼티의 값이 배열 혹은
-객체인 경우 모두 재귀 호출을 하는 방식으로 순회를 구현할 수 있었다.&lt;/p&gt;
+타입별로 구조가 달랐기 때문에 재귀 함수를 어떻게 짜야 될지 정말 감이 오질 않았다. 결국 팀원에게 조언을 구해 노드 객체의 프로퍼티 값이
+배열 혹은 객체인 경우 모두 재귀 호출하는 방식으로 순회를 구현하였다.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;이후 알게된 사실이지만, 노드의 재귀적인 순회는 &lt;code class=&quot;language-text&quot;&gt;babel/traverse&lt;/code&gt;를 사용할 수 있습니다. 견식이 짧았습니다.&lt;/em&gt;&lt;/p&gt;
 &lt;deckgo-highlight-code language=&quot;js&quot; theme=&quot;nord&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;function recursion(node: unknown) {
   if (!isObject(node) || !(&amp;#39;type&amp;#39; in node)) {
@@ -6791,20 +6818,26 @@ function Component() {
   });
 }&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
-&lt;p&gt;이제 모든 노드를 순회하면서 styled 라는 이름을 가진 TaggedTemplateExpression 타입의 표현문이 초기 할당된 변수 선언 타입을 가진 노드라는 주요 조건을 걸어
-조건을 충족하는 노드에서 스타일된 컴포넌트의 이름과 태그 그리고 스타일 정의를 추출했다.&lt;/p&gt;
+&lt;p&gt;이제 모든 노드를 순회하면서, &lt;code class=&quot;language-text&quot;&gt;styled&lt;/code&gt;라는 이름을 가진 &lt;code class=&quot;language-text&quot;&gt;TaggedTemplateExpression&lt;/code&gt; 타입의 표현문이 초기 할당된 변수 선언 타입을
+가진 노드라는 주요 조건을 걸어, 조건을 충족하는 노드에서 스타일된 컴포넌트의 이름과 태그, 그리고 스타일 정의를 추출했다.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;ts&quot; theme=&quot;nord&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;const Component = styled`...`;&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
 &lt;deckgo-highlight-code language=&quot;js&quot; theme=&quot;nord&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;if (
+  // 노드의 타입이 변수 선언인지 확인
   node.type === &amp;#39;VariableDeclarator&amp;#39; &amp;amp;&amp;amp;
   &amp;#39;id&amp;#39; in node &amp;amp;&amp;amp;
   isObject(node.id) &amp;amp;&amp;amp;
   &amp;#39;type&amp;#39; in node.id &amp;amp;&amp;amp;
   &amp;#39;name&amp;#39; in node.id &amp;amp;&amp;amp;
+  // node.id.name = 스타일된 컴포넌트 이름
   node.id.type === &amp;#39;Identifier&amp;#39; &amp;amp;&amp;amp;
-  typeof node.id.name === &amp;#39;string&amp;#39; &amp;amp;&amp;amp; // 요게 컴포넌트 이름
+  typeof node.id.name === &amp;#39;string&amp;#39; &amp;amp;&amp;amp;
   &amp;#39;init&amp;#39; in node &amp;amp;&amp;amp;
   isObject(node.init) &amp;amp;&amp;amp;
   &amp;#39;type&amp;#39; in node.init &amp;amp;&amp;amp;
+  // 변수 선언에 초기 할당된 노드의 타입이 TaggedTemplateExpression인지 확인
   node.init.type === &amp;#39;TaggedTemplateExpression&amp;#39; &amp;amp;&amp;amp;
   &amp;#39;tag&amp;#39; in node.init &amp;amp;&amp;amp;
   isObject(node.init.tag) &amp;amp;&amp;amp;
@@ -6812,15 +6845,18 @@ function Component() {
   isObject(node.init.tag.object) &amp;amp;&amp;amp;
   &amp;#39;type&amp;#39; in node.init.tag.object &amp;amp;&amp;amp;
   &amp;#39;name&amp;#39; in node.init.tag.object &amp;amp;&amp;amp;
+  // styled 함수를 사용하고 있는지 확인
   node.init.tag.object.type === &amp;#39;Identifier&amp;#39; &amp;amp;&amp;amp;
-  node.init.tag.object.name === &amp;#39;styled&amp;#39; &amp;amp;&amp;amp; // styled 함수를 사용했는가
+  node.init.tag.object.name === &amp;#39;styled&amp;#39; &amp;amp;&amp;amp;
   &amp;#39;property&amp;#39; in node.init.tag &amp;amp;&amp;amp;
   isObject(node.init.tag.property) &amp;amp;&amp;amp;
   &amp;#39;name&amp;#39; in node.init.tag.property &amp;amp;&amp;amp;
-  typeof node.init.tag.property.name === &amp;#39;string&amp;#39; &amp;amp;&amp;amp; // 요게 태그 이름
+  // node.init.tag.property.name = styled된 요소의 이름 (ex. div, span)
+  typeof node.init.tag.property.name === &amp;#39;string&amp;#39; &amp;amp;&amp;amp;
   &amp;#39;quasi&amp;#39; in node.init &amp;amp;&amp;amp;
   isObject(node.init.quasi) &amp;amp;&amp;amp;
   &amp;#39;type&amp;#39; in node.init.quasi &amp;amp;&amp;amp;
+  // 스타일 정의가 TemplateLiteral 타입으로 파라미터 전달이 되었는지 확인
   node.init.quasi.type === &amp;#39;TemplateLiteral&amp;#39; &amp;amp;&amp;amp;
   &amp;#39;quasis&amp;#39; in node.init.quasi &amp;amp;&amp;amp;
   Array.isArray(node.init.quasi.quasis) &amp;amp;&amp;amp;
@@ -6829,12 +6865,14 @@ function Component() {
   &amp;#39;value&amp;#39; in node.init.quasi.quasis[0] &amp;amp;&amp;amp;
   isObject(node.init.quasi.quasis[0].value)
 ) {
+  // node.init.quasi.quasis = 스타일 정의
   const sassScript = generateConcatenatedCSSTemplateLiteral(
     node.init.quasi.quasis
   );
 
   const parsedCSS = parseSass(sassScript);
 
+  // 컴포넌트 이름과 스타일된 태그명, 스타일을 객체화
   const componentDeclaration: ComponentDeclaration = {
     name: node.id.name,
     tag: node.init.tag.property.name,
@@ -6844,11 +6882,11 @@ function Component() {
   componentDeclarations.push(componentDeclaration);
 }&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
-&lt;p&gt;스타일 정의를 추출하는 작업은 sass, css 파서에게 맡겼다. sass 컴파일을 통해 css로 변환하고, 해당 css를 파싱해서 해당 컴포넌트의 스타일 정의와 값, 내부에
-정의되어 있는 클래스 또한 추출할 수 있었다. 이렇게 정의된 컴포넌트의 정보를 추상 구문 트리에서 획득했다.&lt;/p&gt;
-&lt;h2 id=&quot;2-추출된-스타일-정의를-유틸리티-클래스로-변환하기&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#2-%EC%B6%94%EC%B6%9C%EB%90%9C-%EC%8A%A4%ED%83%80%EC%9D%BC-%EC%A0%95%EC%9D%98%EB%A5%BC-%EC%9C%A0%ED%8B%B8%EB%A6%AC%ED%8B%B0-%ED%81%B4%EB%9E%98%EC%8A%A4%EB%A1%9C-%EB%B3%80%ED%99%98%ED%95%98%EA%B8%B0&quot; aria-label=&quot;2 추출된 스타일 정의를 유틸리티 클래스로 변환하기 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;2. 추출된 스타일 정의를 유틸리티 클래스로 변환하기&lt;/h2&gt;
-&lt;p&gt;이제 컴포넌트별로 추출된 스타일을 tailwindCSS의 정의되어 있는 유틸리티 클래스로 변환해 주어야 한다. 스타일 속성과 할당된 값에 대응되는 유틸리티 클래스 리스트가
-필요했는데 우연히 CSS 정의를 tailwind 유틸리티 클래스로 변환해 주는 &lt;a href=&quot;https://tailwind-converter.netlify.app/&quot;&gt;웹 서비스&lt;/a&gt;의 소스 코드에서 constants
+&lt;p&gt;스타일 정의를 추출하는 작업은 &lt;code class=&quot;language-text&quot;&gt;sass&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;css&lt;/code&gt; 파서에게 맡겼다. &lt;code class=&quot;language-text&quot;&gt;sass&lt;/code&gt; 컴파일을 통해 &lt;code class=&quot;language-text&quot;&gt;css&lt;/code&gt;로 변환하고, 해당 &lt;code class=&quot;language-text&quot;&gt;css&lt;/code&gt;를 파싱해서
+해당 컴포넌트의 스타일 정의와 값들과 중첩되어 있는 클래스들의 스타일 또한 추출할 수 있었다.&lt;/p&gt;
+&lt;h3 id=&quot;2-추출된-스타일-정의를-유틸리티-클래스로-변환하기&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#2-%EC%B6%94%EC%B6%9C%EB%90%9C-%EC%8A%A4%ED%83%80%EC%9D%BC-%EC%A0%95%EC%9D%98%EB%A5%BC-%EC%9C%A0%ED%8B%B8%EB%A6%AC%ED%8B%B0-%ED%81%B4%EB%9E%98%EC%8A%A4%EB%A1%9C-%EB%B3%80%ED%99%98%ED%95%98%EA%B8%B0&quot; aria-label=&quot;2 추출된 스타일 정의를 유틸리티 클래스로 변환하기 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;2. 추출된 스타일 정의를 유틸리티 클래스로 변환하기&lt;/h3&gt;
+&lt;p&gt;이제 컴포넌트별로 추출된 스타일을 &lt;code class=&quot;language-text&quot;&gt;tailwindCSS&lt;/code&gt;에 정의되어 있는 유틸리티 클래스로 변환해 주어야 한다.
+스타일 속성과 할당된 값에 대응되는 유틸리티 클래스 리스트가 필요했는데 우연히 &lt;code class=&quot;language-text&quot;&gt;css&lt;/code&gt; 정의를 유틸리티 클래스로 변환해 주는 &lt;a href=&quot;https://tailwind-converter.netlify.app/&quot;&gt;웹 서비스&lt;/a&gt;의 소스 코드에서 &lt;code class=&quot;language-text&quot;&gt;constants&lt;/code&gt;
 파일을 구할 수 있었다.&lt;/p&gt;
 &lt;deckgo-highlight-code language=&quot;js&quot; theme=&quot;nord&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;const TAILWINDCLASS: { [key: string]: any } = {
@@ -6869,10 +6907,12 @@ function Component() {
   ...
 }&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
-&lt;p&gt;가령 font-size 라는 스타일 속성에 할당된 값이 해당 키 배열에 포함되어 있다면, tailwindCSS에서 제공하는 기본 클래스에 포함되어 있다고 간주하고 해당 값을
-반환해 주었고, 그 외의 값에 대해서는 임의로 할당된 클래스를 생성하여 반환하도록 구현했다.&lt;/p&gt;
+&lt;p&gt;가령 &lt;code class=&quot;language-text&quot;&gt;font-size&lt;/code&gt;라는 스타일 속성에 할당된 값이 정의된 &lt;code class=&quot;language-text&quot;&gt;TAILWINDCLASS&lt;/code&gt;의 키로서 값을 가지고 있다면, &lt;code class=&quot;language-text&quot;&gt;tailwindCSS&lt;/code&gt;에서
+제공하는 유틸리티 클래스에 포함되어 있다고 간주하고 해당 값을 반환하고, 그 외의 값에 대해서는 임의 할당된 클래스로 생성하여 변환되도록
+구현하였다.&lt;/p&gt;
 &lt;deckgo-highlight-code language=&quot;js&quot; theme=&quot;nord&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;export function convertCss({ property, value }: CSSStyleEntity) {
+  // 속성과 값을 전처리
   property = preprocessProperty({ property, value });
   const processedValue = preprocessValue({ property, value });
 
@@ -6896,7 +6936,8 @@ function Component() {
   return TAILWINDCLASS[property][processedValue].slice(1);
 }&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
-&lt;p&gt;위 코드에서 속성과 값이 전처리되고 있는 것을 볼 수 있다. 이는 가령 background 속성에 색상 값이 할당되어 있는 경우 background-color로 변경한다거나,&lt;/p&gt;
+&lt;p&gt;위 코드에서 속성과 값이 전처리되고 있는 것을 볼 수 있다. 이는 가령 &lt;code class=&quot;language-text&quot;&gt;background&lt;/code&gt; 속성에 색상 값이 할당되어 있는 경우
+&lt;code class=&quot;language-text&quot;&gt;background-color&lt;/code&gt;로 변경한다던지,&lt;/p&gt;
 &lt;deckgo-highlight-code language=&quot;js&quot; theme=&quot;nord&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;export function preprocessProperty({ property, value }: CSSStyleEntity) {
   if (property === &amp;#39;background&amp;#39;) {
@@ -6909,7 +6950,7 @@ function Component() {
   return property;
 }&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
-&lt;p&gt;px, rem, em으로 표현되는 치수를 통일시켜주거나,&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;px&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;rem&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;em&lt;/code&gt;으로 표현되는 치수를 통일시켜 주고,&lt;/p&gt;
 &lt;deckgo-highlight-code language=&quot;js&quot; theme=&quot;nord&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;export function preprocessDimension(value: string) {
   if (value === &amp;#39;0&amp;#39; || value === &amp;#39;0px&amp;#39;) {
@@ -6923,8 +6964,7 @@ export function preprocessSpacing(value: string) {
   return convertUnit(value, &amp;#39;rem&amp;#39;);
 }&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
-&lt;p&gt;축약된 값을 할당할 수 있는 padding, margin, border과 같은 속성을 쪼개는 과정이 포함된다.
-(background 또한 축약 속성이나, 아직 값을 적절하게 쪼개내지 못했다..)&lt;/p&gt;
+&lt;p&gt;축약된 값을 할당할 수 있는 &lt;code class=&quot;language-text&quot;&gt;padding&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;margin&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;border&lt;/code&gt;와 같은 속성을 쪼개는 과정이 포함된다.&lt;/p&gt;
 &lt;deckgo-highlight-code language=&quot;js&quot; theme=&quot;nord&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;export function preprocessSpacingShorthand(
   property: &amp;#39;padding&amp;#39; | &amp;#39;margin&amp;#39;,
@@ -6981,19 +7021,13 @@ function preprocessBorderShorthand(value: string): StyleEntity[] {
 }&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
 &lt;p&gt;결과적으로 다음과 같은 스타일 정의에 대한 유틸리티 클래스를 묶어 얻어낼 수 있었다.&lt;/p&gt;
-&lt;deckgo-highlight-code language=&quot;text&quot; theme=&quot;nord&quot;  &gt;
-          &lt;code slot=&quot;code&quot;&gt;const before = [
-  &amp;quot;font-size:1.5em&amp;quot;,
-  &amp;quot;text-align:center&amp;quot;,
-  &amp;quot;color:#bf4f74&amp;quot;
-]
-
-=&amp;gt; &amp;quot;text-2xl text-center text-[#bf4f74]&amp;quot;&lt;/code&gt;
+&lt;deckgo-highlight-code language=&quot;js&quot; theme=&quot;nord&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;const before = [&amp;#39;font-size:1.5em&amp;#39;, &amp;#39;text-align:center&amp;#39;, &amp;#39;color:#bf4f74&amp;#39;];
+const after = &amp;#39;text-2xl text-center text-[#bf4f74]&amp;#39;;&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
-&lt;h2 id=&quot;3-컴포넌트-사용처-조작하기&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#3-%EC%BB%B4%ED%8F%AC%EB%84%8C%ED%8A%B8-%EC%82%AC%EC%9A%A9%EC%B2%98-%EC%A1%B0%EC%9E%91%ED%95%98%EA%B8%B0&quot; aria-label=&quot;3 컴포넌트 사용처 조작하기 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;3. 컴포넌트 사용처 조작하기&lt;/h2&gt;
-&lt;p&gt;이제 컴포넌트 정의와 변환된 유틸리티 클래스를 얻었으니 컴포넌트의 열린 태그를 포함하고 있는 노드를 찾아 해당 노드의 className 속성에 변환된 유틸리티 클래스를
-할당해 주어야 한다.&lt;/p&gt;
-&lt;p&gt;마찬가지로 JSXElement 반환문에 사용되는 컴포넌트의 열린 태그는 여러 레벨의 상태문 안에서 사용될 수 있기 때문에 추상 구문 트리의 모든 레벨과 노드를 순회해야 한다.&lt;/p&gt;
+&lt;h3 id=&quot;3-컴포넌트-사용처-조작하기&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#3-%EC%BB%B4%ED%8F%AC%EB%84%8C%ED%8A%B8-%EC%82%AC%EC%9A%A9%EC%B2%98-%EC%A1%B0%EC%9E%91%ED%95%98%EA%B8%B0&quot; aria-label=&quot;3 컴포넌트 사용처 조작하기 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;3. 컴포넌트 사용처 조작하기&lt;/h3&gt;
+&lt;p&gt;이제 컴포넌트 정의와 변환된 유틸리티 클래스를 얻었으니 컴포넌트의 열린 태그를 포함하고 있는 노드를 찾아 해당 노드의 &lt;code class=&quot;language-text&quot;&gt;className&lt;/code&gt; 속성에 변환된 유틸리티 클래스를 할당해 주어야 한다.&lt;/p&gt;
+&lt;p&gt;마찬가지로 &lt;code class=&quot;language-text&quot;&gt;JSXElement&lt;/code&gt; 반환문에 사용되는 컴포넌트의 열린 태그는 여러 레벨의 상태문 안에서 사용될 수 있기 때문에 추상 구문 트리의 모든 레벨과 노드를 순회해야 한다.&lt;/p&gt;
 &lt;deckgo-highlight-code language=&quot;js&quot; theme=&quot;nord&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;function Component() {
   if (isOpen) {
@@ -7009,10 +7043,11 @@ function preprocessBorderShorthand(value: string): StyleEntity[] {
   return &amp;lt;SubTitle&amp;gt;...&amp;lt;/SubTitle&amp;gt;
 }&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
-&lt;p&gt;스타일된 컴포넌트의 사용처에서 열린 태그를 찾는 조건은 다음과 같은 조건을 걸었다. 그리고 조건에 충족한 노드를 만나면 className 속성에 변환된 유틸리티 클래스
-문자열을 덮어쓰는 방식으로 속성 조작을 구현했다.&lt;/p&gt;
+&lt;p&gt;스타일된 컴포넌트의 사용처에서 열린 태그를 찾는 조건은 다음과 같은 조건을 걸었다. 조건을 충족하는 노드를 만나면, &lt;code class=&quot;language-text&quot;&gt;className&lt;/code&gt; 속성에
+변환된 유틸리티 클래스 문자열을 덮어쓰는 방식으로 속성 조작을 구현했다.&lt;/p&gt;
 &lt;deckgo-highlight-code language=&quot;js&quot; theme=&quot;nord&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;if (
+  // 노드 타입이 열린 태그 타입(JSXOpeningElement)인지 확인
   node.type === &amp;#39;JSXOpeningElement&amp;#39; &amp;amp;&amp;amp;
   parentNode?.type === &amp;#39;JSXElement&amp;#39; &amp;amp;&amp;amp;
   &amp;#39;name&amp;#39; in node &amp;amp;&amp;amp;
@@ -7083,14 +7118,13 @@ function preprocessBorderShorthand(value: string): StyleEntity[] {
 }&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
 &lt;h2 id=&quot;남은-과제&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EB%82%A8%EC%9D%80-%EA%B3%BC%EC%A0%9C&quot; aria-label=&quot;남은 과제 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;남은 과제&lt;/h2&gt;
-&lt;p&gt;단번에 모든 스타일된 컴포넌트 코드 스타일을 커버할 수 있는 변환기를 만들겠노라 목표하진 않았지만, 아직 조건부 스타일을 위한 보간 (interpolation)을 어떻게
-처리해야 할 지 고민이 크다.&lt;/p&gt;
-&lt;deckgo-highlight-code language=&quot;ts&quot; theme=&quot;nord&quot;  &gt;
+&lt;p&gt;단번에 모든 스타일된 컴포넌트 코드 스타일을 커버할 수 있는 변환기를 만들겠노라 목표하진 않았지만, 아직 조건부 스타일을 위한 보간 (interpolation)을 어떻게 처리해야 할 지 고민이 크다.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;tsx&quot; theme=&quot;nord&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;const Card = styled.div&amp;lt;{ isSelected: boolean }&amp;gt;`
   ... border-width: ${({ isSelected }) =&amp;gt; (isSelected ? &amp;#39;4px&amp;#39; : &amp;#39;2px&amp;#39;)}; // ?
 `;&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
-&lt;p&gt;보간의 경우 그대로 열린 태그의 style 속성에 옮겨주면 괜찮지 않을까 싶지만, 열린 태그를 반환하는 스코프 내에서 아래와 같이 참조 가능한 변수 선언인지 판단이
+&lt;p&gt;보간의 경우 그대로 열린 태그의 &lt;code class=&quot;language-text&quot;&gt;style&lt;/code&gt; 속성에 옮겨주면 괜찮지 않을까 싶지만, 열린 태그를 반환하는 스코프 내에서 아래와 같이 참조 가능한 변수 선언인지 판단이
 필요하다. 우선 옮겨주고 에러 픽스는 작업자에게 맡겨도 되지 않을까 싶지만 에러가 담긴 코드를 뱉어 일을 두번 만들고 싶지는 않다.&lt;/p&gt;
 &lt;deckgo-highlight-code language=&quot;js&quot; theme=&quot;nord&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;// card
@@ -7099,7 +7133,7 @@ function preprocessBorderShorthand(value: string): StyleEntity[] {
               // &amp;#39;isSelected&amp;#39; is not defined
 }}&amp;gt;&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
-&lt;p&gt;스타일 추출을 위해 sass 컴파일을 진행할 때 보간을 만나면 문법 에러를 발생시키기 때문에 현재 버전에서는 보간문을 모두 unset 속성으로 대체하여 변환하고 있다.&lt;/p&gt;
+&lt;p&gt;스타일 추출을 위해 &lt;code class=&quot;language-text&quot;&gt;sass&lt;/code&gt; 컴파일을 진행할 때 보간을 만나면 문법 에러를 발생시키기 때문에 현재 버전에서는 보간문을 모두 &lt;code class=&quot;language-text&quot;&gt;unset&lt;/code&gt; 속성으로 대체하여 변환하고 있다.&lt;/p&gt;
 &lt;h2 id=&quot;마치면서&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EB%A7%88%EC%B9%98%EB%A9%B4%EC%84%9C&quot; aria-label=&quot;마치면서 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;마치면서&lt;/h2&gt;
 &lt;p&gt;실무에서 사용하려 제작한 스크립트를 라이브러리로 제작하면서 배운 점이 많다. 추상 구문 트리를 조작하여 코드를 전처리한다는 접근법은 이후에도 유사한 작업을 처리할 때
 유용하게 사용될 것 같다. 위에서 언급한 과제들이 남아있지만 유사한 작업을 진행 중이신 분들에게 개선된 개발자 경험에 있어 작게나마 도움이 될 수 있으면 좋겠다.&lt;/p&gt;</content:encoded></item><item><title><![CDATA[자바스크립트의 클로저]]></title><description><![CDATA[TL;TR…]]></description><link>https://youthfulhps.dev/TIL/javascript/closure/</link><guid isPermaLink="false">https://youthfulhps.dev/TIL/javascript/closure/</guid><pubDate>Thu, 10 Aug 2023 13:05:26 GMT</pubDate><content:encoded>&lt;h3 id=&quot;tltr&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#tltr&quot; aria-label=&quot;tltr permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;TL;TR&lt;/h3&gt;
@@ -11952,21 +11986,20 @@ swr 전략을 기반으로한 구현체들이 주는 개발 경험이 정말 훌
 &lt;p&gt;그 근간이 되는 swr 전략에 대해 알아보았습니다. 더 많은 예시들이나, 잘못된 설명이 있다면 언제든 코멘트 주시면 감사하겠습니다 :) 감사합니다.&lt;/p&gt;
 &lt;h2 id=&quot;reference&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#reference&quot; aria-label=&quot;reference permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Reference&lt;/h2&gt;
 &lt;p&gt;&lt;a href=&quot;https://jbee.io/react/thinking-about-global-state/&quot;&gt;전역 상태 관리에 대한 단상 (stale-while-revalidate)&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;https://web.dev/i18n/ko/stale-while-revalidate/&quot;&gt;stale-while-revalidate로 최신 상태 유지&lt;/a&gt;&lt;/p&gt;</content:encoded></item><item><title><![CDATA[온디멘드 이미지 리사이징을 위한 인프라 구성]]></title><description><![CDATA[사용자 경험 품질 향상을 위한 이미지 최적화에서 온디멘드 이미지 리사이징
-에 대한 이야기를 공유해드렸습니다. 이번 글에서는 CloudFront에서  를 통해 직접 구현해본 과정을 정리해보려 합니다. TL;DR S…]]></description><link>https://youthfulhps.dev/infra/image-optimization-with-cloudfront/</link><guid isPermaLink="false">https://youthfulhps.dev/infra/image-optimization-with-cloudfront/</guid><pubDate>Tue, 31 May 2022 14:05:04 GMT</pubDate><content:encoded>&lt;blockquote class=&quot;warning&quot;&gt;작성한 지 2년이 지난 글이에요. 지금과는 맞지 않을 수도 있지만, 당시의 고민과 노력이 담겨있습니다.&lt;/blockquote&gt;
-&lt;p&gt;&lt;a href=&quot;https://youthfulhps.dev/web/image-optimization/&quot;&gt;사용자 경험 품질 향상을 위한 이미지 최적화&lt;/a&gt;에서 온디멘드 이미지 리사이징
-에 대한 이야기를 공유해드렸습니다. 이번 글에서는 CloudFront에서 &lt;code class=&quot;language-text&quot;&gt;lambda@edge&lt;/code&gt; 를 통해 직접 구현해본 과정을 정리해보려 합니다.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://web.dev/i18n/ko/stale-while-revalidate/&quot;&gt;stale-while-revalidate로 최신 상태 유지&lt;/a&gt;&lt;/p&gt;</content:encoded></item><item><title><![CDATA[온디멘드 이미지 리사이징을 위한 인프라 구성]]></title><description><![CDATA[사용자 경험 품질 향상을 위한 이미지 최적화에 이어
+이번 글에서는 온디멘드 이미지 리사이징을 위한 인프라 구현 과정을 정리해보려 한다. TL;DR…]]></description><link>https://youthfulhps.dev/infra/image-optimization-with-cloudfront/</link><guid isPermaLink="false">https://youthfulhps.dev/infra/image-optimization-with-cloudfront/</guid><pubDate>Tue, 31 May 2022 14:05:04 GMT</pubDate><content:encoded>&lt;blockquote class=&quot;warning&quot;&gt;작성한 지 2년이 지난 글이에요. 지금과는 맞지 않을 수도 있지만, 당시의 고민과 노력이 담겨있습니다.&lt;/blockquote&gt;
+&lt;p&gt;&lt;a href=&quot;https://youthfulhps.dev/web/image-optimization/&quot;&gt;사용자 경험 품질 향상을 위한 이미지 최적화&lt;/a&gt;에 이어
+이번 글에서는 온디멘드 이미지 리사이징을 위한 인프라 구현 과정을 정리해보려 한다.&lt;/p&gt;
 &lt;h2 id=&quot;tldr&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#tldr&quot; aria-label=&quot;tldr permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;TL;DR&lt;/h2&gt;
 &lt;ol&gt;
-&lt;li&gt;S3 버킷을 생성하고 이미지를 업로드합니다.&lt;/li&gt;
-&lt;li&gt;CloudFront를 통해 S3 컨텐츠를 배포합니다.&lt;/li&gt;
-&lt;li&gt;라시아징, webp 파일 형식 변환을 위한 노드 환경 람다 함수를 구현합니다.&lt;/li&gt;
-&lt;li&gt;버킷 접근 권한 및 역할을 담은 IAM을 정의하고 람다 함수에 부여합니다.&lt;/li&gt;
-&lt;li&gt;CloudFront의 오리진 응답 엣지에 람다 함수를 연동합니다.&lt;/li&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;S3&lt;/code&gt; 버킷을 생성하고 이미지를 업로드한다.&lt;/li&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;CloudFront&lt;/code&gt;를 통해 &lt;code class=&quot;language-text&quot;&gt;S3&lt;/code&gt; 컨텐츠를 배포한다.&lt;/li&gt;
+&lt;li&gt;라시아징, &lt;code class=&quot;language-text&quot;&gt;webp&lt;/code&gt; 파일 형식 변환을 위한 노드 환경 람다 함수를 구현한다.&lt;/li&gt;
+&lt;li&gt;버킷 접근 권한 및 역할을 담은 &lt;code class=&quot;language-text&quot;&gt;IAM&lt;/code&gt;을 정의하고 람다 함수에 부여한다.&lt;/li&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;CloudFront&lt;/code&gt;의 오리진 응답 엣지에 람다 함수를 연동한다.&lt;/li&gt;
 &lt;/ol&gt;
-&lt;h2 id=&quot;s3-샘플-이미지-업로드&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#s3-%EC%83%98%ED%94%8C-%EC%9D%B4%EB%AF%B8%EC%A7%80-%EC%97%85%EB%A1%9C%EB%93%9C&quot; aria-label=&quot;s3 샘플 이미지 업로드 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;S3, 샘플 이미지 업로드&lt;/h2&gt;
-&lt;p&gt;일반적으로 사용되는 S3 버킷을 생성하는 과정과 동일합니다. &lt;code class=&quot;language-text&quot;&gt;모든 퍼블릭 엑세스 차단이 비활성화&lt;/code&gt; 가 선택된
-버킷을 생성하고 샘플 이미지 객체를 업로드해주세요.&lt;/p&gt;
+&lt;h3 id=&quot;s3-샘플-이미지-업로드&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#s3-%EC%83%98%ED%94%8C-%EC%9D%B4%EB%AF%B8%EC%A7%80-%EC%97%85%EB%A1%9C%EB%93%9C&quot; aria-label=&quot;s3 샘플 이미지 업로드 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;S3, 샘플 이미지 업로드&lt;/h3&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;모든 퍼블릭 엑세스 차단이 비활성화&lt;/code&gt;되어 있는 &lt;code class=&quot;language-text&quot;&gt;S3&lt;/code&gt; 버킷을 생성하고 샘플 이미지 객체를 업로드한다.&lt;/p&gt;
 &lt;p&gt;&lt;span
       class=&quot;gatsby-resp-image-wrapper&quot;
       style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 1200px; &quot;
@@ -11990,15 +12023,15 @@ swr 전략을 기반으로한 구현체들이 주는 개발 경험이 정말 훌
         decoding=&quot;async&quot;
       /&gt;
     &lt;/span&gt;&lt;/p&gt;
-&lt;h2 id=&quot;cloudfront-s3-컨텐츠-배포&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#cloudfront-s3-%EC%BB%A8%ED%85%90%EC%B8%A0-%EB%B0%B0%ED%8F%AC&quot; aria-label=&quot;cloudfront s3 컨텐츠 배포 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;CloudFront, S3 컨텐츠 배포&lt;/h2&gt;
-&lt;p&gt;CloudFront 배포를 생성합니다. 기본적으로 CloudFront는 쿼리 문자열을 무시하게 되는데,
-쿼리 문자열 파라미터 기반의 컨텐츠 캐싱이 가능하도록 &lt;code class=&quot;language-text&quot;&gt;캐시 키 및 원본 요청&lt;/code&gt;
-에서 &lt;code class=&quot;language-text&quot;&gt;Lagacy cache settings&lt;/code&gt; 를 선택하여 컨텐츠 캐싱에 사용할 &lt;code class=&quot;language-text&quot;&gt;쿼리 문자열을 설정&lt;/code&gt; 해줍니다.&lt;/p&gt;
+&lt;h3 id=&quot;cloudfront-s3-컨텐츠-배포&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#cloudfront-s3-%EC%BB%A8%ED%85%90%EC%B8%A0-%EB%B0%B0%ED%8F%AC&quot; aria-label=&quot;cloudfront s3 컨텐츠 배포 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;CloudFront, S3 컨텐츠 배포&lt;/h3&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;CloudFront&lt;/code&gt; 배포를 생성한다. 기본적으로 &lt;code class=&quot;language-text&quot;&gt;CloudFront&lt;/code&gt;는 쿼리 문자열을 무시하게 되는데,
+쿼리 문자열 파라미터 기반의 컨텐츠 캐싱이 가능하도록 &lt;code class=&quot;language-text&quot;&gt;캐시 키 및 원본 요청&lt;/code&gt;에서
+&lt;code class=&quot;language-text&quot;&gt;Lagacy cache settings&lt;/code&gt;를 선택하여 컨텐츠 캐싱에 사용할 &lt;code class=&quot;language-text&quot;&gt;쿼리 문자열을 설정&lt;/code&gt;을 진행한다.&lt;/p&gt;
 &lt;p&gt;쿼리 문자열은 이미지 변환에 대한 설정을 전달하기 위한 역할로서
-&lt;code class=&quot;language-text&quot;&gt;너비, 높이, 이미지 핏, webp 변환&lt;/code&gt; 에 대한 설정값을 담을 수 있습니다.&lt;/p&gt;
-&lt;p&gt;또한, &lt;code class=&quot;language-text&quot;&gt;쿼리 문자열 파라미터 기반의 컨텐츠 캐싱&lt;/code&gt; 이라는 특징에 따라, 동일한 쿼리 조합의 요청에 대한
-리사이징된 컨텐츠가 CloudFront에 캐싱되어 있다면, S3까지 오리진 요청이 전달되지 않고,
-CloudFront에서 뷰어 응답으로 빠르게 컨텐츠를 전달합니다.&lt;/p&gt;
+&lt;code class=&quot;language-text&quot;&gt;너비, 높이, 이미지 핏, webp 변환&lt;/code&gt; 에 대한 설정값을 담을 수 있다.
+또한, &lt;code class=&quot;language-text&quot;&gt;쿼리 문자열 파라미터 기반의 컨텐츠 캐싱&lt;/code&gt; 이라는 특징에 따라, 동일한 쿼리 조합의 요청에 대한
+리사이징된 컨텐츠가 &lt;code class=&quot;language-text&quot;&gt;CloudFront&lt;/code&gt;에 캐싱되어 있다면, 원본 버킷까지 오리진 요청이 전달되지 않고,
+&lt;code class=&quot;language-text&quot;&gt;CloudFront&lt;/code&gt;에서 뷰어 응답으로 빠르게 컨텐츠를 반환할 수 있다.&lt;/p&gt;
 &lt;deckgo-highlight-code  theme=&quot;nord&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;https://...cloudfront/sample-image.jpg?w=500&amp;amp;h=300&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
@@ -12024,9 +12057,9 @@ CloudFront에서 뷰어 응답으로 빠르게 컨텐츠를 전달합니다.&lt;
         decoding=&quot;async&quot;
       /&gt;
     &lt;/span&gt;&lt;/p&gt;
-&lt;h2 id=&quot;람다-함수에-부여할-iam-역할-생성&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EB%9E%8C%EB%8B%A4-%ED%95%A8%EC%88%98%EC%97%90-%EB%B6%80%EC%97%AC%ED%95%A0-iam-%EC%97%AD%ED%95%A0-%EC%83%9D%EC%84%B1&quot; aria-label=&quot;람다 함수에 부여할 iam 역할 생성 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;람다 함수에 부여할 IAM 역할 생성&lt;/h2&gt;
-&lt;p&gt;람다 함수에서 우리를 대신해 S3 객체에 접근할 수 있도록 &lt;code class=&quot;language-text&quot;&gt;s3:GetObject&lt;/code&gt; 와 같은 권한을 부여해주어야 합니다.
-&lt;code class=&quot;language-text&quot;&gt;IAM 콘솔&lt;/code&gt; 로 접근하여 역할을 생성, &lt;code class=&quot;language-text&quot;&gt;AWS 서비스 / Lambda&lt;/code&gt; 를 선택하고 단계를 넘어갑니다.&lt;/p&gt;
+&lt;h3 id=&quot;람다-함수에-부여할-iam-역할-생성&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EB%9E%8C%EB%8B%A4-%ED%95%A8%EC%88%98%EC%97%90-%EB%B6%80%EC%97%AC%ED%95%A0-iam-%EC%97%AD%ED%95%A0-%EC%83%9D%EC%84%B1&quot; aria-label=&quot;람다 함수에 부여할 iam 역할 생성 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;람다 함수에 부여할 IAM 역할 생성&lt;/h3&gt;
+&lt;p&gt;람다 함수에서 &lt;code class=&quot;language-text&quot;&gt;S3&lt;/code&gt; 객체에 접근할 수 있도록 &lt;code class=&quot;language-text&quot;&gt;s3:GetObject&lt;/code&gt;와 같은 권한을 부여해준다.
+IAM 콘솔에서 역할을 생성, &lt;code class=&quot;language-text&quot;&gt;AWS 서비스 / Lambda&lt;/code&gt;를 선택하고 넘어간다.&lt;/p&gt;
 &lt;p&gt;&lt;span
       class=&quot;gatsby-resp-image-wrapper&quot;
       style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 981px; &quot;
@@ -12049,7 +12082,7 @@ CloudFront에서 뷰어 응답으로 빠르게 컨텐츠를 전달합니다.&lt;
         decoding=&quot;async&quot;
       /&gt;
     &lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;다음 단계에서는 &lt;code class=&quot;language-text&quot;&gt;정책 생성&lt;/code&gt; 을 통해 JSON 편집을 통해 권한을 편집합니다.
+&lt;p&gt;다음 단계에서는 &lt;code class=&quot;language-text&quot;&gt;정책 생성&lt;/code&gt; 을 통해 JSON 편집을 통해 권한을 편집한다.
 (예시 프로젝트를 위한 퍼블릭한 권한입니다.)&lt;/p&gt;
 &lt;deckgo-highlight-code language=&quot;json&quot; theme=&quot;nord&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;{
@@ -12113,9 +12146,9 @@ CloudFront에서 뷰어 응답으로 빠르게 컨텐츠를 전달합니다.&lt;
   ]
 }&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
-&lt;h2 id=&quot;온디멘드-이미지-webp-파일-형식-변환을-위한-lambda-함수-생성-w-sharpjs&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EC%98%A8%EB%94%94%EB%A9%98%EB%93%9C-%EC%9D%B4%EB%AF%B8%EC%A7%80-webp-%ED%8C%8C%EC%9D%BC-%ED%98%95%EC%8B%9D-%EB%B3%80%ED%99%98%EC%9D%84-%EC%9C%84%ED%95%9C-lambda-%ED%95%A8%EC%88%98-%EC%83%9D%EC%84%B1-w-sharpjs&quot; aria-label=&quot;온디멘드 이미지 webp 파일 형식 변환을 위한 lambda 함수 생성 w sharpjs permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;온디멘드 이미지, WebP 파일 형식 변환을 위한 Lambda 함수 생성 (w/ sharp.js)&lt;/h2&gt;
-&lt;p&gt;람다 함수를 생성합니다. 이때, 람다 트리거를 CloudFront로 설정할 수 있는 지역은
-&lt;code class=&quot;language-text&quot;&gt;버지니아 북부&lt;/code&gt; 만 가능하기 때문에 지역을 변경하고 람다 함수를 생성해주세요.&lt;/p&gt;
+&lt;h3 id=&quot;온디멘드-이미지-webp-파일-형식-변환을-위한-lambda-함수-생성-w-sharpjs&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EC%98%A8%EB%94%94%EB%A9%98%EB%93%9C-%EC%9D%B4%EB%AF%B8%EC%A7%80-webp-%ED%8C%8C%EC%9D%BC-%ED%98%95%EC%8B%9D-%EB%B3%80%ED%99%98%EC%9D%84-%EC%9C%84%ED%95%9C-lambda-%ED%95%A8%EC%88%98-%EC%83%9D%EC%84%B1-w-sharpjs&quot; aria-label=&quot;온디멘드 이미지 webp 파일 형식 변환을 위한 lambda 함수 생성 w sharpjs permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;온디멘드 이미지, WebP 파일 형식 변환을 위한 Lambda 함수 생성 (w/ sharp.js)&lt;/h3&gt;
+&lt;p&gt;람다 함수를 생성한다. 이때 람다 트리거를 &lt;code class=&quot;language-text&quot;&gt;CloudFront&lt;/code&gt;로 설정할 수 있는 지역은
+&lt;code class=&quot;language-text&quot;&gt;버지니아 북부&lt;/code&gt;만 가능하기 때문에 지역을 변경하고 람다 함수를 생성한다.&lt;/p&gt;
 &lt;p&gt;&lt;span
       class=&quot;gatsby-resp-image-wrapper&quot;
       style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 978px; &quot;
@@ -12138,7 +12171,7 @@ CloudFront에서 뷰어 응답으로 빠르게 컨텐츠를 전달합니다.&lt;
         decoding=&quot;async&quot;
       /&gt;
     &lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;권한 / 구성&lt;/code&gt; 탭에서 생성한 IAM 역할을 설정합니다.&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;권한 / 구성&lt;/code&gt; 탭에서 생성한 IAM 역할을 설정한다.&lt;/p&gt;
 &lt;p&gt;&lt;span
       class=&quot;gatsby-resp-image-wrapper&quot;
       style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 837px; &quot;
@@ -12161,17 +12194,17 @@ CloudFront에서 뷰어 응답으로 빠르게 컨텐츠를 전달합니다.&lt;
         decoding=&quot;async&quot;
       /&gt;
     &lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;이제, 람다 함수 대시보드로 이동하여 이미지 리사이징, webp 포맷팅 적용을 위한 코드를 업로드합니다.
-코드는 &lt;a href=&quot;https://medium.com/daangn/lambda-edge%EB%A1%9C-%EA%B5%AC%ED%98%84%ED%95%98%EB%8A%94-on-the-fly-%EC%9D%B4%EB%AF%B8%EC%A7%80-%EB%A6%AC%EC%82%AC%EC%9D%B4%EC%A7%95-f4e5052d49f3&quot;&gt;AWS Lambda@Edge에서 실시간 이미지 리사이즈 &amp;#x26; WebP 형식으로 변환&lt;/a&gt;를 참고하고 약간의 수정을 더하여 작성하였는데, 위 글에서도 잘 정리되어 있지만, 구현하면서 짚고 넘어가야 될 부분들이 몇 가지 있었는데요.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;노드 환경에서 동작하는 람다 머신이 별도로 가지고 있지 않은 모듈은 직접 &lt;code class=&quot;language-text&quot;&gt;node_modules&lt;/code&gt; 폴더를 함께 압축하여 제공해주어야 했습니다.&lt;/strong&gt; 의존성 해결을 위한 별도의 설치 과정이 포함되어 있지 않습니다.
-&lt;code class=&quot;language-text&quot;&gt;querystring&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;aws-sdk&lt;/code&gt; 를 포함한 몇 가지 모듈들은 이미 의존성이 해결되어 있습니다.&lt;/p&gt;
+&lt;p&gt;이제, 람다 함수 대시보드로 이동하여 이미지 리사이징, webp 포맷팅 적용을 위한 코드를 업로드한다.
+코드는 &lt;a href=&quot;https://medium.com/daangn/lambda-edge%EB%A1%9C-%EA%B5%AC%ED%98%84%ED%95%98%EB%8A%94-on-the-fly-%EC%9D%B4%EB%AF%B8%EC%A7%80-%EB%A6%AC%EC%82%AC%EC%9D%B4%EC%A7%95-f4e5052d49f3&quot;&gt;AWS Lambda@Edge에서 실시간 이미지 리사이즈 &amp;#x26; WebP 형식으로 변환&lt;/a&gt;를 참고하고 약간의 수정을 더하여 작성하였는데, 위 글에서도 잘 정리되어 있지만, 구현하면서 짚고 넘어가야 될 부분들이 몇 가지 있다.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;노드 환경에서 동작하는 람다 머신이 별도로 가지고 있지 않은 모듈은 직접 &lt;code class=&quot;language-text&quot;&gt;node_modules&lt;/code&gt; 폴더를 함께 압축하여 제공해주어야 한다.&lt;/strong&gt;
+&lt;code class=&quot;language-text&quot;&gt;querystring&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;aws-sdk&lt;/code&gt;를 포함한 몇 가지 의존성을 제외하고는 의존성 해결을 위한 별도의 설치 과정이 포함되어 있지 않다.&lt;/p&gt;
 &lt;deckgo-highlight-code language=&quot;js&quot; theme=&quot;nord&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;// Dependencies resolved
 
 const querystring = require(&amp;#39;querystring&amp;#39;);
 const AWS = require(&amp;#39;aws-sdk&amp;#39;);&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
-&lt;p&gt;&lt;strong&gt;람다 함수에서 바디를 조작했다면, 그 결과가 1MB 이하여야 했습니다.&lt;/strong&gt; 만약 1MB 보다 크다면, 이미지의 퀄리티를 단계적으로 낮추는 방법으로 접근했습니다.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;람다 함수에서 바디를 조작했다면, 그 결과가 1MB 이하여야 한다.&lt;/strong&gt; 만약 1MB 보다 크다면, 이미지의 퀄리티를 단계적으로 낮추는 방법으로 접근했다.&lt;/p&gt;
 &lt;deckgo-highlight-code language=&quot;js&quot; theme=&quot;nord&quot;  &gt;
           &lt;code slot=&quot;code&quot;&gt;const MEGABYTE = 1046528;
 const byteLength = Buffer.byteLength(resizedImage, &amp;#39;base64&amp;#39;);
@@ -12180,11 +12213,11 @@ if (byteLength &amp;gt; MEGABYTE) {
   resizedImage.toFormat(requiredFormat, { quality: 90 });
 }&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
-&lt;p&gt;&lt;strong&gt;퀄리티 저하의 한계점을 넘어가거나, 타임 아웃이 되면 원본을 반환했습니다.&lt;/strong&gt;
+&lt;p&gt;&lt;strong&gt;퀄리티 저하의 한계점을 넘어가거나, 타임 아웃이 되면 원본을 반환한다.&lt;/strong&gt;
 1MB 제약을 지키기 위해서 변환 과정이 너무 오래 걸리거나, 이미지 퀄리티가
-너무 저하되는 경우 원본을 반환하도록 했습니다.&lt;/p&gt;
+너무 저하되는 경우 원본을 반환하도록 했다.&lt;/p&gt;
 &lt;p&gt;이제 비즈니스에 맞게 코드를 수정하고, &lt;code class=&quot;language-text&quot;&gt;node_modules&lt;/code&gt; 와 함께 압축된 코드 업로드를 마치셨다면,
-람다 함수 상단 메뉴 &lt;code class=&quot;language-text&quot;&gt;작업 / Lambda@edge 배포&lt;/code&gt; 를 선택합니다.&lt;/p&gt;
+람다 함수 상단 메뉴 &lt;code class=&quot;language-text&quot;&gt;작업 / Lambda@edge 배포&lt;/code&gt;를 선택한다.&lt;/p&gt;
 &lt;p&gt;&lt;span
       class=&quot;gatsby-resp-image-wrapper&quot;
       style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 812px; &quot;
@@ -12207,7 +12240,7 @@ if (byteLength &amp;gt; MEGABYTE) {
         decoding=&quot;async&quot;
       /&gt;
     &lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;CloudFront 이벤트는 &lt;a href=&quot;https://youthfulhps.dev/web/image-optimization/#lambdaedge&quot;&gt;사용자 경험 품질 향상을 위한 이미지 최적화&lt;/a&gt;에 기반하여 &lt;code class=&quot;language-text&quot;&gt;오리진 응답&lt;/code&gt; 을 설정합니다. 이제, 람다 함수를 &lt;code class=&quot;language-text&quot;&gt;배포&lt;/code&gt; 합니다.&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;CloudFront&lt;/code&gt; 이벤트는 &lt;code class=&quot;language-text&quot;&gt;오리진 응답&lt;/code&gt;에 설정한다. 이후 람다 함수를 배포한다.&lt;/p&gt;
 &lt;p&gt;&lt;span
       class=&quot;gatsby-resp-image-wrapper&quot;
       style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 810px; &quot;
@@ -12231,7 +12264,7 @@ if (byteLength &amp;gt; MEGABYTE) {
       /&gt;
     &lt;/span&gt;&lt;/p&gt;
 &lt;h2 id=&quot;마치면서&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EB%A7%88%EC%B9%98%EB%A9%B4%EC%84%9C&quot; aria-label=&quot;마치면서 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;마치면서&lt;/h2&gt;
-&lt;p&gt;단순히 코드 레벨과 물리적인 대응 방안을 고민하는 단계에서 더 넓은 접근 방식을 배울 수 있었던 좋은 경험이었습니다. 이미지 리사이징, webp 포맷팅이 잘 적용되는 지 확인해보실 수 있는 간단한 &lt;a href=&quot;https://github.com/youthfulhps/image-ondemand-resizing&quot;&gt;프로젝트&lt;/a&gt;를 구성해두었으니 경험해보실 수 있습니다.&lt;/p&gt;
+&lt;p&gt;단순히 코드 레벨과 물리적인 대응 방안을 고민하는 단계에서 더 넓은 접근 방식을 배울 수 있었던 좋은 경험이었다. 이미지 리사이징, webp 포맷팅이 잘 적용되는 지 확인해보실 수 있는 간단한 &lt;a href=&quot;https://github.com/youthfulhps/image-ondemand-resizing&quot;&gt;프로젝트&lt;/a&gt;를 구성해두었으니 경험해보실 수 있다.&lt;/p&gt;
 &lt;h2 id=&quot;reference&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#reference&quot; aria-label=&quot;reference permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Reference&lt;/h2&gt;
 &lt;p&gt;&lt;a href=&quot;https://medium.com/daangn/lambda-edge%EB%A1%9C-%EA%B5%AC%ED%98%84%ED%95%98%EB%8A%94-on-the-fly-%EC%9D%B4%EB%AF%B8%EC%A7%80-%EB%A6%AC%EC%82%AC%EC%9D%B4%EC%A7%95-f4e5052d49f3&quot;&gt;https://medium.com/daangn/lambda-edge로-구현하는-on-the-fly-이미지-리사이징-f4e5052d49f3&lt;/a&gt;&lt;/p&gt;</content:encoded></item><item><title><![CDATA[사용자 경험 품질 향상을 위한 이미지 최적화]]></title><description><![CDATA[많은 이미지를 다루는 페이지의 경우, 이미지 최적화에 신경쓰지 않으면 사용자 경험 지표에서 많은 감점을 받기 쉽습니다.
 사용자 경험 지표를 측정해보면, 이미지 관련된 감점 요소들이 정말 많은데요. Properly size images Serve…]]></description><link>https://youthfulhps.dev/web/image-optimization/</link><guid isPermaLink="false">https://youthfulhps.dev/web/image-optimization/</guid><pubDate>Sun, 29 May 2022 16:05:05 GMT</pubDate><content:encoded>&lt;blockquote class=&quot;warning&quot;&gt;작성한 지 2년이 지난 글이에요. 지금과는 맞지 않을 수도 있지만, 당시의 고민과 노력이 담겨있습니다.&lt;/blockquote&gt;
@@ -12781,49 +12814,47 @@ str.sayValue() // &amp;quot;string&amp;quot;&lt;/code&gt;
 &lt;h2 id=&quot;reference&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#reference&quot; aria-label=&quot;reference permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Reference&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&quot;https://poiemaweb.com/js-prototype&quot;&gt;https://poiemaweb.com/js-prototype&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content:encoded></item><item><title><![CDATA[Incremental Static Regeneration 타임라인 이해하기]]></title><description><![CDATA[최근 CRA…]]></description><link>https://youthfulhps.dev/nextjs/next-isr/</link><guid isPermaLink="false">https://youthfulhps.dev/nextjs/next-isr/</guid><pubDate>Sat, 08 Jan 2022 21:06:16 GMT</pubDate><content:encoded>&lt;blockquote class=&quot;warning&quot;&gt;작성한 지 2년이 지난 글이에요. 지금과는 맞지 않을 수도 있지만, 당시의 고민과 노력이 담겨있습니다.&lt;/blockquote&gt;
-&lt;p&gt;최근 CRA 프로젝트를 넥스트로 이관하는 작업이 한창입니다. 넥스트는 서버 사이드 랜더링과 동시에 클라이언트 사이드 랜더링을
-동시에 지원하기 때문에 점진적 이관이 가능했죠. 단순히 빌드가 실패되는 문제들을 제외하면요.&lt;/p&gt;
-&lt;p&gt;이후 적절한 &lt;code class=&quot;language-text&quot;&gt;getStaticProps&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;getStaticPaths&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;getServerSideProps&lt;/code&gt; 를 통해 서버 사이드에서 데이터 패칭이
-이루어질 수 있도록 작업했습니다.&lt;/p&gt;
-&lt;p&gt;작업할 때 서버 사이드 랜더링(&lt;code class=&quot;language-text&quot;&gt;Server Side Rendering&lt;/code&gt;)보다는 정적 사이트 생성(&lt;code class=&quot;language-text&quot;&gt;Static Site Generation&lt;/code&gt;) 방식으로
-접근하려 했습니다.&lt;/p&gt;
+&lt;/ul&gt;</content:encoded></item><item><title><![CDATA[Incremental Static Regeneration 타임라인 이해하기]]></title><description><![CDATA[…]]></description><link>https://youthfulhps.dev/nextjs/next-isr/</link><guid isPermaLink="false">https://youthfulhps.dev/nextjs/next-isr/</guid><pubDate>Sat, 08 Jan 2022 21:06:16 GMT</pubDate><content:encoded>&lt;blockquote class=&quot;warning&quot;&gt;작성한 지 2년이 지난 글이에요. 지금과는 맞지 않을 수도 있지만, 당시의 고민과 노력이 담겨있습니다.&lt;/blockquote&gt;
+&lt;p&gt;최근 클라이언트 사이드 랜더링 방식을 취하고 있는 프로젝트를 &lt;code class=&quot;language-text&quot;&gt;next.js&lt;/code&gt;로 이관하는 작업이 한창이다. &lt;code class=&quot;language-text&quot;&gt;next.js&lt;/code&gt;는 서버 사이드
+랜더링과 동시에 클라이언트 사이드 랜더링을 동시에 지원하기 때문에, 마이너한 빌드 이슈를 제외하면 점진적 이관이 가능했다.&lt;/p&gt;
+&lt;p&gt;이후 페이지별로 적절한 랜더링 전략을 취해야 했다. 가령, 상품 정보와 같은 정적인 정보를 제공하는 페이지의 경우 &lt;code class=&quot;language-text&quot;&gt;getStaticProps&lt;/code&gt;를 통해
+빌드 타임에 패칭된 데이터들을 통해 빠르게 페이지를 제공하고, 동적이고 데이터 정합성을 요구하는 페이지의 경우 &lt;code class=&quot;language-text&quot;&gt;getServerSideProps&lt;/code&gt;를
+통해 제공하는 방식 등을 고려하여 선정해야 했다.&lt;/p&gt;
+&lt;p&gt;그러나 동적이지만, 그렇다고 실시간으로 데이터 정합성을 요구하는 정도가 아닌 그 중간 어딘가의 데이터를 사용하는 페이지의 경우,
+최대한 정적 사이트 생성 전략을 통해 해결하려 했다.&lt;/p&gt;
 &lt;h2 id=&quot;ssr-vs-ssg&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#ssr-vs-ssg&quot; aria-label=&quot;ssr vs ssg permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;SSR vs SSG&lt;/h2&gt;
-&lt;p&gt;넥스트는 서버 사이드에서 데이터 패칭을 할 수 있도록 두 가지 함수를 제공합니다.
-두 함수의 가장 큰 차이점은 단연 데이터 패칭의 시점인데요.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;&lt;code class=&quot;language-text&quot;&gt;getServerSideProps&lt;/code&gt;의 경우&lt;/strong&gt;, 클라이언트에서 요청이 들어올 때
-데이터 패칭을 통해 외부 데이터를 json파일에 담고, 마크업을 생성하여 클라이언트로 전달합니다.&lt;/p&gt;
-&lt;p&gt;반대로 &lt;strong&gt;&lt;code class=&quot;language-text&quot;&gt;getStaticProps&lt;/code&gt;의 경우&lt;/strong&gt;, 빌드 시 한번만 모든 페이지의 마크업과 데이터 패칭을 통해
-얻은 외부 데이터를 json파일에 담아두고, 요청 때 캐싱되어 있는 마크업, json 파일을 클라이언트로 전달합니다.&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;next.js&lt;/code&gt;는 서버사이드 랜더링 전략을 쉽게 구현할 수 있도록 두 가지 API를 제공한다. 두 함수의 가장 큰 차이점은 단연
+데이터 패칭의 시점이다. &lt;code class=&quot;language-text&quot;&gt;getServerSideProps&lt;/code&gt;는 클라이언트에서 요청이 들어올 때 외부 데이터를 패칭하여 마크업을 생성하여
+담아낸다.&lt;/p&gt;
+&lt;p&gt;반면, &lt;code class=&quot;language-text&quot;&gt;getStaticProps&lt;/code&gt;는 빌드 타임에 마크업 파일을 생성하고, 외부 데이터를 패칭하여 &lt;code class=&quot;language-text&quot;&gt;json&lt;/code&gt; 파일로 작성한다.
+이후 클라이언트의 페이지 요청에 대해 이미 작성되어 있는 마크업 파일과 데이터가 담겨 있는 &lt;code class=&quot;language-text&quot;&gt;json&lt;/code&gt; 파일을 제공한다.&lt;/p&gt;
 &lt;p&gt;&lt;span
       class=&quot;gatsby-resp-image-wrapper&quot;
       style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 1200px; &quot;
     &gt;
       &lt;span
     class=&quot;gatsby-resp-image-background-image&quot;
-    style=&quot;padding-bottom: 56.333333333333336%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAALCAYAAAB/Ca1DAAAACXBIWXMAAAsTAAALEwEAmpwYAAABOklEQVR42q1SyYqDQBDN/39LfsKTeFE0oBIDxiguuAZNosZYwysoRzMZmMMUFNVL9Vu6e0ermOd5qTKWmKaJns8nV+Q4jjxHrnt3MjmdTmQYBh0OB7Jtm9N1XT4IAKybpkm+7/OeZVnkOA4dj0fyPO8bUAbDMDCbMKP2fb8oFmXI1+vFa6iifAMIsKZpGOQvASD0or4HA4ZhSEEQ0OVyoTzPqSxLSpJkOQAFdV1TURSUpinn+Xzmvuv1SrfbbQuIe9jv93xnsHK/35kAdhCwDoC2bfkwBIAcwHEcM9kGECDCBitd19Hj8fhoFyTYAzCqkP54FIBUVUVRFLFd2MNcgMW+WEQ/FK/VbQCFHXZgA3ayLFvuR76Xruukqip/IU3TSFEUftSPgDgERbjDdysSUC4PhAriXxX+R3wBFSVTYkyTvEoAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+    style=&quot;padding-bottom: 55.666666666666664%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAALCAIAAADwazoUAAAACXBIWXMAAAsTAAALEwEAmpwYAAABX0lEQVR42mWR6Y6CQBCEef/3IPEd/KMxRE28QNAY8EKNuLqGQzzisOwnrWR1O2FSdNdUV/doaZp+FRFFURiG2+32cDjwG8cxpTzPL5fLfr/f7XZUv4tIkoQkJc2yrHq93ul0+v1+r9frdrvtdns4HHKORiMYk8kEguQh27ZtGMZqtXpczt/jp4gS5//iL0HDnud50+lUfN7v9w+SgPP5jGH8A0pdDW948H3fNE1UAIPBQFyJPtM6jhMEget5YABLQUUppc1mM13XK5XKcrmEqrJss9mwPOmPEVkkbBQB0ACcj8sYoLxer9Ur8J9l2ceoJKEdj0d5gqdtvuv1ulgsKKM3n89h0PB2u5WLgXA6nQB05uSpngt7WFUKKin6IyErQIWkkBBlHVTH4zF5MGO/PRXdyDIwKwlDPEaISqnVavHUzWazWq3WarVGo+G67ttl5kyLKBuWgW0ZFUXZkcz8C8mDZ57ZNCHBAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
   &gt;&lt;/span&gt;
   &lt;img
         class=&quot;gatsby-resp-image-image&quot;
         alt=&quot;comparison&quot;
         title=&quot;&quot;
-        src=&quot;/static/cd29985dffb91fc65d52899ac3d1fb4c/c1b63/comparison.png&quot;
-        srcset=&quot;/static/cd29985dffb91fc65d52899ac3d1fb4c/5a46d/comparison.png 300w,
-/static/cd29985dffb91fc65d52899ac3d1fb4c/0a47e/comparison.png 600w,
-/static/cd29985dffb91fc65d52899ac3d1fb4c/c1b63/comparison.png 1200w,
-/static/cd29985dffb91fc65d52899ac3d1fb4c/73a2e/comparison.png 1439w&quot;
+        src=&quot;/static/4a557f5896e32c0efefaac19bdc8e343/c1b63/comparison.png&quot;
+        srcset=&quot;/static/4a557f5896e32c0efefaac19bdc8e343/5a46d/comparison.png 300w,
+/static/4a557f5896e32c0efefaac19bdc8e343/0a47e/comparison.png 600w,
+/static/4a557f5896e32c0efefaac19bdc8e343/c1b63/comparison.png 1200w,
+/static/4a557f5896e32c0efefaac19bdc8e343/bb543/comparison.png 1418w&quot;
         sizes=&quot;(max-width: 1200px) 100vw, 1200px&quot;
         style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
         loading=&quot;lazy&quot;
         decoding=&quot;async&quot;
       /&gt;
     &lt;/span&gt;&lt;/p&gt;
-&lt;h2 id=&quot;정적-생성을-지향했던-이유&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EC%A0%95%EC%A0%81-%EC%83%9D%EC%84%B1%EC%9D%84-%EC%A7%80%ED%96%A5%ED%96%88%EB%8D%98-%EC%9D%B4%EC%9C%A0&quot; aria-label=&quot;정적 생성을 지향했던 이유 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;정적 생성을 지향했던 이유&lt;/h2&gt;
-&lt;p&gt;정적 생성된 페이지는 클라이언트의 요청 시 상당히 빠르게 제공됩니다.
-빌드 시 생성한 마크업과 데이터가 담긴 json을 제공하기 때문인데요.&lt;/p&gt;
-&lt;p&gt;이는 &lt;code class=&quot;language-text&quot;&gt;Time to First Byte (TTFB)&lt;/code&gt;를 크게 줄일 수 있을 뿐만 아니라, &lt;code class=&quot;language-text&quot;&gt;First Input Delay (FID)&lt;/code&gt;와 같은 Web Vital Score를 개선하는 데 큰 도움이 됩니다.&lt;/p&gt;
-&lt;p&gt;좋지 못한 네트워크 상에서 비교 측정해봤을 때 초 단위로 측정되는 &lt;code class=&quot;language-text&quot;&gt;SSR&lt;/code&gt;에 반해 &lt;code class=&quot;language-text&quot;&gt;SSG&lt;/code&gt;는 밀리 초 단위로
-측정되는 것을 확인할 수 있습니다.&lt;/p&gt;
+&lt;h3 id=&quot;정적-생성-전략을-지향했던-이유&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EC%A0%95%EC%A0%81-%EC%83%9D%EC%84%B1-%EC%A0%84%EB%9E%B5%EC%9D%84-%EC%A7%80%ED%96%A5%ED%96%88%EB%8D%98-%EC%9D%B4%EC%9C%A0&quot; aria-label=&quot;정적 생성 전략을 지향했던 이유 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;정적 생성 전략을 지향했던 이유&lt;/h3&gt;
+&lt;p&gt;정적 생성된 페이지는 이미 생성된 마크업 파일과 데이터를 소유하고 있기 때문에, 클라이언트의 요청에 서버사이드 랜더링 전략으로
+제공되는 페이지보다 비교적 빠르게 제공된다.
+이는 서버사이드 랜더링 전략 대비 &lt;code class=&quot;language-text&quot;&gt;Time to First Byte (TTFB)&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;First Input Delay (FID)&lt;/code&gt; 등 다양한 웹 성능 메트릭을 개선하는데 큰 이점을 제공한다.&lt;/p&gt;
 &lt;p&gt;&lt;span
       class=&quot;gatsby-resp-image-wrapper&quot;
       style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 725px; &quot;
@@ -12868,20 +12899,25 @@ str.sayValue() // &amp;quot;string&amp;quot;&lt;/code&gt;
         decoding=&quot;async&quot;
       /&gt;
     &lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;추가적으로 클라이언트의 요청 횟수에 상관없이 서버측은 빌드 시 제공된 한번의 응답이면 충분하게 됩니다.&lt;/p&gt;
+&lt;p&gt;더불어 클라이언트의 요청 횟수에 상관없이 빌드 타임에 한 번만 데이터 요청이 이루어지기 때문에 서버 자원 또한 극적으로 절약할 수 있다.&lt;/p&gt;
 &lt;h2 id=&quot;증분-정적-재생성&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EC%A6%9D%EB%B6%84-%EC%A0%95%EC%A0%81-%EC%9E%AC%EC%83%9D%EC%84%B1&quot; aria-label=&quot;증분 정적 재생성 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;증분 정적 재생성&lt;/h2&gt;
-&lt;p&gt;그러나 한 가지 염두해야 할 것이 있다면, 제공하는 서비스 특성상 데이터가 실시간으로 업데이트되어야 한다면
-&lt;strong&gt;빌드되는 시점에 받은 외부 데이터가 최신화된 데이터로서 유효하지 않다는 점&lt;/strong&gt;입니다.&lt;/p&gt;
-&lt;p&gt;그래도 넥스트가 정적 생성을 권장하는 근거가 있다면, &lt;a href=&quot;https://vercel.com/docs/concepts/next.js/incremental-static-regeneration&quot;&gt;증분 정적 재생성&lt;/a&gt;
-(Incremental Static Regeneration)라 생각이 듭니다.&lt;/p&gt;
-&lt;p&gt;위 문서를 읽어보면 증분 정적 재생성을 하기 위해서는 &lt;code class=&quot;language-text&quot;&gt;getStaticProps&lt;/code&gt;의 반환 프로퍼티로 &lt;code class=&quot;language-text&quot;&gt;revalidate&lt;/code&gt; 값을
-설정하면, 설정된 초 단위 마다 넥스트에서 데이터 유효성 검사를 진행할거다 정도로 쉽게 받아드릴 수 있습니다.&lt;/p&gt;
-&lt;p&gt;하지만, &lt;code class=&quot;language-text&quot;&gt;revalidate&lt;/code&gt; 가 되는 시점과 트리거에 대한 이해가 필연적입니다.&lt;/p&gt;
-&lt;h2 id=&quot;증분-정적-재생성의-타임라인&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EC%A6%9D%EB%B6%84-%EC%A0%95%EC%A0%81-%EC%9E%AC%EC%83%9D%EC%84%B1%EC%9D%98-%ED%83%80%EC%9E%84%EB%9D%BC%EC%9D%B8&quot; aria-label=&quot;증분 정적 재생성의 타임라인 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;증분 정적 재생성의 타임라인&lt;/h2&gt;
-&lt;p&gt;증분 정적 재생성(&lt;code class=&quot;language-text&quot;&gt;ISR&lt;/code&gt;)은 &lt;code class=&quot;language-text&quot;&gt;SSG&lt;/code&gt; 과 동일한 넥스트 API(&lt;code class=&quot;language-text&quot;&gt;getStaticProps&lt;/code&gt;)로 정적 페이지를 생성합니다. &lt;code class=&quot;language-text&quot;&gt;revalidate&lt;/code&gt; 값을 설정하여
-생성된 페이지를 업데이트하도록 알리는데요.&lt;/p&gt;
-&lt;p&gt;단순하게 &lt;code class=&quot;language-text&quot;&gt;revalidate&lt;/code&gt;값이 20초라면, 특정 페이지에 대한 첫 요청이
-들어온 이후 20초마다 한번 씩 유효성 검사를 한다는 것으로 오해할 수 있습니다.&lt;/p&gt;
+&lt;p&gt;정적 생성 전략을 통해 웹 성능 메트릭 개선과 서버 자원을 절약을 달성할 수 있다. 그러나 한 가지 염두해야 할 것이 있다면,
+빌드 타임에 캐싱된 외부 데이터가 데이터 정합성 측면에서 유효한가를 확인해 봐야 한다.
+개요에서 언급했던 바와 같이, 상품 정보 데이터의 경우 비교적 무거운 정적인 데이터로 간주하여 빌드 타임에
+캐싱하여 정적으로 제공하는 것이 가능하다.&lt;/p&gt;
+&lt;p&gt;하지만 구매한 상품 개수, 총 주문 금액을 유저에게 노출시켜 전환율을 높이는 이벤트를 진행한다고 생각해 보자. 상품 개수나, 총 주문 금액과 같은
+데이터는 빌드 타임에 가지고 있을 수 없는 동적인 데이터이다. 하지만 실시간으로 데이터 정합성을 유효하게 제공할 것인가, 혹은 서버 자원 절약하고
+개선된 웹 성능 메트릭을 취할 것인가에 대한 저울질이 가능하다.&lt;/p&gt;
+&lt;p&gt;이렇게 비즈니스적인 측면에서 바라보았을때 정적 혹은 동적인 데이터 그 중간 어딘가에 속하는 데이터들은 어떻게 처리할 수 있을까. 바로 &lt;code class=&quot;language-text&quot;&gt;next.js&lt;/code&gt;가 제공하는
+&lt;a href=&quot;https://vercel.com/docs/concepts/next.js/incremental-static-regeneration&quot;&gt;증분 정적 재생성&lt;/a&gt; 전략을 고려해 볼 수 있다.&lt;/p&gt;
+&lt;p&gt;증분 정적 재생성은 빌드 타임에 외부 데이터를 패칭해 캐싱하는 정적 생성 전략에서, 일정한 트리거에 의해 데이터 유효성을 검증하고
+이를 최신화하여 정적 생성 전략에서도 데이터 정합성을 일부 챙길 수 있는 전략이다.&lt;/p&gt;
+&lt;p&gt;이를 구현하는 방식은 간단하다. &lt;code class=&quot;language-text&quot;&gt;getStaticProps&lt;/code&gt;의 반환 프로퍼티로 초 단위의 &lt;code class=&quot;language-text&quot;&gt;revalidate&lt;/code&gt; 값을 제공하면 된다.
+하지만 단순히 &lt;code class=&quot;language-text&quot;&gt;revalidate&lt;/code&gt;에 설정된 초 단위마다 외부 데이터를 최신화하는 것은 아니기 때문에 트리거에 의해 최신화되는 과정을
+살펴보자.&lt;/p&gt;
+&lt;h3 id=&quot;증분-정적-재생성의-타임라인&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EC%A6%9D%EB%B6%84-%EC%A0%95%EC%A0%81-%EC%9E%AC%EC%83%9D%EC%84%B1%EC%9D%98-%ED%83%80%EC%9E%84%EB%9D%BC%EC%9D%B8&quot; aria-label=&quot;증분 정적 재생성의 타임라인 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;증분 정적 재생성의 타임라인&lt;/h3&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;revalidate&lt;/code&gt;를 20초로 설정했다고 가정해 보자. 이는 첫 요청이 들어온 이후 20초마다 한번씩 유효성 검사를 진행하고
+데이터 정합성을 확인하여 최신화된 데이터가 담긴 페이지를 반환한다는 것으로 오해할 수 있다.&lt;/p&gt;
 &lt;p&gt;&lt;span
       class=&quot;gatsby-resp-image-wrapper&quot;
       style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 1200px; &quot;
@@ -12905,7 +12941,7 @@ str.sayValue() // &amp;quot;string&amp;quot;&lt;/code&gt;
         decoding=&quot;async&quot;
       /&gt;
     &lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;정확한 플로우는 공식 문서에서 다음과 같이 설명하고 있습니다. 이제, 이 플로우를 하나 씩 살펴 봅시다.&lt;/p&gt;
+&lt;p&gt;하지만, 정확한 유효성 검사의 흐름은 공식 문서에서 다음과 같이 설명하고 있다.&lt;/p&gt;
 &lt;p&gt;&lt;span
       class=&quot;gatsby-resp-image-wrapper&quot;
       style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 1200px; &quot;
@@ -12929,8 +12965,8 @@ str.sayValue() // &amp;quot;string&amp;quot;&lt;/code&gt;
         decoding=&quot;async&quot;
       /&gt;
     &lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;revalidate&lt;/code&gt; 는 20초, 빌드 시 페이지 정적 생성이 이루어졌다면,
-초기 페이지를 요청(1)한다면, 0s 기준으로 캐싱되어 있는 페이지를 응답받습니다.&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;revalidate&lt;/code&gt;가 20초로 설정된 페이지는 빌드 타임에 정적 생성되었다. 해당 페이지 요청(1)이 이루어졌다면,
+0초를 기준으로 빌드 시점에 캐싱되어 있는 페이지가 반환된다.&lt;/p&gt;
 &lt;p&gt;&lt;span
       class=&quot;gatsby-resp-image-wrapper&quot;
       style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 1200px; &quot;
@@ -12954,7 +12990,7 @@ str.sayValue() // &amp;quot;string&amp;quot;&lt;/code&gt;
         decoding=&quot;async&quot;
       /&gt;
     &lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;만약, 20초 이내에 새로운 요청(2)을 보냈다면, 이것 또한 기존 캐싱되어 있는 페이지를 응답받습니다.&lt;/p&gt;
+&lt;p&gt;가령 이후 다른 유저가 20초 이내 같은 페이지를 요청(2)했다면, 이것 또한 기존 캐싱되어 있는 페이지가 반환된다.&lt;/p&gt;
 &lt;p&gt;&lt;span
       class=&quot;gatsby-resp-image-wrapper&quot;
       style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 1200px; &quot;
@@ -12978,9 +13014,9 @@ str.sayValue() // &amp;quot;string&amp;quot;&lt;/code&gt;
         decoding=&quot;async&quot;
       /&gt;
     &lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;드디어 20초가 지나서 새로운 요청(3)을 보냈습니다. 넥스트에서는 설정해둔 20초가 지났기 때문에
-캐싱된 페이지에 대해 유효성 검사를 진행하고, 새롭게 캐싱된 페이지가 전달될 거라 기대하지만, 그렇지 않습니다.
-&lt;strong&gt;마찬가지로, 캐싱된 페이지를 응답받습니다.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;드디어 우리가 설정한 20초가 지난 시점에 새로운 페이지 요청(3)이 들어왔다. 해당 페이지에 &lt;code class=&quot;language-text&quot;&gt;revalidate&lt;/code&gt;로 설정한
+20초가 지났기 때문에 캐싱되어 있는 페이지에 대한 유효성 검사를 진행하고, 최신화된 페이지를 반환할 것이라
+기대하지만 그렇지 않다. 마찬가지로 신선하지 않은 캐싱된 페이지를 반환받는다.&lt;/p&gt;
 &lt;p&gt;&lt;span
       class=&quot;gatsby-resp-image-wrapper&quot;
       style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 1200px; &quot;
@@ -13004,9 +13040,8 @@ str.sayValue() // &amp;quot;string&amp;quot;&lt;/code&gt;
         decoding=&quot;async&quot;
       /&gt;
     &lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;이 단계에서 예상과는 다르게 새롭게 재생성된 페이지를 전달받지 못한 것에 대해 약간의 혼란이 생깁니다.
-그렇다면, 넥스트는 어느 시점에서 새롭게 유효성을 검사할까요?&lt;/p&gt;
-&lt;p&gt;바로, &lt;strong&gt;20초가 지나서 전달된 새로운 요청(3)이 유효성 재검사의 트리거가 됩니다.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;개인적으로 이 단계에서 예상과 달라 혼란이 있다. 그렇다면, 어느 시점에 새롭게 유효성 검사가 진행될까.
+바로 20초가 지나서 전달된 새로운 요청(3)이 유효성을 재검사의 트리거가 된다.&lt;/p&gt;
 &lt;p&gt;&lt;span
       class=&quot;gatsby-resp-image-wrapper&quot;
       style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 1200px; &quot;
@@ -13030,12 +13065,12 @@ str.sayValue() // &amp;quot;string&amp;quot;&lt;/code&gt;
         decoding=&quot;async&quot;
       /&gt;
     &lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;넥스트는 20초가 지난 시점에서 새로운 요청(3)이 들어오면 기존의 캐싱되어 있던 페이지의 유효성을 재검사합니다.
-&lt;strong&gt;이때 재생성이 성공한다면, 기존의 캐싱된 페이지는 무효화되며, 재생성된 페이지가 새롭게 캐싱됩니다.&lt;/strong&gt;
-만약, 모종의 이유로 재생성에 실패한다면, 기존의 캐싱된 페이지가 유효하게 유지됩니다.&lt;/p&gt;
-&lt;p&gt;이 시점을 왜 재생성의 트리거로 설정했을 까라는 생각을 오래했는데, 20초 마다 조건없이 재생성하기 보다는,
-20초 이후 새로운 요청이 들어와 업데이트된 정보를 필요로 하는 클라이언트의 수요를 확인하고
-재생성이 이루어지는 것이 훨씬 경제적일 거라는 판단이지 않을까라는 개인적인 생각을 했습니다.&lt;/p&gt;
+&lt;p&gt;20초가 지난 시점에서 새로운 요청(3)이 들어오면, 기존에 캐싱되어 있던 페이지를 다시 최신화한다.
+이때 재생성이 성공한다면, 기존의 캐싱된 페이지는 무효화되고 재생성된 페이지가 새롭게 캐싱된다.
+그러나 모종의 이유로 재생성에 실패한다면, 기존에 캐싱된 페이지가 유지된다.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;이 시점을 왜 재생성의 트리거로 설정했을까라는 생각을 오해했는데, 20초마다 조건없이 재생성 하기보다는,
+20초 이후 들어온 새로운 요청에 대해 빠르게 페이지를 반환해 주고, 최신화된 데이터에 대한 수요를 확인하여
+재생성이 이루어지도록 하는 것이 훨씬 경제적이지 않을까 판단됩니다.&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;&lt;span
       class=&quot;gatsby-resp-image-wrapper&quot;
       style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 1200px; &quot;
@@ -13059,47 +13094,19 @@ str.sayValue() // &amp;quot;string&amp;quot;&lt;/code&gt;
         decoding=&quot;async&quot;
       /&gt;
     &lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;재생성이 완료된 이후 시점에서 새로운 요청(4)이 들어온다면, 재생성이 성공했다는 가정하에 재생성된 페이지를 응답 받게 됩니다.&lt;/p&gt;
-&lt;h2 id=&quot;isr를-적용하기-앞서&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#isr%EB%A5%BC-%EC%A0%81%EC%9A%A9%ED%95%98%EA%B8%B0-%EC%95%9E%EC%84%9C&quot; aria-label=&quot;isr를 적용하기 앞서 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;ISR를 적용하기 앞서&lt;/h2&gt;
-&lt;p&gt;사실, 실시간으로 업데이트되어야 하는 제품 상세 페이지에 ISR을 적용하기란 생각보다 불안했습니다.
-그래서 ISR을 타임라인을 그려보기도 하고, 생각보다 비슷한 걱정을 한 이야기들을 보기 위해 괜히
-&lt;a href=&quot;https://github.com/vercel/next.js/discussions?discussions_q=ecommerce&quot;&gt;디스커션&lt;/a&gt;
-을 읽어보기도 했습니다.&lt;/p&gt;
-&lt;p&gt;맘 편하게 &lt;code class=&quot;language-text&quot;&gt;TTFB&lt;/code&gt; 를 조금 양보하더라도 서버 사이드에서 데이터 패칭하도록 할까 라는 생각도 했었지만,
-SSG의 응답 속도를 한번이라도 경험해보신 분들은 절대 포기못 할 속도일 겁니다.&lt;/p&gt;
-&lt;p&gt;&lt;span
-      class=&quot;gatsby-resp-image-wrapper&quot;
-      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 709px; &quot;
-    &gt;
-      &lt;span
-    class=&quot;gatsby-resp-image-background-image&quot;
-    style=&quot;padding-bottom: 61.66666666666666%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAMCAYAAABiDJ37AAAACXBIWXMAAAsTAAALEwEAmpwYAAADZklEQVR42iWS60/TBxSG+584GZfSFpBLa3BcRAQ60Aq0WMutrAhMKFeBhEZQ2HBAICCDdVsIXsicMBEBgzhXGzFbQYJTEXCTDTYUuUjtDVwykme/bZ/O++U8ed6TIxqt0ZAfG07agVDKkmI4q00gXxlJ6gcKRhrzcL2wsvpDL6/GzGzO3+fu9W9pq+viensHcze6eXH/JidzK8lOP4VeY0A0ekbLsSg5X1VmUZeuRBsp50i4ghohr1p7cP0+jd3Sy5O2j1kebMGx/JStNQ/WsRmWxof4e8FKU0MrSXFpZKRkIrI1apluz2OoWk1atJzD+0PZL5NwriiTH78+w4OGdMZr1Dz80oRZr2Liaj/s7jI3v8nMvRl2f51m4fET8j6qRJeqR2SpS6E9K5bwkDBiI6OIkocR4OOHKV/L4lAbi11GJhtzeNRVTm91FQPmQZam55myrWCbWMT9ap139jdYvrdxQp2LSHswBH8/McGyQBSBQYQHBSGXSjAZVPzZ/xkzLYX80nGKjWvNTN60YLkxxezEAj9PveT54zXsa048DhfLi6+pqTiPaM97Pkj8ZUj9JQT6SwmTBQiGYipzNEx2V9GdFc+D1nJWbn/H+vNNHCtOXG/cuLbcbDs9uBxOHFseRm/N0tl8GZFMEoBELEUqlgmmEvZJA/H18sOQpmJhoIOLuUfoK07l6bVe/trYxul0/QdxCdPp+D97XNvYJlf4vPUbRMFB+1CEhBIs1PV53xextx8+e705EBrMpbNFXKrQcfG0huH6Yl7O/oFbWHa+deCyC8C3TrZdHpYW7YyPz/FFex+ivXu8BDs/AmUyIsLlJCcqydFpSddlYMhIR58UTZE6Dq0ynpamPjY23uH+187uxO1ws/qbnbFhoe6FQcr0JYgiFAqUh6I5nnIUU3kR5pZPeXj3FpahAUoLjRxOUHMo9ijREXFoUgz09Iyx/trNjmdHAAq29h1+mnhGk6mZwuQTiI7Fx6M8GENoUAiZ6hSK9JlM3Rmhs76B4yotBQVV5OWVCT+mIzEmgXOmT5i89wib9RnW2zPcGbIwcqWfwU4zNao0RF7CvXy8xYh9pWg+TCQ7WUVtaQm1FdUYcoyUlNbSceEyhflGVLFxnNRmkKsroLy4nivmYRpPn6fdaGSmr5fOrGz+AXuVcER1Qt+nAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
-  &gt;&lt;/span&gt;
-  &lt;img
-        class=&quot;gatsby-resp-image-image&quot;
-        alt=&quot;fast&quot;
-        title=&quot;&quot;
-        src=&quot;/static/33d2719e99724dfa5a914b88059481ef/4d08a/fast1.png&quot;
-        srcset=&quot;/static/33d2719e99724dfa5a914b88059481ef/5a46d/fast1.png 300w,
-/static/33d2719e99724dfa5a914b88059481ef/0a47e/fast1.png 600w,
-/static/33d2719e99724dfa5a914b88059481ef/4d08a/fast1.png 709w&quot;
-        sizes=&quot;(max-width: 709px) 100vw, 709px&quot;
-        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
-        loading=&quot;lazy&quot;
-        decoding=&quot;async&quot;
-      /&gt;
-    &lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;나름의 합의점을 찾자면, ISR을 통해 속도 최적화를 챙기면서
-가격 변동이나 남은 수량과 같은 실시간 정보를 필요로 하는 곳은 랜더링 직후 클라이언트에서 데이터 패칭을 통해
-UI에 영향이 가지 않는 선에서 스토어를 업데이트해주는 방향을 선택할 수 있습니다.&lt;/p&gt;
-&lt;p&gt;ISR과 함께 데이터 재검증에 대한 고민을 하다보니 &lt;a href=&quot;https://swr.vercel.app/ko&quot;&gt;SWR&lt;/a&gt;가 자주 등장하는데요.
-ISR를 적용하고 나서 풀어야 할 숙제가 남아 있기 때문에 SWR를 추가적으로 공부해보려 합니다.&lt;/p&gt;
-&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;SWR&lt;/code&gt; 을 &lt;code class=&quot;language-text&quot;&gt;ISR&lt;/code&gt; 와 함께 사용한 예제들을 보면 정적 랜더링 이후 포커싱이 돌아오거나, 네트워크가 회복되었을 때 데이터 패칭을 통해 업데이트된 외부 데이터를 UI에
-적용시켜줍니다. 어쩌면 스토어 따윈 필요로 하지 않는 클라이언트 개발이 얼마 남지 않은 것 같네요.b&lt;/p&gt;
+&lt;p&gt;재생성이 완료된 이후 시점에 새로운 요청(4)이 들어온다면, 최신화된 페이지를 반환받게 된다.&lt;/p&gt;
+&lt;h3 id=&quot;제품에-적용하기-앞서&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EC%A0%9C%ED%92%88%EC%97%90-%EC%A0%81%EC%9A%A9%ED%95%98%EA%B8%B0-%EC%95%9E%EC%84%9C&quot; aria-label=&quot;제품에 적용하기 앞서 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;제품에 적용하기 앞서&lt;/h3&gt;
+&lt;p&gt;사실 여러 성질을 가진 데이터들을 요구하는 제품 상세 페이지에 증분 정적 재생성 전략을 취하는 것은 생각보다 불안해
+재검증되는 타임라인을 그려보기도 하고, 생각보다 비슷한 우려에 대해 &lt;a href=&quot;https://github.com/vercel/next.js/discussions?discussions_q=ecommerce&quot;&gt;논의한 이야기&lt;/a&gt;들도 읽어보며 참고했다.&lt;/p&gt;
+&lt;p&gt;웹 성능 메트릭을 조금 양보하더라도 서버사이드 랜더링 전략을 취해 모든 요청에 대해 데이터가 패칭되도록 해야 할까라는 생각도 했지만,
+정적 생성 전략의 응답 속도를 경험해 본다면 포기하기 힘들다.&lt;/p&gt;
+&lt;p&gt;결과적으로 정적인 상품 정보와 같이 무겁고 메타데이터에 활용도가 높은 데이터들은 증분 정적 재생성되도록 캐싱하여
+사용하고, 메타데이터와 무관하며 실시간으로 데이터 정합성 판단이 필요한 남은 수량, 가격 변동과 같은 데이터들은 클라이언트에서
+요청을 분리하여 페이지를 완성하는 전략으로 작업을 진행했다.&lt;/p&gt;
 &lt;h2 id=&quot;마치면서&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EB%A7%88%EC%B9%98%EB%A9%B4%EC%84%9C&quot; aria-label=&quot;마치면서 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;마치면서&lt;/h2&gt;
-&lt;p&gt;최근 넥스트로 이관하면서 최적화에 재미가 붙은 것 같습니다. 작업할 때 Web Vital Score을 신경쓰게 되었고,
-페이지별로 감점 요소를 찾고 추가 작업을 합니다. 이번 작업을 진행하면서 고민할 것들도 늘었구요.&lt;/p&gt;
-&lt;p&gt;그러다 오른 점수를 보면 마냥 행복해지는 게 숙명이 아닌 가 싶습니다. 얼른 90점을 넘겨 초록색 게이지를 보고 싶네요!&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;stale-while-revalidate&lt;/code&gt; 전략을 통해 클라이언트에서 서버 데이터를 캐싱하고 관리해 주는 &lt;code class=&quot;language-text&quot;&gt;react-query&lt;/code&gt;나,
+&lt;code class=&quot;language-text&quot;&gt;swr&lt;/code&gt;과 같은 도구들이 자주 등장한다. 여기서 사용되는 전략 또한 동일한 타임 라인을 가지고 있기 때문에 한번 사용해 보면
+좋을 것 같다.&lt;/p&gt;
 &lt;p&gt;&lt;span
       class=&quot;gatsby-resp-image-wrapper&quot;
       style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 1016px; &quot;
