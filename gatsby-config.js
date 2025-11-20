@@ -144,5 +144,6 @@ module.exports = {
     `gatsby-plugin-postcss`,
     `gatsby-plugin-lodash`,
     `gatsby-plugin-sitemap`,
+    `gatsby-plugin-typescript`,
   ],
 };
