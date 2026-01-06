@@ -4,7 +4,7 @@ const { createFilePath } = require(`gatsby-source-filesystem`);
 exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions;
 
-  const blogPostTemplate = path.resolve(`./src/templates/blog-post.js`);
+  const blogPostTemplate = path.resolve(`./src/pages/post.tsx`);
 
   return graphql(
     `
@@ -81,4 +81,16 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
       value: isTIL ? `/TIL${value}` : value,
     });
   }
+};
+
+exports.onCreateWebpackConfig = ({ actions }) => {
+  actions.setWebpackConfig({
+    resolve: {
+      alias: {
+        '@shared': path.resolve(__dirname, 'src/_shared'),
+        '@features': path.resolve(__dirname, 'src/_features'),
+        '@': path.resolve(__dirname, 'src'),
+      },
+    },
+  });
 };
