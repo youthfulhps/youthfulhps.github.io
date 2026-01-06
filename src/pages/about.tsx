@@ -1,14 +1,21 @@
 import React from 'react';
-import { graphql } from 'gatsby';
+import { graphql, PageProps } from 'gatsby';
 
 import { rhythm } from '@shared/utils/typography';
 import * as Lang from '@shared/constants';
+import { AllMarkdownRemark } from '@shared/types/gatsby';
 
-export default ({ data }) => {
+type AboutPageData = {
+  allMarkdownRemark: AllMarkdownRemark;
+};
+
+type AboutPageProps = PageProps<AboutPageData>;
+
+function AboutPage({ data }: AboutPageProps) {
   const resumes = data.allMarkdownRemark.edges;
 
   const resume = resumes
-    .filter(({ node }) => node.frontmatter.lang === Lang.ENGLISH)
+    .filter(({ node }) => node.frontmatter?.lang === Lang.ENGLISH)
     .map(({ node }) => node)[0];
 
   return (
@@ -22,10 +29,14 @@ export default ({ data }) => {
         )}`,
       }}
     >
-      <div dangerouslySetInnerHTML={{ __html: resume.html }} />
+      {resume && (
+        <div dangerouslySetInnerHTML={{ __html: resume.html || '' }} />
+      )}
     </div>
   );
-};
+}
+
+export default AboutPage;
 
 export const pageQuery = graphql`
   query {

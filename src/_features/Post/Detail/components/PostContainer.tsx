@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { defineCustomElements as deckDeckGoHighlightElement } from '@deckdeckgo/highlight-code/dist/loader';
 import MermaidZoom from './MermaidZoom';
+import { MarkdownRemarkNode } from '@shared/types/gatsby';
 
 deckDeckGoHighlightElement();
 
 type PostContainerProps = {
-  html: string;
+  html: MarkdownRemarkNode['html'];
 };
 
 function PostContainer({ html }: PostContainerProps) {

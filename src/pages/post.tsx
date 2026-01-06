@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { graphql } from 'gatsby';
+import { graphql, PageProps } from 'gatsby';
 import Layout from '@shared/layouts';
 import Head from '@shared/components/Head';
 import PostTitle from '@features/Post/Detail/components/PostTitle';
@@ -9,30 +9,46 @@ import PostNavigator from '@features/Post/Detail/components/PostNavigator';
 import Disqus from '@features/Post/Detail/components/Disqus';
 import Utterances from '@features/Post/Detail/components/Utterances';
 import * as ScrollManager from '@shared/utils/scroll';
+import { Site, MarkdownRemark, MarkdownRemarkNode } from '@shared/types/gatsby';
 
 import 'katex/dist/katex.min.css';
 
-export default ({ data, pageContext, location }) => {
+type BlogPostPageData = {
+  site: Site;
+  markdownRemark: MarkdownRemark;
+};
+
+type BlogPostPageProps = PageProps<BlogPostPageData> & {
+  pageContext: {
+    slug: string;
+    previous?: MarkdownRemarkNode | null;
+    next?: MarkdownRemarkNode | null;
+  };
+};
+
+function BlogPostPage({ data, pageContext, location }: BlogPostPageProps) {
   useEffect(() => {
     ScrollManager.init();
-    return () => ScrollManager.destroy();
+    return () => {
+      ScrollManager.destroy();
+    };
   }, []);
 
   const post = data.markdownRemark;
   const metaData = data.site.siteMetadata;
-  const { title, comment, siteUrl, author, sponsor } = metaData;
-  const { disqusShortName, utterances } = comment;
+  const { comment, siteUrl } = metaData;
+  const { disqusShortName, utterances } = comment || {};
   const { title: postTitle, date, description } = post.frontmatter;
 
   return (
-    <Layout location={location} title={title}>
+    <Layout location={location}>
       <Head
-        title={postTitle}
+        title={postTitle || ''}
         description={description}
         thumbnail={metaData.thumbnail}
       />
-      <PostTitle title={postTitle} />
-      <PostDate date={date} />
+      {postTitle && <PostTitle title={postTitle} />}
+      {date && <PostDate date={date} />}
       <PostContainer html={post.html} />
       <PostNavigator pageContext={pageContext} />
       {!!disqusShortName && (
@@ -46,7 +62,9 @@ export default ({ data, pageContext, location }) => {
       {!!utterances && <Utterances repo={utterances} />}
     </Layout>
   );
-};
+}
+
+export default BlogPostPage;
 
 export const pageQuery = graphql`
   query BlogPostBySlug($slug: String!) {
