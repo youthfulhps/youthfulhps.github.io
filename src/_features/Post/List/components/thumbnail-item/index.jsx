@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'gatsby';
-import { TARGET_CLASS } from '../../utils/visible';
+import { TARGET_CLASS } from '@shared/utils/visible';
 
 import './index.scss';
 

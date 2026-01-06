@@ -89,6 +89,7 @@ exports.onCreateWebpackConfig = ({ actions }) => {
       alias: {
         '@shared': path.resolve(__dirname, 'src/_shared'),
         '@features': path.resolve(__dirname, 'src/_features'),
+        '@': path.resolve(__dirname, 'src'),
       },
     },
   });

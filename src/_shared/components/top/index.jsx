@@ -3,7 +3,7 @@ import { Link } from 'gatsby';
 import { ThemeSwitch } from '../theme-switch';
 
 import './index.scss';
-import { rhythm } from '../../../utils/typography';
+import { rhythm } from '@shared/utils/typography';
 
 export const Top = ({ location, rootPath }) => {
   const isRoot = location.pathname === rootPath;

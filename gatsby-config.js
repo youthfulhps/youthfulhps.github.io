@@ -113,7 +113,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-typography`,
       options: {
-        pathToConfigModule: `src/utils/typography`,
+        pathToConfigModule: `src/_shared/utils/typography`,
       },
     },
     {
@@ -140,7 +140,14 @@ module.exports = {
     `gatsby-plugin-feed`,
     `gatsby-plugin-offline`,
     `gatsby-plugin-react-helmet`,
-    `gatsby-plugin-sass`,
+    {
+      resolve: `gatsby-plugin-sass`,
+      options: {
+        sassOptions: {
+          includePaths: [`${__dirname}/src`],
+        },
+      },
+    },
     `gatsby-plugin-postcss`,
     `gatsby-plugin-lodash`,
     `gatsby-plugin-sitemap`,

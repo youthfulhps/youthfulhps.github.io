@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 
 import { ThumbnailContainer } from '../thumbnail-container';
-import { ThumbnailItem } from '../../../../../components/thumbnail-item';
+import { ThumbnailItem } from '../thumbnail-item';
 
 export const Contents = ({ posts }) => {
   return (

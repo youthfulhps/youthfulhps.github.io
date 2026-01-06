@@ -1,16 +1,16 @@
 import { graphql } from 'gatsby';
 import _ from 'lodash';
 import React, { useMemo, useRef, useEffect, useState } from 'react';
-import { Contents } from '../_features/Post/List/components/contents';
-import { Head } from '../_shared/components/head';
-import { HOME_TITLE, TYPE_CATEGORY } from '../constants';
-import { useCategory } from '../hooks/useCategory';
-import { useIntersectionObserver } from '../hooks/useIntersectionObserver';
-import { useRenderedCount } from '../hooks/useRenderedCount';
-import { useScrollEvent } from '../hooks/useScrollEvent';
+import { Contents } from '@features/Post/List/components/contents';
+import { Head } from '@shared/components/head';
+import { HOME_TITLE, TYPE_CATEGORY } from '@shared/constants';
+import { useCategory } from '@shared/hooks/useCategory';
+import { useIntersectionObserver } from '@shared/hooks/useIntersectionObserver';
+import { useRenderedCount } from '@shared/hooks/useRenderedCount';
+import { useScrollEvent } from '@shared/hooks/useScrollEvent';
 import { Layout } from '../layout';
-import * as Dom from '../utils/dom';
-import * as EventManager from '../utils/event-manager';
+import * as Dom from '@shared/utils/dom';
+import * as EventManager from '@shared/utils/event-manager';
 import './index.scss';
 
 const BASE_LINE = 80;

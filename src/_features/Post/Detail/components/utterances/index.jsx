@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 
-import * as Dom from '../../../../../utils/dom';
-import { THEME } from '../../../../../constants';
+import * as Dom from '@shared/utils/dom';
+import { THEME } from '@shared/constants';
 
 const src = 'https://utteranc.es/client.js';
 const branch = 'master';

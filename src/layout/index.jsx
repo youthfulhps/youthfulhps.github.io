@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
-import { Top } from '../_shared/components/top';
-import { ThemeSwitch } from '../components/theme-switch';
-import { Footer } from '../_shared/components/footer';
-import { rhythm } from '../utils/typography';
+import { Top } from '@shared/components/top';
+import { ThemeSwitch } from '@shared/components/theme-switch';
+import { Footer } from '@shared/components/footer';
+import { rhythm } from '@shared/utils/typography';
 
 import './index.scss';
 

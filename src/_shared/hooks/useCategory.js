@@ -1,7 +1,7 @@
 import { useEffect, useState, useCallback } from 'react';
 import qs from 'query-string';
-import { CATEGORY_TYPE } from '../constants';
-import * as ScrollManager from '../utils/scroll';
+import { CATEGORY_TYPE } from '@shared/constants';
+import * as ScrollManager from '@shared/utils/scroll';
 
 let DEST_POS;
 

@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import Switch from 'react-switch';
 
-import * as Dom from '../../utils/dom';
-import * as Storage from '../../utils/storage';
-import { THEME } from '../../constants';
+import * as Dom from '@shared/utils/dom';
+import * as Storage from '@shared/utils/storage';
+import { THEME } from '@shared/constants';
 
 import './index.scss';
 

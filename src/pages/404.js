@@ -2,7 +2,7 @@ import React from 'react';
 import { graphql, Link } from 'gatsby';
 
 import { Layout } from '../layout';
-import { Head } from '../_shared/components/head';
+import { Head } from '@shared/components/head';
 
 class NotFoundPage extends React.Component {
   render() {
