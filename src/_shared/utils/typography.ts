@@ -1,4 +1,6 @@
+// @ts-ignore
 import Typography from 'typography';
+// @ts-ignore
 import GitHubTheme from 'typography-theme-github';
 
 GitHubTheme.overrideThemeStyles = () => {
@@ -82,9 +84,9 @@ GitHubTheme.overrideThemeStyles = () => {
 
 // 코드 블록에 Fira Code 폰트 적용
 GitHubTheme.overrideStyles = (
-  { adjustFontSizeTo, rhythm },
-  options,
-  styles
+  { adjustFontSizeTo, rhythm }: any,
+  options: any,
+  styles: any
 ) => ({
   ...styles,
   'code, pre, tt': {

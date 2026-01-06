@@ -11,16 +11,11 @@ type NotFoundPageData = {
 
 type NotFoundPageProps = PageProps<NotFoundPageData>;
 
-function NotFoundPage({ data, location }: NotFoundPageProps) {
-  const siteTitle = data.site.siteMetadata.title;
-
+function NotFoundPage({ location }: NotFoundPageProps) {
   return (
     <Layout location={location}>
       <Head title="404: Not Found" />
       <h1>NOT FOUND :(</h1>
-      <Link to={`/`} className="link">
-        홈으로 돌아가기
-      </Link>
     </Layout>
   );
 }

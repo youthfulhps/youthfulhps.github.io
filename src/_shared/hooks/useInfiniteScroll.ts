@@ -4,25 +4,30 @@ import * as EventManager from '@shared/utils/event-manager';
 
 const BASE_LINE = 80;
 
-function getDistance(currentPos) {
+function getDistance(currentPos: number): number {
   return Dom.getDocumentHeight() - currentPos;
 }
 
-export function useInfiniteScroll(callback, condition) {
+export function useInfiniteScroll(
+  callback: () => void,
+  condition: () => boolean
+) {
   const onScroll = useCallback(() => {
     const currentPos = window.scrollY + window.innerHeight;
     const isTriggerPos = () => getDistance(currentPos) < BASE_LINE;
 
     return EventManager.toFit(callback, {
-      dismissCondition: !isTriggerPos(),
-      triggerCondition: isTriggerPos() && condition(),
+      dismissCondition: () => !isTriggerPos(),
+      triggerCondition: () => isTriggerPos() && condition(),
     })();
-  }, [condition]);
+  }, [callback, condition]);
 
   useEffect(() => {
-    window.addEventListener(`scroll`, onScroll, { passive: false });
+    window.addEventListener('scroll', onScroll, {
+      passive: false,
+    } as AddEventListenerOptions);
     return () => {
-      window.removeEventListener(`scroll`, onScroll, { passive: false });
+      window.removeEventListener('scroll', onScroll);
     };
-  }, []);
+  }, [onScroll]);
 }

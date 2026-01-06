@@ -3951,6 +3951,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/smooth-scroll@npm:^16.1.4":
+  version: 16.1.4
+  resolution: "@types/smooth-scroll@npm:16.1.4"
+  checksum: 10c0/ff4ae3a4cdc1cd1430529a366ccaeba090f3d6c5206e52037a4cfa836d958a18b135429bcad107a95355194fba185d51bb1d76a994961639818bb9a29cbdcce8
+  languageName: node
+  linkType: hard
+
+"@types/smoothscroll-polyfill@npm:^0.3.4":
+  version: 0.3.4
+  resolution: "@types/smoothscroll-polyfill@npm:0.3.4"
+  checksum: 10c0/5d89150eac693cb30fc109935f7bfca37c0c4aa4872b000f57c68f66a58ba8fbaa24088fd61633cf90986ae26330f8fb39f419c43462df7c71d195f52099697d
+  languageName: node
+  linkType: hard
+
 "@types/tmp@npm:^0.0.33":
   version: 0.0.33
   resolution: "@types/tmp@npm:0.0.33"
@@ -10256,6 +10270,8 @@ __metadata:
     "@types/react": "npm:^19.2.6"
     "@types/react-dom": "npm:^19.2.3"
     "@types/react-helmet": "npm:^6.1.11"
+    "@types/smooth-scroll": "npm:^16.1.4"
+    "@types/smoothscroll-polyfill": "npm:^0.3.4"
     "@typescript-eslint/eslint-plugin": "npm:^8.52.0"
     "@typescript-eslint/parser": "npm:^8.52.0"
     date-fns: "npm:^1.30.1"

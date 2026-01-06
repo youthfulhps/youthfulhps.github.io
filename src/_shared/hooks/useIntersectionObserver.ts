@@ -13,3 +13,4 @@ export function useIntersectionObserver() {
     IOManager.refreshObserver();
   });
 }
+
