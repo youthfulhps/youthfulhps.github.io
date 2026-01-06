@@ -16,24 +16,20 @@ function PostContainer({ html }: PostContainerProps) {
 
   useEffect(() => {
     if (containerRef.current) {
-      // Mermaid SVG 요소들에 클릭 이벤트 리스너 추가
       const mermaidSvgs = containerRef.current.querySelectorAll('p > svg');
 
       mermaidSvgs.forEach(element => {
         const svg = element as SVGElement;
-        // 클릭 가능함을 시각적으로 표시
         svg.style.cursor = 'zoom-in';
         svg.setAttribute('aria-label', '클릭하여 다이어그램 확대');
         svg.setAttribute('role', 'button');
         svg.setAttribute('tabindex', '0');
 
         const handleClick = () => {
-          // SVG 크기 정보 분석
           const svgClone = svg.cloneNode(true) as SVGElement;
           const rect = svg.getBoundingClientRect();
           const isVertical = rect.height > rect.width;
 
-          // 세로형 다이어그램인 경우 추가 클래스 적용
           if (isVertical) {
             svgClone.setAttribute('data-orientation', 'vertical');
           } else {
@@ -58,14 +54,12 @@ function PostContainer({ html }: PostContainerProps) {
         svg.addEventListener('click', handleClick);
         svg.addEventListener('keydown', handleKeyDown);
 
-        // Cleanup을 위해 이벤트 리스너를 저장
         (svg as any).__mermaidZoomCleanup = () => {
           svg.removeEventListener('click', handleClick);
           svg.removeEventListener('keydown', handleKeyDown);
         };
       });
 
-      // Cleanup 함수 반환
       return () => {
         mermaidSvgs.forEach(element => {
           const svg = element as SVGElement;
@@ -84,11 +78,13 @@ function PostContainer({ html }: PostContainerProps) {
 
   return (
     <>
-      <div
-        ref={containerRef}
-        className="post-container"
-        dangerouslySetInnerHTML={{ __html: html }}
-      />
+      {html && (
+        <div
+          ref={containerRef}
+          className="post-container"
+          dangerouslySetInnerHTML={{ __html: html }}
+        />
+      )}
       <MermaidZoom
         isOpen={isZoomOpen}
         onClose={handleCloseZoom}
