@@ -36,6 +36,7 @@ export interface MarkdownRemarkFrontmatter {
   description?: string;
   date?: string;
   category?: string;
+  category_id?: string;
   draft?: boolean;
   type?: string;
   lang?: string;

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 import * as Dom from '@shared/utils/dom';
 import { THEME } from '@shared/constants';
@@ -8,13 +8,19 @@ const branch = 'master';
 const DARK_THEME = 'photon-dark';
 const LIGHT_THEME = 'github-light';
 
-export const Utterances = ({ repo }) => {
-  const rootElm = React.createRef();
+type UtterancesProps = {
+  repo: string;
+};
+
+function Utterances({ repo }: UtterancesProps) {
+  const rootElm = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    if (!rootElm.current) return;
+
     const isDarkTheme = Dom.hasClassOfBody(THEME.DARK);
     const utterances = document.createElement('script');
-    const utterancesConfig = {
+    const utterancesConfig: Record<string, string | boolean> = {
       src,
       repo,
       branch,
@@ -25,11 +31,13 @@ export const Utterances = ({ repo }) => {
       crossorigin: 'anonymous',
     };
 
-    Object.keys(utterancesConfig).forEach(configKey => {
-      utterances.setAttribute(configKey, utterancesConfig[configKey]);
+    Object.entries(utterancesConfig).forEach(([key, value]) => {
+      utterances.setAttribute(key, String(value));
     });
     rootElm.current.appendChild(utterances);
-  }, []);
+  }, [repo]);
 
   return <div className="utterances" ref={rootElm} />;
-};
+}
+
+export default Utterances;

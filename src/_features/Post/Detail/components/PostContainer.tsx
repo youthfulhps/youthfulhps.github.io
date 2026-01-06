@@ -1,20 +1,25 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { defineCustomElements as deckDeckGoHighlightElement } from '@deckdeckgo/highlight-code/dist/loader';
-import { MermaidZoom } from '../mermaid-zoom';
+import MermaidZoom from './MermaidZoom';
 
 deckDeckGoHighlightElement();
 
-export const PostContainer = ({ html }) => {
+type PostContainerProps = {
+  html: string;
+};
+
+function PostContainer({ html }: PostContainerProps) {
   const [isZoomOpen, setIsZoomOpen] = useState(false);
   const [selectedSvgContent, setSelectedSvgContent] = useState('');
-  const containerRef = useRef(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (containerRef.current) {
       // Mermaid SVG 요소들에 클릭 이벤트 리스너 추가
       const mermaidSvgs = containerRef.current.querySelectorAll('p > svg');
 
-      mermaidSvgs.forEach(svg => {
+      mermaidSvgs.forEach(element => {
+        const svg = element as SVGElement;
         // 클릭 가능함을 시각적으로 표시
         svg.style.cursor = 'zoom-in';
         svg.setAttribute('aria-label', '클릭하여 다이어그램 확대');
@@ -23,7 +28,7 @@ export const PostContainer = ({ html }) => {
 
         const handleClick = () => {
           // SVG 크기 정보 분석
-          const svgClone = svg.cloneNode(true);
+          const svgClone = svg.cloneNode(true) as SVGElement;
           const rect = svg.getBoundingClientRect();
           const isVertical = rect.height > rect.width;
 
@@ -41,9 +46,10 @@ export const PostContainer = ({ html }) => {
           setIsZoomOpen(true);
         };
 
-        const handleKeyDown = event => {
-          if (event.key === 'Enter' || event.key === ' ') {
-            event.preventDefault();
+        const handleKeyDown = (event: Event) => {
+          const keyboardEvent = event as KeyboardEvent;
+          if (keyboardEvent.key === 'Enter' || keyboardEvent.key === ' ') {
+            keyboardEvent.preventDefault();
             handleClick();
           }
         };
@@ -52,7 +58,7 @@ export const PostContainer = ({ html }) => {
         svg.addEventListener('keydown', handleKeyDown);
 
         // Cleanup을 위해 이벤트 리스너를 저장
-        svg.__mermaidZoomCleanup = () => {
+        (svg as any).__mermaidZoomCleanup = () => {
           svg.removeEventListener('click', handleClick);
           svg.removeEventListener('keydown', handleKeyDown);
         };
@@ -60,9 +66,10 @@ export const PostContainer = ({ html }) => {
 
       // Cleanup 함수 반환
       return () => {
-        mermaidSvgs.forEach(svg => {
-          if (svg.__mermaidZoomCleanup) {
-            svg.__mermaidZoomCleanup();
+        mermaidSvgs.forEach(element => {
+          const svg = element as SVGElement;
+          if ((svg as any).__mermaidZoomCleanup) {
+            (svg as any).__mermaidZoomCleanup();
           }
         });
       };
@@ -88,4 +95,6 @@ export const PostContainer = ({ html }) => {
       />
     </>
   );
-};
+}
+
+export default PostContainer;

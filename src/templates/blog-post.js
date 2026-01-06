@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react';
 import { graphql } from 'gatsby';
 import { Layout } from '../layout';
-import { Head } from '@shared/components/head';
-import { PostTitle } from '@features/Post/Detail/components/post-title';
-import { PostDate } from '@features/Post/Detail/components/post-date';
-import { PostContainer } from '@features/Post/Detail/components/post-container';
-import { PostNavigator } from '@features/Post/Detail/components/post-navigator';
-import { Disqus } from '@features/Post/Detail/components/disqus';
-import { Utterances } from '@features/Post/Detail/components/utterances';
+import Head from '@shared/components/Head';
+import PostTitle from '@features/Post/Detail/components/PostTitle';
+import PostDate from '@features/Post/Detail/components/PostDate';
+import PostContainer from '@features/Post/Detail/components/PostContainer';
+import PostNavigator from '@features/Post/Detail/components/PostNavigator';
+import Disqus from '@features/Post/Detail/components/Disqus';
+import Utterances from '@features/Post/Detail/components/Utterances';
 import * as ScrollManager from '@shared/utils/scroll';
 
 import 'katex/dist/katex.min.css';

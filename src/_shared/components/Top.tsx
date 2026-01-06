@@ -1,11 +1,15 @@
 import React from 'react';
 import { Link } from 'gatsby';
-import { ThemeSwitch } from '../theme-switch';
-
-import './index.scss';
+import { PageProps } from 'gatsby';
+import ThemeSwitch from './ThemeSwitch';
 import { rhythm } from '@shared/utils/typography';
 
-export const Top = ({ location, rootPath }) => {
+type TopProps = {
+  location: PageProps['location'];
+  rootPath: string;
+};
+
+function Top({ location, rootPath }: TopProps) {
   const isRoot = location.pathname === rootPath;
   return (
     <div
@@ -34,4 +38,6 @@ export const Top = ({ location, rootPath }) => {
       <ThemeSwitch />
     </div>
   );
-};
+}
+
+export default Top;

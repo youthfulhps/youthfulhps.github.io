@@ -5,13 +5,11 @@ import * as Dom from '@shared/utils/dom';
 import * as Storage from '@shared/utils/storage';
 import { THEME } from '@shared/constants';
 
-import './index.scss';
-
-function getTheme(checked) {
+function getTheme(checked: boolean) {
   return checked ? THEME.DARK : THEME.LIGHT;
 }
 
-function toggleTheme(theme) {
+function toggleTheme(theme: typeof THEME.LIGHT | typeof THEME.DARK) {
   switch (theme) {
     case THEME.LIGHT: {
       Dom.addClassToBody(THEME.LIGHT);
@@ -26,10 +24,10 @@ function toggleTheme(theme) {
   }
 }
 
-export const ThemeSwitch = () => {
+function ThemeSwitch() {
   const [checked, setChecked] = useState(true);
 
-  const handleChange = checked => {
+  const handleChange = (checked: boolean) => {
     const theme = getTheme(checked);
 
     Storage.setTheme(checked);
@@ -44,7 +42,7 @@ export const ThemeSwitch = () => {
   }, []);
 
   return (
-    <div className="switch-container">
+    <div className="text-right">
       <label htmlFor="normal-switch">
         <Switch
           onChange={handleChange}
@@ -52,8 +50,12 @@ export const ThemeSwitch = () => {
           id="normal-switch"
           height={24}
           width={48}
-          checkedIcon={<div className="icon checkedIcon" />}
-          uncheckedIcon={<div className="icon uncheckedIcon" />}
+          checkedIcon={
+            <div className="text-center text-[14px] font-black text-[#222]" />
+          }
+          uncheckedIcon={
+            <div className="text-center text-[14px] font-black text-[#222]" />
+          }
           offColor={'#d9dfe2'}
           offHandleColor={'#fff'}
           onColor={'#999'}
@@ -62,4 +64,6 @@ export const ThemeSwitch = () => {
       </label>
     </div>
   );
-};
+}
+
+export default ThemeSwitch;
