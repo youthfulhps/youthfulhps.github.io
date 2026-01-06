@@ -17,9 +17,12 @@
     "allowSyntheticDefaultImports": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["src/*"],
+      "@shared/*": ["src/_shared/*"],
+      "@features/*": ["src/_features/*"]
     },
-    "types": ["node"]
+    "types": ["node", "gatsby"],
+    "incremental": true
   },
   "include": [
     "src/**/*",

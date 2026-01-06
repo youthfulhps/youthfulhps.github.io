@@ -82,3 +82,14 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
     });
   }
 };
+
+exports.onCreateWebpackConfig = ({ actions }) => {
+  actions.setWebpackConfig({
+    resolve: {
+      alias: {
+        '@shared': path.resolve(__dirname, 'src/_shared'),
+        '@features': path.resolve(__dirname, 'src/_features'),
+      },
+    },
+  });
+};

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
-import { Top } from '../components/top';
+import { Top } from '../_shared/components/top';
 import { ThemeSwitch } from '../components/theme-switch';
-import { Footer } from '../components/footer';
+import { Footer } from '../_shared/components/footer';
 import { rhythm } from '../utils/typography';
 
 import './index.scss';

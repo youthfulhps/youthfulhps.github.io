@@ -1,8 +1,8 @@
 import { graphql } from 'gatsby';
 import _ from 'lodash';
 import React, { useMemo, useRef, useEffect, useState } from 'react';
-import { Contents } from '../components/contents';
-import { Head } from '../components/head';
+import { Contents } from '../_features/Post/List/components/contents';
+import { Head } from '../_shared/components/head';
 import { HOME_TITLE, TYPE_CATEGORY } from '../constants';
 import { useCategory } from '../hooks/useCategory';
 import { useIntersectionObserver } from '../hooks/useIntersectionObserver';
