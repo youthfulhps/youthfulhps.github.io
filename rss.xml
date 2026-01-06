@@ -1,4 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Youthfulhps.dev]]></title><description><![CDATA[프론트엔드 주니어 개발자, 트러블슈팅에 대한 고민의 흔적을 기록으로 남기는 것을 좋아합니다.]]></description><link>https://youthfulhps.dev</link><generator>GatsbyJS</generator><lastBuildDate>Tue, 28 Oct 2025 00:57:01 GMT</lastBuildDate><item><title><![CDATA[Google Analytics MCP를 통한 데이터 분석]]></title><description><![CDATA[여러 컨텍스트에서 를 제공하기 시작하면서 개발 단계에 도움을 많이 받고 있다.
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Youthfulhps.dev]]></title><description><![CDATA[프론트엔드 주니어 개발자, 트러블슈팅에 대한 고민의 흔적을 기록으로 남기는 것을 좋아합니다.]]></description><link>https://youthfulhps.dev</link><generator>GatsbyJS</generator><lastBuildDate>Tue, 06 Jan 2026 06:47:13 GMT</lastBuildDate><item><title><![CDATA[리엑트 컴파일러]]></title><description><![CDATA[리엑트 컴파일러가 안정한 버전으로 출시되었다. 리엑트는 앱의 성능을 개선하기 위한
+메모이제이션 API…]]></description><link>https://youthfulhps.dev/react/react-compiler/</link><guid isPermaLink="false">https://youthfulhps.dev/react/react-compiler/</guid><pubDate>Mon, 24 Nov 2025 16:11:15 GMT</pubDate><content:encoded>&lt;p&gt;&lt;a href=&quot;https://react.dev/blog/2025/10/07/react-compiler-1&quot;&gt;리엑트 컴파일러가 안정한 버전으로 출시&lt;/a&gt;되었다. 리엑트는 앱의 성능을 개선하기 위한
+메모이제이션 API를 제공하여 선택적으로 최적화할 수 있도록 도왔다. 하지만 올바르게 사용하기 어렵다. 오히려 남용으로 인해 디버깅이 필요한
+코드를 양산하게 되고, 리엑트라는 도구를 접하는 사용자 접근성에 허들이 된다.&lt;/p&gt;
+&lt;p&gt;리엑트 컴파일러는 순수한 랜더 함수와 훅 규칙과 같은 관용적인 리엑트 패턴이 적용된 코드의 메모이제이션 기능 적용 가능성을
+판단하여 메모이제이션 기능을 주입해 최적화된 성능을 제공하는 코드를 생산한다. 이는 개발자가 선언적이고 단순한 코드에 집중할 수 있도록 돕는 새로운 개념이다.&lt;/p&gt;
+&lt;p&gt;리엑트 컴파일러는 바벨 플러그인으로 제공되어 컴파일 단계에 적용되고, 코드 작성 단계에서 리엑트 컴파일러의 관용적인 패턴을 검증하기 위한 eslint 플러그인을 제공한다.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;shell&quot; theme=&quot;nord&quot;  &gt;
+          &lt;code slot=&quot;code&quot;&gt;~$ npm install -D babel-plugin-react-compiler@latest
+~$ npm install -D eslint-plugin-react-hooks@latest&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;</content:encoded></item><item><title><![CDATA[Google Analytics MCP를 통한 데이터 분석]]></title><description><![CDATA[여러 컨텍스트에서 를 제공하기 시작하면서 개발 단계에 도움을 많이 받고 있다.
 가령 를 통해 단순한 UI…]]></description><link>https://youthfulhps.dev/development/google-analytics-mcp/</link><guid isPermaLink="false">https://youthfulhps.dev/development/google-analytics-mcp/</guid><pubDate>Mon, 22 Sep 2025 14:09:05 GMT</pubDate><content:encoded>&lt;p&gt;여러 컨텍스트에서 &lt;code class=&quot;language-text&quot;&gt;Model Context Protocol(MCP)&lt;/code&gt;를 제공하기 시작하면서 개발 단계에 도움을 많이 받고 있다.
 가령 &lt;a href=&quot;https://github.com/GLips/Figma-Context-MCP&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;Figma-Context-MCP&lt;/code&gt;&lt;/a&gt;를 통해 단순한 UI 구현을 요청하고선,
 다른 비즈니스 로직을 짜는 것에 충분히 익숙해져 있다.&lt;/p&gt;
