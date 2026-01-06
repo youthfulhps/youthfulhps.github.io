@@ -1,9 +1,6 @@
 import { graphql } from 'gatsby';
 import _ from 'lodash';
 import React, { useMemo, useRef, useEffect, useState } from 'react';
-// import { Bio } from '../components/bio';
-import { Category } from '../components/category';
-import { TypeCategory } from '../components/type-category';
 import { Contents } from '../components/contents';
 import { Head } from '../components/head';
 import { HOME_TITLE, TYPE_CATEGORY } from '../constants';
@@ -70,13 +67,7 @@ export default ({ data, location }) => {
   return (
     <Layout location={location} title={siteMetadata.title}>
       <Head title={HOME_TITLE} keywords={siteMetadata.keywords} />
-      <Contents
-        posts={posts}
-        countOfInitialPost={countOfInitialPost}
-        count={count}
-        category={category}
-        typeCategory={typeCategory}
-      />
+      <Contents posts={posts} />
     </Layout>
   );
 };

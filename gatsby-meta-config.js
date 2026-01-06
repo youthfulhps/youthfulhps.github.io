@@ -13,7 +13,7 @@ module.exports = {
     linkedin: ``,
     instagram: `youthfulhps`,
   },
-  icon: `static/favicon.png`,
+  icon: `static/favicon.svg`,
   keywords: [`blog`, 'javascript', 'web', 'react', 'frontend', 'development'],
   comment: {
     disqusShortName: 'youthfulhps', // Your disqus-short-name. check disqus.com.

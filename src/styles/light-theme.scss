@@ -3,6 +3,16 @@ body.light {
   text-shadow: $light-text-shadow;
   color: $light-text-color;
 
+  ::selection {
+    background-color: #deecfd;
+    color: #253145;
+  }
+
+  ::-moz-selection {
+    background-color: #deecfd;
+    color: #253145;
+  }
+
   // home
   .home-header {
     color: $dark-gray;
