@@ -35,7 +35,7 @@ function Top({ location, rootPath }: TopProps) {
           Github
         </a>
       </div>
-      <ThemeSwitch />
+      {/* <ThemeSwitch /> */}
     </div>
   );
 }
