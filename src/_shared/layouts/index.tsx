@@ -1,15 +1,22 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Top from '@shared/components/Top';
-import ThemeSwitch from '@shared/components/ThemeSwitch';
 import Footer from '@shared/components/Footer';
 import { rhythm } from '@shared/utils/typography';
 
-export const Layout = ({ location, title, children }) => {
+import { PageProps } from 'gatsby';
+
+type LayoutProps = {
+  location: PageProps['location'];
+  children: React.ReactNode;
+};
+
+function Layout({ location, children }: LayoutProps) {
+  // @ts-ignore
   const rootPath = `${__PATH_PREFIX__}/`;
 
   return (
     <React.Fragment>
-      <Top title={title} location={location} rootPath={rootPath} />
+      <Top location={location} rootPath={rootPath} />
       <div
         className="mx-auto"
         style={{
@@ -22,4 +29,6 @@ export const Layout = ({ location, title, children }) => {
       </div>
     </React.Fragment>
   );
-};
+}
+
+export default Layout;

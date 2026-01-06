@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { graphql } from 'gatsby';
-import { Layout } from '../layout';
+import Layout from '@shared/layouts';
 import Head from '@shared/components/Head';
 import PostTitle from '@features/Post/Detail/components/PostTitle';
 import PostDate from '@features/Post/Detail/components/PostDate';

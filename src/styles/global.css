@@ -173,6 +173,10 @@ body.dark ::-moz-selection {
 }
 
 /* Post Container */
+.post-container {
+  text-shadow: none;
+}
+
 .post-container h3 {
   margin-top: 2em;
 }
@@ -214,7 +218,6 @@ body.dark ::-moz-selection {
   );
   border: 1px solid rgba(200, 200, 200, 0.5);
   @apply text-[var(--color-inline-text)];
-  backdrop-filter: blur(2px);
   line-height: 1.4;
   font-feature-settings: 'liga' 1, 'calt' 1;
 }

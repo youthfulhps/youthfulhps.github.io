@@ -8,7 +8,7 @@ import { useCategory } from '@shared/hooks/useCategory';
 import { useIntersectionObserver } from '@shared/hooks/useIntersectionObserver';
 import { useRenderedCount } from '@shared/hooks/useRenderedCount';
 import { useScrollEvent } from '@shared/hooks/useScrollEvent';
-import { Layout } from '../layout';
+import Layout from '@shared/layouts';
 import * as Dom from '@shared/utils/dom';
 import * as EventManager from '@shared/utils/event-manager';
 

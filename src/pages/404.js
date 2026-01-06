@@ -1,7 +1,7 @@
 import React from 'react';
 import { graphql, Link } from 'gatsby';
 
-import { Layout } from '../layout';
+import Layout from '@shared/layouts';
 import Head from '@shared/components/Head';
 
 class NotFoundPage extends React.Component {
